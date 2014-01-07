@@ -13,6 +13,8 @@ public class GameLoop {
 
         }
 
+        GameController.stopGame();
+
     }
 
 }
