@@ -6,11 +6,18 @@ import org.lwjgl.opengl.DisplayMode;
 
 public class GraphicsController {
 
-    public static int fps;
+    private static int width;
+    private static int height;
+
+    private static int fps;
 
     public static void createDisplay(int width, int height, int fps, String title, boolean fullscreen) {
 
+        GraphicsController.width = width;
+        GraphicsController.height = height;
+
         GraphicsController.fps = fps;
+
         if(!fullscreen) { setupWindow(width, height, title); }
 
     }
@@ -38,5 +45,12 @@ public class GraphicsController {
         }
 
     }
+
+    public static int getWidth() { return width; }
+    public static int getHeight() { return height; }
+
+    public static int getFps() { return fps; }
+
+    public static float getAspectRatio() { return (float)width / height; }
 
 }
