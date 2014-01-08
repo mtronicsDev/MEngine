@@ -10,6 +10,10 @@ public class GameController {
         GameLoop.loop();
 
     }
-    public static void stopGame() {}
+    public static void stopGame() {
+
+        System.exit(0);
+
+    }
 
 }
