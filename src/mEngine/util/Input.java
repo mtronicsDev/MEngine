@@ -4,27 +4,23 @@ import org.lwjgl.input.Keyboard;
 
 public class Input {
 
-    public static int forward = Keyboard.KEY_W;
-    public static int backward = Keyboard.KEY_S;
+    private static boolean[] keyStates = new boolean[Keyboard.getKeyCount()];
 
-    public static int left = Keyboard.KEY_A;
-    public static int right = Keyboard.KEY_D;
+    public static boolean isKeyPressed(int key) { return Keyboard.isKeyDown(key); }
 
-    public static int up = Keyboard.KEY_E;
-    public static int down = Keyboard.KEY_Q;
+    public static boolean isKeyDown(int key) {
 
-    public static int sprint = Keyboard.KEY_LSHIFT;
-    public static int sneak = Keyboard.KEY_C;
+        boolean isAlreadyActivated = keyStates[key];
+        keyStates[key] = isKeyPressed(key);
+        return keyStates[key] != isAlreadyActivated && !isAlreadyActivated;
 
-    public static int jump = Keyboard.KEY_SPACE;
+    }
 
-    public static int endGame = Keyboard.KEY_ESCAPE;
-    public static int pauseGame = Keyboard.KEY_TAB;
+    public static boolean isKeyUp(int key) {
 
-
-    public static boolean isKeyPressed(int keyCode) {
-
-        return Keyboard.isKeyDown(keyCode);
+        boolean isAlreadyActivated = keyStates[key];
+        keyStates[key] = isKeyPressed(key);
+        return keyStates[key] != isAlreadyActivated && isAlreadyActivated;
 
     }
 
