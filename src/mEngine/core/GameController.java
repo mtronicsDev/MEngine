@@ -1,19 +1,10 @@
 package mEngine.core;
 
 import mEngine.graphics.GraphicsController;
-import mEngine.interactive.gameObjects.Camera;
-import mEngine.interactive.gameObjects.GameObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameController {
 
     public static boolean isGamePaused;
-
-    public static List<GameObject> gameObjects = new ArrayList<GameObject>();
-
-    public static Camera camera;
 
     public static void runGame() {
 
