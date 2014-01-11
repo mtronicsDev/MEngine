@@ -11,4 +11,6 @@ public class ObjectController {
     public static List<GameObject> objects = new ArrayList<GameObject>();
     public static Camera camera;
 
+    public static void addObject(GameObject object) { objects.add(object); }
+
 }

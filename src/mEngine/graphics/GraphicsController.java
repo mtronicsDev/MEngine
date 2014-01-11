@@ -3,6 +3,9 @@ package mEngine.graphics;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.vector.Vector4f;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class GraphicsController {
 
@@ -19,6 +22,13 @@ public class GraphicsController {
         GraphicsController.fps = fps;
 
         if(!fullscreen) { setupWindow(width, height, title); }
+
+    }
+
+    public static void clearScreen(Vector4f rgba) {
+
+        glClearColor(rgba.x, rgba.y, rgba.z, rgba.w);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     }
 
