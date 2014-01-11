@@ -10,8 +10,8 @@ public class Input {
 
     public static boolean isKeyDown(int key) {
 
-        boolean isAlreadyActivated = keyStates[key];
         keyStates[key] = isKeyPressed(key);
+        boolean isAlreadyActivated = keyStates[key];
         return keyStates[key] != isAlreadyActivated && !isAlreadyActivated;
 
     }

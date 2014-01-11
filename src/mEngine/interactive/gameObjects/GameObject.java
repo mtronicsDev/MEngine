@@ -14,6 +14,6 @@ public abstract class GameObject {
 
     }
 
-    public void update() {}
+    public abstract void update();
 
 }

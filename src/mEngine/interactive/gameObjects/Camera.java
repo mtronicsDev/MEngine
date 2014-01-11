@@ -11,10 +11,13 @@ public class Camera {
     Vector3f position;
     Vector3f rotation;
 
-    public Camera(Vector3f pos, Vector3f rot) {
+    public static GameObject cameraSticksTo;
+
+    public Camera(Vector3f pos, Vector3f rot, GameObject obj) {
 
         position = pos;
         rotation = rot;
+        cameraSticksTo = obj;
 
     }
 
@@ -28,6 +31,20 @@ public class Camera {
         glMatrixMode(GL_MODELVIEW);
 
         glEnable(GL_DEPTH_TEST);
+
+    }
+
+    public void update() {
+
+        if(cameraSticksTo == null) { //Moving the camera free from any game object
+
+
+
+        } else { //Moving the camera bound to the movement of a game object
+
+
+
+        }
 
     }
 

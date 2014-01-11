@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e86f7707-fb3b-424a-b21a-23b14a6d8cb4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObjectRenderable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mEngine/graphics/renderable/Model.java" />
-      <change type="DELETED" beforePath="D:\Users\Maxi\Documents\IntelliJ\Projects\mEngine\src\mEngine\core\World.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Maxi\Documents\IntelliJ\Projects\mEngine\src\mEngine\interactive\gameObjects\Entity.java" afterPath="" />
+    <list default="true" id="e86f7707-fb3b-424a-b21a-23b14a6d8cb4" name="Default" comment="added the input class again&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java" afterPath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mEngine/core/GameController.java" afterPath="$PROJECT_DIR$/src/mEngine/core/GameController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mEngine/core/GameLoop.java" afterPath="$PROJECT_DIR$/src/mEngine/core/GameLoop.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObject.java" afterPath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObject.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mEngine/util/Input.java" afterPath="$PROJECT_DIR$/src/mEngine/util/Input.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java" afterPath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Users\Maxi\Documents\IntelliJ\Projects\mEngine\src\mEngine\graphics\Camera.java" afterPath="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java" />
     </list>
     <ignored path="mEngine.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,27 +75,45 @@
       <file leaf-file-name="GameController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="5" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameObjectRenderable.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObjectRenderable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="26" selection-start="545" selection-end="545" vertical-scroll-proportion="0.42361864" vertical-offset="0" max-vertical-offset="923">
+            <state line="2" column="7" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#352#364#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Input.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mEngine/util/Input.java">
+      <file leaf-file-name="GameLoop.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="55" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+            <state line="18" column="36" selection-start="538" selection-end="538" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameObjectRenderable.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObjectRenderable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameObject.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="34" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
               <folding />
             </state>
           </provider>
@@ -107,34 +122,7 @@
       <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mEngine/graphics/renderable/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="13" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2363">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#302#312#0" expanded="true" />
-                <element signature="e#358#368#0" expanded="true" />
-                <element signature="e#409#415#0" expanded="true" />
-                <element signature="class#Face#0" expanded="false" />
-                <element signature="e#1619#1629#0" expanded="true" />
-                <element signature="e#1679#1689#0" expanded="true" />
-                <element signature="e#1734#1740#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUIContainer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gui/GUIContainer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="1" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="204">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameLoop.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameLoop.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="88" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+            <state line="11" column="13" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2448">
               <folding />
             </state>
           </provider>
@@ -143,36 +131,16 @@
       <file leaf-file-name="GraphicsController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mEngine/graphics/GraphicsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="18" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1054">
+            <state line="48" column="18" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Camera.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Camera.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="18" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="680">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PropertyHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mEngine/util/PropertyHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="221">
+            <state line="42" column="75" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.6701245" vertical-offset="0" max-vertical-offset="964">
               <folding />
             </state>
           </provider>
@@ -203,17 +171,19 @@
         <option value="$PROJECT_DIR$/src/mEngine/graphics/renderable/Model.java" />
         <option value="$PROJECT_DIR$/src/mEngine/util/Input.java" />
         <option value="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObject.java" />
-        <option value="$PROJECT_DIR$/src/mEngine/core/GameController.java" />
-        <option value="$PROJECT_DIR$/src/mEngine/core/GameLoop.java" />
         <option value="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObjectRenderable.java" />
+        <option value="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java" />
+        <option value="$PROJECT_DIR$/src/mEngine/core/GameLoop.java" />
+        <option value="$PROJECT_DIR$/src/mEngine/core/GameController.java" />
+        <option value="$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="54" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1874" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -241,6 +211,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -296,6 +267,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="physics" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -425,28 +418,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mEngine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mEngine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lwjgl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -509,19 +483,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -547,6 +508,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -666,7 +640,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -679,17 +653,17 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3090909" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19270833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40702212" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1926803" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4060606" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3097998" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -719,6 +693,34 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/mEngine/graphics/GraphicsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="18" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="18" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="221">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/util/PropertyHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="221">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mEngine/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="13" selection-start="83" selection-end="83" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="323">
@@ -729,7 +731,9 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="44" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="425">
-          <folding />
+          <folding>
+            <element signature="e#352#364#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -764,9 +768,7 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="18" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="663">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -787,7 +789,9 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="44" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="425">
-          <folding />
+          <folding>
+            <element signature="e#352#364#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -822,9 +826,7 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="18" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="663">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -845,7 +847,9 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="44" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="357">
-          <folding />
+          <folding>
+            <element signature="e#352#364#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -880,9 +884,7 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="0" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="221">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -903,7 +905,9 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="44" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="357">
-          <folding />
+          <folding>
+            <element signature="e#352#364#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -938,9 +942,7 @@
     <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="0" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="221">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -951,23 +953,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/util/PropertyHelper.java">
+    <entry file="jar://$PROJECT_DIR$/lib/lwjgl/jar/lwjgl.jar!/org/lwjgl/input/Keyboard.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <folding />
-        </state>
+        <state line="135" column="44" selection-start="5769" selection-end="5769" vertical-scroll-proportion="0.77616924" vertical-offset="1581" max-vertical-offset="3825" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/mEngine/util/PropertyHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="83" selection-end="83" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+        <state line="4" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.07053942" vertical-offset="0" max-vertical-offset="964">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gui/GUIContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="1" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+        <state line="6" column="1" selection-start="66" selection-end="66" vertical-scroll-proportion="0.10580913" vertical-offset="0" max-vertical-offset="964">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/util/Input.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="75" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/physics/Collider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="23" selection-start="141" selection-end="141" vertical-scroll-proportion="0.07053942" vertical-offset="0" max-vertical-offset="964">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="13" selection-start="83" selection-end="83" vertical-scroll-proportion="0.07053942" vertical-offset="0" max-vertical-offset="964">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObjectRenderable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/graphics/renderable/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2363">
           <folding />
         </state>
       </provider>
@@ -979,114 +1014,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="18" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="680">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../GitHub/MEngine/src/mengine/Face.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="83" selection-end="345" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../GitHub/MEngine/src/mengine/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../GitHub/MEngine/src/mengine/OBJLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="35" selection-start="0" selection-end="2153" vertical-scroll-proportion="0.14734562" vertical-offset="0" max-vertical-offset="1462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../GitHub/MEngine/src/mengine/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="18" selection-start="773" selection-end="773" vertical-scroll-proportion="-0.07367281" vertical-offset="459" max-vertical-offset="1496">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/lwjgl/jar/lwjgl.jar!/org/lwjgl/input/Keyboard.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="44" selection-start="5769" selection-end="5769" vertical-scroll-proportion="0.77616924" vertical-offset="1581" max-vertical-offset="3825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../GitHub/MEngine/src/mengine/util/Input.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="34" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.53412783" vertical-offset="408" max-vertical-offset="1700">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="23" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/graphics/renderable/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2363">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#302#312#0" expanded="true" />
-            <element signature="e#358#368#0" expanded="true" />
-            <element signature="e#409#415#0" expanded="true" />
-            <element signature="class#Face#0" expanded="false" />
-            <element signature="e#1619#1629#0" expanded="true" />
-            <element signature="e#1679#1689#0" expanded="true" />
-            <element signature="e#1734#1740#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="88" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-8.258675" vertical-offset="7854" max-vertical-offset="19635">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="5" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/util/Input.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="55" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObjectRenderable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="26" selection-start="545" selection-end="545" vertical-scroll-proportion="0.42361864" vertical-offset="0" max-vertical-offset="923">
+        <state line="2" column="7" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#352#364#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/core/GameLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="36" selection-start="538" selection-end="538" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="34" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mEngine/interactive/gameObjects/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="75" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.6701245" vertical-offset="0" max-vertical-offset="964">
+          <folding />
         </state>
       </provider>
     </entry>
