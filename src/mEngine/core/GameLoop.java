@@ -23,6 +23,7 @@ public class GameLoop {
 
             }
 
+            ObjectController.camera.update();
             GraphicsController.update();
 
         }

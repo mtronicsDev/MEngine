@@ -15,15 +15,17 @@ public class Camera {
 
     public Camera(Vector3f pos, Vector3f rot) {
 
-        this(pos, rot, null);
+        this(new GameObjectInvisible(pos, rot));
 
     }
 
-    public Camera(Vector3f pos, Vector3f rot, GameObject obj) {
+    public Camera(GameObject obj) {
 
-        position = pos;
-        rotation = rot;
+        position = obj.position;
+        rotation = obj.rotation;
         sticksTo = obj;
+
+        initialize();
 
     }
 
