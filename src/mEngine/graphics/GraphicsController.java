@@ -56,6 +56,8 @@ public class GraphicsController {
 
     }
 
+    public static void setWindowTitle(String title) { Display.setTitle(title); }
+
     public static int getWidth() { return width; }
     public static int getHeight() { return height; }
 

@@ -3,6 +3,7 @@ package mEngine.core;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.Input;
+import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
@@ -24,6 +25,8 @@ public class GameLoop {
             }
 
             ObjectController.camera.update();
+
+            TimeHelper.updateFPS();
             GraphicsController.update();
 
         }
