@@ -8,6 +8,8 @@ public class Entity extends GameObjectRenderable {
 
     public void updateEntity() {
 
+        //Entity update code here
+
         updatePlayer();
 
     }
