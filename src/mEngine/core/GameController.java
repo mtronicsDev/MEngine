@@ -20,7 +20,7 @@ public class GameController {
         ObjectController.camera = new Camera(new Vector3f(), new Vector3f());
 
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50), new Vector3f(), "res/assets/models/star.obj"));
-        //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/star.obj"));
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 50, 0), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0), new Vector3f(), "res/assets/models/star.obj"));
