@@ -29,8 +29,8 @@ public class Camera extends GameObject{
 
         //Sets perspective
         glMatrixMode(GL_PROJECTION);
-            gluPerspective(45, GraphicsController.getAspectRatio(), 0.1f, 1000);
-            glViewport(0, 0, GraphicsController.getWidth(), GraphicsController.getHeight());
+        gluPerspective(45, GraphicsController.getAspectRatio(), 0.1f, 1000);
+        glViewport(0, 0, GraphicsController.getWidth(), GraphicsController.getHeight());
 
         glMatrixMode(GL_MODELVIEW);
 
