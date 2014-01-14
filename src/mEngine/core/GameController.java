@@ -6,6 +6,7 @@ import mEngine.interactive.gameObjects.GameObjectRenderable;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
+import mEngine.interactive.gameObjects.GameObjectRenderable;
 
 public class GameController {
 
