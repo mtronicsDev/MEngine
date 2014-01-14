@@ -21,10 +21,12 @@ public class GameObjectRenderable extends GameObject {
 
         if(!GameController.isGamePaused) {
 
-            //Code here...
+            updateEntity();
 
         }
 
     }
+
+    public void updateEntity() {};
 
 }

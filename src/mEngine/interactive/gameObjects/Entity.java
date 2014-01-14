@@ -6,4 +6,12 @@ public class Entity extends GameObjectRenderable {
 
     public Entity(Vector3f pos, Vector3f rot, String modelFileName) { super(pos, rot, modelFileName); }
 
+    public void updateEntity() {
+
+        updatePlayer();
+
+    }
+
+    public void updatePlayer() {}
+
 }
