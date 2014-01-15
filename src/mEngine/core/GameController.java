@@ -1,5 +1,6 @@
 package mEngine.core;
 
+import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
@@ -7,6 +8,8 @@ import mEngine.interactive.gameObjects.Player;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.openal.AL;
 import org.lwjgl.util.vector.Vector3f;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
 
@@ -39,12 +42,26 @@ public class GameController {
 
         ObjectController.camera = new Camera(ObjectController.objects.get(0));
 
+        try {
+
+            AudioSource source = new AudioSource(ObjectController.objects.get(1), ObjectController.objects.get(0));
+            source.play();
+
+        }
+        catch (LWJGLException e) {
+
+            e.printStackTrace();
+            System.exit(1);
+
+        }
+
         GameLoop.loop();
 
     }
 
     public static void stopGame() {
 
+        AL.destroy();
         System.exit(0);
 
     }

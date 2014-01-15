@@ -4,8 +4,8 @@ import org.lwjgl.util.vector.Vector3f;
 
 public abstract class GameObject {
 
-    Vector3f position;
-    Vector3f rotation;
+    public Vector3f position;
+    public Vector3f rotation;
 
     public GameObject(Vector3f pos, Vector3f rot) {
 

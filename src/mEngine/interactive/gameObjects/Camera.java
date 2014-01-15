@@ -1,6 +1,5 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.graphics.GraphicsController;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 

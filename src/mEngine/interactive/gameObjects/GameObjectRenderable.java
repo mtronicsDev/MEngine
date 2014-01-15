@@ -7,6 +7,8 @@ import mEngine.physics.ForceController;
 import mEngine.util.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
 
+import java.sql.Time;
+
 public class GameObjectRenderable extends GameObject {
 
     Model model;
@@ -32,8 +34,20 @@ public class GameObjectRenderable extends GameObject {
 
             Vector3f forceSum = ForceController.sumForces();
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
-            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
-            speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
+
+            Vector3f movedSpace;
+            if(TimeHelper.currentFPS != 0){
+
+                movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
+                speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
+
+            }
+            else {
+
+                movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime());
+                speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
+
+            }
 
             //Collision Detection
 
