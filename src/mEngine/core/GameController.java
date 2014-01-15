@@ -19,7 +19,7 @@ public class GameController {
         GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
         TimeHelper.setupTiming();
 
-        ObjectController.addObject(new Player(new Vector3f(), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
+        ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
 
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50), new Vector3f(), "res/assets/models/star.obj"));
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));

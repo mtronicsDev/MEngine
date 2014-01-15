@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class KeyboardMouse extends Controller {
 
-    private int[] keys = new int[Keyboard.getKeyCount()];
+    public int[] keys = new int[Keyboard.getKeyCount()];
 
     public KeyboardMouse() {
 
@@ -20,7 +20,6 @@ public class KeyboardMouse extends Controller {
         keys[6] = Keyboard.KEY_LSHIFT;
         keys[7] = Keyboard.KEY_C;
         keys[8] = Keyboard.KEY_SPACE;
-        keys[9] = Keyboard.KEY_ESCAPE;
 
 
     }

@@ -21,9 +21,11 @@ public class GameObjectRenderable extends GameObject {
 
         if(!GameController.isGamePaused) {
 
-            //"Default" game object code here
-
             updateEntity();
+
+            //Movement
+
+            //Collision Detection
 
         }
 
