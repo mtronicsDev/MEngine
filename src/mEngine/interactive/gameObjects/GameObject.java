@@ -1,14 +1,15 @@
 package mEngine.interactive.gameObjects;
 
 import mEngine.physics.Force;
+import mEngine.physics.ForceController;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.List;
 
 public abstract class GameObject {
 
-    Vector3f position;
-    Vector3f rotation;
+    public Vector3f position;
+    public Vector3f rotation;
     public List<Force> forces;
     boolean sprinting;
     boolean sneaking;
@@ -17,6 +18,8 @@ public abstract class GameObject {
 
         position = pos;
         rotation = rot;
+
+        forces = ForceController.forces;
 
     }
 
