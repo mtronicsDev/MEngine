@@ -1,5 +1,6 @@
 package mEngine.interactive.controls;
 
+import mEngine.interactive.gameObjects.GameObject;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -7,16 +8,13 @@ public class ArtificialIntelligence extends Controller {
 
     public ArtificialIntelligence() {}
 
-    public Vector3f getIntelligentMovement() {
+    public void actIntelligently(GameObject obj) {
 
 
-        return new Vector3f();
 
     }
 
     //Not needed
-    public boolean[] getInputKeys() { return new boolean[1]; }
-
-    public Vector2f getRotation() { return new Vector2f(); }
+    public void checkInputKeys(GameObject obj) {}
 
 }

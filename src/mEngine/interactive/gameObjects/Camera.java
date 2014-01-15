@@ -1,6 +1,6 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.graphics.GraphicsController;
+import mEngine.interactive.controls.KeyboardMouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -13,7 +13,7 @@ public class Camera extends GameObject{
 
     public Camera(Vector3f pos, Vector3f rot) {
 
-        this(new GameObjectInvisible(pos, rot));
+        this(new GameObjectInvisible(pos, rot, new KeyboardMouse()));
 
     }
 
@@ -55,5 +55,16 @@ public class Camera extends GameObject{
         glTranslatef(-position.x, -position.y, -position.z);
 
     }
+
+    //Never used
+    public void moveForward() {}
+    public void moveBackward() {}
+    public void moveLeft() {}
+    public void moveRight() {}
+    public void moveUp() {}
+    public void moveDown() {}
+    public void jump() {}
+    public void sprint() {}
+    public void sneak() {}
 
 }

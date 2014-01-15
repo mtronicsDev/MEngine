@@ -1,6 +1,7 @@
 package mEngine.interactive.gameObjects;
 
 import mEngine.interactive.controls.Controller;
+import mEngine.physics.ForceController;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Player extends Entity {
@@ -9,7 +10,7 @@ public class Player extends Entity {
 
     public void updatePlayer() {
 
-
+        controller.checkInputKeys(this);
 
     }
 

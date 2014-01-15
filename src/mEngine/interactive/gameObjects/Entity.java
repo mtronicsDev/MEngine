@@ -16,7 +16,7 @@ public class Entity extends GameObjectRenderable {
 
     public void updateEntity() {
 
-        //Entity update code here
+        controller.actIntelligently(this);
 
         updatePlayer();
 

@@ -11,7 +11,7 @@ public class ForceController {
 
     public static void addForce(Vector3f direction) { forces.add(new Force(direction)); }
 
-    public static Vector3f sumForces() {
+    public static Vector3f sumForces(List<Force> forces) {
 
         Vector3f forceSum = new Vector3f();
 
