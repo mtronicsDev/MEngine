@@ -36,6 +36,8 @@ public class Camera extends GameObject{
         glMatrixMode(GL_MODELVIEW);
 
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
 
     }
 

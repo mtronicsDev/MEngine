@@ -31,7 +31,7 @@ public class KeyboardMouse extends Controller {
 
         for(int count = 0; count < inputKeys.length; count++) {
 
-            inputKeys[count] = Input.isKeyboardKeyDown(keys[count]);
+            inputKeys[count] = Input.isKeyDown(keys[count]);
 
         }
 
