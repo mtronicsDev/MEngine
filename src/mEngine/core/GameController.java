@@ -24,12 +24,19 @@ public class GameController {
         TimeHelper.setupTiming();
 
         ForceController.addForce(new Vector3f(0, -9.81f, 0));
-        ForceController.addForce(new Vector3f(0, 0, 10));
-        ForceController.addForce(new Vector3f(0, 0, -8));
+        ForceController.addForce(new Vector3f(0, 0, -10));
+        ForceController.addForce(new Vector3f(0, 0, 8));
         ForceController.addForce(new Vector3f(8, 0, 0));
         ForceController.addForce(new Vector3f(-8, 0, 0));
         ForceController.addForce(new Vector3f(0, 8, 0));
         ForceController.addForce(new Vector3f(0, -8, 0));
+        ForceController.addForce(new Vector3f(0, 0, 1));
+        ForceController.addForce(new Vector3f(0, 0, -0.8f));
+        ForceController.addForce(new Vector3f(-0.8f, 0, 0));
+        ForceController.addForce(new Vector3f(0.8f, 0, 0));
+        ForceController.addForce(new Vector3f(0, -0.8f, 0));
+        ForceController.addForce(new Vector3f(0, 0.8f, 0));
+        ForceController.addForce(new Vector3f(0, 10, 0));
 
         ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
 

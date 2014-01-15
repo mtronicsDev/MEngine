@@ -28,26 +28,11 @@ public class GameObjectInvisible extends GameObject {
 
             controller.checkInputKeys(this);
 
-            forces.get(0).setEnabled(true);
-            sprinting = false;
-            sneaking = false;
-
             Vector3f forceSum = ForceController.sumForces(forces);
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            Vector3f movedSpace;
-
-            if(TimeHelper.currentFPS != 0) {
-
-                movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
-                speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
-
-            } else {
-
-                movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime());
-                speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
-
-            }
+            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
+            speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
 
             position.x -= movedSpace.x;
             position.y += movedSpace.y;
@@ -57,14 +42,14 @@ public class GameObjectInvisible extends GameObject {
 
     }
 
-    public void moveForward() { forces.get(1).setEnabled(true); }
-    public void moveBackward() { forces.get(2).setEnabled(true); }
-    public void moveLeft() { forces.get(3).setEnabled(true); }
-    public void moveRight() { forces.get(4).setEnabled(true); }
-    public void moveUp() { forces.get(5).setEnabled(true); }
-    public void moveDown() { forces.get(6).setEnabled(true); }
-    public void jump() { forces.get(5).setEnabled(true); }
-    public void sprint() { sprinting = true; }
-    public void sneak() { sneaking = true; }
+    public void moveForward() { forces.get(1).enabled = true; forces.get(7).enabled = true; }
+    public void moveBackward() { forces.get(2).enabled = true; forces.get(8).enabled = true; }
+    public void moveLeft() { forces.get(3).enabled = true; forces.get(9).enabled = true; }
+    public void moveRight() { forces.get(4).enabled = true; forces.get(10).enabled = true; }
+    public void moveUp() { forces.get(5).enabled = true; forces.get(11).enabled = true; }
+    public void moveDown() { forces.get(6).enabled = true; forces.get(12).enabled = true; }
+    public void jump() {}
+    public void sprint() {}
+    public void sneak() {}
 
 }
