@@ -1,6 +1,7 @@
 package mEngine.interactive.gameObjects;
 
 import mEngine.graphics.GraphicsController;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -29,8 +30,8 @@ public class Camera extends GameObject{
 
         //Sets perspective
         glMatrixMode(GL_PROJECTION);
-        gluPerspective(45, GraphicsController.getAspectRatio(), 0.1f, 1000);
-        glViewport(0, 0, GraphicsController.getWidth(), GraphicsController.getHeight());
+        gluPerspective(45, (float)Display.getWidth() / Display.getHeight(), 0.1f, 1000);
+        glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
         glMatrixMode(GL_MODELVIEW);
 

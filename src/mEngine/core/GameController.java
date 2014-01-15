@@ -14,7 +14,7 @@ public class GameController {
     public static void runGame() {
 
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
-        GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
+        GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", true);
         TimeHelper.setupTiming();
 
         ObjectController.camera = new Camera(new Vector3f(), new Vector3f());

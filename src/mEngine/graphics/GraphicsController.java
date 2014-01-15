@@ -21,7 +21,8 @@ public class GraphicsController {
 
         GraphicsController.fps = fps;
 
-        if(!fullscreen) { setupWindow(width, height, title); }
+        if(!fullscreen) setupWindow(width, height, title);
+        else setupFullscreen();
 
     }
 
@@ -45,6 +46,23 @@ public class GraphicsController {
 
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setTitle(title);
+            Display.create();
+
+        } catch (LWJGLException e) {
+
+            e.printStackTrace();
+            System.exit(1);
+
+        }
+
+    }
+
+    private static void setupFullscreen() {
+
+        try {
+
+            Display.setDisplayMode(Display.getDesktopDisplayMode());
+            Display.setFullscreen(true);
             Display.create();
 
         } catch (LWJGLException e) {
