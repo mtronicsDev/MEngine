@@ -16,13 +16,13 @@ public class GameController {
     public static void runGame() {
 
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
-        GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
+        GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", true);
         TimeHelper.setupTiming();
 
         ObjectController.addObject(new Player(new Vector3f(), new Vector3f(), "res/assets/models/star.obj", new KeyboardMouse()));
 
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50), new Vector3f(), "res/assets/models/star.obj"));
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/star.obj"));
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 50, 0), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0), new Vector3f(), "res/assets/models/star.obj"));

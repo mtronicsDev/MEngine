@@ -8,10 +8,10 @@ public class GameObjectRenderable extends GameObject {
 
     Model model;
 
-    public GameObjectRenderable(Vector3f pos, Vector3f rot, String modelFileName) {
+    public GameObjectRenderable(Vector3f pos, Vector3f rot, String modelFileName, String textureFileName) {
 
         super(pos, rot);
-        model = new Model(modelFileName, pos, rot);
+        model = new Model(modelFileName, textureFileName, pos, rot);
 
     }
 
