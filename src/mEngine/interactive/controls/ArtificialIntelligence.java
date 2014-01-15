@@ -15,7 +15,7 @@ public class ArtificialIntelligence extends Controller {
     }
 
     //Not needed
-    public boolean[] getMovement() { return new boolean[1]; }
+    public boolean[] getInputKeys() { return new boolean[1]; }
 
     public Vector2f getRotation() { return new Vector2f(); }
 

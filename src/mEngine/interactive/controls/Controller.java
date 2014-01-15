@@ -7,10 +7,12 @@ public abstract class Controller {
 
     public Controller() {}
 
-    public abstract boolean[] getMovement();
+    //Controls used while playing
+    public abstract boolean[] getInputKeys();
 
     public abstract Vector2f getRotation();
 
+    //Artificial Intelligence
     public abstract Vector3f getIntelligentMovement();
 
 }

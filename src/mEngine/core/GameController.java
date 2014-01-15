@@ -1,7 +1,9 @@
 package mEngine.core;
 
 import mEngine.graphics.GraphicsController;
+import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
+import mEngine.interactive.gameObjects.Player;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -17,7 +19,7 @@ public class GameController {
         GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
         TimeHelper.setupTiming();
 
-        ObjectController.camera = new Camera(new Vector3f(), new Vector3f());
+        ObjectController.addObject(new Player(new Vector3f(), new Vector3f(), "res/assets/models/star.obj", new KeyboardMouse()));
 
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50), new Vector3f(), "res/assets/models/star.obj"));
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/star.obj"));
@@ -25,6 +27,8 @@ public class GameController {
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0), new Vector3f(), "res/assets/models/star.obj"));
         //ObjectController.addObject(new GameObjectRenderable(new Vector3f(-50, 0, 0), new Vector3f(), "res/assets/models/star.obj"));
+
+        ObjectController.camera = new Camera(ObjectController.objects.get(0));
 
         GameLoop.loop();
 

@@ -8,7 +8,7 @@ public class Input {
 
     public static boolean isKeyPressed(int key) { return Keyboard.isKeyDown(key); }
 
-    public static boolean isKeyDown(int key) {
+    public static boolean isKeyboardKeyDown(int key) {
 
         boolean isAlreadyActivated = keyStates[key];
         keyStates[key] = isKeyPressed(key);

@@ -7,17 +7,19 @@ public class Gamepad extends Controller {
 
     public Gamepad() {}
 
-    public boolean[] getMovement() {
+    public boolean[] getInputKeys() {
 
+        boolean[] movement = new boolean[7];
 
-        return new boolean[1];
+        return movement;
 
     }
 
     public Vector2f getRotation() {
 
+        Vector2f rotation = new Vector2f();
 
-        return new Vector2f();
+        return rotation;
 
     }
 
