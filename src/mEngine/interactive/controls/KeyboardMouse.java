@@ -27,7 +27,15 @@ public class KeyboardMouse extends Controller {
 
     public void checkInputKeys(GameObject obj) {
 
-
+        if(Input.isKeyDown(keys[0])) obj.moveForward();
+        if(Input.isKeyDown(keys[1])) obj.moveBackward();
+        if(Input.isKeyDown(keys[2])) obj.moveLeft();
+        if(Input.isKeyDown(keys[3])) obj.moveRight();
+        if(Input.isKeyDown(keys[4])) obj.moveDown();
+        if(Input.isKeyDown(keys[5])) obj.moveUp();
+        if(Input.isKeyDown(keys[6])) obj.sprint();
+        if(Input.isKeyDown(keys[7])) obj.sneak();
+        if(Input.isKeyDown(keys[8])) obj.jump();
 
     }
 

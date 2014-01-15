@@ -30,23 +30,31 @@ public class GameObjectRenderable extends GameObject {
 
             updateEntity();
 
-            forces.get(0).setEnabled(true);
+            //forces.get(0).setEnabled(true);
             sprinting = false;
             sneaking = false;
 
             Vector3f forceSum = ForceController.sumForces(forces);
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
+
+            Vector3f movedSpace;
+
             if(TimeHelper.currentFPS != 0) {
 
-                Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
+                movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
                 speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime() / TimeHelper.currentFPS);
 
             } else {
 
-                Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime());
+                movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime());
                 speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
 
             }
+
+            position.x -= movedSpace.x;
+            position.y += movedSpace.y;
+            position.z -= movedSpace.z;
+
             //Collision Detection
 
         }
