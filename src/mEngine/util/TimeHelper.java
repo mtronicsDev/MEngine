@@ -8,7 +8,7 @@ public class TimeHelper {
     private static long lastTime;
     private static long lastFPS;
 
-    private static long currentFPS;
+    public static long currentFPS;
 
     public static void setupTiming() {
 

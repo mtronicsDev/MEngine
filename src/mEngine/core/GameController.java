@@ -4,6 +4,7 @@ import mEngine.graphics.GraphicsController;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
+import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -18,6 +19,14 @@ public class GameController {
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
         GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
         TimeHelper.setupTiming();
+
+        ForceController.addForce(new Vector3f(0, -9.81f, 0));
+        ForceController.addForce(new Vector3f(0, 0, 10));
+        ForceController.addForce(new Vector3f(0, 0, -8));
+        ForceController.addForce(new Vector3f(8, 0, 0));
+        ForceController.addForce(new Vector3f(-8, 0, 0));
+        ForceController.addForce(new Vector3f(0, 8, 0));
+        ForceController.addForce(new Vector3f(0, -8, 0));
 
         ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
 
