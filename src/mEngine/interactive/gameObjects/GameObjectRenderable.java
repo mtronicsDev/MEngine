@@ -7,8 +7,6 @@ import mEngine.physics.ForceController;
 import mEngine.util.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.util.List;
-
 public class GameObjectRenderable extends GameObject {
 
     Model model;
@@ -21,7 +19,6 @@ public class GameObjectRenderable extends GameObject {
         model = new Model(modelFileName, textureFileName, pos, rot);
         mass = 60; //This is not correct, I will implement a method for defining the weight of the model later
         speed = new Vector3f();
-        forces = ForceController.forces;
 
     }
 
@@ -50,7 +47,6 @@ public class GameObjectRenderable extends GameObject {
                 speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
 
             }
-
             //Collision Detection
 
         }
