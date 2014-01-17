@@ -1,10 +1,8 @@
 package mEngine.interactive.controls;
 
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.interactive.gameObjects.GameObjectMovable;
 import mEngine.util.Input;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector2f;
 
 public class KeyboardMouse extends Controller {
 
@@ -24,21 +22,18 @@ public class KeyboardMouse extends Controller {
 
     }
 
-    public void checkInputKeys(GameObject obj) {
+    public void updateObject(GameObjectMovable obj) {
 
-        if(Input.isKeyDown(keys[0])) obj.moveForward();
-        if(Input.isKeyDown(keys[1])) obj.moveBackward();
-        if(Input.isKeyDown(keys[2])) obj.moveLeft();
-        if(Input.isKeyDown(keys[3])) obj.moveRight();
-        if(Input.isKeyDown(keys[4])) obj.moveDown();
-        if(Input.isKeyDown(keys[5])) obj.moveUp();
-        if(Input.isKeyDown(keys[6])) obj.sprint();
-        if(Input.isKeyDown(keys[7])) obj.sneak();
-        if(Input.isKeyDown(keys[8])) obj.jump();
+        if(Input.isKeyPressed(keys[0])) obj.moveForward();
+        if(Input.isKeyPressed(keys[1])) obj.moveBackward();
+        if(Input.isKeyPressed(keys[2])) obj.moveLeft();
+        if(Input.isKeyPressed(keys[3])) obj.moveRight();
+        if(Input.isKeyPressed(keys[4])) obj.moveDown();
+        if(Input.isKeyPressed(keys[5])) obj.moveUp();
+        if(Input.isKeyPressed(keys[6])) obj.sprint();
+        if(Input.isKeyPressed(keys[7])) obj.sneak();
+        if(Input.isKeyPressed(keys[8])) obj.jump();
 
     }
-
-    //Not needed
-    public void actIntelligently(GameObject obj) {}
 
 }

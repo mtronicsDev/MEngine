@@ -1,20 +1,11 @@
 package mEngine.interactive.controls;
 
-import mEngine.interactive.gameObjects.GameObject;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector2f;
+import mEngine.interactive.gameObjects.GameObjectMovable;
 
 public class Gamepad extends Controller {
 
     public Gamepad() {}
 
-    public void checkInputKeys(GameObject obj) {
-
-
-
-    }
-
-    //Not needed
-    public void actIntelligently(GameObject obj) {}
+    public void updateObject(GameObjectMovable obj) {}
 
 }

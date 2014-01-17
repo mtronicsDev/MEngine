@@ -2,6 +2,7 @@ package mEngine.core;
 
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
+import mEngine.interactive.controls.ArtificialIntelligence;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
@@ -40,12 +41,41 @@ public class GameController {
 
         ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 50, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(-50, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png"));
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
+                new Vector3f(),
+                "res/assets/models/texturedStar.obj",
+                "res/assets/textures/texturedStar.png",
+                new ArtificialIntelligence()));
+
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
+                new Vector3f(),
+                "res/assets/models/texturedStar.obj",
+                "res/assets/textures/texturedStar.png",
+                new ArtificialIntelligence()));
+
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
+                new Vector3f(),
+                "res/assets/models/texturedStar.obj",
+                "res/assets/textures/texturedStar.png",
+                new ArtificialIntelligence()));
+
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
+                new Vector3f(),
+                "res/assets/models/texturedStar.obj",
+                "res/assets/textures/texturedStar.png",
+                new ArtificialIntelligence()));
+
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
+                new Vector3f(),
+                "res/assets/models/texturedStar.obj",
+                "res/assets/textures/texturedStar.png",
+                new ArtificialIntelligence()));
+
+        ObjectController.addObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
+                new Vector3f(),
+                "res/assets/models/texturedStar.obj",
+                "res/assets/textures/texturedStar.png",
+                new ArtificialIntelligence()));
 
         ObjectController.camera = new Camera(ObjectController.objects.get(0));
 
