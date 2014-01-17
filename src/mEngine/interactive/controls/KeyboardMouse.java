@@ -22,7 +22,6 @@ public class KeyboardMouse extends Controller {
         keys[7] = Keyboard.KEY_C;
         keys[8] = Keyboard.KEY_SPACE;
 
-
     }
 
     public void checkInputKeys(GameObject obj) {

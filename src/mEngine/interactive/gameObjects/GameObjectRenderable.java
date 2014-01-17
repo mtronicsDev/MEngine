@@ -1,6 +1,5 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.Main;
 import mEngine.core.GameController;
 import mEngine.graphics.renderable.Model;
 import mEngine.physics.Force;
