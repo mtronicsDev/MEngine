@@ -56,15 +56,4 @@ public class Camera extends GameObject{
 
     }
 
-    //Never used
-    public void moveForward() {}
-    public void moveBackward() {}
-    public void moveLeft() {}
-    public void moveRight() {}
-    public void moveUp() {}
-    public void moveDown() {}
-    public void jump() {}
-    public void sprint() {}
-    public void sneak() {}
-
 }

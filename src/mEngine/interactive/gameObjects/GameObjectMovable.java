@@ -31,9 +31,11 @@ public class GameObjectMovable extends GameObject{
 
         if(!GameController.isGamePaused) {
 
-            //forces.get(0).enabled = true;
+            //forces.get(0).enable();
             sprinting = false;
             sneaking = false;
+
+            for(Force force: forces) { force.disable(); }
 
             updateController();
 
@@ -43,16 +45,13 @@ public class GameObjectMovable extends GameObject{
 
                     if(forces.indexOf(force) <= 6 && forces.indexOf(force) != 0) {
 
-                        force.direction.x /= 2;
-                        force.direction.z /= 2;
-
                         if(Math.abs(force.direction.x) <= Math.abs(forces.get(forces.indexOf(force) + 6).direction.x) &&
                                 Math.abs(force.direction.y) <= Math.abs(forces.get(forces.indexOf(force) + 6).direction.y) &&
                                 Math.abs(force.direction.z) <= Math.abs(forces.get(forces.indexOf(force) + 6).direction.z)) {
 
                             force.setDirection(ForceController.forces.get(forces.indexOf(force)).direction);
-                            force.enabled = false;
-                            forces.get(forces.indexOf(force) + 6).enabled = false;
+                            force.disable();
+                            forces.get(forces.indexOf(force) + 6).disable();
 
                         }
 
@@ -68,7 +67,7 @@ public class GameObjectMovable extends GameObject{
             Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / 5);
             speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
 
-            position.x -= movedSpace.x;
+            position.x += movedSpace.x;
             position.y += movedSpace.y;
             position.z += movedSpace.z;
 
@@ -83,53 +82,53 @@ public class GameObjectMovable extends GameObject{
 
     public void moveForward() {
 
-        forces.get(1).enabled = true;
+        forces.get(1).enable();
         forces.get(1).setDirection(ForceController.forces.get(1).direction);
-        forces.get(7).enabled = true;
+        forces.get(7).enable();
 
     }
 
     public void moveBackward() {
 
-        forces.get(2).enabled = true;
+        forces.get(2).enable();
         forces.get(2).setDirection(ForceController.forces.get(2).direction);
-        forces.get(8).enabled = true;
+        forces.get(8).enable();
 
     }
 
     public void moveLeft() {
 
-        forces.get(3).enabled = true;
+        forces.get(3).enable();
         forces.get(3).setDirection(ForceController.forces.get(3).direction);
-        forces.get(9).enabled = true;
+        forces.get(9).enable();
 
     }
 
     public void moveRight() {
 
-        forces.get(4).enabled = true;
+        forces.get(4).enable();
         forces.get(4).setDirection(ForceController.forces.get(4).direction);
-        forces.get(10).enabled = true;
+        forces.get(10).enable();
 
     }
 
     public void moveUp() {
 
-        forces.get(5).enabled = true;
+        forces.get(5).enable();
         forces.get(5).setDirection(ForceController.forces.get(5).direction);
-        forces.get(11).enabled = true;
+        forces.get(11).enable();
 
     }
 
     public void moveDown() {
 
-        forces.get(6).enabled = true;
+        forces.get(6).enable();
         forces.get(6).setDirection(ForceController.forces.get(6).direction);
-        forces.get(12).enabled = true;
+        forces.get(12).enable();
 
     }
 
-    public void jump() { forces.get(13).enabled = true; }
+    public void jump() { forces.get(13).enable(); }
 
     public void sprint() { sprinting = true; }
 

@@ -2,7 +2,10 @@ package mEngine.interactive.controls;
 
 import mEngine.interactive.gameObjects.GameObjectMovable;
 import mEngine.util.Input;
+import mEngine.util.KeyAlreadyAssignedException;
 import org.lwjgl.input.Keyboard;
+
+import static mEngine.util.Input.getKey;
 
 public class KeyboardMouse extends Controller {
 
@@ -10,29 +13,42 @@ public class KeyboardMouse extends Controller {
 
     public KeyboardMouse() {
 
-        keys[0] = Keyboard.KEY_W;
-        keys[1] = Keyboard.KEY_S;
-        keys[2] = Keyboard.KEY_A;
-        keys[3] = Keyboard.KEY_D;
-        keys[4] = Keyboard.KEY_Q;
-        keys[5] = Keyboard.KEY_E;
-        keys[6] = Keyboard.KEY_LSHIFT;
-        keys[7] = Keyboard.KEY_C;
-        keys[8] = Keyboard.KEY_SPACE;
+        try {
+
+            Input.assignKey("forward", Keyboard.KEY_W);
+            Input.assignKey("backward", Keyboard.KEY_S);
+            Input.assignKey("right", Keyboard.KEY_D);
+            Input.assignKey("left", Keyboard.KEY_A);
+
+            Input.assignKey("up", Keyboard.KEY_E);
+            Input.assignKey("down", Keyboard.KEY_Q);
+
+            Input.assignKey("jump", Keyboard.KEY_SPACE);
+            Input.assignKey("sprint", Keyboard.KEY_LCONTROL);
+            Input.assignKey("sneak", Keyboard.KEY_LSHIFT);
+
+        } catch (KeyAlreadyAssignedException e) {
+
+            e.printStackTrace();
+            System.exit(1);
+
+        }
 
     }
 
     public void updateObject(GameObjectMovable obj) {
 
-        if(Input.isKeyPressed(keys[0])) obj.moveForward();
-        if(Input.isKeyPressed(keys[1])) obj.moveBackward();
-        if(Input.isKeyPressed(keys[2])) obj.moveLeft();
-        if(Input.isKeyPressed(keys[3])) obj.moveRight();
-        if(Input.isKeyPressed(keys[4])) obj.moveDown();
-        if(Input.isKeyPressed(keys[5])) obj.moveUp();
-        if(Input.isKeyPressed(keys[6])) obj.sprint();
-        if(Input.isKeyPressed(keys[7])) obj.sneak();
-        if(Input.isKeyPressed(keys[8])) obj.jump();
+        if(Input.isKeyPressed(getKey("forward"))) obj.moveForward();
+        if(Input.isKeyPressed(getKey("backward"))) obj.moveBackward();
+        if(Input.isKeyPressed(getKey("right"))) obj.moveLeft();
+        if(Input.isKeyPressed(getKey("left"))) obj.moveRight();
+
+        if(Input.isKeyPressed(getKey("up"))) obj.moveUp();
+        if(Input.isKeyPressed(getKey("down"))) obj.moveDown();
+
+        if(Input.isKeyPressed(getKey("jump"))) obj.jump();
+        if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
+        if(Input.isKeyPressed(getKey("sneak"))) obj.sneak();
 
     }
 

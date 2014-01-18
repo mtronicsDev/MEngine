@@ -24,20 +24,20 @@ public class GameController {
         GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
         TimeHelper.setupTiming();
 
-        ForceController.addForce(new Vector3f(0, -9.81f, 0));
-        ForceController.addForce(new Vector3f(0, 0, -10));
-        ForceController.addForce(new Vector3f(0, 0, 8));
-        ForceController.addForce(new Vector3f(8, 0, 0));
-        ForceController.addForce(new Vector3f(-8, 0, 0));
-        ForceController.addForce(new Vector3f(0, 8, 0));
-        ForceController.addForce(new Vector3f(0, -8, 0));
-        ForceController.addForce(new Vector3f(0, 0, 1));
-        ForceController.addForce(new Vector3f(0, 0, -0.8f));
-        ForceController.addForce(new Vector3f(-0.8f, 0, 0));
-        ForceController.addForce(new Vector3f(0.8f, 0, 0));
-        ForceController.addForce(new Vector3f(0, -0.8f, 0));
-        ForceController.addForce(new Vector3f(0, 0.8f, 0));
-        ForceController.addForce(new Vector3f(0, 10, 0));
+        ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
+        ForceController.addForce(new Vector3f(0, 0, -10)); //Forward
+        ForceController.addForce(new Vector3f(0, 0, 8)); //Backward
+        ForceController.addForce(new Vector3f(8, 0, 0)); //Right
+        ForceController.addForce(new Vector3f(-8, 0, 0)); //Left
+        ForceController.addForce(new Vector3f(0, 8, 0)); //Up
+        ForceController.addForce(new Vector3f(0, -8, 0)); //Down
+        ForceController.addForce(new Vector3f(0, 0, 1)); //FwFriction
+        ForceController.addForce(new Vector3f(0, 0, -0.8f)); //BwFriction
+        ForceController.addForce(new Vector3f(-0.8f, 0, 0)); //RiF
+        ForceController.addForce(new Vector3f(0.8f, 0, 0)); //LeF
+        ForceController.addForce(new Vector3f(0, -0.8f, 0)); //UpF
+        ForceController.addForce(new Vector3f(0, 0.8f, 0)); //DoF
+        ForceController.addForce(new Vector3f(0, 10, 0)); //Jump force
 
         ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
 
