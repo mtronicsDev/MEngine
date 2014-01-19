@@ -8,6 +8,7 @@ import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
+import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
@@ -24,6 +25,7 @@ public class GameController {
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
         GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
         TimeHelper.setupTiming();
+        RuntimeHelper.initialize();
 
         ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
         ForceController.addForce(new Vector3f(0, 0, -10)); //Forward
@@ -82,8 +84,7 @@ public class GameController {
 
         try {
 
-            AudioSource source = new AudioSource(ObjectController.objects.get(1), ObjectController.objects.get(0));
-            source.play();
+            ObjectController.addAudioSource(new AudioSource(ObjectController.objects.get(1), ObjectController.objects.get(0)));
 
         }
         catch (LWJGLException e) {
@@ -93,9 +94,28 @@ public class GameController {
 
         }
 
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
+
+    }
+
+    public static void pauseGame() {
+
+        Mouse.setGrabbed(false);
+        for(AudioSource source : ObjectController.audioSources) { source.pause(); }
+
+        isGamePaused = true;
+
+    }
+
+    public static void unPauseGame() {
+
+        Mouse.setGrabbed(true);
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
+
+        isGamePaused = false;
 
     }
 

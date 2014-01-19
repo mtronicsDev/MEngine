@@ -16,7 +16,12 @@ public class GameLoop {
 
             GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
 
-            if(Input.isKeyDown(Keyboard.KEY_ESCAPE)) GameController.isGamePaused = !GameController.isGamePaused;
+            if(Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
+
+                if(GameController.isGamePaused) GameController.unPauseGame();
+                else GameController.pauseGame();
+
+            }
 
             for(GameObject gameObject : ObjectController.objects) {
 
