@@ -67,9 +67,9 @@ public class GameObjectMovable extends GameObject{
             Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / 5);
             speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
 
-            position.x += movedSpace.x;
+            position.x -= movedSpace.x * (float)Math.sin(Math.toRadians(rotation.y - 90)) + movedSpace.z * Math.sin(Math.toRadians(rotation.y));
             position.y += movedSpace.y;
-            position.z += movedSpace.z;
+            position.z += movedSpace.x * (float)Math.cos(Math.toRadians(rotation.y - 90)) + movedSpace.z * Math.cos(Math.toRadians(rotation.y));
 
             //Collision Detection
 
@@ -133,5 +133,12 @@ public class GameObjectMovable extends GameObject{
     public void sprint() { sprinting = true; }
 
     public void sneak() { sneaking = true; }
+
+    public void rotate(float pitch, float yaw) {
+
+        rotation.x = pitch;
+        rotation.y = yaw;
+
+    }
 
 }

@@ -63,4 +63,14 @@ public class ForceController {
 
     }
 
+    public static Vector3f getCombinedForces(Vector3f forceA, Vector3f forceB) {
+
+        Vector3f combinedForce = new Vector3f();
+
+
+
+        return combinedForce;
+
+    }
+
 }

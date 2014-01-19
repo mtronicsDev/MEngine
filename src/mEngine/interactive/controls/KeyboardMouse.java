@@ -4,6 +4,7 @@ import mEngine.interactive.gameObjects.GameObjectMovable;
 import mEngine.util.Input;
 import mEngine.util.KeyAlreadyAssignedException;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import static mEngine.util.Input.getKey;
 
@@ -49,6 +50,46 @@ public class KeyboardMouse extends Controller {
         if(Input.isKeyPressed(getKey("jump"))) obj.jump();
         if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
         if(Input.isKeyPressed(getKey("sneak"))) obj.sneak();
+
+        //Calculating the rotation
+        float pitch = obj.rotation.x;
+        float yaw = obj.rotation.y;
+
+        final float MAX_UP_ANGLE = 90;
+        final float MAX_DOWN_ANGLE = -90;
+
+        float deltaMouseX = Mouse.getDX() * 0.16f;
+        float deltaMouseY = Mouse.getDY() * 0.16f;
+
+        if (yaw + deltaMouseX >= 360) {
+
+            yaw = yaw + deltaMouseX - 360;
+
+        } else if (yaw + deltaMouseX < 0) {
+
+            yaw = 360 - yaw + deltaMouseX;
+
+        } else {
+
+            yaw += deltaMouseX;
+
+        }
+
+        if (pitch - deltaMouseY >= MAX_DOWN_ANGLE && pitch - deltaMouseY <= MAX_UP_ANGLE) {
+
+            pitch += -deltaMouseY;
+
+        } else if (pitch - deltaMouseY < MAX_DOWN_ANGLE) {
+
+            pitch = MAX_DOWN_ANGLE;
+
+        } else if (pitch - deltaMouseY > MAX_UP_ANGLE) {
+
+            pitch = MAX_UP_ANGLE;
+
+        }
+
+        obj.rotate(pitch, yaw);
 
     }
 

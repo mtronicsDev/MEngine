@@ -10,6 +10,7 @@ import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.util.vector.Vector3f;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
@@ -45,7 +46,7 @@ public class GameController {
                 new Vector3f(),
                 "res/assets/models/texturedStar.obj",
                 "res/assets/textures/texturedStar.png",
-                new ArtificialIntelligence()));
+                null));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
                 new Vector3f(),
@@ -91,6 +92,8 @@ public class GameController {
             System.exit(1);
 
         }
+
+        Mouse.setGrabbed(true);
 
         GameLoop.loop();
 
