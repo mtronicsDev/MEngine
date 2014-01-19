@@ -1,6 +1,5 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.core.ObjectController;
 import mEngine.interactive.controls.KeyboardMouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;

@@ -82,7 +82,7 @@ public class GameController {
 
         ObjectController.camera = new Camera(ObjectController.objects.get(0));
 
-        try {
+        /*try {
 
             ObjectController.addAudioSource(new AudioSource(ObjectController.objects.get(1), ObjectController.objects.get(0)));
 
@@ -92,7 +92,7 @@ public class GameController {
             e.printStackTrace();
             System.exit(1);
 
-        }
+        }*/
 
         for(AudioSource source : ObjectController.audioSources) { //source.play();
         }

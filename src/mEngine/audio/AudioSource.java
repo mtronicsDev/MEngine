@@ -26,11 +26,7 @@ public class AudioSource {
     FloatBuffer sourcePos = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
     FloatBuffer sourceVel = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
 
-    FloatBuffer listenerPos = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-    FloatBuffer listenerVel = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-    FloatBuffer listenerOri = (FloatBuffer)BufferUtils.createFloatBuffer(6).put(new float[]{0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f}).rewind();
-
-    public AudioSource(GameObject source, GameObject listener) throws LWJGLException{
+    public AudioSource(GameObject source) throws LWJGLException{
 
         try {
 
@@ -48,12 +44,6 @@ public class AudioSource {
 
         position = source.position;
         rotation = source.rotation;
-
-        listenerPos = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{listener.position.x, listener.position.y, listener.position.z}).rewind();
-        listenerVel = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-        listenerOri = (FloatBuffer)BufferUtils.createFloatBuffer(6).put(new float[]{0, 0, -1, 0.0f, 1.0f, 0.0f}).rewind();
-
-        setListenerValues();
 
     }
 
@@ -94,14 +84,6 @@ public class AudioSource {
 
         if(alGetError() == AL_NO_ERROR) return  AL_TRUE;
         else return AL_FALSE;
-
-    }
-
-    void setListenerValues() {
-
-        alListener(AL_POSITION, listenerPos);
-        alListener(AL_VELOCITY, listenerVel);
-        alListener(AL_ORIENTATION, listenerOri);
 
     }
 

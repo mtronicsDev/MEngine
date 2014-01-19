@@ -34,30 +34,10 @@ public class PreferenceHelper {
 
     }
 
-    public static Vector4f getRgbaValue(String key) {
+    public static boolean getBoolean(String key) {
 
-        String value = properties.getProperty(key);
-
-        if(value.matches("rgba *\\( *([0-9]+), *([0-9]+), *([0-9]+), *([0-9]+) *\\)")) {
-
-            value = value.replace("rgba(", "");
-            value = value.replace(")", "");
-
-            String[] values = value.split(", *");
-
-            return new Vector4f(
-                    Float.parseFloat(values[0]),
-                    Float.parseFloat(values[1]),
-                    Float.parseFloat(values[2]),
-                    Float.parseFloat(values[3])
-            );
-
-        }
-        else{
-
-            return  null;
-
-        }
+        String value = getValue(key);
+        return value.toLowerCase().equals("true") || value.equals("1");
 
     }
 
