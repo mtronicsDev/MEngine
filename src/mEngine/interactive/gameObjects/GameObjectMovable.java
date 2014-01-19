@@ -6,6 +6,7 @@ import mEngine.physics.Force;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class GameObjectMovable extends GameObject{
@@ -70,6 +71,16 @@ public class GameObjectMovable extends GameObject{
             }
 
             Vector3f forceSum = ForceController.sumForces(forces);
+
+            if(forceSum.x != 0 && forceSum.z != 0) {
+
+                Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+
+                forceSum.x = newForces.x;
+                forceSum.z = newForces.y;
+
+            }
+
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
             Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / 5);
