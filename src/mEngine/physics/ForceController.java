@@ -1,5 +1,6 @@
 package mEngine.physics;
 
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
@@ -8,6 +9,36 @@ import java.util.List;
 public class ForceController {
 
     public static List<Force> forces = new ArrayList<Force>();
+
+    public static final float X_Y_RATIO = calculateXYRatio();
+
+    private static float calculateXYRatio() {
+
+        float xYRatio = 0;
+
+        for(float x = 0; x <= 1; x += 0.00001f) {
+
+            float y = (float)Math.sqrt(1 - Math.pow(x, 2));
+
+            if(x == y) xYRatio = x;
+
+            else {
+
+                for(float count = -0.00001f; count <= 0.00001f; count += 0.00000001f) {
+
+                    y += count;
+
+                    if(x == y) xYRatio = x;
+
+                }
+
+            }
+
+        }
+
+        return xYRatio;
+
+    }
 
     public static void addForce(Vector3f direction) { forces.add(new Force(direction)); }
 
@@ -63,11 +94,12 @@ public class ForceController {
 
     }
 
-    public static Vector3f getCombinedForces(Vector3f forceA, Vector3f forceB) {
+    public static Vector2f getCombinedForces(float directionA, float directionB) {
 
-        Vector3f combinedForce = new Vector3f();
+        Vector2f combinedForce = new Vector2f();
 
-
+        combinedForce.x = directionA * X_Y_RATIO;
+        combinedForce.y = directionB * X_Y_RATIO;
 
         return combinedForce;
 
