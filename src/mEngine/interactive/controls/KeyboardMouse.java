@@ -10,8 +10,6 @@ import static mEngine.util.Input.getKey;
 
 public class KeyboardMouse extends Controller {
 
-    public int[] keys = new int[Keyboard.getKeyCount()];
-
     public KeyboardMouse() {
 
         try {
@@ -25,8 +23,8 @@ public class KeyboardMouse extends Controller {
             Input.assignKey("down", Keyboard.KEY_Q);
 
             Input.assignKey("jump", Keyboard.KEY_SPACE);
-            Input.assignKey("sprint", Keyboard.KEY_LCONTROL);
-            Input.assignKey("sneak", Keyboard.KEY_LSHIFT);
+            Input.assignKey("sprint", Keyboard.KEY_LSHIFT);
+            Input.assignKey("sneak", Keyboard.KEY_C);
 
         } catch (KeyAlreadyAssignedException e) {
 
@@ -47,7 +45,8 @@ public class KeyboardMouse extends Controller {
         if(Input.isKeyPressed(getKey("up"))) obj.moveUp();
         if(Input.isKeyPressed(getKey("down"))) obj.moveDown();
 
-        if(Input.isKeyPressed(getKey("jump"))) obj.jump();
+        if(obj.continuouslyJumping) if(Input.isKeyPressed(getKey("jump"))) obj.jump();
+
         if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
         if(Input.isKeyPressed(getKey("sneak"))) obj.sneak();
 

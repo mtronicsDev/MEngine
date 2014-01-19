@@ -3,8 +3,6 @@ package mEngine.physics;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
 import org.lwjgl.util.vector.Vector3f;
 
-import mEngine.interactive.gameObjects.GameObject;
-
 public class Collider {
 
        public static boolean areAABBsColliding(GameObjectRenderable a, GameObjectRenderable b) {

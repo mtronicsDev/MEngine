@@ -13,8 +13,10 @@ public class GameObjectMovable extends GameObject{
     public float mass;
     public Vector3f speed = new Vector3f();
 
-    boolean sprinting;
-    boolean sneaking;
+    public boolean sprinting;
+    public boolean sneaking;
+    public boolean continuouslyJumping = false;
+    public boolean sneakModeToggle = true;
 
     public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller) {
 
