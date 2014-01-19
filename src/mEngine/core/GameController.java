@@ -52,31 +52,31 @@ public class GameController {
                 new Vector3f(),
                 "res/assets/models/texturedStar.obj",
                 "res/assets/textures/texturedStar.png",
-                new ArtificialIntelligence()));
+                null));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
                 new Vector3f(),
                 "res/assets/models/texturedStar.obj",
                 "res/assets/textures/texturedStar.png",
-                new ArtificialIntelligence()));
+                null));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
                 new Vector3f(),
                 "res/assets/models/texturedStar.obj",
                 "res/assets/textures/texturedStar.png",
-                new ArtificialIntelligence()));
+                null));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
                 new Vector3f(),
                 "res/assets/models/texturedStar.obj",
                 "res/assets/textures/texturedStar.png",
-                new ArtificialIntelligence()));
+                null));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
                 new Vector3f(),
                 "res/assets/models/texturedStar.obj",
                 "res/assets/textures/texturedStar.png",
-                new ArtificialIntelligence()));
+                null));
 
         ObjectController.camera = new Camera(ObjectController.objects.get(0));
 

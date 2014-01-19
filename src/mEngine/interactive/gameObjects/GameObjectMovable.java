@@ -37,7 +37,7 @@ public class GameObjectMovable extends GameObject{
 
             for(Force force: forces) { force.disable(); }
 
-            updateController();
+            if(controller != null) updateController();
 
             for(Force force : forces) {
 

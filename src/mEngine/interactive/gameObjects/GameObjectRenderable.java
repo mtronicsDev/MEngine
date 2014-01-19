@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class GameObjectRenderable extends GameObjectMovable {
 
-    Model model;
+    public Model model;
 
     public GameObjectRenderable(Vector3f pos, Vector3f rot, String modelFileName, String textureFileName, Controller controller) {
 

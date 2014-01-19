@@ -107,6 +107,33 @@ public class Model {
 
     }
 
+    public Vector3f getSize() {
+
+        Vector3f size = new Vector3f();
+        Vector3f maxVertexPos = new Vector3f();
+        Vector3f minVertexPos = new Vector3f();
+
+        for(Vector3f vertex : vertices) {
+
+            if(vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
+            else if(vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
+
+            if(vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
+            else if(vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
+
+            if(vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
+            else if(vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
+
+        }
+
+        size.x = maxVertexPos.x - minVertexPos.x;
+        size.y = maxVertexPos.y - minVertexPos.y;
+        size.z = maxVertexPos.z - minVertexPos.z;
+
+        return size;
+
+    }
+
 }
 
 class Face {
