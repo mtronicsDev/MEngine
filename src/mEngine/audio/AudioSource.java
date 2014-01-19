@@ -28,17 +28,6 @@ public class AudioSource {
 
     public AudioSource(GameObject source) throws LWJGLException{
 
-        try {
-
-            AL.create();
-
-        } catch (LWJGLException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
-
         alGetError();
         if(loadALData() == AL_FALSE) throw new LWJGLException();
 

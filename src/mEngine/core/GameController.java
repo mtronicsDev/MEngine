@@ -1,8 +1,9 @@
 package mEngine.core;
 
+import mEngine.audio.AudioController;
+import mEngine.audio.AudioListener;
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
-import mEngine.interactive.controls.ArtificialIntelligence;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
@@ -12,7 +13,6 @@ import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.openal.AL;
 import org.lwjgl.util.vector.Vector3f;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
 
@@ -24,6 +24,7 @@ public class GameController {
 
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
         GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
+        AudioController.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
 
@@ -81,10 +82,11 @@ public class GameController {
                 null));
 
         ObjectController.camera = new Camera(ObjectController.objects.get(0));
+        AudioController.setListener(ObjectController.objects.get(0));
 
-        /*try {
+        try {
 
-            ObjectController.addAudioSource(new AudioSource(ObjectController.objects.get(1), ObjectController.objects.get(0)));
+            ObjectController.addAudioSource(new AudioSource(ObjectController.objects.get(1)));
 
         }
         catch (LWJGLException e) {
@@ -92,10 +94,9 @@ public class GameController {
             e.printStackTrace();
             System.exit(1);
 
-        }*/
-
-        for(AudioSource source : ObjectController.audioSources) { //source.play();
         }
+
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
@@ -114,8 +115,7 @@ public class GameController {
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
-        for(AudioSource source : ObjectController.audioSources) { //source.play();
-        }
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
 
         isGamePaused = false;
 
@@ -123,7 +123,7 @@ public class GameController {
 
     public static void stopGame() {
 
-        AL.destroy();
+        AudioController.close();
         System.exit(0);
 
     }
