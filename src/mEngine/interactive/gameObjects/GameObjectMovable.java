@@ -4,6 +4,7 @@ import mEngine.core.GameController;
 import mEngine.interactive.controls.Controller;
 import mEngine.physics.Force;
 import mEngine.physics.ForceController;
+import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -15,13 +16,18 @@ public class GameObjectMovable extends GameObject{
 
     public boolean sprinting;
     public boolean sneaking;
-    public boolean continuouslyJumping = false;
-    public boolean sneakModeToggle = true;
+    public boolean continuouslyJumping;
+    public boolean sneakModeToggle;
+    public boolean capableOfFlying;
 
     public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller) {
 
         super(pos, rot);
         this.controller = controller;
+
+        continuouslyJumping = PreferenceHelper.getBoolean("continuouslyJumping");
+        sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
+        capableOfFlying = PreferenceHelper.getBoolean("capableOfFlying");
 
         mass = 60;
 

@@ -1,7 +1,5 @@
 package mEngine.util;
 
-import org.lwjgl.util.vector.Vector4f;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
