@@ -1,11 +1,13 @@
 package mEngine.graphics;
 
+import mEngine.util.PreferenceHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector4f;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 public class GraphicsController {
 
@@ -13,16 +15,28 @@ public class GraphicsController {
     private static int height;
 
     private static int fps;
+    public static boolean isFullscreen;
+    public static boolean is3DActive;
 
-    public static void createDisplay(int width, int height, int fps, String title, boolean fullscreen) {
+    public static void createDisplay(int fps, String title) {
 
-        GraphicsController.width = width;
-        GraphicsController.height = height;
+        GraphicsController.width = PreferenceHelper.getInteger("screenWidth");
+        GraphicsController.height = PreferenceHelper.getInteger("screenHeight");
 
         GraphicsController.fps = fps;
 
-        if(!fullscreen) setupWindow(width, height, title);
-        else setupFullscreen();
+        if(!PreferenceHelper.getBoolean("fullscreen")) {
+
+            setupWindow(width, height, title);
+            isFullscreen = false;
+
+        }
+        else {
+
+            setupFullscreen();
+            isFullscreen = true;
+
+        }
 
     }
 
@@ -82,5 +96,39 @@ public class GraphicsController {
     public static int getFps() { return fps; }
 
     public static float getAspectRatio() { return (float)width / height; }
+
+    public static void switchTo2D() {
+
+        //glClearColor(0, 0, 0, 0); //Black & transparent (not visible)
+        //glClearDepth(1);
+        glViewport(0, 0, Display.getWidth(), Display.getHeight());
+        //glMatrixMode(GL_MODELVIEW);
+        glMatrixMode(GL_PROJECTION);
+        //glLoadIdentity();
+        glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
+        glMatrixMode(GL_MODELVIEW);
+
+        //glPushMatrix();
+        glColor3f(1, 0, 1);
+        glBegin(GL_QUADS);
+        glVertex2f(100, 100);
+        glVertex2f(300, 100);
+        glVertex2f(300, 300);
+        glVertex2f(100, 300);
+        glEnd();
+        //glPopMatrix();
+
+    }
+
+    public static void switchTo3D() {
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
+        glViewport(0, 0, Display.getWidth(), Display.getHeight());
+        glMatrixMode(GL_MODELVIEW);
+        glEnable(GL_DEPTH_TEST);
+
+    }
 
 }

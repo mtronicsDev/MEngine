@@ -1,12 +1,12 @@
 package mEngine.core;
 
 import mEngine.audio.AudioController;
-import mEngine.audio.AudioListener;
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
+import mEngine.interactive.gui.GUIController;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.RuntimeHelper;
@@ -23,7 +23,7 @@ public class GameController {
     public static void runGame() {
 
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
-        GraphicsController.createDisplay(1280, 720, 60, "mEngine Test Run", false);
+        GraphicsController.createDisplay(60, "mEngine Test Run");
         AudioController.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
@@ -123,7 +123,7 @@ public class GameController {
 
     public static void stopGame() {
 
-        AudioController.close();
+        AudioController.killALData();
         System.exit(0);
 
     }

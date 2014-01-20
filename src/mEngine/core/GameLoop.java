@@ -2,6 +2,7 @@ package mEngine.core;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
+import mEngine.interactive.gui.GUIController;
 import mEngine.util.Input;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
@@ -14,6 +15,7 @@ public class GameLoop {
 
         while (!Display.isCloseRequested()) {
 
+            if(GUIController.isGUIActivated) GraphicsController.switchTo3D();
             GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
 
             if(Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
@@ -30,6 +32,8 @@ public class GameLoop {
             }
 
             ObjectController.camera.update();
+
+            if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
 
             TimeHelper.updateFPS();
             GraphicsController.update();

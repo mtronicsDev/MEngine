@@ -1,3 +1,12 @@
+#Display preferences
+screenWidth=1280
+screenHeight=720
+fullscreen=false
+
+#Camera preferences
+fieldOfView=45
+
+#Player preferences
 continuouslyJumping=true
 sneakModeToggle=true
 capableOfFlying=false
