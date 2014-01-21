@@ -7,6 +7,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector4f;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 public class GraphicsController {
@@ -50,7 +51,7 @@ public class GraphicsController {
     public static void update() {
 
         Display.update();
-        Display.sync(fps);
+        //Display.sync(fps);
 
     }
 
@@ -98,20 +99,19 @@ public class GraphicsController {
     public static float getAspectRatio() { return (float)width / height; }
 
     public static void switchTo2D() {
-
-        //glClearColor(0, 0, 0, 0); //Black & transparent (not visible)
-        //glClearDepth(1);
-        glViewport(0, 0, Display.getWidth(), Display.getHeight());
-        //glMatrixMode(GL_MODELVIEW);
+        
         glMatrixMode(GL_PROJECTION);
-        //glLoadIdentity();
-        glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
+        gluOrtho2D(0, Display.getWidth(), 0, Display.getHeight());
+        glViewport(0, 0, Display.getWidth(), Display.getHeight());
         glMatrixMode(GL_MODELVIEW);
-
+        glDisable(GL_DEPTH_TEST);
         //glPushMatrix();
         glColor3f(1, 0, 1);
-        glBegin(GL_QUADS);
+        glBegin(GL_LINES);
         glVertex2f(100, 100);
+        glVertex2f(300, 100);
+        glVertex2f(300, 300);
+
         glVertex2f(300, 100);
         glVertex2f(300, 300);
         glVertex2f(100, 300);
