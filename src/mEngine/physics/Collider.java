@@ -28,9 +28,6 @@ public class Collider {
         public static Vector3f getMovedSpace(Vector3f velocity, GameObjectRenderable a, GameObjectRenderable b) {
 
             Vector3f movedSpace = new Vector3f(0, 0, 0);
-
-
-
             return movedSpace;
 
         }
