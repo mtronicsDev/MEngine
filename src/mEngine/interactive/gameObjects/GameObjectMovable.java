@@ -52,6 +52,8 @@ public class GameObjectMovable extends GameObject{
 
                     Force force = forces.get(count);
 
+                    //TODO: insert a method to calculate the sliding factor of the triangle the object is moving on to calculate the force direction subtraction
+
                     force.direction.x /= 1.5f;
                     force.direction.z /= 1.5f;
 
@@ -68,6 +70,8 @@ public class GameObjectMovable extends GameObject{
             }
 
             Vector3f forceSum = ForceController.sumForces(forces);
+
+            //TODO: complete the method that combines 3 force directions and also work with forces that operate on the y axis if the object isn't free falling
 
             if(forceSum.x != 0 && forceSum.z != 0) {
 
