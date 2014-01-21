@@ -96,7 +96,8 @@ public class GameController {
 
         }
 
-        for(AudioSource source : ObjectController.audioSources) { source.play(); }
+        for(AudioSource source : ObjectController.audioSources) { //source.play(); }
+        }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
@@ -115,7 +116,8 @@ public class GameController {
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
-        for(AudioSource source : ObjectController.audioSources) { source.play(); }
+        for(AudioSource source : ObjectController.audioSources) { //source.play(); }
+        }
 
         isGamePaused = false;
 

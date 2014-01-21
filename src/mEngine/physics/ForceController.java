@@ -12,6 +12,8 @@ public class ForceController {
 
     public static final float X_Y_RATIO = calculateXYRatio();
 
+    public static final float X_Y_Z_RATIO = calculateXYZRatio();
+
     private static float calculateXYRatio() {
 
         float xYRatio = 0;
@@ -37,6 +39,54 @@ public class ForceController {
         }
 
         return xYRatio;
+
+    }
+
+    private static float calculateXYZRatio() {
+
+        float xYZRatio = 0;
+
+        for(float x = 0; x <= 1; x += 0.00001f) {
+
+            for(float y = 0; y <= 1; y += 0.00001f) {
+
+                float dif = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+
+                float z = (float)Math.sqrt(1 - Math.pow(dif, 2));
+
+                if(x == y && y == z) xYZRatio = x;
+
+                else {
+
+                    for(float yAlternative = -0.00001f; yAlternative <= 0.00001f; yAlternative += 0.0000001f) {
+
+                        float difAlternative = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(yAlternative, 2));
+
+                        float zAlternative = (float)Math.sqrt(1 - Math.pow(difAlternative, 2));
+
+                        if(x == yAlternative && yAlternative == zAlternative) xYZRatio = x;
+
+                        else {
+
+                            for(float count = -0.00001f; count <= 0.00001f; count += 0.0000001f) {
+
+                                zAlternative += count;
+
+                                if(x == yAlternative && yAlternative == zAlternative) xYZRatio = x;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return xYZRatio;
 
     }
 
@@ -100,6 +150,18 @@ public class ForceController {
 
         combinedForce.x = directionA * X_Y_RATIO;
         combinedForce.y = directionB * X_Y_RATIO;
+
+        return combinedForce;
+
+    }
+
+    public static Vector3f getCombinedForces(float directionA, float directionB, float directionC) {
+
+        Vector3f combinedForce = new Vector3f();
+
+        combinedForce.x = directionA * X_Y_Z_RATIO;
+        combinedForce.y = directionB * X_Y_Z_RATIO;
+        combinedForce.z = directionC * X_Y_Z_RATIO;
 
         return combinedForce;
 

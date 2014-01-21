@@ -1,6 +1,7 @@
 package mEngine.physics;
 
 import mEngine.interactive.gameObjects.GameObjectRenderable;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Collider {
@@ -24,7 +25,7 @@ public class Collider {
 
        }
 
-        public static Vector3f getMovedSpace(GameObjectRenderable a, GameObjectRenderable b) {
+        public static Vector3f getMovedSpace(Vector3f velocity, GameObjectRenderable a, GameObjectRenderable b) {
 
             Vector3f movedSpace = new Vector3f(0, 0, 0);
 
