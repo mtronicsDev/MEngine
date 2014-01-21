@@ -51,7 +51,7 @@ public class GraphicsController {
     public static void update() {
 
         Display.update();
-        //Display.sync(fps);
+        Display.sync(fps);
 
     }
 

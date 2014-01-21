@@ -37,19 +37,6 @@ public class KeyboardMouse extends Controller {
 
     public void updateObject(GameObjectMovable obj) {
 
-        if(Input.isKeyPressed(getKey("forward"))) obj.moveForward();
-        if(Input.isKeyPressed(getKey("backward"))) obj.moveBackward();
-        if(Input.isKeyPressed(getKey("right"))) obj.moveLeft();
-        if(Input.isKeyPressed(getKey("left"))) obj.moveRight();
-
-        if(Input.isKeyPressed(getKey("up")) && obj.capableOfFlying) obj.moveUp();
-        if(Input.isKeyPressed(getKey("down")) && obj.capableOfFlying) obj.moveDown();
-
-        if(obj.continuouslyJumping) if(Input.isKeyPressed(getKey("jump"))) obj.jump();
-
-        if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
-        if(Input.isKeyPressed(getKey("sneak"))) obj.sneak();
-
         //Calculating the rotation
         float pitch = obj.rotation.x;
         float yaw = obj.rotation.y;
@@ -89,6 +76,19 @@ public class KeyboardMouse extends Controller {
         }
 
         obj.rotate(pitch, yaw);
+
+        if(Input.isKeyPressed(getKey("forward"))) obj.moveForward();
+        if(Input.isKeyPressed(getKey("backward"))) obj.moveBackward();
+        if(Input.isKeyPressed(getKey("right"))) obj.moveLeft();
+        if(Input.isKeyPressed(getKey("left"))) obj.moveRight();
+
+        if(Input.isKeyPressed(getKey("up")) && obj.capableOfFlying) obj.moveUp();
+        if(Input.isKeyPressed(getKey("down")) && obj.capableOfFlying) obj.moveDown();
+
+        if(obj.continuouslyJumping) if(Input.isKeyPressed(getKey("jump"))) obj.jump();
+
+        if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
+        if(Input.isKeyPressed(getKey("sneak"))) obj.sneak();
 
     }
 

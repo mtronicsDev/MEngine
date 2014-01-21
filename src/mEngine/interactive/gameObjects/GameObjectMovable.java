@@ -44,25 +44,22 @@ public class GameObjectMovable extends GameObject{
             sprinting = false;
             sneaking = false;
 
-            for(Force force: forces) { force.disable(); }
-
             if(controller != null) updateController();
 
-            for(Force force : forces) {
+            for(int count = 14; count < forces.size(); count ++) {
 
-                if(force.enabled) {
+                if(forces.get(count) != null) {
 
-                    if(forces.indexOf(force) <= 6 && forces.indexOf(force) != 0) {
+                    Force force = forces.get(count);
 
-                        if(Math.abs(force.direction.x) <= Math.abs(forces.get(forces.indexOf(force) + 6).direction.x) &&
-                                Math.abs(force.direction.y) <= Math.abs(forces.get(forces.indexOf(force) + 6).direction.y) &&
-                                Math.abs(force.direction.z) <= Math.abs(forces.get(forces.indexOf(force) + 6).direction.z)) {
+                    force.direction.x /= 1.5f;
+                    force.direction.z /= 1.5f;
 
-                            force.setDirection(ForceController.forces.get(forces.indexOf(force)).direction);
-                            force.disable();
-                            forces.get(forces.indexOf(force) + 6).disable();
+                    if(Math.abs(force.direction.x) <= 0.1f &&
+                            Math.abs(force.direction.y) <= 0.1f &&
+                            Math.abs(force.direction.z) <= 0.1f) {
 
-                        }
+                        forces.remove(force);
 
                     }
 
@@ -86,11 +83,11 @@ public class GameObjectMovable extends GameObject{
             Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime() / 5);
             speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
 
-            position.x -= movedSpace.x * (float)Math.sin(Math.toRadians(rotation.y - 90)) + movedSpace.z * Math.sin(Math.toRadians(rotation.y));
-            position.y += movedSpace.y;
-            position.z += movedSpace.x * (float)Math.cos(Math.toRadians(rotation.y - 90)) + movedSpace.z * Math.cos(Math.toRadians(rotation.y));
-
             //Collision Detection
+
+            position.x -= movedSpace.x;
+            position.y += movedSpace.y;
+            position.z += movedSpace.z;
 
         }
 
@@ -101,33 +98,53 @@ public class GameObjectMovable extends GameObject{
 
     public void moveForward() {
 
-        forces.get(1).enable();
-        forces.get(1).setDirection(ForceController.forces.get(1).direction);
-        forces.get(7).enable();
+        Vector3f direction = new Vector3f();
+        Force givenForce = forces.get(1);
+
+        direction.x = givenForce.direction.x * (float)Math.sin(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(rotation.y));
+        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(rotation.y));
+
+        forces.add(new Force(direction));
+        forces.get(forces.size() - 1).enabled = true;
 
     }
 
     public void moveBackward() {
 
-        forces.get(2).enable();
-        forces.get(2).setDirection(ForceController.forces.get(2).direction);
-        forces.get(8).enable();
+        Vector3f direction = new Vector3f();
+        Force givenForce = forces.get(2);
+
+        direction.x = givenForce.direction.x * (float)Math.sin(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(rotation.y));
+        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(rotation.y));
+
+        forces.add(new Force(direction));
+        forces.get(forces.size() - 1).enabled = true;
 
     }
 
     public void moveLeft() {
 
-        forces.get(3).enable();
-        forces.get(3).setDirection(ForceController.forces.get(3).direction);
-        forces.get(9).enable();
+        Vector3f direction = new Vector3f();
+        Force givenForce = forces.get(3);
+
+        direction.x = givenForce.direction.x * (float)Math.sin(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(rotation.y));
+        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(rotation.y));
+
+        forces.add(new Force(direction));
+        forces.get(forces.size() - 1).enabled = true;
 
     }
 
     public void moveRight() {
 
-        forces.get(4).enable();
-        forces.get(4).setDirection(ForceController.forces.get(4).direction);
-        forces.get(10).enable();
+        Vector3f direction = new Vector3f();
+        Force givenForce = forces.get(4);
+
+        direction.x = givenForce.direction.x * (float)Math.sin(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(rotation.y));
+        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(rotation.y));
+
+        forces.add(new Force(direction));
+        forces.get(forces.size() - 1).enabled = true;
 
     }
 

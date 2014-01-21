@@ -26,7 +26,7 @@ public class ForceController {
 
             else {
 
-                for(float count = -0.00001f; count <= 0.00001f; count += 0.00000001f) {
+                for(float count = -0.00001f; count <= 0.00001f; count += 0.0000001f) {
 
                     y += count;
 
@@ -46,15 +46,47 @@ public class ForceController {
 
         float xYZRatio = 0;
 
-        for(float x = 0; x <= 1; x += 0.001f) {
+        for(float x = 0; x <= 0.5; x += 0.0001f) {
 
-            for(float y = 0; y <= 1; y += 0.0001f) {
+            for(float y = 0; y <= 0.5; y += 0.0001f) {
 
-                float dif = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+                if(x == y) {
 
-                float z = (float)Math.sqrt(1 - Math.pow(dif, 2));
+                    float dif = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 
-                if(x == y && y == z) xYZRatio = x;
+                    float z = (float)Math.sqrt(1 - dif);
+
+                    if(y == z) xYZRatio = x;
+
+                    else {
+
+                        for(float count = -0.0001f; count <= 0.0001f; count += 0.000001f) {
+
+                            y += count;
+
+                            dif = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+
+                            z = (float)Math.sqrt(1 - dif);
+
+                            if(y == z) xYZRatio = x;
+
+                            else if(z >= y - 0.0001f && z <= y + 0.0001f) {
+
+                                for(float count2 = -0.0001f; count2 <= 0.0001f; count2 += 0.000001f) {
+
+                                    z += count2;
+
+                                    if(y == z) xYZRatio = x;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
 
             }
 
