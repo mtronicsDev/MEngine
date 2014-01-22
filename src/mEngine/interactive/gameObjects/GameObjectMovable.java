@@ -55,9 +55,9 @@ public class GameObjectMovable extends GameObject{
 
                 //TODO: insert a method to calculate the sliding factor of the triangle the object is moving on to calculate the force direction subtraction
 
-                force.direction.x /= 1.5f;
-                force.direction.y /= 1.5f;
-                force.direction.z /= 1.5f;
+                force.direction.x /= 1.01f;
+                force.direction.y /= 1.01f;
+                force.direction.z /= 1.01f;
 
                 if(Math.abs(force.direction.x) <= 0.1f &&
                         Math.abs(force.direction.y) <= 0.1f &&
