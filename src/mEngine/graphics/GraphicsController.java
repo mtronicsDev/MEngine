@@ -17,7 +17,6 @@ public class GraphicsController {
 
     private static int fps;
     public static boolean isFullscreen;
-    public static boolean is3DActive;
 
     public static void createDisplay(int fps, String title) {
 
@@ -103,7 +102,7 @@ public class GraphicsController {
         glMatrixMode(GL_MODELVIEW);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(0, Display.getWidth(), 0, Display.getHeight());
+        gluOrtho2D(0, Display.getWidth(), Display.getHeight(), 0);
         glViewport(0, 0, Display.getWidth(), Display.getHeight());
         glMatrixMode(GL_MODELVIEW);
 
@@ -111,9 +110,9 @@ public class GraphicsController {
         glLoadIdentity();
 
         glBegin(GL_TRIANGLES);
-        glVertex2f(100, 100);
-        glVertex2f(300, 100);
-        glVertex2f(300, 300);
+        glVertex2f(0, 50);
+        glVertex2f(50, 0);
+        glVertex2f(0, 0);
         glEnd();
 
         glPopMatrix();
