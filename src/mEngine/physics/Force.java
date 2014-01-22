@@ -21,9 +21,4 @@ public class Force {
 
     }
 
-    public void setDirection(Vector3f direction) { this.direction = direction; }
-
-    public void enable() { enabled = true; }
-
-    public void disable() { enabled = false; }
 }
