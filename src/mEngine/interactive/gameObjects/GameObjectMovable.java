@@ -12,7 +12,7 @@ import org.lwjgl.util.vector.Vector3f;
 public class GameObjectMovable extends GameObject{
 
     protected Controller controller;
-    public float mass;
+    public float mass = 0;
     public Vector3f speed = new Vector3f();
 
     public boolean sprinting;
@@ -30,7 +30,7 @@ public class GameObjectMovable extends GameObject{
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         capableOfFlying = PreferenceHelper.getBoolean("capableOfFlying");
 
-        mass = 60;
+        if(mass == 0) mass = 60;
 
     }
 

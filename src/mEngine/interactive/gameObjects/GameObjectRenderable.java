@@ -13,6 +13,8 @@ public class GameObjectRenderable extends GameObjectMovable {
         super(pos, rot, controller);
         model = new Model(modelFileName, textureFileName, pos, rot);
 
+        mass = model.getMass();
+
     }
 
     protected void updateModel() { model.update(position, rotation); }

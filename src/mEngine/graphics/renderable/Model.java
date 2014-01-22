@@ -134,6 +134,14 @@ public class Model {
 
     }
 
+    public float getMass() {
+
+        float mass = 60;
+
+        return mass;
+
+    }
+
 }
 
 class Face {
