@@ -99,24 +99,24 @@ public class GraphicsController {
     public static float getAspectRatio() { return (float)width / height; }
 
     public static void switchTo2D() {
-        
+
+        glMatrixMode(GL_MODELVIEW);
         glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
         gluOrtho2D(0, Display.getWidth(), 0, Display.getHeight());
         glViewport(0, 0, Display.getWidth(), Display.getHeight());
         glMatrixMode(GL_MODELVIEW);
-        glDisable(GL_DEPTH_TEST);
-        //glPushMatrix();
-        glColor3f(1, 0, 1);
-        glBegin(GL_LINES);
+
+        glPushMatrix();
+        glLoadIdentity();
+
+        glBegin(GL_TRIANGLES);
         glVertex2f(100, 100);
         glVertex2f(300, 100);
         glVertex2f(300, 300);
-
-        glVertex2f(300, 100);
-        glVertex2f(300, 300);
-        glVertex2f(100, 300);
         glEnd();
-        //glPopMatrix();
+
+        glPopMatrix();
 
     }
 
