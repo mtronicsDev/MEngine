@@ -109,18 +109,11 @@ public class GraphicsController {
         glPushMatrix();
         glLoadIdentity();
 
-        glBegin(GL_TRIANGLES);
-        glVertex2f(0, 50);
-        glVertex2f(50, 0);
-        glVertex2f(0, 0);
-        glEnd();
-
-        glPopMatrix();
-
     }
 
     public static void switchTo3D() {
 
+        glPopMatrix(); //From 2D
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
