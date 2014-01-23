@@ -10,91 +10,9 @@ public class ForceController {
 
     public static List<Force> forces = new ArrayList<Force>();
 
-    public static final float X_Y_RATIO = calculateXYRatio();
+    public static final float X_Y_RATIO = 0.7068913f;
 
-    //public static final float X_Y_Z_RATIO = calculateXYZRatio();
-
-    private static float calculateXYRatio() {
-
-        float xYRatio = 0;
-
-        for(float x = 0; x <= 1; x += 0.00001f) {
-
-            float y = (float)Math.sqrt(1 - Math.pow(x, 2));
-
-            if(x == y) xYRatio = x;
-
-            else {
-
-                for(float count = -0.00001f; count <= 0.00001f; count += 0.0000001f) {
-
-                    y += count;
-
-                    if(x == y) xYRatio = x;
-
-                }
-
-            }
-
-        }
-
-        return xYRatio;
-
-    }
-
-    /*private static float calculateXYZRatio() {
-
-        float xYZRatio = 0;
-
-        for(float x = 0; x <= 0.5; x += 0.0001f) {
-
-            for(float y = 0; y <= 0.5; y += 0.0001f) {
-
-                if(x == y) {
-
-                    float dif = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-
-                    float z = (float)Math.sqrt(1 - dif);
-
-                    if(y == z) xYZRatio = x;
-
-                    else {
-
-                        for(float count = -0.0001f; count <= 0.0001f; count += 0.000001f) {
-
-                            y += count;
-
-                            dif = (float)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-
-                            z = (float)Math.sqrt(1 - dif);
-
-                            if(y == z) xYZRatio = x;
-
-                            else if(z >= y - 0.0001f && z <= y + 0.0001f) {
-
-                                for(float count2 = -0.0001f; count2 <= 0.0001f; count2 += 0.000001f) {
-
-                                    z += count2;
-
-                                    if(y == z) xYZRatio = x;
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        return xYZRatio;
-
-    }*/
+    public static final float X_Y_Z_RATIO = 0.57765603f;
 
     public static void addForce(Vector3f direction) { forces.add(new Force(direction)); }
 
@@ -161,7 +79,7 @@ public class ForceController {
 
     }
 
-    /*public static Vector3f getCombinedForces(float directionA, float directionB, float directionC) {
+    public static Vector3f getCombinedForces(float directionA, float directionB, float directionC) {
 
         Vector3f combinedForce = new Vector3f();
 
@@ -171,6 +89,6 @@ public class ForceController {
 
         return combinedForce;
 
-    }*/
+    }
 
 }

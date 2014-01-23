@@ -71,14 +71,28 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f forceSum = ForceController.sumForces(forces);
 
-            //TODO: complete the method that combines 3 force directions and also work with forces that operate on the y axis if the object isn't free falling
+            if(Collider.isCollidingWithSomething(this)) {
 
-            if(forceSum.x != 0 && forceSum.z != 0) {
+                if(forceSum.x != 0 && forceSum.z != 0) {
 
-                Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+                    Vector3f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
 
-                forceSum.x = newForces.x;
-                forceSum.z = newForces.y;
+                    forceSum.x = newForces.x;
+                    forceSum.y = newForces.y;
+                    forceSum.z = newForces.z;
+
+                }
+
+            } else {
+
+                if(forceSum.x != 0 && forceSum.z != 0) {
+
+                    Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+
+                    forceSum.x = newForces.x;
+                    forceSum.z = newForces.y;
+
+                }
 
             }
 
