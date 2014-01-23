@@ -7,6 +7,7 @@ import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
 import mEngine.interactive.gui.GUIController;
+import mEngine.interactive.gui.GUIEllipse;
 import mEngine.interactive.gui.GUIQuad;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
@@ -41,6 +42,7 @@ public class GameController {
 
         ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
         GUIController.guiElements.add(new GUIQuad(new Vector2f(50, 50), new Vector2f(80, 80)));
+        GUIController.guiElements.add(new GUIEllipse(new Vector2f(300, 300), new Vector2f(80, 40)));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
