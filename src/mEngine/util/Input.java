@@ -31,7 +31,13 @@ public class Input {
     public static void assignKey(String key, int value) throws KeyAlreadyAssignedException {
 
         if(keyAssignments.get(key) != null) throw new KeyAlreadyAssignedException();
-        else keyAssignments.put(key, value);
+
+        else {
+
+            keyAssignments.put(key, value);
+            keyStates[value] = false;
+
+        }
 
     }
 

@@ -1,9 +1,6 @@
 package mEngine.physics;
 
-import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gameObjects.GameObjectMovable;
-import mEngine.interactive.gameObjects.GameObjectRenderable;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Collider {
@@ -59,7 +56,11 @@ public class Collider {
 
             else {
 
-                return velocity;
+                Vector3f movedSpace = new Vector3f();
+
+                movedSpace = velocity;
+
+                return  movedSpace;
 
             }
 
