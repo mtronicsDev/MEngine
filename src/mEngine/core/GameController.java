@@ -7,12 +7,14 @@ import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
 import mEngine.interactive.gui.GUIController;
+import mEngine.interactive.gui.GUIQuad;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
 
@@ -38,6 +40,7 @@ public class GameController {
         ForceController.addForce(new Vector3f(0, 10, 0)); //Jump force
 
         ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
+        GUIController.guiElements.add(new GUIQuad(new Vector2f(50, 50), new Vector2f(80, 80)));
 
         ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
@@ -90,8 +93,7 @@ public class GameController {
 
         }*/
 
-        for(AudioSource source : ObjectController.audioSources) { //source.play(); }
-        }
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
@@ -110,8 +112,7 @@ public class GameController {
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
-        for(AudioSource source : ObjectController.audioSources) { //source.play(); }
-        }
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
 
         isGamePaused = false;
 

@@ -3,6 +3,7 @@ package mEngine.core;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
+import mEngine.interactive.gui.GUIElement;
 import mEngine.util.Input;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
@@ -34,6 +35,10 @@ public class GameLoop {
             ObjectController.camera.update();
 
             if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
+
+            if(GUIController.isGUIActivated)
+                for(GUIElement guiElement : GUIController.guiElements)
+                    guiElement.update();
 
             TimeHelper.updateFPS();
             GraphicsController.update();
