@@ -23,11 +23,11 @@ public class Model {
     Vector3f position = new Vector3f();
     Vector3f rotation = new Vector3f();
 
-    public Model(String name, Vector3f pos, Vector3f rot) {
+    public Model(String fileName, Vector3f pos, Vector3f rot) {
 
         Model model = ModelHelper.loadModelSafely(
-                getResource(name + ".obj", RES_MODEL),
-                getResource(name + ".png", RES_TEXTURE));
+                getResource(fileName + ".obj", RES_MODEL),
+                getResource(fileName + ".png", RES_TEXTURE));
 
         this.vertices = model.vertices;
         this.normals = model.normals;
