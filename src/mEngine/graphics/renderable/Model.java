@@ -1,15 +1,15 @@
 package mEngine.graphics.renderable;
 
+import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static mEngine.util.ResourceHelper.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Model {
@@ -24,9 +24,12 @@ public class Model {
     Vector3f position = new Vector3f();
     Vector3f rotation = new Vector3f();
 
-    public Model(String fileName, String textureFileName, Vector3f pos, Vector3f rot) {
+    public Model(String name, Vector3f pos, Vector3f rot) {
 
-        Model model = ModelLoader.loadModelSafely(new File(fileName), new File(textureFileName));
+        Model model = ModelLoader.loadModelSafely(
+                getResource(name + ".obj", RES_MODEL),
+                getResource(name + ".png", RES_TEXTURE));
+
         this.vertices = model.vertices;
         this.normals = model.normals;
         this.uvs = model.uvs;
@@ -63,7 +66,6 @@ public class Model {
 
         glTranslatef(position.x, position.y, position.z);
 
-        Color.white.bind();
         texture.bind();
 
         glBegin(GL_TRIANGLES);
@@ -79,6 +81,7 @@ public class Model {
             Vector3f v1 = vertices.get((int)face.vertexIndices.x - 1);
             glVertex3f(v1.x, v1.y, v1.z);
 
+
             Vector3f n2 = normals.get((int)face.normalIndices.y - 1);
             glNormal3f(n2.x, n2.y, n2.z);
 
@@ -87,6 +90,7 @@ public class Model {
 
             Vector3f v2 = vertices.get((int)face.vertexIndices.y - 1);
             glVertex3f(v2.x, v2.y, v2.z);
+
 
             Vector3f n3 = normals.get((int)face.normalIndices.z - 1);
             glNormal3f(n3.x, n3.y, n3.z);
@@ -160,22 +164,11 @@ class Face {
 
 class ModelLoader {
 
-    private static Model loadModel(File file, File textureFile) throws IOException {
+    private static Model loadModel(File modelFile, File textureFile) throws IOException {
 
-        Texture texture = null;
+        Texture texture = TextureHelper.loadTexture(textureFile);
 
-        try {
-
-            texture = TextureLoader.getTexture("PNG", new FileInputStream(textureFile));
-
-        } catch(IOException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedReader reader = new BufferedReader(new FileReader(modelFile));
         String line;
 
         List<Vector3f> vertices = new ArrayList<Vector3f>();

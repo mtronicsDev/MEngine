@@ -1,5 +1,6 @@
-package mEngine.interactive.gui;
+package mEngine.interactive.gui.primitives;
 
+import mEngine.interactive.gui.GUIElement;
 import org.lwjgl.util.vector.Vector2f;
 
 import static org.lwjgl.opengl.GL11.*;

@@ -28,10 +28,10 @@ public class AudioSource {
     FloatBuffer sourcePos = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
     FloatBuffer sourceVel = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
 
-    public AudioSource(GameObject source) throws LWJGLException{
+    public AudioSource(GameObject source, String fileName) throws LWJGLException{
 
         alGetError();
-        if(AudioController.loadALData(this, "res/assets/sounds/test.wav") == AL_FALSE) throw new LWJGLException();
+        if(AudioController.loadALData(this, fileName) == AL_FALSE) throw new LWJGLException();
 
         position = source.position;
         rotation = source.rotation;

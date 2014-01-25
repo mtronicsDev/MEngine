@@ -3,18 +3,24 @@ package mEngine.core;
 import mEngine.audio.AudioSource;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObject;
+import mEngine.interactive.gui.GUIElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectController {
 
-    public static List<GameObject> objects = new ArrayList<GameObject>();
+    public static List<GameObject> gameObjects = new ArrayList<GameObject>();
     public static List<AudioSource> audioSources = new ArrayList<AudioSource>();
+    public static List<GUIElement> guiElements = new ArrayList<GUIElement>();
     public static Camera camera;
 
-    public static void addObject(GameObject object) { objects.add(object); }
-
+    public static void addGameObject(GameObject object) { gameObjects.add(object); }
     public static void addAudioSource(AudioSource source) { audioSources.add(source); }
+    public static void addGUIElement(GUIElement element) { guiElements.add(element); }
+
+    public static GameObject getGameObject(int index) { return gameObjects.get(index); }
+    public static AudioSource getAudioSource(int index) { return audioSources.get(index); }
+    public static GUIElement getGUIElement(int index) { return guiElements.get(index); }
 
 }

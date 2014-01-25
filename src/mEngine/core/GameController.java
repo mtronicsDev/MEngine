@@ -6,11 +6,11 @@ import mEngine.graphics.GraphicsController;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.Player;
-import mEngine.interactive.gui.GUIController;
-import mEngine.interactive.gui.GUIEllipse;
-import mEngine.interactive.gui.GUIQuad;
+import mEngine.interactive.gui.primitives.GUICircle;
+import mEngine.interactive.gui.primitives.GUIQuad;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
+import mEngine.util.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.LWJGLException;
@@ -26,6 +26,7 @@ public class GameController {
     public static void runGame() {
 
         PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
+        ResourceHelper.initialize();
         GraphicsController.createDisplay(60, "mEngine Test Run");
         AudioController.initializeOpenAL();
         TimeHelper.setupTiming();
@@ -40,52 +41,46 @@ public class GameController {
         ForceController.addForce(new Vector3f(0, -4, 0)); //Down
         ForceController.addForce(new Vector3f(0, 10, 0)); //Jump force
 
-        ObjectController.addObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "res/assets/models/texturedStar.obj", "res/assets/textures/texturedStar.png", new KeyboardMouse()));
-        GUIController.guiElements.add(new GUIQuad(new Vector2f(50, 50), new Vector2f(80, 80)));
-        GUIController.guiElements.add(new GUIEllipse(new Vector2f(300, 300), new Vector2f(80, 40)));
+        ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new KeyboardMouse()));
+        ObjectController.addGUIElement(new GUIQuad(new Vector2f(50, 50), new Vector2f(80, 80)));
+        ObjectController.addGUIElement(new GUICircle(new Vector2f(300, 300), 80));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
-                "res/assets/models/texturedStar.obj",
-                "res/assets/textures/texturedStar.png",
+                "texturedStar",
                 null));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
                 new Vector3f(),
-                "res/assets/models/texturedStar.obj",
-                "res/assets/textures/texturedStar.png",
+                "texturedStar",
                 null));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
                 new Vector3f(),
-                "res/assets/models/texturedStar.obj",
-                "res/assets/textures/texturedStar.png",
+                "texturedStar",
                 null));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
                 new Vector3f(),
-                "res/assets/models/texturedStar.obj",
-                "res/assets/textures/texturedStar.png",
+                "texturedStar",
                 null));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
                 new Vector3f(),
-                "res/assets/models/texturedStar.obj",
-                "res/assets/textures/texturedStar.png",
+                "texturedStar",
                 null));
 
-        ObjectController.addObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
                 new Vector3f(),
-                "res/assets/models/texturedStar.obj",
-                "res/assets/textures/texturedStar.png",
+                "texturedStar",
                 null));
 
-        ObjectController.camera = new Camera(ObjectController.objects.get(0));
-        AudioController.setListener(ObjectController.objects.get(0));
+        ObjectController.camera = new Camera(ObjectController.getGameObject(0));
+        AudioController.setListener(ObjectController.getGameObject(0));
 
-        /*try {
+        try {
 
-            ObjectController.addAudioSource(new AudioSource(ObjectController.objects.get(1)));
+            ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(1), "test"));
 
         }
         catch (LWJGLException e) {
@@ -93,7 +88,7 @@ public class GameController {
             e.printStackTrace();
             System.exit(1);
 
-        }*/
+        }
 
         for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);

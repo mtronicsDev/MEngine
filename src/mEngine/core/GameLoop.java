@@ -26,7 +26,7 @@ public class GameLoop {
 
             }
 
-            for(GameObject gameObject : ObjectController.objects) {
+            for(GameObject gameObject : ObjectController.gameObjects) {
 
                 gameObject.update();
 
@@ -37,7 +37,7 @@ public class GameLoop {
             if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
 
             if(GUIController.isGUIActivated)
-                for(GUIElement guiElement : GUIController.guiElements)
+                for(GUIElement guiElement : ObjectController.guiElements)
                     guiElement.update();
 
             TimeHelper.updateFPS();

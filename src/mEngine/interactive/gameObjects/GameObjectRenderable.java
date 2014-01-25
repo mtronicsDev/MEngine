@@ -6,10 +6,10 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class GameObjectRenderable extends GameObjectMovable {
 
-    public GameObjectRenderable(Vector3f pos, Vector3f rot, String modelFileName, String textureFileName, Controller controller) {
+    public GameObjectRenderable(Vector3f pos, Vector3f rot, String fileName, Controller controller) {
 
         super(pos, rot, controller);
-        model = new Model(modelFileName, textureFileName, pos, rot);
+        model = new Model(fileName, pos, rot);
 
         mass = model.getMass();
 

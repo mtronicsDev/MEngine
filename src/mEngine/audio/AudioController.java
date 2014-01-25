@@ -1,19 +1,18 @@
 package mEngine.audio;
 
-import com.sun.jndi.url.corbaname.corbanameURLContextFactory;
 import mEngine.interactive.gameObjects.GameObject;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.openal.AL;
 import org.lwjgl.util.WaveData;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.openal.AL10.*;
+import static mEngine.util.ResourceHelper.*;
 
 public class AudioController {
 
@@ -47,7 +46,7 @@ public class AudioController {
 
         try {
 
-            FileInputStream stream = new FileInputStream(new File(fileName));
+            FileInputStream stream = new FileInputStream(getResource(fileName + ".wav", RES_SOUND));
             waveData = WaveData.create(new BufferedInputStream(stream));
 
         }
