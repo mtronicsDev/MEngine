@@ -1,11 +1,10 @@
 package mEngine.graphics.renderable;
 
-import mEngine.util.TextureHelper;
+import mEngine.util.ModelHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class Model {
 
     public Model(String name, Vector3f pos, Vector3f rot) {
 
-        Model model = ModelLoader.loadModelSafely(
+        Model model = ModelHelper.loadModelSafely(
                 getResource(name + ".obj", RES_MODEL),
                 getResource(name + ".png", RES_TEXTURE));
 
@@ -41,7 +40,7 @@ public class Model {
 
     }
 
-    Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture) {
 
         this.vertices = vertices;
         this.normals = normals;
@@ -146,112 +145,3 @@ public class Model {
 
 }
 
-class Face {
-
-    public Vector3f vertexIndices = new Vector3f();
-    public Vector3f normalIndices = new Vector3f();
-    public Vector2f uvIndices = new Vector2f();
-
-    public Face(Vector3f vertexIndices, Vector3f normalIndices, Vector2f uvIndices) {
-
-        this.vertexIndices = vertexIndices;
-        this.normalIndices = normalIndices;
-        this.uvIndices = uvIndices;
-
-    }
-
-}
-
-class ModelLoader {
-
-    private static Model loadModel(File modelFile, File textureFile) throws IOException {
-
-        Texture texture = TextureHelper.loadTexture(textureFile);
-
-        BufferedReader reader = new BufferedReader(new FileReader(modelFile));
-        String line;
-
-        List<Vector3f> vertices = new ArrayList<Vector3f>();
-        List<Vector3f> normals = new ArrayList<Vector3f>();
-        List<Vector2f> uvs = new ArrayList<Vector2f>();
-        List<Face> faces = new ArrayList<Face>();
-
-        while((line = reader.readLine()) != null) {
-
-            if(line.startsWith("v ")){
-
-                //First: "v", Second: x, Third: y, Fourth: z
-                float x = Float.valueOf(line.split(" ")[1]);
-                float y = Float.valueOf(line.split(" ")[2]);
-                float z = Float.valueOf(line.split(" ")[3]);
-
-                vertices.add(new Vector3f(x, y, z));
-
-            }
-            else if(line.startsWith("vn ")){
-
-                //First: "vn", Second: x, Third: y, Fourth: z
-                float x = Float.valueOf(line.split(" ")[1]);
-                float y = Float.valueOf(line.split(" ")[2]);
-                float z = Float.valueOf(line.split(" ")[3]);
-
-                normals.add(new Vector3f(x, y, z));
-
-            }
-            else if(line.startsWith("vt ")){
-
-                //First: "vt", Second: x, Third: y
-                float x = Float.valueOf(line.split(" ")[1]);
-                float y = Float.valueOf(line.split(" ")[2]);
-
-                uvs.add(new Vector2f(x, y));
-
-            }
-            else if(line.startsWith("f ")) {
-
-                //[0]: "f", [1]:([0]:vertexIndex, [1]:uvIndex, [2]: normalIndex), [...]
-                Vector3f vertexIndices = new Vector3f(Float.valueOf(line.split(" ")[1].split("/")[0]),
-                        Float.valueOf(line.split(" ")[2].split("/")[0]),
-                        Float.valueOf(line.split(" ")[3].split("/")[0]));
-
-                Vector3f normalIndices = new Vector3f(Float.valueOf(line.split(" ")[1].split("/")[2]),
-                        Float.valueOf(line.split(" ")[2].split("/")[2]),
-                        Float.valueOf(line.split(" ")[3].split("/")[2]));
-
-                Vector2f uvIndices = new Vector2f(Float.valueOf(line.split(" ")[1].split("/")[1]),
-                        Float.valueOf(line.split(" ")[2].split("/")[1]));
-
-                faces.add(new Face(vertexIndices, normalIndices, uvIndices));
-
-            }
-
-        }
-
-        reader.close();
-
-        return new Model(vertices, normals, uvs, faces, texture);
-
-    }
-
-    public static Model loadModelSafely(File file, File textureFile) {
-
-        Model model = null;
-
-        try {
-
-            model = loadModel(file, textureFile);
-
-        }
-        catch (IOException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
-
-        return model;
-
-    }
-
-
-}
