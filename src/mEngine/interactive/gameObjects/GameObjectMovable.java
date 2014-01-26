@@ -8,6 +8,7 @@ import mEngine.physics.Force;
 import mEngine.physics.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
+import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -55,9 +56,7 @@ public class GameObjectMovable extends GameObject{
 
                 //TODO: insert a method to calculate the sliding factor of the triangle the object is moving on to calculate the force direction subtraction
 
-                force.direction.x /= 1.01f;
-                force.direction.y /= 1.01f;
-                force.direction.z /= 1.01f;
+                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(1.01f, 1.01f, 1.01f));
 
                 if(Math.abs(force.direction.x) <= 0.1f &&
                         Math.abs(force.direction.y) <= 0.1f &&
@@ -77,9 +76,7 @@ public class GameObjectMovable extends GameObject{
 
                     Vector3f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
 
-                    forceSum.x = newForces.x;
-                    forceSum.y = newForces.y;
-                    forceSum.z = newForces.z;
+                    forceSum = newForces;
 
                 }
 
@@ -103,9 +100,7 @@ public class GameObjectMovable extends GameObject{
 
             Collider.getMovedSpace(movedSpace, this);
 
-            position.x += movedSpace.x;
-            position.y += movedSpace.y;
-            position.z += movedSpace.z;
+            position = VectorHelper.sumVectors(new Vector3f[] {position, movedSpace});
 
         }
 

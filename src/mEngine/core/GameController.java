@@ -15,6 +15,7 @@ import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
@@ -43,7 +44,7 @@ public class GameController {
 
         ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new KeyboardMouse()));
         ObjectController.addGUIElement(new GUIQuad(new Vector2f(50, 50), new Vector2f(80, 80)));
-        ObjectController.addGUIElement(new GUICircle(new Vector2f(300, 300), 80));
+        ObjectController.addGUIElement(new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 40));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
