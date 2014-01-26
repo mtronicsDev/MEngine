@@ -44,7 +44,6 @@ public class GameController {
 
         ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new KeyboardMouse()));
         ObjectController.addGUIElement(new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 40));
-        ObjectController.addGUIElement(new GUIQuad(new Vector2f(100, 100), new Vector2f(100, 100)));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
@@ -91,7 +90,7 @@ public class GameController {
 
         }*/
 
-        //for(AudioSource source : ObjectController.audioSources) { source.play(); }
+        for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
