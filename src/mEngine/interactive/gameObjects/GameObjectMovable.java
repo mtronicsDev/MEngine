@@ -72,9 +72,7 @@ public class GameObjectMovable extends GameObject{
 
                 if(forceSum.x != 0 && forceSum.z != 0) {
 
-                    Vector3f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
-
-                    forceSum = newForces;
+                    forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
 
                 }
 
@@ -252,9 +250,7 @@ public class GameObjectMovable extends GameObject{
 
         if(!sprinting) {
 
-            if(controller != null) if(!controller.sneakModeToggle) sneaking = true;
-
-            else sneaking = !sneaking;
+            if(controller != null) sneaking = !controller.sneakModeToggle || !sneaking;
 
         }
 
