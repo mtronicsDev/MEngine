@@ -3,6 +3,7 @@ package mEngine.interactive.controls;
 import mEngine.interactive.gameObjects.GameObjectMovable;
 import mEngine.util.Input;
 import mEngine.util.KeyAlreadyAssignedException;
+import mEngine.util.PreferenceHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -11,6 +12,9 @@ import static mEngine.util.Input.getKey;
 public class KeyboardMouse extends Controller {
 
     public KeyboardMouse() {
+
+        sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
+        continuouslyJumping = PreferenceHelper.getBoolean("continuouslyJumping");
 
         try {
 
@@ -77,6 +81,10 @@ public class KeyboardMouse extends Controller {
 
         obj.rotate(pitch, yaw);
 
+        if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
+        if(sneakModeToggle) { if(Input.isKeyDown(getKey("sneak"))) obj.sneak(); }
+        else { if(Input.isKeyPressed(getKey("sneak"))) obj.sneak(); }
+
         if(Input.isKeyPressed(getKey("forward"))) obj.moveForward();
         if(Input.isKeyPressed(getKey("backward"))) obj.moveBackward();
         if(Input.isKeyPressed(getKey("right"))) obj.moveLeft();
@@ -85,11 +93,8 @@ public class KeyboardMouse extends Controller {
         if(Input.isKeyPressed(getKey("up")) && obj.capableOfFlying) obj.moveUp();
         if(Input.isKeyPressed(getKey("down")) && obj.capableOfFlying) obj.moveDown();
 
-        if(obj.continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) obj.jump(); }
+        if(continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) obj.jump(); }
         else { if(Input.isKeyDown(getKey("jump"))) obj.jump(); }
-
-        if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
-        if(Input.isKeyPressed(getKey("sneak"))) obj.sneak();
 
     }
 

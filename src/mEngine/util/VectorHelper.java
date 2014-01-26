@@ -35,7 +35,7 @@ public class VectorHelper {
 
     public static Vector3f multiplyVectors(Vector3f[] vectors) {
 
-        Vector3f vectorProduct = new Vector3f();
+        Vector3f vectorProduct = new Vector3f(1, 1, 1);
 
         for(Vector3f vector : vectors) {
 

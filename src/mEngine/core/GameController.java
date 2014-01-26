@@ -91,7 +91,7 @@ public class GameController {
 
         }
 
-        for(AudioSource source : ObjectController.audioSources) { source.play(); }
+        //for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
