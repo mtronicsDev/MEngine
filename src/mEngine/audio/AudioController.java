@@ -46,7 +46,7 @@ public class AudioController {
 
         try {
 
-            FileInputStream stream = new FileInputStream(getResource(fileName + ".wav", RES_SOUND));
+            FileInputStream stream = new FileInputStream(getResource(fileName, RES_SOUND));
             waveData = WaveData.create(new BufferedInputStream(stream));
 
         }

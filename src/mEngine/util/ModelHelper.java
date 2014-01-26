@@ -13,13 +13,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static mEngine.util.ResourceHelper.*;
+
 public class ModelHelper {
 
-    private static Model loadModel(File modelFile, File textureFile) throws IOException {
+    private static Model loadModel(String fileName) throws IOException {
 
-        Texture texture = TextureHelper.loadTexture(textureFile);
+        Texture texture = TextureHelper.loadTexture(fileName);
 
-        BufferedReader reader = new BufferedReader(new FileReader(modelFile));
+        BufferedReader reader = new BufferedReader(new FileReader(getResource(fileName, RES_MODEL)));
         String line;
 
         List<Vector3f> vertices = new ArrayList<Vector3f>();
@@ -84,13 +86,13 @@ public class ModelHelper {
 
     }
 
-    public static Model loadModelSafely(File file, File textureFile) {
+    public static Model loadModelSafely(String fileName) {
 
         Model model = null;
 
         try {
 
-            model = loadModel(file, textureFile);
+            model = loadModel(fileName);
 
         }
         catch (IOException e) {

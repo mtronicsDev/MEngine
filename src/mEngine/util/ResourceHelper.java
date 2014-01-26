@@ -34,7 +34,24 @@ public class ResourceHelper {
 
     public static File getResource(String fileName, int type) {
 
-        return new File(paths.get(type) + fileName);
+        String filePath;
+
+        switch (type) {
+
+            default: filePath = paths.get(type) + fileName;
+                break;
+            case 3: filePath = paths.get(type) + fileName + ".mtl";
+                break;
+            case 4: filePath = paths.get(type) + fileName + ".obj";
+                break;
+            case 5: filePath = paths.get(type) + fileName + ".wav";
+                break;
+            case 6: filePath = paths.get(type) + fileName + ".png";
+                break;
+
+        }
+
+        return new File(filePath);
 
     }
 

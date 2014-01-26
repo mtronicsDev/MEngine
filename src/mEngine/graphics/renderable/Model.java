@@ -8,7 +8,6 @@ import org.newdawn.slick.opengl.Texture;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mEngine.util.ResourceHelper.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Model {
@@ -25,9 +24,7 @@ public class Model {
 
     public Model(String fileName, Vector3f pos, Vector3f rot) {
 
-        Model model = ModelHelper.loadModelSafely(
-                getResource(fileName + ".obj", RES_MODEL),
-                getResource(fileName + ".png", RES_TEXTURE));
+        Model model = ModelHelper.loadModelSafely(fileName);
 
         this.vertices = model.vertices;
         this.normals = model.normals;

@@ -3,19 +3,20 @@ package mEngine.util;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import static mEngine.util.ResourceHelper.*;
+
 public class TextureHelper {
 
-    public static Texture loadTexture(File textureFile) {
+    public static Texture loadTexture(String fileName) {
 
         Texture texture = null;
 
         try {
 
-            texture = TextureLoader.getTexture("PNG", new FileInputStream(textureFile));
+            texture = TextureLoader.getTexture("PNG", new FileInputStream(getResource(fileName, RES_TEXTURE)));
 
         } catch(IOException e) {
 
