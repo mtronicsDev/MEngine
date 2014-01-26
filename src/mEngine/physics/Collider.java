@@ -9,10 +9,6 @@ public class Collider {
 
            boolean colliding;
 
-           if(a.model == null) colliding = false;
-
-           else {
-
                Vector3f posA = a.position;
                Vector3f posB = b.position;
 
@@ -26,8 +22,6 @@ public class Collider {
                        && posA.z < posB.z + sizeB.z
                        && posA.z + sizeA.z > posB.z;
 
-           }
-
            return colliding;
 
        }
@@ -36,15 +30,7 @@ public class Collider {
 
             boolean colliding;
 
-            if(obj.model == null) {
-
-                colliding = false;
-
-            } else {
-
-                colliding = false;
-
-            }
+            colliding = false;
 
             return colliding;
 
@@ -52,17 +38,11 @@ public class Collider {
 
         public static Vector3f getMovedSpace(Vector3f velocity, GameObjectMovable obj) {
 
-            if(obj.model == null) return velocity;
+            Vector3f movedSpace;
 
-            else {
+            movedSpace = velocity;
 
-                Vector3f movedSpace;
-
-                movedSpace = velocity;
-
-                return  movedSpace;
-
-            }
+            return  movedSpace;
 
         }
 
