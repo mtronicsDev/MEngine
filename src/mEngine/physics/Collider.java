@@ -56,7 +56,7 @@ public class Collider {
 
             else {
 
-                Vector3f movedSpace = new Vector3f();
+                Vector3f movedSpace;
 
                 movedSpace = velocity;
 
