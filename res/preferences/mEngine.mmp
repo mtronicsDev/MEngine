@@ -9,4 +9,5 @@ fieldOfView=45
 #Player preferences
 continuouslyJumping=true
 sneakModeToggle=true
+sprintModeToggle=false
 capableOfFlying=false

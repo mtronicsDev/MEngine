@@ -14,6 +14,7 @@ public class KeyboardMouse extends Controller {
     public KeyboardMouse() {
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
+        sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");
         continuouslyJumping = PreferenceHelper.getBoolean("continuouslyJumping");
 
         try {
@@ -81,7 +82,9 @@ public class KeyboardMouse extends Controller {
 
         obj.rotate(pitch, yaw);
 
-        if(Input.isKeyPressed(getKey("sprint"))) obj.sprint();
+        if(sprintModeToggle) { if(Input.isKeyDown(getKey("sprint"))) obj.sprint(); }
+        else { if(Input.isKeyPressed(getKey("sprint"))) obj.sprint(); }
+
         if(sneakModeToggle) { if(Input.isKeyDown(getKey("sneak"))) obj.sneak(); }
         else { if(Input.isKeyPressed(getKey("sneak"))) obj.sneak(); }
 

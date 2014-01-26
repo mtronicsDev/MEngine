@@ -41,7 +41,7 @@ public class GameObjectMovable extends GameObject{
         if(!GameController.isGamePaused) {
 
             //forces.get(0).enabled = true;
-            sprinting = false;
+            if(controller != null) if(!controller.sprintModeToggle) sprinting = false;
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
             updateController();
@@ -230,16 +230,33 @@ public class GameObjectMovable extends GameObject{
 
     public void sprint() {
 
-        sprinting = true;
-        sneaking = false;
+        if(controller != null) {
+
+            if(!controller.sprintModeToggle) {
+
+                sprinting = true;
+                sneaking = false;
+
+            } else {
+
+                sprinting = !sprinting;
+                sneaking = false;
+
+            }
+
+        }
 
     }
 
     public void sneak() {
 
-        if(controller != null) if(!controller.sneakModeToggle) sneaking = true;
+        if(!sprinting) {
 
-        else sneaking = !sneaking;
+            if(controller != null) if(!controller.sneakModeToggle) sneaking = true;
+
+            else sneaking = !sneaking;
+
+        }
 
     }
 
