@@ -10,6 +10,7 @@ public class Gamepad extends Controller {
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");
         continuouslyJumping = PreferenceHelper.getBoolean("continuouslyJumping");
+        rotationSpeed = PreferenceHelper.getFloat("rotationSpeed");
 
     }
 

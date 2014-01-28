@@ -12,3 +12,4 @@ continuouslyJumping=true
 sneakModeToggle=true
 sprintModeToggle=false
 capableOfFlying=false
+rotationSpeed=0.16
