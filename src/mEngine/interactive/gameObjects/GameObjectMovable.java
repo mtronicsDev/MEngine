@@ -212,6 +212,20 @@ public class GameObjectMovable extends GameObject{
 
         direction.y = givenForce.direction.y;
 
+        if(sprinting) {
+
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0, 3, 0)});
+
+            direction.y = newDirection.y;
+
+        } else if(sneaking) {
+
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0, 0.3f, 0)});
+
+            direction.y = newDirection.y;
+
+        }
+
         forces.add(new Force(direction));
         forces.get(forces.size() - 1).enabled = true;
 
