@@ -26,6 +26,7 @@ public class GameObjectMovable extends GameObject{
 
         super(pos, rot, forceStrengths);
         this.controller = controller;
+        this.capableOfFlying = capableOfFlying;
 
         if(mass == -1) mass = 60;
 
