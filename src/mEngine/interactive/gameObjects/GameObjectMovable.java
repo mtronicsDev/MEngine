@@ -11,6 +11,7 @@ import mEngine.util.TimeHelper;
 import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public class GameObjectMovable extends GameObject{
 
@@ -23,9 +24,9 @@ public class GameObjectMovable extends GameObject{
     public boolean sneaking;
     public boolean capableOfFlying;
 
-    public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller) {
+    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller) {
 
-        super(pos, rot);
+        super(pos, rot, forceStrengths);
         this.controller = controller;
 
         capableOfFlying = PreferenceHelper.getBoolean("capableOfFlying");
