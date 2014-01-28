@@ -19,6 +19,14 @@ public abstract class GameObject {
 
         forces = ForceController.forces;
 
+        ForceController.addForce(new Vector3f(0, 0, -5)); //Forward
+        ForceController.addForce(new Vector3f(0, 0, 4)); //Backward
+        ForceController.addForce(new Vector3f(4, 0, 0)); //Right
+        ForceController.addForce(new Vector3f(-4, 0, 0)); //Left
+        ForceController.addForce(new Vector3f(0, 4, 0)); //Up
+        ForceController.addForce(new Vector3f(0, -4, 0)); //Down
+        ForceController.addForce(new Vector3f(0, 10, 0)); //Jump force
+
     }
 
     public abstract void update();

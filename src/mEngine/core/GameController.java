@@ -35,13 +35,6 @@ public class GameController {
         RuntimeHelper.initialize();
 
         ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
-        ForceController.addForce(new Vector3f(0, 0, -5)); //Forward
-        ForceController.addForce(new Vector3f(0, 0, 4)); //Backward
-        ForceController.addForce(new Vector3f(4, 0, 0)); //Right
-        ForceController.addForce(new Vector3f(-4, 0, 0)); //Left
-        ForceController.addForce(new Vector3f(0, 4, 0)); //Up
-        ForceController.addForce(new Vector3f(0, -4, 0)); //Down
-        ForceController.addForce(new Vector3f(0, 10, 0)); //Jump force
 
         ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new KeyboardMouse()));
         //ObjectController.addGameObject(new GameObjectInvisible(new Vector3f(), new Vector3f(), new KeyboardMouse()));

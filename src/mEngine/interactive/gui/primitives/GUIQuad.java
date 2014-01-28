@@ -28,17 +28,15 @@ public class GUIQuad extends GUIElement {
         texture.bind();
 
         glBegin(GL_QUADS);
-        glVertex2f(position.x, position.y + size.y);
-        glTexCoord2f(0, 0);
-        glVertex2f(position.x + size.x, position.y + size.y);
         glTexCoord2f(0, 1);
-        glVertex2f(position.x + size.x, position.y);
+        glVertex2f(position.x, position.y + size.y);
         glTexCoord2f(1, 1);
-        glVertex2f(position.x, position.y);
+        glVertex2f(position.x + size.x, position.y + size.y);
         glTexCoord2f(1, 0);
+        glVertex2f(position.x + size.x, position.y);
+        glTexCoord2f(0, 0);
+        glVertex2f(position.x, position.y);
         glEnd();
-
-        texture.release();
 
     }
 }
