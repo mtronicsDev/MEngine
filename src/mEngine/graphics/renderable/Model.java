@@ -77,7 +77,7 @@ public class Model {
             glVertex3f(v1.x, v1.y, v1.z);
 
 
-            Vector2f uv2 = uvs.get((int)face.uvIndices.x - 1);
+            Vector2f uv2 = uvs.get((int)face.uvIndices.y - 1);
             glTexCoord2f(uv2.x, uv2.y);
 
             Vector3f n2 = normals.get((int)face.normalIndices.y - 1);
@@ -87,7 +87,7 @@ public class Model {
             glVertex3f(v2.x, v2.y, v2.z);
 
 
-            Vector2f uv3 = uvs.get((int)face.uvIndices.x - 1);
+            Vector2f uv3 = uvs.get((int)face.uvIndices.z - 1);
             glTexCoord2f(uv3.x, uv3.y);
 
             Vector3f n3 = normals.get((int)face.normalIndices.z - 1);

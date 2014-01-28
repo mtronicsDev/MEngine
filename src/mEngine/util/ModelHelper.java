@@ -71,8 +71,9 @@ public class ModelHelper {
                         Float.valueOf(line.split(" ")[2].split("/")[2]),
                         Float.valueOf(line.split(" ")[3].split("/")[2]));
 
-                Vector2f uvIndices = new Vector2f(Float.valueOf(line.split(" ")[1].split("/")[1]),
-                        Float.valueOf(line.split(" ")[2].split("/")[1]));
+                Vector3f uvIndices = new Vector3f(Float.valueOf(line.split(" ")[1].split("/")[1]),
+                        Float.valueOf(line.split(" ")[2].split("/")[1]),
+                        Float.valueOf(line.split(" ")[3].split("/")[1]));
 
                 faces.add(new Face(vertexIndices, normalIndices, uvIndices));
 

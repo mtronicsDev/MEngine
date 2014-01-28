@@ -46,8 +46,6 @@ public class GameObjectMovable extends GameObject{
 
             updateController();
 
-            System.out.println(sprinting + ", " + sneaking);
-
             for(int count = 8; count < forces.size(); count ++) {
 
                 Force force = forces.get(count);
