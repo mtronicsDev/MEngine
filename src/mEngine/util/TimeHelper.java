@@ -7,7 +7,9 @@ import static mEngine.util.RuntimeHelper.*;
 
 public class TimeHelper {
 
-    private static long lastTime;
+    private static long lastTime = System.currentTimeMillis();
+    private static long thisTime;
+    public static float deltaTime;
     private static long lastFPS;
 
     public static long currentFPS;
@@ -19,15 +21,13 @@ public class TimeHelper {
 
     }
 
-    public static long getTime() { return (Sys.getTime() * 1000) / Sys.getTimerResolution(); }
+    public static long getTime() { return System.currentTimeMillis(); }
 
-    public static int deltaTime() {
+    public static void updateDeltaTime() {
 
-        long time = getTime();
-        int deltaTime = (int)(time - lastTime);
-        lastTime = time;
-
-        return deltaTime;
+        thisTime = getTime();
+        deltaTime = (thisTime - lastTime) / 1000f;
+        lastTime = thisTime;
 
     }
 

@@ -59,11 +59,11 @@ public class GameObjectMovable extends GameObject{
 
                 //TODO: insert a method to calculate the sliding factor of the triangle the object is moving on to calculate the force direction subtraction
 
-                force.direction = VectorHelper.multiplyVectors(new Vector3f[] { force.direction, new Vector3f(0.2f, 0.2f, 0.2f) });
+                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(10, 10, 10));
 
-                if(Math.abs(force.direction.x) <= 0.1f &&
-                        Math.abs(force.direction.y) <= 0.1f &&
-                        Math.abs(force.direction.z) <= 0.1f) {
+                if(Math.abs(force.direction.x) <= 0.001f &&
+                        Math.abs(force.direction.y) <= 0.001f &&
+                        Math.abs(force.direction.z) <= 0.001f) {
 
                     forces.remove(force);
 
@@ -96,10 +96,15 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, TimeHelper.deltaTime());
-            speed = ForceController.getSpeed(acceleration, speed, TimeHelper.deltaTime());
+            float deltaTime = TimeHelper.deltaTime * 100;
+            System.out.println(deltaTime);
 
-            if(model != null && (movedSpace.x != 0 || movedSpace.y != 0 || movedSpace.z != 0)) movedSpace = Collider.getMovedSpace(movedSpace, this);
+            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, deltaTime);
+            speed = ForceController.getSpeed(acceleration, speed, deltaTime);
+
+            System.out.println(movedSpace);
+
+            if(model != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 
             position = VectorHelper.sumVectors(new Vector3f[] {position, movedSpace});
 

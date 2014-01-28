@@ -26,6 +26,8 @@ public class GameLoop {
 
             }
 
+            TimeHelper.updateDeltaTime();
+
             for(GameObject gameObject : ObjectController.gameObjects) {
 
                 gameObject.update();
