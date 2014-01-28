@@ -63,36 +63,35 @@ public class Model {
         glTranslatef(position.x, position.y, position.z);
 
         texture.bind();
-
         glBegin(GL_TRIANGLES);
 
         for (Face face : faces) {
 
-            Vector3f n1 = normals.get((int)face.normalIndices.x - 1);
-            glNormal3f(n1.x, n1.y, n1.z);
-
             Vector2f uv1 = uvs.get((int)face.uvIndices.x - 1);
             glTexCoord2f(uv1.x, uv1.y);
+
+            Vector3f n1 = normals.get((int)face.normalIndices.x - 1);
+            glNormal3f(n1.x, n1.y, n1.z);
 
             Vector3f v1 = vertices.get((int)face.vertexIndices.x - 1);
             glVertex3f(v1.x, v1.y, v1.z);
 
 
-            Vector3f n2 = normals.get((int)face.normalIndices.y - 1);
-            glNormal3f(n2.x, n2.y, n2.z);
-
             Vector2f uv2 = uvs.get((int)face.uvIndices.x - 1);
             glTexCoord2f(uv2.x, uv2.y);
+
+            Vector3f n2 = normals.get((int)face.normalIndices.y - 1);
+            glNormal3f(n2.x, n2.y, n2.z);
 
             Vector3f v2 = vertices.get((int)face.vertexIndices.y - 1);
             glVertex3f(v2.x, v2.y, v2.z);
 
 
-            Vector3f n3 = normals.get((int)face.normalIndices.z - 1);
-            glNormal3f(n3.x, n3.y, n3.z);
-
             Vector2f uv3 = uvs.get((int)face.uvIndices.x - 1);
             glTexCoord2f(uv3.x, uv3.y);
+
+            Vector3f n3 = normals.get((int)face.normalIndices.z - 1);
+            glNormal3f(n3.x, n3.y, n3.z);
 
             Vector3f v3 = vertices.get((int)face.vertexIndices.z - 1);
             glVertex3f(v3.x, v3.y, v3.z);
@@ -101,7 +100,7 @@ public class Model {
 
         glEnd();
 
-        texture.release();
+        //texture.release();
 
         glPopMatrix();
 
