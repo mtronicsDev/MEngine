@@ -9,18 +9,18 @@ public class Collider {
 
            boolean colliding;
 
-               Vector3f posA = a.position;
-               Vector3f posB = b.position;
+           Vector3f posA = a.position;
+           Vector3f posB = b.position;
 
-               Vector3f sizeA = a.model.getSize();
-               Vector3f sizeB = b.model.getSize();
+           Vector3f sizeA = a.model.getSize();
+           Vector3f sizeB = b.model.getSize();
 
-               colliding = posA.x < posB.x + sizeB.x
-                       && posA.x + sizeA.x > posB.x
-                       && posA.y < posB.y + sizeB.y
-                       && posA.y + sizeA.y > posB.y
-                       && posA.z < posB.z + sizeB.z
-                       && posA.z + sizeA.z > posB.z;
+           colliding = posA.x < posB.x + sizeB.x
+                   && posA.x + sizeA.x > posB.x
+                   && posA.y < posB.y + sizeB.y
+                   && posA.y + sizeA.y > posB.y
+                   && posA.z < posB.z + sizeB.z
+                   && posA.z + sizeA.z > posB.z;
 
            return colliding;
 

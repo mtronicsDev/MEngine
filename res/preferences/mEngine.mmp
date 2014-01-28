@@ -11,5 +11,4 @@ fieldOfView=45
 continuouslyJumping=true
 sneakModeToggle=true
 sprintModeToggle=false
-capableOfFlying=true
 rotationSpeed=0.16

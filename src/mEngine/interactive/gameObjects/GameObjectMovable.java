@@ -24,12 +24,10 @@ public class GameObjectMovable extends GameObject{
     public boolean sneaking;
     public boolean capableOfFlying;
 
-    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller) {
+    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying) {
 
         super(pos, rot, forceStrengths);
         this.controller = controller;
-
-        capableOfFlying = PreferenceHelper.getBoolean("capableOfFlying");
 
         if(mass == -1) mass = 60;
 

@@ -7,9 +7,9 @@ public class GameObjectInvisible extends GameObjectMovable {
 
     Controller controller;
 
-    public GameObjectInvisible(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller) {
+    public GameObjectInvisible(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying) {
 
-        super(pos, rot, forceStrengths, controller);
+        super(pos, rot, forceStrengths, controller, capableOfFlying);
         this.controller = controller;
         capableOfFlying = true;
 
