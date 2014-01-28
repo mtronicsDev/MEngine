@@ -32,8 +32,6 @@ public class GameLoop {
 
             }
 
-            ObjectController.camera.update();
-
             if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
 
             if(GUIController.isGUIActivated)

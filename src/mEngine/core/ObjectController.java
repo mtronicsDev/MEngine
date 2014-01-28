@@ -13,7 +13,6 @@ public class ObjectController {
     public static List<GameObject> gameObjects = new ArrayList<GameObject>();
     public static List<AudioSource> audioSources = new ArrayList<AudioSource>();
     public static List<GUIElement> guiElements = new ArrayList<GUIElement>();
-    public static Camera camera;
 
     public static void addGameObject(GameObject object) { gameObjects.add(object); }
     public static void addAudioSource(AudioSource source) { audioSources.add(source); }

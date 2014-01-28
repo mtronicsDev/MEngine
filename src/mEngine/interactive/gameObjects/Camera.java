@@ -1,5 +1,6 @@
 package mEngine.interactive.gameObjects;
 
+import mEngine.interactive.controls.Controller;
 import mEngine.interactive.controls.KeyboardMouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
@@ -10,12 +11,6 @@ import static org.lwjgl.util.glu.GLU.gluPerspective;
 public class Camera extends GameObject{
 
     private GameObject sticksTo;
-
-    public Camera(Vector3f pos, Vector3f rot) {
-
-        this(new GameObjectInvisible(pos, rot, new KeyboardMouse()));
-
-    }
 
     public Camera(GameObject obj) {
 
