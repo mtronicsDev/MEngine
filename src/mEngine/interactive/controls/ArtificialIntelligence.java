@@ -6,9 +6,7 @@ public class ArtificialIntelligence extends Controller {
 
     public ArtificialIntelligence() {
 
-        sneakModeToggle = false;
-        sprintModeToggle = false;
-        continuouslyJumping = false;
+
 
     }
 

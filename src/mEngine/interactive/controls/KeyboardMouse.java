@@ -16,6 +16,7 @@ public class KeyboardMouse extends Controller {
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");
         continuouslyJumping = PreferenceHelper.getBoolean("continuouslyJumping");
+        rotationSpeed = PreferenceHelper.getFloat("rotationSpeed");
 
         try {
 
@@ -49,8 +50,8 @@ public class KeyboardMouse extends Controller {
         final float MAX_UP_ANGLE = 90;
         final float MAX_DOWN_ANGLE = -90;
 
-        float deltaMouseX = Mouse.getDX() * 0.16f;
-        float deltaMouseY = Mouse.getDY() * 0.16f;
+        float deltaMouseX = Mouse.getDX() * rotationSpeed;
+        float deltaMouseY = Mouse.getDY() * rotationSpeed;
 
         if (yaw + deltaMouseX >= 360) {
 
