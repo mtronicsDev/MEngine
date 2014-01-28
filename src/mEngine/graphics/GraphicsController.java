@@ -17,6 +17,7 @@ public class GraphicsController {
 
     private static int fps;
     public static boolean isFullscreen;
+    public static boolean isCurrently3D;
 
     public static void createDisplay(int fps, String title) {
 
@@ -24,6 +25,8 @@ public class GraphicsController {
         GraphicsController.height = PreferenceHelper.getInteger("screenHeight");
 
         GraphicsController.fps = fps;
+
+        isCurrently3D = PreferenceHelper.getBoolean("is3D");
 
         if(!PreferenceHelper.getBoolean("fullscreen")) {
 
