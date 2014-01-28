@@ -2,6 +2,7 @@
 screenWidth=1280
 screenHeight=720
 fullscreen=false
+is3D=true
 
 #Camera preferences
 fieldOfView=45
