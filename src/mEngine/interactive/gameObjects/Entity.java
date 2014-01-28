@@ -7,9 +7,9 @@ public class Entity extends GameObjectRenderable {
     
     Controller controller;
     
-    public Entity(Vector3f pos, Vector3f rot, String fileName, Controller controller) {
+    public Entity(Vector3f pos, Vector3f rot, String fileName, float[] forceStrengths, Controller controller) {
         
-        super(pos, rot, fileName, controller);
+        super(pos, rot, fileName, forceStrengths, controller);
         this.controller = controller;
         
     }
