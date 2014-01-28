@@ -6,12 +6,10 @@ import mEngine.interactive.controls.Controller;
 import mEngine.physics.Collider;
 import mEngine.physics.Force;
 import mEngine.physics.ForceController;
-import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 
 public class GameObjectMovable extends GameObject{
 
@@ -27,6 +25,15 @@ public class GameObjectMovable extends GameObject{
     public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying) {
 
         super(pos, rot, forceStrengths);
+        this.controller = controller;
+
+        if(mass == -1) mass = 60;
+
+    }
+
+    public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying) {
+
+        super(pos, rot);
         this.controller = controller;
 
         if(mass == -1) mass = 60;

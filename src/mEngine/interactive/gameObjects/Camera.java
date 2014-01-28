@@ -14,7 +14,7 @@ public class Camera extends GameObject{
 
     public Camera(GameObject obj) {
 
-        super(obj.position, obj.rotation, obj.forceStrengths);
+        super(obj.position, obj.rotation);
         sticksTo = obj;
 
         initialize();

@@ -14,6 +14,13 @@ public class Entity extends GameObjectRenderable {
         
     }
 
+    public Entity(Vector3f pos, Vector3f rot, String fileName, Controller controller, boolean capableOfFlying) {
+
+        super(pos, rot, fileName, controller, capableOfFlying);
+        this.controller = controller;
+
+    }
+
     protected void updateController() { controller.updateObject(this); }
 
 }

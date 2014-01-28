@@ -37,7 +37,7 @@ public class GameController {
         ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
 
         ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), false));
-        //ObjectController.addGameObject(new GameObjectInvisible(new Vector3f(), new Vector3f(), new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse()));
+        //ObjectController.addGameObject(new GameObjectInvisible(new Vector3f(), new Vector3f(), new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), true));
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
@@ -47,42 +47,36 @@ public class GameController {
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
                 "texturedStar",
-                new float[] {0, 0, 0, 0, 0, 0, 0},
                 null,
                 false));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
                 new Vector3f(),
                 "texturedStar",
-                new float[] {0, 0, 0, 0, 0, 0, 0},
                 null,
                 false));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
                 new Vector3f(),
                 "texturedStar",
-                new float[] {0, 0, 0, 0, 0, 0, 0},
                 null,
                 false));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
                 new Vector3f(),
                 "texturedStar",
-                new float[] {0, 0, 0, 0, 0, 0, 0},
                 null,
                 false));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
                 new Vector3f(),
                 "texturedStar",
-                new float[] {0, 0, 0, 0, 0, 0, 0},
                 null,
                 false));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
                 new Vector3f(),
                 "texturedStar",
-                new float[] {0, 0, 0, 0, 0, 0, 0},
                 null,
                 false));
 

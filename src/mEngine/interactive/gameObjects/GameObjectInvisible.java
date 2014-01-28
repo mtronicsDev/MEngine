@@ -15,6 +15,14 @@ public class GameObjectInvisible extends GameObjectMovable {
 
     }
 
+    public GameObjectInvisible(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying) {
+
+        super(pos, rot, controller, capableOfFlying);
+        this.controller = controller;
+        capableOfFlying = true;
+
+    }
+
     protected void updateController() { controller.updateObject(this); }
 
     public void jump() {}
