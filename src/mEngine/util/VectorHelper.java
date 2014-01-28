@@ -5,6 +5,14 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class VectorHelper {
 
+    public static boolean areEqual(Vector3f vectorA, Vector3f vectorB) {
+
+        return vectorA.x == vectorB.x
+                && vectorA.y == vectorB.y
+                && vectorA.z == vectorB.z;
+
+    }
+
     public static Vector3f sumVectors(Vector3f[] vectors) {
 
         Vector3f vectorSum = new Vector3f();
@@ -78,6 +86,13 @@ public class VectorHelper {
         scalarProduct = vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z;
 
         return scalarProduct;
+
+    }
+
+    public static boolean areEqual(Vector2f vectorA, Vector2f vectorB) {
+
+        return vectorA.x == vectorB.x
+                && vectorA.y == vectorB.y;
 
     }
 
