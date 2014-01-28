@@ -11,6 +11,8 @@ import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import static mEngine.util.TimeHelper.deltaTime;
+
 public class GameObjectMovable extends GameObject{
 
     protected Controller controller;
@@ -96,11 +98,8 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            float deltaTime = TimeHelper.deltaTime * 100;
-            System.out.println(deltaTime);
-
-            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, deltaTime);
-            speed = ForceController.getSpeed(acceleration, speed, deltaTime);
+            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, deltaTime * 100);
+            speed = ForceController.getSpeed(acceleration, speed, deltaTime * 100);
 
             System.out.println(movedSpace);
 

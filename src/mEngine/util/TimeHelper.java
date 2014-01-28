@@ -8,7 +8,6 @@ import static mEngine.util.RuntimeHelper.*;
 public class TimeHelper {
 
     private static long lastTime = System.currentTimeMillis();
-    private static long thisTime;
     public static float deltaTime;
     private static long lastFPS;
 
@@ -21,11 +20,11 @@ public class TimeHelper {
 
     }
 
-    public static long getTime() { return System.currentTimeMillis(); }
+    public static long getTime() { return System.nanoTime() / 1000000; }
 
     public static void updateDeltaTime() {
 
-        thisTime = getTime();
+        long thisTime = getTime();
         deltaTime = (thisTime - lastTime) / 1000f;
         lastTime = thisTime;
 
