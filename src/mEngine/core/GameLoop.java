@@ -48,6 +48,7 @@ public class GameLoop {
 
                 }
 
+            //Remove when not needed any longer
             ObjectController.getGUITextElement(1).text = "mEngine Test Run @ " + FPS + " FPS";
             ObjectController.getGUITextElement(2).text = "MemUsage: [Total: " + getMemoryStats(TOTAL_MEMORY) +
                     " MB | Used: " + getMemoryStats(USED_MEMORY) +
