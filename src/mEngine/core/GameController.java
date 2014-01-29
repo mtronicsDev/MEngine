@@ -7,6 +7,7 @@ import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObjectInvisible;
 import mEngine.interactive.gameObjects.Player;
+import mEngine.interactive.gui.GUIText;
 import mEngine.interactive.gui.primitives.GUICircle;
 import mEngine.interactive.gui.primitives.GUIQuad;
 import mEngine.physics.ForceController;
@@ -20,6 +21,11 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
+import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+
+import java.awt.*;
+import java.awt.Font;
 
 public class GameController {
 
@@ -41,8 +47,9 @@ public class GameController {
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
-        ObjectController.addGUIElement(new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 40));
-        ObjectController.addGUIElement(new GUIQuad(new Vector2f(), new Vector2f(100, 100)));
+        ObjectController.addGUIElement(new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 20));
+        ObjectController.addGUIElement(new GUIText(new Vector2f(5, 5), "Current FPS", 15));
+        ObjectController.addGUIElement(new GUIText(new Vector2f(5, 25), "Current RAM", 15));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),

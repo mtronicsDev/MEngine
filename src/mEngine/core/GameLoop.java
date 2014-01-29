@@ -9,6 +9,10 @@ import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
+import org.newdawn.slick.Color;
+
+import static mEngine.util.RuntimeHelper.*;
+import static mEngine.util.TimeHelper.FPS;
 
 public class GameLoop {
 
@@ -37,8 +41,17 @@ public class GameLoop {
             if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
 
             if(GUIController.isGUIActivated)
-                for(GUIElement guiElement : ObjectController.guiElements)
+                for(GUIElement guiElement : ObjectController.guiElements) {
+
                     guiElement.update();
+                    Color.white.bind();
+
+                }
+
+            ObjectController.getGUITextElement(1).text = "mEngine Test Run @ " + FPS + " FPS";
+            ObjectController.getGUITextElement(2).text = "MemUsage: [Total: " + getMemoryStats(TOTAL_MEMORY) +
+                    " MB | Used: " + getMemoryStats(USED_MEMORY) +
+                    " MB | Free: " + getMemoryStats(FREE_MEMORY) + " MB]";
 
             TimeHelper.updateFPS();
             GraphicsController.update();
