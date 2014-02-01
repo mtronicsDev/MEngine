@@ -3,19 +3,11 @@ package mEngine.audio;
 import mEngine.interactive.gameObjects.GameObject;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.openal.AL;
-import org.lwjgl.util.WaveData;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.FloatBuffer;
 
 import static org.lwjgl.openal.AL10.*;
-import static org.lwjgl.openal.AL10.alDeleteBuffers;
-import static org.lwjgl.openal.AL10.alDeleteSources;
 
 public class AudioSource {
 

@@ -1,11 +1,15 @@
 package mEngine.graphics;
 
+import mEngine.core.ObjectController;
+import mEngine.util.KeyAlreadyAssignedException;
 import mEngine.util.PreferenceHelper;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector4f;
 
+import static mEngine.util.Input.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
@@ -14,10 +18,13 @@ public class GraphicsController {
 
     private static int width;
     private static int height;
+    private static String title;
 
     private static int fps;
     public static boolean isFullscreen;
     public static boolean isCurrently3D;
+
+    public static boolean mEnchmarkEnabled;
 
     public static void createDisplay(int fps, String title) {
 
@@ -27,6 +34,19 @@ public class GraphicsController {
         GraphicsController.fps = fps;
 
         isCurrently3D = PreferenceHelper.getBoolean("is3D");
+        mEnchmarkEnabled = PreferenceHelper.getBoolean("mEnchmarkEnabled");
+        GraphicsController.title = title;
+
+        try {
+
+            assignKey("fullscreen", Keyboard.KEY_F11);
+
+        } catch (KeyAlreadyAssignedException e) {
+
+            e.printStackTrace();
+            System.exit(1);
+
+        }
 
         if(!PreferenceHelper.getBoolean("fullscreen")) {
 
@@ -52,8 +72,17 @@ public class GraphicsController {
 
     public static void update() {
 
+        if(Display.wasResized()) ObjectController.getGameObject(1);
+
+        if(isKeyDown(getKey("fullscreen"))) {
+
+            if(isFullscreen) setupWindow(width, height, title);
+            else setupFullscreen();
+
+        }
+
         Display.update();
-        Display.sync(fps);
+        if(!mEnchmarkEnabled) Display.sync(fps);
 
     }
 
@@ -63,7 +92,9 @@ public class GraphicsController {
 
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setTitle(title);
-            Display.create();
+            Display.setFullscreen(false);
+
+            if(!Display.isCreated()) Display.create();
 
         } catch (LWJGLException e) {
 
@@ -80,7 +111,7 @@ public class GraphicsController {
 
             Display.setDisplayMode(Display.getDesktopDisplayMode());
             Display.setFullscreen(true);
-            Display.create();
+            if(!Display.isCreated()) Display.create();
 
         } catch (LWJGLException e) {
 

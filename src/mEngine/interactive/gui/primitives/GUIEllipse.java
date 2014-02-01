@@ -20,9 +20,11 @@ public class GUIEllipse extends GUIElement {
 
     public void update() {
 
-        glBegin(GL_LINE_LOOP);
+        glBegin(GL_TRIANGLE_FAN);
 
-        for(int i = 0; i < 360; i++) {
+        glVertex2f(position.x, position.y);
+
+        for(int i = 360; i > 0; i--) {
 
             float radians = ((float)PI / 180) * i;
 

@@ -6,7 +6,6 @@ import mEngine.interactive.controls.Controller;
 import mEngine.physics.Collider;
 import mEngine.physics.Force;
 import mEngine.physics.ForceController;
-import mEngine.util.TimeHelper;
 import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;

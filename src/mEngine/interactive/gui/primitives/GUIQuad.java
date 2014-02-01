@@ -19,7 +19,7 @@ public class GUIQuad extends GUIElement {
         super(pos, rot);
         this.size = size;
 
-        texture = TextureHelper.loadTexture("texturedStar");
+        texture = TextureHelper.getTexture("texturedStar");
 
     }
 

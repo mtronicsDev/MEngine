@@ -3,7 +3,6 @@ screenWidth=1280
 screenHeight=720
 fullscreen=false
 is3D=true
-antiAliasing=true
 
 #Camera preferences
 fieldOfView=45
@@ -16,3 +15,7 @@ rotationSpeed=0.16
 
 #GUI preferences
 defaultFontFace=Verdana
+antiAliasing=true
+
+#mEnchmark preferences
+mEnchmarkEnabled=true

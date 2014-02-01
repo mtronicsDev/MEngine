@@ -5,27 +5,16 @@ import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
-import mEngine.interactive.gameObjects.GameObjectInvisible;
+import mEngine.interactive.gameObjects.GameObjectRenderable;
 import mEngine.interactive.gameObjects.Player;
 import mEngine.interactive.gui.GUIText;
 import mEngine.interactive.gui.primitives.GUICircle;
-import mEngine.interactive.gui.primitives.GUIQuad;
 import mEngine.physics.ForceController;
-import mEngine.util.PreferenceHelper;
-import mEngine.util.ResourceHelper;
-import mEngine.util.RuntimeHelper;
-import mEngine.util.TimeHelper;
-import org.lwjgl.LWJGLException;
+import mEngine.util.*;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import mEngine.interactive.gameObjects.GameObjectRenderable;
-import org.newdawn.slick.*;
-import org.newdawn.slick.Color;
-
-import java.awt.*;
-import java.awt.Font;
 
 public class GameController {
 
@@ -41,6 +30,8 @@ public class GameController {
         RuntimeHelper.initialize();
 
         ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
+
+        TextureHelper.loadTexture("texturedStar");
 
         ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), false));
         //ObjectController.addGameObject(new GameObjectInvisible(new Vector3f(), new Vector3f(), new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), true));

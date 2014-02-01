@@ -5,18 +5,22 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import static mEngine.util.ResourceHelper.*;
+import static mEngine.util.ResourceHelper.RES_TEXTURE;
+import static mEngine.util.ResourceHelper.getResource;
 
 public class TextureHelper {
 
-    public static Texture loadTexture(String fileName) {
+    private static Map<String, Texture> loadedTextures = new HashMap<String, Texture>();
 
-        Texture texture = null;
+    public static void loadTexture(String fileName) {
 
         try {
 
-            texture = TextureLoader.getTexture("PNG", new FileInputStream(getResource(fileName, RES_TEXTURE)));
+            Texture texture = TextureLoader.getTexture("PNG", new FileInputStream(getResource(fileName, RES_TEXTURE)));
+            loadedTextures.put(fileName, texture);
 
         } catch(IOException e) {
 
@@ -25,8 +29,10 @@ public class TextureHelper {
 
         }
 
-        return texture;
-
     }
+
+    public static Texture getTexture(String name) { return loadedTextures.get(name); }
+
+    public static void removeTexture(String name) { loadedTextures.remove(name); }
 
 }

@@ -1,7 +1,6 @@
 package mEngine.core;
 
 import mEngine.audio.AudioSource;
-import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIText;

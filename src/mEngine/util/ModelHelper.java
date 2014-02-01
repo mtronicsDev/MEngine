@@ -7,19 +7,19 @@ import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mEngine.util.ResourceHelper.*;
+import static mEngine.util.ResourceHelper.RES_MODEL;
+import static mEngine.util.ResourceHelper.getResource;
 
 public class ModelHelper {
 
     private static Model loadModel(String fileName) throws IOException {
 
-        Texture texture = TextureHelper.loadTexture(fileName);
+        Texture texture = TextureHelper.getTexture(fileName);
 
         BufferedReader reader = new BufferedReader(new FileReader(getResource(fileName, RES_MODEL)));
         String line;
