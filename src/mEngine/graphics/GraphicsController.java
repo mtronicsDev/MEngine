@@ -51,13 +51,11 @@ public class GraphicsController {
         if(!PreferenceHelper.getBoolean("fullscreen")) {
 
             setupWindow(width, height, title);
-            isFullscreen = false;
 
         }
         else {
 
             setupFullscreen();
-            isFullscreen = true;
 
         }
 
@@ -103,6 +101,8 @@ public class GraphicsController {
 
         }
 
+        isFullscreen = false;
+
     }
 
     private static void setupFullscreen() {
@@ -119,6 +119,8 @@ public class GraphicsController {
             System.exit(1);
 
         }
+
+        isFullscreen = true;
 
     }
 
