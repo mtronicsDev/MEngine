@@ -1,16 +1,16 @@
 package mEngine.interactive.gameObjects;
 
 import mEngine.core.GameController;
+import mEngine.core.ObjectController;
 import mEngine.graphics.renderable.Model;
 import mEngine.interactive.controls.Controller;
 import mEngine.physics.Collider;
 import mEngine.physics.Force;
 import mEngine.physics.ForceController;
+import mEngine.util.TimeHelper;
 import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-
-import static mEngine.util.TimeHelper.deltaTime;
 
 public class GameObjectMovable extends GameObject{
 
@@ -37,6 +37,7 @@ public class GameObjectMovable extends GameObject{
 
         super(pos, rot);
         this.controller = controller;
+        this.capableOfFlying = capableOfFlying;
 
         if(mass == -1) mass = 60;
 
@@ -52,7 +53,7 @@ public class GameObjectMovable extends GameObject{
             if(controller != null) if(!controller.sprintModeToggle) sprinting = false;
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
-            updateController();
+            if(controller != null) updateController();
 
             for(int count = 8; count < forces.size(); count ++) {
 
@@ -60,7 +61,7 @@ public class GameObjectMovable extends GameObject{
 
                 //TODO: insert a method to calculate the sliding factor of the triangle the object is moving on to calculate the force direction subtraction
 
-                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(10, 10, 10));
+                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
 
                 if(Math.abs(force.direction.x) <= 0.001f &&
                         Math.abs(force.direction.y) <= 0.001f &&
@@ -97,10 +98,12 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            Vector3f movedSpace = ForceController.getMovedSpace(acceleration, speed, deltaTime * 100);
-            speed = ForceController.getSpeed(acceleration, speed, deltaTime * 100);
+            float deltaTime = TimeHelper.deltaTime * 100;
 
-            System.out.println(movedSpace);
+            speed = ForceController.getSpeed(acceleration, speed, deltaTime);
+            Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
+
+            if(ObjectController.getGameObject(0) == this) System.out.println(movedSpace);
 
             if(model != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 
