@@ -53,7 +53,7 @@ public class GameObjectMovable extends GameObject{
             if(controller != null) if(!controller.sprintModeToggle) sprinting = false;
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
-            if(controller != null) updateController();
+            updateController();
 
             for(int count = 8; count < forces.size(); count ++) {
 
@@ -103,7 +103,8 @@ public class GameObjectMovable extends GameObject{
             speed = ForceController.getSpeed(acceleration, speed, deltaTime);
             Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if(ObjectController.getGameObject(0) == this) System.out.println(movedSpace);
+            //if(ObjectController.getGameObject(0) == this) System.out.println(movedSpace);
+            System.out.println(speed);
 
             if(model != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 

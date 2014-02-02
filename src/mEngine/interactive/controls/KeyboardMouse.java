@@ -1,6 +1,7 @@
 package mEngine.interactive.controls;
 
 import mEngine.interactive.gameObjects.GameObjectMovable;
+import mEngine.interactive.gameObjects.Player;
 import mEngine.util.Input;
 import mEngine.util.KeyAlreadyAssignedException;
 import mEngine.util.PreferenceHelper;
