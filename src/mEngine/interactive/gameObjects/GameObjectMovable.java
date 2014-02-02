@@ -17,6 +17,7 @@ public class GameObjectMovable extends GameObject{
     protected Controller controller;
     public float mass = -1;
     public Vector3f speed = new Vector3f();
+    private Vector3f previousSpeed = new Vector3f();
     public Model model = null;
 
     public boolean sprinting;
@@ -98,13 +99,16 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            float deltaTime = TimeHelper.deltaTime / 10;
+            float deltaTime = TimeHelper.deltaTime / 2;
 
             speed = ForceController.getSpeed(acceleration, speed, deltaTime);
+
+            speed = VectorHelper.subtractVectors(speed, previousSpeed);
+            previousSpeed = speed;
+
             Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            //if(ObjectController.getGameObject(0) == this) System.out.println(movedSpace);
-            System.out.println(speed);
+            if(ObjectController.getGameObject(0) == this) System.out.println(movedSpace);
 
             if(model != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 
