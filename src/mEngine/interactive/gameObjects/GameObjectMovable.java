@@ -8,7 +8,7 @@ import mEngine.physics.Collider;
 import mEngine.physics.Force;
 import mEngine.physics.ForceController;
 import mEngine.util.TimeHelper;
-import mEngine.util.VectorHelper;
+import mEngine.util.VectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -49,7 +49,7 @@ public class GameObjectMovable extends GameObject{
 
         if(!GameController.isGamePaused) {
 
-            //forces.get(0).enabled = true;
+            if(!capableOfFlying) //forces.get(0).enabled = true;
             if(controller != null) if(!controller.sprintModeToggle) sprinting = false;
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
