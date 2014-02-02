@@ -2,12 +2,12 @@ package mEngine.util;
 
 public class TimeHelper {
 
-    private static long lastTime = System.nanoTime() / 1000000;
+    private static float lastTime = System.nanoTime() / 1000000;
 
     public static float deltaTime;
     public static int FPS;
 
-    private static long lastFPS;
+    private static float lastFPS;
     private static long currentFPS;
 
     public static void setupTiming() {
@@ -17,12 +17,12 @@ public class TimeHelper {
 
     }
 
-    public static long getTime() { return System.nanoTime() / 1000000; }
+    public static float getTime() { return System.nanoTime() / 1000000; }
 
     public static void updateDeltaTime() {
 
-        long thisTime = getTime();
-        deltaTime = (thisTime - lastTime) / 1000f;
+        float thisTime = getTime();
+        deltaTime = thisTime - lastTime;
         lastTime = thisTime;
 
     }

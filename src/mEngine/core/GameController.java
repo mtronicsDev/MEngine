@@ -9,7 +9,7 @@ import mEngine.interactive.gameObjects.GameObjectRenderable;
 import mEngine.interactive.gameObjects.Player;
 import mEngine.interactive.gui.GUIText;
 import mEngine.interactive.gui.primitives.GUICircle;
-import mEngine.physics.ForceController;
+import mEngine.physics.forces.ForceController;
 import mEngine.util.*;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;

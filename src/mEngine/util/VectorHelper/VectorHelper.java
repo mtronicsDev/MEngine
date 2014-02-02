@@ -1,4 +1,4 @@
-package mEngine.util.VectorHelper;
+package mEngine.util.vectorHelper;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;

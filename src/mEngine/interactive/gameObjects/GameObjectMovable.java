@@ -5,10 +5,10 @@ import mEngine.core.ObjectController;
 import mEngine.graphics.renderable.Model;
 import mEngine.interactive.controls.Controller;
 import mEngine.physics.Collider;
-import mEngine.physics.Force;
-import mEngine.physics.ForceController;
+import mEngine.physics.forces.Force;
+import mEngine.physics.forces.ForceController;
 import mEngine.util.TimeHelper;
-import mEngine.util.VectorHelper.VectorHelper;
+import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -49,7 +49,7 @@ public class GameObjectMovable extends GameObject{
 
         if(!GameController.isGamePaused) {
 
-            if(!capableOfFlying) //forces.get(0).enabled = true;
+            //if(!capableOfFlying) forces.get(0).enabled = true;
             if(controller != null) if(!controller.sprintModeToggle) sprinting = false;
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
@@ -59,7 +59,7 @@ public class GameObjectMovable extends GameObject{
 
                 Force force = forces.get(count);
 
-                //TODO: insert a method to calculate the sliding factor of the triangle the object is moving on to calculate the force direction subtraction
+                //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
                 force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
 
@@ -98,7 +98,7 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            float deltaTime = TimeHelper.deltaTime * 100;
+            float deltaTime = TimeHelper.deltaTime / 10;
 
             speed = ForceController.getSpeed(acceleration, speed, deltaTime);
             Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);

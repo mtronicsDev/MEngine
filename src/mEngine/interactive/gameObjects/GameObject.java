@@ -1,7 +1,7 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.physics.Force;
-import mEngine.physics.ForceController;
+import mEngine.physics.forces.Force;
+import mEngine.physics.forces.ForceController;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.List;
