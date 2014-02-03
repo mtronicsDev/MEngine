@@ -1,3 +1,6 @@
+mEngine License
+=====
+
 Copyright (c) 2013 - 2014, mGameLabs
 All rights reserved.
 
@@ -26,7 +29,8 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
---- LWJGL License ---
+LWJGL License
+=====
 
 Copyright (c) 2002-2007, Lightweight Java Game Library Project
 All rights reserved.
@@ -58,7 +62,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
---- Slick2D License ---
+Slick2D License
+=====
 
 Copyright (c) 2013, Slick2D
 All rights reserved.
