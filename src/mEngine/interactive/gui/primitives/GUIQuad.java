@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GUIQuad extends GUIElement {
 
-    Vector2f size;
+    public Vector2f size;
     Texture texture;
 
     public GUIQuad(Vector2f pos, Vector2f size) { this(pos, new Vector2f(), size); }

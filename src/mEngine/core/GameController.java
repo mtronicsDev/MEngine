@@ -7,6 +7,7 @@ import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
 import mEngine.interactive.gameObjects.Player;
+import mEngine.interactive.gui.GUIButton;
 import mEngine.interactive.gui.GUIText;
 import mEngine.interactive.gui.primitives.GUICircle;
 import mEngine.physics.forces.ForceController;
@@ -41,6 +42,7 @@ public class GameController {
         ObjectController.addGUIElement(new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 20));
         ObjectController.addGUIElement(new GUIText(new Vector2f(5, 5), "Current FPS", 15));
         ObjectController.addGUIElement(new GUIText(new Vector2f(5, 25), "Current RAM", 15));
+        ObjectController.addGUIElement(new GUIButton(new Vector2f(5, 45), new Vector2f(300, 100)));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),
