@@ -1,21 +1,9 @@
-package mEngine.util.vectorHelper;
+package mEngine.util;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class VectorHelper {
-
-    public static Vector3f combineVectorAndMatrix(Matrix matrix, Vector3f vector) {
-
-        Vector3f combinedVector = new Vector3f();
-
-        combinedVector.x = vector.x * matrix.firstLine3d.x + vector.y * matrix.firstLine3d.y + vector.z * matrix.firstLine3d.z;
-        combinedVector.y = vector.x * matrix.secondLine3d.x + vector.y * matrix.secondLine3d.y + vector.z * matrix.secondLine3d.z;
-        combinedVector.z = vector.x * matrix.thirdLine3d.x + vector.y * matrix.thirdLine3d.y + vector.z * matrix.thirdLine3d.z;
-
-        return  combinedVector;
-
-    }
 
     public static boolean areEqual(Vector3f vectorA, Vector3f vectorB) {
 
@@ -98,17 +86,6 @@ public class VectorHelper {
         scalarProduct = vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z;
 
         return scalarProduct;
-
-    }
-
-    public static Vector2f combineVectorAndMatrix(Matrix matrix, Vector2f vector) {
-
-        Vector2f combinedVector = new Vector2f();
-
-        combinedVector.x = vector.x * matrix.firstLine2d.x + vector.y * matrix.firstLine2d.y;
-        combinedVector.y = vector.x * matrix.secondLine2d.x + vector.y * matrix.secondLine2d.y;
-
-        return combinedVector;
 
     }
 

@@ -8,7 +8,7 @@ import mEngine.physics.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.TimeHelper;
-import mEngine.util.vectorHelper.VectorHelper;
+import mEngine.util.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -55,6 +55,18 @@ public class GameObjectMovable extends GameObject{
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
             updateController();
+
+            if(ObjectController.getGameObject(0) == this) System.out.print(rotation + ", ");
+
+            percentRotation.x = (float)Math.sin(Math.toRadians(-rotation.y));
+            percentRotation.y = (float)Math.sin(Math.toRadians(-rotation.x));
+            percentRotation.z = (float)Math.cos(Math.toRadians(-rotation.y));
+
+            float percentRotationLength = VectorHelper.getAbs(percentRotation);
+
+            percentRotation = VectorHelper.divideVectors(percentRotation, new Vector3f(percentRotationLength, percentRotationLength, percentRotationLength));
+
+            if(ObjectController.getGameObject(0) == this) System.out.println(percentRotation);
 
             for(int count = 8; count < forces.size(); count ++) {
 
@@ -107,8 +119,6 @@ public class GameObjectMovable extends GameObject{
             previousSpeed = speed;
 
             Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
-
-            if(ObjectController.getGameObject(0) == this) System.out.println(movedSpace);
 
             if(model != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 
