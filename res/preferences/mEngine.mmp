@@ -14,6 +14,7 @@ sprintModeToggle=false
 rotationSpeed=0.16
 
 #GUI preferences
+guiEnabledOnStart=false
 defaultFontFace=Verdana
 antiAliasing=true
 

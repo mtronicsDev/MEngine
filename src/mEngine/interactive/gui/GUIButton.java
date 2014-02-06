@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class GUIButton extends GUIQuad {
 
+    //Later used for rising edge / falling edge detection
     boolean isButtonPressed;
     boolean isButtonHovered;
 

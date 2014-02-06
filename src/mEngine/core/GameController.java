@@ -8,6 +8,8 @@ import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObjectRenderable;
 import mEngine.interactive.gameObjects.Player;
 import mEngine.interactive.gui.GUIButton;
+import mEngine.interactive.gui.GUIElement;
+import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.GUIText;
 import mEngine.interactive.gui.primitives.GUICircle;
 import mEngine.physics.forces.ForceController;
@@ -35,14 +37,20 @@ public class GameController {
         TextureHelper.loadTexture("texturedStar");
 
         ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), false));
-        //ObjectController.addGameObject(new GameObjectInvisible(new Vector3f(), new Vector3f(), new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), true));
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
-        ObjectController.addGUIElement(new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 20));
-        ObjectController.addGUIElement(new GUIText(new Vector2f(5, 5), "Current FPS", 15));
-        ObjectController.addGUIElement(new GUIText(new Vector2f(5, 25), "Current RAM", 15));
-        ObjectController.addGUIElement(new GUIButton(new Vector2f(5, 45), new Vector2f(300, 100)));
+        ObjectController.addGUIScreen(new GUIScreen(
+                new GUIElement[] {
+                        new GUIText(new Vector2f(5, 5), "Current FPS", 15),
+                        new GUIText(new Vector2f(5, 25), "Current RAM", 15)
+                }, true));
+
+        ObjectController.addGUIScreen(new GUIScreen(
+                new GUIElement[]{
+                        new GUIButton(new Vector2f(5, 45), new Vector2f(300, 100)),
+                        new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 20)
+                }, true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
                 new Vector3f(),

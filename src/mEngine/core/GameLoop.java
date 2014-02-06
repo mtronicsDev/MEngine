@@ -4,6 +4,7 @@ import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIElement;
+import mEngine.interactive.gui.GUIScreen;
 import mEngine.util.Input;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
@@ -41,16 +42,11 @@ public class GameLoop {
             if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
 
             if(GUIController.isGUIActivated)
-                for(GUIElement guiElement : ObjectController.guiElements) {
-
-                    guiElement.update();
-                    Color.white.bind();
-
-                }
+                for(GUIScreen screen : ObjectController.guiScreens) { screen.update(); }
 
             //Remove when not needed any longer
-            ObjectController.getGUITextElement(1).text = "mEngine Test Run @ " + FPS + " FPS";
-            ObjectController.getGUITextElement(2).text = "MemUsage: [Total: " + getMemoryStats(TOTAL_MEMORY) +
+            ObjectController.getGUIScreen(0).getGUIText(0).text = "mEngine Test Run @ " + FPS + " FPS";
+            ObjectController.getGUIScreen(0).getGUIText(1).text = "MemUsage: [Total: " + getMemoryStats(TOTAL_MEMORY) +
                     " MB | Used: " + getMemoryStats(USED_MEMORY) +
                     " MB | Free: " + getMemoryStats(FREE_MEMORY) + " MB]";
 
