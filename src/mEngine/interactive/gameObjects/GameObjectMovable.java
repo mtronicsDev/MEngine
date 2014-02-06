@@ -62,10 +62,6 @@ public class GameObjectMovable extends GameObject{
             percentRotation.y = (float)Math.sin(Math.toRadians(-rotation.x));
             percentRotation.z = (float)Math.cos(Math.toRadians(-rotation.y));
 
-            float percentRotationLength = VectorHelper.getAbs(percentRotation);
-
-            percentRotation = VectorHelper.divideVectors(percentRotation, new Vector3f(percentRotationLength, percentRotationLength, percentRotationLength));
-
             if(ObjectController.getGameObject(0) == this) System.out.println(percentRotation);
 
             for(int count = 8; count < forces.size(); count ++) {
