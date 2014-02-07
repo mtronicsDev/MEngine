@@ -14,6 +14,7 @@ import mEngine.interactive.gui.GUIText;
 import mEngine.interactive.gui.primitives.GUICircle;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.*;
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -46,13 +47,13 @@ public class GameController {
                         new GUIText(new Vector2f(5, 25), "Current RAM", 15)
                 }, true));
 
-        ObjectController.addGUIScreen(new GUIScreen(
-                new GUIElement[]{
-                        new GUIButton(new Vector2f(5, 45), new Vector2f(300, 100)),
-                        new GUICircle(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), 20)
-                }, true));
-
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
+                new Vector3f(),
+                "texturedStar",
+                null,
+                false));
+
+        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 50),
                 new Vector3f(),
                 "texturedStar",
                 null,
@@ -90,7 +91,7 @@ public class GameController {
 
         AudioController.setListener(ObjectController.getGameObject(0));
 
-        /*try {
+        try {
 
             ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(1), "test"));
 
@@ -100,7 +101,7 @@ public class GameController {
             e.printStackTrace();
             System.exit(1);
 
-        }*/
+        }
 
         for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);

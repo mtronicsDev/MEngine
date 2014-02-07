@@ -19,4 +19,4 @@ defaultFontFace=Verdana
 antiAliasing=true
 
 #mEnchmark preferences
-mEnchmarkEnabled=false
+mEnchmarkEnabled=true
