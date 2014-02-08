@@ -9,7 +9,11 @@ import static org.lwjgl.opengl.GL11.*;
 public class GUIEllipse extends GUIElement {
     Vector2f radius;
 
-    public GUIEllipse(Vector2f pos, Vector2f radius) { this(pos, new Vector2f(), radius); }
+    public GUIEllipse(Vector2f pos, Vector2f radius) {
+
+        this(pos, new Vector2f(), radius);
+
+    }
 
     public GUIEllipse(Vector2f pos, Vector2f rot, Vector2f radius) {
 
@@ -26,7 +30,7 @@ public class GUIEllipse extends GUIElement {
 
         for(int i = 360; i > 0; i--) {
 
-            float radians = ((float)PI / 180) * i;
+            float radians = (float)Math.toRadians(i);
 
             glVertex2f(
                     position.x + ((float)cos(radians) * radius.x),

@@ -93,7 +93,7 @@ public class GameController {
 
         try {
 
-            ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(1), "test"));
+            ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(2), "test"));
 
         }
         catch (LWJGLException e) {

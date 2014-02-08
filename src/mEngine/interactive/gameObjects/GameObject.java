@@ -10,7 +10,8 @@ public abstract class GameObject {
 
     public Vector3f position;
     public Vector3f rotation;
-    public Vector3f percentRotation = new Vector3f();
+    public Vector3f percentRotation = new Vector3f(0, 0, 1);
+    public Vector3f previousRotation = new Vector3f();
     public List<Force> forces;
 
     public GameObject(Vector3f pos, Vector3f rot, float[] forceStrengths) {

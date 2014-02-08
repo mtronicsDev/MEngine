@@ -56,13 +56,26 @@ public class GameObjectMovable extends GameObject{
 
             updateController();
 
-            if(ObjectController.getGameObject(0) == this) System.out.print(rotation + ", ");
+            //if(ObjectController.getGameObject(0) == this) System.out.print(rotation + ", ");
 
             percentRotation.x = (float)Math.sin(Math.toRadians(-rotation.y));
             percentRotation.y = (float)Math.sin(Math.toRadians(-rotation.x));
             percentRotation.z = (float)Math.cos(Math.toRadians(-rotation.y));
 
-            if(ObjectController.getGameObject(0) == this) System.out.println(percentRotation);
+            /*Vector3f previousPercentRotation = percentRotation;
+            Vector3f deltaRotation = VectorHelper.subtractVectors(rotation, previousRotation);
+
+            percentRotation.x = (float)(previousPercentRotation.x * Math.cos(Math.toRadians(-deltaRotation.y)) + previousPercentRotation.z * -Math.sin(Math.toRadians(-deltaRotation.y)));
+            percentRotation.z = (float)(previousPercentRotation.x * Math.sin(Math.toRadians(-deltaRotation.y)) + previousPercentRotation.z * Math.cos(Math.toRadians(-deltaRotation.y)));
+
+            previousPercentRotation = percentRotation;
+
+            percentRotation.y = (float)(previousPercentRotation.y * Math.cos(Math.toRadians(-deltaRotation.x)) + previousPercentRotation.z * -Math.sin(Math.toRadians(-deltaRotation.x)));
+            percentRotation.z = (float)(previousPercentRotation.y * Math.sin(Math.toRadians(-deltaRotation.x)) + previousPercentRotation.z * Math.cos(Math.toRadians(-deltaRotation.x)));
+
+            previousRotation = rotation;*/
+
+            //if(ObjectController.getGameObject(0) == this) System.out.println(percentRotation);
 
             for(int count = 8; count < forces.size(); count ++) {
 
@@ -108,6 +121,8 @@ public class GameObjectMovable extends GameObject{
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
             float deltaTime = TimeHelper.deltaTime / 2;
+
+            if(deltaTime == 0) deltaTime = 1.5f;
 
             speed = ForceController.getSpeed(acceleration, speed, deltaTime);
 
