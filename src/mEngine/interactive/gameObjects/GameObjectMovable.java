@@ -21,22 +21,25 @@ public class GameObjectMovable extends GameObject{
     public boolean sprinting;
     public boolean sneaking;
     public boolean capableOfFlying;
+    public boolean movable;
 
-    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying, boolean collidable) {
+    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying, boolean collidable, boolean movable) {
 
         super(pos, rot, forceStrengths, collidable);
         this.controller = controller;
         this.capableOfFlying = capableOfFlying;
+        this.movable = movable;
 
         if(mass == -1) mass = 60;
 
     }
 
-    public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying, boolean collidable) {
+    public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying, boolean collidable, boolean movable) {
 
         super(pos, rot, collidable);
         this.controller = controller;
         this.capableOfFlying = capableOfFlying;
+        this.movable = movable;
 
         if(mass == -1) mass = 60;
 
@@ -74,63 +77,67 @@ public class GameObjectMovable extends GameObject{
 
             //if(ObjectController.getGameObject(0) == this) System.out.println(percentRotation);
 
-            for(int count = 8; count < forces.size(); count ++) {
+            if(movable) {
 
-                Force force = forces.get(count);
+                for(int count = 8; count < forces.size(); count ++) {
 
-                //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
+                    Force force = forces.get(count);
 
-                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
+                    //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
-                if(Math.abs(force.direction.x) <= 0.001f &&
-                        Math.abs(force.direction.y) <= 0.001f &&
-                        Math.abs(force.direction.z) <= 0.001f) {
+                    force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
 
-                    forces.remove(force);
+                    if(Math.abs(force.direction.x) <= 0.001f &&
+                            Math.abs(force.direction.y) <= 0.001f &&
+                            Math.abs(force.direction.z) <= 0.001f) {
+
+                        forces.remove(force);
+
+                    }
 
                 }
+
+                Vector3f forceSum = ForceController.sumForces(forces);
+
+                if(Collider.isCollidingWithSomething(this)) {
+
+                    if(forceSum.x != 0 && forceSum.z != 0) {
+
+                        forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
+
+                    }
+
+                } else {
+
+                    if(forceSum.x != 0 && forceSum.z != 0) {
+
+                        Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+
+                        forceSum.x = newForces.x;
+                        forceSum.z = newForces.y;
+
+                    }
+
+                }
+
+                Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
+
+                float deltaTime = TimeHelper.deltaTime;
+
+                if(deltaTime == 0) deltaTime = 1.5f;
+
+                speed = ForceController.getSpeed(acceleration, speed, deltaTime);
+
+                speed = VectorHelper.subtractVectors(speed, previousSpeed);
+                previousSpeed = speed;
+
+                Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
+
+                if(ObjectController.getGameObject(0) == this && model != null && collidable && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
+
+                position = VectorHelper.sumVectors(new Vector3f[] {position, movedSpace});
 
             }
-
-            Vector3f forceSum = ForceController.sumForces(forces);
-
-            if(Collider.isCollidingWithSomething(this)) {
-
-                if(forceSum.x != 0 && forceSum.z != 0) {
-
-                    forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
-
-                }
-
-            } else {
-
-                if(forceSum.x != 0 && forceSum.z != 0) {
-
-                    Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
-
-                    forceSum.x = newForces.x;
-                    forceSum.z = newForces.y;
-
-                }
-
-            }
-
-            Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
-
-            float deltaTime = TimeHelper.deltaTime;
-
-            if(deltaTime == 0) deltaTime = 1.5f;
-
-            speed = ForceController.getSpeed(acceleration, speed, deltaTime);
-
-            speed = VectorHelper.subtractVectors(speed, previousSpeed);
-            previousSpeed = speed;
-
-            Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
-
-            if(model != null && collidable && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
-
-            position = VectorHelper.sumVectors(new Vector3f[] {position, movedSpace});
 
         }
 

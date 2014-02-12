@@ -54,10 +54,9 @@ public class Collider {
             boolean maybeColliding = false;
             boolean colliding = true;
             float[] collisionTimes = new float[objA.model.faces.size()];
-            float finalCollisionTime = 2;
+            float finalCollisionTime = 2f;
+            Face[] collisionFaces = new Face[objA.model.faces.size()];
             Face finalCollisionFace;
-
-            for(float collisionTime : collisionTimes) collisionTime = 2;
 
             for(GameObject objB : ObjectController.gameObjects) {
 
@@ -73,9 +72,9 @@ public class Collider {
 
                                 Face newFace = allFaces.get(allFaces.size() - 1);
 
-                                allVertices.add(new Vector3f(objB.model.vertices.get((int)face.vertexIndices.x)));
-                                allVertices.add(new Vector3f(objB.model.vertices.get((int)face.vertexIndices.y)));
-                                allVertices.add(new Vector3f(objB.model.vertices.get((int)face.vertexIndices.z)));
+                                allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{objB.model.vertices.get((int) face.vertexIndices.x), objB.position})));
+                                allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{objB.model.vertices.get((int) face.vertexIndices.y), objB.position})));
+                                allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{objB.model.vertices.get((int) face.vertexIndices.z), objB.position})));
 
                                 allNormals.add(new Vector3f(objB.model.normals.get((int)face.normalIndices.x)));
                                 allNormals.add(new Vector3f(objB.model.normals.get((int)face.normalIndices.y)));
@@ -101,26 +100,25 @@ public class Collider {
 
             }
 
-            Face[] collisionFaces = new Face[allFaces.size()];
-
             if(maybeColliding) {
 
-                while(colliding) {
+                //while(colliding) {
 
                     colliding = false;
 
                     for(Face faceA : objA.model.faces) {
 
+                        collisionTimes[objA.model.faces.indexOf(faceA)] = 2f;
                         Vector3f maxVertexPos;
                         Vector3f minVertexPos;
-                        Vector3f position;
+                        Vector3f middle;
                         Vector3f radius;
                         List<Vector3f> verticesA = new ArrayList<Vector3f>();
                         List<Vector3f> verticesToCalculate = new ArrayList<Vector3f>();
 
-                        verticesA.add(new Vector3f(objA.model.vertices.get((int)faceA.vertexIndices.x)));
-                        verticesA.add(new Vector3f(objA.model.vertices.get((int)faceA.vertexIndices.y)));
-                        verticesA.add(new Vector3f(objA.model.vertices.get((int)faceA.vertexIndices.z)));
+                        verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{objA.model.vertices.get((int) faceA.vertexIndices.x), objA.position})));
+                        verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{objA.model.vertices.get((int) faceA.vertexIndices.y), objA.position})));
+                        verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{objA.model.vertices.get((int) faceA.vertexIndices.z), objA.position})));
 
                         verticesToCalculate.add(new Vector3f());
                         verticesToCalculate.add(new Vector3f(VectorHelper.subtractVectors(verticesA.get(1), verticesA.get(0))));
@@ -145,24 +143,24 @@ public class Collider {
                         maxVertexPos = VectorHelper.sumVectors(new Vector3f[] {maxVertexPos, verticesA.get(0)});
                         minVertexPos = VectorHelper.sumVectors(new Vector3f[] {minVertexPos, verticesA.get(0)});
 
-                        position = VectorHelper.divideVectors(VectorHelper.sumVectors(new Vector3f[] {minVertexPos, maxVertexPos}), new Vector3f(2, 2, 2));
+                        middle = VectorHelper.divideVectors(VectorHelper.sumVectors(new Vector3f[] {minVertexPos, maxVertexPos}), new Vector3f(2f, 2f, 2f));
 
-                        radius = VectorHelper.subtractVectors(maxVertexPos, position);
+                        radius = VectorHelper.subtractVectors(maxVertexPos, middle);
 
                         Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
                         Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
 
-                        position = changeOfBasisMatrix.multiplyByVector(position);
-                        Vector3f originalPosition = new Vector3f(position);
+                        middle = changeOfBasisMatrix.multiplyByVector(middle);
+                        Vector3f originalMiddle = new Vector3f(middle);
                         velocity = changeOfBasisMatrix.multiplyByVector(velocity);
 
                         for(float count = 0; count <= 1; count += 0.001f) {
 
-                            if(collisionTimes[objA.model.faces.indexOf(faceA)] != 2) break;
+                            if(collisionTimes[objA.model.faces.indexOf(faceA)] <= 1) break;
 
-                            position = originalPosition;
+                            middle = originalMiddle;
 
-                            position = VectorHelper.sumVectors(new Vector3f[] {position, VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(count, count, count)})});
+                            middle = VectorHelper.sumVectors(new Vector3f[] {middle, VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(count, count, count)})});
 
                             for(Face faceB : allFaces) {
 
@@ -170,9 +168,7 @@ public class Collider {
                                 Vector3f vertex = allVertices.get((int)faceB.vertexIndices.x);
 
                                 //Special thanks to Mike Ganshorn for this piece of code
-                                float difference = Math.abs(VectorHelper.getScalarProduct(normal,
-                                        VectorHelper.sumVectors(new Vector3f[] {objA.position, position})) +
-                                        VectorHelper.getScalarProduct(normal, VectorHelper.sumVectors(new Vector3f[] {objA.position, vertex})));
+                                float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertex));
 
                                 if(difference <= 1) {
 
@@ -192,28 +188,37 @@ public class Collider {
 
                     }
 
-                    if(!colliding) break;
+                    System.out.println(colliding);
+
+                    if(!colliding) {
+
+                        movedSpace = velocity;
+                        //break;
+
+                    }
 
                     for(float collisionTime : collisionTimes) {
 
                         if(collisionTime < finalCollisionTime) {
 
                             finalCollisionTime = collisionTime;
-                            finalCollisionFace = collisionFaces[Arrays.asList(collisionTimes).indexOf(collisionTime)];
+                            //finalCollisionFace = collisionFaces[Arrays.asList(collisionTimes).indexOf(collisionTime)];
 
                         }
 
                     }
 
+                    System.out.println(finalCollisionTime);
+
                     if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
 
                     else {
 
-
+                        movedSpace = new Vector3f();
 
                     }
 
-                }
+                //}
 
             }
 
