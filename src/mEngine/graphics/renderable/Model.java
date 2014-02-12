@@ -12,10 +12,10 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Model {
 
-    List<Vector3f> vertices = new ArrayList<Vector3f>();
-    List<Vector3f> normals = new ArrayList<Vector3f>();
-    List<Vector2f> uvs = new ArrayList<Vector2f>();
-    List<Face> faces = new ArrayList<Face>();
+    public List<Vector3f> vertices = new ArrayList<Vector3f>();
+    public List<Vector3f> normals = new ArrayList<Vector3f>();
+    public List<Vector2f> uvs = new ArrayList<Vector2f>();
+    public List<Face> faces = new ArrayList<Face>();
 
     Texture texture;
 
@@ -67,33 +67,33 @@ public class Model {
 
         for (Face face : faces) {
 
-            Vector2f uv1 = uvs.get((int)face.uvIndices.x - 1);
+            Vector2f uv1 = uvs.get((int)face.uvIndices.x);
             glTexCoord2f(uv1.x, uv1.y);
 
-            Vector3f n1 = normals.get((int)face.normalIndices.x - 1);
+            Vector3f n1 = normals.get((int)face.normalIndices.x);
             glNormal3f(n1.x, n1.y, n1.z);
 
-            Vector3f v1 = vertices.get((int)face.vertexIndices.x - 1);
+            Vector3f v1 = vertices.get((int)face.vertexIndices.x);
             glVertex3f(v1.x, v1.y, v1.z);
 
 
-            Vector2f uv2 = uvs.get((int)face.uvIndices.y - 1);
+            Vector2f uv2 = uvs.get((int)face.uvIndices.y);
             glTexCoord2f(uv2.x, uv2.y);
 
-            Vector3f n2 = normals.get((int)face.normalIndices.y - 1);
+            Vector3f n2 = normals.get((int)face.normalIndices.y);
             glNormal3f(n2.x, n2.y, n2.z);
 
-            Vector3f v2 = vertices.get((int)face.vertexIndices.y - 1);
+            Vector3f v2 = vertices.get((int)face.vertexIndices.y);
             glVertex3f(v2.x, v2.y, v2.z);
 
 
-            Vector2f uv3 = uvs.get((int)face.uvIndices.z - 1);
+            Vector2f uv3 = uvs.get((int)face.uvIndices.z);
             glTexCoord2f(uv3.x, uv3.y);
 
-            Vector3f n3 = normals.get((int)face.normalIndices.z - 1);
+            Vector3f n3 = normals.get((int)face.normalIndices.z);
             glNormal3f(n3.x, n3.y, n3.z);
 
-            Vector3f v3 = vertices.get((int)face.vertexIndices.z - 1);
+            Vector3f v3 = vertices.get((int)face.vertexIndices.z);
             glVertex3f(v3.x, v3.y, v3.z);
 
         }

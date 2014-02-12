@@ -1,5 +1,6 @@
 package mEngine.interactive.gameObjects;
 
+import mEngine.graphics.renderable.Model;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import org.lwjgl.util.vector.Vector3f;
@@ -13,11 +14,14 @@ public abstract class GameObject {
     public Vector3f percentRotation = new Vector3f(0, 0, 1);
     public Vector3f previousRotation = new Vector3f();
     public List<Force> forces;
+    public Model model = null;
+    public boolean collidable;
 
-    public GameObject(Vector3f pos, Vector3f rot, float[] forceStrengths) {
+    public GameObject(Vector3f pos, Vector3f rot, float[] forceStrengths, boolean collidable) {
 
         position = pos;
         rotation = rot;
+        this.collidable = collidable;
 
         forces = ForceController.forces;
 
@@ -31,10 +35,11 @@ public abstract class GameObject {
 
     }
 
-    public GameObject(Vector3f pos, Vector3f rot) {
+    public GameObject(Vector3f pos, Vector3f rot, boolean collidable) {
 
         position = pos;
         rotation = rot;
+        this.collidable = collidable;
 
         forces = ForceController.forces;
 

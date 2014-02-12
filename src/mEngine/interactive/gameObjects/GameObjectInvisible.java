@@ -9,7 +9,7 @@ public class GameObjectInvisible extends GameObjectMovable {
 
     public GameObjectInvisible(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying) {
 
-        super(pos, rot, forceStrengths, controller, capableOfFlying);
+        super(pos, rot, forceStrengths, controller, capableOfFlying, false);
         this.controller = controller;
         capableOfFlying = true;
 
@@ -17,7 +17,7 @@ public class GameObjectInvisible extends GameObjectMovable {
 
     public GameObjectInvisible(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying) {
 
-        super(pos, rot, controller, capableOfFlying);
+        super(pos, rot, controller, capableOfFlying, false);
         this.controller = controller;
         capableOfFlying = true;
 

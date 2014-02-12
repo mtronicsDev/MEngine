@@ -7,16 +7,16 @@ public class Entity extends GameObjectRenderable {
     
     Controller controller;
     
-    public Entity(Vector3f pos, Vector3f rot, String fileName, float[] forceStrengths, Controller controller, boolean capableOfFlying) {
+    public Entity(Vector3f pos, Vector3f rot, String fileName, float[] forceStrengths, Controller controller, boolean capableOfFlying, boolean collidable) {
         
-        super(pos, rot, fileName, forceStrengths, controller, capableOfFlying);
+        super(pos, rot, fileName, forceStrengths, controller, capableOfFlying, collidable);
         this.controller = controller;
         
     }
 
-    public Entity(Vector3f pos, Vector3f rot, String fileName, Controller controller, boolean capableOfFlying) {
+    public Entity(Vector3f pos, Vector3f rot, String fileName, Controller controller, boolean capableOfFlying, boolean collidable) {
 
-        super(pos, rot, fileName, controller, capableOfFlying);
+        super(pos, rot, fileName, controller, capableOfFlying, collidable);
         this.controller = controller;
 
     }

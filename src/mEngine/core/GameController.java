@@ -37,7 +37,7 @@ public class GameController {
 
         TextureHelper.loadTexture("texturedStar");
 
-        ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {5, 4, 4, 4, 4, 4, 10}, new KeyboardMouse(), false));
+        ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {2, 1.5f, 1.5f, 1.5f, 1.5f, 1.5f, 4}, new KeyboardMouse(), false, true));
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
@@ -51,43 +51,50 @@ public class GameController {
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 50),
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
                 new Vector3f(),
                 "texturedStar",
                 null,
-                false));
+                false,
+                true));
 
         AudioController.setListener(ObjectController.getGameObject(0));
 

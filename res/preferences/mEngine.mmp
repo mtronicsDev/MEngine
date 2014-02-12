@@ -5,7 +5,7 @@ fullscreen=false
 is3D=true
 
 #Camera preferences
-fieldOfView=45
+fieldOfView=80
 
 #Player preferences
 continuouslyJumping=true
@@ -19,4 +19,4 @@ defaultFontFace=Verdana
 antiAliasing=true
 
 #mEnchmark preferences
-mEnchmarkEnabled=true
+mEnchmarkEnabled=false

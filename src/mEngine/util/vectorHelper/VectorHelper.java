@@ -1,4 +1,4 @@
-package mEngine.util;
+package mEngine.util.vectorHelper;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -7,6 +7,9 @@ public class VectorHelper {
 
     public static boolean areEqual(Vector3f vectorA, Vector3f vectorB) {
 
+        if(vectorA == null) vectorA = new Vector3f();
+        if(vectorB == null) vectorB = new Vector3f();
+
         return vectorA.x == vectorB.x
                 && vectorA.y == vectorB.y
                 && vectorA.z == vectorB.z;
@@ -14,6 +17,12 @@ public class VectorHelper {
     }
 
     public static Vector3f sumVectors(Vector3f[] vectors) {
+
+        for(Vector3f vector : vectors) {
+
+            if(vector == null) vector = new Vector3f();
+
+        }
 
         Vector3f vectorSum = new Vector3f();
 
@@ -31,6 +40,9 @@ public class VectorHelper {
 
     public static Vector3f subtractVectors(Vector3f vectorA, Vector3f vectorB) {
 
+        if(vectorA == null) vectorA = new Vector3f();
+        if(vectorB == null) vectorB = new Vector3f();
+
         Vector3f vectorDifference = new Vector3f();
 
         vectorDifference.x = vectorA.x - vectorB.x;
@@ -42,6 +54,12 @@ public class VectorHelper {
     }
 
     public static Vector3f multiplyVectors(Vector3f[] vectors) {
+
+        for(Vector3f vector : vectors) {
+
+            if(vector == null) vector = new Vector3f();
+
+        }
 
         Vector3f vectorProduct = new Vector3f(1, 1, 1);
 
@@ -59,6 +77,9 @@ public class VectorHelper {
 
     public static Vector3f divideVectors(Vector3f vectorA, Vector3f vectorB) {
 
+        if(vectorA == null) vectorA = new Vector3f();
+        if(vectorB == null) vectorB = new Vector3f();
+
         Vector3f vectorQuotient = new Vector3f();
 
         vectorQuotient.x = vectorA.x / vectorB.x;
@@ -71,6 +92,8 @@ public class VectorHelper {
 
     public static float getAbs(Vector3f vector) {
 
+        if(vector == null) vector = new Vector3f();
+
         float abs;
 
         abs = (float)Math.sqrt(getScalarProduct(vector, vector));
@@ -80,6 +103,9 @@ public class VectorHelper {
     }
 
     public static float getScalarProduct(Vector3f vectorA, Vector3f vectorB) {
+
+        if(vectorA == null) vectorA = new Vector3f();
+        if(vectorB == null) vectorB = new Vector3f();
 
         float scalarProduct;
 
@@ -91,12 +117,21 @@ public class VectorHelper {
 
     public static boolean areEqual(Vector2f vectorA, Vector2f vectorB) {
 
+        if(vectorA == null) vectorA = new Vector2f();
+        if(vectorB == null) vectorB = new Vector2f();
+
         return vectorA.x == vectorB.x
                 && vectorA.y == vectorB.y;
 
     }
 
     public static Vector2f sumVectors(Vector2f[] vectors) {
+
+        for(Vector2f vector : vectors) {
+
+            if(vector == null) vector = new Vector2f();
+
+        }
 
         Vector2f vectorSum = new Vector2f();
 
@@ -113,6 +148,9 @@ public class VectorHelper {
 
     public static Vector2f subtractVectors(Vector2f vectorA, Vector2f vectorB) {
 
+        if(vectorA == null) vectorA = new Vector2f();
+        if(vectorB == null) vectorB = new Vector2f();
+
         Vector2f vectorDifference = new Vector2f();
 
         vectorDifference.x = vectorA.x - vectorB.x;
@@ -123,6 +161,12 @@ public class VectorHelper {
     }
 
     public static Vector2f multiplyVectors(Vector2f[] vectors) {
+
+        for(Vector2f vector : vectors) {
+
+            if(vector == null) vector = new Vector2f();
+
+        }
 
         Vector2f vectorProduct = new Vector2f();
 
@@ -139,6 +183,9 @@ public class VectorHelper {
 
     public static Vector2f divideVectors(Vector2f vectorA, Vector2f vectorB) {
 
+        if(vectorA == null) vectorA = new Vector2f();
+        if(vectorB == null) vectorB = new Vector2f();
+
         Vector2f vectorQuotient = new Vector2f();
 
         vectorQuotient.x = vectorA.x / vectorB.x;
@@ -150,6 +197,8 @@ public class VectorHelper {
 
     public static float getAbs(Vector2f vector) {
 
+        if(vector == null) vector = new Vector2f();
+
         float abs;
 
         abs = (float)Math.sqrt(getScalarProduct(vector, vector));
@@ -159,6 +208,9 @@ public class VectorHelper {
     }
 
     public static float getScalarProduct(Vector2f vectorA, Vector2f vectorB) {
+
+        if(vectorA == null) vectorA = new Vector2f();
+        if(vectorB == null) vectorB = new Vector2f();
 
         float scalarProduct;
 

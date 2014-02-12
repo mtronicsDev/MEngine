@@ -2,13 +2,12 @@ package mEngine.interactive.gameObjects;
 
 import mEngine.core.GameController;
 import mEngine.core.ObjectController;
-import mEngine.graphics.renderable.Model;
 import mEngine.interactive.controls.Controller;
 import mEngine.physics.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.TimeHelper;
-import mEngine.util.VectorHelper;
+import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -18,15 +17,14 @@ public class GameObjectMovable extends GameObject{
     public float mass = -1;
     public Vector3f speed = new Vector3f();
     private Vector3f previousSpeed = new Vector3f();
-    public Model model = null;
 
     public boolean sprinting;
     public boolean sneaking;
     public boolean capableOfFlying;
 
-    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying) {
+    public GameObjectMovable(Vector3f pos, Vector3f rot, float[] forceStrengths, Controller controller, boolean capableOfFlying, boolean collidable) {
 
-        super(pos, rot, forceStrengths);
+        super(pos, rot, forceStrengths, collidable);
         this.controller = controller;
         this.capableOfFlying = capableOfFlying;
 
@@ -34,9 +32,9 @@ public class GameObjectMovable extends GameObject{
 
     }
 
-    public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying) {
+    public GameObjectMovable(Vector3f pos, Vector3f rot, Controller controller, boolean capableOfFlying, boolean collidable) {
 
-        super(pos, rot);
+        super(pos, rot, collidable);
         this.controller = controller;
         this.capableOfFlying = capableOfFlying;
 
@@ -54,26 +52,25 @@ public class GameObjectMovable extends GameObject{
             if(controller != null) if(!controller.sprintModeToggle) sprinting = false;
             if(controller != null) if(!controller.sneakModeToggle) sneaking = false;
 
+            previousRotation = rotation;
+            Vector3f previousPercentRotation = percentRotation;
+
             updateController();
 
-            //if(ObjectController.getGameObject(0) == this) System.out.print(rotation + ", ");
-
-            percentRotation.x = (float)Math.sin(Math.toRadians(-rotation.y));
+            /*percentRotation.x = (float)Math.sin(Math.toRadians(-rotation.y));
             percentRotation.y = (float)Math.sin(Math.toRadians(-rotation.x));
-            percentRotation.z = (float)Math.cos(Math.toRadians(-rotation.y));
+            percentRotation.z = (float)Math.cos(Math.toRadians(-rotation.y));*/
 
-            /*Vector3f previousPercentRotation = percentRotation;
             Vector3f deltaRotation = VectorHelper.subtractVectors(rotation, previousRotation);
+            //if(ObjectController.getGameObject(0) == this) if(VectorHelper.areEqual(deltaRotation, new Vector3f())) System.out.println("fail!");
 
-            percentRotation.x = (float)(previousPercentRotation.x * Math.cos(Math.toRadians(-deltaRotation.y)) + previousPercentRotation.z * -Math.sin(Math.toRadians(-deltaRotation.y)));
-            percentRotation.z = (float)(previousPercentRotation.x * Math.sin(Math.toRadians(-deltaRotation.y)) + previousPercentRotation.z * Math.cos(Math.toRadians(-deltaRotation.y)));
+            percentRotation.x = (float)(previousPercentRotation.x * Math.cos(Math.toRadians(-deltaRotation.y)) + previousPercentRotation.z * Math.sin(Math.toRadians(-deltaRotation.y)));
+            percentRotation.z = (float)(previousPercentRotation.x * -Math.sin(Math.toRadians(-deltaRotation.y)) + previousPercentRotation.z * Math.cos(Math.toRadians(-deltaRotation.y)));
 
             previousPercentRotation = percentRotation;
 
             percentRotation.y = (float)(previousPercentRotation.y * Math.cos(Math.toRadians(-deltaRotation.x)) + previousPercentRotation.z * -Math.sin(Math.toRadians(-deltaRotation.x)));
             percentRotation.z = (float)(previousPercentRotation.y * Math.sin(Math.toRadians(-deltaRotation.x)) + previousPercentRotation.z * Math.cos(Math.toRadians(-deltaRotation.x)));
-
-            previousRotation = rotation;*/
 
             //if(ObjectController.getGameObject(0) == this) System.out.println(percentRotation);
 
@@ -120,7 +117,7 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
-            float deltaTime = TimeHelper.deltaTime / 2;
+            float deltaTime = TimeHelper.deltaTime;
 
             if(deltaTime == 0) deltaTime = 1.5f;
 
@@ -131,7 +128,7 @@ public class GameObjectMovable extends GameObject{
 
             Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if(model != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
+            if(model != null && collidable && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 
             position = VectorHelper.sumVectors(new Vector3f[] {position, movedSpace});
 
