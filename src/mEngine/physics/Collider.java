@@ -169,7 +169,10 @@ public class Collider {
                                 Vector3f normal = allNormals.get((int)faceB.normalIndices.x);
                                 Vector3f vertex = allVertices.get((int)faceB.vertexIndices.x);
 
-                                float difference = Math.abs(VectorHelper.getScalarProduct(normal, VectorHelper.sumVectors(new Vector3f[] {objA.position, position})) + VectorHelper.getScalarProduct(normal, VectorHelper.sumVectors(new Vector3f[] {objA.position, vertex}))); //Special thanks to Mike Ganshorn for this piece of code
+                                //Special thanks to Mike Ganshorn for this piece of code
+                                float difference = Math.abs(VectorHelper.getScalarProduct(normal,
+                                        VectorHelper.sumVectors(new Vector3f[] {objA.position, position})) +
+                                        VectorHelper.getScalarProduct(normal, VectorHelper.sumVectors(new Vector3f[] {objA.position, vertex})));
 
                                 if(difference <= 1) {
 
