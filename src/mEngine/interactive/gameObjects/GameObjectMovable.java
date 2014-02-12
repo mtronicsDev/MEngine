@@ -99,17 +99,13 @@ public class GameObjectMovable extends GameObject{
 
                 Vector3f forceSum = ForceController.sumForces(forces);
 
-                if(Collider.isCollidingWithSomething(this)) {
+                if(forceSum.x != 0 && forceSum.z != 0) {
 
-                    if(forceSum.x != 0 && forceSum.z != 0) {
+                    if(Collider.isCollidingWithSomething(this)) {
 
                         forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
 
-                    }
-
-                } else {
-
-                    if(forceSum.x != 0 && forceSum.z != 0) {
+                    } else {
 
                         Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
 
@@ -133,7 +129,7 @@ public class GameObjectMovable extends GameObject{
 
                 Vector3f movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-                if(ObjectController.getGameObject(0) == this && model != null && collidable && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
+                if(model != null && collidable && !VectorHelper.areEqual(movedSpace, new Vector3f())) movedSpace = Collider.getMovedSpace(movedSpace, this);
 
                 position = VectorHelper.sumVectors(new Vector3f[] {position, movedSpace});
 
