@@ -48,6 +48,9 @@ public class GameLoop {
             ObjectController.getGUIScreen(0).getGUIText(1).text = "MemUsage: [Total: " + getMemoryStats(TOTAL_MEMORY) +
                     " MB | Used: " + getMemoryStats(USED_MEMORY) +
                     " MB | Free: " + getMemoryStats(FREE_MEMORY) + " MB]";
+            ObjectController.getGUIScreen(0).getGUIText(2).text = "x: " + String.valueOf(ObjectController.getGameObject(0).position.x);
+            ObjectController.getGUIScreen(0).getGUIText(3).text = "y: " + String.valueOf(ObjectController.getGameObject(0).position.y);
+            ObjectController.getGUIScreen(0).getGUIText(4).text = "z: " + String.valueOf(ObjectController.getGameObject(0).position.z);
 
             TimeHelper.updateFPS();
             GraphicsController.update();

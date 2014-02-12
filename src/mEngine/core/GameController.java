@@ -37,14 +37,17 @@ public class GameController {
 
         TextureHelper.loadTexture("texturedStar");
 
-        ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {1, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 2}, new KeyboardMouse(), false, true, true));
+        ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {0.7f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 2}, new KeyboardMouse(), false, true, true));
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
         ObjectController.addGUIScreen(new GUIScreen(
                 new GUIElement[] {
                         new GUIText(new Vector2f(5, 5), "Current FPS", 15),
-                        new GUIText(new Vector2f(5, 25), "Current RAM", 15)
+                        new GUIText(new Vector2f(5, 25), "Current RAM", 15),
+                        new GUIText(new Vector2f(5, 50), "0", 15),
+                        new GUIText(new Vector2f(5, 70), "0", 15),
+                        new GUIText(new Vector2f(5, 90), "0", 15)
                 }, true));
 
         ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
