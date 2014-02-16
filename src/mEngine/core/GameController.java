@@ -45,19 +45,19 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
 
-        object.addCompontent(
+        object.addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
         );
-        object.addCompontent(
+        object.addComponent(
                 "collideComponent",
                 new CollideComponent(false)
         );
-        object.addCompontent(
+        object.addComponent(
                 "movementComponent",
                 new MovementComponent()
         );
-        object.addCompontent(
+        object.addComponent(
                 "controlComponent",
                 new ControlComponent(
                         new KeyboardMouse(),
@@ -70,7 +70,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
 
-        object.addCompontent(
+        object.addComponent(
                 "renderComponent",
                 new RenderComponent("rotatedCube")
         );
@@ -80,7 +80,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0)));
         object = getGameObject(gameObjects.size() - 1);
 
-        object.addCompontent(
+        object.addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
         );

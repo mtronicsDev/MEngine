@@ -27,7 +27,7 @@ public class GameObject {
 
     }
 
-    public void addCompontent(String key, Component component) {
+    public void addComponent(String key, Component component) {
 
         components.put(key, component);
         getComponent(key).onCreation(this);
