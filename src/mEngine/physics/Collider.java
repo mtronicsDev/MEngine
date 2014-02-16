@@ -6,7 +6,6 @@ import mEngine.interactive.components.CollideComponent;
 import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.components.RenderComponent;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.util.componentHelper.ComponentHelper;
 import mEngine.util.vectorHelper.Matrix3d;
 import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -20,11 +19,11 @@ public class Collider {
 
            boolean colliding;
 
-           RenderComponent renderComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).renderComponent;
-           CollideComponent collideComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).collideComponent;
+           RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
+           CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
 
-           RenderComponent renderComponentB = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objB)).renderComponent;
-           CollideComponent collideComponentB = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objB)).collideComponent;
+           RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
+           CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
 
            if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
 
@@ -56,13 +55,13 @@ public class Collider {
             List<Vector3f> allVertices = new ArrayList<Vector3f>();
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
             boolean maybeColliding = false;
-            RenderComponent renderComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).renderComponent;
-            CollideComponent collideComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).collideComponent;
+            RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
+            CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
 
             for(GameObject objB : ObjectController.gameObjects) {
 
-                RenderComponent renderComponentB = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objB)).renderComponent;
-                CollideComponent collideComponentB = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objB)).collideComponent;
+                RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
+                CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
 
                 if(objA != objB) {
 
@@ -176,9 +175,9 @@ public class Collider {
 
         public static Vector3f getMovedSpace(GameObject objA) {
 
-            RenderComponent renderComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).renderComponent;
-            CollideComponent collideComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).collideComponent;
-            MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).movementComponent;
+            RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
+            CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
+            MovementComponent movementComponent = (MovementComponent)objA.getComponent("movementComponent");
             Vector3f velocity = new Vector3f(movementComponent.movedSpace);
             Vector3f movedSpace = new Vector3f();
             List<Face> allFaces = new ArrayList<Face>();
@@ -193,8 +192,8 @@ public class Collider {
 
             for(GameObject objB : ObjectController.gameObjects) {
 
-                RenderComponent renderComponentB = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objB)).renderComponent;
-                CollideComponent collideComponentB = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objB)).collideComponent;
+                RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
+                CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
 
                 if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
 

@@ -12,14 +12,8 @@ public class InteractionComponent extends Component {
 
     }
 
-    public void initialize(GameObject obj) {}
+    public void onCreation(GameObject obj) {}
 
-    public void update(GameObject obj) {
-
-
-
-    }
-
-    public void updateByComponent(GameObject obj) {}
+    public void onUpdate(GameObject obj) {}
 
 }

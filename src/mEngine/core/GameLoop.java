@@ -4,7 +4,6 @@ import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIScreen;
-import mEngine.physics.Collider;
 import mEngine.util.Input;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;

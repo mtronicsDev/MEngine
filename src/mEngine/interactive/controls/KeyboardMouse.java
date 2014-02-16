@@ -1,14 +1,11 @@
 package mEngine.interactive.controls;
 
-import mEngine.core.ObjectController;
-import mEngine.interactive.components.Component;
 import mEngine.interactive.components.ControlComponent;
 import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.Input;
 import mEngine.util.KeyAlreadyAssignedException;
 import mEngine.util.PreferenceHelper;
-import mEngine.util.componentHelper.ComponentHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -48,8 +45,8 @@ public class KeyboardMouse extends Controller {
 
     public void updateObject(GameObject obj) {
 
-        MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).movementComponent;
-        ControlComponent controlComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).controlComponent;
+        MovementComponent movementComponent = (MovementComponent)obj.getComponent("movementComponent");
+        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
 
         if(movementComponent != null) {
 

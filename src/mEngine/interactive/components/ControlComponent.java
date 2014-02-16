@@ -1,10 +1,8 @@
 package mEngine.interactive.components;
 
-import mEngine.core.ObjectController;
 import mEngine.interactive.controls.Controller;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.physics.forces.Force;
-import mEngine.util.componentHelper.ComponentHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 public class ControlComponent extends Component {
@@ -24,9 +22,9 @@ public class ControlComponent extends Component {
 
     }
 
-    public void initialize(GameObject obj) {
+    public void onCreation(GameObject obj) {
 
-        MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).movementComponent;
+        MovementComponent movementComponent = (MovementComponent)obj.getComponent("movementComponent");
 
         if(movementComponent != null) {
 
@@ -43,12 +41,7 @@ public class ControlComponent extends Component {
 
     }
 
-    public void update(GameObject obj) {
-
-        controller.updateObject(obj);
-
-    }
-
-    public void updateByComponent(GameObject obj) {}
+    public void onUpdate(GameObject obj) {}
+    public void onRemoteUpdate(GameObject obj) { controller.updateObject(obj); }
 
 }

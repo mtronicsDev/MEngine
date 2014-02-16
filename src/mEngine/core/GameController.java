@@ -3,7 +3,10 @@ package mEngine.core;
 import mEngine.audio.AudioController;
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
-import mEngine.interactive.components.*;
+import mEngine.interactive.components.CollideComponent;
+import mEngine.interactive.components.ControlComponent;
+import mEngine.interactive.components.MovementComponent;
+import mEngine.interactive.components.RenderComponent;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObject;
@@ -15,6 +18,8 @@ import mEngine.util.*;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+
+import static mEngine.core.ObjectController.*;
 
 public class GameController {
 
@@ -33,19 +38,54 @@ public class GameController {
 
         TextureHelper.loadTexture("texturedStar");
 
-        ObjectController.addGameObject(new GameObject(new Vector3f(), new Vector3f(),
-                new Component[] {new ControlComponent(new KeyboardMouse(), false, new float[] {5, 4, 4, 4, 4, 4, 10}),
-                                    new RenderComponent("texturedStar"),
-                                    new CollideComponent(false),
-                                    new MovementComponent()}));
+        //GameObject Time ;)
+        GameObject object;
 
-        ObjectController.addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f(),
-                new Component[] {new RenderComponent("texturedStar")}));
+        addGameObject(new GameObject(new Vector3f(), new Vector3f()));
+        object = getGameObject(gameObjects.size() - 1);
 
-        ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
-        ObjectController.addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), new Component[] {new RenderComponent("texturedStar")}));
+        object.addCompontent(
+                "renderComponent",
+                new RenderComponent("texturedStar")
+        );
+        object.addCompontent(
+                "collideComponent",
+                new CollideComponent(false)
+        );
+        object.addCompontent(
+                "movementComponent",
+                new MovementComponent()
+        );
+        object.addCompontent(
+                "controlComponent",
+                new ControlComponent(
+                        new KeyboardMouse(),
+                        false,
+                        new float[] {5, 4, 4, 4, 4, 4, 10, 11}
+                )
+        );
 
-        ObjectController.addGUIScreen(new GUIScreen(
+
+        addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
+        object = getGameObject(gameObjects.size() - 1);
+
+        object.addCompontent(
+                "renderComponent",
+                new RenderComponent("texturedStar")
+        );
+
+
+        addGameObject(new Camera(getGameObject(0)));
+        addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0)));
+        object = getGameObject(gameObjects.size() - 1);
+
+        object.addCompontent(
+                "renderComponent",
+                new RenderComponent("texturedStar")
+        );
+
+
+        addGUIScreen(new GUIScreen(
                 new GUIElement[]{
                         new GUIText(new Vector2f(5, 5), "Current FPS", 15),
                         new GUIText(new Vector2f(5, 25), "Current RAM", 15),
@@ -54,15 +94,9 @@ public class GameController {
                         new GUIText(new Vector2f(5, 90), "0", 15)
                 }, true));
 
-        for(GameObject obj : ObjectController.gameObjects) {
+        AudioController.setListener(getGameObject(0));
 
-            for(Component component : obj.components) { component.initialize(obj); }
-
-        }
-
-        AudioController.setListener(ObjectController.getGameObject(0));
-
-        for(AudioSource source : ObjectController.audioSources) { source.play(); }
+        for(AudioSource source : audioSources) { source.play(); }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
@@ -72,7 +106,7 @@ public class GameController {
     public static void pauseGame() {
 
         Mouse.setGrabbed(false);
-        for(AudioSource source : ObjectController.audioSources) { source.pause(); }
+        for(AudioSource source : audioSources) { source.pause(); }
 
         isGamePaused = true;
 
@@ -81,7 +115,7 @@ public class GameController {
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
-        for(AudioSource source : ObjectController.audioSources) { source.play(); }
+        for(AudioSource source : audioSources) { source.play(); }
 
         isGamePaused = false;
 

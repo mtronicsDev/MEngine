@@ -2,7 +2,6 @@ package mEngine.interactive.components;
 
 import mEngine.graphics.renderable.Model;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.util.ModelHelper;
 
 public class RenderComponent extends Component {
 
@@ -15,18 +14,16 @@ public class RenderComponent extends Component {
 
     }
 
-    public void initialize(GameObject obj) {
+    public void onCreation(GameObject obj) {
 
         model = new Model(modelFileName, obj.position, obj.rotation);
 
     }
 
-    public void update(GameObject obj) {
+    public void onUpdate(GameObject obj) {
 
         model.update(obj.position, obj.rotation);
 
     }
-
-    public void updateByComponent(GameObject obj) {}
 
 }

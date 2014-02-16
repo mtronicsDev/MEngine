@@ -1,16 +1,13 @@
 package mEngine.interactive.components;
 
-import mEngine.core.ObjectController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.TimeHelper;
-import mEngine.util.componentHelper.ComponentHelper;
 import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MovementComponent extends Component {
@@ -33,9 +30,9 @@ public class MovementComponent extends Component {
 
     }
 
-    public void initialize(GameObject obj) {
+    public void onCreation(GameObject obj) {
 
-        RenderComponent renderComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).renderComponent;
+        RenderComponent renderComponent = (RenderComponent)obj.getComponent("renderComponent");
 
         if(renderComponent != null) mass = renderComponent.model.getMass();
 
@@ -43,17 +40,17 @@ public class MovementComponent extends Component {
 
     }
 
-    public void update(GameObject obj) {
+    public void onUpdate(GameObject obj) {
 
-        ControlComponent controlComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).controlComponent;
-        CollideComponent collideComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).collideComponent;
+        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
+        CollideComponent collideComponent = (CollideComponent)obj.getComponent("collideComponent");
 
         if(controlComponent != null) {
 
             if(!controlComponent.controller.sprintModeToggle) sprinting = false;
             if(!controlComponent.controller.sneakModeToggle) sneaking = false;
 
-            controlComponent.updateByComponent(obj);
+            controlComponent.onRemoteUpdate(obj);
 
         }
 
@@ -95,7 +92,7 @@ public class MovementComponent extends Component {
 
     }
 
-    public void updateByComponent(GameObject obj) {}
+    public void onRemoteUpdate(GameObject obj) {}
 
     public void moveForward(GameObject obj) {
 
@@ -234,7 +231,7 @@ public class MovementComponent extends Component {
 
     public void sprint(GameObject obj) {
 
-        ControlComponent controlComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).controlComponent;
+        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
 
         if(!controlComponent.controller.sprintModeToggle) {
 
@@ -252,7 +249,7 @@ public class MovementComponent extends Component {
 
     public void sneak(GameObject obj) {
 
-        ControlComponent controlComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).controlComponent;
+        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
 
         if(!sprinting) {
 
