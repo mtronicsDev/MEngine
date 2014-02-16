@@ -40,6 +40,9 @@ public class GameController {
                                     new CollideComponent(false),
                                     new MovementComponent()}));
 
+        ObjectController.addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f(),
+                new Component[] {new RenderComponent("texturedStar")}));
+
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
         ObjectController.addGUIScreen(new GUIScreen(
@@ -50,6 +53,12 @@ public class GameController {
                         new GUIText(new Vector2f(5, 70), "0", 15),
                         new GUIText(new Vector2f(5, 90), "0", 15)
                 }, true));
+
+        for(GameObject obj : ObjectController.gameObjects) {
+
+            for(Component component : obj.components) { component.initialize(obj); }
+
+        }
 
         AudioController.setListener(ObjectController.getGameObject(0));
 

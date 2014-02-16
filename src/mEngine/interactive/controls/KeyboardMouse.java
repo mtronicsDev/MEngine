@@ -48,48 +48,48 @@ public class KeyboardMouse extends Controller {
 
     public void updateObject(GameObject obj) {
 
-        //Calculating the rotation
-        float pitch = obj.rotation.x;
-        float yaw = obj.rotation.y;
-
-        final float MAX_UP_ANGLE = 90;
-        final float MAX_DOWN_ANGLE = -90;
-
-        float deltaMouseX = Mouse.getDX() * rotationSpeed;
-        float deltaMouseY = Mouse.getDY() * rotationSpeed;
-
-        if (yaw + deltaMouseX >= 360) {
-
-            yaw = yaw + deltaMouseX - 360;
-
-        } else if (yaw + deltaMouseX < 0) {
-
-            yaw = 360 - yaw + deltaMouseX;
-
-        } else {
-
-            yaw += deltaMouseX;
-
-        }
-
-        if (pitch - deltaMouseY >= MAX_DOWN_ANGLE && pitch - deltaMouseY <= MAX_UP_ANGLE) {
-
-            pitch += -deltaMouseY;
-
-        } else if (pitch - deltaMouseY < MAX_DOWN_ANGLE) {
-
-            pitch = MAX_DOWN_ANGLE;
-
-        } else if (pitch - deltaMouseY > MAX_UP_ANGLE) {
-
-            pitch = MAX_UP_ANGLE;
-
-        }
-
         MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).movementComponent;
         ControlComponent controlComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).controlComponent;
 
         if(movementComponent != null) {
+
+            //Calculating the rotation
+            float pitch = obj.rotation.x;
+            float yaw = obj.rotation.y;
+
+            final float MAX_UP_ANGLE = 90;
+            final float MAX_DOWN_ANGLE = -90;
+
+            float deltaMouseX = Mouse.getDX() * rotationSpeed;
+            float deltaMouseY = Mouse.getDY() * rotationSpeed;
+
+            if (yaw + deltaMouseX >= 360) {
+
+                yaw = yaw + deltaMouseX - 360;
+
+            } else if (yaw + deltaMouseX < 0) {
+
+                yaw = 360 - yaw + deltaMouseX;
+
+            } else {
+
+                yaw += deltaMouseX;
+
+            }
+
+            if (pitch - deltaMouseY >= MAX_DOWN_ANGLE && pitch - deltaMouseY <= MAX_UP_ANGLE) {
+
+                pitch += -deltaMouseY;
+
+            } else if (pitch - deltaMouseY < MAX_DOWN_ANGLE) {
+
+                pitch = MAX_DOWN_ANGLE;
+
+            } else if (pitch - deltaMouseY > MAX_UP_ANGLE) {
+
+                pitch = MAX_UP_ANGLE;
+
+            }
 
             movementComponent.rotate(pitch, yaw, obj);
 

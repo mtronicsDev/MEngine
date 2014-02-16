@@ -46,8 +46,6 @@ public class GameObject {
                 (MovementComponent)movementComponent,
                 (InteractionComponent)interactionComponent));
 
-        for(Component component : this.components) { component.initialize(this); }
-
     }
 
     public void update() {

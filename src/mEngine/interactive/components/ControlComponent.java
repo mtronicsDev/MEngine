@@ -26,7 +26,7 @@ public class ControlComponent extends Component {
 
     public void initialize(GameObject obj) {
 
-        MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj) + 1).movementComponent;
+        MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).movementComponent;
 
         if(movementComponent != null) {
 

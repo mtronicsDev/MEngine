@@ -35,7 +35,7 @@ public class MovementComponent extends Component {
 
     public void initialize(GameObject obj) {
 
-        RenderComponent renderComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj) + 1).renderComponent;
+        RenderComponent renderComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(obj)).renderComponent;
 
         if(renderComponent != null) mass = renderComponent.model.getMass();
 
