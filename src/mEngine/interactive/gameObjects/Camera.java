@@ -1,5 +1,6 @@
 package mEngine.interactive.gameObjects;
 
+import mEngine.interactive.components.Component;
 import mEngine.util.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -42,8 +43,8 @@ public class Camera extends GameObject{
 
     public void update() {
 
-        if(Input.isKeyPressed(Keyboard.KEY_F)) zoom ++;
-        else if(Input.isKeyPressed(Keyboard.KEY_G)) zoom --;
+        if(Input.isKeyPressed(Keyboard.KEY_F)) zoom --;
+        else if(Input.isKeyPressed(Keyboard.KEY_G)) zoom ++;
 
         position = sticksTo.position;
         rotation = sticksTo.rotation;

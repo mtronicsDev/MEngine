@@ -1,5 +1,6 @@
 package mEngine.interactive.components;
 
+import mEngine.core.GameController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
@@ -42,53 +43,57 @@ public class MovementComponent extends Component {
 
     public void onUpdate(GameObject obj) {
 
-        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
-        CollideComponent collideComponent = (CollideComponent)obj.getComponent("collideComponent");
+        if(!GameController.isGamePaused) {
 
-        if(controlComponent != null) {
+            ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
+            CollideComponent collideComponent = (CollideComponent)obj.getComponent("collideComponent");
 
-            if(!controlComponent.controller.sprintModeToggle) sprinting = false;
-            if(!controlComponent.controller.sneakModeToggle) sneaking = false;
+            if(controlComponent != null) {
 
-            controlComponent.onRemoteUpdate(obj);
+                if(!controlComponent.controller.sprintModeToggle) sprinting = false;
+                if(!controlComponent.controller.sneakModeToggle) sneaking = false;
 
-        }
-
-        for(int count = 8; count < forces.size(); count ++) {
-
-            Force force = forces.get(count);
-
-            //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
-
-            force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
-
-            if(Math.abs(force.direction.x) <= 0.001f &&
-                    Math.abs(force.direction.y) <= 0.001f &&
-                    Math.abs(force.direction.z) <= 0.001f) {
-
-                forces.remove(force);
+                controlComponent.onRemoteUpdate(obj);
 
             }
 
+            for(int count = 8; count < forces.size(); count ++) {
+
+                Force force = forces.get(count);
+
+                //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
+
+                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
+
+                if(Math.abs(force.direction.x) <= 0.001f &&
+                        Math.abs(force.direction.y) <= 0.001f &&
+                        Math.abs(force.direction.z) <= 0.001f) {
+
+                    forces.remove(force);
+
+                }
+
+            }
+
+            Vector3f forceSum = ForceController.sumForces(forces);
+
+
+
+            Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
+
+            float deltaTime = TimeHelper.deltaTime;
+
+            speed = ForceController.getSpeed(acceleration, speed, deltaTime);
+            speed = VectorHelper.subtractVectors(speed, previousSpeed);
+            previousSpeed = speed;
+
+            movedSpace = ForceController.getMovedSpace(speed, deltaTime);
+
+            if(collideComponent != null) collideComponent.updateByComponent(obj);
+
+            obj.position = VectorHelper.sumVectors(new Vector3f[] {obj.position, movedSpace});
+
         }
-
-        Vector3f forceSum = ForceController.sumForces(forces);
-
-
-
-        Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
-
-        float deltaTime = TimeHelper.deltaTime;
-
-        speed = ForceController.getSpeed(acceleration, speed, deltaTime);
-        speed = VectorHelper.subtractVectors(speed, previousSpeed);
-        previousSpeed = speed;
-
-        movedSpace = ForceController.getMovedSpace(speed, deltaTime);
-
-        if(collideComponent != null) collideComponent.updateByComponent(obj);
-
-        obj.position = VectorHelper.sumVectors(new Vector3f[] {obj.position, movedSpace});
 
     }
 
@@ -189,7 +194,7 @@ public class MovementComponent extends Component {
 
     }
 
-    public void moveUp(GameObject obj) {
+    public void moveUp() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forces.get(5);
@@ -215,7 +220,7 @@ public class MovementComponent extends Component {
 
     }
 
-    public void moveDown(GameObject obj) {
+    public void moveDown() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forces.get(6);

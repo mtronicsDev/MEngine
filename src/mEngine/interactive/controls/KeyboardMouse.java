@@ -54,8 +54,8 @@ public class KeyboardMouse extends Controller {
             float pitch = obj.rotation.x;
             float yaw = obj.rotation.y;
 
-            final float MAX_UP_ANGLE = 90;
-            final float MAX_DOWN_ANGLE = -90;
+            float maxUpAngle = 90;
+            float maxDownAngle = -90;
 
             float deltaMouseX = Mouse.getDX() * rotationSpeed;
             float deltaMouseY = Mouse.getDY() * rotationSpeed;
@@ -74,17 +74,17 @@ public class KeyboardMouse extends Controller {
 
             }
 
-            if (pitch - deltaMouseY >= MAX_DOWN_ANGLE && pitch - deltaMouseY <= MAX_UP_ANGLE) {
+            if (pitch - deltaMouseY >= maxDownAngle && pitch - deltaMouseY <= maxUpAngle) {
 
                 pitch += -deltaMouseY;
 
-            } else if (pitch - deltaMouseY < MAX_DOWN_ANGLE) {
+            } else if (pitch - deltaMouseY < maxDownAngle) {
 
-                pitch = MAX_DOWN_ANGLE;
+                pitch = maxDownAngle;
 
-            } else if (pitch - deltaMouseY > MAX_UP_ANGLE) {
+            } else if (pitch - deltaMouseY > maxUpAngle) {
 
-                pitch = MAX_UP_ANGLE;
+                pitch = maxUpAngle;
 
             }
 
@@ -101,8 +101,8 @@ public class KeyboardMouse extends Controller {
             if(Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft(obj);
             if(Input.isKeyPressed(getKey("left"))) movementComponent.moveRight(obj);
 
-            if(Input.isKeyPressed(getKey("up")) && controlComponent.capableOfFlying) movementComponent.moveUp(obj);
-            if(Input.isKeyPressed(getKey("down")) && controlComponent.capableOfFlying) movementComponent.moveDown(obj);
+            if(Input.isKeyPressed(getKey("up")) && controlComponent.capableOfFlying) movementComponent.moveUp();
+            if(Input.isKeyPressed(getKey("down")) && controlComponent.capableOfFlying) movementComponent.moveDown();
 
             if(continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) movementComponent.jump(obj); }
             else { if(Input.isKeyDown(getKey("jump"))) movementComponent.jump(obj); }

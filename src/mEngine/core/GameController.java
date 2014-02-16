@@ -62,7 +62,7 @@ public class GameController {
                 new ControlComponent(
                         new KeyboardMouse(),
                         false,
-                        new float[] {5, 4, 4, 4, 4, 4, 10, 11}
+                        new float[] {1, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 10, 11}
                 )
         );
 
