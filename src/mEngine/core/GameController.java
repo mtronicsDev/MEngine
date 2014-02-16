@@ -12,7 +12,6 @@ import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.GUIText;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.*;
-import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -44,6 +43,7 @@ public class GameController {
                 new Component[] {new RenderComponent("texturedStar")}));
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
+        ObjectController.addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), new Component[] {new RenderComponent("texturedStar")}));
 
         ObjectController.addGUIScreen(new GUIScreen(
                 new GUIElement[]{
@@ -61,8 +61,6 @@ public class GameController {
         }
 
         AudioController.setListener(ObjectController.getGameObject(0));
-
-        ObjectController.addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), new Component[] {new RenderComponent("texturedStar")}));
 
         for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);
