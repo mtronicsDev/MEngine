@@ -36,6 +36,7 @@ public class GameController {
 
         ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
 
+        TextureHelper.loadTexture("rotatedCube");
         TextureHelper.loadTexture("texturedStar");
 
         //GameObject Time ;)
@@ -71,7 +72,7 @@ public class GameController {
 
         object.addCompontent(
                 "renderComponent",
-                new RenderComponent("texturedStar")
+                new RenderComponent("rotatedCube")
         );
 
 
