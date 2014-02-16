@@ -3,20 +3,17 @@ package mEngine.core;
 import mEngine.audio.AudioController;
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
+import mEngine.interactive.components.*;
 import mEngine.interactive.controls.KeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
-import mEngine.interactive.gameObjects.GameObjectRenderable;
-import mEngine.interactive.gameObjects.Player;
-import mEngine.interactive.gui.GUIButton;
+import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.GUIText;
-import mEngine.interactive.gui.primitives.GUICircle;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.*;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -37,7 +34,11 @@ public class GameController {
 
         TextureHelper.loadTexture("texturedStar");
 
-        ObjectController.addGameObject(new Player(new Vector3f(0, 0, 0), new Vector3f(), "texturedStar", new float[] {0.7f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 2}, new KeyboardMouse(), false, true, true));
+        ObjectController.addGameObject(new GameObject(new Vector3f(), new Vector3f(),
+                new Component[] {new ControlComponent(new KeyboardMouse(), false, new float[] {5, 4, 4, 4, 4, 4, 10}),
+                                    new RenderComponent("texturedStar"),
+                                    new CollideComponent(false),
+                                    new MovementComponent()}));
 
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
@@ -50,67 +51,11 @@ public class GameController {
                         new GUIText(new Vector2f(5, 90), "0", 15)
                 }, true));
 
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, 50),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 50),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 0, -50),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, 50, 0),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(0, -50, 0),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(50, 0, 0),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
-        ObjectController.addGameObject(new GameObjectRenderable(new Vector3f(-50, 0, 0),
-                new Vector3f(),
-                "texturedStar",
-                null,
-                false,
-                true,
-                false));
-
         AudioController.setListener(ObjectController.getGameObject(0));
 
         try {
 
-            ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(2), "test"));
+            ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(0), "test"));
 
         }
         catch (LWJGLException e) {

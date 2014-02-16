@@ -1,6 +1,7 @@
 package mEngine.interactive.controls;
 
-import mEngine.interactive.gameObjects.GameObjectMovable;
+import mEngine.interactive.components.Component;
+import mEngine.interactive.gameObjects.GameObject;
 
 public class ArtificialIntelligence extends Controller {
 
@@ -10,6 +11,6 @@ public class ArtificialIntelligence extends Controller {
 
     }
 
-    public void updateObject(GameObjectMovable obj) {}
+    public void updateObject(GameObject obj) {}
 
 }

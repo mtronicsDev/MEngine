@@ -1,6 +1,7 @@
 package mEngine.interactive.controls;
 
-import mEngine.interactive.gameObjects.GameObjectMovable;
+import mEngine.interactive.components.Component;
+import mEngine.interactive.gameObjects.GameObject;
 
 public abstract class Controller {
 
@@ -11,7 +12,6 @@ public abstract class Controller {
 
     public Controller() {}
 
-    //Controls used while playing
-    public abstract void updateObject(GameObjectMovable obj);
+    public abstract void updateObject(GameObject obj);
 
 }

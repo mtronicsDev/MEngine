@@ -17,6 +17,8 @@ public class Model {
     public List<Vector2f> uvs = new ArrayList<Vector2f>();
     public List<Face> faces = new ArrayList<Face>();
 
+    public float mass;
+
     Texture texture;
 
     Vector3f position = new Vector3f();
@@ -31,6 +33,7 @@ public class Model {
         this.uvs = model.uvs;
         this.faces = model.faces;
         this.texture = model.texture;
+        this.mass = model.getMass();
 
         position = pos;
         rotation = rot;
