@@ -2,9 +2,7 @@ package mEngine.core;
 
 import mEngine.audio.AudioSource;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
-import mEngine.interactive.gui.GUIText;
 
 import java.util.ArrayList;
 import java.util.List;

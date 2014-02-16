@@ -43,7 +43,7 @@ public class GameController {
         ObjectController.addGameObject(new Camera(ObjectController.getGameObject(0)));
 
         ObjectController.addGUIScreen(new GUIScreen(
-                new GUIElement[] {
+                new GUIElement[]{
                         new GUIText(new Vector2f(5, 5), "Current FPS", 15),
                         new GUIText(new Vector2f(5, 25), "Current RAM", 15),
                         new GUIText(new Vector2f(5, 50), "0", 15),
@@ -53,17 +53,7 @@ public class GameController {
 
         AudioController.setListener(ObjectController.getGameObject(0));
 
-        try {
-
-            ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(0), "test"));
-
-        }
-        catch (LWJGLException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
+        ObjectController.addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), new Component[] {new RenderComponent("texturedStar")}));
 
         for(AudioSource source : ObjectController.audioSources) { source.play(); }
         Mouse.setGrabbed(true);

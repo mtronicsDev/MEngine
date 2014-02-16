@@ -3,7 +3,8 @@ package mEngine.interactive.gui.primitives;
 import mEngine.interactive.gui.GUIElement;
 import org.lwjgl.util.vector.Vector2f;
 
-import static java.lang.Math.*;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUIEllipse extends GUIElement {

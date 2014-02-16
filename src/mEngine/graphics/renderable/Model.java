@@ -59,9 +59,9 @@ public class Model {
 
         glPushMatrix();
 
-        /*glRotatef(rotation.x, 1, 0, 0);
+        glRotatef(rotation.x, 1, 0, 0);
         glRotatef(rotation.y, 0, 1, 0);
-        glRotatef(rotation.z, 0, 0, 1);*/
+        glRotatef(rotation.z, 0, 0, 1);
 
         glTranslatef(position.x, position.y, position.z);
 
@@ -70,31 +70,31 @@ public class Model {
 
         for (Face face : faces) {
 
-            Vector2f uv1 = uvs.get((int)face.uvIndices.x);
-            glTexCoord2f(uv1.x, uv1.y);
-
             Vector3f n1 = normals.get((int)face.normalIndices.x);
             glNormal3f(n1.x, n1.y, n1.z);
+
+            Vector2f uv1 = uvs.get((int)face.uvIndices.x);
+            glTexCoord2f(uv1.x, uv1.y);
 
             Vector3f v1 = vertices.get((int)face.vertexIndices.x);
             glVertex3f(v1.x, v1.y, v1.z);
 
 
-            Vector2f uv2 = uvs.get((int)face.uvIndices.y);
-            glTexCoord2f(uv2.x, uv2.y);
-
             Vector3f n2 = normals.get((int)face.normalIndices.y);
             glNormal3f(n2.x, n2.y, n2.z);
+
+            Vector2f uv2 = uvs.get((int)face.uvIndices.y);
+            glTexCoord2f(uv2.x, uv2.y);
 
             Vector3f v2 = vertices.get((int)face.vertexIndices.y);
             glVertex3f(v2.x, v2.y, v2.z);
 
 
-            Vector2f uv3 = uvs.get((int)face.uvIndices.z);
-            glTexCoord2f(uv3.x, uv3.y);
-
             Vector3f n3 = normals.get((int)face.normalIndices.z);
             glNormal3f(n3.x, n3.y, n3.z);
+
+            Vector2f uv3 = uvs.get((int)face.uvIndices.z);
+            glTexCoord2f(uv3.x, uv3.y);
 
             Vector3f v3 = vertices.get((int)face.vertexIndices.z);
             glVertex3f(v3.x, v3.y, v3.z);
