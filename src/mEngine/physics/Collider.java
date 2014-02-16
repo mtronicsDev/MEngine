@@ -3,6 +3,7 @@ package mEngine.physics;
 import mEngine.core.ObjectController;
 import mEngine.graphics.renderable.Face;
 import mEngine.interactive.components.CollideComponent;
+import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.components.RenderComponent;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.componentHelper.ComponentHelper;
@@ -173,16 +174,18 @@ public class Collider {
 
         }
 
-        public static Vector3f getMovedSpace(Vector3f velocity, GameObject objA) {
+        public static Vector3f getMovedSpace(GameObject objA) {
 
+            RenderComponent renderComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).renderComponent;
+            CollideComponent collideComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).collideComponent;
+            MovementComponent movementComponent = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).movementComponent;
+            Vector3f velocity = new Vector3f(movementComponent.movedSpace);
             Vector3f movedSpace = new Vector3f();
             List<Face> allFaces = new ArrayList<Face>();
             List<Vector3f> allVertices = new ArrayList<Vector3f>();
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
             boolean maybeColliding = false;
             boolean colliding = false;
-            RenderComponent renderComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).renderComponent;
-            CollideComponent collideComponentA = ComponentHelper.components.get(ObjectController.gameObjects.indexOf(objA)).collideComponent;
             float[] collisionTimes = new float[renderComponentA.model.faces.size()];
             float finalCollisionTime = 2f;
             Face[] collisionFaces = new Face[renderComponentA.model.faces.size()];
