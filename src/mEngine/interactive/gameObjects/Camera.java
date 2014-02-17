@@ -1,6 +1,5 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.interactive.components.Component;
 import mEngine.util.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -55,7 +54,7 @@ public class Camera extends GameObject{
         glRotatef(rotation.y, 0, 1, 0);
         glRotatef(rotation.z, 0, 0, 1);
 
-        glTranslatef(-position.x, -position.y - zoom, -position.z);
+        glTranslatef(-position.x, -position.y - 1.3f - zoom, -position.z);
 
     }
 

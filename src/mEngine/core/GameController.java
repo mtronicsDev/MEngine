@@ -72,7 +72,7 @@ public class GameController {
 
         object.addComponent(
                 "renderComponent",
-                new RenderComponent("rotatedCube")
+                new RenderComponent("texturedStar")
         );
 
 

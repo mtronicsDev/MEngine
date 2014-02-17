@@ -2,10 +2,12 @@ package mEngine.interactive.components;
 
 import mEngine.core.GameController;
 import mEngine.interactive.gameObjects.GameObject;
+import mEngine.physics.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.TimeHelper;
 import mEngine.util.vectorHelper.VectorHelper;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
@@ -77,7 +79,22 @@ public class MovementComponent extends Component {
 
             Vector3f forceSum = ForceController.sumForces(forces);
 
+            if(collideComponent != null) {
 
+                if(Collider.isCollidingWithSomething(obj)) {
+
+                    forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
+
+                } else {
+
+                    Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+
+                    forceSum.x = newForces.x;
+                    forceSum.z = newForces.y;
+
+                }
+
+            }
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
@@ -89,7 +106,7 @@ public class MovementComponent extends Component {
 
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if(collideComponent != null) collideComponent.updateByComponent(obj);
+            if(collideComponent != null) collideComponent.onRemoteUpdate(obj);
 
             obj.position = VectorHelper.sumVectors(new Vector3f[] {obj.position, movedSpace});
 

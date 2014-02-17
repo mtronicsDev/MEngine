@@ -28,13 +28,13 @@ public class ControlComponent extends Component {
 
         if(movementComponent != null) {
 
-            movementComponent.forces.add(new Force(new Vector3f(0, 0, -forceStrengths[0]))); //Forward
-            movementComponent.forces.add(new Force(new Vector3f(0, 0, forceStrengths[1]))); //Backward
-            movementComponent.forces.add(new Force(new Vector3f(forceStrengths[2], 0, 0))); //Right
-            movementComponent.forces.add(new Force(new Vector3f(-forceStrengths[3], 0, 0))); //Left
-            movementComponent.forces.add(new Force(new Vector3f(0, forceStrengths[4], 0))); //Up
-            movementComponent.forces.add(new Force(new Vector3f(0, -forceStrengths[5], 0))); //Down
-            movementComponent.forces.add(new Force(new Vector3f(0, forceStrengths[6], 0))); //Jump force
+            movementComponent.forces.add(new Force(new Vector3f(0, 0, -forceStrengths[0] / 10))); //Forward
+            movementComponent.forces.add(new Force(new Vector3f(0, 0, forceStrengths[1] / 10))); //Backward
+            movementComponent.forces.add(new Force(new Vector3f(forceStrengths[2] / 10, 0, 0))); //Right
+            movementComponent.forces.add(new Force(new Vector3f(-forceStrengths[3] / 10, 0, 0))); //Left
+            movementComponent.forces.add(new Force(new Vector3f(0, forceStrengths[4] / 10, 0))); //Up
+            movementComponent.forces.add(new Force(new Vector3f(0, -forceStrengths[5] / 10, 0))); //Down
+            movementComponent.forces.add(new Force(new Vector3f(0, forceStrengths[6] / 10, 0))); //Jump force
 
         }
 

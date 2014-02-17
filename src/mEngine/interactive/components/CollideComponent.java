@@ -1,6 +1,7 @@
 package mEngine.interactive.components;
 
 import mEngine.interactive.gameObjects.GameObject;
+import mEngine.physics.Collider;
 import org.lwjgl.util.vector.Vector3f;
 
 public class CollideComponent extends Component {
@@ -25,6 +26,12 @@ public class CollideComponent extends Component {
     public void onCreation(GameObject obj) {}
     public void onUpdate(GameObject obj) {}
 
-    public void updateByComponent(GameObject obj) {}
+    public void onRemoteUpdate(GameObject obj) {
+
+        MovementComponent movementComponent = (MovementComponent)obj.getComponent("movementComponent");
+
+        if(movementComponent != null) movementComponent.movedSpace = Collider.getMovedSpace(obj);
+
+    }
 
 }
