@@ -67,12 +67,18 @@ public class GameController {
         );
 
 
+
+
         addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
 
         object.addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
+        );
+        object.addComponent(
+                "collideComponent",
+                new CollideComponent(false)
         );
 
 
@@ -83,6 +89,10 @@ public class GameController {
         object.addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
+        );
+        object.addComponent(
+                "collideComponent",
+                new CollideComponent(false)
         );
 
 

@@ -104,8 +104,8 @@ public class KeyboardMouse extends Controller {
             if(Input.isKeyPressed(getKey("up")) && controlComponent.capableOfFlying) movementComponent.moveUp();
             if(Input.isKeyPressed(getKey("down")) && controlComponent.capableOfFlying) movementComponent.moveDown();
 
-            if(continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) movementComponent.jump(obj); }
-            else { if(Input.isKeyDown(getKey("jump"))) movementComponent.jump(obj); }
+            if(continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) movementComponent.jump(); }
+            else { if(Input.isKeyDown(getKey("jump"))) movementComponent.jump(); }
 
         }
 

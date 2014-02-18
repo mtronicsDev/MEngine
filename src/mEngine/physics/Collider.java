@@ -11,6 +11,7 @@ import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Collider {
@@ -60,10 +61,10 @@ public class Collider {
 
             for(GameObject objB : ObjectController.gameObjects) {
 
-                RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
-                CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
-
                 if(objA != objB) {
+
+                    RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
+                    CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
 
                     if(renderComponentB != null && collideComponentB != null && renderComponentA != null && collideComponentA != null) {
 
@@ -177,9 +178,9 @@ public class Collider {
 
             RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
             CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
-            MovementComponent movementComponent = (MovementComponent)objA.getComponent("movementComponent");
-            Vector3f velocity = new Vector3f(movementComponent.movedSpace);
-            Vector3f movedSpace = new Vector3f();
+            MovementComponent movementComponentA = (MovementComponent)objA.getComponent("movementComponent");
+            Vector3f velocity = new Vector3f(movementComponentA.movedSpace);
+            Vector3f movedSpace;
             List<Face> allFaces = new ArrayList<Face>();
             List<Vector3f> allVertices = new ArrayList<Vector3f>();
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
@@ -192,12 +193,12 @@ public class Collider {
 
             for(GameObject objB : ObjectController.gameObjects) {
 
-                RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
-                CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
+                if(objA != objB) {
 
-                if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
+                    RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
+                    CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
 
-                    if(objB != objA) {
+                    if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
 
                         if(areAABBsColliding(objA, objB)) {
 
@@ -239,7 +240,7 @@ public class Collider {
 
                 for(Face faceA : renderComponentA.model.faces) {
 
-                    collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = 2f;
+                    collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = 2;
                     Vector3f maxVertexPos;
                     Vector3f minVertexPos;
                     Vector3f middle;
@@ -313,15 +314,13 @@ public class Collider {
 
                     }
 
-                    //if(objA == ObjectController.getGameObject(0)) System.out.println(colliding);
-
                     velocity = invertedChangeOfBasisMatrix.multiplyByVector(velocity);
 
                 }
 
-                if(colliding) {
+                System.out.println(colliding);
 
-                    System.out.println(colliding);
+                if(colliding) {
 
                     for(float collisionTime : collisionTimes) {
 
@@ -340,7 +339,7 @@ public class Collider {
 
                     else {
 
-
+                        movedSpace = VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
 
                     }
 

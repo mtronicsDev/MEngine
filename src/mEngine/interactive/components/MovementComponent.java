@@ -106,7 +106,7 @@ public class MovementComponent extends Component {
 
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if(collideComponent != null) collideComponent.onRemoteUpdate(obj);
+            if(collideComponent != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) collideComponent.onRemoteUpdate(obj);
 
             obj.position = VectorHelper.sumVectors(new Vector3f[] {obj.position, movedSpace});
 
@@ -249,7 +249,7 @@ public class MovementComponent extends Component {
 
     }
 
-    public void jump(GameObject obj) { forces.get(7).enabled = true; }
+    public void jump() { forces.get(7).enabled = true; }
 
     public void sprint(GameObject obj) {
 
