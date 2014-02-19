@@ -11,9 +11,9 @@ import static mEngine.util.Input.getKey;
 
 public class ControllerKeyboardMouse extends Controller {
 
-    public ControllerKeyboardMouse(float[] forceStrengths) {
+    public ControllerKeyboardMouse(float[] forceStrengths, boolean capableOfFlying) {
 
-        super(forceStrengths);
+        super(forceStrengths, capableOfFlying);
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");

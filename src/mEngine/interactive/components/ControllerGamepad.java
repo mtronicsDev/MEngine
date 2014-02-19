@@ -5,9 +5,9 @@ import mEngine.util.PreferenceHelper;
 
 public class ControllerGamepad extends Controller {
 
-    public ControllerGamepad(float[] forceStrengths) {
+    public ControllerGamepad(float[] forceStrengths, boolean capableOfFlying) {
 
-        super(forceStrengths);
+        super(forceStrengths, capableOfFlying);
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");

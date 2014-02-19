@@ -13,9 +13,10 @@ public abstract class Controller extends Component{
     public boolean continuouslyJumping;
     public float rotationSpeed;
 
-    public Controller(float[] forceStrengths) {
+    public Controller(float[] forceStrengths, boolean capableOfFlying) {
 
         this.forceStrengths = forceStrengths;
+        this.capableOfFlying = capableOfFlying;
 
     }
 
