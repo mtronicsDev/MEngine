@@ -60,7 +60,7 @@ public class GameController {
                 "controller",
                 new ControllerKeyboardMouse(
                     new float[] {0.1f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 1.1f},
-                    true
+                    false
                 )
         );
 

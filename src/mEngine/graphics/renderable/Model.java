@@ -136,39 +136,25 @@ public class Model {
 
     }
 
-    public Vector3f getMaxVertexPos() {
+    public Vector3f[] getExtremeVertexPositions() {
 
         Vector3f maxVertexPos = new Vector3f();
-
-        for(Vector3f vertex : vertices) {
-
-            if(vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
-
-            if(vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
-
-            if(vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
-
-        }
-
-        return maxVertexPos;
-
-    }
-
-    public Vector3f getMinVertexPos() {
-
         Vector3f minVertexPos = new Vector3f();
 
         for(Vector3f vertex : vertices) {
 
-            if(vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
+            if(vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
+            else if(vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
 
-            if(vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
+            if(vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
+            else if(vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
 
-            if(vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
+            if(vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
+            else if(vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
 
         }
 
-        return minVertexPos;
+        return new Vector3f[] {minVertexPos, maxVertexPos};
 
     }
 

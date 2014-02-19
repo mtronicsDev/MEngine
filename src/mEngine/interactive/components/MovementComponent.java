@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class MovementComponent extends Component {
 
-    public List<Force> forces = new ArrayList<Force>();
     public Map<String, ForcePoint> forcePoints = new HashMap<String, ForcePoint>();
     public Vector3f speed;
     public Vector3f movedSpace;
@@ -44,8 +43,8 @@ public class MovementComponent extends Component {
             mass = renderComponent.model.getMass();
 
             Vector3f modelMiddle = VectorHelper.divideVectors(renderComponent.model.getSize(), new Vector3f(2, 2, 2));
-            Vector3f maxModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getMaxVertexPos(), modelMiddle);
-            Vector3f minModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getMinVertexPos(), modelMiddle);
+            Vector3f maxModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getExtremeVertexPositions()[1], modelMiddle);
+            Vector3f minModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getExtremeVertexPositions()[0], modelMiddle);
 
             forcePoints.put("middle", new ForcePoint(modelMiddle));
             forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, minModelVertexPos.z)));
