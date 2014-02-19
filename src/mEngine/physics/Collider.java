@@ -11,8 +11,8 @@ import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 public class Collider {
 
@@ -189,7 +189,9 @@ public class Collider {
             float[] collisionTimes = new float[renderComponentA.model.faces.size()];
             float finalCollisionTime = 2f;
             Face[] collisionFaces = new Face[renderComponentA.model.faces.size()];
-            Face finalCollisionFace;
+            Face finalCollisionFace = null;
+            List<GameObject> objList = new ArrayList<GameObject>();
+            GameObject collidingObject = null;
 
             for(GameObject objB : ObjectController.gameObjects) {
 
@@ -205,6 +207,7 @@ public class Collider {
                             for(Face face : renderComponentB.model.faces) {
 
                                 allFaces.add(new Face(face));
+                                objList.add(objB);
 
                                 Face newFace = allFaces.get(allFaces.size() - 1);
 
@@ -238,13 +241,14 @@ public class Collider {
 
             if(maybeColliding) {
 
+                List<Vector3f> middles = new ArrayList<Vector3f>();
+                List<Vector3f> radii = new Vector<Vector3f>();
+
                 for(Face faceA : renderComponentA.model.faces) {
 
                     collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = 2;
                     Vector3f maxVertexPos;
                     Vector3f minVertexPos;
-                    Vector3f middle;
-                    Vector3f radius;
                     List<Vector3f> verticesA = new ArrayList<Vector3f>();
                     List<Vector3f> verticesToCalculate = new ArrayList<Vector3f>();
 
@@ -275,9 +279,11 @@ public class Collider {
                     maxVertexPos = VectorHelper.sumVectors(new Vector3f[] {maxVertexPos, verticesA.get(0)});
                     minVertexPos = VectorHelper.sumVectors(new Vector3f[] {minVertexPos, verticesA.get(0)});
 
-                    middle = VectorHelper.divideVectors(VectorHelper.sumVectors(new Vector3f[] {minVertexPos, maxVertexPos}), new Vector3f(2f, 2f, 2f));
+                    middles.add(VectorHelper.divideVectors(VectorHelper.sumVectors(new Vector3f[]{minVertexPos, maxVertexPos}), new Vector3f(2f, 2f, 2f)));
+                    Vector3f middle = middles.get(middles.size() - 1);
 
-                    radius = VectorHelper.subtractVectors(maxVertexPos, middle);
+                    radii.add(VectorHelper.subtractVectors(maxVertexPos, middle));
+                    Vector3f radius = radii.get(radii.size() - 1);
 
                     Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
                     Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
@@ -288,7 +294,7 @@ public class Collider {
 
                     for(float count = 0; count <= 1; count += 0.001f) {
 
-                        if(collisionTimes[renderComponentA.model.faces.indexOf(faceA)] <= 1) break;
+                        if(collisionTimes[renderComponentA.model.faces.indexOf(faceA)] != 2) break;
 
                         middle = originalMiddle;
 
@@ -318,7 +324,7 @@ public class Collider {
 
                 }
 
-                System.out.println(colliding);
+                //System.out.println(colliding);
 
                 if(colliding) {
 
@@ -327,19 +333,161 @@ public class Collider {
                         if(collisionTime < finalCollisionTime) {
 
                             finalCollisionTime = collisionTime;
-                            //finalCollisionFace = collisionFaces[Arrays.asList(collisionTimes).indexOf(collisionTime)];
+
+                            int index = -1;
+
+                            for(int count = 0; count < collisionTimes.length; count ++) {
+
+                                if(collisionTime == collisionTimes[count]) index = count;
+
+                            }
+
+                            finalCollisionFace = collisionFaces[index];
 
                         }
 
                     }
 
-                    System.out.println(finalCollisionTime);
+                    //System.out.println(finalCollisionTime);
 
-                    if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
+                    if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
+                            {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
 
                     else {
 
-                        movedSpace = VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
+                        for(Face face : allFaces) {
+
+                            if(finalCollisionFace == face) {
+
+                                collidingObject = objList.get(allFaces.indexOf(face));
+                                break;
+
+                            }
+
+                        }
+
+                        if(collidingObject != null) {
+
+                            MovementComponent movementComponent = (MovementComponent)collidingObject.getComponent("movementComponent");
+                            CollideComponent collideComponent = (CollideComponent)collidingObject.getComponent("collideComponent");
+
+                            if(movementComponent == null) {
+
+                                if(collideComponent.destroyable) {
+
+
+
+                                } else {
+
+                                    Vector3f vertexA = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.x));
+                                    Vector3f vertexB = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.y));
+                                    Vector3f vertexC = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.z));
+
+                                    Vector3f vertexBToCalculate = VectorHelper.subtractVectors(vertexB, vertexA);
+                                    Vector3f vertexCToCalculate = VectorHelper.subtractVectors(vertexC, vertexA);
+
+                                    int index = -1;
+
+                                    for(int count = 0; count < collisionFaces.length; count ++) {
+
+                                        if(collisionFaces[count] == finalCollisionFace) {
+
+                                            index = count;
+                                            break;
+
+                                        }
+
+                                    }
+
+                                    Vector3f radius = radii.get(index);
+
+                                    Vector3f middle = middles.get(index);
+                                    middle = VectorHelper.subtractVectors(middle, vertexA);
+
+
+                                    Vector3f temporaryVelocity = VectorHelper.sumVectors(new Vector3f[] {velocity, middle});
+
+                                    Vector3f invertedNormal = VectorHelper.multiplyVectors(new Vector3f[]
+                                            {allNormals.get((int)finalCollisionFace.normalIndices.x), new Vector3f(-1, -1, -1)});
+
+                                    Vector3f intersectionPoint = VectorHelper.sumVectors(new Vector3f[] {middle, invertedNormal});
+                                    intersectionPoint = VectorHelper.subtractVectors(intersectionPoint, vertexA);
+
+                                    float alpha;
+                                    float beta;
+                                    float gamma;
+
+                                    Matrix3d xAxisRotationMatrix;
+
+                                    Matrix3d yAxisRotationMatrix;
+
+                                    Matrix3d zAxisRotationMatrix;
+
+                                    Vector3f alphaIndicator = new Vector3f(vertexBToCalculate.x, vertexBToCalculate.y, 0);
+
+                                    alpha = (float)Math.acos(VectorHelper.getScalarProduct(alphaIndicator, vertexBToCalculate)
+                                            / (VectorHelper.getAbs(alphaIndicator) * VectorHelper.getAbs(vertexBToCalculate)));
+
+                                    yAxisRotationMatrix = new Matrix3d(new Vector3f((float)Math.cos(alpha), 0, (float)Math.sin(alpha)),
+                                            new Vector3f(0, 1, 0),
+                                            new Vector3f(-(float)Math.sin(alpha), 0, (float)Math.cos(alpha)));
+
+                                    vertexBToCalculate = yAxisRotationMatrix.multiplyByVector(vertexBToCalculate);
+                                    vertexCToCalculate = yAxisRotationMatrix.multiplyByVector(vertexCToCalculate);
+                                    middle = yAxisRotationMatrix.multiplyByVector(middle);
+                                    temporaryVelocity = yAxisRotationMatrix.multiplyByVector(temporaryVelocity);
+                                    intersectionPoint = yAxisRotationMatrix.multiplyByVector(intersectionPoint);
+
+                                    Vector3f betaIndicator = new Vector3f(1, 0, 0);
+
+                                    beta = (float)Math.acos(VectorHelper.getScalarProduct(betaIndicator, vertexBToCalculate)
+                                            / (VectorHelper.getAbs(betaIndicator) * VectorHelper.getAbs(vertexBToCalculate)));
+
+                                    zAxisRotationMatrix = new Matrix3d(new Vector3f((float)Math.cos(beta), -(float)Math.sin(beta), 0),
+                                            new Vector3f((float)Math.sin(beta), (float)Math.cos(beta), 0),
+                                            new Vector3f(0, 0, 1));
+
+                                    vertexBToCalculate = zAxisRotationMatrix.multiplyByVector(vertexBToCalculate);
+                                    vertexCToCalculate = zAxisRotationMatrix.multiplyByVector(vertexCToCalculate);
+                                    middle = zAxisRotationMatrix.multiplyByVector(middle);
+                                    temporaryVelocity = zAxisRotationMatrix.multiplyByVector(temporaryVelocity);
+                                    intersectionPoint = zAxisRotationMatrix.multiplyByVector(intersectionPoint);
+
+                                    Vector3f gammaIndicator = new Vector3f(vertexCToCalculate.x, vertexCToCalculate.y, 0);
+
+                                    gamma = (float)Math.acos(VectorHelper.getScalarProduct(gammaIndicator, vertexCToCalculate)
+                                            / (VectorHelper.getAbs(gammaIndicator) * VectorHelper.getAbs(vertexCToCalculate)));
+
+                                    xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+                                            new Vector3f(0, (float)Math.cos(gamma), -(float)Math.sin(gamma)),
+                                            new Vector3f(0, (float)Math.sin(gamma), (float)Math.cos(gamma)));
+
+                                    vertexCToCalculate = xAxisRotationMatrix.multiplyByVector(vertexCToCalculate);
+                                    middle = xAxisRotationMatrix.multiplyByVector(middle);
+                                    temporaryVelocity = xAxisRotationMatrix.multiplyByVector(temporaryVelocity);
+                                    intersectionPoint = xAxisRotationMatrix.multiplyByVector(intersectionPoint);
+
+
+
+                                }
+
+                            } else {
+
+                                if(collideComponent.destroyable) {
+
+
+
+                                } else {
+
+
+
+                                }
+
+                            }
+
+                        }
+
+                        movedSpace = velocity;
 
                     }
 

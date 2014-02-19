@@ -66,8 +66,7 @@ public class GameController {
                 )
         );
 
-
-
+        addGameObject(new Camera(getGameObject(0)));
 
         addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
@@ -81,8 +80,6 @@ public class GameController {
                 new CollideComponent(false)
         );
 
-
-        addGameObject(new Camera(getGameObject(0)));
         addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0)));
         object = getGameObject(gameObjects.size() - 1);
 
@@ -94,7 +91,6 @@ public class GameController {
                 "collideComponent",
                 new CollideComponent(false)
         );
-
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
