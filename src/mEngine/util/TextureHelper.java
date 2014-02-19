@@ -31,7 +31,19 @@ public class TextureHelper {
 
     }
 
-    public static Texture getTexture(String name) { return loadedTextures.get(name); }
+    public static Texture getTexture(String name) {
+
+        Texture texture = loadedTextures.get(name);
+
+        if(loadedTextures.containsKey(name)) return texture;
+        else {
+
+            loadTexture(name);
+            return getTexture(name);
+
+        }
+
+    }
 
     public static void removeTexture(String name) { loadedTextures.remove(name); }
 

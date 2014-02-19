@@ -47,15 +47,15 @@ public class MovementComponent extends Component {
 
         if(!GameController.isGamePaused) {
 
-            ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
+            Controller controller = (Controller)obj.getComponent("controller");
             CollideComponent collideComponent = (CollideComponent)obj.getComponent("collideComponent");
 
-            if(controlComponent != null) {
+            if(controller != null) {
 
-                if(!controlComponent.controller.sprintModeToggle) sprinting = false;
-                if(!controlComponent.controller.sneakModeToggle) sneaking = false;
+                if(!controller.sprintModeToggle) sprinting = false;
+                if(!controller.sneakModeToggle) sneaking = false;
 
-                controlComponent.onRemoteUpdate(obj);
+                controller.onRemoteUpdate(obj);
 
             }
 
@@ -253,9 +253,9 @@ public class MovementComponent extends Component {
 
     public void sprint(GameObject obj) {
 
-        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
+        Controller controller = (Controller)obj.getComponent("controller");
 
-        if(!controlComponent.controller.sprintModeToggle) {
+        if(!controller.sprintModeToggle) {
 
             sprinting = true;
             sneaking = false;
@@ -271,11 +271,11 @@ public class MovementComponent extends Component {
 
     public void sneak(GameObject obj) {
 
-        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
+        Controller controller = (Controller)obj.getComponent("controller");
 
         if(!sprinting) {
 
-            sneaking = !controlComponent.controller.sneakModeToggle || !sneaking;
+            sneaking = !controller.sneakModeToggle || !sneaking;
 
         }
 

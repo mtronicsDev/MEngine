@@ -1,11 +1,13 @@
-package mEngine.interactive.controls;
+package mEngine.interactive.components;
 
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.PreferenceHelper;
 
-public class Gamepad extends Controller {
+public class ControllerGamepad extends Controller {
 
-    public Gamepad() {
+    public ControllerGamepad(float[] forceStrengths) {
+
+        super(forceStrengths);
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");

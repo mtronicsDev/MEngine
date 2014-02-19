@@ -4,18 +4,19 @@ import mEngine.audio.AudioController;
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.components.CollideComponent;
-import mEngine.interactive.components.ControlComponent;
 import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.components.RenderComponent;
-import mEngine.interactive.controls.KeyboardMouse;
+import mEngine.interactive.components.ControllerKeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.GUIText;
+import mEngine.interactive.gui.primitives.GUIQuadTextured;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.*;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -36,9 +37,6 @@ public class GameController {
 
         ForceController.addForce(new Vector3f(0, -9.81f, 0)); //Gravity
 
-        TextureHelper.loadTexture("rotatedCube");
-        TextureHelper.loadTexture("texturedStar");
-
         //GameObject Time ;)
         GameObject object;
 
@@ -58,15 +56,11 @@ public class GameController {
                 new MovementComponent()
         );
         object.addComponent(
-                "controlComponent",
-                new ControlComponent(
-                        new KeyboardMouse(),
-                        false,
-                        new float[] {1, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 10, 11}
+                "controller",
+                new ControllerKeyboardMouse(
+                    new float[] {0.1f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 1, 1.1f}
                 )
         );
-
-        addGameObject(new Camera(getGameObject(0)));
 
         addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
@@ -92,13 +86,20 @@ public class GameController {
                 new CollideComponent(false)
         );
 
+        addGameObject(new Camera(getGameObject(0)));
+
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
                         new GUIText(new Vector2f(5, 5), "Current FPS", 15),
                         new GUIText(new Vector2f(5, 25), "Current RAM", 15),
-                        new GUIText(new Vector2f(5, 50), "0", 15),
-                        new GUIText(new Vector2f(5, 70), "0", 15),
-                        new GUIText(new Vector2f(5, 90), "0", 15)
+                        new GUIText(new Vector2f(5, 50), "x: 0", 15),
+                        new GUIText(new Vector2f(5, 70), "y: 0", 15),
+                        new GUIText(new Vector2f(5, 90), "z: 0", 15)
+                }, true));
+
+        addGUIScreen(new GUIScreen(
+                new GUIElement[]{
+                        new GUIQuadTextured(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
                 }, true));
 
         AudioController.setListener(getGameObject(0));

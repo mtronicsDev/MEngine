@@ -1,7 +1,5 @@
-package mEngine.interactive.controls;
+package mEngine.interactive.components;
 
-import mEngine.interactive.components.ControlComponent;
-import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.Input;
 import mEngine.util.KeyAlreadyAssignedException;
@@ -11,9 +9,11 @@ import org.lwjgl.input.Mouse;
 
 import static mEngine.util.Input.getKey;
 
-public class KeyboardMouse extends Controller {
+public class ControllerKeyboardMouse extends Controller {
 
-    public KeyboardMouse() {
+    public ControllerKeyboardMouse(float[] forceStrengths) {
+
+        super(forceStrengths);
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");
@@ -46,7 +46,6 @@ public class KeyboardMouse extends Controller {
     public void updateObject(GameObject obj) {
 
         MovementComponent movementComponent = (MovementComponent)obj.getComponent("movementComponent");
-        ControlComponent controlComponent = (ControlComponent)obj.getComponent("controlComponent");
 
         if(movementComponent != null) {
 
@@ -101,8 +100,8 @@ public class KeyboardMouse extends Controller {
             if(Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft(obj);
             if(Input.isKeyPressed(getKey("left"))) movementComponent.moveRight(obj);
 
-            if(Input.isKeyPressed(getKey("up")) && controlComponent.capableOfFlying) movementComponent.moveUp();
-            if(Input.isKeyPressed(getKey("down")) && controlComponent.capableOfFlying) movementComponent.moveDown();
+            if(Input.isKeyPressed(getKey("up")) && capableOfFlying) movementComponent.moveUp();
+            if(Input.isKeyPressed(getKey("down")) && capableOfFlying) movementComponent.moveDown();
 
             if(continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) movementComponent.jump(); }
             else { if(Input.isKeyDown(getKey("jump"))) movementComponent.jump(); }
