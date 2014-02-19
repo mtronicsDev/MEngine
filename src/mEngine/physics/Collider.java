@@ -186,9 +186,18 @@ public class Collider {
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
             boolean maybeColliding = false;
             boolean colliding = false;
-            float[] collisionTimes = new float[renderComponentA.model.faces.size()];
+
+            float[] collisionTimes = null;
+            Face[] collisionFaces = null;
+
+            if(renderComponentA != null) {
+
+                collisionTimes = new float[renderComponentA.model.faces.size()];
+                collisionFaces = new Face[renderComponentA.model.faces.size()];
+
+            }
+
             float finalCollisionTime = 2f;
-            Face[] collisionFaces = new Face[renderComponentA.model.faces.size()];
             Face finalCollisionFace = null;
             List<GameObject> objList = new ArrayList<GameObject>();
             GameObject collidingObject = null;

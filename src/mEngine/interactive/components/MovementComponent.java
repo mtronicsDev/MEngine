@@ -5,17 +5,21 @@ import mEngine.interactive.gameObjects.GameObject;
 import mEngine.physics.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
+import mEngine.physics.forces.ForcePoint;
 import mEngine.util.TimeHelper;
 import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MovementComponent extends Component {
 
     public List<Force> forces = new ArrayList<Force>();
+    public Map<String, ForcePoint> forcePoints = new HashMap<String, ForcePoint>();
     public Vector3f speed;
     public Vector3f movedSpace;
     Vector3f previousSpeed;
@@ -24,8 +28,6 @@ public class MovementComponent extends Component {
     float mass = 0;
 
     public MovementComponent() {
-
-        for(Force force : ForceController.forces) forces.add(force);
 
         speed = new Vector3f();
         movedSpace = new Vector3f();
@@ -37,9 +39,33 @@ public class MovementComponent extends Component {
 
         RenderComponent renderComponent = (RenderComponent)obj.getComponent("renderComponent");
 
-        if(renderComponent != null) mass = renderComponent.model.getMass();
+        if(renderComponent != null) {
 
-        else mass = 60;
+            mass = renderComponent.model.getMass();
+
+            Vector3f modelMiddle = VectorHelper.divideVectors(renderComponent.model.getSize(), new Vector3f(2, 2, 2));
+            Vector3f maxModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getMaxVertexPos(), modelMiddle);
+            Vector3f minModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getMinVertexPos(), modelMiddle);
+
+            forcePoints.put("middle", new ForcePoint(modelMiddle));
+            forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, minModelVertexPos.z)));
+            forcePoints.put("backward", new ForcePoint(new Vector3f(0, 0, maxModelVertexPos.z)));
+            forcePoints.put("left", new ForcePoint(new Vector3f(minModelVertexPos.x, 0, 0)));
+            forcePoints.put("right", new ForcePoint(new Vector3f(maxModelVertexPos.x, 0, 0)));
+            forcePoints.put("up", new ForcePoint(new Vector3f(0, maxModelVertexPos.y, 0)));
+            forcePoints.put("down", new ForcePoint(new Vector3f(0, minModelVertexPos.y, 0)));
+
+        }
+
+        else {
+
+            mass = 60;
+
+            forcePoints.put("middle", new ForcePoint(new Vector3f()));
+
+        }
+
+        for(Force force : ForceController.forces) forcePoints.get("middle").forces.add(force);
 
     }
 
@@ -59,25 +85,29 @@ public class MovementComponent extends Component {
 
             }
 
-            for(int count = 8; count < forces.size(); count ++) {
+            for(ForcePoint forcePoint : forcePoints.values()) {
 
-                Force force = forces.get(count);
+                for(int count = 8; count < forcePoint.forces.size(); count ++) {
 
-                //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
+                    Force force = forcePoint.forces.get(count);
 
-                force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
+                    //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
-                if(Math.abs(force.direction.x) <= 0.001f &&
-                        Math.abs(force.direction.y) <= 0.001f &&
-                        Math.abs(force.direction.z) <= 0.001f) {
+                    force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
 
-                    forces.remove(force);
+                    if(Math.abs(force.direction.x) <= 0.001f &&
+                            Math.abs(force.direction.y) <= 0.001f &&
+                            Math.abs(force.direction.z) <= 0.001f) {
+
+                        forcePoint.forces.remove(force);
+
+                    }
 
                 }
 
             }
 
-            Vector3f forceSum = ForceController.sumForces(forces);
+            Vector3f forceSum = ForceController.sumForces(forcePoints.get("middle").forces);
 
             if(collideComponent != null) {
 
@@ -119,133 +149,133 @@ public class MovementComponent extends Component {
     public void moveForward(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forces.get(1);
+        Force givenForce = forcePoints.get("middle").forces.get(1);
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
 
         if(sprinting) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(3, 0, 3)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(3, 1, 3)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
 
         } else if(sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 0, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
 
         }
 
-        forces.add(new Force(direction));
-        forces.get(forces.size() - 1).enabled = true;
+        forcePoints.get("middle").forces.add(new Force(direction));
+        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
 
     }
 
     public void moveBackward(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forces.get(2);
+        Force givenForce = forcePoints.get("middle").forces.get(2);
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
 
         if(sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 0, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
 
         }
 
-        forces.add(new Force(direction));
-        forces.get(forces.size() - 1).enabled = true;
+        forcePoints.get("middle").forces.add(new Force(direction));
+        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
 
     }
 
     public void moveLeft(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forces.get(3);
+        Force givenForce = forcePoints.get("middle").forces.get(3);
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
 
         if(sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 0, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
 
         }
 
-        forces.add(new Force(direction));
-        forces.get(forces.size() - 1).enabled = true;
+        forcePoints.get("middle").forces.add(new Force(direction));
+        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
 
     }
 
     public void moveRight(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forces.get(4);
+        Force givenForce = forcePoints.get("middle").forces.get(4);
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
 
         if(sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 0, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
 
         }
 
-        forces.add(new Force(direction));
-        forces.get(forces.size() - 1).enabled = true;
+        forcePoints.get("middle").forces.add(new Force(direction));
+        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
 
     }
 
     public void moveUp() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forces.get(5);
+        Force givenForce = forcePoints.get("middle").forces.get(5);
 
         direction.y = givenForce.direction.y;
 
         if(sprinting) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0, 3, 0)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(1, 3, 1)});
 
             direction.y = newDirection.y;
 
         } else if(sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0, 0.3f, 0)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(1, 0.3f, 1)});
 
             direction.y = newDirection.y;
 
         }
 
-        forces.add(new Force(direction));
-        forces.get(forces.size() - 1).enabled = true;
+        forcePoints.get("middle").forces.add(new Force(direction));
+        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
 
     }
 
     public void moveDown() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forces.get(6);
+        Force givenForce = forcePoints.get("middle").forces.get(6);
 
         direction.y = givenForce.direction.y;
 
-        forces.add(new Force(direction));
-        forces.get(forces.size() - 1).enabled = true;
+        forcePoints.get("middle").forces.add(new Force(direction));
+        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
 
     }
 
