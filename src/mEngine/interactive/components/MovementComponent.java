@@ -279,7 +279,7 @@ public class MovementComponent extends Component {
 
     }
 
-    public void jump() { forces.get(7).enabled = true; }
+    public void jump() { forcePoints.get("middle").forces.get(7).enabled = true; }
 
     public void sprint(GameObject obj) {
 
