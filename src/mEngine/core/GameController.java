@@ -4,18 +4,21 @@ import mEngine.audio.AudioController;
 import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.components.CollideComponent;
+import mEngine.interactive.components.ControllerKeyboardMouse;
 import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.components.RenderComponent;
-import mEngine.interactive.components.ControllerKeyboardMouse;
 import mEngine.interactive.gameObjects.Camera;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.GUIText;
-import mEngine.interactive.gui.primitives.GUICircle;
+import mEngine.interactive.gui.primitives.GUIEllipse;
 import mEngine.interactive.gui.primitives.GUIQuadTextured;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.*;
+import mEngine.util.PreferenceHelper;
+import mEngine.util.ResourceHelper;
+import mEngine.util.RuntimeHelper;
+import mEngine.util.TimeHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -101,7 +104,8 @@ public class GameController {
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
-                        new GUIQuadTextured(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
+                        new GUIQuadTextured(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule"),
+                        new GUIEllipse(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), new Vector2f(100, 200))
                 }, true));
 
         AudioController.setListener(getGameObject(0));

@@ -1,9 +1,7 @@
 package mEngine.interactive.gui.primitives;
 
 import mEngine.interactive.gui.GUIElement;
-import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
-import org.newdawn.slick.opengl.Texture;
 
 import static org.lwjgl.opengl.GL11.*;
 
