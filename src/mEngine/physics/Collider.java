@@ -209,7 +209,7 @@ public class Collider {
                     RenderComponent renderComponentB = (RenderComponent)objB.getComponent("renderComponent");
                     CollideComponent collideComponentB = (CollideComponent)objB.getComponent("collideComponent");
 
-                    if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
+                    if(renderComponentA != null && renderComponentB != null && collideComponentB != null) {
 
                         if(areAABBsColliding(objA, objB)) {
 

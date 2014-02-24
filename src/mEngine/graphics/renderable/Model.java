@@ -103,8 +103,6 @@ public class Model {
 
         glEnd();
 
-        //texture.release();
-
         glPopMatrix();
 
     }

@@ -7,7 +7,7 @@ import mEngine.interactive.components.CollideComponent;
 import mEngine.interactive.components.ControllerKeyboardMouse;
 import mEngine.interactive.components.MovementComponent;
 import mEngine.interactive.components.RenderComponent;
-import mEngine.interactive.gameObjects.Camera;
+import mEngine.interactive.components.Camera;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
@@ -66,6 +66,10 @@ public class GameController {
                     false
                 )
         );
+        object.addComponent(
+                "camera",
+                new Camera()
+        );
 
         addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
@@ -90,8 +94,6 @@ public class GameController {
                 "collideComponent",
                 new CollideComponent(false)
         );
-
-        addGameObject(new Camera(getGameObject(0)));
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{

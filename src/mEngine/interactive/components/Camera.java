@@ -1,28 +1,20 @@
-package mEngine.interactive.gameObjects;
+package mEngine.interactive.components;
 
+import mEngine.interactive.components.Component;
+import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
-public class Camera extends GameObject{
-
-    private GameObject sticksTo;
+public class Camera extends Component {
 
     public int zoom = 0;
 
-    public Camera(GameObject obj) {
-
-        super(obj.position, obj.rotation);
-        sticksTo = obj;
-
-        initialize();
-
-    }
-
-    private void initialize() {
+    public Camera() {
 
         //Sets perspective
         glMatrixMode(GL_PROJECTION);
@@ -40,13 +32,15 @@ public class Camera extends GameObject{
 
     }
 
-    public void update() {
+    public  void onCreation(GameObject obj) {}
+
+    public void onUpdate(GameObject obj) {
 
         if(Input.isKeyPressed(Keyboard.KEY_F)) zoom --;
         else if(Input.isKeyPressed(Keyboard.KEY_G)) zoom ++;
 
-        position = sticksTo.position;
-        rotation = sticksTo.rotation;
+        Vector3f position = obj.position;
+        Vector3f rotation = obj.rotation;
 
         glLoadIdentity();
 
@@ -57,5 +51,7 @@ public class Camera extends GameObject{
         glTranslatef(-position.x, -position.y - 1.3f - zoom, -position.z);
 
     }
+
+    public void onRemoteUpdate(GameObject obj) {}
 
 }
