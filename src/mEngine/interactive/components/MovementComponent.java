@@ -6,8 +6,10 @@ import mEngine.physics.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.physics.forces.ForcePoint;
+import mEngine.util.Input;
 import mEngine.util.TimeHelper;
 import mEngine.util.vectorHelper.VectorHelper;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -77,6 +79,7 @@ public class MovementComponent extends Component {
 
                 if(!controller.sprintModeToggle) sprinting = false;
                 if(!controller.sneakModeToggle) sneaking = false;
+                if(Input.isKeyDown(Keyboard.KEY_V)) forcePoints.get("middle").forces.get(0).enabled = !forcePoints.get("middle").forces.get(0).enabled; //Kiwi (KEY_V) :P
 
                 controller.onRemoteUpdate(obj);
 
