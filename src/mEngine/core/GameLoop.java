@@ -4,12 +4,14 @@ import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIScreen;
+import mEngine.physics.Collider;
 import mEngine.util.Input;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
 
+import static mEngine.util.NumberFormatHelper.cutDecimals;
 import static mEngine.util.RuntimeHelper.*;
 import static mEngine.util.TimeHelper.FPS;
 
@@ -44,12 +46,11 @@ public class GameLoop {
 
             //Remove when not needed any longer
             ObjectController.getGUIScreen(0).getGUIText(0).text = "mEngine Test Run @ " + FPS + " FPS";
-            ObjectController.getGUIScreen(0).getGUIText(1).text = "MemUsage: [Total: " + getMemoryStats(TOTAL_MEMORY) +
-                    " MB | Used: " + getMemoryStats(USED_MEMORY) +
-                    " MB | Free: " + getMemoryStats(FREE_MEMORY) + " MB]";
-            ObjectController.getGUIScreen(0).getGUIText(2).text = "x: " + String.valueOf(ObjectController.getGameObject(0).position.x);
-            ObjectController.getGUIScreen(0).getGUIText(3).text = "y: " + String.valueOf(ObjectController.getGameObject(0).position.y);
-            ObjectController.getGUIScreen(0).getGUIText(4).text = "z: " + String.valueOf(ObjectController.getGameObject(0).position.z);
+            ObjectController.getGUIScreen(0).getGUIText(1).text = "MemUsage: " + cutDecimals((float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1) + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]";
+            ObjectController.getGUIScreen(0).getGUIText(2).text = "x: " + cutDecimals(ObjectController.getGameObject(0).position.x, 4);
+            ObjectController.getGUIScreen(0).getGUIText(3).text = "y: " + cutDecimals(ObjectController.getGameObject(0).position.y, 4);
+            ObjectController.getGUIScreen(0).getGUIText(4).text = "z: " + cutDecimals(ObjectController.getGameObject(0).position.z, 4);
+            ObjectController.getGUIScreen(0).getGUIText(5).text = "Player collision: " + Collider.isCollidingWithSomething(ObjectController.getGameObject(0));
 
             TimeHelper.updateFPS();
             GraphicsController.update();

@@ -99,9 +99,12 @@ public class GameController {
                 new GUIElement[]{
                         new GUIText(new Vector2f(5, 5), "Current FPS", 15),
                         new GUIText(new Vector2f(5, 25), "Current RAM", 15),
-                        new GUIText(new Vector2f(5, 50), "x: 0", 15),
-                        new GUIText(new Vector2f(5, 70), "y: 0", 15),
-                        new GUIText(new Vector2f(5, 90), "z: 0", 15)
+
+                        new GUIText(new Vector2f(5, 50), "x:", 15),
+                        new GUIText(new Vector2f(5, 70), "y:", 15),
+                        new GUIText(new Vector2f(5, 90), "z:", 15),
+
+                        new GUIText(new Vector2f(5, 115), "Player collision:", 15)
                 }, true));
 
         addGUIScreen(new GUIScreen(
