@@ -71,12 +71,12 @@ public class GameController {
                 new Camera()
         );
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f()));
+        addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
 
         object.addComponent(
                 "renderComponent",
-                new RenderComponent("texturedStar")
+                new RenderComponent("12star")
         );
         object.addComponent(
                 "collideComponent",
