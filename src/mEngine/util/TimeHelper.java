@@ -4,11 +4,13 @@ public class TimeHelper {
 
     private static float lastTime = System.nanoTime() / 1000000;
 
+    public static boolean oneSecondPassed = false;
     public static float deltaTime;
     public static int FPS;
 
     private static float lastFPS;
     private static long currentFPS;
+
 
     public static void setupTiming() {
 
@@ -29,8 +31,10 @@ public class TimeHelper {
 
     public static void updateFPS() {
 
+        oneSecondPassed = false;
         if(getTime() - lastFPS > 1000) {
 
+            oneSecondPassed = true;
             FPS = (int)currentFPS;
             currentFPS = 0;
             lastFPS += 1000;

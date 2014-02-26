@@ -3,7 +3,6 @@ package mEngine.interactive.gui.guiComponents;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
-import org.newdawn.slick.Color;
 
 import static mEngine.util.MathHelper.clamp;
 import static org.lwjgl.opengl.GL11.*;
@@ -17,13 +16,18 @@ public class GUIGraph extends GUIComponent {
 
         this.size = size;
         this.values = values;
+        if(values.length == 0) {
+
+            this.values = new double[(int)size.x];
+            for(int i = 0; i < size.x; i++) { this.values[i] = 0; }
+
+        }
 
     }
 
     public void onUpdate(GUIElement element) {
 
         super.onUpdate(element);
-
         float stepSize = size.x / values.length;
 
         TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
@@ -45,4 +49,12 @@ public class GUIGraph extends GUIComponent {
         glEnd();
 
     }
+
+    public void onExternalUpdate(Object[] args) {
+
+        super.onExternalUpdate(args);
+        for(int i = 0; i < args.length; i++) { values[i] = (Double)args[i]; }
+
+    }
+
 }

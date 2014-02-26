@@ -5,7 +5,9 @@ import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.physics.Collider;
+import mEngine.util.DataTypeHelper;
 import mEngine.util.Input;
+import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -58,6 +60,7 @@ public class GameLoop {
 
             //Collider output
             ObjectController.getGUIElement(0, 5).getComponent("guiText").onExternalUpdate(new String[]{"Player collision: " + Collider.isCollidingWithSomething(ObjectController.getGameObject(0))});
+            ObjectController.getGUIElement(0, 6).getComponent("guiGraph").onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(getMemoryGraph(200)));
 
             TimeHelper.updateFPS();
             GraphicsController.update();

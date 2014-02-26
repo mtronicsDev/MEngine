@@ -1,5 +1,7 @@
 package mEngine.util;
 
+import java.util.Random;
+
 public class RuntimeHelper {
 
     public static final int TOTAL_MEMORY = 0;
@@ -7,6 +9,7 @@ public class RuntimeHelper {
     public static final int FREE_MEMORY = 2;
 
     private static Runtime runtime;
+    private static double[] memUsage;
 
     public static void initialize() { runtime = Runtime.getRuntime(); }
 
@@ -26,6 +29,31 @@ public class RuntimeHelper {
         }
 
         return 0;
+
+    }
+
+    public static double[] getMemoryGraph(int valueCount) {
+
+        if(memUsage == null) {
+
+            memUsage = new double[valueCount];
+            for(int i = 0; i < memUsage.length; i++) {
+
+                memUsage[i] = 0;
+
+            }
+
+        }
+
+        for(int i = 1; i < memUsage.length; i++) {
+
+            if(i - 1 >= 0) memUsage[i - 1] = memUsage[i];
+
+        }
+
+        memUsage[memUsage.length - 1] = (float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100;
+
+        return memUsage;
 
     }
 

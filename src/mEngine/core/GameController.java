@@ -110,49 +110,7 @@ public class GameController {
 
                         new GUIElement(new Vector2f(5, 235), new Vector2f()).addComponent("guiGraph", new GUIGraph(
                                 new Vector2f(200, 100),
-                                new double[]{
-                                        0,
-                                        3,
-                                        6,
-                                        10,
-                                        16,
-                                        25,
-                                        37,
-                                        49,
-                                        52,
-                                        54,
-                                        56,
-                                        58,
-                                        54,
-                                        48,
-                                        42,
-                                        35,
-                                        28,
-                                        16,
-                                        15,
-                                        14,
-                                        13,
-                                        13,
-                                        13,
-                                        15,
-                                        19,
-                                        25,
-                                        31,
-                                        38,
-                                        49,
-                                        63,
-                                        77,
-                                        93,
-                                        100,
-                                        100,
-                                        200,
-                                        90,
-                                        67,
-                                        53,
-                                        34,
-                                        19,
-                                        0
-                                }))
+                                new double[]{}))
                 }, true));
 
         addGUIScreen(new GUIScreen(
