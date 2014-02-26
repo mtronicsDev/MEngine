@@ -303,18 +303,36 @@ public class Collider {
                     for(Face faceB : allFaces) {
 
                         Vector3f normal = allNormals.get((int)faceB.normalIndices.x);
-                        Vector3f vertex = allVertices.get((int)faceB.vertexIndices.x);
 
-                        //Special thanks to Mike Ganshorn for this piece of code
-                        float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertex)) - 1;
+                        Vector3f vertexA = allVertices.get((int)faceB.vertexIndices.x);
+                        vertexA = changeOfBasisMatrix.multiplyByVector(vertexA);
 
-                        float collisionTime = difference / VectorHelper.getAbs(velocity);
+                        Vector3f vertexB = allVertices.get((int)faceB.vertexIndices.y);
+                        vertexB = changeOfBasisMatrix.multiplyByVector(vertexB);
 
-                        if(collisionTime >= 0 && collisionTime <= 1 && collisionTime < collisionTimes[renderComponentA.model.faces.indexOf(faceA)]) {
+                        Vector3f vertexC = allVertices.get((int)faceB.vertexIndices.z);
+                        vertexC = changeOfBasisMatrix.multiplyByVector(vertexC);
 
-                            colliding = true;
-                            collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime;
-                            collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+                        Vector3f intersectionPoint = VectorHelper.subtractVectors(middle, normal);
+
+                        float longestVertexDifference = VectorHelper.getAbs(VectorHelper.subtractVectors(vertexB, vertexA));
+                        if(VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, vertexA)) > longestVertexDifference)
+                            longestVertexDifference = VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, vertexA));
+
+                        if(VectorHelper.getAbs(VectorHelper.subtractVectors(intersectionPoint, vertexA)) <= longestVertexDifference) {
+
+                            //Special thanks to Mike Ganshorn for this piece of code
+                            float difference = Math.abs(VectorHelper.getScalarProduct(normal, intersectionPoint) + VectorHelper.getScalarProduct(normal, vertexA));
+
+                            float collisionTime = difference / VectorHelper.getAbs(velocity);
+
+                            if(collisionTime >= -1 && collisionTime <= 1 && Math.abs(collisionTime) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+
+                                colliding = true;
+                                collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime;
+                                collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+
+                            }
 
                         }
 
@@ -330,7 +348,7 @@ public class Collider {
 
                     for(float collisionTime : collisionTimes) {
 
-                        if(collisionTime < finalCollisionTime) {
+                        if(Math.abs(collisionTime) < Math.abs(finalCollisionTime)) {
 
                             finalCollisionTime = collisionTime;
 
