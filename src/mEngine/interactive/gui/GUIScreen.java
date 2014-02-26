@@ -1,5 +1,7 @@
 package mEngine.interactive.gui;
 
+import mEngine.interactive.gui.guiComponents.GUIText;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +26,5 @@ public class GUIScreen {
 
     public void addGUIElement(GUIElement element) { guiElements.add(element); }
     public GUIElement getGUIElement(int index) { return guiElements.get(index); }
-    public GUIText getGUIText(int index) { return (GUIText)guiElements.get(index); }
 
 }

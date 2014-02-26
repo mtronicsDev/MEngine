@@ -11,7 +11,9 @@ import mEngine.interactive.gameObjects.components.Camera;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
-import mEngine.interactive.gui.GUIText;
+import mEngine.interactive.gui.guiComponents.GUIGraph;
+import mEngine.interactive.gui.guiComponents.GUIText;
+import mEngine.interactive.gui.primitives.GUICircle;
 import mEngine.interactive.gui.primitives.GUIEllipse;
 import mEngine.interactive.gui.primitives.GUIQuadTextured;
 import mEngine.physics.forces.ForceController;
@@ -97,20 +99,65 @@ public class GameController {
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
-                        new GUIText(new Vector2f(5, 5), "Current FPS", 15),
-                        new GUIText(new Vector2f(5, 25), "Current RAM", 15),
+                        new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new GUIText("Current FPS", 15)),
+                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new GUIText("Current RAM", 15)),
 
-                        new GUIText(new Vector2f(5, 50), "x:", 15),
-                        new GUIText(new Vector2f(5, 70), "y:", 15),
-                        new GUIText(new Vector2f(5, 90), "z:", 15),
+                        new GUIElement(new Vector2f(5, 50), new Vector2f()).addComponent("guiText", new GUIText("x:", 15)),
+                        new GUIElement(new Vector2f(5, 70), new Vector2f()).addComponent("guiText", new GUIText("y:", 15)),
+                        new GUIElement(new Vector2f(5, 90), new Vector2f()).addComponent("guiText", new GUIText("z:", 15)),
 
-                        new GUIText(new Vector2f(5, 115), "Player collision:", 15)
+                        new GUIElement(new Vector2f(5, 115), new Vector2f()).addComponent("guiText", new GUIText("Player collision:", 15)),
+
+                        new GUIElement(new Vector2f(5, 235), new Vector2f()).addComponent("guiGraph", new GUIGraph(
+                                new Vector2f(200, 100),
+                                new double[]{
+                                        0,
+                                        3,
+                                        6,
+                                        10,
+                                        16,
+                                        25,
+                                        37,
+                                        49,
+                                        52,
+                                        54,
+                                        56,
+                                        58,
+                                        54,
+                                        48,
+                                        42,
+                                        35,
+                                        28,
+                                        16,
+                                        15,
+                                        14,
+                                        13,
+                                        13,
+                                        13,
+                                        15,
+                                        19,
+                                        25,
+                                        31,
+                                        38,
+                                        49,
+                                        63,
+                                        77,
+                                        93,
+                                        100,
+                                        100,
+                                        200,
+                                        90,
+                                        67,
+                                        53,
+                                        34,
+                                        19,
+                                        0
+                                }))
                 }, true));
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
-                        new GUIQuadTextured(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule"),
-                        new GUIEllipse(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2), new Vector2f(100, 200))
+                        new GUIQuadTextured(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
                 }, true));
 
         AudioController.setListener(getGameObject(0));

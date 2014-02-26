@@ -1,6 +1,7 @@
 package mEngine.interactive.gui.primitives;
 
 import mEngine.interactive.gui.GUIElement;
+import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
 import static java.lang.Math.*;
@@ -25,6 +26,7 @@ public class GUIEllipse extends GUIElement {
 
     public void update() {
 
+        TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
         glBegin(GL_TRIANGLE_FAN);
 
         glVertex2f(position.x, position.y);
@@ -39,6 +41,11 @@ public class GUIEllipse extends GUIElement {
             );
 
         }
+
+        glVertex2f(
+                position.x + ((float)cos(toRadians(360)) * radius.x),
+                position.y + ((float)sin(toRadians(360)) * radius.y)
+        );
 
         glEnd();
 

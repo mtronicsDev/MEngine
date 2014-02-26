@@ -27,10 +27,11 @@ public class GameObject {
 
     }
 
-    public void addComponent(String key, Component component) {
+    public GameObject addComponent(String key, Component component) {
 
         components.put(key, component);
         getComponent(key).onCreation(this);
+        return this;
 
     }
 

@@ -44,13 +44,20 @@ public class GameLoop {
             if(GUIController.isGUIActivated)
                 for(GUIScreen screen : ObjectController.guiScreens) { screen.update(); }
 
-            //Remove when not needed any longer
-            ObjectController.getGUIScreen(0).getGUIText(0).text = "mEngine Test Run @ " + FPS + " FPS";
-            ObjectController.getGUIScreen(0).getGUIText(1).text = "MemUsage: " + cutDecimals((float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1) + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]";
-            ObjectController.getGUIScreen(0).getGUIText(2).text = "x: " + cutDecimals(ObjectController.getGameObject(0).position.x, 4);
-            ObjectController.getGUIScreen(0).getGUIText(3).text = "y: " + cutDecimals(ObjectController.getGameObject(0).position.y, 4);
-            ObjectController.getGUIScreen(0).getGUIText(4).text = "z: " + cutDecimals(ObjectController.getGameObject(0).position.z, 4);
-            ObjectController.getGUIScreen(0).getGUIText(5).text = "Player collision: " + Collider.isCollidingWithSomething(ObjectController.getGameObject(0));
+            //--- Remove when not needed any longer ---
+            //System resource usage
+            ObjectController.getGUIElement(0, 0).getComponent("guiText").onExternalUpdate(new String[]{"mEngine Test Run @ " + FPS + " FPS"});
+            ObjectController.getGUIElement(0, 1).getComponent("guiText").onExternalUpdate(new String[]{"MemUsage: "
+                    + cutDecimals((float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1)
+                    + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]"});
+
+            //Player stats
+            ObjectController.getGUIElement(0, 2).getComponent("guiText").onExternalUpdate(new String[]{"x: " + cutDecimals(ObjectController.getGameObject(0).position.x, 7)});
+            ObjectController.getGUIElement(0, 3).getComponent("guiText").onExternalUpdate(new String[]{"y: " + cutDecimals(ObjectController.getGameObject(0).position.y, 7)});
+            ObjectController.getGUIElement(0, 4).getComponent("guiText").onExternalUpdate(new String[]{"z: " + cutDecimals(ObjectController.getGameObject(0).position.z, 7)});
+
+            //Collider output
+            ObjectController.getGUIElement(0, 5).getComponent("guiText").onExternalUpdate(new String[]{"Player collision: " + Collider.isCollidingWithSomething(ObjectController.getGameObject(0))});
 
             TimeHelper.updateFPS();
             GraphicsController.update();

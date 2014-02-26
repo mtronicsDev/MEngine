@@ -6,12 +6,18 @@ import org.lwjgl.util.vector.Vector2f;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class GUIElement {
+public class GUIElement {
 
     public Vector2f position;
     public Vector2f rotation;
 
     public Map<String, GUIComponent> components = new HashMap<String, GUIComponent>();
+
+    public GUIElement(Vector2f pos) {
+
+        this(pos, new Vector2f());
+
+    }
 
     public GUIElement(Vector2f pos, Vector2f rot) {
 
@@ -26,10 +32,11 @@ public abstract class GUIElement {
 
     }
 
-    public void addComponent(String key, GUIComponent component) {
+    public GUIElement addComponent(String key, GUIComponent component) {
 
         components.put(key, component);
         getComponent(key).onCreation(this);
+        return this;
 
     }
 
