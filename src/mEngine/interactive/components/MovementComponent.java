@@ -42,17 +42,13 @@ public class MovementComponent extends Component {
 
             mass = renderComponent.model.getMass();
 
-            Vector3f modelMiddle = VectorHelper.divideVectors(renderComponent.model.getSize(), new Vector3f(2, 2, 2));
-            Vector3f maxModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getExtremeVertexPositions()[1], modelMiddle);
-            Vector3f minModelVertexPos = VectorHelper.subtractVectors(renderComponent.model.getExtremeVertexPositions()[0], modelMiddle);
-
-            forcePoints.put("middle", new ForcePoint(modelMiddle));
-            forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, minModelVertexPos.z)));
-            forcePoints.put("backward", new ForcePoint(new Vector3f(0, 0, maxModelVertexPos.z)));
-            forcePoints.put("left", new ForcePoint(new Vector3f(minModelVertexPos.x, 0, 0)));
-            forcePoints.put("right", new ForcePoint(new Vector3f(maxModelVertexPos.x, 0, 0)));
-            forcePoints.put("up", new ForcePoint(new Vector3f(0, maxModelVertexPos.y, 0)));
-            forcePoints.put("down", new ForcePoint(new Vector3f(0, minModelVertexPos.y, 0)));
+            forcePoints.put("middle", new ForcePoint(new Vector3f()));
+            forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, -1)));
+            forcePoints.put("backward", new ForcePoint(new Vector3f(0, 0, 1)));
+            forcePoints.put("left", new ForcePoint(new Vector3f(-1, 0, 0)));
+            forcePoints.put("right", new ForcePoint(new Vector3f(1, 0, 0)));
+            forcePoints.put("up", new ForcePoint(new Vector3f(0, 1, 0)));
+            forcePoints.put("down", new ForcePoint(new Vector3f(0, -1, 0)));
 
         }
 

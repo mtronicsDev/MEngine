@@ -298,32 +298,23 @@ public class Collider {
                     Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
 
                     middle = changeOfBasisMatrix.multiplyByVector(middle);
-                    Vector3f originalMiddle = new Vector3f(middle);
                     velocity = changeOfBasisMatrix.multiplyByVector(velocity);
 
-                    for(float count = 0; count <= 1; count += 0.001f) {
+                    for(Face faceB : allFaces) {
 
-                        if(collisionTimes[renderComponentA.model.faces.indexOf(faceA)] != 2) break;
+                        Vector3f normal = allNormals.get((int)faceB.normalIndices.x);
+                        Vector3f vertex = allVertices.get((int)faceB.vertexIndices.x);
 
-                        middle = originalMiddle;
+                        //Special thanks to Mike Ganshorn for this piece of code
+                        float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertex)) - 1;
 
-                        middle = VectorHelper.sumVectors(new Vector3f[] {middle, VectorHelper.multiplyVectors(new Vector3f[] {velocity, new Vector3f(count, count, count)})});
+                        float collisionTime = difference / VectorHelper.getAbs(velocity);
 
-                        for(Face faceB : allFaces) {
+                        if(collisionTime <= 1 && collisionTime < collisionTimes[renderComponentA.model.faces.indexOf(faceA)]) {
 
-                            Vector3f normal = allNormals.get((int)faceB.normalIndices.x);
-                            Vector3f vertex = allVertices.get((int)faceB.vertexIndices.x);
-
-                            //Special thanks to Mike Ganshorn for this piece of code
-                            float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertex));
-
-                            if(difference <= 1) {
-
-                                colliding = true;
-                                collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = count;
-                                collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
-
-                            }
+                            colliding = true;
+                            collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime;
+                            collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
 
                         }
 
@@ -333,7 +324,7 @@ public class Collider {
 
                 }
 
-                //System.out.println(colliding);
+                System.out.println(colliding);
 
                 if(colliding) {
 
@@ -377,12 +368,12 @@ public class Collider {
 
                         if(collidingObject != null) {
 
-                            MovementComponent movementComponent = (MovementComponent)collidingObject.getComponent("movementComponent");
-                            CollideComponent collideComponent = (CollideComponent)collidingObject.getComponent("collideComponent");
+                            MovementComponent movementComponentB = (MovementComponent)collidingObject.getComponent("movementComponent");
+                            CollideComponent collideComponentB = (CollideComponent)collidingObject.getComponent("collideComponent");
 
-                            if(movementComponent == null) {
+                            if(movementComponentB == null) {
 
-                                if(collideComponent.destroyable) {
+                                if(collideComponentB.destroyable) {
 
 
 
@@ -482,7 +473,7 @@ public class Collider {
 
                             } else {
 
-                                if(collideComponent.destroyable) {
+                                if(collideComponentB.destroyable) {
 
 
 

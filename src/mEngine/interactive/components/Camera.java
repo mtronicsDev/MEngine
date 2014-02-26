@@ -1,6 +1,5 @@
 package mEngine.interactive.components;
 
-import mEngine.interactive.components.Component;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.Input;
 import org.lwjgl.input.Keyboard;
