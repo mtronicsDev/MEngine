@@ -1,4 +1,4 @@
-package mEngine.interactive.components;
+package mEngine.interactive.gameObjects.components;
 
 import mEngine.interactive.gameObjects.GameObject;
 

@@ -1,6 +1,6 @@
 package mEngine.interactive.gameObjects;
 
-import mEngine.interactive.components.Component;
+import mEngine.interactive.gameObjects.components.Component;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;

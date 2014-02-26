@@ -2,9 +2,9 @@ package mEngine.physics;
 
 import mEngine.core.ObjectController;
 import mEngine.graphics.renderable.Face;
-import mEngine.interactive.components.CollideComponent;
-import mEngine.interactive.components.MovementComponent;
-import mEngine.interactive.components.RenderComponent;
+import mEngine.interactive.gameObjects.components.CollideComponent;
+import mEngine.interactive.gameObjects.components.MovementComponent;
+import mEngine.interactive.gameObjects.components.RenderComponent;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.vectorHelper.Matrix3d;
 import mEngine.util.vectorHelper.VectorHelper;
