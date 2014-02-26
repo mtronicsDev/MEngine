@@ -310,7 +310,7 @@ public class Collider {
 
                         float collisionTime = difference / VectorHelper.getAbs(velocity);
 
-                        if(collisionTime <= 1 && collisionTime < collisionTimes[renderComponentA.model.faces.indexOf(faceA)]) {
+                        if(collisionTime >= 0 && collisionTime <= 1 && collisionTime < collisionTimes[renderComponentA.model.faces.indexOf(faceA)]) {
 
                             colliding = true;
                             collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime;
@@ -338,7 +338,12 @@ public class Collider {
 
                             for(int count = 0; count < collisionTimes.length; count ++) {
 
-                                if(collisionTime == collisionTimes[count]) index = count;
+                                if(collisionTime == collisionTimes[count]) {
+
+                                    index = count;
+                                    break;
+
+                                }
 
                             }
 
@@ -348,7 +353,7 @@ public class Collider {
 
                     }
 
-                    //System.out.println(finalCollisionTime);
+                    System.out.println(finalCollisionTime);
 
                     if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
                             {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
@@ -487,7 +492,8 @@ public class Collider {
 
                         }
 
-                        movedSpace = velocity;
+                        movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
+                                {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
 
                     }
 
