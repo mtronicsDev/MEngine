@@ -353,6 +353,8 @@ public class Collider {
 
                     }
 
+                    if(Math.abs(finalCollisionTime) <= 0.001f) finalCollisionTime = 0;
+
                     System.out.println(finalCollisionTime);
 
                     if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
