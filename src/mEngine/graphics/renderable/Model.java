@@ -43,6 +43,8 @@ public class Model {
         position = pos;
         rotation = rot;
 
+        position = VectorHelper.sumVectors(new Vector3f[] {position, minVertexPos});
+
     }
 
     public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture) {
@@ -56,6 +58,8 @@ public class Model {
         Vector3f minVertexPos = getExtremeVertexPositions()[0];
 
         for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), minVertexPos));
+
+        position = VectorHelper.sumVectors(new Vector3f[] {position, minVertexPos});
 
     }
 

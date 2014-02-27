@@ -213,7 +213,7 @@ public class Collider {
         public static Vector3f getMovedSpace(GameObject objA) {
 
             RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
-            CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
+            //CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
             MovementComponent movementComponentA = (MovementComponent)objA.getComponent("movementComponent");
             Vector3f velocity = new Vector3f(movementComponentA.movedSpace);
             Vector3f movedSpace;

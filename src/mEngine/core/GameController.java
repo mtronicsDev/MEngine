@@ -95,7 +95,7 @@ public class GameController {
         object.addComponent(
                 "collideComponent",
                 new CollideComponent(false)
-        );
+        ); 
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
