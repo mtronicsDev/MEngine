@@ -1,6 +1,7 @@
 package mEngine.graphics.renderable;
 
 import mEngine.util.ModelHelper;
+import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
@@ -35,6 +36,10 @@ public class Model {
         this.texture = model.texture;
         this.mass = model.getMass();
 
+        Vector3f minVertexPos = getExtremeVertexPositions()[0];
+
+        for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), minVertexPos));
+
         position = pos;
         rotation = rot;
 
@@ -47,6 +52,10 @@ public class Model {
         this.uvs = uvs;
         this.faces = faces;
         this.texture = texture;
+
+        Vector3f minVertexPos = getExtremeVertexPositions()[0];
+
+        for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), minVertexPos));
 
     }
 

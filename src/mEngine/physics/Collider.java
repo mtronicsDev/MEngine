@@ -57,6 +57,7 @@ public class Collider {
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
             boolean maybeColliding = false;
             RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
+            MovementComponent movementComponentA = (MovementComponent)objA.getComponent("movementComponent");
             CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
 
             for(GameObject objB : ObjectController.gameObjects) {
@@ -147,20 +148,55 @@ public class Collider {
                     radius = VectorHelper.subtractVectors(maxVertexPos, middle);
 
                     Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
+                    Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
 
                     middle = changeOfBasisMatrix.multiplyByVector(middle);
 
                     for(Face faceB : allFaces) {
 
-                        Vector3f normal = allNormals.get((int)faceB.normalIndices.x);
-                        Vector3f vertex = allVertices.get((int)faceB.vertexIndices.x);
+                        boolean collidingHere = false;
 
-                        //Special thanks to Mike Ganshorn for this piece of code
-                        float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertex));
+                        Vector3f normal = new Vector3f(allNormals.get((int)faceB.normalIndices.x));
 
-                        if(difference <= 1) {
+                        Vector3f vertexA = new Vector3f(allVertices.get((int)faceB.vertexIndices.x));
+                        vertexA = changeOfBasisMatrix.multiplyByVector(vertexA);
 
-                            colliding = true;
+                        Vector3f vertexB = new Vector3f(allVertices.get((int)faceB.vertexIndices.y));
+                        vertexB = changeOfBasisMatrix.multiplyByVector(vertexB);
+
+                        Vector3f vertexC = new Vector3f(allVertices.get((int)faceB.vertexIndices.z));
+                        vertexC = changeOfBasisMatrix.multiplyByVector(vertexC);
+
+                        Vector3f intersectionPoint = VectorHelper.subtractVectors(middle, normal);
+
+                        float longestVertexDifference = VectorHelper.getAbs(VectorHelper.subtractVectors(vertexB, vertexA));
+                        if(VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, vertexA)) > longestVertexDifference)
+                            longestVertexDifference = VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, vertexA));
+
+                        if(VectorHelper.getAbs(VectorHelper.subtractVectors(intersectionPoint, vertexA)) <= longestVertexDifference) {
+
+                            //Special thanks to Mike Ganshorn for this piece of code
+                            float difference = Math.abs(VectorHelper.getScalarProduct(normal, intersectionPoint) + VectorHelper.getScalarProduct(normal, vertexA));
+
+                            if(difference <= 1) collidingHere = true;
+
+                        }
+
+                        if(collidingHere) colliding = true;
+
+                        else {
+
+                            Vector3f differenceToVertices = new Vector3f(VectorHelper.getAbs(VectorHelper.subtractVectors(vertexA, middle)) - 1,
+                                    VectorHelper.getAbs(VectorHelper.subtractVectors(vertexB, middle)) - 1,
+                                    VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, middle)) - 1);
+
+                            if(differenceToVertices.x >= 0 && differenceToVertices.x <= 1) collidingHere = true;
+
+                            else if(differenceToVertices.y >= 0 && differenceToVertices.y <= 1) collidingHere = true;
+
+                            else if(differenceToVertices.z >= 0 && differenceToVertices.z <= 1) collidingHere = true;
+
+                            if(collidingHere) colliding = true;
 
                         }
 
@@ -302,15 +338,17 @@ public class Collider {
 
                     for(Face faceB : allFaces) {
 
-                        Vector3f normal = allNormals.get((int)faceB.normalIndices.x);
+                        boolean collidingHere = false;
 
-                        Vector3f vertexA = allVertices.get((int)faceB.vertexIndices.x);
+                        Vector3f normal = new Vector3f(allNormals.get((int)faceB.normalIndices.x));
+
+                        Vector3f vertexA = new Vector3f(allVertices.get((int)faceB.vertexIndices.x));
                         vertexA = changeOfBasisMatrix.multiplyByVector(vertexA);
 
-                        Vector3f vertexB = allVertices.get((int)faceB.vertexIndices.y);
+                        Vector3f vertexB = new Vector3f(allVertices.get((int)faceB.vertexIndices.y));
                         vertexB = changeOfBasisMatrix.multiplyByVector(vertexB);
 
-                        Vector3f vertexC = allVertices.get((int)faceB.vertexIndices.z);
+                        Vector3f vertexC = new Vector3f(allVertices.get((int)faceB.vertexIndices.z));
                         vertexC = changeOfBasisMatrix.multiplyByVector(vertexC);
 
                         Vector3f intersectionPoint = VectorHelper.subtractVectors(middle, normal);
@@ -326,13 +364,48 @@ public class Collider {
 
                             float collisionTime = difference / VectorHelper.getAbs(velocity);
 
-                            if(collisionTime >= -1 && collisionTime <= 1 && Math.abs(collisionTime) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+                            if(collisionTime >= 0 && collisionTime <= 1 && Math.abs(collisionTime) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
 
-                                colliding = true;
+                                collidingHere = true;
                                 collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime;
                                 collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
 
                             }
+
+                        }
+
+                        if(collidingHere) colliding = true;
+
+                        else {
+
+                            Vector3f differenceToVertices = new Vector3f(VectorHelper.getAbs(VectorHelper.subtractVectors(vertexA, middle)) - 1,
+                                    VectorHelper.getAbs(VectorHelper.subtractVectors(vertexB, middle)) - 1,
+                                    VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, middle)) - 1);
+
+                            Vector3f collisionTime = VectorHelper.divideVectors(differenceToVertices,
+                                    new Vector3f(VectorHelper.getAbs(velocity), VectorHelper.getAbs(velocity), VectorHelper.getAbs(velocity)));
+
+                            if(collisionTime.x >= 0 && collisionTime.x <= 1 && Math.abs(collisionTime.x) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+
+                                collidingHere = true;
+                                collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime.x;
+                                collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+
+                            } else if(collisionTime.y >= 0 && collisionTime.y <= 1 && Math.abs(collisionTime.y) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+
+                                collidingHere = true;
+                                collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime.y;
+                                collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+
+                            } else if(collisionTime.z >= 0 && collisionTime.z <= 1 && Math.abs(collisionTime.z) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+
+                                collidingHere = true;
+                                collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime.z;
+                                collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+
+                            }
+
+                            if(collidingHere) colliding = true;
 
                         }
 
@@ -341,8 +414,6 @@ public class Collider {
                     velocity = invertedChangeOfBasisMatrix.multiplyByVector(velocity);
 
                 }
-
-                System.out.println(colliding);
 
                 if(colliding) {
 
@@ -372,8 +443,6 @@ public class Collider {
                     }
 
                     if(Math.abs(finalCollisionTime) <= 0.001f) finalCollisionTime = 0;
-
-                    System.out.println(finalCollisionTime);
 
                     if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
                             {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
