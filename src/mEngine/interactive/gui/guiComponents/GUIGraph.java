@@ -1,16 +1,16 @@
 package mEngine.interactive.gui.guiComponents;
 
 import mEngine.interactive.gui.GUIElement;
-import mEngine.util.modelHelper.TextureHelper;
+import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
-import static mEngine.util.mathHelper.MathHelper.clamp;
+import static mEngine.util.math.MathHelper.clamp;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUIGraph extends GUIComponent {
 
-    protected Vector2f size;
-    protected double[] values;
+    public Vector2f size;
+    public double[] values;
 
     public GUIGraph(Vector2f size, double[] values) {
 

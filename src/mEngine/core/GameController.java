@@ -108,9 +108,14 @@ public class GameController {
 
                         new GUIElement(new Vector2f(5, 115), new Vector2f()).addComponent("guiText", new GUIText("Player collision:", 15)),
 
-                        new GUIElement(new Vector2f(5, 235), new Vector2f()).addComponent("guiGraph", new GUIGraph(
-                                new Vector2f(200, 100),
-                                new double[]{}))
+                        new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
+                                .addComponent("guiGraphRAM", new GUIGraph(
+                                    new Vector2f(Display.getWidth(), 100),
+                                    new double[]{}))
+                                .addComponent("guiGraphFPS", new GUIGraph(
+                                    new Vector2f(Display.getWidth(), 100),
+                                    new double[]{})
+                                )
                 }, true));
 
         addGUIScreen(new GUIScreen(

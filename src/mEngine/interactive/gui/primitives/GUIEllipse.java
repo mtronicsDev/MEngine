@@ -1,7 +1,7 @@
 package mEngine.interactive.gui.primitives;
 
 import mEngine.interactive.gui.GUIElement;
-import mEngine.util.modelHelper.TextureHelper;
+import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
 import static java.lang.Math.*;

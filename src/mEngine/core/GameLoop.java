@@ -4,6 +4,7 @@ import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIScreen;
+import mEngine.interactive.gui.guiComponents.GUIGraph;
 import mEngine.physics.Collider;
 import mEngine.util.DataTypeHelper;
 import mEngine.util.input.Input;
@@ -12,7 +13,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
 
-import static mEngine.util.mathHelper.NumberFormatHelper.cutDecimals;
+import static mEngine.util.TimeHelper.getFPSGraph;
+import static mEngine.util.math.NumberFormatHelper.cutDecimals;
 import static mEngine.util.RuntimeHelper.*;
 import static mEngine.util.TimeHelper.FPS;
 
@@ -59,7 +61,18 @@ public class GameLoop {
 
             //Collider output
             ObjectController.getGUIElement(0, 5).getComponent("guiText").onExternalUpdate(new String[]{"Player collision: " + Collider.isCollidingWithSomething(ObjectController.getGameObject(0))});
-            ObjectController.getGUIElement(0, 6).getComponent("guiGraph").onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(getMemoryGraph(200)));
+
+            GUIGraph graph = (GUIGraph)ObjectController.getGUIElement(0, 6).getComponent("guiGraphRAM");
+
+            graph.onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(
+                    getMemoryGraph((int)graph.size.x)
+            ));
+
+            graph = (GUIGraph)ObjectController.getGUIElement(0, 6).getComponent("guiGraphFPS");
+
+            graph.onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(
+                    getFPSGraph((int) graph.size.x)
+            ));
 
             TimeHelper.updateFPS();
             GraphicsController.update();

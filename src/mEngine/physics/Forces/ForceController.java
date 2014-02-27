@@ -1,6 +1,6 @@
 package mEngine.physics.forces;
 
-import mEngine.util.vectorHelper.VectorHelper;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 

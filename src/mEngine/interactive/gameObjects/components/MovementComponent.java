@@ -8,7 +8,7 @@ import mEngine.physics.forces.ForceController;
 import mEngine.physics.forces.ForcePoint;
 import mEngine.util.input.Input;
 import mEngine.util.TimeHelper;
-import mEngine.util.vectorHelper.VectorHelper;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;

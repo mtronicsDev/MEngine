@@ -1,4 +1,4 @@
-package mEngine.util.mathHelper;
+package mEngine.util.math;
 
 import java.text.DecimalFormat;
 

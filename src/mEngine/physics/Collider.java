@@ -6,8 +6,8 @@ import mEngine.interactive.gameObjects.components.CollideComponent;
 import mEngine.interactive.gameObjects.components.MovementComponent;
 import mEngine.interactive.gameObjects.components.RenderComponent;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.util.vectorHelper.Matrix3d;
-import mEngine.util.vectorHelper.VectorHelper;
+import mEngine.util.math.vectors.Matrix3d;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;

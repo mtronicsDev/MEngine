@@ -1,6 +1,7 @@
 package mEngine.util;
 
-import java.util.Random;
+import mEngine.util.math.MathHelper;
+import org.lwjgl.opengl.Display;
 
 public class RuntimeHelper {
 
@@ -34,17 +35,7 @@ public class RuntimeHelper {
 
     public static double[] getMemoryGraph(int valueCount) {
 
-        if(memUsage == null) {
-
-            memUsage = new double[valueCount];
-            for(int i = 0; i < memUsage.length; i++) {
-
-                memUsage[i] = 0;
-
-            }
-
-        }
-
+        if(memUsage == null) memUsage = MathHelper.fillArray(valueCount);
         for(int i = 1; i < memUsage.length; i++) {
 
             if(i - 1 >= 0) memUsage[i - 1] = memUsage[i];

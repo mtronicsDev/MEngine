@@ -1,4 +1,4 @@
-package mEngine.util.modelHelper;
+package mEngine.util;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;

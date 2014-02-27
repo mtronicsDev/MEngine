@@ -1,4 +1,4 @@
-package mEngine.util.vectorHelper;
+package mEngine.util.math.vectors;
 
 public abstract class Matrix {
 

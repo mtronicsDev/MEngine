@@ -1,7 +1,7 @@
 package mEngine.graphics.renderable;
 
-import mEngine.util.modelHelper.ModelHelper;
-import mEngine.util.vectorHelper.VectorHelper;
+import mEngine.util.ModelHelper;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;

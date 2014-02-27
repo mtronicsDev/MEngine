@@ -1,6 +1,6 @@
 package mEngine.graphics.renderable;
 
-import mEngine.util.vectorHelper.VectorHelper;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Face {
