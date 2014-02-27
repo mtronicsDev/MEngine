@@ -6,7 +6,7 @@ import mEngine.physics.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.physics.forces.ForcePoint;
-import mEngine.util.Input;
+import mEngine.util.input.Input;
 import mEngine.util.TimeHelper;
 import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.input.Keyboard;

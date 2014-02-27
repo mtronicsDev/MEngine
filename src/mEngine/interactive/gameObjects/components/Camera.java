@@ -1,7 +1,7 @@
 package mEngine.interactive.gameObjects.components;
 
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.util.Input;
+import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;

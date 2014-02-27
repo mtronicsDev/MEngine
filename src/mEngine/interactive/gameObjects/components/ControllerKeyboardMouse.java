@@ -1,13 +1,13 @@
 package mEngine.interactive.gameObjects.components;
 
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.util.Input;
-import mEngine.util.KeyAlreadyAssignedException;
+import mEngine.util.input.Input;
+import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.PreferenceHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import static mEngine.util.Input.getKey;
+import static mEngine.util.input.Input.getKey;
 
 public class ControllerKeyboardMouse extends Controller {
 

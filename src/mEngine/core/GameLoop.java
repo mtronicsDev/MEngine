@@ -6,14 +6,13 @@ import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.physics.Collider;
 import mEngine.util.DataTypeHelper;
-import mEngine.util.Input;
-import mEngine.util.RuntimeHelper;
+import mEngine.util.input.Input;
 import mEngine.util.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
 
-import static mEngine.util.NumberFormatHelper.cutDecimals;
+import static mEngine.util.mathHelper.NumberFormatHelper.cutDecimals;
 import static mEngine.util.RuntimeHelper.*;
 import static mEngine.util.TimeHelper.FPS;
 

@@ -1,6 +1,6 @@
 package mEngine.graphics.renderable;
 
-import mEngine.util.ModelHelper;
+import mEngine.util.modelHelper.ModelHelper;
 import mEngine.util.vectorHelper.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;

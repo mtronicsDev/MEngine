@@ -1,7 +1,7 @@
 package mEngine.graphics;
 
 import mEngine.core.ObjectController;
-import mEngine.util.KeyAlreadyAssignedException;
+import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.PreferenceHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -9,7 +9,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector4f;
 
-import static mEngine.util.Input.*;
+import static mEngine.util.input.Input.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 import static org.lwjgl.util.glu.GLU.gluPerspective;

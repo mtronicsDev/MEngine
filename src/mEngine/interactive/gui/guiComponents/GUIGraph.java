@@ -1,10 +1,10 @@
 package mEngine.interactive.gui.guiComponents;
 
 import mEngine.interactive.gui.GUIElement;
-import mEngine.util.TextureHelper;
+import mEngine.util.modelHelper.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
-import static mEngine.util.MathHelper.clamp;
+import static mEngine.util.mathHelper.MathHelper.clamp;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUIGraph extends GUIComponent {

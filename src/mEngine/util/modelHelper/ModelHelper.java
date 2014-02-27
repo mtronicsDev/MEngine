@@ -1,4 +1,4 @@
-package mEngine.util;
+package mEngine.util.modelHelper;
 
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
