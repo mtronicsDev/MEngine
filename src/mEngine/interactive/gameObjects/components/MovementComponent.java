@@ -13,6 +13,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class MovementComponent extends Component {
     boolean sprinting;
     boolean sneaking;
     float mass = 0;
+    int forceCount = 0;
 
     public MovementComponent() {
 
@@ -60,7 +62,7 @@ public class MovementComponent extends Component {
 
         }
 
-        for(Force force : ForceController.forces) forcePoints.get("middle").forces.add(force);
+        for(Force force : ForceController.forces) forcePoints.get("middle").forces.put("gravity", force);
 
     }
 
@@ -83,19 +85,23 @@ public class MovementComponent extends Component {
 
             for(ForcePoint forcePoint : forcePoints.values()) {
 
-                for(int count = 8; count < forcePoint.forces.size(); count ++) {
+                for(String key : forcePoint.forces.keySet()) {
 
-                    Force force = forcePoint.forces.get(count);
+                    if(key.startsWith("inertiaForce")) {
 
-                    //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
+                        Force force = forcePoint.forces.get(key);
 
-                    force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
+                        //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
-                    if(Math.abs(force.direction.x) <= 0.001f &&
-                            Math.abs(force.direction.y) <= 0.001f &&
-                            Math.abs(force.direction.z) <= 0.001f) {
+                        force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
 
-                        forcePoint.forces.remove(force);
+                        if(Math.abs(force.direction.x) <= 0.001f &&
+                                Math.abs(force.direction.y) <= 0.001f &&
+                                Math.abs(force.direction.z) <= 0.001f) {
+
+                            forcePoint.forces.remove(force);
+
+                        }
 
                     }
 
@@ -103,7 +109,7 @@ public class MovementComponent extends Component {
 
             }
 
-            Vector3f forceSum = ForceController.sumForces(forcePoints.get("middle").forces);
+            Vector3f forceSum = ForceController.sumForces(forcePoints.get("middle").forces.values());
 
             if(collideComponent != null) {
 
@@ -145,7 +151,7 @@ public class MovementComponent extends Component {
     public void moveForward(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get(1);
+        Force givenForce = forcePoints.get("middle").forces.get("forward");
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
@@ -166,15 +172,19 @@ public class MovementComponent extends Component {
 
         }
 
-        forcePoints.get("middle").forces.add(new Force(direction));
-        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
+        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+
+        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
+        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+
+        forceCount ++;
 
     }
 
     public void moveBackward(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get(2);
+        Force givenForce = forcePoints.get("middle").forces.get("backward");
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
@@ -188,15 +198,19 @@ public class MovementComponent extends Component {
 
         }
 
-        forcePoints.get("middle").forces.add(new Force(direction));
-        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
+        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+
+        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
+        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+
+        forceCount ++;
 
     }
 
     public void moveLeft(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get(3);
+        Force givenForce = forcePoints.get("middle").forces.get("left");
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
@@ -210,15 +224,19 @@ public class MovementComponent extends Component {
 
         }
 
-        forcePoints.get("middle").forces.add(new Force(direction));
-        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
+        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+
+        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
+        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+
+        forceCount ++;
 
     }
 
     public void moveRight(GameObject obj) {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get(4);
+        Force givenForce = forcePoints.get("middle").forces.get("right");
 
         direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
         direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
@@ -232,15 +250,19 @@ public class MovementComponent extends Component {
 
         }
 
-        forcePoints.get("middle").forces.add(new Force(direction));
-        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
+        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+
+        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
+        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+
+        forceCount ++;
 
     }
 
     public void moveUp() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get(5);
+        Force givenForce = forcePoints.get("middle").forces.get("up");
 
         direction.y = givenForce.direction.y;
 
@@ -258,24 +280,32 @@ public class MovementComponent extends Component {
 
         }
 
-        forcePoints.get("middle").forces.add(new Force(direction));
-        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
+        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+
+        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
+        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+
+        forceCount ++;
 
     }
 
     public void moveDown() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get(6);
+        Force givenForce = forcePoints.get("middle").forces.get("down");
 
         direction.y = givenForce.direction.y;
 
-        forcePoints.get("middle").forces.add(new Force(direction));
-        forcePoints.get("middle").forces.get(forcePoints.get("middle").forces.size() - 1).enabled = true;
+        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+
+        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
+        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+
+        forceCount ++;
 
     }
 
-    public void jump() { forcePoints.get("middle").forces.get(7).enabled = true; }
+    public void jump() { forcePoints.get("middle").forces.get("jump").enabled = true; }
 
     public void sprint(GameObject obj) {
 

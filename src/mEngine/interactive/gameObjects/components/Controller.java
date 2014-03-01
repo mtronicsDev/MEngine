@@ -26,13 +26,13 @@ public abstract class Controller extends Component{
 
         if(movementComponent != null) {
 
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(0, 0, -forceStrengths[0]))); //Forward
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(0, 0, forceStrengths[1]))); //Backward
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(forceStrengths[2], 0, 0))); //Right
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(-forceStrengths[3], 0, 0))); //Left
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(0, forceStrengths[4], 0))); //Up
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(0, -forceStrengths[5], 0))); //Down
-            movementComponent.forcePoints.get("middle").forces.add(new Force(new Vector3f(0, forceStrengths[6], 0))); //Jump force
+            movementComponent.forcePoints.get("middle").forces.put("forward", new Force(new Vector3f(0, 0, -forceStrengths[0])));
+            movementComponent.forcePoints.get("middle").forces.put("backward", new Force(new Vector3f(0, 0, forceStrengths[1])));
+            movementComponent.forcePoints.get("middle").forces.put("right", new Force(new Vector3f(-forceStrengths[2], 0, 0)));
+            movementComponent.forcePoints.get("middle").forces.put("left", new Force(new Vector3f(forceStrengths[3], 0, 0)));
+            movementComponent.forcePoints.get("middle").forces.put("up", new Force(new Vector3f(0, forceStrengths[4], 0)));
+            movementComponent.forcePoints.get("middle").forces.put("down", new Force(new Vector3f(0, -forceStrengths[5], 0)));
+            movementComponent.forcePoints.get("middle").forces.put("jump", new Force(new Vector3f(0, forceStrengths[6], 0)));
 
         }
 
