@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ForceController {
@@ -17,7 +18,7 @@ public class ForceController {
 
     public static void addForce(Vector3f direction) { forces.add(new Force(direction)); }
 
-    public static Vector3f sumForces(List<Force> forces) {
+    public static Vector3f sumForces(Collection<Force> forces) {
 
         Vector3f forceSum = new Vector3f();
 
