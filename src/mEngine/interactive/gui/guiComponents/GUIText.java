@@ -40,14 +40,16 @@ public class GUIText extends GUIComponent {
 
     }
 
-    public void onUpdate(GUIElement element) {
+    public void onUpdate() {
 
-        font.drawString(element.position.x, element.position.y, text, color);
+        super.onUpdate();
+        font.drawString(parent.position.x, parent.position.y, text, color);
 
     }
 
     public void onExternalUpdate(Object[] args) {
 
+        super.onExternalUpdate(args);
         if(args.length >= 1) this.text = (String)args[0];
         if(args.length == 2) onExternalUpdate((Integer)args[1]);
         if(args.length == 3) onExternalUpdate((Integer)args[1], (Integer)args[2]);

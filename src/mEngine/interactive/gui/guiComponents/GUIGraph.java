@@ -25,9 +25,9 @@ public class GUIGraph extends GUIComponent {
 
     }
 
-    public void onUpdate(GUIElement element) {
+    public void onUpdate() {
 
-        super.onUpdate(element);
+        super.onUpdate();
         float stepSize = size.x / values.length;
 
         TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
@@ -42,7 +42,7 @@ public class GUIGraph extends GUIComponent {
                 Then it is moved down by size.y so it is in the bottom left corner of the element.
                 Finally, it is moved up again by the y value given.
             */
-            glVertex2f(element.position.x + stepSize * i, element.position.y + size.y - (float)clamp(values[i], 0, size.y));
+            glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float)clamp(values[i], 0, size.y));
 
         }
 

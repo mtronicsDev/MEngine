@@ -9,7 +9,7 @@ import java.util.Map;
 public class GUIElement {
 
     public Vector2f position;
-    public Vector2f rotation;
+    public Vector2f size;
 
     public Map<String, GUIComponent> components = new HashMap<String, GUIComponent>();
 
@@ -19,10 +19,10 @@ public class GUIElement {
 
     }
 
-    public GUIElement(Vector2f pos, Vector2f rot) {
+    public GUIElement(Vector2f pos, Vector2f size) {
 
         position = pos;
-        rotation = rot;
+        this.size = size;
 
     }
 
