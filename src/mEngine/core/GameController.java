@@ -12,10 +12,8 @@ import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.guiComponents.GUIGraph;
+import mEngine.interactive.gui.guiComponents.GUIQuad;
 import mEngine.interactive.gui.guiComponents.GUIText;
-import mEngine.interactive.gui.primitives.GUICircle;
-import mEngine.interactive.gui.primitives.GUIEllipse;
-import mEngine.interactive.gui.primitives.GUIQuadTextured;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;
@@ -120,7 +118,7 @@ public class GameController {
 
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
-                        new GUIQuadTextured(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64)).addComponent("guiQuad", new GUIQuad("reticule"))
                 }, true));
 
         AudioController.setListener(getGameObject(0));

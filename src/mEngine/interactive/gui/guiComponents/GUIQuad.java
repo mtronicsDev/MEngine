@@ -1,6 +1,7 @@
 package mEngine.interactive.gui.guiComponents;
 
 import mEngine.interactive.gui.GUIElement;
+import mEngine.util.TextureHelper;
 import org.newdawn.slick.opengl.Texture;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -10,6 +11,12 @@ public class GUIQuad extends GUIComponent {
     protected Texture texture;
 
     public GUIQuad() {}
+
+    public GUIQuad(String fileName) {
+
+        texture = TextureHelper.getTexture(fileName);
+
+    }
 
     public void onUpdate() {
 

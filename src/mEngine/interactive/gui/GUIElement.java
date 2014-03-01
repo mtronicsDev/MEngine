@@ -28,7 +28,7 @@ public class GUIElement {
 
     public void update() {
 
-        for(GUIComponent component : components.values()) { component.onUpdate(this); }
+        for(GUIComponent component : components.values()) { component.onUpdate(); }
 
     }
 
