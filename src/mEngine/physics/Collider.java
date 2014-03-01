@@ -501,10 +501,7 @@ public class Collider {
 
                                     Vector3f temporaryVelocity = VectorHelper.sumVectors(new Vector3f[] {velocity, middle});
 
-                                    Vector3f invertedNormal = VectorHelper.multiplyVectors(new Vector3f[]
-                                            {allNormals.get((int)finalCollisionFace.normalIndices.x), new Vector3f(-1, -1, -1)});
-
-                                    Vector3f intersectionPoint = VectorHelper.sumVectors(new Vector3f[] {middle, invertedNormal});
+                                    Vector3f intersectionPoint = VectorHelper.subtractVectors(middle, allNormals.get((int)finalCollisionFace.normalIndices.x));
                                     intersectionPoint = VectorHelper.subtractVectors(intersectionPoint, vertexA);
 
                                     float alpha;
