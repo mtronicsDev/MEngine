@@ -77,7 +77,7 @@ public class MovementComponent extends Component {
 
                 if(!controller.sprintModeToggle) sprinting = false;
                 if(!controller.sneakModeToggle) sneaking = false;
-                if(Input.isKeyDown(Keyboard.KEY_V)) forcePoints.get("middle").forces.get(0).enabled = !forcePoints.get("middle").forces.get(0).enabled; //Kiwi (KEY_V) :P
+                if(Input.isKeyDown(Keyboard.KEY_V)) forcePoints.get("middle").forces.get("gravity").enabled = !forcePoints.get("middle").forces.get("gravity").enabled; //Kiwi (KEY_V) :P
 
                 controller.onRemoteUpdate(obj);
 
