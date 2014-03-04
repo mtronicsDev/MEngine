@@ -7,6 +7,7 @@ public class InteractionComponent extends Component {
     public boolean interactable;
     public int interactionKey;
     public boolean automaticallyInteractable;
+    public String interactionDescription;
 
     public InteractionComponent(boolean interactable) {
 
@@ -22,6 +23,14 @@ public class InteractionComponent extends Component {
         this.interactionKey = interactionKey;
 
         automaticallyInteractable = false;
+
+    }
+
+    public InteractionComponent(boolean interactable, int interactionKey, String interactionDescription) {
+
+        this(interactable, interactionKey);
+
+        this.interactionDescription = interactionDescription;
 
     }
 
