@@ -11,7 +11,7 @@ import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 public class Camera extends Component {
 
-    public int zoom = 0;
+    public float zoom = 1.3f;
 
     public Camera() {
 
@@ -47,7 +47,7 @@ public class Camera extends Component {
         glRotatef(rotation.y, 0, 1, 0);
         glRotatef(rotation.z, 0, 0, 1);
 
-        glTranslatef(-position.x, -position.y - 1.3f - zoom, -position.z);
+        glTranslatef(-position.x, -position.y - zoom, -position.z);
 
     }
 

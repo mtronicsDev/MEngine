@@ -36,14 +36,14 @@ public class Model {
         this.texture = model.texture;
         this.mass = model.getMass();
 
-        Vector3f minVertexPos = getExtremeVertexPositions()[0];
+        Vector3f middle = getMiddle();
 
-        for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), minVertexPos));
+        for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
         position = pos;
         rotation = rot;
 
-        position = VectorHelper.sumVectors(new Vector3f[] {position, minVertexPos});
+        //position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
 
     }
 
@@ -55,11 +55,11 @@ public class Model {
         this.faces = faces;
         this.texture = texture;
 
-        Vector3f minVertexPos = getExtremeVertexPositions()[0];
+        Vector3f middle = getMiddle();
 
-        for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), minVertexPos));
+        for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
-        position = VectorHelper.sumVectors(new Vector3f[] {position, minVertexPos});
+        //position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
 
     }
 
@@ -166,6 +166,18 @@ public class Model {
         }
 
         return new Vector3f[] {minVertexPos, maxVertexPos};
+
+    }
+
+    public Vector3f getMiddle() {
+
+        Vector3f minVertexPos = getExtremeVertexPositions()[0];
+
+        for(int count = 0; count < vertices.size(); count ++) vertices.set(count, VectorHelper.subtractVectors(vertices.get(count), minVertexPos));
+
+        Vector3f middle =  VectorHelper.divideVectors(getExtremeVertexPositions()[1], new Vector3f(2, 2, 2));
+
+        return middle;
 
     }
 

@@ -28,8 +28,8 @@ public class Collider {
 
            if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
 
-               Vector3f posA = objA.position;
-               Vector3f posB = objB.position;
+               Vector3f posA = VectorHelper.subtractVectors(objA.position, VectorHelper.divideVectors(renderComponentA.model.getSize(), new Vector3f(2, 2, 2)));
+               Vector3f posB = VectorHelper.subtractVectors(objB.position, VectorHelper.divideVectors(renderComponentB.model.getSize(), new Vector3f(2, 2, 2)));
 
                Vector3f sizeA = renderComponentA.model.getSize();
                Vector3f sizeB = renderComponentB.model.getSize();
