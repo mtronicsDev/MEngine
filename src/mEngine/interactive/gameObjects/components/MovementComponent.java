@@ -2,7 +2,7 @@ package mEngine.interactive.gameObjects.components;
 
 import mEngine.core.GameController;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.physics.Collider;
+import mEngine.physics.collisions.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.physics.forces.ForcePoint;
@@ -13,7 +13,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 

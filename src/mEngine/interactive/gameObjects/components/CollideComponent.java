@@ -1,7 +1,7 @@
 package mEngine.interactive.gameObjects.components;
 
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.physics.Collider;
+import mEngine.physics.collisions.Collider;
 import org.lwjgl.util.vector.Vector3f;
 
 public class CollideComponent extends Component {

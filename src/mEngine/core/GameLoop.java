@@ -5,7 +5,7 @@ import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIController;
 import mEngine.interactive.gui.GUIScreen;
 import mEngine.interactive.gui.guiComponents.GUIGraph;
-import mEngine.physics.Collider;
+import mEngine.physics.collisions.Collider;
 import mEngine.util.DataTypeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.TimeHelper;
