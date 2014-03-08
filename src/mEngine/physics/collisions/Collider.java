@@ -70,6 +70,7 @@ public class Collider {
             RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
             MovementComponent movementComponentA = (MovementComponent)objA.getComponent("movementComponent");
             CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
+            Box collisionBoxA;
 
             for(GameObject objB : ObjectController.gameObjects) {
 
@@ -132,8 +133,8 @@ public class Collider {
                     verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.z), objA.position})));
 
                     verticesToCalculate.add(new Vector3f());
-                    verticesToCalculate.add(new Vector3f(VectorHelper.subtractVectors(verticesA.get(1), verticesA.get(0))));
-                    verticesToCalculate.add(new Vector3f(VectorHelper.subtractVectors(verticesA.get(2), verticesA.get(0))));
+                    verticesToCalculate.add(VectorHelper.subtractVectors(verticesA.get(1), verticesA.get(0)));
+                    verticesToCalculate.add(VectorHelper.subtractVectors(verticesA.get(2), verticesA.get(0)));
 
                     maxVertexPos = new Vector3f();
                     minVertexPos = new Vector3f();
@@ -224,7 +225,7 @@ public class Collider {
         public static Vector3f getMovedSpace(GameObject objA) {
 
             RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
-            //CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
+            CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
             MovementComponent movementComponentA = (MovementComponent)objA.getComponent("movementComponent");
             Vector3f velocity = new Vector3f(movementComponentA.movedSpace);
             Vector3f movedSpace;
@@ -480,15 +481,35 @@ public class Collider {
 
                             if(movementComponentB == null) {
 
-                                if(collideComponentB.destroyable) collisionType = 0;
+                                if(collideComponentB.destroyable) {
 
-                                else collisionType = 1;
+                                    if(collideComponentA.destroyable) collisionType = 0;
+
+                                    else collisionType = 1;
+
+                                } else {
+
+                                    if(collideComponentA.destroyable) collisionType = 2;
+
+                                    else collisionType = 3;
+
+                                }
 
                             } else {
 
-                                if(collideComponentB.destroyable) collisionType = 2;
+                                if(collideComponentB.destroyable) {
 
-                                else collisionType = 3;
+                                    if(collideComponentA.destroyable) collisionType = 4;
+
+                                    else collisionType = 5;
+
+                                } else {
+
+                                    if(collideComponentA.destroyable) collisionType = 6;
+
+                                    else collisionType = 7;
+
+                                }
 
                             }
 
@@ -496,7 +517,11 @@ public class Collider {
 
                                 case 0: break;
 
-                                case 1:
+                                case 1: break;
+
+                                case 2: break;
+
+                                case 3:
 
                                     Vector3f vertexA = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.x));
                                     Vector3f vertexB = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.y));
@@ -585,9 +610,13 @@ public class Collider {
 
                                     break;
 
-                                case 2: break;
+                                case 4: break;
 
-                                case 3: break;
+                                case 5: break;
+
+                                case 6: break;
+
+                                case 7: break;
 
                             }
 
