@@ -3,6 +3,7 @@ package mEngine.physics.collisions;
 import mEngine.core.ObjectController;
 import mEngine.graphics.renderable.Face;
 import mEngine.interactive.gameObjects.components.CollideComponent;
+import mEngine.interactive.gameObjects.components.Controller;
 import mEngine.interactive.gameObjects.components.MovementComponent;
 import mEngine.interactive.gameObjects.components.RenderComponent;
 import mEngine.interactive.gameObjects.GameObject;
@@ -277,7 +278,7 @@ public class Collider {
 
                     if(objA != objB) {
 
-                        //Splitting the model of objA here
+
 
                     }
 
@@ -288,7 +289,13 @@ public class Collider {
 
             }
 
-            float finalCollisionTime = 2f;
+            for(int count = 0; count < collisionTimes.length; count ++) {
+
+                collisionTimes[count] = 2;
+
+            }
+
+            float finalCollisionTime = 2;
             Face finalCollisionFace = null;
             List<GameObject> objList = new ArrayList<GameObject>();
             GameObject collidingObject = null;
@@ -346,7 +353,6 @@ public class Collider {
 
                 for(Face faceA : renderComponentA.model.faces) {
 
-                    collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = 2;
                     Vector3f maxVertexPos;
                     Vector3f minVertexPos;
                     List<Vector3f> verticesA = new ArrayList<Vector3f>();
@@ -518,38 +524,120 @@ public class Collider {
 
                             MovementComponent movementComponentB = (MovementComponent)collidingObject.getComponent("movementComponent");
                             CollideComponent collideComponentB = (CollideComponent)collidingObject.getComponent("collideComponent");
+                            Controller controllerA = (Controller)objA.getComponent("controller");
+                            Controller controllerB = (Controller)collidingObject.getComponent("controller");
 
                             int collisionType;
 
                             if(movementComponentB == null) {
 
-                                if(collideComponentB.destroyable) {
+                                if(controllerA == null) {
 
-                                    if(collideComponentA.destroyable) collisionType = 0;
+                                    if(collideComponentB.destroyable) {
 
-                                    else collisionType = 1;
+                                        if(collideComponentA.destroyable) collisionType = 0;
+
+                                        else collisionType = 1;
+
+                                    } else {
+
+                                        if(collideComponentA.destroyable) collisionType = 2;
+
+                                        else collisionType = 3;
+
+                                    }
 
                                 } else {
 
-                                    if(collideComponentA.destroyable) collisionType = 2;
+                                    if(collideComponentB.destroyable) {
 
-                                    else collisionType = 3;
+                                        if(collideComponentA.destroyable) collisionType = 4;
+
+                                        else collisionType = 5;
+
+                                    } else {
+
+                                        if(collideComponentA.destroyable) collisionType = 6;
+
+                                        else collisionType = 7;
+
+                                    }
 
                                 }
 
                             } else {
 
-                                if(collideComponentB.destroyable) {
+                                if(controllerA == null) {
 
-                                    if(collideComponentA.destroyable) collisionType = 4;
+                                    if(controllerB == null) {
 
-                                    else collisionType = 5;
+                                        if(collideComponentB.destroyable) {
+
+                                            if(collideComponentA.destroyable) collisionType = 8;
+
+                                            else collisionType = 9;
+
+                                        } else {
+
+                                            if(collideComponentA.destroyable) collisionType = 10;
+
+                                            else collisionType = 11;
+
+                                        }
+
+                                    } else {
+
+                                        if(collideComponentB.destroyable) {
+
+                                            if(collideComponentA.destroyable) collisionType = 12;
+
+                                            else collisionType = 13;
+
+                                        } else {
+
+                                            if(collideComponentA.destroyable) collisionType = 14;
+
+                                            else collisionType = 15;
+
+                                        }
+
+                                    }
 
                                 } else {
 
-                                    if(collideComponentA.destroyable) collisionType = 6;
+                                    if(controllerB == null) {
 
-                                    else collisionType = 7;
+                                        if(collideComponentB.destroyable) {
+
+                                            if(collideComponentA.destroyable) collisionType = 16;
+
+                                            else collisionType = 17;
+
+                                        } else {
+
+                                            if(collideComponentA.destroyable) collisionType = 18;
+
+                                            else collisionType = 19;
+
+                                        }
+
+                                    } else {
+
+                                        if(collideComponentB.destroyable) {
+
+                                            if(collideComponentA.destroyable) collisionType = 20;
+
+                                            else collisionType = 21;
+
+                                        } else {
+
+                                            if(collideComponentA.destroyable) collisionType = 22;
+
+                                            else collisionType = 23;
+
+                                        }
+
+                                    }
 
                                 }
 
@@ -563,7 +651,15 @@ public class Collider {
 
                                 case 2: break;
 
-                                case 3:
+                                case 3: break;
+
+                                case 4: break;
+
+                                case 5: break;
+
+                                case 6: break;
+
+                                case 7:
 
                                     Vector3f vertexA = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.x));
                                     Vector3f vertexB = new Vector3f(allVertices.get((int)finalCollisionFace.vertexIndices.y));
@@ -652,13 +748,37 @@ public class Collider {
 
                                     break;
 
-                                case 4: break;
+                                case 8: break;
 
-                                case 5: break;
+                                case 9: break;
 
-                                case 6: break;
+                                case 10: break;
 
-                                case 7: break;
+                                case 11: break;
+
+                                case 12: break;
+
+                                case 13: break;
+
+                                case 14: break;
+
+                                case 15: break;
+
+                                case 16: break;
+
+                                case 17: break;
+
+                                case 18: break;
+
+                                case 19: break;
+
+                                case 20: break;
+
+                                case 21: break;
+
+                                case 22: break;
+
+                                case 23: break;
 
                             }
 
