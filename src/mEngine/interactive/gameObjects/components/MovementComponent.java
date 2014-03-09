@@ -61,7 +61,7 @@ public class MovementComponent extends Component {
 
         }
 
-        for(Force force : ForceController.forces) forcePoints.get("middle").forces.put("gravity", force);
+        forcePoints.get("middle").forces.put("gravity", new Force(new Vector3f(0, -0.981f, 0)));
 
     }
 
@@ -92,7 +92,7 @@ public class MovementComponent extends Component {
 
                         //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
-                        force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
+                        force.direction = VectorHelper.divideVectorByFloat(force.direction, 2);
 
                         if(Math.abs(force.direction.x) <= 0.001f &&
                                 Math.abs(force.direction.y) <= 0.001f &&
@@ -114,11 +114,11 @@ public class MovementComponent extends Component {
 
                 if(Collider.isCollidingWithSomething(obj)) {
 
-                    forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
+                    forceSum = ForceController.getCombinedForces(forceSum);
 
                 } else {
 
-                    Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+                    Vector2f newForces = ForceController.getCombinedForces(new Vector2f(forceSum.x, forceSum.z));
 
                     forceSum.x = newForces.x;
                     forceSum.z = newForces.y;
@@ -126,6 +126,8 @@ public class MovementComponent extends Component {
                 }
 
             }
+
+            else forceSum = ForceController.getCombinedForces(forceSum);
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
