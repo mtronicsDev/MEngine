@@ -277,7 +277,7 @@ public class Collider {
 
                     if(objA != objB) {
 
-
+                        //Splitting the model of objA here
 
                     }
 

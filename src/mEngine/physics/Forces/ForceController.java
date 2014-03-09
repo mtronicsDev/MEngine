@@ -68,7 +68,7 @@ public class ForceController {
 
     public static Vector2f getCombinedForces(Vector2f direction) {
 
-        Vector2f combinedForce = new Vector2f();
+        Vector2f combinedForce;
 
         combinedForce = VectorHelper.multiplyVectorByFloat(direction, X_Y_RATIO);
 
@@ -78,7 +78,7 @@ public class ForceController {
 
     public static Vector3f getCombinedForces(Vector3f direction) {
 
-        Vector3f combinedForce = new Vector3f();
+        Vector3f combinedForce;
 
         combinedForce = VectorHelper.multiplyVectorByFloat(direction, X_Y_Z_RATIO);
 

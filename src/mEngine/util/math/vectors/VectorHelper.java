@@ -118,11 +118,7 @@ public class VectorHelper {
 
         if(vector == null) vector = new Vector3f();
 
-        float abs;
-
-        abs = (float)Math.sqrt(getScalarProduct(vector, vector));
-
-        return  abs;
+        return (float)Math.sqrt(getScalarProduct(vector, vector));
 
     }
 
@@ -131,11 +127,7 @@ public class VectorHelper {
         if(vectorA == null) vectorA = new Vector3f();
         if(vectorB == null) vectorB = new Vector3f();
 
-        float scalarProduct;
-
-        scalarProduct = vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z;
-
-        return scalarProduct;
+        return vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z;
 
     }
 
@@ -247,11 +239,7 @@ public class VectorHelper {
 
         if(vector == null) vector = new Vector2f();
 
-        float abs;
-
-        abs = (float)Math.sqrt(getScalarProduct(vector, vector));
-
-        return  abs;
+        return (float)Math.sqrt(getScalarProduct(vector, vector));
 
     }
 
@@ -260,11 +248,7 @@ public class VectorHelper {
         if(vectorA == null) vectorA = new Vector2f();
         if(vectorB == null) vectorB = new Vector2f();
 
-        float scalarProduct;
-
-        scalarProduct = vectorA.x * vectorB.x + vectorA.y * vectorB.y;
-
-        return scalarProduct;
+        return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
 
     }
 
