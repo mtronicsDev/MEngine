@@ -5,6 +5,30 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class VectorHelper {
 
+    public static Vector3f sumVectorAndFloat(Vector3f vector, float addend) {
+
+        return sumVectors(new Vector3f[] {vector, new Vector3f(addend, addend, addend)});
+
+    }
+
+    public static Vector3f subtractVectorAndFloat(Vector3f vector, float subtrahend) {
+
+        return subtractVectors(vector, new Vector3f(subtrahend, subtrahend, subtrahend));
+
+    }
+
+    public static Vector3f multiplyVectorByFloat(Vector3f vector, float multiplier) {
+
+        return multiplyVectors(new Vector3f[] {vector, new Vector3f(multiplier, multiplier, multiplier)});
+
+    }
+
+    public static Vector3f divideVectorByFloat(Vector3f vector, float dividend) {
+
+        return divideVectors(vector, new Vector3f(dividend, dividend, dividend));
+
+    }
+
     public static boolean areEqual(Vector3f vectorA, Vector3f vectorB) {
 
         if(vectorA == null) vectorA = new Vector3f();
@@ -18,9 +42,9 @@ public class VectorHelper {
 
     public static Vector3f sumVectors(Vector3f[] vectors) {
 
-        for(Vector3f vector : vectors) {
+        for(int count = 0; count < vectors.length; count ++) {
 
-            if(vector == null) vector = new Vector3f();
+            if(vectors[count] == null) vectors[count] = new Vector3f();
 
         }
 
@@ -55,9 +79,9 @@ public class VectorHelper {
 
     public static Vector3f multiplyVectors(Vector3f[] vectors) {
 
-        for(Vector3f vector : vectors) {
+        for(int count = 0; count < vectors.length; count ++) {
 
-            if(vector == null) vector = new Vector3f();
+            if(vectors[count] == null) vectors[count] = new Vector3f();
 
         }
 
@@ -127,9 +151,9 @@ public class VectorHelper {
 
     public static Vector2f sumVectors(Vector2f[] vectors) {
 
-        for(Vector2f vector : vectors) {
+        for(int count = 0; count < vectors.length; count ++) {
 
-            if(vector == null) vector = new Vector2f();
+            if(vectors[count] == null) vectors[count] = new Vector2f();
 
         }
 
@@ -162,9 +186,9 @@ public class VectorHelper {
 
     public static Vector2f multiplyVectors(Vector2f[] vectors) {
 
-        for(Vector2f vector : vectors) {
+        for(int count = 0; count < vectors.length; count ++) {
 
-            if(vector == null) vector = new Vector2f();
+            if(vectors[count] == null) vectors[count] = new Vector2f();
 
         }
 

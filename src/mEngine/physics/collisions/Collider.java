@@ -60,6 +60,33 @@ public class Collider {
 
         }
 
+        public static boolean isBoxCollidingWithAABB(Box boxA, GameObject obj) {
+
+            boolean colliding;
+
+            RenderComponent renderComponent = (RenderComponent)obj.getComponent("renderComponent");
+            CollideComponent collideComponent = (CollideComponent)obj.getComponent("collideComponent");
+
+            if(renderComponent != null && collideComponent != null) {
+
+                Box boxB = new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectors(renderComponent.model.getSize(),
+                        new Vector3f(2, 2, 2))), renderComponent.model.getSize());
+
+                colliding = boxA.position.x < boxB.position.x + boxB.size.x
+                        && boxA.position.x + boxA.size.x > boxB.position.x
+                        && boxA.position.y < boxB.position.y + boxB.size.y
+                        && boxA.position.y + boxA.size.y > boxB.position.y
+                        && boxA.position.z < boxB.position.z + boxB.size.z
+                        && boxA.position.z + boxA.size.z > boxB.position.z;
+
+            }
+
+            else colliding = false;
+
+            return colliding;
+
+        }
+
         public static boolean isCollidingWithSomething(GameObject objA) {
 
             boolean colliding = false;
@@ -249,6 +276,19 @@ public class Collider {
             Face finalCollisionFace = null;
             List<GameObject> objList = new ArrayList<GameObject>();
             GameObject collidingObject = null;
+
+            List<Box> collisionBoxesA = new ArrayList<Box>();
+            Box collisionBoxA;
+
+            for(GameObject objB : ObjectController.gameObjects) {
+
+                if(objA != objB) {
+
+
+
+                }
+
+            }
 
             for(GameObject objB : ObjectController.gameObjects) {
 
@@ -456,8 +496,7 @@ public class Collider {
 
                     if(Math.abs(finalCollisionTime) <= 0.001f) finalCollisionTime = 0;
 
-                    if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
-                            {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
+                    if(finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
                     else {
 
@@ -622,8 +661,7 @@ public class Collider {
 
                         }
 
-                        movedSpace = VectorHelper.multiplyVectors(new Vector3f[]
-                                {velocity, new Vector3f(finalCollisionTime, finalCollisionTime, finalCollisionTime)});
+                        movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
                     }
 

@@ -92,7 +92,7 @@ public class MovementComponent extends Component {
 
                         //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
-                        force.direction = VectorHelper.divideVectors(force.direction, new Vector3f(2, 2, 2));
+                        force.direction = VectorHelper.divideVectorByFloat(force.direction, 2);
 
                         if(Math.abs(force.direction.x) <= 0.001f &&
                                 Math.abs(force.direction.y) <= 0.001f &&
