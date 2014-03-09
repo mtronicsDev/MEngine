@@ -1,6 +1,6 @@
 package mEngine.util;
 
-import mEngine.util.math.MathHelper;
+import mEngine.util.math.graphs.Graph;
 
 public class TimeHelper {
 
@@ -13,7 +13,7 @@ public class TimeHelper {
     private static float lastFPS;
     private static long currentFPS;
 
-    private static double[] fpsGraph;
+    private static Graph fpsGraph;
 
 
     public static void setupTiming() {
@@ -50,16 +50,16 @@ public class TimeHelper {
 
     }
 
-    public static double[] getFPSGraph(int valueCount) {
+    public static Graph getFPSGraph(int valueCount) {
 
-        if(fpsGraph == null) fpsGraph = MathHelper.fillArray(valueCount);
-        for(int i = 1; i < fpsGraph.length; i++) {
+        if(fpsGraph == null) fpsGraph = new Graph(valueCount);
+        for(int i = 1; i < fpsGraph.getLength(); i++) {
 
-            if(i - 1 >= 0) fpsGraph[i - 1] = fpsGraph[i];
+            if(i - 1 >= 0) fpsGraph.updateValue(i - 1, fpsGraph.getX(i));
 
         }
 
-        fpsGraph[fpsGraph.length - 1] = (float)FPS / highestFPS * 100; //Show fps in dependency of the highest fps reached in the current run
+        fpsGraph.updateValue(fpsGraph.getLength() - 1, (float)FPS / highestFPS * 100); //Show fps in dependency of the highest fps reached in the current run
 
         return fpsGraph;
 

@@ -62,17 +62,19 @@ public class GameLoop {
             //Collider output
             ObjectController.getGUIElement(0, 5).getComponent("guiText").onExternalUpdate(new String[]{"Player collision: " + Collider.isCollidingWithSomething(ObjectController.getGameObject(0))});
 
+            //RAM and FPS graphs
             GUIGraph graph = (GUIGraph)ObjectController.getGUIElement(0, 6).getComponent("guiGraphRAM");
 
             graph.onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(
-                    getMemoryGraph((int)graph.size.x)
+                    getMemoryGraph((int)graph.size.x).getValues()
             ));
 
             graph = (GUIGraph)ObjectController.getGUIElement(0, 6).getComponent("guiGraphFPS");
 
             graph.onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(
-                    getFPSGraph((int) graph.size.x)
+                    getFPSGraph((int) graph.size.x).getValues()
             ));
+            //--- End Remove ---
 
             TimeHelper.updateFPS();
             GraphicsController.update();

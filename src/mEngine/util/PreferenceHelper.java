@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+import static mEngine.util.ResourceHelper.RES_PREFERENCE;
+import static mEngine.util.ResourceHelper.getResource;
+
 public class PreferenceHelper {
 
     private static Properties properties = new Properties();
@@ -13,7 +16,7 @@ public class PreferenceHelper {
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader(getResource(fileName, RES_PREFERENCE)));
             properties.load(reader);
             reader.close();
 
