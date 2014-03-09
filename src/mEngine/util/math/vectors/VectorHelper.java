@@ -139,6 +139,30 @@ public class VectorHelper {
 
     }
 
+    public static Vector2f sumVectorAndFloat(Vector2f vector, float addend) {
+
+        return sumVectors(new Vector2f[] {vector, new Vector2f(addend, addend)});
+
+    }
+
+    public static Vector2f subtractVectorAndFloat(Vector2f vector, float subtrahend) {
+
+        return subtractVectors(vector, new Vector2f(subtrahend, subtrahend));
+
+    }
+
+    public static Vector2f multiplyVectorByFloat(Vector2f vector, float multiplier) {
+
+        return multiplyVectors(new Vector2f[] {vector, new Vector2f(multiplier, multiplier)});
+
+    }
+
+    public static Vector2f divideVectorByFloat(Vector2f vector, float dividend) {
+
+        return divideVectors(vector, new Vector2f(dividend, dividend));
+
+    }
+
     public static boolean areEqual(Vector2f vectorA, Vector2f vectorB) {
 
         if(vectorA == null) vectorA = new Vector2f();
@@ -192,7 +216,7 @@ public class VectorHelper {
 
         }
 
-        Vector2f vectorProduct = new Vector2f();
+        Vector2f vectorProduct = new Vector2f(1, 1);
 
         for(Vector2f vector : vectors) {
 

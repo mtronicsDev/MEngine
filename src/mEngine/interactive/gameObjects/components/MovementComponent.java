@@ -114,11 +114,11 @@ public class MovementComponent extends Component {
 
                 if(Collider.isCollidingWithSomething(obj)) {
 
-                    forceSum = ForceController.getCombinedForces(forceSum.x, forceSum.y, forceSum.z);
+                    forceSum = ForceController.getCombinedForces(forceSum);
 
                 } else {
 
-                    Vector2f newForces = ForceController.getCombinedForces(forceSum.x, forceSum.z);
+                    Vector2f newForces = ForceController.getCombinedForces(new Vector2f(forceSum.x, forceSum.z));
 
                     forceSum.x = newForces.x;
                     forceSum.z = newForces.y;
@@ -126,6 +126,8 @@ public class MovementComponent extends Component {
                 }
 
             }
+
+            else forceSum = ForceController.getCombinedForces(forceSum);
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 

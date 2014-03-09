@@ -259,13 +259,29 @@ public class Collider {
             List<Face> allFaces = new ArrayList<Face>();
             List<Vector3f> allVertices = new ArrayList<Vector3f>();
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
+            List<Face> objAFaces = new ArrayList<Face>();
+            List<Vector3f> objAVertices = new ArrayList<Vector3f>();
+            List<Vector3f> objANormals = new ArrayList<Vector3f>();
             boolean maybeColliding = false;
             boolean colliding = false;
+
+            List<Box> collisionBoxesA = new ArrayList<Box>();
+            Box collisionBoxA;
 
             float[] collisionTimes = null;
             Face[] collisionFaces = null;
 
             if(renderComponentA != null) {
+
+                for(GameObject objB : ObjectController.gameObjects) {
+
+                    if(objA != objB) {
+
+
+
+                    }
+
+                }
 
                 collisionTimes = new float[renderComponentA.model.faces.size()];
                 collisionFaces = new Face[renderComponentA.model.faces.size()];
@@ -276,19 +292,6 @@ public class Collider {
             Face finalCollisionFace = null;
             List<GameObject> objList = new ArrayList<GameObject>();
             GameObject collidingObject = null;
-
-            List<Box> collisionBoxesA = new ArrayList<Box>();
-            Box collisionBoxA;
-
-            for(GameObject objB : ObjectController.gameObjects) {
-
-                if(objA != objB) {
-
-
-
-                }
-
-            }
 
             for(GameObject objB : ObjectController.gameObjects) {
 
@@ -376,7 +379,7 @@ public class Collider {
                     maxVertexPos = VectorHelper.sumVectors(new Vector3f[] {maxVertexPos, verticesA.get(0)});
                     minVertexPos = VectorHelper.sumVectors(new Vector3f[] {minVertexPos, verticesA.get(0)});
 
-                    middles.add(VectorHelper.divideVectors(VectorHelper.sumVectors(new Vector3f[]{minVertexPos, maxVertexPos}), new Vector3f(2f, 2f, 2f)));
+                    middles.add(VectorHelper.divideVectorByFloat(VectorHelper.sumVectors(new Vector3f[]{minVertexPos, maxVertexPos}), 2));
                     Vector3f middle = middles.get(middles.size() - 1);
 
                     radii.add(VectorHelper.subtractVectors(maxVertexPos, middle));

@@ -36,7 +36,7 @@ public class ForceController {
 
         Vector3f acceleration;
 
-        acceleration = VectorHelper.divideVectors(forceDirection, new Vector3f(mass, mass, mass));
+        acceleration = VectorHelper.divideVectorByFloat(forceDirection, mass);
 
         return acceleration;
 
@@ -66,24 +66,21 @@ public class ForceController {
 
     }
 
-    public static Vector2f getCombinedForces(float directionA, float directionB) {
+    public static Vector2f getCombinedForces(Vector2f direction) {
 
         Vector2f combinedForce = new Vector2f();
 
-        combinedForce.x = directionA * X_Y_RATIO;
-        combinedForce.y = directionB * X_Y_RATIO;
+        combinedForce = VectorHelper.multiplyVectorByFloat(direction, X_Y_RATIO);
 
         return combinedForce;
 
     }
 
-    public static Vector3f getCombinedForces(float directionA, float directionB, float directionC) {
+    public static Vector3f getCombinedForces(Vector3f direction) {
 
         Vector3f combinedForce = new Vector3f();
 
-        combinedForce.x = directionA * X_Y_Z_RATIO;
-        combinedForce.y = directionB * X_Y_Z_RATIO;
-        combinedForce.z = directionC * X_Y_Z_RATIO;
+        combinedForce = VectorHelper.multiplyVectorByFloat(direction, X_Y_Z_RATIO);
 
         return combinedForce;
 
