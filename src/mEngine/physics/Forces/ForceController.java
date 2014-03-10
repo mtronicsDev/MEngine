@@ -4,19 +4,17 @@ import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class ForceController {
 
-    public static List<Force> forces = new ArrayList<Force>();
+    public static Map<String, Force> generalForces = new HashMap<String, Force>();
 
     public static final float X_Y_RATIO = 0.7068913f;
 
     public static final float X_Y_Z_RATIO = 0.57765603f;
 
-    public static void addForce(Vector3f direction) { forces.add(new Force(direction)); }
+    public static void addForce(String key, Vector3f direction) { generalForces.put(key, new Force(direction)); }
 
     public static Vector3f sumForces(Collection<Force> forces) {
 
