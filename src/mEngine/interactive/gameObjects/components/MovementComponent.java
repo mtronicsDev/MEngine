@@ -61,7 +61,11 @@ public class MovementComponent extends Component {
 
         }
 
-        forcePoints.get("middle").forces.put("gravity", new Force(new Vector3f(0, -0.981f, 0)));
+        for(String key : ForceController.generalForces.keySet()) {
+
+            forcePoints.get("middle").forces.put(key, ForceController.generalForces.get(key));
+
+        }
 
     }
 

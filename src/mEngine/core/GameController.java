@@ -39,7 +39,7 @@ public class GameController {
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
 
-        ForceController.addForce(new Vector3f(0, -0.981f, 0)); //Gravity
+        ForceController.addForce("gravity", new Vector3f(0, -0.981f, 0));
 
         //GameObject Time ;)
         GameObject object;
