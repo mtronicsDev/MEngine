@@ -73,12 +73,7 @@ public class Collider {
                 Box boxB = new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectors(renderComponent.model.getSize(),
                         new Vector3f(2, 2, 2))), renderComponent.model.getSize());
 
-                colliding = boxA.position.x < boxB.position.x + boxB.size.x
-                        && boxA.position.x + boxA.size.x > boxB.position.x
-                        && boxA.position.y < boxB.position.y + boxB.size.y
-                        && boxA.position.y + boxA.size.y > boxB.position.y
-                        && boxA.position.z < boxB.position.z + boxB.size.z
-                        && boxA.position.z + boxA.size.z > boxB.position.z;
+                colliding = areBoxesColliding(boxA, boxB);
 
             }
 
