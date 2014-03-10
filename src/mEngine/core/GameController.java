@@ -32,8 +32,8 @@ public class GameController {
 
     public static void runGame() {
 
-        PreferenceHelper.loadPreferences("res/preferences/mEngine.mmp");
         ResourceHelper.initialize();
+        PreferenceHelper.loadPreferences("mEngine");
         GraphicsController.createDisplay(60, "mEngine Test Run");
         AudioController.initializeOpenAL();
         TimeHelper.setupTiming();

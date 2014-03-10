@@ -1,6 +1,7 @@
 package mEngine.util;
 
 import mEngine.util.math.MathHelper;
+import mEngine.util.math.graphs.Graph;
 import org.lwjgl.opengl.Display;
 
 public class RuntimeHelper {
@@ -10,7 +11,7 @@ public class RuntimeHelper {
     public static final int FREE_MEMORY = 2;
 
     private static Runtime runtime;
-    private static double[] memUsage;
+    private static Graph memUsage;
 
     public static void initialize() { runtime = Runtime.getRuntime(); }
 
@@ -33,16 +34,16 @@ public class RuntimeHelper {
 
     }
 
-    public static double[] getMemoryGraph(int valueCount) {
+    public static Graph getMemoryGraph(int valueCount) {
 
-        if(memUsage == null) memUsage = MathHelper.fillArray(valueCount);
-        for(int i = 1; i < memUsage.length; i++) {
+        if(memUsage == null) memUsage = new Graph(valueCount);
+        for(int i = 1; i < memUsage.getLength(); i++) {
 
-            if(i - 1 >= 0) memUsage[i - 1] = memUsage[i];
+            if(i - 1 >= 0) memUsage.updateValue(i - 1, memUsage.getX(i));
 
         }
 
-        memUsage[memUsage.length - 1] = (float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100;
+        memUsage.updateValue(memUsage.getLength() - 1, (float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100);
 
         return memUsage;
 

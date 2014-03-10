@@ -40,6 +40,8 @@ public class ResourceHelper {
 
             default: filePath = paths.get(type) + fileName;
                 break;
+            case 2: filePath = paths.get(type) + fileName + ".mmp";
+                break;
             case 3: filePath = paths.get(type) + fileName + ".mtl";
                 break;
             case 4: filePath = paths.get(type) + fileName + ".obj";

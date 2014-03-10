@@ -1,7 +1,7 @@
 package mEngine.interactive.gui.guiComponents;
 
-import mEngine.interactive.gui.GUIElement;
 import mEngine.util.TextureHelper;
+import mEngine.util.math.graphs.Graph;
 import org.lwjgl.util.vector.Vector2f;
 
 import static mEngine.util.math.MathHelper.clamp;
@@ -10,16 +10,15 @@ import static org.lwjgl.opengl.GL11.*;
 public class GUIGraph extends GUIComponent {
 
     public Vector2f size;
-    public double[] values;
+    public Graph graph;
 
     public GUIGraph(Vector2f size, double[] values) {
 
         this.size = size;
-        this.values = values;
+        this.graph = new Graph(values);
         if(values.length == 0) {
 
-            this.values = new double[(int)size.x];
-            for(int i = 0; i < size.x; i++) { this.values[i] = 0; }
+            this.graph = new Graph((int)size.x);
 
         }
 
@@ -28,13 +27,13 @@ public class GUIGraph extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
-        float stepSize = size.x / values.length;
+        float stepSize = size.x / graph.getLength();
 
         TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
         glBegin(GL_LINE_STRIP);
 
         //For every x-value, a vertex is rendered at the appropriate spot
-        for(int i = 0; i < values.length; i++) {
+        for(int i = 0; i < graph.getLength(); i++) {
 
             /*
             StepSize: size of the jumps between x values
@@ -42,7 +41,7 @@ public class GUIGraph extends GUIComponent {
                 Then it is moved down by size.y so it is in the bottom left corner of the element.
                 Finally, it is moved up again by the y value given.
             */
-            glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float)clamp(values[i], 0, size.y));
+            glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float)clamp(graph.getX(i), 0, size.y));
 
         }
 
@@ -53,7 +52,7 @@ public class GUIGraph extends GUIComponent {
     public void onExternalUpdate(Object[] args) {
 
         super.onExternalUpdate(args);
-        for(int i = 0; i < args.length; i++) { values[i] = (Double)args[i]; }
+        for(int i = 0; i < args.length; i++) { graph.updateValue(i, (Double)args[i]); }
 
     }
 
