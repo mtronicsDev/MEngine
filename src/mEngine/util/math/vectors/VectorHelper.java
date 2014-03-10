@@ -131,6 +131,21 @@ public class VectorHelper {
 
     }
 
+    public static Vector3f getVectorProduct(Vector3f vectorA, Vector3f vectorB) {
+
+        if(vectorA == null) vectorA = new Vector3f();
+        if(vectorB == null) vectorB = new Vector3f();
+
+        Vector3f vectorProduct = new Vector3f();
+
+        vectorProduct.x = vectorA.y * vectorB.z - vectorA.z * vectorB.y;
+        vectorProduct.y = vectorA.z * vectorB.x - vectorA.x * vectorB.z;
+        vectorProduct.z = vectorA.x * vectorB.y - vectorA.y * vectorB.x;
+
+        return vectorProduct;
+
+    }
+
     public static Vector2f sumVectorAndFloat(Vector2f vector, float addend) {
 
         return sumVectors(new Vector2f[] {vector, new Vector2f(addend, addend)});
