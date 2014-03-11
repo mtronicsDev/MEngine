@@ -7,24 +7,24 @@ import java.util.Map;
 
 public class Input {
 
-    private static boolean[] keyStates = new boolean[Keyboard.getKeyCount()];
+    private static boolean[] keyStats = new boolean[Keyboard.getKeyCount()];
     public static Map<String, Integer> keyAssignments = new HashMap<String, Integer>();
 
     public static boolean isKeyPressed(int key) { return Keyboard.isKeyDown(key); }
 
     public static boolean isKeyDown(int key) {
 
-        boolean isAlreadyActivated = keyStates[key];
-        keyStates[key] = isKeyPressed(key);
-        return keyStates[key] != isAlreadyActivated && !isAlreadyActivated;
+        boolean isAlreadyActivated = keyStats[key];
+        keyStats[key] = isKeyPressed(key);
+        return keyStats[key] != isAlreadyActivated && !isAlreadyActivated;
 
     }
 
     public static boolean isKeyUp(int key) {
 
-        boolean isAlreadyActivated = keyStates[key];
-        keyStates[key] = isKeyPressed(key);
-        return keyStates[key] != isAlreadyActivated && isAlreadyActivated;
+        boolean isAlreadyActivated = keyStats[key];
+        keyStats[key] = isKeyPressed(key);
+        return keyStats[key] != isAlreadyActivated && isAlreadyActivated;
 
     }
 
@@ -35,7 +35,7 @@ public class Input {
         else {
 
             keyAssignments.put(key, value);
-            keyStates[value] = false;
+            keyStats[value] = false;
 
         }
 

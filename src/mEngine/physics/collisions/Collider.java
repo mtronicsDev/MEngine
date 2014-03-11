@@ -699,8 +699,7 @@ public class Collider {
 
                                     Vector3f alphaIndicator = new Vector3f(vertexBToCalculate.x, vertexBToCalculate.y, 0);
 
-                                    alpha = (float)Math.acos(VectorHelper.getScalarProduct(alphaIndicator, vertexBToCalculate)
-                                            / (VectorHelper.getAbs(alphaIndicator) * VectorHelper.getAbs(vertexBToCalculate)));
+                                    alpha = VectorHelper.getAngle(alphaIndicator, vertexBToCalculate);
 
                                     yAxisRotationMatrix = new Matrix3d(new Vector3f((float)Math.cos(alpha), 0, (float)Math.sin(alpha)),
                                             new Vector3f(0, 1, 0),
@@ -714,8 +713,7 @@ public class Collider {
 
                                     Vector3f betaIndicator = new Vector3f(1, 0, 0);
 
-                                    beta = (float)Math.acos(VectorHelper.getScalarProduct(betaIndicator, vertexBToCalculate)
-                                            / (VectorHelper.getAbs(betaIndicator) * VectorHelper.getAbs(vertexBToCalculate)));
+                                    beta = VectorHelper.getAngle(betaIndicator, vertexBToCalculate);
 
                                     zAxisRotationMatrix = new Matrix3d(new Vector3f((float)Math.cos(beta), -(float)Math.sin(beta), 0),
                                             new Vector3f((float)Math.sin(beta), (float)Math.cos(beta), 0),
@@ -729,8 +727,7 @@ public class Collider {
 
                                     Vector3f gammaIndicator = new Vector3f(vertexCToCalculate.x, vertexCToCalculate.y, 0);
 
-                                    gamma = (float)Math.acos(VectorHelper.getScalarProduct(gammaIndicator, vertexCToCalculate)
-                                            / (VectorHelper.getAbs(gammaIndicator) * VectorHelper.getAbs(vertexCToCalculate)));
+                                    gamma = VectorHelper.getAngle(gammaIndicator, vertexCToCalculate);
 
                                     xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
                                             new Vector3f(0, (float)Math.cos(gamma), -(float)Math.sin(gamma)),

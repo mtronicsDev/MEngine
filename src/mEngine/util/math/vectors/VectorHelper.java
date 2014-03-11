@@ -146,6 +146,12 @@ public class VectorHelper {
 
     }
 
+    public static float getAngle(Vector3f vectorA, Vector3f vectorB) {
+
+        return (float)Math.acos(getScalarProduct(vectorA, vectorB) / (getAbs(vectorA) * getAbs(vectorB)));
+
+    }
+
     public static Vector2f sumVectorAndFloat(Vector2f vector, float addend) {
 
         return sumVectors(new Vector2f[] {vector, new Vector2f(addend, addend)});
@@ -264,6 +270,12 @@ public class VectorHelper {
         if(vectorB == null) vectorB = new Vector2f();
 
         return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
+
+    }
+
+    public static float getAngle(Vector2f vectorA, Vector2f vectorB) {
+
+        return (float)Math.acos(getScalarProduct(vectorA, vectorB) / (getAbs(vectorA) * getAbs(vectorB)));
 
     }
 

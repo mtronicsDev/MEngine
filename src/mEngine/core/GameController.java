@@ -11,6 +11,7 @@ import mEngine.interactive.gameObjects.components.Camera;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gui.GUIElement;
 import mEngine.interactive.gui.GUIScreen;
+import mEngine.interactive.gui.guiComponents.GUIButton;
 import mEngine.interactive.gui.guiComponents.GUIGraph;
 import mEngine.interactive.gui.guiComponents.GUIQuad;
 import mEngine.interactive.gui.guiComponents.GUIText;
@@ -19,6 +20,7 @@ import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
+import mEngine.util.input.Input;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -108,11 +110,11 @@ public class GameController {
 
                         new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
                                 .addComponent("guiGraphRAM", new GUIGraph(
-                                    new Vector2f(Display.getWidth(), 100),
-                                    new double[]{}))
+                                        new Vector2f(Display.getWidth(), 100),
+                                        new double[]{}))
                                 .addComponent("guiGraphFPS", new GUIGraph(
-                                    new Vector2f(Display.getWidth(), 100),
-                                    new double[]{})
+                                        new Vector2f(Display.getWidth(), 100),
+                                        new double[]{})
                                 )
                 }, true));
 
