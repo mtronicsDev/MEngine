@@ -1,7 +1,5 @@
 package mEngine.interactive.gui;
 
-import mEngine.interactive.gui.guiComponents.GUIText;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

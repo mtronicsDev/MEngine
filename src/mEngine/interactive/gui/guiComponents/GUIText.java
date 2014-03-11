@@ -1,6 +1,5 @@
 package mEngine.interactive.gui.guiComponents;
 
-import mEngine.interactive.gui.GUIElement;
 import mEngine.util.FontHelper;
 import mEngine.util.PreferenceHelper;
 import org.newdawn.slick.Color;

@@ -1,8 +1,8 @@
 package mEngine.graphics;
 
 import mEngine.core.ObjectController;
-import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.PreferenceHelper;
+import mEngine.util.input.KeyAlreadyAssignedException;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;

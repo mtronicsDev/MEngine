@@ -2,11 +2,11 @@ package mEngine.physics.collisions;
 
 import mEngine.core.ObjectController;
 import mEngine.graphics.renderable.Face;
+import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gameObjects.components.CollideComponent;
 import mEngine.interactive.gameObjects.components.Controller;
 import mEngine.interactive.gameObjects.components.MovementComponent;
 import mEngine.interactive.gameObjects.components.RenderComponent;
-import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;

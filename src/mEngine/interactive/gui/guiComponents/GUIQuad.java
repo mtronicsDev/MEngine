@@ -1,6 +1,5 @@
 package mEngine.interactive.gui.guiComponents;
 
-import mEngine.interactive.gui.GUIElement;
 import mEngine.util.TextureHelper;
 import org.newdawn.slick.opengl.Texture;
 

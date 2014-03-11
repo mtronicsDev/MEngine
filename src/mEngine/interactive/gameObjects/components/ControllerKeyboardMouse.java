@@ -1,9 +1,9 @@
 package mEngine.interactive.gameObjects.components;
 
 import mEngine.interactive.gameObjects.GameObject;
+import mEngine.util.PreferenceHelper;
 import mEngine.util.input.Input;
 import mEngine.util.input.KeyAlreadyAssignedException;
-import mEngine.util.PreferenceHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
