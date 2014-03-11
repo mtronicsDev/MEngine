@@ -29,8 +29,8 @@ public class Collider {
 
            if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
 
-               Vector3f posA = VectorHelper.subtractVectors(objA.position, VectorHelper.divideVectors(renderComponentA.model.getSize(), new Vector3f(2, 2, 2)));
-               Vector3f posB = VectorHelper.subtractVectors(objB.position, VectorHelper.divideVectors(renderComponentB.model.getSize(), new Vector3f(2, 2, 2)));
+               Vector3f posA = VectorHelper.subtractVectors(objA.position, VectorHelper.divideVectorByFloat(renderComponentA.model.getSize(), 2));
+               Vector3f posB = VectorHelper.subtractVectors(objB.position, VectorHelper.divideVectorByFloat(renderComponentB.model.getSize(), 2));
 
                Vector3f sizeA = renderComponentA.model.getSize();
                Vector3f sizeB = renderComponentB.model.getSize();
@@ -70,8 +70,8 @@ public class Collider {
 
             if(renderComponent != null && collideComponent != null) {
 
-                Box boxB = new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectors(renderComponent.model.getSize(),
-                        new Vector3f(2, 2, 2))), renderComponent.model.getSize());
+                Box boxB = new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectorByFloat(renderComponent.model.getSize(), 2)),
+                        renderComponent.model.getSize());
 
                 colliding = areBoxesColliding(boxA, boxB);
 
