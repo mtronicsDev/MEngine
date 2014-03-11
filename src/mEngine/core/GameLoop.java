@@ -13,7 +13,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
 
-import static mEngine.util.TimeHelper.getFPSGraph;
+import static mEngine.util.debug.Profiler.*;
 import static mEngine.util.math.NumberFormatHelper.cutDecimals;
 import static mEngine.util.RuntimeHelper.*;
 import static mEngine.util.TimeHelper.FPS;
