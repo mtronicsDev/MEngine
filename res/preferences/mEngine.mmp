@@ -2,7 +2,6 @@
 screenWidth=1280
 screenHeight=720
 fullscreen=false
-is3D=true
 
 #Camera preferences
 fieldOfView=80
@@ -14,7 +13,6 @@ sprintModeToggle=false
 rotationSpeed=0.16
 
 #GUI preferences
-guiEnabledOnStart=true
 defaultFontFace=Verdana
 antiAliasing=true
 

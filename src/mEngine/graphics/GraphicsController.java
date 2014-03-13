@@ -19,21 +19,20 @@ public class GraphicsController {
     private static int width;
     private static int height;
     private static String title;
-
     private static int fps;
-    public static boolean isFullscreen;
-    public static boolean isCurrently3D;
 
+    public static Dimension currentRenderDimension;
+
+    public static boolean isFullscreen;
     public static boolean mEnchmarkEnabled;
 
     public static void createDisplay(int fps, String title) {
 
-        GraphicsController.width = PreferenceHelper.getInteger("screenWidth");
-        GraphicsController.height = PreferenceHelper.getInteger("screenHeight");
+        width = PreferenceHelper.getInteger("screenWidth");
+        height = PreferenceHelper.getInteger("screenHeight");
 
         GraphicsController.fps = fps;
 
-        isCurrently3D = PreferenceHelper.getBoolean("is3D");
         mEnchmarkEnabled = PreferenceHelper.getBoolean("mEnchmarkEnabled");
         GraphicsController.title = title;
 
@@ -135,27 +134,39 @@ public class GraphicsController {
 
     public static void switchTo2D() {
 
-        glMatrixMode(GL_MODELVIEW);
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluOrtho2D(0, Display.getWidth(), Display.getHeight(), 0);
-        glViewport(0, 0, Display.getWidth(), Display.getHeight());
-        glMatrixMode(GL_MODELVIEW);
+        if(currentRenderDimension != Dimension.DIM_2) {
 
-        glPushMatrix();
-        glLoadIdentity();
+            glMatrixMode(GL_MODELVIEW);
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            gluOrtho2D(0, Display.getWidth(), Display.getHeight(), 0);
+            glViewport(0, 0, Display.getWidth(), Display.getHeight());
+            glMatrixMode(GL_MODELVIEW);
+
+            glPushMatrix();
+            glLoadIdentity();
+
+            currentRenderDimension = Dimension.DIM_2;
+
+        }
 
     }
 
     public static void switchTo3D() {
 
-        glPopMatrix(); //From 2D
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
-        glViewport(0, 0, Display.getWidth(), Display.getHeight());
-        glMatrixMode(GL_MODELVIEW);
-        glEnable(GL_DEPTH_TEST);
+        if(currentRenderDimension != Dimension.DIM_3) {
+
+            glPopMatrix(); //From 2D
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
+            glViewport(0, 0, Display.getWidth(), Display.getHeight());
+            glMatrixMode(GL_MODELVIEW);
+            glEnable(GL_DEPTH_TEST);
+
+            currentRenderDimension = Dimension.DIM_3;
+
+        }
 
     }
 

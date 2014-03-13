@@ -2,13 +2,14 @@ package mEngine.core;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.interactive.gui.GUIController;
-import mEngine.interactive.gui.GUIScreen;
-import mEngine.interactive.gui.guiComponents.GUIGraph;
+import mEngine.interactive.gameObjects.components.gui.GUIElement;
+import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIGraph;
 import mEngine.physics.collisions.Collider;
 import mEngine.util.DataTypeHelper;
 import mEngine.util.TimeHelper;
+import mEngine.util.debug.Profiler;
 import mEngine.util.input.Input;
+import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
@@ -25,7 +26,6 @@ public class GameLoop {
 
         while (!Display.isCloseRequested()) {
 
-            if(GUIController.isGUIActivated) GraphicsController.switchTo3D();
             GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
 
             if(Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
@@ -43,14 +43,9 @@ public class GameLoop {
 
             }
 
-            if(GUIController.isGUIActivated) GraphicsController.switchTo2D();
-
-            if(GUIController.isGUIActivated)
-                for(GUIScreen screen : ObjectController.guiScreens) { screen.update(); }
-
             //--- Remove when not needed any longer ---
             //System resource usage
-            ObjectController.getGUIElement(0, 0).getComponent("guiText").onExternalUpdate(new String[]{"mEngine Test Run @ " + FPS + " FPS"});
+           /* ObjectController.getGUIElement(0, 0).getComponent("guiText").onExternalUpdate(new String[]{"mEngine Test Run @ " + FPS + " FPS"});
             ObjectController.getGUIElement(0, 1).getComponent("guiText").onExternalUpdate(new String[]{"MemUsage: "
                     + cutDecimals((float)getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1)
                     + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]"});
@@ -74,7 +69,7 @@ public class GameLoop {
 
             graph.onExternalUpdate(DataTypeHelper.doublePrimitiveToObject(
                     getFPSGraph((int) graph.size.x).getValues()
-            ));
+            ));*/
             //--- End Remove ---
 
             TimeHelper.updateFPS();

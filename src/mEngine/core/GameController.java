@@ -5,11 +5,10 @@ import mEngine.audio.AudioSource;
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.interactive.gameObjects.components.*;
-import mEngine.interactive.gui.GUIElement;
-import mEngine.interactive.gui.GUIScreen;
-import mEngine.interactive.gui.guiComponents.GUIGraph;
-import mEngine.interactive.gui.guiComponents.GUIQuad;
-import mEngine.interactive.gui.guiComponents.GUIText;
+import mEngine.interactive.gameObjects.components.gui.GUIElement;
+import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIGraph;
+import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIQuad;
+import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIText;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;
@@ -66,6 +65,44 @@ public class GameController {
                 "camera",
                 new Camera()
         );
+        object.addComponent(
+                "fpsText",
+                new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new GUIText("Current FPS", 15))
+        );
+        object.addComponent(
+                "ramText",
+                new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new GUIText("Current RAM", 15))
+        );
+        object.addComponent(
+                "xText",
+                new GUIElement(new Vector2f(5, 50), new Vector2f()).addComponent("guiText", new GUIText("x:", 15))
+        );
+        object.addComponent(
+                "yText",
+                new GUIElement(new Vector2f(5, 70), new Vector2f()).addComponent("guiText", new GUIText("y:", 15))
+        );
+        object.addComponent(
+                "zText",
+                new GUIElement(new Vector2f(5, 90), new Vector2f()).addComponent("guiText", new GUIText("z:", 15))
+        );
+        object.addComponent(
+                "collisionText",
+                new GUIElement(new Vector2f(5, 115), new Vector2f()).addComponent("guiText", new GUIText("Player collision:", 15))
+        );
+        object.addComponent(
+                "graphs",
+                new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
+                        .addComponent("guiGraphFPS", new GUIGraph(
+                                new Vector2f(Display.getWidth(), 100),
+                                new double[]{}))
+                        .addComponent("guiGraphRAM", new GUIGraph(
+                                new Vector2f(Display.getWidth(), 100),
+                                new double[]{}))
+        );
+        object.addComponent(
+                "reticule",
+                new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64)).addComponent("guiQuad", new GUIQuad("reticule"))
+        );
 
         addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);
@@ -91,7 +128,7 @@ public class GameController {
                 new CollideComponent(false)
         );
 
-        addGUIScreen(new GUIScreen(
+        /*addGUIScreen(new GUIScreen(
                 new GUIElement[]{
                         new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new GUIText("Current FPS", 15)),
                         new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new GUIText("Current RAM", 15)),
@@ -115,7 +152,7 @@ public class GameController {
         addGUIScreen(new GUIScreen(
                 new GUIElement[]{
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64)).addComponent("guiQuad", new GUIQuad("reticule"))
-                }, true));
+                }, true));*/
 
         AudioController.setListener(getGameObject(0));
 

@@ -1,4 +1,4 @@
-package mEngine.interactive.gui.guiComponents;
+package mEngine.interactive.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.TextureHelper;
 import org.newdawn.slick.opengl.Texture;

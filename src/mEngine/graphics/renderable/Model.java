@@ -59,8 +59,6 @@ public class Model {
 
         for(int count = 0; count < this.vertices.size(); count ++) this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
-        //position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
-
     }
 
     public void update(Vector3f pos, Vector3f rot) {
@@ -175,9 +173,7 @@ public class Model {
 
         for(int count = 0; count < vertices.size(); count ++) vertices.set(count, VectorHelper.subtractVectors(vertices.get(count), minVertexPos));
 
-        Vector3f middle =  VectorHelper.divideVectors(getExtremeVertexPositions()[1], new Vector3f(2, 2, 2));
-
-        return middle;
+        return VectorHelper.divideVectors(getExtremeVertexPositions()[1], new Vector3f(2, 2, 2));
 
     }
 

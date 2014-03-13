@@ -1,8 +1,8 @@
-package mEngine.interactive.gui.guiComponents;
+package mEngine.interactive.gameObjects.components.gui.guiComponents;
 
-import mEngine.interactive.gui.GUIElement;
+import mEngine.interactive.gameObjects.components.gui.GUIElement;
 
-public abstract class GUIComponent {
+public abstract class GUIComponent{
 
     public GUIElement parent;
 

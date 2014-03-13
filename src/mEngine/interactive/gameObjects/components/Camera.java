@@ -1,5 +1,6 @@
 package mEngine.interactive.gameObjects.components;
 
+import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
@@ -35,6 +36,7 @@ public class Camera extends Component {
 
     public void onUpdate(GameObject obj) {
 
+        GraphicsController.switchTo3D();
         if(Input.isKeyPressed(Keyboard.KEY_F)) zoom --;
         else if(Input.isKeyPressed(Keyboard.KEY_G)) zoom ++;
 

@@ -1,4 +1,4 @@
-package mEngine.interactive.gui.guiComponents;
+package mEngine.interactive.gameObjects.components.gui.guiComponents;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;

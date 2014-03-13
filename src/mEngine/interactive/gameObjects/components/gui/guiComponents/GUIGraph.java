@@ -1,4 +1,4 @@
-package mEngine.interactive.gui.guiComponents;
+package mEngine.interactive.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.TextureHelper;
 import mEngine.util.math.graphs.Graph;

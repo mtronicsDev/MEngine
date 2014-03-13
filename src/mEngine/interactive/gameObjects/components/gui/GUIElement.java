@@ -1,12 +1,15 @@
-package mEngine.interactive.gui;
+package mEngine.interactive.gameObjects.components.gui;
 
-import mEngine.interactive.gui.guiComponents.GUIComponent;
+import mEngine.graphics.GraphicsController;
+import mEngine.interactive.gameObjects.GameObject;
+import mEngine.interactive.gameObjects.components.Component;
+import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIComponent;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GUIElement {
+public class GUIElement extends Component{
 
     public Vector2f position;
     public Vector2f size;
@@ -26,8 +29,9 @@ public class GUIElement {
 
     }
 
-    public void update() {
+    public void onUpdate(GameObject obj) {
 
+        GraphicsController.switchTo2D();
         for(GUIComponent component : components.values()) { component.onUpdate(); }
 
     }
