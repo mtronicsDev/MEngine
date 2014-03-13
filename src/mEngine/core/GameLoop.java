@@ -2,23 +2,11 @@ package mEngine.core;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.interactive.gameObjects.GameObject;
-import mEngine.interactive.gameObjects.components.gui.GUIElement;
-import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIGraph;
-import mEngine.physics.collisions.Collider;
-import mEngine.util.DataTypeHelper;
 import mEngine.util.TimeHelper;
-import mEngine.util.debug.Profiler;
 import mEngine.util.input.Input;
-import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
-
-import static mEngine.util.RuntimeHelper.*;
-import static mEngine.util.TimeHelper.FPS;
-import static mEngine.util.debug.Profiler.getFPSGraph;
-import static mEngine.util.debug.Profiler.getMemoryGraph;
-import static mEngine.util.math.NumberFormatHelper.cutDecimals;
 
 public class GameLoop {
 

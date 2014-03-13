@@ -1,6 +1,5 @@
 package mEngine.interactive.gameObjects.components;
 
-import mEngine.graphics.Dimension;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.renderable.Model;
 import mEngine.interactive.gameObjects.GameObject;
