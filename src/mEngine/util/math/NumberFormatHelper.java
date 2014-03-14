@@ -14,8 +14,10 @@ public class NumberFormatHelper {
     public static String cutDecimals(double input, int decimals) {
 
         String format = "0.";
-        if(decimals == 0) format = "0";
-        else for(int i = 0; i < decimals; i++) { format = format + "0"; }
+        if (decimals == 0) format = "0";
+        else for (int i = 0; i < decimals; i++) {
+            format = format + "0";
+        }
 
         return format(input, format);
 

@@ -1,6 +1,6 @@
-package mEngine.interactive.gameObjects;
+package mEngine.gameObjects;
 
-import mEngine.interactive.gameObjects.components.Component;
+import mEngine.gameObjects.components.Component;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;
@@ -23,7 +23,9 @@ public class GameObject {
 
     public void update() {
 
-        for(Component component : components.values()) { component.onUpdate(this); }
+        for (Component component : components.values()) {
+            component.onUpdate(this);
+        }
 
     }
 
@@ -35,6 +37,8 @@ public class GameObject {
 
     }
 
-    public Component getComponent(String key) { return components.get(key); }
+    public Component getComponent(String key) {
+        return components.get(key);
+    }
 
 }

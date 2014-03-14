@@ -1,7 +1,7 @@
-package mEngine.interactive.gameObjects.components;
+package mEngine.gameObjects.components;
 
+import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
-import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -18,7 +18,7 @@ public class Camera extends Component {
 
         //Sets perspective
         glMatrixMode(GL_PROJECTION);
-        gluPerspective(45, (float)Display.getWidth() / Display.getHeight(), 0.1f, 1000);
+        gluPerspective(45, (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
         glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
         glMatrixMode(GL_MODELVIEW);
@@ -32,13 +32,14 @@ public class Camera extends Component {
 
     }
 
-    public  void onCreation(GameObject obj) {}
+    public void onCreation(GameObject obj) {
+    }
 
     public void onUpdate(GameObject obj) {
 
         GraphicsController.switchTo3D();
-        if(Input.isKeyPressed(Keyboard.KEY_F)) zoom --;
-        else if(Input.isKeyPressed(Keyboard.KEY_G)) zoom ++;
+        if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
+        else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
 
         Vector3f position = obj.position;
         Vector3f rotation = obj.rotation;
@@ -53,6 +54,7 @@ public class Camera extends Component {
 
     }
 
-    public void onRemoteUpdate(GameObject obj) {}
+    public void onRemoteUpdate(GameObject obj) {
+    }
 
 }

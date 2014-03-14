@@ -1,6 +1,6 @@
 package mEngine.audio;
 
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.gameObjects.GameObject;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.util.vector.Vector3f;
@@ -17,22 +17,31 @@ public class AudioSource {
     int buffer;
     int source;
 
-    FloatBuffer sourcePos = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-    FloatBuffer sourceVel = (FloatBuffer)BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
+    FloatBuffer sourcePos = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
+    FloatBuffer sourceVel = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
 
-    public AudioSource(GameObject source, String fileName) throws LWJGLException{
+    public AudioSource(GameObject source, String fileName) throws LWJGLException {
 
         alGetError();
-        if(AudioController.loadALData(this, fileName) == AL_FALSE) throw new LWJGLException();
+        if (AudioController.loadALData(this, fileName) == AL_FALSE) throw new LWJGLException();
 
         position = source.position;
         rotation = source.rotation;
 
     }
 
-    public void play() { alSourcePlay(source); }
-    public void pause() { alSourcePause(source); }
-    public void stop() { alSourceStop(source); }
+    public void play() {
+        alSourcePlay(source);
+    }
+
+    public void pause() {
+        alSourcePause(source);
+    }
+
+    public void stop() {
+        alSourceStop(source);
+    }
+
     public void close() {
 
         alDeleteSources(source);

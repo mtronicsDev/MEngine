@@ -1,6 +1,6 @@
-package mEngine.interactive.gameObjects.components.gui.primitives;
+package mEngine.gameObjects.components.gui.primitives;
 
-import mEngine.interactive.gameObjects.components.gui.GUIElement;
+import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.util.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -31,20 +31,20 @@ public class GUIEllipse extends GUIElement {
 
         glVertex2f(position.x, position.y);
 
-        for(int i = 360; i > 0; i--) {
+        for (int i = 360; i > 0; i--) {
 
-            float radians = (float)toRadians(i);
+            float radians = (float) toRadians(i);
 
             glVertex2f(
-                    position.x + ((float)cos(radians) * radius.x),
-                    position.y + ((float)sin(radians) * radius.y)
+                    position.x + ((float) cos(radians) * radius.x),
+                    position.y + ((float) sin(radians) * radius.y)
             );
 
         }
 
         glVertex2f(
-                position.x + ((float)cos(toRadians(360)) * radius.x),
-                position.y + ((float)sin(toRadians(360)) * radius.y)
+                position.x + ((float) cos(toRadians(360)) * radius.x),
+                position.y + ((float) sin(toRadians(360)) * radius.y)
         );
 
         glEnd();

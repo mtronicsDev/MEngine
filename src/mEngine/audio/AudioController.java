@@ -1,6 +1,6 @@
 package mEngine.audio;
 
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.gameObjects.GameObject;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.openal.AL;
 import org.lwjgl.util.WaveData;
@@ -41,7 +41,7 @@ public class AudioController {
 
     }
 
-    static int loadALData(AudioSource src, String  fileName) {
+    static int loadALData(AudioSource src, String fileName) {
 
         WaveData waveData = null;
 
@@ -50,20 +50,19 @@ public class AudioController {
             FileInputStream stream = new FileInputStream(getResource(fileName, RES_SOUND));
             waveData = WaveData.create(new BufferedInputStream(stream));
 
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
 
             e.printStackTrace();
             System.exit(1);
 
         }
         src.buffer = alGenBuffers();
-        if(alGetError() != AL_NO_ERROR) return AL_FALSE;
+        if (alGetError() != AL_NO_ERROR) return AL_FALSE;
         alBufferData(src.buffer, waveData.format, waveData.data, waveData.samplerate);
         waveData.dispose();
 
         src.source = alGenSources();
-        if(alGetError() != AL_NO_ERROR) return  AL_FALSE;
+        if (alGetError() != AL_NO_ERROR) return AL_FALSE;
 
         alSourcei(src.source, AL_BUFFER, src.buffer);
         alSourcef(src.source, AL_PITCH, 1.0f);
@@ -71,14 +70,14 @@ public class AudioController {
         alSource(src.source, AL_POSITION, src.sourcePos);
         alSource(src.source, AL_VELOCITY, src.sourceVel);
 
-        if(alGetError() == AL_NO_ERROR) return  AL_TRUE;
+        if (alGetError() == AL_NO_ERROR) return AL_TRUE;
         else return AL_FALSE;
 
     }
 
     public static void killALData() {
 
-        for(AudioSource source : sources){
+        for (AudioSource source : sources) {
 
             alDeleteSources(source.source);
             alDeleteBuffers(source.buffer);

@@ -8,20 +8,22 @@ public class RuntimeHelper {
 
     private static Runtime runtime;
 
-    public static void initialize() { runtime = Runtime.getRuntime(); }
+    public static void initialize() {
+        runtime = Runtime.getRuntime();
+    }
 
     public static int getMemoryStats(int mode) {
 
         switch (mode) {
 
             case TOTAL_MEMORY:
-                return (int)(runtime.totalMemory() / 1024 / 1024);
+                return (int) (runtime.totalMemory() / 1024 / 1024);
 
             case USED_MEMORY:
-                return (int)((runtime.totalMemory() - runtime.freeMemory()) / 1024 / 1024);
+                return (int) ((runtime.totalMemory() - runtime.freeMemory()) / 1024 / 1024);
 
             case FREE_MEMORY:
-                return (int)(runtime.freeMemory() / 1024 / 1024);
+                return (int) (runtime.freeMemory() / 1024 / 1024);
 
         }
 

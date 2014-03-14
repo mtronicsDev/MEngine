@@ -22,7 +22,7 @@ public class TextureHelper {
             Texture texture = TextureLoader.getTexture("PNG", new FileInputStream(getResource(fileName, RES_TEXTURE)));
             loadedTextures.put(fileName, texture);
 
-        } catch(IOException e) {
+        } catch (IOException e) {
 
             e.printStackTrace();
             System.exit(1);
@@ -35,7 +35,7 @@ public class TextureHelper {
 
         Texture texture = loadedTextures.get(name);
 
-        if(loadedTextures.containsKey(name)) return texture;
+        if (loadedTextures.containsKey(name)) return texture;
         else {
 
             loadTexture(name);
@@ -45,6 +45,8 @@ public class TextureHelper {
 
     }
 
-    public static void removeTexture(String name) { loadedTextures.remove(name); }
+    public static void removeTexture(String name) {
+        loadedTextures.remove(name);
+    }
 
 }

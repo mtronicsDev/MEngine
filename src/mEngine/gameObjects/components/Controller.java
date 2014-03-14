@@ -1,10 +1,10 @@
-package mEngine.interactive.gameObjects.components;
+package mEngine.gameObjects.components;
 
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.gameObjects.GameObject;
 import mEngine.physics.forces.Force;
 import org.lwjgl.util.vector.Vector3f;
 
-public abstract class Controller extends Component{
+public abstract class Controller extends Component {
 
     public float[] forceStrengths;
     public boolean capableOfFlying;
@@ -22,9 +22,9 @@ public abstract class Controller extends Component{
 
     public void onCreation(GameObject obj) {
 
-        MovementComponent movementComponent = (MovementComponent)obj.getComponent("movementComponent");
+        MovementComponent movementComponent = (MovementComponent) obj.getComponent("movementComponent");
 
-        if(movementComponent != null) {
+        if (movementComponent != null) {
 
             movementComponent.forcePoints.get("middle").forces.put("forward", new Force(new Vector3f(0, 0, -forceStrengths[0])));
             movementComponent.forcePoints.get("middle").forces.put("backward", new Force(new Vector3f(0, 0, forceStrengths[1])));
@@ -39,7 +39,9 @@ public abstract class Controller extends Component{
 
     }
 
-    public void onRemoteUpdate(GameObject obj) { updateObject(obj); }
+    public void onRemoteUpdate(GameObject obj) {
+        updateObject(obj);
+    }
 
     protected abstract void updateObject(GameObject obj);
 

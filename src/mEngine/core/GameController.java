@@ -2,18 +2,19 @@ package mEngine.core;
 
 import mEngine.audio.AudioController;
 import mEngine.audio.AudioSource;
+import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.*;
+import mEngine.gameObjects.components.gui.GUIElement;
+import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
+import mEngine.gameObjects.components.gui.guiComponents.GUIText;
 import mEngine.graphics.GraphicsController;
-import mEngine.interactive.gameObjects.GameObject;
-import mEngine.interactive.gameObjects.components.*;
-import mEngine.interactive.gameObjects.components.gui.GUIElement;
-import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIGraph;
-import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIQuad;
-import mEngine.interactive.gameObjects.components.gui.guiComponents.GUIText;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
+import mEngine.util.debug.FPSComponent;
+import mEngine.util.debug.RAMComponent;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -57,8 +58,8 @@ public class GameController {
         object.addComponent(
                 "controller",
                 new ControllerKeyboardMouse(
-                    new float[] {0.1f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 1.1f},
-                    false
+                        new float[]{0.1f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 0.075f, 1.1f},
+                        false
                 )
         );
         object.addComponent(
@@ -92,10 +93,10 @@ public class GameController {
         object.addComponent(
                 "graphs",
                 new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
-                        .addComponent("guiGraphFPS", new GUIGraph(
+                        .addComponent("guiGraphFPS", new FPSComponent(
                                 new Vector2f(Display.getWidth(), 100),
                                 new double[]{}))
-                        .addComponent("guiGraphRAM", new GUIGraph(
+                        .addComponent("guiGraphRAM", new RAMComponent(
                                 new Vector2f(Display.getWidth(), 100),
                                 new double[]{}))
         );
@@ -156,7 +157,9 @@ public class GameController {
 
         AudioController.setListener(getGameObject(0));
 
-        for(AudioSource source : audioSources) { source.play(); }
+        for (AudioSource source : audioSources) {
+            source.play();
+        }
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
@@ -166,7 +169,9 @@ public class GameController {
     public static void pauseGame() {
 
         Mouse.setGrabbed(false);
-        for(AudioSource source : audioSources) { source.pause(); }
+        for (AudioSource source : audioSources) {
+            source.pause();
+        }
 
         isGamePaused = true;
 
@@ -175,7 +180,9 @@ public class GameController {
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
-        for(AudioSource source : audioSources) { source.play(); }
+        for (AudioSource source : audioSources) {
+            source.play();
+        }
 
         isGamePaused = false;
 

@@ -1,7 +1,7 @@
-package mEngine.interactive.gameObjects.components;
+package mEngine.gameObjects.components;
 
 import mEngine.core.GameController;
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.gameObjects.GameObject;
 import mEngine.physics.collisions.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
@@ -37,9 +37,9 @@ public class MovementComponent extends Component {
 
     public void onCreation(GameObject obj) {
 
-        RenderComponent renderComponent = (RenderComponent)obj.getComponent("renderComponent");
+        RenderComponent renderComponent = (RenderComponent) obj.getComponent("renderComponent");
 
-        if(renderComponent != null) {
+        if (renderComponent != null) {
 
             mass = renderComponent.model.getMass();
 
@@ -51,9 +51,7 @@ public class MovementComponent extends Component {
             forcePoints.put("up", new ForcePoint(new Vector3f(0, 1, 0)));
             forcePoints.put("down", new ForcePoint(new Vector3f(0, -1, 0)));
 
-        }
-
-        else {
+        } else {
 
             mass = 60;
 
@@ -61,7 +59,7 @@ public class MovementComponent extends Component {
 
         }
 
-        for(String key : ForceController.generalForces.keySet()) {
+        for (String key : ForceController.generalForces.keySet()) {
 
             forcePoints.get("middle").forces.put(key, ForceController.generalForces.get(key));
 
@@ -71,26 +69,27 @@ public class MovementComponent extends Component {
 
     public void onUpdate(GameObject obj) {
 
-        if(!GameController.isGamePaused) {
+        if (!GameController.isGamePaused) {
 
-            Controller controller = (Controller)obj.getComponent("controller");
-            CollideComponent collideComponent = (CollideComponent)obj.getComponent("collideComponent");
+            Controller controller = (Controller) obj.getComponent("controller");
+            CollideComponent collideComponent = (CollideComponent) obj.getComponent("collideComponent");
 
-            if(controller != null) {
+            if (controller != null) {
 
-                if(!controller.sprintModeToggle) sprinting = false;
-                if(!controller.sneakModeToggle) sneaking = false;
-                if(Input.isKeyDown(Keyboard.KEY_V)) forcePoints.get("middle").forces.get("gravity").enabled = !forcePoints.get("middle").forces.get("gravity").enabled; //Kiwi (KEY_V) :P
+                if (!controller.sprintModeToggle) sprinting = false;
+                if (!controller.sneakModeToggle) sneaking = false;
+                if (Input.isKeyDown(Keyboard.KEY_V))
+                    forcePoints.get("middle").forces.get("gravity").enabled = !forcePoints.get("middle").forces.get("gravity").enabled; //Kiwi (KEY_V) :P
 
                 controller.onRemoteUpdate(obj);
 
             }
 
-            for(ForcePoint forcePoint : forcePoints.values()) {
+            for (ForcePoint forcePoint : forcePoints.values()) {
 
-                for(String key : forcePoint.forces.keySet()) {
+                for (String key : forcePoint.forces.keySet()) {
 
-                    if(key.startsWith("inertiaForce")) {
+                    if (key.startsWith("inertiaForce")) {
 
                         Force force = forcePoint.forces.get(key);
 
@@ -98,7 +97,7 @@ public class MovementComponent extends Component {
 
                         force.direction = VectorHelper.divideVectorByFloat(force.direction, 2);
 
-                        if(Math.abs(force.direction.x) <= 0.001f &&
+                        if (Math.abs(force.direction.x) <= 0.001f &&
                                 Math.abs(force.direction.y) <= 0.001f &&
                                 Math.abs(force.direction.z) <= 0.001f) {
 
@@ -114,9 +113,9 @@ public class MovementComponent extends Component {
 
             Vector3f forceSum = ForceController.sumForces(forcePoints.get("middle").forces.values());
 
-            if(collideComponent != null) {
+            if (collideComponent != null) {
 
-                if(Collider.isCollidingWithSomething(obj)) {
+                if (Collider.isCollidingWithSomething(obj)) {
 
                     forceSum = ForceController.getCombinedForces(forceSum);
 
@@ -129,9 +128,7 @@ public class MovementComponent extends Component {
 
                 }
 
-            }
-
-            else forceSum = ForceController.getCombinedForces(forceSum);
+            } else forceSum = ForceController.getCombinedForces(forceSum);
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
@@ -143,34 +140,36 @@ public class MovementComponent extends Component {
 
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if(collideComponent != null && !VectorHelper.areEqual(movedSpace, new Vector3f())) collideComponent.onRemoteUpdate(obj);
+            if (collideComponent != null && !VectorHelper.areEqual(movedSpace, new Vector3f()))
+                collideComponent.onRemoteUpdate(obj);
 
-            obj.position = VectorHelper.sumVectors(new Vector3f[] {obj.position, movedSpace});
+            obj.position = VectorHelper.sumVectors(new Vector3f[]{obj.position, movedSpace});
 
         }
 
     }
 
-    public void onRemoteUpdate(GameObject obj) {}
+    public void onRemoteUpdate(GameObject obj) {
+    }
 
     public void moveForward(GameObject obj) {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("forward");
 
-        direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
 
-        if(sprinting) {
+        if (sprinting) {
 
             Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(3, 1, 3)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
 
-        } else if(sneaking) {
+        } else if (sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
@@ -182,7 +181,7 @@ public class MovementComponent extends Component {
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount ++;
+        forceCount++;
 
     }
 
@@ -191,12 +190,12 @@ public class MovementComponent extends Component {
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("backward");
 
-        direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
 
-        if(sneaking) {
+        if (sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
@@ -208,7 +207,7 @@ public class MovementComponent extends Component {
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount ++;
+        forceCount++;
 
     }
 
@@ -217,12 +216,12 @@ public class MovementComponent extends Component {
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("left");
 
-        direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
 
-        if(sneaking) {
+        if (sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
@@ -234,7 +233,7 @@ public class MovementComponent extends Component {
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount ++;
+        forceCount++;
 
     }
 
@@ -243,12 +242,12 @@ public class MovementComponent extends Component {
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("right");
 
-        direction.x = -(givenForce.direction.x * (float)Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float)Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float)Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
 
-        if(sneaking) {
+        if (sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(0.3f, 1, 0.3f)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
 
             direction.x = newDirection.x;
             direction.z = newDirection.z;
@@ -260,7 +259,7 @@ public class MovementComponent extends Component {
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount ++;
+        forceCount++;
 
     }
 
@@ -271,15 +270,15 @@ public class MovementComponent extends Component {
 
         direction.y = givenForce.direction.y;
 
-        if(sprinting) {
+        if (sprinting) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(1, 3, 1)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(1, 3, 1)});
 
             direction.y = newDirection.y;
 
-        } else if(sneaking) {
+        } else if (sneaking) {
 
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[] {direction, new Vector3f(1, 0.3f, 1)});
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(1, 0.3f, 1)});
 
             direction.y = newDirection.y;
 
@@ -290,7 +289,7 @@ public class MovementComponent extends Component {
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount ++;
+        forceCount++;
 
     }
 
@@ -306,17 +305,19 @@ public class MovementComponent extends Component {
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount ++;
+        forceCount++;
 
     }
 
-    public void jump() { forcePoints.get("middle").forces.get("jump").enabled = true; }
+    public void jump() {
+        forcePoints.get("middle").forces.get("jump").enabled = true;
+    }
 
     public void sprint(GameObject obj) {
 
-        Controller controller = (Controller)obj.getComponent("controller");
+        Controller controller = (Controller) obj.getComponent("controller");
 
-        if(!controller.sprintModeToggle) {
+        if (!controller.sprintModeToggle) {
 
             sprinting = true;
             sneaking = false;
@@ -332,9 +333,9 @@ public class MovementComponent extends Component {
 
     public void sneak(GameObject obj) {
 
-        Controller controller = (Controller)obj.getComponent("controller");
+        Controller controller = (Controller) obj.getComponent("controller");
 
-        if(!sprinting) {
+        if (!sprinting) {
 
             sneaking = !controller.sneakModeToggle || !sneaking;
 

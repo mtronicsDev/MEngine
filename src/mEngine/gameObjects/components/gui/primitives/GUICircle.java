@@ -1,4 +1,4 @@
-package mEngine.interactive.gameObjects.components.gui.primitives;
+package mEngine.gameObjects.components.gui.primitives;
 
 import org.lwjgl.util.vector.Vector2f;
 

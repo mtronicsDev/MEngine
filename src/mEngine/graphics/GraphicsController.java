@@ -47,12 +47,11 @@ public class GraphicsController {
 
         }
 
-        if(!PreferenceHelper.getBoolean("fullscreen")) {
+        if (!PreferenceHelper.getBoolean("fullscreen")) {
 
             setupWindow(width, height, title);
 
-        }
-        else {
+        } else {
 
             setupFullscreen();
 
@@ -69,17 +68,17 @@ public class GraphicsController {
 
     public static void update() {
 
-        if(Display.wasResized()) ObjectController.getGameObject(1);
+        if (Display.wasResized()) ObjectController.getGameObject(1);
 
-        if(isKeyDown(getKey("fullscreen"))) {
+        if (isKeyDown(getKey("fullscreen"))) {
 
-            if(isFullscreen) setupWindow(width, height, title);
+            if (isFullscreen) setupWindow(width, height, title);
             else setupFullscreen();
 
         }
 
         Display.update();
-        if(!mEnchmarkEnabled) Display.sync(fps);
+        if (!mEnchmarkEnabled) Display.sync(fps);
 
     }
 
@@ -91,7 +90,7 @@ public class GraphicsController {
             Display.setTitle(title);
             Display.setFullscreen(false);
 
-            if(!Display.isCreated()) Display.create();
+            if (!Display.isCreated()) Display.create();
 
         } catch (LWJGLException e) {
 
@@ -110,7 +109,7 @@ public class GraphicsController {
 
             Display.setDisplayMode(Display.getDesktopDisplayMode());
             Display.setFullscreen(true);
-            if(!Display.isCreated()) Display.create();
+            if (!Display.isCreated()) Display.create();
 
         } catch (LWJGLException e) {
 
@@ -123,18 +122,29 @@ public class GraphicsController {
 
     }
 
-    public static void setWindowTitle(String title) { Display.setTitle(title); }
+    public static void setWindowTitle(String title) {
+        Display.setTitle(title);
+    }
 
-    public static int getWidth() { return width; }
-    public static int getHeight() { return height; }
+    public static int getWidth() {
+        return width;
+    }
 
-    public static int getFps() { return fps; }
+    public static int getHeight() {
+        return height;
+    }
 
-    public static float getAspectRatio() { return (float)width / height; }
+    public static int getFps() {
+        return fps;
+    }
+
+    public static float getAspectRatio() {
+        return (float) width / height;
+    }
 
     public static void switchTo2D() {
 
-        if(currentRenderDimension != Dimension.DIM_2) {
+        if (currentRenderDimension != Dimension.DIM_2) {
 
             glMatrixMode(GL_MODELVIEW);
             glMatrixMode(GL_PROJECTION);
@@ -154,7 +164,7 @@ public class GraphicsController {
 
     public static void switchTo3D() {
 
-        if(currentRenderDimension != Dimension.DIM_3) {
+        if (currentRenderDimension != Dimension.DIM_3) {
 
             glPopMatrix(); //From 2D
             glMatrixMode(GL_PROJECTION);

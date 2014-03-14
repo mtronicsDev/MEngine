@@ -18,7 +18,9 @@ public class TimeHelper {
 
     }
 
-    public static float getTime() { return System.nanoTime() / 1000000; }
+    public static float getTime() {
+        return System.nanoTime() / 1000000;
+    }
 
     public static void updateDeltaTime() {
 
@@ -31,11 +33,11 @@ public class TimeHelper {
     public static void updateFPS() {
 
         oneSecondPassed = false;
-        if(getTime() - lastFPS > 1000) {
+        if (getTime() - lastFPS > 1000) {
 
             oneSecondPassed = true;
-            FPS = (int)currentFPS;
-            if(currentFPS > highestFPS) highestFPS = FPS;
+            FPS = (int) currentFPS;
+            if (currentFPS > highestFPS) highestFPS = FPS;
             currentFPS = 0;
             lastFPS += 1000;
 

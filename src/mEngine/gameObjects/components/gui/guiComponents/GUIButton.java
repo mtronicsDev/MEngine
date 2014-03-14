@@ -1,4 +1,4 @@
-package mEngine.interactive.gameObjects.components.gui.guiComponents;
+package mEngine.gameObjects.components.gui.guiComponents;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -9,7 +9,8 @@ public class GUIButton extends GUIComponent {
     boolean isButtonPressed;
     boolean isButtonHovered;
 
-    public GUIButton() {}
+    public GUIButton() {
+    }
 
     public void onUpdate() {
 

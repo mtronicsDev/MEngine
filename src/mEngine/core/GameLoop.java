@@ -1,7 +1,7 @@
 package mEngine.core;
 
+import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
-import mEngine.interactive.gameObjects.GameObject;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
@@ -16,16 +16,16 @@ public class GameLoop {
 
             GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
 
-            if(Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            if (Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
 
-                if(GameController.isGamePaused) GameController.unPauseGame();
+                if (GameController.isGamePaused) GameController.unPauseGame();
                 else GameController.pauseGame();
 
             }
 
             TimeHelper.updateDeltaTime();
 
-            for(GameObject gameObject : ObjectController.gameObjects) {
+            for (GameObject gameObject : ObjectController.gameObjects) {
 
                 gameObject.update();
 

@@ -29,9 +29,9 @@ public class ModelHelper {
         List<Vector2f> uvs = new ArrayList<Vector2f>();
         List<Face> faces = new ArrayList<Face>();
 
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
 
-            if(line.startsWith("v ")){
+            if (line.startsWith("v ")) {
 
                 //First: "v", Second: x, Third: y, Fourth: z
                 float x = Float.valueOf(line.split(" ")[1]);
@@ -40,8 +40,7 @@ public class ModelHelper {
 
                 vertices.add(new Vector3f(x, y, z));
 
-            }
-            else if(line.startsWith("vn ")){
+            } else if (line.startsWith("vn ")) {
 
                 //First: "vn", Second: x, Third: y, Fourth: z
                 float x = Float.valueOf(line.split(" ")[1]);
@@ -50,8 +49,7 @@ public class ModelHelper {
 
                 normals.add(new Vector3f(x, y, z));
 
-            }
-            else if(line.startsWith("vt ")){
+            } else if (line.startsWith("vt ")) {
 
                 //First: "vt", Second: x, Third: y
                 float x = Float.valueOf(line.split(" ")[1]);
@@ -59,8 +57,7 @@ public class ModelHelper {
 
                 uvs.add(new Vector2f(x, y));
 
-            }
-            else if(line.startsWith("f ")) {
+            } else if (line.startsWith("f ")) {
 
                 //[0]: "f", [1]:([0]:vertexIndex, [1]:uvIndex, [2]: normalIndex), [...]
                 Vector3f vertexIndices = new Vector3f(Float.valueOf(line.split(" ")[1].split("/")[0]),
@@ -95,8 +92,7 @@ public class ModelHelper {
 
             model = loadModel(fileName);
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
 
             e.printStackTrace();
             System.exit(1);

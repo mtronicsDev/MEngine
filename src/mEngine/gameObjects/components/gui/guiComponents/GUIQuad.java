@@ -1,4 +1,4 @@
-package mEngine.interactive.gameObjects.components.gui.guiComponents;
+package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.TextureHelper;
 import org.newdawn.slick.opengl.Texture;
@@ -9,7 +9,8 @@ public class GUIQuad extends GUIComponent {
 
     protected Texture texture;
 
-    public GUIQuad() {}
+    public GUIQuad() {
+    }
 
     public GUIQuad(String fileName) {
 
@@ -20,7 +21,7 @@ public class GUIQuad extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
-        if(texture != null) {
+        if (texture != null) {
 
             texture.bind();
 
@@ -35,8 +36,7 @@ public class GUIQuad extends GUIComponent {
             glVertex2f(parent.position.x, parent.position.y);
             glEnd();
 
-        }
-        else {
+        } else {
 
             glBegin(GL_QUADS);
             glVertex2f(parent.position.x, parent.position.y + parent.size.y);

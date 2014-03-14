@@ -1,8 +1,8 @@
-package mEngine.interactive.gameObjects.components;
+package mEngine.gameObjects.components;
 
+import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.renderable.Model;
-import mEngine.interactive.gameObjects.GameObject;
 
 public class RenderComponent extends Component {
 

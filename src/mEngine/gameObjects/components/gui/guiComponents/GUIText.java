@@ -1,4 +1,4 @@
-package mEngine.interactive.gameObjects.components.gui.guiComponents;
+package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.FontHelper;
 import mEngine.util.PreferenceHelper;
@@ -49,11 +49,11 @@ public class GUIText extends GUIComponent {
     public void onExternalUpdate(Object[] args) {
 
         super.onExternalUpdate(args);
-        if(args.length >= 1) this.text = (String)args[0];
-        if(args.length == 2) onExternalUpdate((Integer)args[1]);
-        if(args.length == 3) onExternalUpdate((Integer)args[1], (Integer)args[2]);
-        if(args.length == 4) onExternalUpdate((Integer)args[1], (Integer)args[2], (String)args[3]);
-        if(args.length == 5) onExternalUpdate((Integer)args[1], (Integer)args[2], (String)args[3], (Color)args[4]);
+        if (args.length >= 1) this.text = (String) args[0];
+        if (args.length == 2) onExternalUpdate((Integer) args[1]);
+        if (args.length == 3) onExternalUpdate((Integer) args[1], (Integer) args[2]);
+        if (args.length == 4) onExternalUpdate((Integer) args[1], (Integer) args[2], (String) args[3]);
+        if (args.length == 5) onExternalUpdate((Integer) args[1], (Integer) args[2], (String) args[3], (Color) args[4]);
 
     }
 
@@ -65,7 +65,7 @@ public class GUIText extends GUIComponent {
 
     protected void onExternalUpdate(int fontStyle, int fontSize) {
 
-        onExternalUpdate( fontStyle, fontSize, PreferenceHelper.getValue("defaultFontFace"));
+        onExternalUpdate(fontStyle, fontSize, PreferenceHelper.getValue("defaultFontFace"));
 
     }
 

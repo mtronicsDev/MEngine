@@ -1,6 +1,6 @@
-package mEngine.interactive.gameObjects.components;
+package mEngine.gameObjects.components;
 
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.gameObjects.GameObject;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.input.Input;
 import mEngine.util.input.KeyAlreadyAssignedException;
@@ -45,9 +45,9 @@ public class ControllerKeyboardMouse extends Controller {
 
     public void updateObject(GameObject obj) {
 
-        MovementComponent movementComponent = (MovementComponent)obj.getComponent("movementComponent");
+        MovementComponent movementComponent = (MovementComponent) obj.getComponent("movementComponent");
 
-        if(movementComponent != null) {
+        if (movementComponent != null) {
 
             //Calculating the rotation
             float pitch = obj.rotation.x;
@@ -89,22 +89,31 @@ public class ControllerKeyboardMouse extends Controller {
 
             movementComponent.rotate(pitch, yaw, obj);
 
-            if(sprintModeToggle) { if(Input.isKeyDown(getKey("sprint"))) movementComponent.sprint(obj); }
-            else { if(Input.isKeyPressed(getKey("sprint"))) movementComponent.sprint(obj); }
+            if (sprintModeToggle) {
+                if (Input.isKeyDown(getKey("sprint"))) movementComponent.sprint(obj);
+            } else {
+                if (Input.isKeyPressed(getKey("sprint"))) movementComponent.sprint(obj);
+            }
 
-            if(sneakModeToggle) { if(Input.isKeyDown(getKey("sneak"))) movementComponent.sneak(obj); }
-            else { if(Input.isKeyPressed(getKey("sneak"))) movementComponent.sneak(obj); }
+            if (sneakModeToggle) {
+                if (Input.isKeyDown(getKey("sneak"))) movementComponent.sneak(obj);
+            } else {
+                if (Input.isKeyPressed(getKey("sneak"))) movementComponent.sneak(obj);
+            }
 
-            if(Input.isKeyPressed(getKey("forward"))) movementComponent.moveForward(obj);
-            if(Input.isKeyPressed(getKey("backward"))) movementComponent.moveBackward(obj);
-            if(Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft(obj);
-            if(Input.isKeyPressed(getKey("left"))) movementComponent.moveRight(obj);
+            if (Input.isKeyPressed(getKey("forward"))) movementComponent.moveForward(obj);
+            if (Input.isKeyPressed(getKey("backward"))) movementComponent.moveBackward(obj);
+            if (Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft(obj);
+            if (Input.isKeyPressed(getKey("left"))) movementComponent.moveRight(obj);
 
-            if(Input.isKeyPressed(getKey("up")) && capableOfFlying) movementComponent.moveUp();
-            if(Input.isKeyPressed(getKey("down")) && capableOfFlying) movementComponent.moveDown();
+            if (Input.isKeyPressed(getKey("up")) && capableOfFlying) movementComponent.moveUp();
+            if (Input.isKeyPressed(getKey("down")) && capableOfFlying) movementComponent.moveDown();
 
-            if(continuouslyJumping) { if(Input.isKeyPressed(getKey("jump"))) movementComponent.jump(); }
-            else { if(Input.isKeyDown(getKey("jump"))) movementComponent.jump(); }
+            if (continuouslyJumping) {
+                if (Input.isKeyPressed(getKey("jump"))) movementComponent.jump();
+            } else {
+                if (Input.isKeyDown(getKey("jump"))) movementComponent.jump();
+            }
 
         }
 

@@ -10,7 +10,9 @@ public class Input {
     private static boolean[] keyStats = new boolean[Keyboard.getKeyCount()];
     public static Map<String, Integer> keyAssignments = new HashMap<String, Integer>();
 
-    public static boolean isKeyPressed(int key) { return Keyboard.isKeyDown(key); }
+    public static boolean isKeyPressed(int key) {
+        return Keyboard.isKeyDown(key);
+    }
 
     public static boolean isKeyDown(int key) {
 
@@ -30,7 +32,7 @@ public class Input {
 
     public static void assignKey(String key, int value) throws KeyAlreadyAssignedException {
 
-        if(keyAssignments.get(key) != null) throw new KeyAlreadyAssignedException();
+        if (keyAssignments.get(key) != null) throw new KeyAlreadyAssignedException();
 
         else {
 
@@ -47,7 +49,9 @@ public class Input {
 
     }
 
-    public static void unAssignKey(String key) { keyAssignments.remove(key); }
+    public static void unAssignKey(String key) {
+        keyAssignments.remove(key);
+    }
 
 }
 

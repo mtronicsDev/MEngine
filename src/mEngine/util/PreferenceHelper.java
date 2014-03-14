@@ -42,8 +42,12 @@ public class PreferenceHelper {
 
     }
 
-    public static int getInteger(String key) { return Integer.valueOf(getValue(key)); }
+    public static int getInteger(String key) {
+        return Integer.valueOf(getValue(key));
+    }
 
-    public static float getFloat(String key) { return Float.valueOf(getValue(key)); }
+    public static float getFloat(String key) {
+        return Float.valueOf(getValue(key));
+    }
 
 }

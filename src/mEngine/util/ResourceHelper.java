@@ -38,17 +38,23 @@ public class ResourceHelper {
 
         switch (type) {
 
-            default: filePath = paths.get(type) + fileName;
+            default:
+                filePath = paths.get(type) + fileName;
                 break;
-            case 2: filePath = paths.get(type) + fileName + ".mmp";
+            case 2:
+                filePath = paths.get(type) + fileName + ".mmp";
                 break;
-            case 3: filePath = paths.get(type) + fileName + ".mtl";
+            case 3:
+                filePath = paths.get(type) + fileName + ".mtl";
                 break;
-            case 4: filePath = paths.get(type) + fileName + ".obj";
+            case 4:
+                filePath = paths.get(type) + fileName + ".obj";
                 break;
-            case 5: filePath = paths.get(type) + fileName + ".wav";
+            case 5:
+                filePath = paths.get(type) + fileName + ".wav";
                 break;
-            case 6: filePath = paths.get(type) + fileName + ".png";
+            case 6:
+                filePath = paths.get(type) + fileName + ".png";
                 break;
 
         }

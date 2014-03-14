@@ -1,6 +1,6 @@
-package mEngine.interactive.gameObjects.components;
+package mEngine.gameObjects.components;
 
-import mEngine.interactive.gameObjects.GameObject;
+import mEngine.gameObjects.GameObject;
 import mEngine.util.PreferenceHelper;
 
 public class ControllerGamepad extends Controller {
@@ -16,6 +16,7 @@ public class ControllerGamepad extends Controller {
 
     }
 
-    public void updateObject(GameObject obj) {}
+    public void updateObject(GameObject obj) {
+    }
 
 }
