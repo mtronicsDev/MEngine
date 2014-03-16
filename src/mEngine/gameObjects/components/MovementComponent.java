@@ -152,6 +152,8 @@ public class MovementComponent extends Component {
     public void onRemoteUpdate(GameObject obj) {
     }
 
+    //TODO: Find a way to hold the force counter as little as possible because otherwise there could be an overflow error
+
     public void moveForward(GameObject obj) {
 
         Vector3f direction = new Vector3f();

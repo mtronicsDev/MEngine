@@ -1,9 +1,53 @@
 package mEngine.util.math.vectors;
 
+import mEngine.physics.collisions.Box;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
 public class VectorHelper {
+
+    public static boolean isPlaneInsideBox(List<Vector3f> vertices, Vector3f normal, Box box) {
+
+        boolean insideBox;
+
+        Vector3f middle = sumVectors(new Vector3f[] {box.position, divideVectorByFloat(box.size, 2)});
+
+        float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertices.get(0)));
+
+        Vector3f differenceVector = multiplyVectorByFloat(multiplyVectorByFloat(normal, -1), difference);
+        differenceVector = sumVectors(new Vector3f[] {differenceVector, middle});
+
+        if(isVectorInsideBox(differenceVector, box)) {
+
+            Vector3f maxVertexDifference = VectorHelper.subtractVectors(vertices.get(1), vertices.get(0));
+
+            if(VectorHelper.getAbs(VectorHelper.subtractVectors(vertices.get(2), vertices.get(0))) > VectorHelper.getAbs(maxVertexDifference))
+                maxVertexDifference = VectorHelper.subtractVectors(vertices.get(2), vertices.get(0));
+
+            insideBox = VectorHelper.getAbs(VectorHelper.subtractVectors(differenceVector, vertices.get(0))) < VectorHelper.getAbs(maxVertexDifference);
+
+        }
+
+        else insideBox = false;
+
+        return insideBox;
+
+    }
+
+    public static boolean isVectorInsideBox(Vector3f vector, Box box) {
+
+        return vector.x > box.position.x
+                && vector.x < box.position.x + box.size.x
+                && vector.y > box.position.y
+                && vector.y < box.position.y + box.size.y
+                && vector.z > box.position.z
+                && vector.z < box.position.z + box.size.z;
+
+    }
 
     public static Vector3f sumVectorAndFloat(Vector3f vector, float addend) {
 
@@ -149,6 +193,15 @@ public class VectorHelper {
     public static float getAngle(Vector3f vectorA, Vector3f vectorB) {
 
         return (float) Math.acos(getScalarProduct(vectorA, vectorB) / (getAbs(vectorA) * getAbs(vectorB)));
+
+    }
+
+    public static boolean isVectorInsideRectangle(Vector2f vector, Rectangle rectangle) {
+
+        return vector.x > rectangle.x
+                && vector.x < rectangle.x + rectangle.width
+                && vector.y > rectangle.y
+                && vector.y < rectangle.y + rectangle.height;
 
     }
 
