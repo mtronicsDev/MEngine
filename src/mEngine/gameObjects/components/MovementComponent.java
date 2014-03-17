@@ -8,6 +8,8 @@ import mEngine.physics.forces.ForceController;
 import mEngine.physics.forces.ForcePoint;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
+import mEngine.util.math.vectors.Matrix;
+import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
@@ -85,6 +87,18 @@ public class MovementComponent extends Component {
 
             }
 
+            obj.percentRotation = new Vector3f(0, 0, 1);
+
+            Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+                    new Vector3f(0, (float)Math.cos(Math.toRadians(obj.rotation.x)), (float)-Math.sin(Math.toRadians(obj.rotation.x))),
+                    new Vector3f(0, (float)Math.sin(Math.toRadians(obj.rotation.x)), (float)Math.cos(Math.toRadians(obj.rotation.x))));
+            obj.percentRotation = xAxisRotationMatrix.multiplyByVector(obj.percentRotation);
+
+            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float)Math.cos(Math.toRadians(obj.rotation.y)), 0, (float)Math.sin(Math.toRadians(obj.rotation.y))),
+                    new Vector3f(0, 1, 0),
+                    new Vector3f((float)-Math.sin(Math.toRadians(obj.rotation.y)), 0, (float)Math.cos(Math.toRadians(obj.rotation.y))));
+            obj.percentRotation = yAxisRotationMatrix.multiplyByVector(obj.percentRotation);
+
             for (ForcePoint forcePoint : forcePoints.values()) {
 
                 for (String key : forcePoint.forces.keySet()) {
@@ -140,7 +154,7 @@ public class MovementComponent extends Component {
 
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if (collideComponent != null && !VectorHelper.areEqual(movedSpace, new Vector3f()))
+            if (collideComponent != null && collideComponent.ableToCollide && !VectorHelper.areEqual(movedSpace, new Vector3f()))
                 collideComponent.onRemoteUpdate(obj);
 
             obj.position = VectorHelper.sumVectors(new Vector3f[]{obj.position, movedSpace});

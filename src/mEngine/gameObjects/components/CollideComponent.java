@@ -7,18 +7,19 @@ import org.lwjgl.util.vector.Vector3f;
 public class CollideComponent extends Component {
 
     public boolean destroyable;
+    public boolean ableToCollide;
     public Vector3f modelSize;
 
-    public CollideComponent(boolean destroyable) {
+    public CollideComponent(boolean destroyable, boolean ableToCollide) {
 
-        this.destroyable = destroyable;
-        modelSize = null;
+        this(destroyable, ableToCollide, null);
 
     }
 
-    public CollideComponent(boolean destroyable, Vector3f modelSize) {
+    public CollideComponent(boolean destroyable, boolean ableToCollide, Vector3f modelSize) {
 
         this.destroyable = destroyable;
+        this.ableToCollide = ableToCollide;
         this.modelSize = modelSize;
 
     }

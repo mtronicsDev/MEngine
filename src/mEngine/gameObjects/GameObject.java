@@ -17,14 +17,16 @@ public class GameObject {
 
         position = pos;
         rotation = rot;
-        percentRotation = new Vector3f();
+        percentRotation = new Vector3f(0, 0, 1);
 
     }
 
     public void update() {
 
         for (Component component : components.values()) {
+
             component.onUpdate(this);
+
         }
 
     }
@@ -38,7 +40,9 @@ public class GameObject {
     }
 
     public Component getComponent(String key) {
+
         return components.get(key);
+
     }
 
 }

@@ -49,7 +49,7 @@ public class GameController {
         );
         object.addComponent(
                 "collideComponent",
-                new CollideComponent(false)
+                new CollideComponent(false, true)
         );
         object.addComponent(
                 "movementComponent",
@@ -114,7 +114,7 @@ public class GameController {
         );
         object.addComponent(
                 "collideComponent",
-                new CollideComponent(false)
+                new CollideComponent(false, true)
         );
 
         addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0)));
@@ -126,7 +126,7 @@ public class GameController {
         );
         object.addComponent(
                 "collideComponent",
-                new CollideComponent(false)
+                new CollideComponent(false, true)
         );
 
         /*addGUIScreen(new GUIScreen(

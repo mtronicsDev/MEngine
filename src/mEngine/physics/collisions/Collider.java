@@ -29,18 +29,10 @@ public class Collider {
 
            if(renderComponentA != null && renderComponentB != null && collideComponentA != null && collideComponentB != null) {
 
-               Vector3f posA = VectorHelper.subtractVectors(objA.position, VectorHelper.divideVectorByFloat(renderComponentA.model.getSize(), 2));
-               Vector3f posB = VectorHelper.subtractVectors(objB.position, VectorHelper.divideVectorByFloat(renderComponentB.model.getSize(), 2));
+               Box boxA = new Box(VectorHelper.subtractVectors(objA.position, VectorHelper.divideVectorByFloat(renderComponentA.model.getSize(), 2)), renderComponentA.model.getSize());
+               Box boxB = new Box(VectorHelper.subtractVectors(objB.position, VectorHelper.divideVectorByFloat(renderComponentB.model.getSize(), 2)), renderComponentB.model.getSize());
 
-               Vector3f sizeA = renderComponentA.model.getSize();
-               Vector3f sizeB = renderComponentB.model.getSize();
-
-               colliding = posA.x < posB.x + sizeB.x
-                       && posA.x + sizeA.x > posB.x
-                       && posA.y < posB.y + sizeB.y
-                       && posA.y + sizeA.y > posB.y
-                       && posA.z < posB.z + sizeB.z
-                       && posA.z + sizeA.z > posB.z;
+               colliding = areBoxesColliding(boxA, boxB);
 
            }
 
@@ -91,9 +83,7 @@ public class Collider {
             List<Vector3f> allNormals = new ArrayList<Vector3f>();
             boolean maybeColliding = false;
             RenderComponent renderComponentA = (RenderComponent)objA.getComponent("renderComponent");
-            MovementComponent movementComponentA = (MovementComponent)objA.getComponent("movementComponent");
             CollideComponent collideComponentA = (CollideComponent)objA.getComponent("collideComponent");
-            Box collisionBoxA;
 
             for(GameObject objB : ObjectController.gameObjects) {
 
@@ -183,7 +173,6 @@ public class Collider {
                     radius = VectorHelper.subtractVectors(maxVertexPos, middle);
 
                     Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
-                    Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
 
                     middle = changeOfBasisMatrix.multiplyByVector(middle);
 
@@ -262,7 +251,8 @@ public class Collider {
             boolean colliding = false;
 
             List<Box> collisionBoxesA = new ArrayList<Box>();
-            Box collisionBoxA;
+            Box collisionBoxA = new Box(VectorHelper.subtractVectors(objA.position,
+                    VectorHelper.divideVectorByFloat(renderComponentA.model.getSize(), 2)), renderComponentA.model.getSize());
 
             float[] collisionTimes = null;
             Face[] collisionFaces = null;
@@ -284,11 +274,7 @@ public class Collider {
 
             }
 
-            for(int count = 0; count < collisionTimes.length; count ++) {
-
-                collisionTimes[count] = 2;
-
-            }
+            for(int count = 0; count < collisionTimes.length; count ++) collisionTimes[count] = 2;
 
             float finalCollisionTime = 2;
             Face finalCollisionFace = null;
@@ -304,30 +290,121 @@ public class Collider {
 
                     if(renderComponentA != null && renderComponentB != null && collideComponentB != null) {
 
-                        if(areAABBsColliding(objA, objB)) {
+                        if(isBoxCollidingWithAABB(collisionBoxA, objB)) {
 
-                            for(Face face : renderComponentB.model.faces) {
+                            List<Box> collisionBoxesB = new ArrayList<Box>();
 
-                                allFaces.add(new Face(face));
-                                objList.add(objB);
+                            List<Box> smallerCollisionBoxes = new ArrayList<Box>();
+                            Vector3f smallerBoxSize = VectorHelper.divideVectorByFloat(VectorHelper.getAABB(objB).size, 2);
+                            Vector3f standardPosition = VectorHelper.subtractVectors(objB.position, VectorHelper.divideVectorByFloat(VectorHelper.getAABB(objB).size, 2));
 
-                                Face newFace = allFaces.get(allFaces.size() - 1);
+                            smallerCollisionBoxes.add(new Box(standardPosition, smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition, new Vector3f(VectorHelper.divideVectorByFloat(smallerBoxSize, 2).x, 0, 0)}), smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition, new Vector3f(0, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).y, 0)}), smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition, new Vector3f(0, 0, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).z)}), smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition,
+                                            new Vector3f(VectorHelper.divideVectorByFloat(smallerBoxSize, 2).x, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).y, 0)}), smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition,
+                                            new Vector3f(VectorHelper.divideVectorByFloat(smallerBoxSize, 2).x, 0, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).z)}), smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition,
+                                            new Vector3f(0, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).y, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).z)}), smallerBoxSize));
+                            smallerCollisionBoxes.add(new Box(VectorHelper.sumVectors(new Vector3f[]
+                                    {standardPosition,
+                                            new Vector3f(VectorHelper.divideVectorByFloat(smallerBoxSize, 2).x, VectorHelper.divideVectorByFloat(smallerBoxSize, 2).y,
+                                                    VectorHelper.divideVectorByFloat(smallerBoxSize, 2).z)}), smallerBoxSize));
 
-                                allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.vertices.get((int) face.vertexIndices.x), objB.position})));
-                                allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.vertices.get((int) face.vertexIndices.y), objB.position})));
-                                allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.vertices.get((int) face.vertexIndices.z), objB.position})));
+                            boolean[] areSmallerBoxesColliding = new boolean[8];
 
-                                allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)face.normalIndices.x)));
-                                allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)face.normalIndices.y)));
-                                allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)face.normalIndices.z)));
+                            for(Box smallerCollisionBox : smallerCollisionBoxes) {
 
-                                newFace.vertexIndices.x = allVertices.size() - 3;
-                                newFace.vertexIndices.y = allVertices.size() - 2;
-                                newFace.vertexIndices.z = allVertices.size() - 1;
+                                if(areBoxesColliding(collisionBoxA, smallerCollisionBox)) areSmallerBoxesColliding[smallerCollisionBoxes.indexOf(smallerCollisionBox)] = true;
 
-                                newFace.normalIndices.x = allNormals.size() - 3;
-                                newFace.normalIndices.y = allNormals.size() - 2;
-                                newFace.normalIndices.z = allNormals.size() - 1;
+                                else areSmallerBoxesColliding[smallerCollisionBoxes.indexOf(smallerCollisionBox)] = false;
+
+                            }
+
+                            if(areSmallerBoxesColliding.equals(new boolean[] {true, true, true, true, true, true, true, true})) {
+
+                                for(Face faceB : renderComponentB.model.faces) {
+
+                                    allFaces.add(new Face(faceB));
+                                    objList.add(objB);
+
+                                    Face newFace = allFaces.get(allFaces.size() - 1);
+
+                                    allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
+                                            {renderComponentB.model.vertices.get((int) faceB.vertexIndices.x), objB.position})));
+                                    allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
+                                            {renderComponentB.model.vertices.get((int) faceB.vertexIndices.y), objB.position})));
+                                    allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
+                                            {renderComponentB.model.vertices.get((int) faceB.vertexIndices.z), objB.position})));
+
+                                    allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)faceB.normalIndices.x)));
+                                    allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)faceB.normalIndices.y)));
+                                    allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)faceB.normalIndices.z)));
+
+                                    newFace.vertexIndices.x = allVertices.size() - 3;
+                                    newFace.vertexIndices.y = allVertices.size() - 2;
+                                    newFace.vertexIndices.z = allVertices.size() - 1;
+
+                                    newFace.normalIndices.x = allNormals.size() - 3;
+                                    newFace.normalIndices.y = allNormals.size() - 2;
+                                    newFace.normalIndices.z = allNormals.size() - 1;
+
+                                }
+
+                            } else {
+
+
+
+                                for(Box collisionBoxB : collisionBoxesB) {
+
+                                    for(Face faceB : renderComponentB.model.faces) {
+
+                                        List<Vector3f> verticesB = new ArrayList<Vector3f>();
+                                        verticesB.add(new Vector3f(renderComponentB.model.vertices.get((int)faceB.vertexIndices.x)));
+                                        verticesB.add(new Vector3f(renderComponentB.model.vertices.get((int)faceB.vertexIndices.y)));
+                                        verticesB.add(new Vector3f(renderComponentB.model.vertices.get((int)faceB.vertexIndices.z)));
+
+                                        Vector3f normalB = renderComponentB.model.normals.get((int)faceB.normalIndices.x);
+
+                                        if(VectorHelper.isTriangleInsideBox(verticesB, normalB, collisionBoxB)) {
+
+                                            allFaces.add(new Face(faceB));
+                                            objList.add(objB);
+
+                                            Face newFace = allFaces.get(allFaces.size() - 1);
+
+                                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
+                                                    {renderComponentB.model.vertices.get((int) faceB.vertexIndices.x), objB.position})));
+                                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
+                                                    {renderComponentB.model.vertices.get((int) faceB.vertexIndices.y), objB.position})));
+                                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
+                                                    {renderComponentB.model.vertices.get((int) faceB.vertexIndices.z), objB.position})));
+
+                                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)faceB.normalIndices.x)));
+                                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)faceB.normalIndices.y)));
+                                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int)faceB.normalIndices.z)));
+
+                                            newFace.vertexIndices.x = allVertices.size() - 3;
+                                            newFace.vertexIndices.y = allVertices.size() - 2;
+                                            newFace.vertexIndices.z = allVertices.size() - 1;
+
+                                            newFace.normalIndices.x = allNormals.size() - 3;
+                                            newFace.normalIndices.y = allNormals.size() - 2;
+                                            newFace.normalIndices.z = allNormals.size() - 1;
+
+                                        }
+
+                                    }
+
+                                }
 
                             }
 

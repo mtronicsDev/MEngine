@@ -1,5 +1,7 @@
 package mEngine.util.math.vectors;
 
+import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.RenderComponent;
 import mEngine.physics.collisions.Box;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -10,25 +12,39 @@ import java.util.List;
 
 public class VectorHelper {
 
-    public static boolean isPlaneInsideBox(List<Vector3f> vertices, Vector3f normal, Box box) {
+    public static Box getAABB(GameObject obj) {
+
+        RenderComponent renderComponent = (RenderComponent)obj.getComponent("renderComponent");
+
+        if(renderComponent != null) {
+
+            return new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectorByFloat(renderComponent.model.getSize(), 2)), renderComponent.model.getSize());
+
+        }
+
+        else return new Box(obj.position, new Vector3f());
+
+    }
+
+    public static boolean isTriangleInsideBox(List<Vector3f> vertices, Vector3f normal, Box box) {
 
         boolean insideBox;
 
         Vector3f middle = sumVectors(new Vector3f[] {box.position, divideVectorByFloat(box.size, 2)});
 
-        float difference = Math.abs(VectorHelper.getScalarProduct(normal, middle) + VectorHelper.getScalarProduct(normal, vertices.get(0)));
+        float difference = Math.abs(getScalarProduct(normal, middle) + getScalarProduct(normal, vertices.get(0)));
 
         Vector3f differenceVector = multiplyVectorByFloat(multiplyVectorByFloat(normal, -1), difference);
         differenceVector = sumVectors(new Vector3f[] {differenceVector, middle});
 
         if(isVectorInsideBox(differenceVector, box)) {
 
-            Vector3f maxVertexDifference = VectorHelper.subtractVectors(vertices.get(1), vertices.get(0));
+            Vector3f maxVertexDifference = subtractVectors(vertices.get(1), vertices.get(0));
 
-            if(VectorHelper.getAbs(VectorHelper.subtractVectors(vertices.get(2), vertices.get(0))) > VectorHelper.getAbs(maxVertexDifference))
-                maxVertexDifference = VectorHelper.subtractVectors(vertices.get(2), vertices.get(0));
+            if(getAbs(subtractVectors(vertices.get(2), vertices.get(0))) > getAbs(maxVertexDifference))
+                maxVertexDifference = subtractVectors(vertices.get(2), vertices.get(0));
 
-            insideBox = VectorHelper.getAbs(VectorHelper.subtractVectors(differenceVector, vertices.get(0))) < VectorHelper.getAbs(maxVertexDifference);
+            insideBox = getAbs(subtractVectors(differenceVector, vertices.get(0))) < getAbs(maxVertexDifference);
 
         }
 
