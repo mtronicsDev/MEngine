@@ -30,7 +30,7 @@ public class GameLoop {
 
                 ObjectController.addGameObject(
                     new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
-                        .addComponent("renderComponent", new RenderComponent("texturedStar"))
+                        .addComponent("renderComponent", new RenderComponent("planet"))
                         .addComponent("collideComponent", new CollideComponent(false, true))
                 );
 
