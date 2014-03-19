@@ -4,10 +4,10 @@ import mEngine.gameObjects.components.gui.guiComponents.GUIGraph;
 import mEngine.util.debug.profiler.Profiler;
 import org.lwjgl.util.vector.Vector2f;
 
-public class RAMComponent extends GUIGraph {
+public class FPSGraphComponent extends GUIGraph {
 
 
-    public RAMComponent(Vector2f size, double[] values) {
+    public FPSGraphComponent(Vector2f size, double[] values) {
 
         super(size, values);
 
@@ -16,8 +16,9 @@ public class RAMComponent extends GUIGraph {
     @Override
     public void onUpdate() {
 
-        graph = Profiler.getMemoryGraph((int) size.x);
+        graph = Profiler.getFPSGraph((int) size.x);
         super.onUpdate();
 
     }
+
 }

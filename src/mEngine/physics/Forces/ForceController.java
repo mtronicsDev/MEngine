@@ -16,15 +16,17 @@ public class ForceController {
 
     public static final float UNIT_VECTOR_3D = 0.57765603f;
 
-    public static void addForce(String key, Vector3f direction) { generalForces.put(key, new Force(direction)); }
+    public static void addForce(String key, Vector3f direction) {
+        generalForces.put(key, new Force(direction));
+    }
 
     public static Vector3f sumForces(Collection<Force> forces) {
 
         Vector3f forceSum = new Vector3f();
 
-        for(Force force : forces) {
+        for (Force force : forces) {
 
-            forceSum = VectorHelper.sumVectors(new Vector3f[] {forceSum, force.getDirectionalForceIfEnabled()});
+            forceSum = VectorHelper.sumVectors(new Vector3f[]{forceSum, force.getDirectionalForceIfEnabled()});
 
         }
 
@@ -46,7 +48,7 @@ public class ForceController {
 
     public static Vector3f getSpeed(Vector3f acceleration, Vector3f startSpeed, float timeInSeconds) {
 
-        return VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(acceleration, timeInSeconds), startSpeed});
+        return VectorHelper.sumVectors(new Vector3f[]{VectorHelper.multiplyVectorByFloat(acceleration, timeInSeconds), startSpeed});
 
     }
 

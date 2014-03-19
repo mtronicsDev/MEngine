@@ -16,7 +16,7 @@ public class Force {
 
     public Vector3f getDirectionalForceIfEnabled() {
 
-        if(enabled) return direction;
+        if (enabled) return direction;
 
         else return new Vector3f();
 

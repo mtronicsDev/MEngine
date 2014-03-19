@@ -13,8 +13,10 @@ import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
-import mEngine.util.debug.FPSComponent;
-import mEngine.util.debug.RAMComponent;
+import mEngine.util.debug.FPSGraphComponent;
+import mEngine.util.debug.FPSTextComponent;
+import mEngine.util.debug.RAMGraphComponent;
+import mEngine.util.debug.RAMTextComponent;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -68,11 +70,11 @@ public class GameController {
         );
         object.addComponent(
                 "fpsText",
-                new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new GUIText("Current FPS", 15))
+                new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
         );
         object.addComponent(
                 "ramText",
-                new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new GUIText("Current RAM", 15))
+                new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
         );
         object.addComponent(
                 "xText",
@@ -93,10 +95,10 @@ public class GameController {
         object.addComponent(
                 "graphs",
                 new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
-                        .addComponent("guiGraphFPS", new FPSComponent(
+                        .addComponent("guiGraphFPS", new FPSGraphComponent(
                                 new Vector2f(Display.getWidth(), 100),
                                 new double[]{}))
-                        .addComponent("guiGraphRAM", new RAMComponent(
+                        .addComponent("guiGraphRAM", new RAMGraphComponent(
                                 new Vector2f(Display.getWidth(), 100),
                                 new double[]{}))
         );
@@ -160,6 +162,7 @@ public class GameController {
         for (AudioSource source : audioSources) {
             source.play();
         }
+
         Mouse.setGrabbed(true);
 
         GameLoop.loop();
