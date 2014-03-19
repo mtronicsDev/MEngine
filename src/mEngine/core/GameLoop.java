@@ -29,9 +29,9 @@ public class GameLoop {
             if (Input.isKeyPressed(Keyboard.KEY_Y)) {
 
                 ObjectController.addGameObject(
-                    new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
-                        .addComponent("renderComponent", new RenderComponent("planet"))
-                        .addComponent("collideComponent", new CollideComponent(false, true))
+                        new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
+                                .addComponent("renderComponent", new RenderComponent("planet"))
+                                .addComponent("collideComponent", new CollideComponent(false, true))
                 );
 
             }

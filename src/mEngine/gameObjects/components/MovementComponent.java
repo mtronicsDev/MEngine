@@ -89,13 +89,13 @@ public class MovementComponent extends Component {
             obj.percentRotation = new Vector3f(0, 0, 1);
 
             Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float)Math.cos(Math.toRadians(obj.rotation.x)), (float)-Math.sin(Math.toRadians(obj.rotation.x))),
-                    new Vector3f(0, (float)Math.sin(Math.toRadians(obj.rotation.x)), (float)Math.cos(Math.toRadians(obj.rotation.x))));
+                    new Vector3f(0, (float) Math.cos(Math.toRadians(obj.rotation.x)), (float) -Math.sin(Math.toRadians(obj.rotation.x))),
+                    new Vector3f(0, (float) Math.sin(Math.toRadians(obj.rotation.x)), (float) Math.cos(Math.toRadians(obj.rotation.x))));
             obj.percentRotation = xAxisRotationMatrix.multiplyByVector(obj.percentRotation);
 
-            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float)Math.cos(Math.toRadians(obj.rotation.y)), 0, (float)Math.sin(Math.toRadians(obj.rotation.y))),
+            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(obj.rotation.y)), 0, (float) Math.sin(Math.toRadians(obj.rotation.y))),
                     new Vector3f(0, 1, 0),
-                    new Vector3f((float)-Math.sin(Math.toRadians(obj.rotation.y)), 0, (float)Math.cos(Math.toRadians(obj.rotation.y))));
+                    new Vector3f((float) -Math.sin(Math.toRadians(obj.rotation.y)), 0, (float) Math.cos(Math.toRadians(obj.rotation.y))));
             obj.percentRotation = yAxisRotationMatrix.multiplyByVector(obj.percentRotation);
 
             for (ForcePoint forcePoint : forcePoints.values()) {

@@ -13,15 +13,13 @@ public class VectorHelper {
 
     public static Box getAABB(GameObject obj) {
 
-        RenderComponent renderComponent = (RenderComponent)obj.getComponent("renderComponent");
+        RenderComponent renderComponent = (RenderComponent) obj.getComponent("renderComponent");
 
-        if(renderComponent != null) {
+        if (renderComponent != null) {
 
             return new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectorByFloat(renderComponent.model.getSize(), 2)), renderComponent.model.getSize());
 
-        }
-
-        else return new Box(obj.position, new Vector3f());
+        } else return new Box(obj.position, new Vector3f());
 
     }
 
@@ -29,25 +27,23 @@ public class VectorHelper {
 
         boolean insideBox;
 
-        Vector3f middle = sumVectors(new Vector3f[] {box.position, divideVectorByFloat(box.size, 2)});
+        Vector3f middle = sumVectors(new Vector3f[]{box.position, divideVectorByFloat(box.size, 2)});
 
         float difference = Math.abs(getScalarProduct(normal, middle) + getScalarProduct(normal, vertices.get(0)));
 
         Vector3f differenceVector = multiplyVectorByFloat(multiplyVectorByFloat(normal, -1), difference);
-        differenceVector = sumVectors(new Vector3f[] {differenceVector, middle});
+        differenceVector = sumVectors(new Vector3f[]{differenceVector, middle});
 
-        if(isVectorInsideBox(differenceVector, box)) {
+        if (isVectorInsideBox(differenceVector, box)) {
 
             Vector3f maxVertexDifference = subtractVectors(vertices.get(1), vertices.get(0));
 
-            if(getAbs(subtractVectors(vertices.get(2), vertices.get(0))) > getAbs(maxVertexDifference))
+            if (getAbs(subtractVectors(vertices.get(2), vertices.get(0))) > getAbs(maxVertexDifference))
                 maxVertexDifference = subtractVectors(vertices.get(2), vertices.get(0));
 
             insideBox = getAbs(subtractVectors(differenceVector, vertices.get(0))) < getAbs(maxVertexDifference);
 
-        }
-
-        else insideBox = false;
+        } else insideBox = false;
 
         return insideBox;
 
