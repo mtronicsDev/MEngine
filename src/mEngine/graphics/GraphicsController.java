@@ -1,6 +1,5 @@
 package mEngine.graphics;
 
-import mEngine.core.ObjectController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.input.KeyAlreadyAssignedException;
 import org.lwjgl.LWJGLException;
@@ -67,8 +66,6 @@ public class GraphicsController {
     }
 
     public static void update() {
-
-        if (Display.wasResized()) ObjectController.getGameObject(1);
 
         if (isKeyDown(getKey("fullscreen"))) {
 

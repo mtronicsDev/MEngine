@@ -236,7 +236,7 @@ public class Collider {
         CollideComponent collideComponentA = (CollideComponent) objA.getComponent("collideComponent");
         MovementComponent movementComponentA = (MovementComponent) objA.getComponent("movementComponent");
         Vector3f velocity = new Vector3f(movementComponentA.movedSpace);
-        Vector3f movedSpace;
+        Vector3f movedSpace = new Vector3f();
         List<Face> allFaces = new ArrayList<Face>();
         List<Vector3f> allVertices = new ArrayList<Vector3f>();
         List<Vector3f> allNormals = new ArrayList<Vector3f>();
@@ -286,8 +286,6 @@ public class Collider {
                 if (renderComponentA != null && renderComponentB != null && collideComponentB != null) {
 
                     if (isBoxCollidingWithAABB(collisionBoxA, objB)) {
-
-                        List<Box> collisionBoxesB = new ArrayList<Box>();
 
                         List<Box> smallerCollisionBoxes = new ArrayList<Box>();
                         Vector3f smallerBoxSize = VectorHelper.divideVectorByFloat(VectorHelper.getAABB(objB).size, 2);
@@ -356,6 +354,9 @@ public class Collider {
                             }
 
                         } else {
+
+                            List<Box> collisionBoxesB = new ArrayList<Box>();
+
 
 
                             for (Box collisionBoxB : collisionBoxesB) {
@@ -595,146 +596,23 @@ public class Collider {
                         Controller controllerA = (Controller) objA.getComponent("controller");
                         Controller controllerB = (Controller) collidingObject.getComponent("controller");
 
-                        int collisionType;
+                        /*if(collideComponentA.destroyable) {
 
-                        if (movementComponentB == null) {
+                            movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
-                            if (controllerA == null) {
+                            if(collideComponentB.destroyable) {
 
-                                if (collideComponentB.destroyable) {
-
-                                    if (collideComponentA.destroyable) collisionType = 0;
-
-                                    else collisionType = 1;
-
-                                } else {
-
-                                    if (collideComponentA.destroyable) collisionType = 2;
-
-                                    else collisionType = 3;
-
-                                }
-
-                            } else {
-
-                                if (collideComponentB.destroyable) {
-
-                                    if (collideComponentA.destroyable) collisionType = 4;
-
-                                    else collisionType = 5;
-
-                                } else {
-
-                                    if (collideComponentA.destroyable) collisionType = 6;
-
-                                    else collisionType = 7;
-
-                                }
+                                movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
                             }
 
-                        } else {
+                        } else {*/
 
-                            if (controllerA == null) {
+                            if(collideComponentB.destroyable) {
 
-                                if (controllerB == null) {
-
-                                    if (collideComponentB.destroyable) {
-
-                                        if (collideComponentA.destroyable) collisionType = 8;
-
-                                        else collisionType = 9;
-
-                                    } else {
-
-                                        if (collideComponentA.destroyable) collisionType = 10;
-
-                                        else collisionType = 11;
-
-                                    }
-
-                                } else {
-
-                                    if (collideComponentB.destroyable) {
-
-                                        if (collideComponentA.destroyable) collisionType = 12;
-
-                                        else collisionType = 13;
-
-                                    } else {
-
-                                        if (collideComponentA.destroyable) collisionType = 14;
-
-                                        else collisionType = 15;
-
-                                    }
-
-                                }
+                                movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
                             } else {
-
-                                if (controllerB == null) {
-
-                                    if (collideComponentB.destroyable) {
-
-                                        if (collideComponentA.destroyable) collisionType = 16;
-
-                                        else collisionType = 17;
-
-                                    } else {
-
-                                        if (collideComponentA.destroyable) collisionType = 18;
-
-                                        else collisionType = 19;
-
-                                    }
-
-                                } else {
-
-                                    if (collideComponentB.destroyable) {
-
-                                        if (collideComponentA.destroyable) collisionType = 20;
-
-                                        else collisionType = 21;
-
-                                    } else {
-
-                                        if (collideComponentA.destroyable) collisionType = 22;
-
-                                        else collisionType = 23;
-
-                                    }
-
-                                }
-
-                            }
-
-                        }
-
-                        switch (collisionType) {
-
-                            case 0:
-                                break;
-
-                            case 1:
-                                break;
-
-                            case 2:
-                                break;
-
-                            case 3:
-                                break;
-
-                            case 4:
-                                break;
-
-                            case 5:
-                                break;
-
-                            case 6:
-                                break;
-
-                            case 7:
 
                                 Vector3f vertexA = new Vector3f(allVertices.get((int) finalCollisionFace.vertexIndices.x));
                                 Vector3f vertexB = new Vector3f(allVertices.get((int) finalCollisionFace.vertexIndices.y));
@@ -818,61 +696,64 @@ public class Collider {
                                 temporaryVelocity = xAxisRotationMatrix.multiplyByVector(temporaryVelocity);
                                 intersectionPoint = xAxisRotationMatrix.multiplyByVector(intersectionPoint);
 
-                                break;
+                                Vector3f newVelocity = new Vector3f(VectorHelper.subtractVectors(temporaryVelocity, intersectionPoint).x,
+                                        VectorHelper.subtractVectors(temporaryVelocity, intersectionPoint).y,
+                                        0);
 
-                            case 8:
-                                break;
+                                Vector3f temporaryNewVelocity = VectorHelper.sumVectors(new Vector3f[] {newVelocity, middle});
 
-                            case 9:
-                                break;
+                                Matrix3d invertedXAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+                                        new Vector3f(0, (float) Math.cos(-gamma), -(float) Math.sin(-gamma)),
+                                        new Vector3f(0, (float) Math.sin(-gamma), (float) Math.cos(-gamma)));
 
-                            case 10:
-                                break;
+                                temporaryNewVelocity =invertedXAxisRotationMatrix.multiplyByVector(temporaryNewVelocity);
+                                middle = invertedXAxisRotationMatrix.multiplyByVector(middle);
 
-                            case 11:
-                                break;
+                                Matrix3d invertedZAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(-beta), -(float) Math.sin(-beta), 0),
+                                        new Vector3f((float) Math.sin(-beta), (float) Math.cos(-beta), 0),
+                                        new Vector3f(0, 0, 1));
 
-                            case 12:
-                                break;
+                                temporaryNewVelocity = invertedZAxisRotationMatrix.multiplyByVector(temporaryNewVelocity);
+                                middle = invertedZAxisRotationMatrix.multiplyByVector(middle);
 
-                            case 13:
-                                break;
+                                Matrix3d invertedYAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(-alpha), 0, (float) Math.sin(-alpha)),
+                                        new Vector3f(0, 1, 0),
+                                        new Vector3f(-(float) Math.sin(-alpha), 0, (float) Math.cos(-alpha)));
 
-                            case 14:
-                                break;
+                                temporaryNewVelocity = invertedYAxisRotationMatrix.multiplyByVector(temporaryNewVelocity);
+                                middle = invertedYAxisRotationMatrix.multiplyByVector(middle);
 
-                            case 15:
-                                break;
+                                movedSpace = VectorHelper.subtractVectors(temporaryNewVelocity, middle);
 
-                            case 16:
-                                break;
+                                /*if(controllerA == null) {
 
-                            case 17:
-                                break;
+                                    movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
-                            case 18:
-                                break;
+                                } else {
 
-                            case 19:
-                                break;
+                                    movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
-                            case 20:
-                                break;
+                                }*/
 
-                            case 21:
-                                break;
+                                /*if(movementComponentB != null) {
 
-                            case 22:
-                                break;
+                                    if(controllerB == null) {
 
-                            case 23:
-                                break;
+                                        movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
-                        }
+                                    } else {
+
+                                        movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
+
+                                    }
+
+                                }*/
+
+                            }
+
+                        //}
 
                     }
-
-                    movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
                 }
 

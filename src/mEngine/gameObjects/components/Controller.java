@@ -16,6 +16,9 @@ public abstract class Controller extends Component {
     public Controller(float[] forceStrengths, boolean capableOfFlying) {
 
         this.forceStrengths = forceStrengths;
+
+        for(int count = 0; count < this.forceStrengths.length; count ++) this.forceStrengths[count] /= 10;
+
         this.capableOfFlying = capableOfFlying;
 
     }
