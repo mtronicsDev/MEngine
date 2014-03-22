@@ -17,7 +17,6 @@ import mEngine.util.debug.FPSGraphComponent;
 import mEngine.util.debug.FPSTextComponent;
 import mEngine.util.debug.RAMGraphComponent;
 import mEngine.util.debug.RAMTextComponent;
-import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
