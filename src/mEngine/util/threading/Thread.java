@@ -1,7 +1,8 @@
 package mEngine.util.threading;
 
-public interface IAsyncTask {
+public abstract class Thread implements Runnable {
 
+    @Override
     public abstract void run();
 
 }
