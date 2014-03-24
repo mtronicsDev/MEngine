@@ -7,6 +7,8 @@ import mEngine.gameObjects.components.Controller;
 import mEngine.gameObjects.components.MovementComponent;
 import mEngine.gameObjects.components.RenderComponent;
 import mEngine.graphics.renderable.Face;
+import mEngine.physics.collisions.primitives.Box;
+import mEngine.physics.collisions.primitives.Triangle;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -369,7 +371,7 @@ public class Collider {
 
                                     Vector3f normalB = renderComponentB.model.normals.get((int) faceB.normalIndices.x);
 
-                                    if (VectorHelper.isTriangleInsideBox(verticesB, normalB, collisionBoxB)) {
+                                    if (VectorHelper.isTriangleInsideBox(new Triangle(verticesB.get(0), normalB, verticesB.get(1), verticesB.get(2)), collisionBoxB)) {
 
                                         allFaces.add(new Face(faceB));
                                         objList.add(objB);

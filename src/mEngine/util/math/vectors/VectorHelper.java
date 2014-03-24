@@ -2,14 +2,35 @@ package mEngine.util.math.vectors;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.RenderComponent;
-import mEngine.physics.collisions.Box;
+import mEngine.physics.collisions.primitives.Box;
+import mEngine.physics.collisions.primitives.Plane;
+import mEngine.physics.collisions.primitives.Triangle;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.awt.*;
-import java.util.List;
 
 public class VectorHelper {
+
+    public static boolean isVectorOnPlane(Plane plane, Vector3f vector) {
+
+        return Math.abs(getScalarProduct(plane.normal, vector) + getScalarProduct(plane.normal, plane.position)) == 0;
+
+    }
+
+    public static float getDifferenceBetweenPlaneAndVector(Plane plane, Vector3f vector) {
+
+        return Math.abs(getScalarProduct(plane.normal, vector) + getScalarProduct(plane.normal, plane.position));
+
+    }
+
+    public static Vector3f getDifferenceVectorBetweenPlaneAndVector(Plane plane, Vector3f vector) {
+
+        float difference = getDifferenceBetweenPlaneAndVector(plane, vector);
+
+        return multiplyVectorByFloat(multiplyVectorByFloat(plane.normal, -1), difference);
+
+    }
 
     public static Box getAABB(GameObject obj) {
 
@@ -23,25 +44,35 @@ public class VectorHelper {
 
     }
 
-    public static boolean isTriangleInsideBox(List<Vector3f> vertices, Vector3f normal, Box box) {
+    public static boolean isPlaneInsideBox(Plane plane, Box box) {
+
+        Vector3f middle = sumVectors(new Vector3f[]{box.position, divideVectorByFloat(box.size, 2)});
+
+        Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(plane, middle);
+        differenceVector = sumVectors(new Vector3f[]{differenceVector, middle});
+
+        if(isVectorInsideBox(differenceVector, box)) return true;
+
+        else return false;
+
+    }
+
+    public static boolean isTriangleInsideBox(Triangle triangle, Box box) {
 
         boolean insideBox;
 
         Vector3f middle = sumVectors(new Vector3f[]{box.position, divideVectorByFloat(box.size, 2)});
 
-        float difference = Math.abs(getScalarProduct(normal, middle) + getScalarProduct(normal, vertices.get(0)));
-
-        Vector3f differenceVector = multiplyVectorByFloat(multiplyVectorByFloat(normal, -1), difference);
-        differenceVector = sumVectors(new Vector3f[]{differenceVector, middle});
+        Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(triangle, middle);
 
         if (isVectorInsideBox(differenceVector, box)) {
 
-            Vector3f maxVertexDifference = subtractVectors(vertices.get(1), vertices.get(0));
+            Vector3f maxVertexDifference = subtractVectors(triangle.directionVectorA, triangle.position);
 
-            if (getAbs(subtractVectors(vertices.get(2), vertices.get(0))) > getAbs(maxVertexDifference))
-                maxVertexDifference = subtractVectors(vertices.get(2), vertices.get(0));
+            if (getAbs(subtractVectors(triangle.directionVectorB, triangle.position)) > getAbs(maxVertexDifference))
+                maxVertexDifference = subtractVectors(triangle.directionVectorB, triangle.position);
 
-            insideBox = getAbs(subtractVectors(differenceVector, vertices.get(0))) < getAbs(maxVertexDifference);
+            insideBox = getAbs(subtractVectors(differenceVector, triangle.position)) < getAbs(maxVertexDifference);
 
         } else insideBox = false;
 
@@ -57,6 +88,12 @@ public class VectorHelper {
                 && vector.y < box.position.y + box.size.y
                 && vector.z > box.position.z
                 && vector.z < box.position.z + box.size.z;
+
+    }
+
+    public static Vector3f normalizeVector(Vector3f vector) {
+
+        return divideVectorByFloat(vector, getAbs(vector));
 
     }
 
@@ -213,6 +250,12 @@ public class VectorHelper {
                 && vector.x < rectangle.x + rectangle.width
                 && vector.y > rectangle.y
                 && vector.y < rectangle.y + rectangle.height;
+
+    }
+
+    public static Vector2f normalizeVector(Vector2f vector) {
+
+        return divideVectorByFloat(vector, getAbs(vector));
 
     }
 
