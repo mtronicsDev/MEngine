@@ -1,4 +1,4 @@
-package mEngine.physics.collisions;
+package mEngine.physics.collisions.primitives;
 
 import org.lwjgl.util.vector.Vector3f;
 
