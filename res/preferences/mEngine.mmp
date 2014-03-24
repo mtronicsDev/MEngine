@@ -4,7 +4,7 @@ screenHeight=720
 fullscreen=false
 
 #Camera preferences
-fieldOfView=80
+fieldOfView=100
 
 #Player preferences
 continuouslyJumping=true
