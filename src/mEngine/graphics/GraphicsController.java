@@ -7,6 +7,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector4f;
+import org.newdawn.slick.Color;
 
 import static mEngine.util.input.Input.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -149,6 +150,9 @@ public class GraphicsController {
             gluOrtho2D(0, Display.getWidth(), Display.getHeight(), 0);
             glViewport(0, 0, Display.getWidth(), Display.getHeight());
             glMatrixMode(GL_MODELVIEW);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glDisable(GL_DEPTH_TEST);
 
             glPushMatrix();
             glLoadIdentity();

@@ -1,5 +1,6 @@
 package mEngine.graphics.renderable;
 
+import mEngine.graphics.Renderer;
 import mEngine.util.ModelHelper;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
@@ -79,42 +80,45 @@ public class Model {
         //glRotatef(rotation.z, 0, 0, 1);
 
         texture.bind();
-        glBegin(GL_TRIANGLES);
+
+        List<Vector3f> renderVertices = new ArrayList<Vector3f>();
+        List<Vector3f> renderNormals = new ArrayList<Vector3f>();
+        List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
         for (Face face : faces) {
 
             Vector3f n1 = normals.get((int) face.normalIndices.x);
-            glNormal3f(n1.x, n1.y, n1.z);
+            renderNormals.add(n1);
 
             Vector2f uv1 = uvs.get((int) face.uvIndices.x);
-            glTexCoord2f(uv1.x, 1 - uv1.y);
+            renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
 
             Vector3f v1 = vertices.get((int) face.vertexIndices.x);
-            glVertex3f(v1.x, v1.y, v1.z);
+            renderVertices.add(v1);
 
 
             Vector3f n2 = normals.get((int) face.normalIndices.y);
-            glNormal3f(n2.x, n2.y, n2.z);
+            renderNormals.add(n2);
 
             Vector2f uv2 = uvs.get((int) face.uvIndices.y);
-            glTexCoord2f(uv2.x, 1 - uv2.y);
+            renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
 
             Vector3f v2 = vertices.get((int) face.vertexIndices.y);
-            glVertex3f(v2.x, v2.y, v2.z);
+            renderVertices.add(v2);
 
 
             Vector3f n3 = normals.get((int) face.normalIndices.z);
-            glNormal3f(n3.x, n3.y, n3.z);
+            renderNormals.add(n3);
 
             Vector2f uv3 = uvs.get((int) face.uvIndices.z);
-            glTexCoord2f(uv3.x, 1 - uv3.y);
+            renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
 
             Vector3f v3 = vertices.get((int) face.vertexIndices.z);
-            glVertex3f(v3.x, v3.y, v3.z);
+            renderVertices.add(v3);
 
         }
 
-        glEnd();
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_TRIANGLES);
 
         glPopMatrix();
 
