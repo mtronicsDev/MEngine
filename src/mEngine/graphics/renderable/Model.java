@@ -24,8 +24,8 @@ public class Model {
 
     Texture texture;
 
-    Vector3f position = new Vector3f();
-    Vector3f rotation = new Vector3f();
+    public Vector3f position = new Vector3f();
+    public Vector3f rotation = new Vector3f();
 
     public Model(String fileName, Vector3f pos, Vector3f rot) {
 
@@ -57,11 +57,14 @@ public class Model {
         this.uvs = uvs;
         this.faces = faces;
         this.texture = texture;
+        this.mass = getMass();
 
         Vector3f middle = getMiddle();
 
         for (int count = 0; count < this.vertices.size(); count++)
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
+
+        position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
 
     }
 
