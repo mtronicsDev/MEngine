@@ -3,6 +3,7 @@ package mEngine.gameObjects.components;
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
@@ -13,6 +14,9 @@ import static org.lwjgl.util.glu.GLU.gluPerspective;
 public class Camera extends Component {
 
     public float zoom = 1.3f;
+    public Vector3f position;
+    public Vector3f rotation;
+    public Vector3f percentRotation;
 
     public Camera() {
 
@@ -41,8 +45,9 @@ public class Camera extends Component {
         if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
 
-        Vector3f position = obj.position;
-        Vector3f rotation = obj.rotation;
+        position = VectorHelper.sumVectors(new Vector3f[] {obj.position, new Vector3f(0, zoom, 0)});
+        rotation = obj.rotation;
+        percentRotation = obj.percentRotation;
 
         glLoadIdentity();
 
@@ -50,7 +55,7 @@ public class Camera extends Component {
         glRotatef(rotation.y, 0, 1, 0);
         glRotatef(rotation.z, 0, 0, 1);
 
-        glTranslatef(-position.x, -position.y - zoom, -position.z);
+        glTranslatef(-position.x, -position.y, -position.z);
 
     }
 
