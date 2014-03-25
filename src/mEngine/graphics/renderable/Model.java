@@ -89,7 +89,7 @@ public class Model {
 
         for (Face face : faces) {
 
-            if (RenderHelper.isFaceNeededToBeRendered(face)) {
+            //if (RenderHelper.isFaceNeededToBeRendered(face)) {
 
                 Vector3f n1 = normals.get((int) face.normalIndices.x);
                 renderNormals.add(n1);
@@ -120,7 +120,7 @@ public class Model {
                 Vector3f v3 = vertices.get((int) face.vertexIndices.z);
                 renderVertices.add(v3);
 
-            }
+            //}
 
         }
 

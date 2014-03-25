@@ -119,6 +119,30 @@ public class GameController {
                 new CollideComponent(false, true)
         );
 
+        addGameObject(new GameObject(new Vector3f(0, 0, -30), new Vector3f()));
+        object = getGameObject(gameObjects.size() - 1);
+
+        object.addComponent(
+                "renderComponent",
+                new RenderComponent("texturedStar")
+        );
+        object.addComponent(
+                "collideComponent",
+                new CollideComponent(false, true)
+        );
+
+        addGameObject(new GameObject(new Vector3f(0, 0, -40), new Vector3f()));
+        object = getGameObject(gameObjects.size() - 1);
+
+        object.addComponent(
+                "renderComponent",
+                new RenderComponent("texturedStar")
+        );
+        object.addComponent(
+                "collideComponent",
+                new CollideComponent(false, true)
+        );
+
         addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0)));
         object = getGameObject(gameObjects.size() - 1);
 
