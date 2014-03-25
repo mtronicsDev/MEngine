@@ -14,8 +14,8 @@ public class Graph {
         this.values = values;
     }
 
-    public double getX(int y) {
-        return values[y];
+    public double getY(int x) {
+        return values[x];
     }
 
     public int getLength() {

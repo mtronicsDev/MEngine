@@ -26,7 +26,7 @@ public class GameLoop {
 
             }
 
-            if (Input.isKeyDown(Keyboard.KEY_Y)) {
+            if (Input.isKeyPressed(Keyboard.KEY_Y)) {
 
                 ObjectController.addGameObject(
                         new GameObject(ObjectController.getGameObject(0).position, new Vector3f())

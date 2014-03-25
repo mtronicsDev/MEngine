@@ -15,7 +15,7 @@ public class Profiler {
         if (memUsage == null) memUsage = new Graph(valueCount);
         for (int i = 1; i < memUsage.getLength(); i++) {
 
-            if (i - 1 >= 0) memUsage.updateValue(i - 1, memUsage.getX(i));
+            if (i - 1 >= 0) memUsage.updateValue(i - 1, memUsage.getY(i));
 
         }
 
@@ -30,7 +30,7 @@ public class Profiler {
         if (fpsGraph == null) fpsGraph = new Graph(valueCount);
         for (int i = 1; i < fpsGraph.getLength(); i++) {
 
-            if (i - 1 >= 0) fpsGraph.updateValue(i - 1, fpsGraph.getX(i));
+            if (i - 1 >= 0) fpsGraph.updateValue(i - 1, fpsGraph.getY(i));
 
         }
 

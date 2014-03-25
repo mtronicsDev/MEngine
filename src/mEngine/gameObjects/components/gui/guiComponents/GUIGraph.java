@@ -29,7 +29,7 @@ public class GUIGraph extends GUIComponent {
         super.onUpdate();
         float stepSize = size.x / graph.getLength();
 
-        TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
+        TextureHelper.getTexture("graph").bind(); //Temporary fix
         glBegin(GL_LINE_STRIP);
 
         //For every x-value, a vertex is rendered at the appropriate spot
@@ -41,7 +41,8 @@ public class GUIGraph extends GUIComponent {
                 Then it is moved down by size.y so it is in the bottom left corner of the element.
                 Finally, it is moved up again by the y value given.
             */
-            glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float) clamp(graph.getX(i), 0, size.y));
+            glTexCoord2f(0, 1 -(float)(clamp(graph.getY(i), 0, size.y) / size.y));
+            glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float) clamp(graph.getY(i), 0, size.y));
 
         }
 

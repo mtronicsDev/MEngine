@@ -131,31 +131,7 @@ public class GameController {
                 new CollideComponent(false, true)
         );
 
-        /*addGUIScreen(new GUIScreen(
-                new GUIElement[]{
-                        new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new GUIText("Current FPS", 15)),
-                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new GUIText("Current RAM", 15)),
-
-                        new GUIElement(new Vector2f(5, 50), new Vector2f()).addComponent("guiText", new GUIText("x:", 15)),
-                        new GUIElement(new Vector2f(5, 70), new Vector2f()).addComponent("guiText", new GUIText("y:", 15)),
-                        new GUIElement(new Vector2f(5, 90), new Vector2f()).addComponent("guiText", new GUIText("z:", 15)),
-
-                        new GUIElement(new Vector2f(5, 115), new Vector2f()).addComponent("guiText", new GUIText("Player collision:", 15)),
-
-                        new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
-                                .addComponent("guiGraphRAM", new GUIGraph(
-                                        new Vector2f(Display.getWidth(), 100),
-                                        new double[]{}))
-                                .addComponent("guiGraphFPS", new GUIGraph(
-                                        new Vector2f(Display.getWidth(), 100),
-                                        new double[]{})
-                                )
-                }, true));
-
-        addGUIScreen(new GUIScreen(
-                new GUIElement[]{
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64)).addComponent("guiQuad", new GUIQuad("reticule"))
-                }, true));*/
+        ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(2), "test"));
 
         AudioController.setListener(getGameObject(0));
 
