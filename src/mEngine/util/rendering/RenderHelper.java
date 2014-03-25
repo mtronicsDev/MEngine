@@ -31,6 +31,7 @@ public class RenderHelper {
                     if (faceListPart == face) {
 
                         model = renderComponent.model;
+                        faceFound = true;
                         break;
 
                     }
@@ -105,29 +106,29 @@ public class RenderHelper {
             Vector3f yAxis = new Vector3f(0, 1, 0);
             Vector3f zAxis = new Vector3f(0, 0, 1);
 
-            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(fov / 2), 0, (float) Math.sin(fov / 2)),
+            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(-fov / 2), 0, (float) Math.sin(-fov / 2)),
                     new Vector3f(0, 1, 0),
-                    new Vector3f(-(float) Math.sin(fov / 2), 0, (float) Math.cos(fov / 2)));
+                    new Vector3f(-(float) Math.sin(-fov / 2), 0, (float) Math.cos(-fov / 2)));
 
-            Vector3f leftEdge = yAxisRotationMatrix.multiplyByVector(zAxis);
+            Vector3f leftLowerCorner = yAxisRotationMatrix.multiplyByVector(zAxis);
 
             yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(fov / 2), 0, (float) Math.sin(fov / 2)),
                     new Vector3f(0, 1, 0),
                     new Vector3f(-(float) Math.sin(fov / 2), 0, (float) Math.cos(fov / 2)));
 
-            Vector3f rightEdge = yAxisRotationMatrix.multiplyByVector(zAxis);
+            Vector3f rightUpperCorner = yAxisRotationMatrix.multiplyByVector(zAxis);
 
             Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
                     new Vector3f(0, (float) Math.cos(fov / 2), -(float) Math.sin(fov / 2)),
                     new Vector3f(0, (float) Math.sin(fov / 2), (float) Math.cos(fov / 2)));
 
-            Vector3f lowerEdge = xAxisRotationMatrix.multiplyByVector(zAxis);
+            leftLowerCorner = xAxisRotationMatrix.multiplyByVector(leftLowerCorner);
 
             xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
                     new Vector3f(0, (float) Math.cos(-fov / 2), -(float) Math.sin(-fov / 2)),
                     new Vector3f(0, (float) Math.sin(-fov / 2), (float) Math.cos(-fov / 2)));
 
-            Vector3f upperEdge = xAxisRotationMatrix.multiplyByVector(zAxis);
+            rightUpperCorner = xAxisRotationMatrix.multiplyByVector(rightUpperCorner);
 
             Vector3f alphaIndicator = new Vector3f(camera.percentRotation.x, 0, camera.percentRotation.z);
             float alpha = VectorHelper.getAngle(zAxis, alphaIndicator);
@@ -155,7 +156,7 @@ public class RenderHelper {
 
             }
 
-            theoreticallyOnScreen = vector.z >= leftEdge.z;
+            theoreticallyOnScreen = vector.x >= leftLowerCorner.x && vector.x <= rightUpperCorner.x && vector.y >= leftLowerCorner.y && vector.y <= rightUpperCorner.y;
 
         }
 
