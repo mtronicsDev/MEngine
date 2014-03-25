@@ -28,7 +28,7 @@ public class Renderer {
         GraphicsController.switchTo3D();
 
         glBegin(mode);
-        for(int i = 0; i < vertices.size(); i++) {
+        for (int i = 0; i < vertices.size(); i++) {
 
             glNormal3f(normals.get(i).x, normals.get(i).y, normals.get(i).z);
             glTexCoord2f(uvs.get(i).x, uvs.get(i).y);
@@ -44,7 +44,7 @@ public class Renderer {
         GraphicsController.switchTo2D();
 
         glBegin(mode);
-        for(int i = 0; i < vertices.size(); i++) {
+        for (int i = 0; i < vertices.size(); i++) {
 
             glTexCoord2f(uvs.get(i).x, uvs.get(i).y);
             glVertex2f(vertices.get(i).x, vertices.get(i).y);
