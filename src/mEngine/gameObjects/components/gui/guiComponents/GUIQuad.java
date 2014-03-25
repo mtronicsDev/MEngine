@@ -1,6 +1,6 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.util.TextureHelper;
+import mEngine.util.rendering.TextureHelper;
 import org.newdawn.slick.opengl.Texture;
 
 import static org.lwjgl.opengl.GL11.*;

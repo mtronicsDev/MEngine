@@ -11,23 +11,17 @@ public class Face {
 
     public Face(Vector3f vertexIndices, Vector3f normalIndices, Vector3f uvIndices) {
 
-        this.vertexIndices = vertexIndices;
-        this.vertexIndices = VectorHelper.subtractVectors(vertexIndices, new Vector3f(1, 1, 1));
-        this.normalIndices = normalIndices;
-        this.normalIndices = VectorHelper.subtractVectors(normalIndices, new Vector3f(1, 1, 1));
-        this.uvIndices = uvIndices;
-        this.uvIndices = VectorHelper.subtractVectors(uvIndices, new Vector3f(1, 1, 1));
+        this.vertexIndices = VectorHelper.subtractVectorAndFloat(vertexIndices, 1);
+        this.normalIndices = VectorHelper.subtractVectorAndFloat(normalIndices, 1);
+        this.uvIndices = VectorHelper.subtractVectorAndFloat(uvIndices, 1);
 
     }
 
     public Face(Face faceSrc) {
 
-        this.vertexIndices = faceSrc.vertexIndices;
-        this.vertexIndices = VectorHelper.subtractVectors(vertexIndices, new Vector3f(1, 1, 1));
-        this.normalIndices = faceSrc.normalIndices;
-        this.normalIndices = VectorHelper.subtractVectors(normalIndices, new Vector3f(1, 1, 1));
-        this.uvIndices = faceSrc.uvIndices;
-        this.uvIndices = VectorHelper.subtractVectors(uvIndices, new Vector3f(1, 1, 1));
+        this.vertexIndices = VectorHelper.subtractVectorAndFloat(faceSrc.vertexIndices, 1);
+        this.normalIndices = VectorHelper.subtractVectors(faceSrc.normalIndices, new Vector3f(1, 1, 1));
+        this.uvIndices = VectorHelper.subtractVectors(faceSrc.uvIndices, new Vector3f(1, 1, 1));
 
     }
 

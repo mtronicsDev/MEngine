@@ -1,6 +1,6 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.util.TextureHelper;
+import mEngine.util.rendering.TextureHelper;
 import mEngine.util.math.graphs.Graph;
 import org.lwjgl.util.vector.Vector2f;
 
