@@ -73,9 +73,7 @@ public class RenderHelper {
 
     public static boolean isVectorTheoreticallyOnScreen(Vector3f vector) {
 
-        boolean theoreticallyOnScreen = true;
-
-        return theoreticallyOnScreen;
+        return true;
 
     }
 

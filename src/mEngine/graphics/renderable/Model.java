@@ -46,7 +46,7 @@ public class Model {
         position = pos;
         rotation = rot;
 
-        //position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
+        position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
 
     }
 
