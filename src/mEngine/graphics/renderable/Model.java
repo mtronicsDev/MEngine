@@ -1,8 +1,8 @@
 package mEngine.graphics.renderable;
 
 import mEngine.graphics.Renderer;
-import mEngine.util.rendering.ModelHelper;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.rendering.ModelHelper;
 import mEngine.util.rendering.RenderHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -46,7 +46,7 @@ public class Model {
         position = pos;
         rotation = rot;
 
-        position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
+        position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
     }
 
@@ -64,7 +64,7 @@ public class Model {
         for (int count = 0; count < this.vertices.size(); count++)
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
-        position = VectorHelper.sumVectors(new Vector3f[] {position, middle});
+        position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
     }
 
@@ -89,7 +89,7 @@ public class Model {
 
         for (Face face : faces) {
 
-            if(RenderHelper.isFaceNeededToBeRendered(face)) {
+            if (RenderHelper.isFaceNeededToBeRendered(face)) {
 
                 Vector3f n1 = normals.get((int) face.normalIndices.x);
                 renderNormals.add(n1);

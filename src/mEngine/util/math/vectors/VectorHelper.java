@@ -51,7 +51,7 @@ public class VectorHelper {
         Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(plane, middle);
         differenceVector = sumVectors(new Vector3f[]{differenceVector, middle});
 
-        if(isVectorInsideBox(differenceVector, box)) return true;
+        if (isVectorInsideBox(differenceVector, box)) return true;
 
         else return false;
 

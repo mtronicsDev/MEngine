@@ -45,7 +45,7 @@ public class Camera extends Component {
         if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
 
-        position = VectorHelper.sumVectors(new Vector3f[] {obj.position, new Vector3f(0, zoom, 0)});
+        position = VectorHelper.sumVectors(new Vector3f[]{obj.position, new Vector3f(0, zoom, 0)});
         rotation = obj.rotation;
         percentRotation = obj.percentRotation;
 
