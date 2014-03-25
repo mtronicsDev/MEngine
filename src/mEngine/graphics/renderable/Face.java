@@ -20,8 +20,8 @@ public class Face {
     public Face(Face faceSrc) {
 
         this.vertexIndices = VectorHelper.subtractVectorAndFloat(faceSrc.vertexIndices, 1);
-        this.normalIndices = VectorHelper.subtractVectors(faceSrc.normalIndices, new Vector3f(1, 1, 1));
-        this.uvIndices = VectorHelper.subtractVectors(faceSrc.uvIndices, new Vector3f(1, 1, 1));
+        this.normalIndices = VectorHelper.subtractVectorAndFloat(faceSrc.normalIndices, 1);
+        this.uvIndices = VectorHelper.subtractVectorAndFloat(faceSrc.uvIndices, 1);
 
     }
 

@@ -70,8 +70,6 @@ public class Model {
         position = pos;
         rotation = rot;
 
-        //Rendering the model
-
         glPushMatrix();
 
         glTranslatef(position.x, position.y, position.z);
