@@ -56,6 +56,8 @@ public class GraphicsController {
 
         }
 
+        initializeOpenGL();
+
     }
 
     public static void clearScreen(Vector4f rgba) {
@@ -139,6 +141,19 @@ public class GraphicsController {
         return (float) width / height;
     }
 
+    private static void initializeOpenGL() {
+
+        //Enabling OpenGL functions
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
+        glEnable(GL_BLEND);
+
+        //Using them
+        glCullFace(GL_BACK);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    }
+
     public static void switchTo2D() {
 
         if (currentRenderDimension != Dimension.DIM_2) {
@@ -149,8 +164,6 @@ public class GraphicsController {
             gluOrtho2D(0, Display.getWidth(), Display.getHeight(), 0);
             glViewport(0, 0, Display.getWidth(), Display.getHeight());
             glMatrixMode(GL_MODELVIEW);
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
             glPushMatrix();
             glLoadIdentity();
@@ -171,7 +184,6 @@ public class GraphicsController {
             gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
             glViewport(0, 0, Display.getWidth(), Display.getHeight());
             glMatrixMode(GL_MODELVIEW);
-            glEnable(GL_DEPTH_TEST);
 
             currentRenderDimension = Dimension.DIM_3;
 

@@ -32,7 +32,7 @@ public class GameController {
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
-        GraphicsController.createDisplay(60, "mEngine Test Run");
+        GraphicsController.createDisplay(120, "mEngine Test Run");
         AudioController.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
