@@ -89,38 +89,34 @@ public class Model {
 
         for (Face face : faces) {
 
-            //if (RenderHelper.isFaceNeededToBeRendered(face)) {
+            Vector3f n1 = normals.get((int) face.normalIndices.x);
+            renderNormals.add(n1);
 
-                Vector3f n1 = normals.get((int) face.normalIndices.x);
-                renderNormals.add(n1);
+            Vector2f uv1 = uvs.get((int) face.uvIndices.x);
+            renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
 
-                Vector2f uv1 = uvs.get((int) face.uvIndices.x);
-                renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
-
-                Vector3f v1 = vertices.get((int) face.vertexIndices.x);
-                renderVertices.add(v1);
+            Vector3f v1 = vertices.get((int) face.vertexIndices.x);
+            renderVertices.add(v1);
 
 
-                Vector3f n2 = normals.get((int) face.normalIndices.y);
-                renderNormals.add(n2);
+            Vector3f n2 = normals.get((int) face.normalIndices.y);
+            renderNormals.add(n2);
 
-                Vector2f uv2 = uvs.get((int) face.uvIndices.y);
-                renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
+            Vector2f uv2 = uvs.get((int) face.uvIndices.y);
+            renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
 
-                Vector3f v2 = vertices.get((int) face.vertexIndices.y);
-                renderVertices.add(v2);
+            Vector3f v2 = vertices.get((int) face.vertexIndices.y);
+            renderVertices.add(v2);
 
 
-                Vector3f n3 = normals.get((int) face.normalIndices.z);
-                renderNormals.add(n3);
+            Vector3f n3 = normals.get((int) face.normalIndices.z);
+            renderNormals.add(n3);
 
-                Vector2f uv3 = uvs.get((int) face.uvIndices.z);
-                renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
+            Vector2f uv3 = uvs.get((int) face.uvIndices.z);
+            renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
 
-                Vector3f v3 = vertices.get((int) face.vertexIndices.z);
-                renderVertices.add(v3);
-
-            //}
+            Vector3f v3 = vertices.get((int) face.vertexIndices.z);
+            renderVertices.add(v3);
 
         }
 

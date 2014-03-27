@@ -1,6 +1,8 @@
 package mEngine.audio;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.AudioListener;
+import mEngine.gameObjects.components.AudioSource;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.openal.AL;
 import org.lwjgl.util.WaveData;
@@ -41,7 +43,7 @@ public class AudioController {
 
     }
 
-    static int loadALData(AudioSource src, String fileName) {
+    public static int loadALData(AudioSource src, String fileName) {
 
         WaveData waveData = null;
 

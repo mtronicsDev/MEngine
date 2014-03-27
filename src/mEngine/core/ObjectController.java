@@ -1,6 +1,6 @@
 package mEngine.core;
 
-import mEngine.audio.AudioSource;
+import mEngine.gameObjects.components.AudioSource;
 import mEngine.gameObjects.GameObject;
 
 import java.util.ArrayList;
