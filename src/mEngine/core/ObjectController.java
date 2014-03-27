@@ -1,7 +1,7 @@
 package mEngine.core;
 
-import mEngine.gameObjects.components.AudioSource;
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.AudioSource;
 
 import java.util.ArrayList;
 import java.util.List;

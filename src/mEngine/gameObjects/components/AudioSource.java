@@ -3,7 +3,6 @@ package mEngine.gameObjects.components;
 import mEngine.audio.AudioController;
 import mEngine.gameObjects.GameObject;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLException;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.nio.FloatBuffer;

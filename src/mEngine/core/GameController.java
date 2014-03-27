@@ -1,7 +1,6 @@
 package mEngine.core;
 
 import mEngine.audio.AudioController;
-import mEngine.gameObjects.components.AudioSource;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
@@ -110,6 +109,7 @@ public class GameController {
                 "reticule",
                 new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64)).addComponent("guiQuad", new GUIQuad("reticule"))
         );
+        /*
         object.addComponent(
                 "background",
                 new GUIElement(new Vector2f(0, 0), new Vector2f(1280, 720)).addComponent("background", new GUIQuad("background"))
@@ -118,6 +118,7 @@ public class GameController {
                 "icon",
                 new GUIElement(new Vector2f(Display.getWidth() / 2 - 200, Display.getHeight() / 2 - 200), new Vector2f(400, 400)).addComponent("icon", new GUIQuad("icon"))
         );
+        */
 
         addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f()));
         object = getGameObject(gameObjects.size() - 1);

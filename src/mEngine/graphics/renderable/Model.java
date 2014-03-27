@@ -3,7 +3,6 @@ package mEngine.graphics.renderable;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
-import mEngine.util.rendering.RenderHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;

@@ -41,7 +41,7 @@ public class GUIGraph extends GUIComponent {
                 Then it is moved down by size.y so it is in the bottom left corner of the element.
                 Finally, it is moved up again by the y value given.
             */
-            glTexCoord2f(0, 1 -(float)(clamp(graph.getY(i), 0, size.y) / size.y));
+            glTexCoord2f(0, 1 - (float) (clamp(graph.getY(i), 0, size.y) / size.y));
             glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float) clamp(graph.getY(i), 0, size.y));
 
         }
