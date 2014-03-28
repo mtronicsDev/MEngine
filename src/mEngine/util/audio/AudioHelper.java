@@ -1,7 +1,5 @@
 package mEngine.util.audio;
 
-import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.AudioListener;
 import mEngine.gameObjects.components.AudioSource;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.openal.AL;

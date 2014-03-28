@@ -1,7 +1,5 @@
 package mEngine.gameObjects.components;
 
-import mEngine.gameObjects.GameObject;
-
 public class InteractionComponent extends Component {
 
     public boolean interactable;

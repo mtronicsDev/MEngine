@@ -1,6 +1,5 @@
 package mEngine.gameObjects.components.gui;
 
-import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
 import mEngine.graphics.GraphicsController;
