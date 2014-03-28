@@ -1,6 +1,6 @@
 package mEngine.gameObjects.components;
 
-import mEngine.audio.AudioController;
+import mEngine.util.audio.AudioHelper;
 import mEngine.gameObjects.GameObject;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Vector3f;
@@ -23,12 +23,14 @@ public class AudioSource extends Component {
     public AudioSource(GameObject source, String fileName) {
 
         alGetError();
-        if (AudioController.loadALData(this, fileName) == AL_FALSE) return;
+        if (AudioHelper.loadALData(this, fileName) == AL_FALSE) return;
 
         position = source.position;
         rotation = source.rotation;
 
     }
+
+    //TODO: Add an update method to refresh position and velocity
 
     public void play() {
         alSourcePlay(source);

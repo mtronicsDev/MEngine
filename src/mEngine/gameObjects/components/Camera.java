@@ -36,18 +36,15 @@ public class Camera extends Component {
 
     }
 
-    public void onCreation(GameObject obj) {
-    }
-
-    public void onUpdate(GameObject obj) {
+    public void onUpdate() {
 
         GraphicsController.switchTo3D();
         if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
 
-        position = VectorHelper.sumVectors(new Vector3f[]{obj.position, new Vector3f(0, zoom, 0)});
-        rotation = obj.rotation;
-        percentRotation = obj.percentRotation;
+        position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0, zoom, 0)});
+        rotation = parent.rotation;
+        percentRotation = parent.percentRotation;
 
         glLoadIdentity();
 

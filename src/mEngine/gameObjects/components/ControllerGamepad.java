@@ -16,7 +16,7 @@ public class ControllerGamepad extends Controller {
 
     }
 
-    public void updateObject(GameObject obj) {
+    public void updateObject() {
     }
 
 }

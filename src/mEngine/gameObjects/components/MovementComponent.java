@@ -38,7 +38,8 @@ public class MovementComponent extends Component {
 
     public void onCreation(GameObject obj) {
 
-        RenderComponent renderComponent = (RenderComponent) obj.getComponent("renderComponent");
+        super.onCreation(obj);
+        RenderComponent renderComponent = (RenderComponent) parent.getComponent("renderComponent");
 
         if (renderComponent != null) {
 
@@ -68,12 +69,12 @@ public class MovementComponent extends Component {
 
     }
 
-    public void onUpdate(GameObject obj) {
+    public void onUpdate() {
 
         if (!GameController.isGamePaused) {
 
-            Controller controller = (Controller) obj.getComponent("controller");
-            CollideComponent collideComponent = (CollideComponent) obj.getComponent("collideComponent");
+            Controller controller = (Controller) parent.getComponent("controller");
+            CollideComponent collideComponent = (CollideComponent) parent.getComponent("collideComponent");
 
             if (controller != null) {
 
@@ -82,21 +83,21 @@ public class MovementComponent extends Component {
                 if (Input.isKeyDown(Keyboard.KEY_V))
                     forcePoints.get("middle").forces.get("gravity").enabled = !forcePoints.get("middle").forces.get("gravity").enabled; //Kiwi (KEY_V) :P
 
-                controller.onRemoteUpdate(obj);
+                controller.onRemoteUpdate();
 
             }
 
-            obj.percentRotation = new Vector3f(0, 0, 1);
+            parent.percentRotation = new Vector3f(0, 0, 1);
 
             Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float) Math.cos(Math.toRadians(obj.rotation.x)), (float) -Math.sin(Math.toRadians(obj.rotation.x))),
-                    new Vector3f(0, (float) Math.sin(Math.toRadians(obj.rotation.x)), (float) Math.cos(Math.toRadians(obj.rotation.x))));
-            obj.percentRotation = xAxisRotationMatrix.multiplyByVector(obj.percentRotation);
+                    new Vector3f(0, (float) Math.cos(Math.toRadians(parent.rotation.x)), (float) -Math.sin(Math.toRadians(parent.rotation.x))),
+                    new Vector3f(0, (float) Math.sin(Math.toRadians(parent.rotation.x)), (float) Math.cos(Math.toRadians(parent.rotation.x))));
+            parent.percentRotation = xAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
-            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(obj.rotation.y)), 0, (float) Math.sin(Math.toRadians(obj.rotation.y))),
+            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(parent.rotation.y)), 0, (float) Math.sin(Math.toRadians(parent.rotation.y))),
                     new Vector3f(0, 1, 0),
-                    new Vector3f((float) -Math.sin(Math.toRadians(obj.rotation.y)), 0, (float) Math.cos(Math.toRadians(obj.rotation.y))));
-            obj.percentRotation = yAxisRotationMatrix.multiplyByVector(obj.percentRotation);
+                    new Vector3f((float) -Math.sin(Math.toRadians(parent.rotation.y)), 0, (float) Math.cos(Math.toRadians(parent.rotation.y))));
+            parent.percentRotation = yAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
             for (ForcePoint forcePoint : forcePoints.values()) {
 
@@ -128,7 +129,7 @@ public class MovementComponent extends Component {
 
             if (collideComponent != null) {
 
-                if (Collider.isCollidingWithSomething(obj)) {
+                if (Collider.isCollidingWithSomething(parent)) {
 
                     forceSum = ForceController.getCombinedForces(forceSum);
 
@@ -154,26 +155,25 @@ public class MovementComponent extends Component {
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
             if (collideComponent != null && collideComponent.ableToCollide && !VectorHelper.areEqual(movedSpace, new Vector3f()))
-                collideComponent.onRemoteUpdate(obj);
+                collideComponent.onRemoteUpdate();
 
-            obj.position = VectorHelper.sumVectors(new Vector3f[]{obj.position, movedSpace});
+            parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, movedSpace});
 
         }
 
     }
 
-    public void onRemoteUpdate(GameObject obj) {
+    public void onRemoteUpdate() {
     }
 
     //TODO: Find a way to hold the force counter as little as possible because otherwise there could be an overflow error
-
-    public void moveForward(GameObject obj) {
+    public void moveForward() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("forward");
 
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
 
         if (sprinting) {
 
@@ -200,13 +200,13 @@ public class MovementComponent extends Component {
 
     }
 
-    public void moveBackward(GameObject obj) {
+    public void moveBackward() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("backward");
 
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
 
         if (sneaking) {
 
@@ -226,13 +226,13 @@ public class MovementComponent extends Component {
 
     }
 
-    public void moveLeft(GameObject obj) {
+    public void moveLeft() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("left");
 
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
 
         if (sneaking) {
 
@@ -252,13 +252,13 @@ public class MovementComponent extends Component {
 
     }
 
-    public void moveRight(GameObject obj) {
+    public void moveRight() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forcePoints.get("middle").forces.get("right");
 
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(obj.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(obj.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(obj.rotation.y));
+        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
+        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
 
         if (sneaking) {
 
@@ -330,9 +330,9 @@ public class MovementComponent extends Component {
 
     }
 
-    public void sprint(GameObject obj) {
+    public void sprint() {
 
-        Controller controller = (Controller) obj.getComponent("controller");
+        Controller controller = (Controller) parent.getComponent("controller");
 
         if (!controller.sprintModeToggle) {
 
@@ -348,9 +348,9 @@ public class MovementComponent extends Component {
 
     }
 
-    public void sneak(GameObject obj) {
+    public void sneak() {
 
-        Controller controller = (Controller) obj.getComponent("controller");
+        Controller controller = (Controller) parent.getComponent("controller");
 
         if (!sprinting) {
 
@@ -360,10 +360,10 @@ public class MovementComponent extends Component {
 
     }
 
-    public void rotate(float pitch, float yaw, GameObject obj) {
+    public void rotate(float pitch, float yaw) {
 
-        obj.rotation.x = pitch;
-        obj.rotation.y = yaw;
+        parent.rotation.x = pitch;
+        parent.rotation.y = yaw;
 
     }
 

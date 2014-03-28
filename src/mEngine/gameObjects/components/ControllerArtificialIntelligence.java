@@ -10,7 +10,7 @@ public class ControllerArtificialIntelligence extends Controller {
 
     }
 
-    public void updateObject(GameObject obj) {
+    public void updateObject() {
     }
 
 }

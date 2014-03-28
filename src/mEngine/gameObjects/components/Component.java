@@ -4,19 +4,14 @@ import mEngine.gameObjects.GameObject;
 
 public abstract class Component {
 
-    public Component() {
-    }
+    protected GameObject parent;
 
-    public void onCreation(GameObject obj) {
-    }
+    public void onCreation(GameObject obj) { parent = obj; }
 
-    public void onUpdate(GameObject obj) {
-    }
+    public void onUpdate() {}
 
-    public void onDestroy(GameObject obj) {
-    }
+    public void onDestroy() {}
 
-    public void onRemoteUpdate(GameObject obj) {
-    }
+    public void onRemoteUpdate() {}
 
 }

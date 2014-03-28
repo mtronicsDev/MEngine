@@ -24,17 +24,11 @@ public class CollideComponent extends Component {
 
     }
 
-    public void onCreation(GameObject obj) {
-    }
+    public void onRemoteUpdate() {
 
-    public void onUpdate(GameObject obj) {
-    }
+        MovementComponent movementComponent = (MovementComponent) parent.getComponent("movementComponent");
 
-    public void onRemoteUpdate(GameObject obj) {
-
-        MovementComponent movementComponent = (MovementComponent) obj.getComponent("movementComponent");
-
-        if (movementComponent != null) movementComponent.movedSpace = Collider.getMovedSpace(obj);
+        if (movementComponent != null) movementComponent.movedSpace = Collider.getMovedSpace(parent);
 
     }
 

@@ -29,7 +29,7 @@ public class GUIElement extends Component {
 
     }
 
-    public void onUpdate(GameObject obj) {
+    public void onUpdate() {
 
         GraphicsController.switchTo2D();
         for (GUIComponent component : components.values()) {

@@ -1,4 +1,4 @@
-package mEngine.audio;
+package mEngine.util.audio;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.AudioListener;
@@ -17,9 +17,8 @@ import static mEngine.util.ResourceHelper.RES_SOUND;
 import static mEngine.util.ResourceHelper.getResource;
 import static org.lwjgl.openal.AL10.*;
 
-public class AudioController {
+public class AudioHelper {
 
-    public static AudioListener listener;
     public static List<AudioSource> sources = new ArrayList<AudioSource>();
 
     public static void initializeOpenAL() {
@@ -34,12 +33,6 @@ public class AudioController {
             System.exit(1);
 
         }
-
-    }
-
-    public static void setListener(GameObject obj) {
-
-        listener = new AudioListener(obj);
 
     }
 

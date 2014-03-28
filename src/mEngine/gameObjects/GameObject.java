@@ -25,7 +25,7 @@ public class GameObject {
 
         for (Component component : components.values()) {
 
-            component.onUpdate(this);
+            component.onUpdate();
 
         }
 

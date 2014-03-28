@@ -34,10 +34,7 @@ public class InteractionComponent extends Component {
 
     }
 
-    public void onCreation(GameObject obj) {
-    }
-
-    public void onUpdate(GameObject obj) {
+    public void onUpdate() {
     }
 
 }

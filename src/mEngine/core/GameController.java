@@ -1,6 +1,6 @@
 package mEngine.core;
 
-import mEngine.audio.AudioController;
+import mEngine.util.audio.AudioHelper;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
@@ -32,7 +32,7 @@ public class GameController {
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
         GraphicsController.createDisplay(120, "mEngine Test Run");
-        AudioController.initializeOpenAL();
+        AudioHelper.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
 
@@ -41,61 +41,59 @@ public class GameController {
         //GameObject Time ;)
         GameObject object;
 
-        addGameObject(new GameObject(new Vector3f(), new Vector3f()));
-        object = getGameObject(gameObjects.size() - 1);
-
-        object.addComponent(
-                "renderComponent",
-                new RenderComponent("texturedStar")
-        );
-        object.addComponent(
-                "collideComponent",
-                new CollideComponent(false, true)
-        );
-        object.addComponent(
+        addGameObject(new GameObject(new Vector3f(), new Vector3f())
+        .addComponent(
                 "movementComponent",
                 new MovementComponent()
-        );
-        object.addComponent(
-                "audioListener",
-                new AudioListener(object)
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "controller",
                 new ControllerKeyboardMouse(
                         new float[]{1, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 11},
                         false
                 )
-        );
-        object.addComponent(
+        )
+        .addComponent(
+                "collideComponent",
+                new CollideComponent(false, true)
+        )
+        .addComponent(
+                "renderComponent",
+                new RenderComponent("texturedStar")
+        )
+        .addComponent(
                 "camera",
                 new Camera()
-        );
-        object.addComponent(
+        )
+        .addComponent(
+                "audioListener",
+                new AudioListener()
+        )
+        .addComponent(
                 "fpsText",
                 new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "ramText",
                 new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "xText",
                 new GUIElement(new Vector2f(5, 50), new Vector2f()).addComponent("guiText", new GUIText("x:", 15))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "yText",
                 new GUIElement(new Vector2f(5, 70), new Vector2f()).addComponent("guiText", new GUIText("y:", 15))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "zText",
                 new GUIElement(new Vector2f(5, 90), new Vector2f()).addComponent("guiText", new GUIText("z:", 15))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "collisionText",
                 new GUIElement(new Vector2f(5, 115), new Vector2f()).addComponent("guiText", new GUIText("Player collision:", 15))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "graphs",
                 new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
                         .addComponent("guiGraphFPS", new FPSGraphComponent(
@@ -104,73 +102,52 @@ public class GameController {
                         .addComponent("guiGraphRAM", new RAMGraphComponent(
                                 new Vector2f(Display.getWidth(), 100),
                                 new double[]{}))
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "reticule",
-                new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64)).addComponent("guiQuad", new GUIQuad("reticule"))
-        );
-        /*
-        object.addComponent(
-                "background",
-                new GUIElement(new Vector2f(0, 0), new Vector2f(1280, 720)).addComponent("background", new GUIQuad("background"))
-        );
-        object.addComponent(
-                "icon",
-                new GUIElement(new Vector2f(Display.getWidth() / 2 - 200, Display.getHeight() / 2 - 200), new Vector2f(400, 400)).addComponent("icon", new GUIQuad("icon"))
-        );
-        */
+                new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
+                        .addComponent("guiQuad", new GUIQuad("reticule"))
+        ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f()));
-        object = getGameObject(gameObjects.size() - 1);
-
-        object.addComponent(
+        addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f())
+        .addComponent(
                 "renderComponent",
                 new RenderComponent("12star")
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "collideComponent",
                 new CollideComponent(false, true)
-        );
+        ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -30), new Vector3f()));
-        object = getGameObject(gameObjects.size() - 1);
-
-        object.addComponent(
+        addGameObject(new GameObject(new Vector3f(0, 0, -30), new Vector3f())
+        .addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "collideComponent",
                 new CollideComponent(false, true)
-        );
+        ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -40), new Vector3f()));
-        object = getGameObject(gameObjects.size() - 1);
-
-        object.addComponent(
+        addGameObject(new GameObject(new Vector3f(0, 0, -40), new Vector3f())
+        .addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "collideComponent",
                 new CollideComponent(false, true)
-        );
+        ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0)));
-        object = getGameObject(gameObjects.size() - 1);
-
-        object.addComponent(
+        addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0))
+        .addComponent(
                 "renderComponent",
                 new RenderComponent("texturedStar")
-        );
-        object.addComponent(
+        )
+        .addComponent(
                 "collideComponent",
                 new CollideComponent(false, true)
-        );
-
-        ObjectController.addAudioSource(new AudioSource(ObjectController.getGameObject(2), "test"));
-
-        AudioController.setListener(getGameObject(0));
+        ));
 
         for (AudioSource source : audioSources) {
             source.play();
@@ -205,7 +182,7 @@ public class GameController {
 
     public static void stopGame() {
 
-        AudioController.killALData();
+        AudioHelper.killALData();
         System.exit(0);
 
     }

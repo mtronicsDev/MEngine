@@ -25,6 +25,7 @@ public abstract class Controller extends Component {
 
     public void onCreation(GameObject obj) {
 
+        super.onCreation(obj);
         MovementComponent movementComponent = (MovementComponent) obj.getComponent("movementComponent");
 
         if (movementComponent != null) {
@@ -42,10 +43,10 @@ public abstract class Controller extends Component {
 
     }
 
-    public void onRemoteUpdate(GameObject obj) {
-        updateObject(obj);
+    public void onRemoteUpdate() {
+        updateObject();
     }
 
-    protected abstract void updateObject(GameObject obj);
+    protected abstract void updateObject();
 
 }

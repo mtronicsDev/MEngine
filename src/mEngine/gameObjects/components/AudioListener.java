@@ -9,24 +9,26 @@ import static org.lwjgl.openal.AL10.*;
 
 public class AudioListener extends Component {
 
-    FloatBuffer listenerPos = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-    FloatBuffer listenerVel = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-    FloatBuffer listenerOri = (FloatBuffer) BufferUtils.createFloatBuffer(6).put(new float[]{0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f}).rewind();
+    FloatBuffer listenerPos;
+    FloatBuffer listenerVel;
+    FloatBuffer listenerOri;
 
-    public AudioListener(GameObject listener) {
+    @Override
+    public void onCreation(GameObject obj) {
 
-        listenerPos = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{listener.position.x, listener.position.y, listener.position.z}).rewind();
+        super.onCreation(obj);
+        listenerPos = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{parent.position.x, parent.position.y, parent.position.z}).rewind();
         listenerVel = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
-        listenerOri = (FloatBuffer) BufferUtils.createFloatBuffer(6).put(new float[]{listener.percentRotation.x, listener.percentRotation.y, listener.percentRotation.z, 0.0f, 1.0f, 0.0f}).rewind();
+        listenerOri = (FloatBuffer) BufferUtils.createFloatBuffer(6).put(new float[]{parent.percentRotation.x, parent.percentRotation.y, parent.percentRotation.z, 0.0f, 1.0f, 0.0f}).rewind();
 
     }
 
-    public void onUpdate(GameObject obj) {
+    public void onUpdate() {
 
-        alListener(AL_POSITION, (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{obj.position.x, obj.position.y, obj.position.z}).rewind());
+        alListener(AL_POSITION, (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{parent.position.x, parent.position.y, parent.position.z}).rewind());
         alListener(AL_VELOCITY, listenerVel);
         alListener(AL_ORIENTATION, (FloatBuffer) BufferUtils.createFloatBuffer(6).put(new float[]{
-                obj.percentRotation.x, obj.percentRotation.y, obj.percentRotation.z,
+                parent.percentRotation.x, parent.percentRotation.y, parent.percentRotation.z,
                 0.0f, 1.0f, 0.0f}).rewind());
 
     }

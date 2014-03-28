@@ -17,14 +17,15 @@ public class RenderComponent extends Component {
 
     public void onCreation(GameObject obj) {
 
-        model = new Model(modelFileName, obj.position, obj.rotation);
+        super.onCreation(obj);
+        model = new Model(modelFileName, parent.position, parent.rotation);
 
     }
 
-    public void onUpdate(GameObject obj) {
+    public void onUpdate() {
 
         GraphicsController.switchTo3D();
-        model.update(obj.position, obj.rotation);
+        model.update(parent.position, parent.rotation);
 
     }
 
