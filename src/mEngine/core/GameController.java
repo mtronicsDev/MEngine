@@ -184,6 +184,7 @@ public class GameController {
 
     public static void stopGame() {
 
+        ThreadHelper.stopAllThreads();
         AudioHelper.killALData();
         System.exit(0);
 

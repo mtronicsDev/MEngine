@@ -10,11 +10,9 @@ import java.util.Map;
 
 public class ForceController {
 
-    public static Map<String, Force> generalForces = new HashMap<String, Force>();
-
     public static final float UNIT_VECTOR_2D = 0.7068913f;
-
     public static final float UNIT_VECTOR_3D = 0.57765603f;
+    public static Map<String, Force> generalForces = new HashMap<String, Force>();
 
     public static void addForce(String key, Vector3f direction) {
         generalForces.put(key, new Force(direction));
