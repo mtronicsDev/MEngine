@@ -28,15 +28,6 @@ public class GUIElement extends Component {
 
     }
 
-    public void onUpdate() {
-
-        GraphicsController.switchTo2D();
-        for (GUIComponent component : components.values()) {
-            component.onUpdate();
-        }
-
-    }
-
     public GUIElement addComponent(String key, GUIComponent component) {
 
         components.put(key, component);
@@ -47,6 +38,14 @@ public class GUIElement extends Component {
 
     public GUIComponent getComponent(String key) {
         return components.get(key);
+    }
+
+    public void render() {
+
+        for (GUIComponent component : components.values()) {
+            component.onUpdate();
+        }
+
     }
 
 }

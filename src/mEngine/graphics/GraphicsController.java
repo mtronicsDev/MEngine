@@ -144,9 +144,10 @@ public class GraphicsController {
     private static void initializeOpenGL() {
 
         //Enabling OpenGL functions
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        glEnable(GL_BLEND);
 
         //Using them
         glCullFace(GL_BACK);

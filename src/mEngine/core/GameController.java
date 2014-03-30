@@ -16,6 +16,7 @@ import mEngine.util.debug.FPSGraphComponent;
 import mEngine.util.debug.FPSTextComponent;
 import mEngine.util.debug.RAMGraphComponent;
 import mEngine.util.debug.RAMTextComponent;
+import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -32,16 +33,17 @@ public class GameController {
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
-        GraphicsController.createDisplay(120, "mEngine Test Run");
+        //GraphicsController.createDisplay(120, "mEngine Test Run");
         AudioHelper.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
 
+        ThreadHelper.startThread(new GameLoop()); //Physics and processing
+        ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
+
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
-        GameObject object;
-
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
                         "movementComponent",
@@ -155,7 +157,7 @@ public class GameController {
         }
 
         Mouse.setGrabbed(true);
-        GameLoop.loop();
+        //GameLoop.loop();
 
     }
 

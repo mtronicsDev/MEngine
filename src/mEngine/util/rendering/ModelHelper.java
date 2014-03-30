@@ -19,7 +19,7 @@ public class ModelHelper {
 
     private static Model loadModel(String fileName) throws IOException {
 
-        Texture texture = TextureHelper.getTexture(fileName);
+        //Texture texture = TextureHelper.getTexture(fileName);
 
         BufferedReader reader = new BufferedReader(new FileReader(getResource(fileName, RES_MODEL)));
         String line;
@@ -80,7 +80,7 @@ public class ModelHelper {
 
         reader.close();
 
-        return new Model(vertices, normals, uvs, faces, texture);
+        return new Model(vertices, normals, uvs, faces, null);
 
     }
 

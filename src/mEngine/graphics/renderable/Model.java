@@ -3,6 +3,7 @@ package mEngine.graphics.renderable;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
+import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
@@ -21,6 +22,7 @@ public class Model {
 
     public float mass;
 
+    String textureName;
     Texture texture;
 
     public Vector3f position = new Vector3f();
@@ -29,6 +31,7 @@ public class Model {
     public Model(String fileName, Vector3f pos, Vector3f rot) {
 
         Model model = ModelHelper.loadModelSafely(fileName);
+        textureName = fileName;
 
         this.vertices = model.vertices;
         this.normals = model.normals;
@@ -67,10 +70,9 @@ public class Model {
 
     }
 
-    public void update(Vector3f pos, Vector3f rot) {
+    public void render() {
 
-        position = pos;
-        rotation = rot;
+        if(texture == null) texture = TextureHelper.getTexture(textureName);
 
         glPushMatrix();
 
@@ -122,6 +124,13 @@ public class Model {
         Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_TRIANGLES);
 
         glPopMatrix();
+
+    }
+
+    public void update(Vector3f pos, Vector3f rot) {
+
+        position = pos;
+        rotation = rot;
 
     }
 

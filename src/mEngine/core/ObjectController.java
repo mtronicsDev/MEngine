@@ -14,15 +14,13 @@ public class ObjectController {
     public static void addGameObject(GameObject object) {
         gameObjects.add(object);
     }
-
-    public static void addAudioSource(AudioSource source) {
-        audioSources.add(source);
-    }
-
     public static GameObject getGameObject(int index) {
         return gameObjects.get(index);
     }
 
+    public static void addAudioSource(AudioSource source) {
+        audioSources.add(source);
+    }
     public static AudioSource getAudioSource(int index) {
         return audioSources.get(index);
     }

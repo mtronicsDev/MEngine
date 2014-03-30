@@ -10,6 +10,9 @@ import java.awt.*;
 public class GUIText extends GUIComponent {
 
     protected String text;
+    protected String fontFace;
+    protected int fontStyle;
+    protected int fontSize;
     protected Color color;
     protected TrueTypeFont font;
 
@@ -33,8 +36,10 @@ public class GUIText extends GUIComponent {
 
     public GUIText(String text, String fontFace, int fontStyle, int fontSize, Color color) {
 
-        font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
         this.text = text;
+        this.fontFace = fontFace;
+        this.fontStyle = fontStyle;
+        this.fontSize = fontSize;
         this.color = color;
 
     }
@@ -42,6 +47,7 @@ public class GUIText extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
+        if(font == null) font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
         font.drawString(parent.position.x, parent.position.y, text, color);
 
     }

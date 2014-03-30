@@ -22,11 +22,4 @@ public class RenderComponent extends Component {
 
     }
 
-    public void onUpdate() {
-
-        GraphicsController.switchTo3D();
-        model.update(parent.position, parent.rotation);
-
-    }
-
 }

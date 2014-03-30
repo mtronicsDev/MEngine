@@ -15,7 +15,7 @@ public class TextureHelper {
 
     private static Map<String, Texture> loadedTextures = new HashMap<String, Texture>();
 
-    public static void loadTexture(String fileName) {
+    private static void loadTexture(String fileName) {
 
         try {
 

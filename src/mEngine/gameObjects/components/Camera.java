@@ -18,33 +18,20 @@ public class Camera extends Component {
     public Vector3f rotation;
     public Vector3f percentRotation;
 
-    public Camera() {
-
-        //Sets perspective
-        glMatrixMode(GL_PROJECTION);
-        gluPerspective(45, (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
-        glViewport(0, 0, Display.getWidth(), Display.getHeight());
-
-        glMatrixMode(GL_MODELVIEW);
-
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    }
+    public Camera() {}
 
     public void onUpdate() {
 
-        GraphicsController.switchTo3D();
         if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
 
         position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0, zoom, 0)});
         rotation = parent.rotation;
         percentRotation = parent.percentRotation;
+
+    }
+
+    public void render() {
 
         glLoadIdentity();
 
@@ -54,9 +41,6 @@ public class Camera extends Component {
 
         glTranslatef(-position.x, -position.y, -position.z);
 
-    }
-
-    public void onRemoteUpdate(GameObject obj) {
     }
 
 }

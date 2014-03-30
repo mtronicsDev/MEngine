@@ -83,7 +83,9 @@ public class Collider {
         RenderComponent renderComponentA = (RenderComponent) objA.getComponent("renderComponent");
         CollideComponent collideComponentA = (CollideComponent) objA.getComponent("collideComponent");
 
-        for (GameObject objB : ObjectController.gameObjects) {
+        for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
+
+            GameObject objB = ObjectController.getGameObject(i);
 
             if (objA != objB) {
 

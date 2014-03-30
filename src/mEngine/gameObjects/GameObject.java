@@ -1,6 +1,10 @@
 package mEngine.gameObjects;
 
+import mEngine.gameObjects.components.Camera;
 import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.RenderComponent;
+import mEngine.gameObjects.components.gui.GUIElement;
+import mEngine.graphics.Renderer;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;
@@ -26,6 +30,19 @@ public class GameObject {
         for (Component component : components.values()) {
 
             component.onUpdate();
+
+        }
+
+    }
+
+    public void addToRenderQueue() {
+
+        //Adds this gameObject's models and guiElements to the renderQueue
+        for(Component component : components.values()) {
+
+            if(component instanceof Camera) Renderer.currentRenderQueue.addCamera((Camera) component);
+            if(component instanceof RenderComponent) Renderer.currentRenderQueue.addModel(((RenderComponent) component).model);
+            if(component instanceof GUIElement) Renderer.currentRenderQueue.addGUIElement((GUIElement) component);
 
         }
 

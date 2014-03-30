@@ -11,13 +11,15 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
-public class GameLoop {
+public class GameLoop implements Runnable {
 
-    public static void loop() {
+    public void run() {
+
+        while (!Display.isCreated()) {} //Waiting for Display creation
 
         while (!Display.isCloseRequested()) {
 
-            GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
+            //GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
 
             if (Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
 
@@ -38,14 +40,14 @@ public class GameLoop {
 
             TimeHelper.updateDeltaTime();
 
-            for (GameObject gameObject : ObjectController.gameObjects) {
+            for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 
-                gameObject.update();
+                ObjectController.getGameObject(i).update();
 
             }
 
-            TimeHelper.updateFPS();
-            GraphicsController.update();
+            //TimeHelper.updateFPS();
+            //GraphicsController.update();
 
         }
 
