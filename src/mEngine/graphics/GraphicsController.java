@@ -15,15 +15,13 @@ import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 public class GraphicsController {
 
+    public static Dimension currentRenderDimension;
+    public static boolean isFullscreen;
+    public static boolean mEnchmarkEnabled;
     private static int width;
     private static int height;
     private static String title;
     private static int fps;
-
-    public static Dimension currentRenderDimension;
-
-    public static boolean isFullscreen;
-    public static boolean mEnchmarkEnabled;
 
     public static void createDisplay(int fps, String title) {
 

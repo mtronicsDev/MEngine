@@ -11,14 +11,12 @@ import static org.lwjgl.openal.AL10.*;
 
 public class AudioSource extends Component {
 
-    Vector3f position = new Vector3f();
-    Vector3f rotation = new Vector3f();
-
     public int buffer;
     public int source;
-
     public FloatBuffer sourcePos = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
     public FloatBuffer sourceVel = (FloatBuffer) BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f}).rewind();
+    Vector3f position = new Vector3f();
+    Vector3f rotation = new Vector3f();
 
     public AudioSource(GameObject source, String fileName) {
 

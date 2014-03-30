@@ -38,11 +38,12 @@ public class GameObject {
     public void addToRenderQueue() {
 
         //Adds this gameObject's models and guiElements to the renderQueue
-        for(Component component : components.values()) {
+        for (Component component : components.values()) {
 
-            if(component instanceof Camera) Renderer.currentRenderQueue.addCamera((Camera) component);
-            if(component instanceof RenderComponent) Renderer.currentRenderQueue.addModel(((RenderComponent) component).model);
-            if(component instanceof GUIElement) Renderer.currentRenderQueue.addGUIElement((GUIElement) component);
+            if (component instanceof Camera) Renderer.currentRenderQueue.addCamera((Camera) component);
+            if (component instanceof RenderComponent)
+                Renderer.currentRenderQueue.addModel(((RenderComponent) component).model);
+            if (component instanceof GUIElement) Renderer.currentRenderQueue.addGUIElement((GUIElement) component);
 
         }
 

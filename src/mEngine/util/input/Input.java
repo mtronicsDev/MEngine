@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Input {
 
-    private static boolean[] keyStats = new boolean[Keyboard.getKeyCount()];
     public static Map<String, Integer> keyAssignments = new HashMap<String, Integer>();
+    private static boolean[] keyStats = new boolean[Keyboard.getKeyCount()];
 
     public static boolean isKeyPressed(int key) {
         return Keyboard.isKeyDown(key);

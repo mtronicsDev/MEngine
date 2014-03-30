@@ -10,8 +10,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
 
-    public static RenderQueue currentRenderQueue;
-
     //Legitimately copying all of OpenGL's render modes
     public static final int RENDER_POINTS = GL11.GL_POINTS;
     public static final int RENDER_LINES = GL11.GL_LINES;
@@ -24,6 +22,7 @@ public class Renderer {
     public static final int RENDER_QUADS = GL11.GL_QUADS;
     public static final int RENDER_QUAD_STRIP = GL11.GL_QUAD_STRIP;
     public static final int RENDER_POLYGON = GL11.GL_POLYGON;
+    public static RenderQueue currentRenderQueue;
 
     public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, int mode) {
 

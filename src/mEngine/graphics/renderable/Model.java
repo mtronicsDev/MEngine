@@ -21,12 +21,10 @@ public class Model {
     public List<Face> faces = new ArrayList<Face>();
 
     public float mass;
-
-    String textureName;
-    Texture texture;
-
     public Vector3f position = new Vector3f();
     public Vector3f rotation = new Vector3f();
+    String textureName;
+    Texture texture;
 
     public Model(String fileName, Vector3f pos, Vector3f rot) {
 
@@ -72,7 +70,7 @@ public class Model {
 
     public void render() {
 
-        if(texture == null) texture = TextureHelper.getTexture(textureName);
+        if (texture == null) texture = TextureHelper.getTexture(textureName);
 
         glPushMatrix();
 

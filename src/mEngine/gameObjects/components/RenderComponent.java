@@ -1,13 +1,12 @@
 package mEngine.gameObjects.components;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.graphics.GraphicsController;
 import mEngine.graphics.renderable.Model;
 
 public class RenderComponent extends Component {
 
-    String modelFileName;
     public Model model;
+    String modelFileName;
 
     public RenderComponent(String modelFileName) {
 

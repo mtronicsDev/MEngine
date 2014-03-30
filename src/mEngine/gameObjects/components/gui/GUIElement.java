@@ -2,7 +2,6 @@ package mEngine.gameObjects.components.gui;
 
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
-import mEngine.graphics.GraphicsController;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.HashMap;

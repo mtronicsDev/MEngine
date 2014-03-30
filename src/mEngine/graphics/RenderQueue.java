@@ -34,20 +34,20 @@ public class RenderQueue {
     public void render() {
 
         GraphicsController.switchTo2D();
-        for(GUIElement element : guiQueue) {
+        for (GUIElement element : guiQueue) {
 
             element.render();
 
         }
 
         GraphicsController.switchTo3D();
-        for(Model model : modelQueue) {
+        for (Model model : modelQueue) {
 
             model.render();
 
         }
 
-        if(camera != null) camera.render();
+        if (camera != null) camera.render();
 
     }
 

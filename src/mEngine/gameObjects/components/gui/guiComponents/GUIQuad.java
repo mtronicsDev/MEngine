@@ -23,7 +23,7 @@ public class GUIQuad extends GUIComponent {
 
         super.onUpdate();
 
-        if(texture == null) texture = TextureHelper.getTexture(textureName);
+        if (texture == null) texture = TextureHelper.getTexture(textureName);
         texture.bind();
 
         glBegin(GL_QUADS);

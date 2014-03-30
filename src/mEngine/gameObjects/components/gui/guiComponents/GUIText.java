@@ -47,7 +47,8 @@ public class GUIText extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
-        if(font == null) font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
+        if (font == null)
+            font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
         font.drawString(parent.position.x, parent.position.y, text, color);
 
     }

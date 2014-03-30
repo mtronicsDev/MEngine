@@ -3,19 +3,18 @@ package mEngine.core;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.CollideComponent;
 import mEngine.gameObjects.components.RenderComponent;
-import mEngine.graphics.GraphicsController;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 
 public class GameLoop implements Runnable {
 
     public void run() {
 
-        while (!Display.isCreated()) {} //Waiting for Display creation
+        while (!Display.isCreated()) {
+        } //Waiting for Display creation
 
         while (!Display.isCloseRequested()) {
 

@@ -4,7 +4,6 @@ import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.opengl.Texture;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

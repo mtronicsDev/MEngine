@@ -5,7 +5,6 @@ import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.gameObjects.components.gui.guiComponents.GUIText;
-import mEngine.graphics.GraphicsController;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;

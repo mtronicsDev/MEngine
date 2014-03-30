@@ -1,15 +1,11 @@
 package mEngine.gameObjects.components;
 
-import mEngine.gameObjects.GameObject;
-import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 public class Camera extends Component {
 
@@ -18,7 +14,8 @@ public class Camera extends Component {
     public Vector3f rotation;
     public Vector3f percentRotation;
 
-    public Camera() {}
+    public Camera() {
+    }
 
     public void onUpdate() {
 
