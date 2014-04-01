@@ -33,6 +33,13 @@ public class RenderQueue {
 
     public void render() {
 
+        GraphicsController.switchTo3D();
+        for (Model model : modelQueue) {
+
+            model.render();
+
+        }
+
         GraphicsController.switchTo2D();
         for (GUIElement element : guiQueue) {
 
@@ -41,12 +48,6 @@ public class RenderQueue {
         }
 
         GraphicsController.switchTo3D();
-        for (Model model : modelQueue) {
-
-            model.render();
-
-        }
-
         if (camera != null) camera.render();
 
     }
