@@ -9,6 +9,7 @@ public class Profiler {
 
     private static Graph memUsage; //Used for saving values of getMemoryGraph()
     private static Graph fpsGraph; //Used for saving values of getFPSGraph()
+    private static Graph tpsGraph; //Used for saving values of getTPSGraph()
 
     public static Graph getMemoryGraph(int valueCount) {
 
@@ -37,6 +38,21 @@ public class Profiler {
         fpsGraph.updateValue(fpsGraph.getLength() - 1, (float) TimeHelper.FPS / TimeHelper.highestFPS * 100); //Show fps in dependency of the highest fps reached in the current run
 
         return fpsGraph;
+
+    }
+
+    public static Graph getTPSGraph(int valueCount) {
+
+        if (tpsGraph == null) tpsGraph = new Graph(valueCount);
+        for (int i = 1; i < tpsGraph.getLength(); i++) {
+
+            if (i - 1 >= 0) tpsGraph.updateValue(i - 1, tpsGraph.getY(i));
+
+        }
+
+        tpsGraph.updateValue(tpsGraph.getLength() - 1, (float) TimeHelper.TPS / TimeHelper.highestTPS * 100); //Show tps in dependency of the highest tps reached in the current run
+
+        return tpsGraph;
 
     }
 

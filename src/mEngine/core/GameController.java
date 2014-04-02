@@ -11,10 +11,7 @@ import mEngine.util.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import mEngine.util.audio.AudioHelper;
-import mEngine.util.debug.FPSGraphComponent;
-import mEngine.util.debug.FPSTextComponent;
-import mEngine.util.debug.RAMGraphComponent;
-import mEngine.util.debug.RAMTextComponent;
+import mEngine.util.debug.*;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -76,29 +73,20 @@ public class GameController {
                         new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
                 )
                 .addComponent(
+                        "tpsText",
+                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new TPSTextComponent("Current TPS", 15))
+                )
+                .addComponent(
                         "ramText",
-                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
-                )
-                .addComponent(
-                        "xText",
-                        new GUIElement(new Vector2f(5, 50), new Vector2f()).addComponent("guiText", new GUIText("x:", 15))
-                )
-                .addComponent(
-                        "yText",
-                        new GUIElement(new Vector2f(5, 70), new Vector2f()).addComponent("guiText", new GUIText("y:", 15))
-                )
-                .addComponent(
-                        "zText",
-                        new GUIElement(new Vector2f(5, 90), new Vector2f()).addComponent("guiText", new GUIText("z:", 15))
-                )
-                .addComponent(
-                        "collisionText",
-                        new GUIElement(new Vector2f(5, 115), new Vector2f()).addComponent("guiText", new GUIText("Player collision:", 15))
+                        new GUIElement(new Vector2f(5, 45), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
                 )
                 .addComponent(
                         "graphs",
                         new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
                                 .addComponent("guiGraphFPS", new FPSGraphComponent(
+                                        new Vector2f(Display.getWidth(), 100),
+                                        new double[]{}))
+                                .addComponent("guiGraphTPS", new TPSGraphComponent(
                                         new Vector2f(Display.getWidth(), 100),
                                         new double[]{}))
                                 .addComponent("guiGraphRAM", new RAMGraphComponent(

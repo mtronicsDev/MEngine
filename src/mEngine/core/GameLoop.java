@@ -45,7 +45,7 @@ public class GameLoop implements Runnable {
 
             }
 
-            //TimeHelper.updateFPS();
+            TimeHelper.updateTPS();
             //GraphicsController.update();
 
         }

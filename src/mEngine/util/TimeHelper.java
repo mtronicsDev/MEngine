@@ -4,17 +4,23 @@ public class TimeHelper {
 
     public static boolean oneSecondPassed = false;
     public static float deltaTime;
+    private static float lastTime = System.nanoTime() / 1000000;
+
     public static int FPS;
     public static int highestFPS;
-
-    private static float lastTime = System.nanoTime() / 1000000;
     private static float lastFPS;
     private static long currentFPS;
+
+    public static int TPS;
+    public static int highestTPS;
+    private static float lastTPS;
+    private static long currentTPS;
 
     public static void setupTiming() {
 
         lastTime = getTime();
         lastFPS = getTime();
+        lastTPS = getTime();
 
     }
 
@@ -44,6 +50,21 @@ public class TimeHelper {
         }
 
         currentFPS++;
+
+    }
+
+    public static void updateTPS() {
+
+        if (getTime() - lastTPS > 1000) {
+
+            TPS = (int) currentTPS;
+            if (currentTPS > highestTPS) highestTPS = TPS;
+            currentTPS = 0;
+            lastTPS += 1000;
+
+        }
+
+        currentTPS++;
 
     }
 
