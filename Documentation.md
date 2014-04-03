@@ -34,14 +34,14 @@ Structure:
 2. Features
 ===
 
-2.1 Multidimensional game creation
-==
+2.1. Multidimensional game creation
+---
 
     mEngine gives developers the tools to create good looking games, no matter in which dimension. It is possible to create 2d and 3d games or even mix the two. This gives game engineers
     more freedom in bringing in their whole creativity and makes it easier for them to reach their aims.
 
-2.2 Easy coding for developers
-==
+2.2. Easy coding for developers
+---
 
     The engine is designed to be simple to understand and to make things easier for those who use it. You will notice this as soon as you start working with it.
 
@@ -51,15 +51,15 @@ Structure:
 
     After all the previous talking, let's get to the actual important thing: creating games.
 
-3.1 3d games
-==
+3.1. 3d games
+---
 
     We will start with the creation of 3d games, because it is probably the more important and interesting part.
     To get started, we will first explain how to create game objects. Following to this, there will be shown how to actually get the game objects to do something
     (for example show themselves), and once that is done, we will explain how to use the gui e.g. for creating a menu.
 
-3.1.1 Creating game objects
-=
+3.1.1. Creating game objects
+---
 
     ...
 
