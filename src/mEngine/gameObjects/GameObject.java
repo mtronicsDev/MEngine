@@ -41,8 +41,13 @@ public class GameObject {
         for (Component component : components.values()) {
 
             if (component instanceof Camera) Renderer.currentRenderQueue.addCamera((Camera) component);
-            if (component instanceof RenderComponent)
+            if (component instanceof RenderComponent) {
+
+                RenderComponent renderComponent = (RenderComponent) component;
+                renderComponent.model.update(position, rotation);
                 Renderer.currentRenderQueue.addModel(((RenderComponent) component).model);
+
+            }
             if (component instanceof GUIElement) Renderer.currentRenderQueue.addGUIElement((GUIElement) component);
 
         }
@@ -54,6 +59,12 @@ public class GameObject {
         components.put(key, component);
         getComponent(key).onCreation(this);
         return this;
+
+    }
+
+    public void removeComponent(String key) {
+
+        components.remove(key);
 
     }
 

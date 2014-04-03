@@ -10,7 +10,7 @@ fieldOfView=100
 continuouslyJumping=true
 sneakModeToggle=true
 sprintModeToggle=false
-rotationSpeed=0.16
+rotationSpeed=0.1
 
 #GUI preferences
 defaultFontFace=Verdana

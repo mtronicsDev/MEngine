@@ -17,7 +17,7 @@ public abstract class Controller extends Component {
 
         this.forceStrengths = forceStrengths;
 
-        for (int count = 0; count < this.forceStrengths.length; count++) this.forceStrengths[count] /= 10;
+        for (int count = 0; count < this.forceStrengths.length; count++) this.forceStrengths[count] /= 2;
 
         this.capableOfFlying = capableOfFlying;
 
