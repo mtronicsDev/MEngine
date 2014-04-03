@@ -20,7 +20,7 @@ public class ThreadHelper {
 
         for(Thread thread : threads) {
 
-            thread.stop();
+            thread.interrupt();
 
         }
 
