@@ -4,14 +4,21 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
-import mEngine.gameObjects.components.gui.guiComponents.GUIText;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import mEngine.util.audio.AudioHelper;
-import mEngine.util.debug.*;
+import mEngine.util.debug.graphs.FPSGraphComponent;
+import mEngine.util.debug.graphs.RAMGraphComponent;
+import mEngine.util.debug.graphs.TPSGraphComponent;
+import mEngine.util.debug.texts.FPSTextComponent;
+import mEngine.util.debug.texts.position.PositionXTextComponent;
+import mEngine.util.debug.texts.RAMTextComponent;
+import mEngine.util.debug.texts.TPSTextComponent;
+import mEngine.util.debug.texts.position.PositionYTextComponent;
+import mEngine.util.debug.texts.position.PositionZTextComponent;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -29,7 +36,6 @@ public class GameController {
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
-        //GraphicsController.createDisplay(120, "mEngine Test Run");
         AudioHelper.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
@@ -79,6 +85,18 @@ public class GameController {
                 .addComponent(
                         "ramText",
                         new GUIElement(new Vector2f(5, 45), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
+                )
+                .addComponent(
+                        "posXText",
+                        new GUIElement(new Vector2f(5, 70), new Vector2f()).addComponent("guiText", new PositionXTextComponent("x Position", 15))
+                )
+                .addComponent(
+                        "posYText",
+                        new GUIElement(new Vector2f(5, 90), new Vector2f()).addComponent("guiText", new PositionYTextComponent("y Position", 15))
+                )
+                .addComponent(
+                        "posZText",
+                        new GUIElement(new Vector2f(5, 110), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
                 )
                 .addComponent(
                         "graphs",
@@ -144,7 +162,6 @@ public class GameController {
         }
 
         Mouse.setGrabbed(true);
-        //GameLoop.loop();
 
     }
 

@@ -1,4 +1,4 @@
-package mEngine.util.debug;
+package mEngine.util.debug.graphs;
 
 import mEngine.gameObjects.components.gui.guiComponents.GUIGraph;
 import mEngine.util.debug.profiler.Profiler;

@@ -1,4 +1,4 @@
-package mEngine.util.debug;
+package mEngine.util.debug.texts;
 
 import mEngine.gameObjects.components.gui.guiComponents.GUIText;
 
