@@ -25,6 +25,20 @@ public class GameObject {
 
     }
 
+    public GameObject(GameObject src) {
+
+        position = src.position;
+        rotation = src.rotation;
+        percentRotation = src.percentRotation;
+
+        for(String key : src.components.keySet()) {
+
+            addComponent(key, src.getComponent(key));
+
+        }
+
+    }
+
     public void update() {
 
         for (Component component : components.values()) {
