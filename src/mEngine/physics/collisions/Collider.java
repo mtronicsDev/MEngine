@@ -603,8 +603,7 @@ public class Collider {
 
                 if (Math.abs(finalCollisionTime) <= 0.001f) finalCollisionTime = 0;
 
-                if (finalCollisionTime != 0)
-                    movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
+                if (finalCollisionTime != 0) movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
                 else {
 
@@ -667,19 +666,27 @@ public class Collider {
                             Vector3f middle = middles.get(index);
                             middle = VectorHelper.subtractVectors(middle, vertexA);
 
+                            Vector3f radius = radii.get(index);
+
+                            Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
+                            //Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
+
+                            vertexBToCalculate = changeOfBasisMatrix.multiplyByVector(vertexBToCalculate);
+                            vertexCToCalculate = changeOfBasisMatrix.multiplyByVector(vertexCToCalculate);
+                            middle = changeOfBasisMatrix.multiplyByVector(middle);
+                            velocity = changeOfBasisMatrix.multiplyByVector(velocity);
+
                             Vector3f temporaryVelocity = VectorHelper.sumVectors(new Vector3f[]{velocity, middle});
 
-                            Vector3f intersectionPoint = VectorHelper.subtractVectors(middle, allNormals.get((int) finalCollisionFace.normalIndices.x));
-                            intersectionPoint = VectorHelper.subtractVectors(intersectionPoint, vertexA);
+                            Vector3f intersectionPoint = VectorHelper.sumVectors(new Vector3f[]{middle,
+                                    VectorHelper.multiplyVectorByFloat(allNormals.get((int) finalCollisionFace.normalIndices.x), -1)});
 
                             float alpha;
                             float beta;
                             float gamma;
 
                             Matrix3d xAxisRotationMatrix;
-
                             Matrix3d yAxisRotationMatrix;
-
                             Matrix3d zAxisRotationMatrix;
 
                             Vector3f alphaIndicator = new Vector3f(vertexBToCalculate.x, vertexBToCalculate.y, 0);
