@@ -2,6 +2,7 @@ package mEngine.gameObjects.components;
 
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.rendering.RenderHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -22,8 +23,7 @@ public class Camera extends Component {
         if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
 
-        if(!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
-            position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0, zoom, 0)});
+        if(!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z))) position = parent.position;
         rotation = parent.rotation;
         percentRotation = parent.percentRotation;
 
@@ -33,11 +33,25 @@ public class Camera extends Component {
 
         glLoadIdentity();
 
-        glRotatef(rotation.x, 1, 0, 0);
-        glRotatef(rotation.y, 0, 1, 0);
-        glRotatef(rotation.z, 0, 0, 1);
+        if(RenderHelper.thirdPersonMode) {
 
-        glTranslatef(-position.x, -position.y, -position.z);
+            glRotatef(rotation.x, 1, 0, 0);
+            glRotatef(rotation.y, 0, 1, 0);
+            glRotatef(rotation.z, 0, 0, 1);
+
+            Vector3f newPosition = VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(percentRotation, -5), position});
+
+            glTranslatef(-newPosition.x, -newPosition.y, -newPosition.z);
+
+        } else {
+
+            glRotatef(rotation.x, 1, 0, 0);
+            glRotatef(rotation.y, 0, 1, 0);
+            glRotatef(rotation.z, 0, 0, 1);
+
+            glTranslatef(-position.x, -position.y, -position.z);
+
+        }
 
     }
 

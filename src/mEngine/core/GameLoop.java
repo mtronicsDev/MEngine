@@ -5,6 +5,7 @@ import mEngine.gameObjects.components.CollideComponent;
 import mEngine.gameObjects.components.RenderComponent;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
+import mEngine.util.rendering.RenderHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
