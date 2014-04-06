@@ -17,7 +17,7 @@ public class GameLoop implements Runnable {
         while (!Display.isCreated()) {
         } //Waiting for Display creation
 
-        while (!Display.isCloseRequested()) {
+        while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
             if (Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
 

@@ -20,8 +20,8 @@ public class Camera extends Component {
 
     public void onUpdate() {
 
-        if (Input.isKeyPressed(Keyboard.KEY_F)) zoom--;
-        else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom++;
+        if (Input.isKeyPressed(Keyboard.KEY_F)) zoom -= 0.03f;
+        else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.03f;
 
         if(!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
             position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0, zoom, 0)});
