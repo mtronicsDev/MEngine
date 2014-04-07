@@ -9,6 +9,9 @@ import mEngine.gameObjects.components.RenderComponent;
 import mEngine.graphics.renderable.Face;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Triangle;
+import mEngine.physics.forces.Force;
+import mEngine.physics.forces.ForceController;
+import mEngine.util.TimeHelper;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -234,7 +237,7 @@ public class Collider {
 
     }
 
-    public static Vector3f getMovedSpace(GameObject objA) {
+    public static void collideObject(GameObject objA) {
 
         RenderComponent renderComponentA = (RenderComponent) objA.getComponent("renderComponent");
         CollideComponent collideComponentA = (CollideComponent) objA.getComponent("collideComponent");
@@ -793,7 +796,18 @@ public class Collider {
 
         } else movedSpace = velocity;
 
-        return movedSpace;
+        /*float deltaTime = TimeHelper.deltaTime;
+
+        Vector3f speed = ForceController.getSpeedInReverse(movedSpace, deltaTime);
+        Vector3f acceleration = ForceController.getAccelerationInReverse(speed, deltaTime);
+        Vector3f forceDirection = ForceController.getForceDirectionInReverse(acceleration, renderComponentA.model.mass);
+
+        String forceIdentifier = "inertiaForce" + movementComponentA.forcePoints.get("middle").forceCount;
+        movementComponentA.forcePoints.get("middle").forces.put(forceIdentifier, new Force(forceDirection));
+        movementComponentA.forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        movementComponentA.forcePoints.get("middle").forceCount++;*/
+
+        movementComponentA.movedSpace = movedSpace;
 
     }
 

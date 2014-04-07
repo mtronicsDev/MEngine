@@ -26,7 +26,6 @@ public class MovementComponent extends Component {
     boolean sprinting;
     boolean sneaking;
     float mass = 0;
-    int forceCount = 0;
 
     public MovementComponent() {
 
@@ -43,7 +42,7 @@ public class MovementComponent extends Component {
 
         if (renderComponent != null) {
 
-            mass = renderComponent.model.getMass();
+            mass = renderComponent.model.mass;
 
             forcePoints.put("middle", new ForcePoint(new Vector3f()));
             forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, -1)));
@@ -191,12 +190,12 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
 
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount++;
+        forcePoints.get("middle").forceCount++;
 
     }
 
@@ -217,12 +216,12 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
 
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount++;
+        forcePoints.get("middle").forceCount++;
 
     }
 
@@ -243,12 +242,12 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
 
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount++;
+        forcePoints.get("middle").forceCount++;
 
     }
 
@@ -269,12 +268,12 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
 
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount++;
+        forcePoints.get("middle").forceCount++;
 
     }
 
@@ -299,12 +298,12 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
 
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount++;
+        forcePoints.get("middle").forceCount++;
 
     }
 
@@ -315,12 +314,12 @@ public class MovementComponent extends Component {
 
         direction.y = givenForce.direction.y;
 
-        String forceIdentifier = "inertiaForce" + String.valueOf(forceCount);
+        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
 
         forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
         forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
 
-        forceCount++;
+        forcePoints.get("middle").forceCount++;
 
     }
 

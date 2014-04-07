@@ -36,6 +36,12 @@ public class GameLoop implements Runnable {
 
             }
 
+            if (Input.isKeyDown(Keyboard.KEY_T)) {
+
+                TimeHelper.isInSlowMotion = !TimeHelper.isInSlowMotion;
+
+            }
+
             TimeHelper.updateDeltaTime();
 
             for (int i = 0; i < ObjectController.gameObjects.size(); i++) {

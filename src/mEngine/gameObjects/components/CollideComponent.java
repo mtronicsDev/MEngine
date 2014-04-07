@@ -27,7 +27,7 @@ public class CollideComponent extends Component {
 
         MovementComponent movementComponent = (MovementComponent) parent.getComponent("movementComponent");
 
-        if (movementComponent != null) movementComponent.movedSpace = Collider.getMovedSpace(parent);
+        if (movementComponent != null) Collider.collideObject(parent);
 
     }
 

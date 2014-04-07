@@ -50,6 +50,24 @@ public class ForceController {
 
     }
 
+    public static Vector3f getForceDirectionInReverse(Vector3f acceleration, float mass) {
+
+        return VectorHelper.multiplyVectorByFloat(acceleration, mass);
+
+    }
+
+    public static Vector3f getSpeedInReverse(Vector3f movedSpace, float timeInSeconds) {
+
+        return VectorHelper.divideVectorByFloat(movedSpace, timeInSeconds);
+
+    }
+
+    public static Vector3f getAccelerationInReverse(Vector3f speed, float timeInSeconds) {
+
+        return VectorHelper.divideVectorByFloat(speed, timeInSeconds);
+
+    }
+
     public static Vector2f getCombinedForces(Vector2f direction) {
 
         return VectorHelper.multiplyVectorByFloat(direction, UNIT_VECTOR_2D);

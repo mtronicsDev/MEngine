@@ -193,7 +193,7 @@ public class Model {
     }
 
 
-    public float getMass() {
+    private float getMass() {
 
         return 60;
 

@@ -16,6 +16,8 @@ public class TimeHelper {
     private static float lastTPS;
     private static long currentTPS;
 
+    public static boolean isInSlowMotion = false;
+
     public static void setupTiming() {
 
         lastTime = getTime();
@@ -32,6 +34,7 @@ public class TimeHelper {
 
         float thisTime = getTime();
         deltaTime = thisTime - lastTime;
+        if(isInSlowMotion) deltaTime /= 8;
         lastTime = thisTime;
 
     }
