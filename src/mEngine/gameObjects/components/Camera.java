@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Camera extends Component {
 
-    public float zoom = 1.3f;
+    public float zoom = 0;
     public Vector3f position;
     public Vector3f rotation;
     public Vector3f percentRotation;
@@ -20,7 +20,7 @@ public class Camera extends Component {
 
     public void onUpdate() {
 
-        if (Input.isKeyPressed(Keyboard.KEY_F)) zoom -= 0.03f;
+        if (Input.isKeyPressed(Keyboard.KEY_F) && zoom >= 0.03f) zoom -= 0.03f;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.03f;
 
         if(!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
@@ -34,25 +34,13 @@ public class Camera extends Component {
 
         glLoadIdentity();
 
-        if(RenderHelper.thirdPersonMode) {
+        glRotatef(rotation.x, 1, 0, 0);
+        glRotatef(rotation.y, 0, 1, 0);
+        glRotatef(rotation.z, 0, 0, 1);
 
-            glRotatef(rotation.x, 1, 0, 0);
-            glRotatef(rotation.y, 0, 1, 0);
-            glRotatef(rotation.z, 0, 0, 1);
+        Vector3f newPosition = VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(percentRotation, -zoom), position});
 
-            Vector3f newPosition = VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(percentRotation, -5), position});
-
-            glTranslatef(-newPosition.x, -newPosition.y, -newPosition.z);
-
-        } else {
-
-            glRotatef(rotation.x, 1, 0, 0);
-            glRotatef(rotation.y, 0, 1, 0);
-            glRotatef(rotation.z, 0, 0, 1);
-
-            glTranslatef(-position.x, -position.y, -position.z);
-
-        }
+        glTranslatef(-newPosition.x, -newPosition.y, -newPosition.z);
 
     }
 

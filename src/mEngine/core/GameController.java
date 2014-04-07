@@ -127,7 +127,7 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -30), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 0, 20), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
@@ -137,7 +137,7 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -40), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(-20, 0, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
@@ -147,7 +147,27 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -5), new Vector3f(0, 0, 0))
+        addGameObject(new GameObject(new Vector3f(20, 0, 0), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "collideComponent",
+                        new CollideComponent(false, true)
+                ));
+
+        addGameObject(new GameObject(new Vector3f(0, -20, 0), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "collideComponent",
+                        new CollideComponent(false, true)
+                ));
+
+        addGameObject(new GameObject(new Vector3f(0, 20, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")

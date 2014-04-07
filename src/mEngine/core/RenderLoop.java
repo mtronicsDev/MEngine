@@ -29,12 +29,6 @@ public class RenderLoop implements Runnable {
 
             }
 
-            if(Keyboard.isKeyDown(Keyboard.KEY_F5)) {
-
-                RenderHelper.thirdPersonMode = !RenderHelper.thirdPersonMode;
-
-            }
-
             Renderer.currentRenderQueue.render();
             TimeHelper.updateFPS();
             GraphicsController.update();

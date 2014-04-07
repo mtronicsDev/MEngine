@@ -98,6 +98,8 @@ public class MovementComponent extends Component {
                     new Vector3f((float) -Math.sin(Math.toRadians(parent.rotation.y)), 0, (float) Math.cos(Math.toRadians(parent.rotation.y))));
             parent.percentRotation = yAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
+            if(Input.isKeyPressed(Keyboard.KEY_E)) System.out.println(parent.percentRotation);
+
             for (ForcePoint forcePoint : forcePoints.values()) {
 
                 for (String key : forcePoint.forces.keySet()) {

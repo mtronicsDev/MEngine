@@ -13,8 +13,6 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class RenderHelper {
 
-    public static boolean thirdPersonMode = false;
-
     public static boolean isFaceNeededToBeRendered(Face face) {
 
         boolean neededToBeRendered = false;
