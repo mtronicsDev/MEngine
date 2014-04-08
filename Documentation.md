@@ -21,15 +21,12 @@ Structure:
     3.2.2 Using components
     3.2.3 Importing textures
 
-
-
 1. History
 ===
 
     mEngine's history starts at the end of 2013, more accurately said on the 5th of december. That was the time when the developers of mEngine, two german high school students being in
     the 10th grade at this time, first had the idea to create a 3d java game engine in order to be able to produce games with it later on. Some time later mGameLabs was founded to be the
     official company developing mEngine. The engine has been in development since then and the production will go on.
-
 
 2. Features
 ===
