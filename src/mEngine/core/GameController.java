@@ -5,8 +5,6 @@ import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.resources.PreferenceHelper;
-import mEngine.util.resources.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import mEngine.util.audio.AudioHelper;
@@ -19,6 +17,8 @@ import mEngine.util.debug.texts.TPSTextComponent;
 import mEngine.util.debug.texts.position.PositionXTextComponent;
 import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
+import mEngine.util.resources.PreferenceHelper;
+import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -26,7 +26,6 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import static mEngine.core.ObjectController.addGameObject;
-import static mEngine.core.ObjectController.audioSources;
 
 public class GameController {
 

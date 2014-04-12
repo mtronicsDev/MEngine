@@ -6,9 +6,9 @@ import mEngine.gameObjects.components.Camera;
 import mEngine.gameObjects.components.RenderComponent;
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
-import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 public class RenderHelper {

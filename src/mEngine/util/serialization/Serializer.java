@@ -1,6 +1,5 @@
 package mEngine.util.serialization;
 
-import mEngine.core.GameController;
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
 import mEngine.util.resources.ResourceHelper;
@@ -8,7 +7,6 @@ import mEngine.util.resources.ResourceHelper;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
@@ -25,7 +23,7 @@ public class Serializer {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();
         String saveFileName = format.format(date);
-        for(int i = 0; i < ObjectController.gameObjects.size(); i++) {
+        for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 
             ObjectController.getGameObject(i).save();
 
@@ -74,7 +72,7 @@ public class Serializer {
             System.exit(1);
         }
 
-        for(GameObject obj : object.gameObjects) {
+        for (GameObject obj : object.gameObjects) {
 
             obj.load();
             ObjectController.gameObjects.add(obj);

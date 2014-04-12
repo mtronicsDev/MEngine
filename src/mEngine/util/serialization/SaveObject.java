@@ -3,7 +3,8 @@ package mEngine.util.serialization;
 import mEngine.gameObjects.GameObject;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaveObject implements Serializable {
 
