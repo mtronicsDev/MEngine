@@ -18,7 +18,7 @@ public class ThreadHelper {
 
     public static void stopAllThreads() {
 
-        for(Thread thread : threads) {
+        for (Thread thread : threads) {
 
             thread.interrupt();
 

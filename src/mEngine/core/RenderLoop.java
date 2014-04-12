@@ -5,9 +5,7 @@ import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
 import mEngine.util.PreferenceHelper;
 import mEngine.util.TimeHelper;
-import mEngine.util.rendering.RenderHelper;
 import mEngine.util.serialization.Serializer;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
 
@@ -27,7 +25,7 @@ public class RenderLoop implements Runnable {
             //Renders all the gameObjects
             for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 
-                if(!Serializer.isSerializing) ObjectController.getGameObject(i).addToRenderQueue();
+                if (!Serializer.isSerializing) ObjectController.getGameObject(i).addToRenderQueue();
 
             }
 

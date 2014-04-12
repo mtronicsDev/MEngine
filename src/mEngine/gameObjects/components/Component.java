@@ -12,14 +12,19 @@ public abstract class Component implements Serializable {
         parent = obj;
     }
 
-    public void onUpdate() {}
+    public void onUpdate() {
+    }
 
-    public void onDestroy() {}
+    public void onDestroy() {
+    }
 
-    public void onRemoteUpdate() {}
+    public void onRemoteUpdate() {
+    }
 
-    public void onSave() {}
+    public void onSave() {
+    }
 
-    public void onLoad() {}
+    public void onLoad() {
+    }
 
 }

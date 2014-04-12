@@ -15,16 +15,22 @@ public abstract class GUIComponent implements Serializable {
         parent = element;
     }
 
-    public void onUpdate() {}
+    public void onUpdate() {
+    }
 
-    public void onDestroy() {}
+    public void onDestroy() {
+    }
 
-    public void onRemoteUpdate() {}
+    public void onRemoteUpdate() {
+    }
 
-    public void onExternalUpdate(Object[] args) {}
+    public void onExternalUpdate(Object[] args) {
+    }
 
-    public void onSave() {}
+    public void onSave() {
+    }
 
-    public void onLoad() {}
+    public void onLoad() {
+    }
 
 }

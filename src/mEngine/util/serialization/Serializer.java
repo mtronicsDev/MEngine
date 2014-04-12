@@ -18,7 +18,7 @@ public class Serializer {
 
         try {
             File file = ResourceHelper.getResource(saveFileName, ResourceHelper.RES_SAVE);
-            if(!file.exists()) //noinspection ResultOfMethodCallIgnored
+            if (!file.exists()) //noinspection ResultOfMethodCallIgnored
                 file.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -68,9 +68,9 @@ public class Serializer {
 
         isSerializing = true;
 
-        for(int i = 0; i < ObjectController.gameObjects.size(); i++) {
+        for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 
-           serialize(ObjectController.getGameObject(i));
+            serialize(ObjectController.getGameObject(i));
 
         }
 
@@ -81,7 +81,7 @@ public class Serializer {
         ObjectController.gameObjects = new ArrayList<GameObject>();
         File saveDirectory = new File("res/saves/");
         String[] saves = saveDirectory.list();
-        for(String save : saves) {
+        for (String save : saves) {
 
             save = save.replace(".mso", "");
             deSerialize(save);

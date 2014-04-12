@@ -4,19 +4,16 @@ public class TimeHelper {
 
     public static boolean oneSecondPassed = false;
     public static float deltaTime;
-    private static float lastTime = System.nanoTime() / 1000000;
-
     public static int FPS;
     public static int highestFPS;
-    private static float lastFPS;
-    private static long currentFPS;
-
     public static int TPS;
     public static int highestTPS;
+    public static boolean isInSlowMotion = false;
+    private static float lastTime = System.nanoTime() / 1000000;
+    private static float lastFPS;
+    private static long currentFPS;
     private static float lastTPS;
     private static long currentTPS;
-
-    public static boolean isInSlowMotion = false;
 
     public static void setupTiming() {
 
@@ -34,7 +31,7 @@ public class TimeHelper {
 
         float thisTime = getTime();
         deltaTime = thisTime - lastTime;
-        if(isInSlowMotion) deltaTime /= 8;
+        if (isInSlowMotion) deltaTime /= 8;
         lastTime = thisTime;
 
     }

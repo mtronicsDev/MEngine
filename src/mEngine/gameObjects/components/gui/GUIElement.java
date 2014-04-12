@@ -31,7 +31,7 @@ public class GUIElement extends Component {
     public void onSave() {
 
         super.onSave();
-        for(GUIComponent component : components.values()) {
+        for (GUIComponent component : components.values()) {
 
             component.onSave();
 
@@ -43,7 +43,7 @@ public class GUIElement extends Component {
     public void onLoad() {
 
         super.onLoad();
-        for(GUIComponent component : components.values()) {
+        for (GUIComponent component : components.values()) {
 
             component.onLoad();
 

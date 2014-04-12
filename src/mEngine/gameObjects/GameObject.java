@@ -29,7 +29,7 @@ public class GameObject implements Serializable {
 
         percentRotation = new Vector3f(0, 0, 1);
 
-        if(!VectorHelper.areEqual(rotation, new Vector3f())) {
+        if (!VectorHelper.areEqual(rotation, new Vector3f())) {
 
             Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
                     new Vector3f(0, (float) Math.cos(Math.toRadians(rotation.x)), (float) -Math.sin(Math.toRadians(rotation.x))),
@@ -51,7 +51,7 @@ public class GameObject implements Serializable {
         rotation = src.rotation;
         percentRotation = src.percentRotation;
 
-        for(String key : src.components.keySet()) {
+        for (String key : src.components.keySet()) {
 
             addComponent(key, src.getComponent(key));
 
@@ -89,7 +89,9 @@ public class GameObject implements Serializable {
 
     }
 
-    public long getUuid() { return uuid; }
+    public long getUuid() {
+        return uuid;
+    }
 
     public void addToRenderQueue() {
 
@@ -101,7 +103,7 @@ public class GameObject implements Serializable {
 
                 RenderComponent renderComponent = (RenderComponent) component;
 
-                if(renderComponent.model != null) {
+                if (renderComponent.model != null) {
                     renderComponent.model.update(position, rotation);
                     Renderer.currentRenderQueue.addModel(((RenderComponent) component).model);
                 }

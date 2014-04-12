@@ -29,7 +29,9 @@ public class PreferenceHelper {
 
     }
 
-    public static String getValue(String key) { return properties.getProperty(key); }
+    public static String getValue(String key) {
+        return properties.getProperty(key);
+    }
 
     public static boolean getBoolean(String key) {
 
