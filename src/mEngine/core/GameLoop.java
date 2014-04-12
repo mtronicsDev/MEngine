@@ -50,8 +50,8 @@ public class GameLoop implements Runnable {
 
             }
 
-            if (Input.isKeyDown(Keyboard.KEY_F9)) Serializer.serializeAll();
-            if (Input.isKeyDown(Keyboard.KEY_F10)) Serializer.deSerializeAll();
+            if (Input.isKeyDown(Keyboard.KEY_F9)) Serializer.serialize();
+            if (Input.isKeyDown(Keyboard.KEY_F10)) Serializer.deSerializeLatest();
 
             TimeHelper.updateTPS();
 

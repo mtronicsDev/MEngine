@@ -1,20 +1,35 @@
 package mEngine.util.serialization;
 
+import mEngine.core.GameController;
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
 import mEngine.util.resources.ResourceHelper;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 
 public class Serializer {
 
     public static boolean isSerializing = false;
 
-    private static void serialize(GameObject obj) {
+    public static void serialize() {
 
-        String saveFileName = String.valueOf(obj.getUuid());
-        obj.save();
+        isSerializing = true;
+
+        SaveObject obj = new SaveObject(ObjectController.gameObjects);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        Date date = new Date();
+        String saveFileName = format.format(date);
+        for(int i = 0; i < ObjectController.gameObjects.size(); i++) {
+
+            ObjectController.getGameObject(i).save();
+
+        }
 
         try {
             File file = ResourceHelper.getResource(saveFileName, ResourceHelper.RES_SAVE);
@@ -34,15 +49,15 @@ public class Serializer {
 
     }
 
-    private static void deSerialize(String fileName) {
+    public static void deSerialize(String fileName) {
 
-        GameObject object = null;
+        SaveObject object = null;
 
         try {
             File file = ResourceHelper.getResource(fileName, ResourceHelper.RES_SAVE);
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            object = (GameObject) objectInputStream.readObject();
+            object = (SaveObject) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
             //noinspection ResultOfMethodCallIgnored
@@ -59,36 +74,36 @@ public class Serializer {
             System.exit(1);
         }
 
-        object.load();
-        ObjectController.gameObjects.add(object);
+        for(GameObject obj : object.gameObjects) {
 
-    }
-
-    public static void serializeAll() {
-
-        isSerializing = true;
-
-        for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
-
-            serialize(ObjectController.getGameObject(i));
-
-        }
-
-    }
-
-    public static void deSerializeAll() {
-
-        ObjectController.gameObjects = new ArrayList<GameObject>();
-        File saveDirectory = new File("res/saves/");
-        String[] saves = saveDirectory.list();
-        for (String save : saves) {
-
-            save = save.replace(".mso", "");
-            deSerialize(save);
+            obj.load();
+            ObjectController.gameObjects.add(obj);
 
         }
 
         isSerializing = false;
+
+    }
+
+    public static void deSerializeLatest() {
+
+        File file = new File("res/saves");
+        File[] saves = file.listFiles();
+        Arrays.sort(saves, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                long last0 = o1.lastModified(), last1 = o2.lastModified();
+                if (last0 > last1) {
+                    return 1;
+                } else if (last0 < last1) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        if (saves != null) deSerialize(saves[0].getName().replace(".mso", ""));
 
     }
 
