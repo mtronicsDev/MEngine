@@ -1,9 +1,9 @@
 package mEngine.util.debug.profiler;
 
-import mEngine.util.TimeHelper;
+import mEngine.util.timing.TimeHelper;
 import mEngine.util.math.graphs.Graph;
 
-import static mEngine.util.RuntimeHelper.*;
+import static mEngine.util.timing.RuntimeHelper.*;
 
 public class Profiler {
 

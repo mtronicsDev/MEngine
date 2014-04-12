@@ -1,7 +1,7 @@
 package mEngine.util.debug.texts;
 
 import mEngine.gameObjects.components.gui.guiComponents.GUIText;
-import mEngine.util.TimeHelper;
+import mEngine.util.timing.TimeHelper;
 
 public class FPSTextComponent extends GUIText {
 
