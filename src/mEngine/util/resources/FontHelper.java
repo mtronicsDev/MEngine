@@ -1,4 +1,4 @@
-package mEngine.util;
+package mEngine.util.resources;
 
 import org.newdawn.slick.TrueTypeFont;
 

@@ -1,6 +1,6 @@
 package mEngine.gameObjects.components;
 
-import mEngine.util.PreferenceHelper;
+import mEngine.util.resources.PreferenceHelper;
 
 public class ControllerGamepad extends Controller {
 

@@ -3,7 +3,7 @@ package mEngine.core;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
-import mEngine.util.PreferenceHelper;
+import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.TimeHelper;
 import mEngine.util.serialization.Serializer;
 import org.lwjgl.opengl.Display;

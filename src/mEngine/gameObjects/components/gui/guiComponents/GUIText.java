@@ -1,7 +1,7 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.util.FontHelper;
-import mEngine.util.PreferenceHelper;
+import mEngine.util.resources.FontHelper;
+import mEngine.util.resources.PreferenceHelper;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 

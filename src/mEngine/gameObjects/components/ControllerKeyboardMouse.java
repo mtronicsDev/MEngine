@@ -1,6 +1,6 @@
 package mEngine.gameObjects.components;
 
-import mEngine.util.PreferenceHelper;
+import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.input.Input;
 import mEngine.util.input.KeyAlreadyAssignedException;
 import org.lwjgl.input.Keyboard;

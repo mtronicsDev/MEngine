@@ -2,7 +2,7 @@ package mEngine.util.serialization;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
-import mEngine.util.ResourceHelper;
+import mEngine.util.resources.ResourceHelper;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -5,8 +5,8 @@ import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.PreferenceHelper;
-import mEngine.util.ResourceHelper;
+import mEngine.util.resources.PreferenceHelper;
+import mEngine.util.resources.ResourceHelper;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
 import mEngine.util.audio.AudioHelper;
@@ -29,6 +29,7 @@ import static mEngine.core.ObjectController.addGameObject;
 import static mEngine.core.ObjectController.audioSources;
 
 public class GameController {
+
 
     public static boolean isGamePaused;
 
@@ -180,10 +181,6 @@ public class GameController {
     public static void pauseGame() {
 
         Mouse.setGrabbed(false);
-        for (AudioSource source : audioSources) {
-            source.pause();
-        }
-
         isGamePaused = true;
 
     }
@@ -191,10 +188,6 @@ public class GameController {
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
-        for (AudioSource source : audioSources) {
-            source.play();
-        }
-
         isGamePaused = false;
 
     }

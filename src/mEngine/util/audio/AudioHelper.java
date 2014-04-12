@@ -11,8 +11,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mEngine.util.ResourceHelper.RES_SOUND;
-import static mEngine.util.ResourceHelper.getResource;
+import static mEngine.util.resources.ResourceHelper.RES_SOUND;
+import static mEngine.util.resources.ResourceHelper.getResource;
 import static org.lwjgl.openal.AL10.*;
 
 public class AudioHelper {
