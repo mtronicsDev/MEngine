@@ -1,14 +1,18 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.controller;
 
-import mEngine.util.PreferenceHelper;
+import mEngine.gameObjects.components.MovementComponent;
+import mEngine.gameObjects.components.controller.Controller;
+import mEngine.util.preferences.PreferenceHelper;
 import mEngine.util.input.Input;
 import mEngine.util.input.KeyAlreadyAssignedException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import java.io.Serializable;
+
 import static mEngine.util.input.Input.getKey;
 
-public class ControllerKeyboardMouse extends Controller {
+public class ControllerKeyboardMouse extends Controller implements Serializable {
 
     public ControllerKeyboardMouse(float[] forceStrengths, boolean capableOfFlying) {
 

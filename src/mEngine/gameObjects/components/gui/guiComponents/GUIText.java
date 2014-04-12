@@ -1,13 +1,14 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.FontHelper;
-import mEngine.util.PreferenceHelper;
+import mEngine.util.preferences.PreferenceHelper;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class GUIText extends GUIComponent {
+public class GUIText extends GUIComponent implements Serializable {
 
     protected String text;
     protected String fontFace;

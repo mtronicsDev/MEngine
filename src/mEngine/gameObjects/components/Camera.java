@@ -6,9 +6,11 @@ import mEngine.util.rendering.RenderHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
+import java.io.Serializable;
+
 import static org.lwjgl.opengl.GL11.*;
 
-public class Camera extends Component {
+public class Camera extends Component implements Serializable {
 
     public float zoom = 0;
     public Vector3f position;

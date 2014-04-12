@@ -3,15 +3,12 @@ package mEngine.physics.collisions;
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.CollideComponent;
-import mEngine.gameObjects.components.Controller;
+import mEngine.gameObjects.components.controller.Controller;
 import mEngine.gameObjects.components.MovementComponent;
 import mEngine.gameObjects.components.RenderComponent;
 import mEngine.graphics.renderable.Face;
-import mEngine.physics.collisions.primitives.Box;
-import mEngine.physics.collisions.primitives.Triangle;
-import mEngine.physics.forces.Force;
-import mEngine.physics.forces.ForceController;
-import mEngine.util.TimeHelper;
+import mEngine.physics.collisions.primitives.*;
+import mEngine.physics.collisions.primitives.Plane;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -519,10 +516,10 @@ public class Collider {
                     if (VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, vertexA)) > longestVertexDifference)
                         longestVertexDifference = VectorHelper.getAbs(VectorHelper.subtractVectors(vertexC, vertexA));
 
+
                     if (VectorHelper.getAbs(VectorHelper.subtractVectors(intersectionPoint, vertexA)) <= longestVertexDifference) {
 
-                        //Special thanks to Mike Ganshorn for this piece of code
-                        float difference = Math.abs(VectorHelper.getScalarProduct(normal, intersectionPoint) + VectorHelper.getScalarProduct(normal, vertexA));
+                        float difference = VectorHelper.getDifferenceBetweenPlaneAndVector(new Plane(vertexA, normal), intersectionPoint);
 
                         float collisionTime = difference / VectorHelper.getAbs(velocity);
 

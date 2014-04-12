@@ -14,4 +14,12 @@ public class ArrayHelper {
 
     }
 
+    public static boolean[] fillArray(int arrayLength, boolean placeHolder) {
+
+        boolean[] output = new boolean[arrayLength];
+        for (int count = 0; count < output.length; count++) output[count] = placeHolder;
+        return output;
+
+    }
+
 }

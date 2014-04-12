@@ -4,10 +4,11 @@ import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GUIElement extends Component {
+public class GUIElement extends Component implements Serializable {
 
     public Vector2f position;
     public Vector2f size;

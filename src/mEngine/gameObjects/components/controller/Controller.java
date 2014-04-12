@@ -1,10 +1,14 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.controller;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.MovementComponent;
 import mEngine.physics.forces.Force;
 import org.lwjgl.util.vector.Vector3f;
 
-public abstract class Controller extends Component {
+import java.io.Serializable;
+
+public abstract class Controller extends Component implements Serializable {
 
     public float[] forceStrengths;
     public boolean capableOfFlying;

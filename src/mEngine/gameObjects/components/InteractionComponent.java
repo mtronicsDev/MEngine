@@ -1,6 +1,8 @@
 package mEngine.gameObjects.components;
 
-public class InteractionComponent extends Component {
+import java.io.Serializable;
+
+public class InteractionComponent extends Component implements Serializable {
 
     public boolean interactable;
     public int interactionKey;

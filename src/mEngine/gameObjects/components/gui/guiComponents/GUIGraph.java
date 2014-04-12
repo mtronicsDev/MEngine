@@ -4,10 +4,12 @@ import mEngine.util.math.graphs.Graph;
 import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.io.Serializable;
+
 import static mEngine.util.math.MathHelper.clamp;
 import static org.lwjgl.opengl.GL11.*;
 
-public class GUIGraph extends GUIComponent {
+public class GUIGraph extends GUIComponent implements Serializable {
 
     public Vector2f size;
     public Graph graph;

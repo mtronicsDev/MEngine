@@ -1,4 +1,4 @@
-package mEngine.util;
+package mEngine.util.preferences;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,11 +10,12 @@ public class ResourceHelper {
 
     public static final int RES_ASSET = 1;
     public static final int RES_PREFERENCE = 2;
+    public static final int RES_WORLD = 3;
 
-    public static final int RES_MATERIAL = 3;
-    public static final int RES_MODEL = 4;
-    public static final int RES_SOUND = 5;
-    public static final int RES_TEXTURE = 6;
+    public static final int RES_MATERIAL = 4;
+    public static final int RES_MODEL = 5;
+    public static final int RES_SOUND = 6;
+    public static final int RES_TEXTURE = 7;
 
     private static List<String> paths = new ArrayList<String>();
 
@@ -24,11 +25,12 @@ public class ResourceHelper {
 
         paths.add(paths.get(0) + "assets/"); //1
         paths.add(paths.get(0) + "preferences/"); //2
+        paths.add(paths.get(0) + "worlds/"); //3
 
-        paths.add(paths.get(1) + "materials/"); //3
-        paths.add(paths.get(1) + "models/"); //4
-        paths.add(paths.get(1) + "sounds/"); //5
-        paths.add(paths.get(1) + "textures/"); //6
+        paths.add(paths.get(1) + "materials/"); //4
+        paths.add(paths.get(1) + "models/"); //5
+        paths.add(paths.get(1) + "sounds/"); //6
+        paths.add(paths.get(1) + "textures/"); //7
 
     }
 
@@ -45,15 +47,18 @@ public class ResourceHelper {
                 filePath = paths.get(type) + fileName + ".mmp";
                 break;
             case 3:
-                filePath = paths.get(type) + fileName + ".mtl";
+                filePath = paths.get(type) + fileName + ".txt";
                 break;
             case 4:
-                filePath = paths.get(type) + fileName + ".obj";
+                filePath = paths.get(type) + fileName + ".mtl";
                 break;
             case 5:
-                filePath = paths.get(type) + fileName + ".wav";
+                filePath = paths.get(type) + fileName + ".obj";
                 break;
             case 6:
+                filePath = paths.get(type) + fileName + ".wav";
+                break;
+            case 7:
                 filePath = paths.get(type) + fileName + ".png";
                 break;
 

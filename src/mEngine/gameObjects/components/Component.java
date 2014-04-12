@@ -2,7 +2,9 @@ package mEngine.gameObjects.components;
 
 import mEngine.gameObjects.GameObject;
 
-public abstract class Component {
+import java.io.Serializable;
+
+public abstract class Component implements Serializable {
 
     protected GameObject parent;
 

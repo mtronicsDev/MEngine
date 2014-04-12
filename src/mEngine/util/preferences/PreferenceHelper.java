@@ -1,12 +1,12 @@
-package mEngine.util;
+package mEngine.util.preferences;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import static mEngine.util.ResourceHelper.RES_PREFERENCE;
-import static mEngine.util.ResourceHelper.getResource;
+import static mEngine.util.preferences.ResourceHelper.RES_PREFERENCE;
+import static mEngine.util.preferences.ResourceHelper.getResource;
 
 public class PreferenceHelper {
 
