@@ -10,25 +10,27 @@ public class ResourceHelper {
 
     public static final int RES_ASSET = 1;
     public static final int RES_PREFERENCE = 2;
+    public static final int RES_SAVE = 3;
 
-    public static final int RES_MATERIAL = 3;
-    public static final int RES_MODEL = 4;
-    public static final int RES_SOUND = 5;
-    public static final int RES_TEXTURE = 6;
+    public static final int RES_MATERIAL = 4;
+    public static final int RES_MODEL = 5;
+    public static final int RES_SOUND = 6;
+    public static final int RES_TEXTURE = 7;
 
     private static List<String> paths = new ArrayList<String>();
 
     public static void initialize() {
 
-        paths.add("res/"); //0
+        paths.add("res/"); //RES_GENERIC
 
-        paths.add(paths.get(0) + "assets/"); //1
-        paths.add(paths.get(0) + "preferences/"); //2
+        paths.add(paths.get(0) + "assets/"); //RES_ASSET
+        paths.add(paths.get(0) + "preferences/"); //RES_PREFERENCE
+        paths.add(paths.get(0) + "saves/"); //RES_SAVE
 
-        paths.add(paths.get(1) + "materials/"); //3
-        paths.add(paths.get(1) + "models/"); //4
-        paths.add(paths.get(1) + "sounds/"); //5
-        paths.add(paths.get(1) + "textures/"); //6
+        paths.add(paths.get(1) + "materials/"); //RES_MATERIAL
+        paths.add(paths.get(1) + "models/"); //RES_MODEL
+        paths.add(paths.get(1) + "sounds/"); //RES_SOUND
+        paths.add(paths.get(1) + "textures/"); //RES_TEXTURE
 
     }
 
@@ -41,19 +43,22 @@ public class ResourceHelper {
             default:
                 filePath = paths.get(type) + fileName;
                 break;
-            case 2:
+            case RES_PREFERENCE:
                 filePath = paths.get(type) + fileName + ".mmp";
                 break;
-            case 3:
+            case RES_SAVE:
+                filePath = paths.get(type) + fileName + ".mso";
+                break;
+            case RES_MATERIAL:
                 filePath = paths.get(type) + fileName + ".mtl";
                 break;
-            case 4:
+            case RES_MODEL:
                 filePath = paths.get(type) + fileName + ".obj";
                 break;
-            case 5:
+            case RES_SOUND:
                 filePath = paths.get(type) + fileName + ".wav";
                 break;
-            case 6:
+            case RES_TEXTURE:
                 filePath = paths.get(type) + fileName + ".png";
                 break;
 

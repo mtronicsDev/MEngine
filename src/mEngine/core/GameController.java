@@ -19,6 +19,7 @@ import mEngine.util.debug.texts.RAMTextComponent;
 import mEngine.util.debug.texts.TPSTextComponent;
 import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
+import mEngine.util.serialization.Serializer;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -69,10 +70,6 @@ public class GameController {
                 .addComponent(
                         "camera",
                         new Camera()
-                )
-                .addComponent(
-                        "audioListener",
-                        new AudioListener()
                 )
                 .addComponent(
                         "fpsText",
@@ -176,10 +173,6 @@ public class GameController {
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
-
-        for (AudioSource source : audioSources) {
-            source.play();
-        }
 
         Mouse.setGrabbed(true);
 

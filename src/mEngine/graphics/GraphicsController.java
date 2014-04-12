@@ -23,12 +23,12 @@ public class GraphicsController {
     private static String title;
     private static int fps;
 
-    public static void createDisplay(int fps, String title) {
+    public static void createDisplay(String title) {
 
         width = PreferenceHelper.getInteger("screenWidth");
         height = PreferenceHelper.getInteger("screenHeight");
 
-        GraphicsController.fps = fps;
+        fps = PreferenceHelper.getInteger("framesPerSecond");
 
         mEnchmarkEnabled = PreferenceHelper.getBoolean("mEnchmarkEnabled");
         GraphicsController.title = title;

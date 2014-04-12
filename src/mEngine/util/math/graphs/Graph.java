@@ -2,7 +2,9 @@ package mEngine.util.math.graphs;
 
 import mEngine.util.ArrayHelper;
 
-public class Graph {
+import java.io.Serializable;
+
+public class Graph implements Serializable {
 
     protected double[] values;
 

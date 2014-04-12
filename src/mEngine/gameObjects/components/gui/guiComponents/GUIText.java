@@ -89,4 +89,12 @@ public class GUIText extends GUIComponent {
 
     }
 
+    @Override
+    public void onSave() {
+
+        super.onSave();
+        font = null;
+
+    }
+
 }

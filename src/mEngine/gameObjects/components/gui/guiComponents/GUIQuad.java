@@ -10,9 +10,6 @@ public class GUIQuad extends GUIComponent {
     protected String textureName;
     protected Texture texture;
 
-    public GUIQuad() {
-    }
-
     public GUIQuad(String fileName) {
 
         textureName = fileName;
@@ -39,4 +36,11 @@ public class GUIQuad extends GUIComponent {
 
     }
 
+    @Override
+    public void onSave() {
+
+        super.onSave();
+        texture = null;
+
+    }
 }

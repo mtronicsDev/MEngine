@@ -27,6 +27,30 @@ public class GUIElement extends Component {
 
     }
 
+    @Override
+    public void onSave() {
+
+        super.onSave();
+        for(GUIComponent component : components.values()) {
+
+            component.onSave();
+
+        }
+
+    }
+
+    @Override
+    public void onLoad() {
+
+        super.onLoad();
+        for(GUIComponent component : components.values()) {
+
+            component.onLoad();
+
+        }
+
+    }
+
     public GUIElement addComponent(String key, GUIComponent component) {
 
         components.put(key, component);

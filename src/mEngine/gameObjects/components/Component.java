@@ -2,7 +2,9 @@ package mEngine.gameObjects.components;
 
 import mEngine.gameObjects.GameObject;
 
-public abstract class Component {
+import java.io.Serializable;
+
+public abstract class Component implements Serializable {
 
     protected GameObject parent;
 
@@ -10,13 +12,14 @@ public abstract class Component {
         parent = obj;
     }
 
-    public void onUpdate() {
-    }
+    public void onUpdate() {}
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 
-    public void onRemoteUpdate() {
-    }
+    public void onRemoteUpdate() {}
+
+    public void onSave() {}
+
+    public void onLoad() {}
 
 }

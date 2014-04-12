@@ -21,4 +21,19 @@ public class RenderComponent extends Component {
 
     }
 
+    @Override
+    public void onSave() {
+
+        super.onSave();
+        model = null; //Delete unserializable model
+
+    }
+
+    @Override
+    public void onLoad() {
+
+        super.onLoad();
+        model = new Model(modelFileName, parent.position, parent.rotation); //Create model again
+
+    }
 }

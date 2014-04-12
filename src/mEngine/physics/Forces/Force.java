@@ -2,7 +2,9 @@ package mEngine.physics.forces;
 
 import org.lwjgl.util.vector.Vector3f;
 
-public class Force {
+import java.io.Serializable;
+
+public class Force implements Serializable {
 
     public Vector3f direction;
     public boolean enabled;

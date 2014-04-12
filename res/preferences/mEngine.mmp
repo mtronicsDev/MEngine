@@ -1,10 +1,12 @@
 #Display preferences
 screenWidth=1280
 screenHeight=720
+framesPerSecond=60
 fullscreen=false
+title=mEngine Test Run
 
 #Camera preferences
-fieldOfView=100
+fieldOfView=45
 
 #Player preferences
 continuouslyJumping=true
