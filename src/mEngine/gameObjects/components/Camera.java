@@ -1,5 +1,6 @@
 package mEngine.gameObjects.components;
 
+import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;
@@ -19,8 +20,8 @@ public class Camera extends Component {
 
     public void onUpdate() {
 
-        if (Input.isKeyPressed(Keyboard.KEY_F) && zoom >= 0.03f) zoom -= 0.03f;
-        else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.03f;
+        if (Input.isKeyPressed(Keyboard.KEY_F)) zoom -= 0.015f * TimeHelper.deltaTime;
+        else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.015f * TimeHelper.deltaTime;
 
         if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
             position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0, zoom, 0)});
