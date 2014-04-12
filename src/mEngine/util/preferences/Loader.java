@@ -3,9 +3,16 @@ package mEngine.util.preferences;
 import mEngine.core.GameController;
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.*;
+import mEngine.gameObjects.components.controller.ControllerArtificialIntelligence;
+import mEngine.gameObjects.components.controller.ControllerGamepad;
+import mEngine.gameObjects.components.controller.ControllerKeyboardMouse;
 import mEngine.util.ArrayHelper;
+import org.lwjgl.util.vector.Vector3f;
 
 import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Loader {
 
@@ -34,7 +41,7 @@ public class Loader {
 
     }
 
-    private static void loadWorld(String fileName) {
+    public static void loadWorld(String fileName) {
 
         GameObject[] gameObjects = new GameObject[] {};
 

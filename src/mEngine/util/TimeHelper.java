@@ -1,4 +1,4 @@
-package mEngine.util.timing;
+package mEngine.util;
 
 public class TimeHelper {
 

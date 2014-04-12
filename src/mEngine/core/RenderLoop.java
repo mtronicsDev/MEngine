@@ -3,7 +3,9 @@ package mEngine.core;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
-import mEngine.util.timing.TimeHelper;
+import mEngine.util.TimeHelper;
+import mEngine.util.rendering.RenderHelper;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
 
