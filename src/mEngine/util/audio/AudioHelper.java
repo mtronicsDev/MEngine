@@ -1,6 +1,6 @@
 package mEngine.util.audio;
 
-import mEngine.gameObjects.components.audio.AudioSource;
+import mEngine.gameObjects.components.AudioSource;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.openal.AL;
 import org.lwjgl.util.WaveData;
@@ -11,8 +11,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mEngine.util.preferences.ResourceHelper.RES_SOUND;
-import static mEngine.util.preferences.ResourceHelper.getResource;
+import static mEngine.util.ResourceHelper.RES_SOUND;
+import static mEngine.util.ResourceHelper.getResource;
 import static org.lwjgl.openal.AL10.*;
 
 public class AudioHelper {

@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mEngine.util.preferences.ResourceHelper.RES_MODEL;
-import static mEngine.util.preferences.ResourceHelper.getResource;
+import static mEngine.util.ResourceHelper.RES_MODEL;
+import static mEngine.util.ResourceHelper.getResource;
 
 public class ModelHelper {
 

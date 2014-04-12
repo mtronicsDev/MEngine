@@ -3,9 +3,7 @@ package mEngine.gameObjects.components.gui.guiComponents;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-import java.io.Serializable;
-
-public class GUIButton extends GUIComponent implements Serializable {
+public class GUIButton extends GUIComponent {
 
     //Later used for rising edge / falling edge detection
     boolean isButtonPressed;

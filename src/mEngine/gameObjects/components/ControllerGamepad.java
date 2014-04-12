@@ -1,11 +1,8 @@
-package mEngine.gameObjects.components.controller;
+package mEngine.gameObjects.components;
 
-import mEngine.gameObjects.components.controller.Controller;
-import mEngine.util.preferences.PreferenceHelper;
+import mEngine.util.PreferenceHelper;
 
-import java.io.Serializable;
-
-public class ControllerGamepad extends Controller implements Serializable {
+public class ControllerGamepad extends Controller {
 
     public ControllerGamepad(float[] forceStrengths, boolean capableOfFlying) {
 

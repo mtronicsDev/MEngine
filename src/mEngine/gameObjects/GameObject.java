@@ -9,11 +9,10 @@ import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameObject implements Serializable {
+public class GameObject {
 
     public Vector3f position;
     public Vector3f rotation;
@@ -40,14 +39,6 @@ public class GameObject implements Serializable {
             percentRotation = yAxisRotationMatrix.multiplyByVector(percentRotation);
 
         }
-
-    }
-
-    public GameObject(Vector3f pos, Vector3f rot, Vector3f percentRot) {
-
-        position = pos;
-        rotation = rot;
-        percentRotation = percentRot;
 
     }
 

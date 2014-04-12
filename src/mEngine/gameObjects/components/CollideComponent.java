@@ -3,9 +3,7 @@ package mEngine.gameObjects.components;
 import mEngine.physics.collisions.Collider;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.Serializable;
-
-public class CollideComponent extends Component implements Serializable {
+public class CollideComponent extends Component {
 
     public boolean destroyable;
     public boolean ableToCollide;

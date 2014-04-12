@@ -3,9 +3,7 @@ package mEngine.gameObjects.components;
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.renderable.Model;
 
-import java.io.Serializable;
-
-public class RenderComponent extends Component implements Serializable {
+public class RenderComponent extends Component {
 
     public Model model;
     String modelFileName;

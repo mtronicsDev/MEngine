@@ -4,12 +4,10 @@ import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
-import java.io.Serializable;
-
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public class GUIEllipse extends GUIElement implements Serializable {
+public class GUIEllipse extends GUIElement {
 
     Vector2f radius;
 

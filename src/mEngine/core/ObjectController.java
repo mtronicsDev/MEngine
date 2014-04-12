@@ -1,7 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.audio.AudioSource;
+import mEngine.gameObjects.components.AudioSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,6 @@ public class ObjectController {
 
     public static GameObject getGameObject(int index) {
         return gameObjects.get(index);
-    }
-
-    public static void removeGameObject(int index) {
-        gameObjects.remove(index);
     }
 
     public static void addAudioSource(AudioSource source) {

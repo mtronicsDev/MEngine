@@ -2,7 +2,6 @@ package mEngine.gameObjects.components;
 
 import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.controller.Controller;
 import mEngine.physics.collisions.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
@@ -15,11 +14,10 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MovementComponent extends Component implements Serializable {
+public class MovementComponent extends Component {
 
     public Map<String, ForcePoint> forcePoints = new HashMap<String, ForcePoint>();
     public Vector3f speed;

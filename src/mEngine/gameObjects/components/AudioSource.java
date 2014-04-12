@@ -1,17 +1,15 @@
-package mEngine.gameObjects.components.audio;
+package mEngine.gameObjects.components;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.Component;
 import mEngine.util.audio.AudioHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.Serializable;
 import java.nio.FloatBuffer;
 
 import static org.lwjgl.openal.AL10.*;
 
-public class AudioSource extends Component implements Serializable {
+public class AudioSource extends Component {
 
     public int buffer;
     public int source;

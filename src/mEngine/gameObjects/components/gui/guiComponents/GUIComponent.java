@@ -2,9 +2,7 @@ package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.gameObjects.components.gui.GUIElement;
 
-import java.io.Serializable;
-
-public abstract class GUIComponent implements Serializable {
+public abstract class GUIComponent {
 
     public GUIElement parent;
 

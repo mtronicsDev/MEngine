@@ -3,11 +3,9 @@ package mEngine.gameObjects.components.gui.guiComponents;
 import mEngine.util.rendering.TextureHelper;
 import org.newdawn.slick.opengl.Texture;
 
-import java.io.Serializable;
-
 import static org.lwjgl.opengl.GL11.*;
 
-public class GUIQuad extends GUIComponent implements Serializable {
+public class GUIQuad extends GUIComponent {
 
     protected String textureName;
     protected Texture texture;

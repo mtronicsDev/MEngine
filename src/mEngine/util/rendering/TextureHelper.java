@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static mEngine.util.preferences.ResourceHelper.RES_TEXTURE;
-import static mEngine.util.preferences.ResourceHelper.getResource;
+import static mEngine.util.ResourceHelper.RES_TEXTURE;
+import static mEngine.util.ResourceHelper.getResource;
 
 public class TextureHelper {
 

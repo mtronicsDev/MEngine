@@ -1,8 +1,6 @@
-package mEngine.gameObjects.components.controller;
+package mEngine.gameObjects.components;
 
-import java.io.Serializable;
-
-public class ControllerArtificialIntelligence extends Controller implements Serializable {
+public class ControllerArtificialIntelligence extends Controller {
 
     public ControllerArtificialIntelligence(float[] forceStrengths, boolean capableOFFlying) {
 
