@@ -12,7 +12,7 @@ public class GUIElement extends Component {
     public Vector2f position;
     public Vector2f size;
 
-    public Map<String, GUIComponent> components = new HashMap<String, GUIComponent>();
+    public HashMap<String, GUIComponent> components = new HashMap<String, GUIComponent>();
 
     public GUIElement(Vector2f pos) {
 

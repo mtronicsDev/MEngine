@@ -3,6 +3,7 @@ package mEngine.core;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.CollideComponent;
 import mEngine.gameObjects.components.RenderComponent;
+import mEngine.graphics.GraphicsController;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.serialization.Serializer;
@@ -36,11 +37,9 @@ public class GameLoop implements Runnable {
 
             }
 
-            if (Input.isKeyDown(Keyboard.KEY_T)) {
+            if (Input.isKeyDown(Keyboard.KEY_T)) TimeHelper.isInSlowMotion = !TimeHelper.isInSlowMotion;
 
-                TimeHelper.isInSlowMotion = !TimeHelper.isInSlowMotion;
-
-            }
+            if(Input.isKeyDown(Keyboard.KEY_R)) GraphicsController.isWireFrameMode = !GraphicsController.isWireFrameMode;
 
             TimeHelper.updateDeltaTime();
 

@@ -6,7 +6,7 @@ fullscreen=false
 title=mEngine Test Run
 
 #Camera preferences
-fieldOfView=45
+fieldOfView=95
 
 #Player preferences
 continuouslyJumping=true
