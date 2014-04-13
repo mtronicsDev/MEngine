@@ -48,7 +48,7 @@ public class RenderQueue {
 
         }
 
-        skybox.render();
+        if(skybox != null) skybox.render();
 
         GraphicsController.switchTo2D();
         for (GUIElement element : guiQueue) {

@@ -47,86 +47,91 @@ public class Skybox extends Component {
 
         //bottom
         textures[0].bind();
-        renderUVs.add(new Vector2f(0, 0));
-        renderVertices.add(new Vector3f(-radius, -radius, radius));
         renderUVs.add(new Vector2f(0, 1));
+        renderVertices.add(new Vector3f(-radius, -radius, radius));
+        renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(radius, -radius, radius));
-        renderUVs.add(new Vector2f(1, 1));
-        renderVertices.add(new Vector3f(radius, -radius, -radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderVertices.add(new Vector3f(radius, -radius, -radius));
+        renderUVs.add(new Vector2f(1, 1));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
+        renderUVs = new ArrayList<Vector2f>();
 
         //top
         textures[1].bind();
-        renderUVs.add(new Vector2f(0, 0));
-        renderVertices.add(new Vector3f(-radius, radius, -radius));
-        renderUVs.add(new Vector2f(0, 1));
-        renderVertices.add(new Vector3f(radius, radius, -radius));
-        renderUVs.add(new Vector2f(1, 1));
-        renderVertices.add(new Vector3f(radius, radius, radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderVertices.add(new Vector3f(-radius, radius, -radius));
+        renderUVs.add(new Vector2f(1, 1));
+        renderVertices.add(new Vector3f(radius, radius, -radius));
+        renderUVs.add(new Vector2f(0, 1));
+        renderVertices.add(new Vector3f(radius, radius, radius));
+        renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
 
-        Renderer.renderObject3D(renderVertices, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
+        renderUVs = new ArrayList<Vector2f>();
 
         //back
         textures[2].bind();
         renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
-        renderUVs.add(new Vector2f(0, 1));
+        renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(radius, radius, radius));
         renderUVs.add(new Vector2f(1, 1));
         renderVertices.add(new Vector3f(radius, -radius, radius));
-        renderUVs.add(new Vector2f(1, 0));
+        renderUVs.add(new Vector2f(0, 1));
         renderVertices.add(new Vector3f(-radius, -radius, radius));
 
-        Renderer.renderObject3D(renderVertices, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
+        renderUVs = new ArrayList<Vector2f>();
 
         //front
         textures[3].bind();
-        renderUVs.add(new Vector2f(0, 0));
+        renderUVs.add(new Vector2f(1, 1));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
         renderUVs.add(new Vector2f(0, 1));
         renderVertices.add(new Vector3f(radius, -radius, -radius));
-        renderUVs.add(new Vector2f(1, 1));
+        renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(radius, radius, -radius));
         renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(-radius, radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
+        renderUVs = new ArrayList<Vector2f>();
 
         //left
         textures[4].bind();
-        renderUVs.add(new Vector2f(0, 0));
+        renderUVs.add(new Vector2f(1, 1));
         renderVertices.add(new Vector3f(-radius, -radius, radius));
         renderUVs.add(new Vector2f(0, 1));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
-        renderUVs.add(new Vector2f(1, 1));
+        renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(-radius, radius, -radius));
         renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
 
-        Renderer.renderObject3D(renderVertices, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
+        renderUVs = new ArrayList<Vector2f>();
 
         //right
         textures[5].bind();
-        renderUVs.add(new Vector2f(0, 0));
+        renderUVs.add(new Vector2f(1, 1));
         renderVertices.add(new Vector3f(radius, -radius, -radius));
         renderUVs.add(new Vector2f(0, 1));
         renderVertices.add(new Vector3f(radius, -radius, radius));
-        renderUVs.add(new Vector2f(1, 1));
+        renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(radius, radius, radius));
         renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(radius, radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
 
         glPopMatrix();
 
