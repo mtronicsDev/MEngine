@@ -42,6 +42,7 @@ public class RenderQueue {
     public void render() {
 
         GraphicsController.switchTo3D();
+        if (camera != null) camera.render();
         for (Model model : modelQueue) {
 
             model.render();
@@ -57,8 +58,8 @@ public class RenderQueue {
 
         }
 
-        GraphicsController.switchTo3D();
-        if (camera != null) camera.render();
+        //GraphicsController.switchTo3D();
+        //if (camera != null) camera.render();
 
     }
 

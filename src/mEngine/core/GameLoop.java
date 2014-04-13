@@ -15,6 +15,7 @@ public class GameLoop implements Runnable {
 
     public void run() {
 
+        //noinspection StatementWithEmptyBody
         while (!Display.isCreated()) {
         } //Waiting for Display creation
 
@@ -32,7 +33,6 @@ public class GameLoop implements Runnable {
                 ObjectController.addGameObject(
                         new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
                                 .addComponent("renderComponent", new RenderComponent("texturedStar"))
-                                .addComponent("collideComponent", new CollideComponent(false, true))
                 );
 
             }
