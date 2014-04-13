@@ -23,6 +23,7 @@ public class GraphicsController {
     private static int height;
     private static String title;
     private static int fps;
+    public static boolean isWireFrameMode = false;
 
     public static void createDisplay(String title) {
 

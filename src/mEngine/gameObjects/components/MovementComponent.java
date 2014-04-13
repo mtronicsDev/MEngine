@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class MovementComponent extends Component {
 
-    public Map<String, ForcePoint> forcePoints = new HashMap<String, ForcePoint>();
+    public HashMap<String, ForcePoint> forcePoints = new HashMap<String, ForcePoint>();
     public Vector3f speed;
     public Vector3f movedSpace;
     Vector3f previousSpeed;

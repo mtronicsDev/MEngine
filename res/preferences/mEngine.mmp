@@ -7,7 +7,7 @@ title=mEngine Test Run
 renderDistance=1000
 
 #Camera preferences
-fieldOfView=45
+fieldOfView=95
 
 #Player preferences
 continuouslyJumping=true

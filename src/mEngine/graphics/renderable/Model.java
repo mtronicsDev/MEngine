@@ -1,5 +1,6 @@
 package mEngine.graphics.renderable;
 
+import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
@@ -8,12 +9,13 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Model {
+public class Model implements Serializable {
 
     public List<Vector3f> vertices = new ArrayList<Vector3f>();
     public List<Vector3f> normals = new ArrayList<Vector3f>();
@@ -119,7 +121,9 @@ public class Model {
 
         }
 
-        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_TRIANGLES);
+        if (GraphicsController.isWireFrameMode) Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_LINE_STRIP);
+
+        else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_TRIANGLES);
 
         glPopMatrix();
 

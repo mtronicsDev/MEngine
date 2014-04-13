@@ -20,7 +20,7 @@ public class Camera extends Component {
 
     public void onUpdate() {
 
-        if (Input.isKeyPressed(Keyboard.KEY_F)) zoom -= 0.015f * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(Keyboard.KEY_F) && zoom >= 0.015f * TimeHelper.deltaTime) zoom -= 0.015f * TimeHelper.deltaTime;
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.015f * TimeHelper.deltaTime;
 
         if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
