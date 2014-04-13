@@ -15,7 +15,6 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class MovementComponent extends Component {
 

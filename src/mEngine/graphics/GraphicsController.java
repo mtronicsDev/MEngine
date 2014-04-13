@@ -19,11 +19,11 @@ public class GraphicsController {
     public static boolean isFullscreen;
     public static boolean mEnchmarkEnabled;
     public static int renderDistance;
+    public static boolean isWireFrameMode = false;
     private static int width;
     private static int height;
     private static String title;
     private static int fps;
-    public static boolean isWireFrameMode = false;
 
     public static void createDisplay(String title) {
 

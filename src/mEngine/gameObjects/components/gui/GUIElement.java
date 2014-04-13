@@ -5,7 +5,6 @@ import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class GUIElement extends Component {
 

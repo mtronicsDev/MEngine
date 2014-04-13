@@ -121,7 +121,8 @@ public class Model implements Serializable {
 
         }
 
-        if (GraphicsController.isWireFrameMode) Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_LINE_STRIP);
+        if (GraphicsController.isWireFrameMode)
+            Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_LINE_STRIP);
 
         else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_TRIANGLES);
 
