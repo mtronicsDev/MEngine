@@ -1,6 +1,7 @@
 package mEngine.gameObjects.components;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.graphics.Dimension;
 import mEngine.graphics.renderable.Model;
 
 public class RenderComponent extends Component {

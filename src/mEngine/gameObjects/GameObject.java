@@ -3,6 +3,7 @@ package mEngine.gameObjects;
 import mEngine.gameObjects.components.Camera;
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.RenderComponent;
+import mEngine.gameObjects.components.Skybox;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.Matrix3d;
@@ -110,6 +111,7 @@ public class GameObject implements Serializable {
 
             }
             if (component instanceof GUIElement) Renderer.currentRenderQueue.addGUIElement((GUIElement) component);
+            if (component instanceof Skybox) Renderer.currentRenderQueue.addSkybox((Skybox) component);
 
         }
 

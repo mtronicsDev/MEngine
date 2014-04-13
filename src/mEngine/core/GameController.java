@@ -67,6 +67,10 @@ public class GameController {
                         new RenderComponent("texturedStar")
                 )
                 .addComponent(
+                        "skybox",
+                        new Skybox("peaks")
+                )
+                .addComponent(
                         "camera",
                         new Camera()
                 )

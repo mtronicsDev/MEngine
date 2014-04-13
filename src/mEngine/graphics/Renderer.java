@@ -38,6 +38,31 @@ public class Renderer {
 
     }
 
+    public static void renderObject3D(List<Vector3f> vertices, int mode) {
+
+        glBegin(mode);
+        for (Vector3f vertex : vertices) {
+
+            glVertex3f(vertex.x, vertex.y, vertex.z);
+
+        }
+        glEnd();
+
+    }
+
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, int mode) {
+
+        glBegin(mode);
+        for (int i = 0; i < vertices.size(); i++) {
+
+            glTexCoord2f(uvs.get(i).x, uvs.get(i).y);
+            glVertex3f(vertices.get(i).x, vertices.get(i).y, vertices.get(i).z);
+
+        }
+        glEnd();
+
+    }
+
     public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, int mode) {
 
         glBegin(mode);

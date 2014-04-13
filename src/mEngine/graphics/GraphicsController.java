@@ -18,6 +18,7 @@ public class GraphicsController {
     public static Dimension currentRenderDimension;
     public static boolean isFullscreen;
     public static boolean mEnchmarkEnabled;
+    public static int renderDistance;
     private static int width;
     private static int height;
     private static String title;
@@ -27,6 +28,7 @@ public class GraphicsController {
 
         width = PreferenceHelper.getInteger("screenWidth");
         height = PreferenceHelper.getInteger("screenHeight");
+        renderDistance = PreferenceHelper.getInteger("renderDistance");
 
         fps = PreferenceHelper.getInteger("framesPerSecond");
 
@@ -180,7 +182,7 @@ public class GraphicsController {
             glPopMatrix(); //From 2D
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, 1000);
+            gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, renderDistance);
             glViewport(0, 0, Display.getWidth(), Display.getHeight());
             glMatrixMode(GL_MODELVIEW);
 
