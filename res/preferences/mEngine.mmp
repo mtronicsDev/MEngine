@@ -5,6 +5,7 @@ framesPerSecond=60
 fullscreen=false
 title=mEngine Test Run
 renderDistance=1000
+antiAliasing=true
 
 #Camera preferences
 fieldOfView=95
@@ -17,7 +18,6 @@ rotationSpeed=0.1
 
 #GUI preferences
 defaultFontFace=Verdana
-antiAliasing=true
 
 #mEnchmark preferences
 mEnchmarkEnabled=false

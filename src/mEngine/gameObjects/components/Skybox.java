@@ -135,4 +135,19 @@ public class Skybox extends Component {
 
     }
 
+    @Override
+    public void onSave() {
+
+        super.onSave();
+        textures = null;
+
+    }
+
+    @Override
+    public void onLoad() {
+
+        super.onLoad();
+        textures = new Texture[6];
+
+    }
 }
