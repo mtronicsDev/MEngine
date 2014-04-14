@@ -1,5 +1,6 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.rendering;
 
+import mEngine.gameObjects.components.rendering.ComponentRenderable;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.rendering.TextureHelper;
@@ -54,7 +55,7 @@ public class Skybox extends ComponentRenderable {
         renderUVs.add(new Vector2f(1, 1));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, textures[0], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
@@ -69,7 +70,7 @@ public class Skybox extends ComponentRenderable {
         renderUVs.add(new Vector2f(0, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, textures[1], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
@@ -84,7 +85,7 @@ public class Skybox extends ComponentRenderable {
         renderUVs.add(new Vector2f(0, 1));
         renderVertices.add(new Vector3f(-radius, -radius, radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, textures[2], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
@@ -99,7 +100,7 @@ public class Skybox extends ComponentRenderable {
         renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(-radius, radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, textures[3], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
@@ -114,7 +115,7 @@ public class Skybox extends ComponentRenderable {
         renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, textures[4], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
@@ -129,7 +130,7 @@ public class Skybox extends ComponentRenderable {
         renderUVs.add(new Vector2f(1, 0));
         renderVertices.add(new Vector3f(radius, radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderUVs, textures[5], Renderer.RENDER_QUADS);
 
         glPopMatrix();
 

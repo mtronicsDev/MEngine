@@ -1,4 +1,4 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.controls;
 
 public class ControllerArtificialIntelligence extends Controller {
 

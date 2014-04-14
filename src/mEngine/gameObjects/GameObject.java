@@ -1,8 +1,7 @@
 package mEngine.gameObjects;
 
 import mEngine.gameObjects.components.*;
-import mEngine.gameObjects.components.gui.GUIElement;
-import mEngine.graphics.Renderer;
+import mEngine.gameObjects.components.rendering.ComponentRenderable;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;

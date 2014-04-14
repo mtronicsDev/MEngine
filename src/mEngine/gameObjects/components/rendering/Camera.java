@@ -1,4 +1,4 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.rendering;
 
 import mEngine.graphics.Renderer;
 import mEngine.util.TimeHelper;
