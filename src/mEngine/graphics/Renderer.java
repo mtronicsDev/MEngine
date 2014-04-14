@@ -30,16 +30,6 @@ public class Renderer {
 
     public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
 
-        /*glBegin(mode);
-        for (int i = 0; i < vertices.size(); i++) {
-
-            glNormal3f(normals.get(i).x, normals.get(i).y, normals.get(i).z);
-            glTexCoord2f(uvs.get(i).x, uvs.get(i).y);
-            glVertex3f(vertices.get(i).x, vertices.get(i).y, vertices.get(i).z);
-
-        }
-        glEnd();*/
-
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
@@ -95,39 +85,120 @@ public class Renderer {
 
     public static void renderObject3D(List<Vector3f> vertices, int mode) {
 
-        glBegin(mode);
-        for (Vector3f vertex : vertices) {
+        FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
 
-            glVertex3f(vertex.x, vertex.y, vertex.z);
+        for(Vector3f vertex : vertices) {
+
+            vertexData.put(new float[] {vertex.x, vertex.y, vertex.z});
 
         }
-        glEnd();
+
+        vertexData.flip();
+
+        int vboVertexHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(3, GL_FLOAT, 0, 0l);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glDrawArrays(mode, 0, vertices.size());
+
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glDeleteBuffers(vboVertexHandle);
 
     }
 
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, int mode) {
+    public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
 
-        glBegin(mode);
-        for (int i = 0; i < vertices.size(); i++) {
+        FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
+        FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-            glTexCoord2f(uvs.get(i).x, uvs.get(i).y);
-            glVertex3f(vertices.get(i).x, vertices.get(i).y, vertices.get(i).z);
+        for(Vector2f vertex : vertices) {
+
+            vertexData.put(new float[] {vertex.x, vertex.y});
 
         }
-        glEnd();
+
+        for(Vector2f uv : uvs) {
+
+            textureData.put(new float[] {uv.x, uv.y});
+
+        }
+
+        vertexData.flip();
+        textureData.flip();
+
+        int vboVertexHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        int vboTextureHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
+        glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        texture.bind();
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(2, GL_FLOAT, 0, 0l);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
+        glTexCoordPointer(2, GL_FLOAT, 0, 0l);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        glDrawArrays(mode, 0, vertices.size());
+
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        //texture.release();
+
+        glDeleteBuffers(vboVertexHandle);
+        glDeleteBuffers(vboTextureHandle);
 
     }
 
-    public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, int mode) {
+    public static void renderObject2D(List<Vector2f> vertices, int mode) {
 
-        glBegin(mode);
-        for (int i = 0; i < vertices.size(); i++) {
+        FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
 
-            glTexCoord2f(uvs.get(i).x, uvs.get(i).y);
-            glVertex2f(vertices.get(i).x, vertices.get(i).y);
+        for(Vector2f vertex : vertices) {
+
+            vertexData.put(new float[] {vertex.x, vertex.y});
 
         }
-        glEnd();
+
+        vertexData.flip();
+
+        int vboVertexHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(2, GL_FLOAT, 0, 0l);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glDrawArrays(mode, 0, vertices.size());
+
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glDeleteBuffers(vboVertexHandle);
 
     }
 

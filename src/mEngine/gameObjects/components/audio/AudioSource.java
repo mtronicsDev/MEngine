@@ -1,6 +1,7 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.audio;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
 import mEngine.util.audio.AudioHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Vector3f;

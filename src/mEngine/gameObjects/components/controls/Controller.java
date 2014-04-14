@@ -1,6 +1,8 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.controls;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.MovementComponent;
 import mEngine.physics.forces.Force;
 import org.lwjgl.util.vector.Vector3f;
 
