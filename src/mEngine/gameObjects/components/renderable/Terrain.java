@@ -20,7 +20,6 @@ public class Terrain extends ComponentRenderable {
     private Model model;
     private Vector3f size;
     private float[][] heightmap;
-    private Random random = new Random();
 
     public Terrain(Vector3f size) {
 
@@ -33,6 +32,16 @@ public class Terrain extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
+        setHeight(0, 0, 0.3f);
+        setHeight(0, 3, 0.3f);
+        setHeight(0, 45, 0.2f);
+        setHeight(0, 56, 0.1f);
+        setHeight(0, 97, 0.3f);
+        setHeight(1, 32, 0.9f);
+        setHeight(1, 23, 0.5f);
+        setHeight(1, 57, 0.4f);
+        setHeight(1, 56, 0.7f);
+        setHeight(1, 89, 0.2f);
         generateMesh();
 
     }
@@ -54,25 +63,25 @@ public class Terrain extends ComponentRenderable {
 
             for (int z = 0; z < size.z; z++) {
 
-                vertices.add(new Vector3f(x, heightmap[x][z], z));
-                uvs.add(new Vector2f(random.nextInt(11) / 10, random.nextInt(11) / 10));
+                vertices.add(new Vector3f(x, size.y * heightmap[x][z], z));
+                uvs.add(new Vector2f(0, 0));
 
                 if(x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f(x + 1, x + 2, x + (int)size.x + 1),
-                            new Vector3f(x + 1, x + 2, x + (int)size.x + 1),
-                            new Vector3f(x + 1, x + 2, x + (int)size.x + 1)
+                            new Vector3f((x * z) + 1, (x * z) + 2, (x *  z) + (int)size.x + 1),
+                            new Vector3f((x * z) + 1, (x *  z) + 2, (x *  z) + (int)size.x + 1),
+                            new Vector3f((x * z) + 1, (x *  z) + 2, (x *  z) + (int)size.x + 1)
                     ));
 
                 }
 
-                if(x > 0 && z > 0) {
+                if((x *  z) > 0 && z > 0) {
 
                     faces.add(new Face(
-                            new Vector3f(x + 1, x + (int)size.x + 1, x + (int)size.x),
-                            new Vector3f(x + 1, x + (int)size.x + 1, x + (int)size.x),
-                            new Vector3f(x + 1, x + (int)size.x + 1, x + (int)size.x)
+                            new Vector3f((x *  z) + 1, (x *  z) + (int)size.x + 1, (x *  z) + (int)size.x),
+                            new Vector3f((x *  z) + 1, (x *  z) + (int)size.x + 1, (x *  z) + (int)size.x),
+                            new Vector3f((x *  z) + 1, (x *  z) + (int)size.x + 1, (x *  z) + (int)size.x)
                     ));
 
                 }

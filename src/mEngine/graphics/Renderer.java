@@ -38,7 +38,7 @@ public class Renderer {
 
     public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
 
-        ShaderHelper.useShader("lighting");
+        ShaderHelper.useShader("intenseColor");
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
