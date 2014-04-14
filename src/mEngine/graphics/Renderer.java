@@ -1,16 +1,21 @@
 package mEngine.graphics;
 
+import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Renderer {
 
@@ -28,7 +33,63 @@ public class Renderer {
     public static final int RENDER_POLYGON = GL11.GL_POLYGON;
     public static RenderQueue currentRenderQueue;
 
+    static int shaderProgram = glCreateProgram();
+    static int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    static int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    static StringBuilder vertexShaderSource = new StringBuilder();
+    static StringBuilder fragmentShaderSource = new StringBuilder();
+
+    public static void initializeShaders() {
+
+        try {
+
+            BufferedReader vertexReader = new BufferedReader(new FileReader("src/mEngine/util/rendering/shaders/shader.vs"));
+            BufferedReader fragmentReader = new BufferedReader(new FileReader("src/mEngine/util/rendering/shaders/shader.fs"));
+            String line;
+
+            while((line = vertexReader.readLine()) != null) {
+
+                vertexShaderSource.append(line + "\n");
+
+            }
+
+            vertexReader.close();
+
+            while((line = fragmentReader.readLine()) != null) {
+
+                fragmentShaderSource.append(line + "\n");
+
+            }
+
+            fragmentReader.close();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            ThreadHelper.stopAllThreads();
+            System.exit(1);
+
+        }
+
+        glShaderSource(vertexShader, vertexShaderSource);
+        glCompileShader(vertexShader);
+
+        glShaderSource(fragmentShader, fragmentShaderSource);
+        glCompileShader(fragmentShader);
+
+        glAttachShader(shaderProgram, vertexShader);
+        glAttachShader(shaderProgram, fragmentShader);
+
+        glLinkProgram(shaderProgram);
+
+        glValidateProgram(shaderProgram);
+
+    }
+
     public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
+
+        glUseProgram(shaderProgram);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
@@ -80,6 +141,8 @@ public class Renderer {
 
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboTextureHandle);
+
+        glUseProgram(0);
 
     }
 

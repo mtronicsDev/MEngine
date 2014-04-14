@@ -15,6 +15,7 @@ public class RenderLoop implements Runnable {
     public void run() {
 
         GraphicsController.createDisplay(PreferenceHelper.getValue("title"));
+        Renderer.initializeShaders();
 
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
