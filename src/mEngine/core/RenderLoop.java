@@ -4,6 +4,7 @@ import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
 import mEngine.util.TimeHelper;
+import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.serialization.Serializer;
 import org.lwjgl.opengl.Display;
@@ -15,7 +16,7 @@ public class RenderLoop implements Runnable {
     public void run() {
 
         GraphicsController.createDisplay(PreferenceHelper.getValue("title"));
-        Renderer.initializeShaders();
+        ShaderHelper.addShader("intenseColor");
 
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {

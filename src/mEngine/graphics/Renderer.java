@@ -1,5 +1,6 @@
 package mEngine.graphics;
 
+import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.BufferUtils;
@@ -34,65 +35,10 @@ public class Renderer {
     public static final int RENDER_POLYGON = GL11.GL_POLYGON;
 
     public static RenderQueue currentRenderQueue;
-    public static int shaderProgram;
-
-    public static void initializeShaders() {
-
-        shaderProgram = glCreateProgram();
-
-        int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-        StringBuilder vertexShaderSource = new StringBuilder();
-        StringBuilder fragmentShaderSource = new StringBuilder();
-
-        try {
-
-            BufferedReader vertexReader = new BufferedReader(new FileReader(ResourceHelper.getResource("shader", ResourceHelper.RES_SHADER_V)));
-            BufferedReader fragmentReader = new BufferedReader(new FileReader(ResourceHelper.getResource("shader", ResourceHelper.RES_SHADER_F)));
-            String line;
-
-            while((line = vertexReader.readLine()) != null) {
-
-                vertexShaderSource.append(line + "\n");
-
-            }
-
-            vertexReader.close();
-
-            while((line = fragmentReader.readLine()) != null) {
-
-                fragmentShaderSource.append(line + "\n");
-
-            }
-
-            fragmentReader.close();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            ThreadHelper.stopAllThreads();
-            System.exit(1);
-
-        }
-
-        glShaderSource(vertexShader, vertexShaderSource);
-        glCompileShader(vertexShader);
-
-        glShaderSource(fragmentShader, fragmentShaderSource);
-        glCompileShader(fragmentShader);
-
-        glAttachShader(shaderProgram, vertexShader);
-        glAttachShader(shaderProgram, fragmentShader);
-
-        glLinkProgram(shaderProgram);
-        glValidateProgram(shaderProgram);
-
-    }
 
     public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
 
-        glUseProgram(shaderProgram);
+        ShaderHelper.useShader("intenseColor");
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
@@ -182,6 +128,8 @@ public class Renderer {
     }
 
     public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
+
+        ShaderHelper.useShader("intenseColor");
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
