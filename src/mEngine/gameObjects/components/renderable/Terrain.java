@@ -4,7 +4,7 @@ import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
 import mEngine.util.math.MathHelper;
-import org.lwjgl.util.vector.Vector2f;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
@@ -14,16 +14,12 @@ public class Terrain extends ComponentRenderable {
 
     private Model model;
     private Vector3f size;
-    private List<Vector3f> vertices;
-    private List<Face> faces;
     private float[][] heightmap;
 
     public Terrain(Vector3f size) {
 
         this.size = size;
         heightmap = new float[(int)size.x][(int)size.z];
-        vertices = new ArrayList<Vector3f>();
-        faces = new ArrayList<Face>();
 
     }
 
@@ -38,9 +34,13 @@ public class Terrain extends ComponentRenderable {
         int i = 0;
         int j = 0;
 
+        List<Vector3f> vertices = new ArrayList<Vector3f>();
+        List<Face> faces = new ArrayList<Face>();
+        List<Vector3f> normals = new ArrayList<Vector3f>();
+
         for(int x = 0; x < size.x; x++) {
 
-            for(int z = 0; z < size.z; x++) {
+            for(int z = 0; z < size.z; z++) {
 
                 i++;
                 j++;
@@ -54,6 +54,22 @@ public class Terrain extends ComponentRenderable {
                             new Vector3f(j - 2, j - 1, j)
                     ));
 
+                    Face face = faces.get(faces.size() - 1);
+
+                    Vector3f vertexA = vertices.get((int) face.vertexIndices.x);
+                    Vector3f vertexB = vertices.get((int) face.vertexIndices.y);
+                    Vector3f vertexC = vertices.get((int) face.vertexIndices.z);
+
+                    Vector3f directionVectorA = VectorHelper.subtractVectors(vertexB, vertexA);
+                    Vector3f directionVectorB = VectorHelper.subtractVectors(vertexC, vertexA);
+
+                    Vector3f normal = VectorHelper.getVectorProduct(directionVectorA, directionVectorB);
+                    normal = VectorHelper.normalizeVector(normal);
+
+                    normals.add(normal);
+                    normals.add(normal);
+                    normals.add(normal);
+
                 }
 
                 vertices.add(new Vector3f(x, heightmap[x][z], z));
@@ -61,8 +77,6 @@ public class Terrain extends ComponentRenderable {
             }
 
         }
-
-        //Create model
 
     }
 
