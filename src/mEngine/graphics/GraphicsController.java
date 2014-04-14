@@ -2,6 +2,7 @@ package mEngine.graphics;
 
 import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.resources.PreferenceHelper;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -153,6 +154,8 @@ public class GraphicsController {
         //Using them
         glCullFace(GL_BACK);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glShadeModel(GL_SMOOTH);
+
 
     }
 

@@ -60,56 +60,42 @@ public class Terrain extends ComponentRenderable {
                 if(x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f(x, x + 1, x + (int)size.x),
-                            new Vector3f(x, x + 1, x + (int)size.x),
-                            new Vector3f(x, x + 1, x + (int)size.x)
+                            new Vector3f(x + 1, x + 2, x + (int)size.x + 1),
+                            new Vector3f(x + 1, x + 2, x + (int)size.x + 1),
+                            new Vector3f(x + 1, x + 2, x + (int)size.x + 1)
                     ));
-
-                    Face face = faces.get(faces.size() - 1);
-
-                    Vector3f vertexA = vertices.get((int) face.vertexIndices.x);
-                    Vector3f vertexB = vertices.get((int) face.vertexIndices.y);
-                    Vector3f vertexC = vertices.get((int) face.vertexIndices.z);
-
-                    Vector3f directionVectorA = VectorHelper.subtractVectors(vertexB, vertexA);
-                    Vector3f directionVectorB = VectorHelper.subtractVectors(vertexC, vertexA);
-
-                    Vector3f normal = VectorHelper.getVectorProduct(directionVectorA, directionVectorB);
-                    normal = VectorHelper.normalizeVector(normal);
-
-                    normals.add(normal);
-                    normals.add(normal);
-                    normals.add(normal);
 
                 }
 
                 if(x > 0 && z > 0) {
 
                     faces.add(new Face(
-                            new Vector3f(x, x + (int)size.x, x + (int)size.x - 1),
-                            new Vector3f(x, x + (int)size.x, x + (int)size.x - 1),
-                            new Vector3f(x, x + (int)size.x, x + (int)size.x - 1)
+                            new Vector3f(x + 1, x + (int)size.x + 1, x + (int)size.x),
+                            new Vector3f(x + 1, x + (int)size.x + 1, x + (int)size.x),
+                            new Vector3f(x + 1, x + (int)size.x + 1, x + (int)size.x)
                     ));
-
-                    Face face = faces.get(faces.size() - 1);
-
-                    Vector3f vertexA = vertices.get((int) face.vertexIndices.x);
-                    Vector3f vertexB = vertices.get((int) face.vertexIndices.y);
-                    Vector3f vertexC = vertices.get((int) face.vertexIndices.z);
-
-                    Vector3f directionVectorA = VectorHelper.subtractVectors(vertexB, vertexA);
-                    Vector3f directionVectorB = VectorHelper.subtractVectors(vertexC, vertexA);
-
-                    Vector3f normal = VectorHelper.getVectorProduct(directionVectorA, directionVectorB);
-                    normal = VectorHelper.normalizeVector(normal);
-
-                    normals.add(normal);
-                    normals.add(normal);
-                    normals.add(normal);
 
                 }
 
             }
+
+        }
+
+        for (Face face : faces) {
+
+            Vector3f vertexA = vertices.get((int) face.vertexIndices.x);
+            Vector3f vertexB = vertices.get((int) face.vertexIndices.y);
+            Vector3f vertexC = vertices.get((int) face.vertexIndices.z);
+
+            Vector3f directionVectorA = VectorHelper.subtractVectors(vertexB, vertexA);
+            Vector3f directionVectorB = VectorHelper.subtractVectors(vertexC, vertexA);
+
+            Vector3f normal = VectorHelper.getVectorProduct(directionVectorA, directionVectorB);
+            normal = VectorHelper.normalizeVector(normal);
+
+            normals.add(normal);
+            normals.add(normal);
+            normals.add(normal);
 
         }
 
