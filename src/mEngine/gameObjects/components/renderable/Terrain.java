@@ -32,16 +32,6 @@ public class Terrain extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        setHeight(0, 0, 0.3f);
-        setHeight(0, 3, 0.3f);
-        setHeight(0, 45, 0.2f);
-        setHeight(0, 56, 0.1f);
-        setHeight(0, 97, 0.3f);
-        setHeight(1, 32, 0.9f);
-        setHeight(1, 23, 0.5f);
-        setHeight(1, 57, 0.4f);
-        setHeight(1, 56, 0.7f);
-        setHeight(1, 89, 0.2f);
         generateMesh();
 
     }
@@ -69,9 +59,9 @@ public class Terrain extends ComponentRenderable {
                 if(x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f((x * z) + 1, (x * z) + 2, (x *  z) + (int)size.x + 1),
-                            new Vector3f((x * z) + 1, (x *  z) + 2, (x *  z) + (int)size.x + 1),
-                            new Vector3f((x * z) + 1, (x *  z) + 2, (x *  z) + (int)size.x + 1)
+                            new Vector3f((x * z) + 1, ((x + 1) * z) + 1, (x *  z) + (int)size.x + 1),
+                            new Vector3f((x * z) + 1, ((x + 1) *  z) + 1, (x *  z) + (int)size.x + 1),
+                            new Vector3f((x * z) + 1, ((x + 1) *  z) + 1, (x *  z) + (int)size.x + 1)
                     ));
 
                 }
