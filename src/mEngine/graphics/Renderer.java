@@ -1,12 +1,16 @@
 package mEngine.graphics;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.newdawn.slick.opengl.Texture;
 
+import java.nio.FloatBuffer;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
 
 public class Renderer {
 
@@ -24,9 +28,9 @@ public class Renderer {
     public static final int RENDER_POLYGON = GL11.GL_POLYGON;
     public static RenderQueue currentRenderQueue;
 
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, int mode) {
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
 
-        glBegin(mode);
+        /*glBegin(mode);
         for (int i = 0; i < vertices.size(); i++) {
 
             glNormal3f(normals.get(i).x, normals.get(i).y, normals.get(i).z);
@@ -34,7 +38,58 @@ public class Renderer {
             glVertex3f(vertices.get(i).x, vertices.get(i).y, vertices.get(i).z);
 
         }
-        glEnd();
+        glEnd();*/
+
+        FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
+        FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
+
+        for(Vector3f vertex : vertices) {
+
+            vertexData.put(new float[] {vertex.x, vertex.y, vertex.z});
+
+        }
+
+        for(Vector2f uv : uvs) {
+
+            textureData.put(new float[] {uv.x, uv.y});
+
+        }
+
+        vertexData.flip();
+        textureData.flip();
+
+        int vboVertexHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        int vboTextureHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
+        glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        texture.bind();
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(3, GL_FLOAT, 0, 0l);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
+        glTexCoordPointer(2, GL_FLOAT, 0, 0l);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        glDrawArrays(mode, 0, vertices.size());
+
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        //texture.release();
+
+        glDeleteBuffers(vboVertexHandle);
+        glDeleteBuffers(vboTextureHandle);
 
     }
 

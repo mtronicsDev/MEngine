@@ -82,16 +82,10 @@ public class Model implements Serializable {
         //glRotatef(rotation.y, 0, 1, 0);
         //glRotatef(rotation.z, 0, 0, 1);
 
-        texture.bind();
-
         List<Vector3f> renderVertices = new ArrayList<Vector3f>();
-        List<Vector3f> renderNormals = new ArrayList<Vector3f>();
         List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
         for (Face face : faces) {
-
-            Vector3f n1 = normals.get((int) face.normalIndices.x);
-            renderNormals.add(n1);
 
             Vector2f uv1 = uvs.get((int) face.uvIndices.x);
             renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
@@ -100,18 +94,12 @@ public class Model implements Serializable {
             renderVertices.add(v1);
 
 
-            Vector3f n2 = normals.get((int) face.normalIndices.y);
-            renderNormals.add(n2);
-
             Vector2f uv2 = uvs.get((int) face.uvIndices.y);
             renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
 
             Vector3f v2 = vertices.get((int) face.vertexIndices.y);
             renderVertices.add(v2);
 
-
-            Vector3f n3 = normals.get((int) face.normalIndices.z);
-            renderNormals.add(n3);
 
             Vector2f uv3 = uvs.get((int) face.uvIndices.z);
             renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
@@ -122,9 +110,9 @@ public class Model implements Serializable {
         }
 
         if (GraphicsController.isWireFrameMode)
-            Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_LINE_STRIP);
+            Renderer.renderObject3D(renderVertices, renderUVs, texture, Renderer.RENDER_LINE_STRIP);
 
-        else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, Renderer.RENDER_TRIANGLES);
+        else Renderer.renderObject3D(renderVertices, renderUVs, texture, Renderer.RENDER_TRIANGLES);
 
         glPopMatrix();
 
