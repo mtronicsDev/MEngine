@@ -59,9 +59,9 @@ public class Terrain extends ComponentRenderable {
                 if(x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f((x * z) + 1, ((x + 1) * z) + 1, (x *  z) + (int)size.x + 1),
-                            new Vector3f((x * z) + 1, ((x + 1) *  z) + 1, (x *  z) + (int)size.x + 1),
-                            new Vector3f((x * z) + 1, ((x + 1) *  z) + 1, (x *  z) + (int)size.x + 1)
+                            new Vector3f((x * z) + 1, (x * z) + 2, (x * z) + (int)size.x + 1),
+                            new Vector3f((x * z) + 1, (x * z) + 2, (x * z) + (int)size.x + 1),
+                            new Vector3f((x * z) + 1, (x * z) + 2, (x * z) + (int)size.x + 1)
                     ));
 
                 }
@@ -69,9 +69,9 @@ public class Terrain extends ComponentRenderable {
                 if((x *  z) > 0 && z > 0) {
 
                     faces.add(new Face(
-                            new Vector3f((x *  z) + 1, (x *  z) + (int)size.x + 1, (x *  z) + (int)size.x),
-                            new Vector3f((x *  z) + 1, (x *  z) + (int)size.x + 1, (x *  z) + (int)size.x),
-                            new Vector3f((x *  z) + 1, (x *  z) + (int)size.x + 1, (x *  z) + (int)size.x)
+                            new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x),
+                            new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x),
+                            new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x)
                     ));
 
                 }
