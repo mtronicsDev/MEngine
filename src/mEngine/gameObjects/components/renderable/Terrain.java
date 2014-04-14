@@ -45,7 +45,9 @@ public class Terrain extends ComponentRenderable {
                 i++;
                 j++;
 
-                if(i == 2) {
+                vertices.add(new Vector3f(x, heightmap[x][z], z));
+
+                if(i == 3) {
 
                     i = 0;
                     faces.add(new Face(
@@ -71,8 +73,6 @@ public class Terrain extends ComponentRenderable {
                     normals.add(normal);
 
                 }
-
-                vertices.add(new Vector3f(x, heightmap[x][z], z));
 
             }
 
