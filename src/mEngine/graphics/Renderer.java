@@ -1,5 +1,6 @@
 package mEngine.graphics;
 
+import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -33,19 +34,19 @@ public class Renderer {
     public static final int RENDER_POLYGON = GL11.GL_POLYGON;
     public static RenderQueue currentRenderQueue;
 
-    static int shaderProgram = glCreateProgram();
-    static int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    static int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    static StringBuilder vertexShaderSource = new StringBuilder();
-    static StringBuilder fragmentShaderSource = new StringBuilder();
-
     public static void initializeShaders() {
+
+        int shaderProgram = glCreateProgram();
+        int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+        int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+        StringBuilder vertexShaderSource = new StringBuilder();
+        StringBuilder fragmentShaderSource = new StringBuilder();
 
         try {
 
-            BufferedReader vertexReader = new BufferedReader(new FileReader("src/mEngine/util/rendering/shaders/shader.vs"));
-            BufferedReader fragmentReader = new BufferedReader(new FileReader("src/mEngine/util/rendering/shaders/shader.fs"));
+            BufferedReader vertexReader = new BufferedReader(new FileReader(ResourceHelper.getResource("shader", ResourceHelper.RES_SHADER_V)));
+            BufferedReader fragmentReader = new BufferedReader(new FileReader(ResourceHelper.getResource("shader", ResourceHelper.RES_SHADER_F)));
             String line;
 
             while((line = vertexReader.readLine()) != null) {
@@ -82,14 +83,12 @@ public class Renderer {
         glAttachShader(shaderProgram, fragmentShader);
 
         glLinkProgram(shaderProgram);
-
         glValidateProgram(shaderProgram);
+        glUseProgram(shaderProgram);
 
     }
 
     public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
-
-        glUseProgram(shaderProgram);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
