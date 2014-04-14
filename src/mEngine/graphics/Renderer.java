@@ -32,11 +32,14 @@ public class Renderer {
     public static final int RENDER_QUADS = GL11.GL_QUADS;
     public static final int RENDER_QUAD_STRIP = GL11.GL_QUAD_STRIP;
     public static final int RENDER_POLYGON = GL11.GL_POLYGON;
+
     public static RenderQueue currentRenderQueue;
+    public static int shaderProgram;
 
     public static void initializeShaders() {
 
-        int shaderProgram = glCreateProgram();
+        shaderProgram = glCreateProgram();
+
         int vertexShader = glCreateShader(GL_VERTEX_SHADER);
         int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -84,11 +87,12 @@ public class Renderer {
 
         glLinkProgram(shaderProgram);
         glValidateProgram(shaderProgram);
-        glUseProgram(shaderProgram);
 
     }
 
     public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
+
+        glUseProgram(shaderProgram);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
