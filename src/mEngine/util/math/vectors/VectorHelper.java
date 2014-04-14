@@ -1,7 +1,7 @@
 package mEngine.util.math.vectors;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.rendering.RenderComponent;
+import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Plane;
 import mEngine.physics.collisions.primitives.Triangle;

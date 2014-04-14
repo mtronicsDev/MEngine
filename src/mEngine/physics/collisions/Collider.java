@@ -5,7 +5,7 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.CollideComponent;
 import mEngine.gameObjects.components.controls.Controller;
 import mEngine.gameObjects.components.MovementComponent;
-import mEngine.gameObjects.components.rendering.RenderComponent;
+import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.renderable.Face;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Plane;

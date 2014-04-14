@@ -1,7 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.rendering.RenderComponent;
+import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;

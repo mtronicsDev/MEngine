@@ -1,7 +1,7 @@
 package mEngine.graphics;
 
-import mEngine.gameObjects.components.rendering.Camera;
-import mEngine.gameObjects.components.rendering.Skybox;
+import mEngine.gameObjects.components.renderable.Camera;
+import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.graphics.renderable.Model;
 

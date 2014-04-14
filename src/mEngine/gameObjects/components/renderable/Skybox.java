@@ -1,6 +1,5 @@
-package mEngine.gameObjects.components.rendering;
+package mEngine.gameObjects.components.renderable;
 
-import mEngine.gameObjects.components.rendering.ComponentRenderable;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.rendering.TextureHelper;

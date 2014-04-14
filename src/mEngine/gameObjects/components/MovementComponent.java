@@ -3,7 +3,7 @@ package mEngine.gameObjects.components;
 import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.controls.Controller;
-import mEngine.gameObjects.components.rendering.RenderComponent;
+import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.physics.collisions.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;

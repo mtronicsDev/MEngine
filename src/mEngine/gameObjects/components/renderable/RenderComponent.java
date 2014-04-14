@@ -1,4 +1,4 @@
-package mEngine.gameObjects.components.rendering;
+package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
