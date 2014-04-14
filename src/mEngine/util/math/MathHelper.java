@@ -10,4 +10,10 @@ public class MathHelper {
 
     }
 
+    public static boolean isEven(int input) {
+
+        return input % 2 == 0;
+
+    }
+
 }

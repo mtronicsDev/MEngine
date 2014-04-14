@@ -1,5 +1,6 @@
 package mEngine.graphics.renderable;
 
+import com.sun.istack.internal.NotNull;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
@@ -25,6 +26,7 @@ public class Model implements Serializable {
     public float mass;
     public Vector3f position = new Vector3f();
     public Vector3f rotation = new Vector3f();
+    public int renderMode = Renderer.RENDER_TRIANGLES;
     String textureName;
     Texture texture;
 
@@ -59,6 +61,24 @@ public class Model implements Serializable {
         this.uvs = uvs;
         this.faces = faces;
         this.texture = texture;
+        this.mass = getMass();
+
+        Vector3f middle = getMiddle();
+
+        for (int count = 0; count < this.vertices.size(); count++)
+            this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
+
+        position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
+
+    }
+
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName) {
+
+        this.vertices = vertices;
+        this.normals = normals;
+        this.uvs = uvs;
+        this.faces = faces;
+        this.textureName = textureName;
         this.mass = getMass();
 
         Vector3f middle = getMiddle();
@@ -112,7 +132,7 @@ public class Model implements Serializable {
         if (GraphicsController.isWireFrameMode)
             Renderer.renderObject3D(renderVertices, renderUVs, texture, Renderer.RENDER_LINE_STRIP);
 
-        else Renderer.renderObject3D(renderVertices, renderUVs, texture, Renderer.RENDER_TRIANGLES);
+        else Renderer.renderObject3D(renderVertices, renderUVs, texture, renderMode);
 
         glPopMatrix();
 

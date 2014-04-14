@@ -8,6 +8,7 @@ import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
+import mEngine.gameObjects.components.renderable.Terrain;
 import mEngine.graphics.Renderer;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.RuntimeHelper;
@@ -176,6 +177,10 @@ public class GameController {
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "terrain",
+                        new Terrain(new Vector3f(100, 100, 100))
                 )
                 .addComponent(
                         "collideComponent",
