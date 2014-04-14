@@ -62,6 +62,8 @@ public class Terrain extends ComponentRenderable {
 
         }
 
+        //Create model
+
     }
 
     @Override
