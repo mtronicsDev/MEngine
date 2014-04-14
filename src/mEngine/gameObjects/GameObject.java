@@ -1,9 +1,6 @@
 package mEngine.gameObjects;
 
-import mEngine.gameObjects.components.Camera;
-import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.RenderComponent;
-import mEngine.gameObjects.components.Skybox;
+import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.Matrix3d;
@@ -99,19 +96,7 @@ public class GameObject implements Serializable {
         //Adds this gameObject's models and guiElements to the renderQueue
         for (Component component : components.values()) {
 
-            if (component instanceof Camera) Renderer.currentRenderQueue.addCamera((Camera) component);
-            if (component instanceof RenderComponent) {
-
-                RenderComponent renderComponent = (RenderComponent) component;
-
-                if (renderComponent.model != null) {
-                    renderComponent.model.update(position, rotation);
-                    Renderer.currentRenderQueue.addModel(((RenderComponent) component).model);
-                }
-
-            }
-            if (component instanceof GUIElement) Renderer.currentRenderQueue.addGUIElement((GUIElement) component);
-            if (component instanceof Skybox) Renderer.currentRenderQueue.addSkybox((Skybox) component);
+            if (component instanceof ComponentRenderable) ((ComponentRenderable) component).addToRenderQueue();
 
         }
 

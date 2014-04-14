@@ -48,6 +48,10 @@ public class GameController {
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
+                )
+                .addComponent(
                         "movementComponent",
                         new MovementComponent()
                 )
@@ -61,10 +65,6 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                )
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("texturedStar")
                 )
                 .addComponent(
                         "skybox",

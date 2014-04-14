@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Skybox extends Component {
+public class Skybox extends ComponentRenderable {
 
     protected Texture[] textures = new Texture[6];
     protected String textureName;
@@ -148,6 +148,13 @@ public class Skybox extends Component {
 
         super.onLoad();
         textures = new Texture[6];
+
+    }
+
+    @Override
+    public void addToRenderQueue() {
+
+        Renderer.currentRenderQueue.addSkybox(this);
 
     }
 }

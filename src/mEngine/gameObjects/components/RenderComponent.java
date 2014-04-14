@@ -1,9 +1,10 @@
 package mEngine.gameObjects.components;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.Model;
 
-public class RenderComponent extends Component {
+public class RenderComponent extends ComponentRenderable {
 
     public Model model;
     String modelFileName;
@@ -22,6 +23,14 @@ public class RenderComponent extends Component {
     }
 
     @Override
+    public void onUpdate() {
+
+        super.onUpdate();
+        model.update(parent.position, parent.rotation);
+
+    }
+
+    @Override
     public void onSave() {
 
         super.onSave();
@@ -34,6 +43,13 @@ public class RenderComponent extends Component {
 
         super.onLoad();
         model = new Model(modelFileName, parent.position, parent.rotation); //Create model again
+
+    }
+
+    @Override
+    public void addToRenderQueue() {
+
+        Renderer.currentRenderQueue.addModel(model);
 
     }
 }

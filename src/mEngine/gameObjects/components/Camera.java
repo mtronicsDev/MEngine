@@ -1,5 +1,6 @@
 package mEngine.gameObjects.components;
 
+import mEngine.graphics.Renderer;
 import mEngine.util.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
@@ -8,7 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Camera extends Component {
+public class Camera extends ComponentRenderable {
 
     public float zoom = 0;
     public Vector3f position;
@@ -42,6 +43,13 @@ public class Camera extends Component {
         Vector3f newPosition = VectorHelper.sumVectors(new Vector3f[]{VectorHelper.multiplyVectorByFloat(percentRotation, -zoom), position});
 
         glTranslatef(-newPosition.x, -newPosition.y, -newPosition.z);
+
+    }
+
+    @Override
+    public void addToRenderQueue() {
+
+        Renderer.currentRenderQueue.addCamera(this);
 
     }
 

@@ -1,12 +1,14 @@
 package mEngine.gameObjects.components.gui;
 
 import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.ComponentRenderable;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
+import mEngine.graphics.Renderer;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.HashMap;
 
-public class GUIElement extends Component {
+public class GUIElement extends ComponentRenderable {
 
     public Vector2f position;
     public Vector2f size;
@@ -67,6 +69,13 @@ public class GUIElement extends Component {
         for (GUIComponent component : components.values()) {
             component.onUpdate();
         }
+
+    }
+
+    @Override
+    public void addToRenderQueue() {
+
+        Renderer.currentRenderQueue.addGUIElement(this);
 
     }
 
