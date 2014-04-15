@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: lwjgl_util.jar lwjgl.jar slick-util.jar
+Class-Path: slick-util.jar lwjgl_util.jar lwjgl.jar
 Main-Class: mEngine.Main
 
