@@ -5,10 +5,7 @@ import mEngine.gameObjects.components.*;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
-import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.Terrain;
+import mEngine.gameObjects.components.renderable.*;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;
@@ -78,6 +75,10 @@ public class GameController {
                 .addComponent(
                         "camera",
                         new Camera()
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(200)
                 )
                 .addComponent(
                         "fpsText",

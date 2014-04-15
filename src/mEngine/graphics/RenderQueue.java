@@ -1,6 +1,7 @@
 package mEngine.graphics;
 
 import mEngine.gameObjects.components.renderable.Camera;
+import mEngine.gameObjects.components.renderable.LightSource;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.graphics.renderable.Model;
@@ -14,6 +15,7 @@ public class RenderQueue {
     private Skybox skybox;
     private List<Model> modelQueue = new ArrayList<Model>();
     private List<GUIElement> guiQueue = new ArrayList<GUIElement>();
+    public List<LightSource> lightSources = new ArrayList<LightSource>();
 
     public void addCamera(Camera camera) {
 
@@ -36,6 +38,12 @@ public class RenderQueue {
     public void addGUIElement(GUIElement element) {
 
         guiQueue.add(element);
+
+    }
+
+    public void addLightSource(LightSource lightSource) {
+
+        lightSources.add(lightSource);
 
     }
 
