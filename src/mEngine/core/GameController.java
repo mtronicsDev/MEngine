@@ -145,7 +145,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(-20, 0, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("sphere")
+                        new RenderComponent("texturedStar")
                 )
                 .addComponent(
                         "collideComponent",
