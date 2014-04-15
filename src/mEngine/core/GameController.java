@@ -71,10 +71,10 @@ public class GameController {
                         "collideComponent",
                         new CollideComponent(false, true)
                 )
-                .addComponent(
+                /*.addComponent(
                         "skybox",
                         new Skybox("peaks")
-                )
+                )*/
                 .addComponent(
                         "camera",
                         new Camera()
@@ -145,7 +145,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(-20, 0, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "collideComponent",

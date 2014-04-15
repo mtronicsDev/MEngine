@@ -70,6 +70,27 @@ public class Model implements Serializable {
         for (int count = 0; count < this.vertices.size(); count++)
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
+        position = middle;
+
+    }
+
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture, Vector3f pos, Vector3f rot) {
+
+        this.vertices = vertices;
+        this.normals = normals;
+        this.uvs = uvs;
+        this.faces = faces;
+        this.texture = texture;
+        this.mass = getMass();
+
+        Vector3f middle = getMiddle();
+
+        for (int count = 0; count < this.vertices.size(); count++)
+            this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
+
+        position = pos;
+        rotation = rot;
+
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
     }
@@ -87,6 +108,27 @@ public class Model implements Serializable {
 
         for (int count = 0; count < this.vertices.size(); count++)
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
+
+        position = middle;
+
+    }
+
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName, Vector3f pos, Vector3f rot) {
+
+        this.vertices = vertices;
+        this.normals = normals;
+        this.uvs = uvs;
+        this.faces = faces;
+        this.textureName = textureName;
+        this.mass = getMass();
+
+        Vector3f middle = getMiddle();
+
+        for (int count = 0; count < this.vertices.size(); count++)
+            this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
+
+        position = pos;
+        rotation = rot;
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
@@ -109,10 +151,6 @@ public class Model implements Serializable {
 
         }
 
-        glPushMatrix();
-
-        glTranslatef(position.x, position.y, position.z);
-
         //glRotatef(rotation.x, 1, 0, 0);
         //glRotatef(rotation.y, 0, 1, 0);
         //glRotatef(rotation.z, 0, 0, 1);
@@ -125,21 +163,21 @@ public class Model implements Serializable {
 
             for (Face face : faces) {
 
-                Vector3f v1 = vertices.get((int) face.vertexIndices.x);
+                Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
                 renderVertices.add(v1);
 
                 Vector3f n1 = normals.get((int) face.normalIndices.x);
                 renderNormals.add(n1);
 
 
-                Vector3f v2 = vertices.get((int) face.vertexIndices.y);
+                Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
                 renderVertices.add(v2);
 
                 Vector3f n2 = normals.get((int) face.normalIndices.y);
                 renderNormals.add(n2);
 
 
-                Vector3f v3 = vertices.get((int) face.vertexIndices.z);
+                Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
                 renderVertices.add(v3);
 
                 Vector3f n3 = normals.get((int) face.normalIndices.z);
@@ -159,7 +197,7 @@ public class Model implements Serializable {
                 Vector2f uv1 = uvs.get((int) face.uvIndices.x);
                 renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
 
-                Vector3f v1 = vertices.get((int) face.vertexIndices.x);
+                Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
                 renderVertices.add(v1);
 
                 Vector3f n1 = normals.get((int) face.normalIndices.x);
@@ -169,7 +207,7 @@ public class Model implements Serializable {
                 Vector2f uv2 = uvs.get((int) face.uvIndices.y);
                 renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
 
-                Vector3f v2 = vertices.get((int) face.vertexIndices.y);
+                Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
                 renderVertices.add(v2);
 
                 Vector3f n2 = normals.get((int) face.normalIndices.y);
@@ -179,7 +217,7 @@ public class Model implements Serializable {
                 Vector2f uv3 = uvs.get((int) face.uvIndices.z);
                 renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
 
-                Vector3f v3 = vertices.get((int) face.vertexIndices.z);
+                Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
                 renderVertices.add(v3);
 
                 Vector3f n3 = normals.get((int) face.normalIndices.z);
@@ -193,8 +231,6 @@ public class Model implements Serializable {
             else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, renderMode);
 
         }
-
-        glPopMatrix();
 
     }
 
