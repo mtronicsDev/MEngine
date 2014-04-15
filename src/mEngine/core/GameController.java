@@ -52,10 +52,10 @@ public class GameController {
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(0, 10, 0), new Vector3f())
-                .addComponent(
+                /*.addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
-                )
+                )*/
                 .addComponent(
                         "movementComponent",
                         new MovementComponent()
@@ -63,18 +63,18 @@ public class GameController {
                 .addComponent(
                         "controller",
                         new ControllerKeyboardMouse(
-                                new float[]{0.05f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
-                                false
+                                new float[]{0.4f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
+                                true
                         )
                 )
-                .addComponent(
+                /*.addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
                 )
                 .addComponent(
                         "skybox",
                         new Skybox("peaks")
-                )
+                )*/
                 .addComponent(
                         "camera",
                         new Camera()
@@ -145,7 +145,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(-20, 0, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "collideComponent",
