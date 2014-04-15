@@ -35,7 +35,7 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 20, 0);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 0, 0);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
@@ -115,7 +115,7 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 20, 0);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 0, 0);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
