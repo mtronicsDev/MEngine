@@ -51,7 +51,7 @@ public class GameController {
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
-        addGameObject(new GameObject(new Vector3f(), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 10, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
@@ -63,7 +63,7 @@ public class GameController {
                 .addComponent(
                         "controller",
                         new ControllerKeyboardMouse(
-                                new float[]{1, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 11},
+                                new float[]{0.05f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
                                 false
                         )
                 )
