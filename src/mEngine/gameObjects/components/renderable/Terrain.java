@@ -32,6 +32,19 @@ public class Terrain extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
+
+        Random rand = new Random();
+
+        for (int x = 0; x < size.x; x++) {
+
+            for (int z = 0; z < size.z; z++) {
+
+                setHeight(x, z, (float)rand.nextInt(11) / 1000);
+
+            }
+
+        }
+
         generateMesh();
 
     }
@@ -49,6 +62,8 @@ public class Terrain extends ComponentRenderable {
         List<Vector3f> normals = new ArrayList<Vector3f>();
         List<Vector2f> uvs = new ArrayList<Vector2f>();
 
+        int i = 0; //Counts all vertices
+
         for (int x = 0; x < size.x; x++) {
 
             for (int z = 0; z < size.z; z++) {
@@ -59,22 +74,24 @@ public class Terrain extends ComponentRenderable {
                 if(x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f((x * z) + 1, (x * z) + 2, (x * z) + (int)size.x + 1),
-                            new Vector3f((x * z) + 1, (x * z) + 2, (x * z) + (int)size.x + 1),
-                            new Vector3f((x * z) + 1, (x * z) + 2, (x * z) + (int)size.x + 1)
+                            new Vector3f(i + 1, i + 2, i + (int)size.x + 1),
+                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int)size.x + 1),
+                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int)size.x + 1)
                     ));
 
                 }
 
-                if((x *  z) > 0 && z > 0) {
+                if(z < size.z && i < 9900) { //Don't ask me about this, it seems to be random
 
                     faces.add(new Face(
-                            new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x),
+                            new Vector3f(i + 1, i + (int)size.x + 1, i + (int)size.x),
                             new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x),
                             new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x)
                     ));
 
                 }
+
+                i++;
 
             }
 

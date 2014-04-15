@@ -8,7 +8,7 @@ renderDistance=1000
 antiAliasing=true
 
 #Camera preferences
-fieldOfView=95
+fieldOfView=45
 
 #Player preferences
 continuouslyJumping=true
