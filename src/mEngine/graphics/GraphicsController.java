@@ -10,6 +10,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.vector.Vector4f;
 
+import java.awt.*;
 import java.nio.FloatBuffer;
 
 import static mEngine.util.input.Input.*;
@@ -123,6 +124,16 @@ public class GraphicsController {
         }
 
         isFullscreen = true;
+
+    }
+
+    public static void setParent(Canvas parent) {
+
+        try {
+            Display.setParent(parent);
+        } catch (LWJGLException e) {
+            e.printStackTrace();
+        }
 
     }
 
