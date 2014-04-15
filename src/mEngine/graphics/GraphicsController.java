@@ -10,8 +10,16 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.vector.Vector4f;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static mEngine.util.input.Input.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -132,6 +140,47 @@ public class GraphicsController {
         try {
             Display.setParent(parent);
         } catch (LWJGLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void takeScreenshot() {
+
+        int width = Display.getWidth();
+        int height = Display.getHeight();
+        int bytesPerPixel = 4; //1 byte per r/g/b/a value
+
+        glReadBuffer(GL_FRONT);
+        ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * bytesPerPixel);
+        glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        Date date = new Date();
+        String saveFileName = format.format(date);
+
+        File file = new File("screenshots/" + saveFileName + ".png");
+        String fileFormat = "PNG";
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        for(int x = 0; x < width; x++) {
+
+            for(int y = 0; y < height; y++) {
+
+                //Stuff 'n' things for every pixel
+                int i = (x + (width * y)) * bytesPerPixel;
+                int r = buffer.get(i) & 0xFF;
+                int g = buffer.get(i + 1) & 0xFF;
+                int b = buffer.get(i + 2) & 0xFF;
+                image.setRGB(x, height - (y + 1), (0xFF << 24) | (r << 16) | (g << 8) | b);
+
+            }
+
+        }
+
+        try {
+            ImageIO.write(image, fileFormat, file); //Write the file
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

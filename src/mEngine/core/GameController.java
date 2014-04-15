@@ -68,10 +68,10 @@ public class GameController {
                         "collideComponent",
                         new CollideComponent(false, true)
                 )
-                /*.addComponent(
+                .addComponent(
                         "skybox",
                         new Skybox("peaks")
-                )*/
+                )
                 .addComponent(
                         "camera",
                         new Camera()
