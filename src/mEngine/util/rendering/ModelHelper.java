@@ -2,6 +2,7 @@ package mEngine.util.rendering;
 
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
+import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
@@ -69,9 +70,15 @@ public class ModelHelper {
                         Float.valueOf(line.split(" ")[2].split("/")[2]),
                         Float.valueOf(line.split(" ")[3].split("/")[2]));
 
-                Vector3f uvIndices = new Vector3f(Float.valueOf(line.split(" ")[1].split("/")[1]),
-                        Float.valueOf(line.split(" ")[2].split("/")[1]),
-                        Float.valueOf(line.split(" ")[3].split("/")[1]));
+                Vector3f uvIndices = null;
+
+                if (!line.split(" ")[1].split("/")[1].isEmpty()) {
+
+                    uvIndices = new Vector3f(Float.valueOf(line.split(" ")[1].split("/")[1]),
+                            Float.valueOf(line.split(" ")[2].split("/")[1]),
+                            Float.valueOf(line.split(" ")[3].split("/")[1]));
+
+                }
 
                 faces.add(new Face(vertexIndices, normalIndices, uvIndices));
 
@@ -96,6 +103,7 @@ public class ModelHelper {
         } catch (IOException e) {
 
             e.printStackTrace();
+            ThreadHelper.stopAllThreads();
             System.exit(1);
 
         }

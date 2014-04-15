@@ -1,15 +1,16 @@
 package mEngine.graphics.renderable;
 
-import com.sun.istack.internal.NotNull;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
 import mEngine.util.rendering.TextureHelper;
+import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class Model implements Serializable {
     public int renderMode = Renderer.RENDER_TRIANGLES;
     String textureName;
     Texture texture;
+    boolean isTextureThere;
 
     public Model(String fileName, Vector3f pos, Vector3f rot) {
 
@@ -92,7 +94,20 @@ public class Model implements Serializable {
 
     public void render() {
 
-        if (texture == null) texture = TextureHelper.getTexture(textureName);
+        if (texture == null) {
+
+            File textureFile = ResourceHelper.getResource(textureName, ResourceHelper.RES_TEXTURE);
+
+            if(!textureFile.exists()) isTextureThere = false;
+
+            else {
+
+                texture = TextureHelper.getTexture(textureName);
+                isTextureThere = true;
+
+            }
+
+        }
 
         glPushMatrix();
 
@@ -103,36 +118,81 @@ public class Model implements Serializable {
         //glRotatef(rotation.z, 0, 0, 1);
 
         List<Vector3f> renderVertices = new ArrayList<Vector3f>();
+        List<Vector3f> renderNormals = new ArrayList<Vector3f>();
         List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
-        for (Face face : faces) {
+        if (!isTextureThere) {
 
-            Vector2f uv1 = uvs.get((int) face.uvIndices.x);
-            renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
+            for (Face face : faces) {
 
-            Vector3f v1 = vertices.get((int) face.vertexIndices.x);
-            renderVertices.add(v1);
+                Vector3f v1 = vertices.get((int) face.vertexIndices.x);
+                renderVertices.add(v1);
 
-
-            Vector2f uv2 = uvs.get((int) face.uvIndices.y);
-            renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
-
-            Vector3f v2 = vertices.get((int) face.vertexIndices.y);
-            renderVertices.add(v2);
+                Vector3f n1 = normals.get((int) face.normalIndices.x);
+                renderNormals.add(n1);
 
 
-            Vector2f uv3 = uvs.get((int) face.uvIndices.z);
-            renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
+                Vector3f v2 = vertices.get((int) face.vertexIndices.y);
+                renderVertices.add(v2);
 
-            Vector3f v3 = vertices.get((int) face.vertexIndices.z);
-            renderVertices.add(v3);
+                Vector3f n2 = normals.get((int) face.normalIndices.y);
+                renderNormals.add(n2);
+
+
+                Vector3f v3 = vertices.get((int) face.vertexIndices.z);
+                renderVertices.add(v3);
+
+                Vector3f n3 = normals.get((int) face.normalIndices.z);
+                renderNormals.add(n3);
+
+            }
+
+            if (GraphicsController.isWireFrameMode)
+                Renderer.renderObject3D(renderVertices, renderNormals, Renderer.RENDER_LINE_STRIP);
+
+            else Renderer.renderObject3D(renderVertices, renderNormals, renderMode);
+
+        } else {
+
+            for (Face face : faces) {
+
+                Vector2f uv1 = uvs.get((int) face.uvIndices.x);
+                renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
+
+                Vector3f v1 = vertices.get((int) face.vertexIndices.x);
+                renderVertices.add(v1);
+
+                Vector3f n1 = normals.get((int) face.normalIndices.x);
+                renderNormals.add(n1);
+
+
+                Vector2f uv2 = uvs.get((int) face.uvIndices.y);
+                renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
+
+                Vector3f v2 = vertices.get((int) face.vertexIndices.y);
+                renderVertices.add(v2);
+
+                Vector3f n2 = normals.get((int) face.normalIndices.y);
+                renderNormals.add(n2);
+
+
+                Vector2f uv3 = uvs.get((int) face.uvIndices.z);
+                renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
+
+                Vector3f v3 = vertices.get((int) face.vertexIndices.z);
+                renderVertices.add(v3);
+
+                Vector3f n3 = normals.get((int) face.normalIndices.z);
+                renderNormals.add(n3);
+
+            }
+
+            if (GraphicsController.isWireFrameMode)
+                Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, Renderer.RENDER_LINE_STRIP);
+
+            else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, renderMode);
 
         }
-
-        if (GraphicsController.isWireFrameMode)
-            Renderer.renderObject3D(renderVertices, renderUVs, texture, Renderer.RENDER_LINE_STRIP);
-
-        else Renderer.renderObject3D(renderVertices, renderUVs, texture, renderMode);
 
         glPopMatrix();
 

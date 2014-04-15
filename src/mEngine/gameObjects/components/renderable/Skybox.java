@@ -41,89 +41,114 @@ public class Skybox extends ComponentRenderable {
         glTranslatef(parent.position.x, parent.position.y, parent.position.z);
 
         List<Vector3f> renderVertices = new ArrayList<Vector3f>();
+        List<Vector3f> renderNormals = new ArrayList<Vector3f>();
         List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
         //bottom
         renderUVs.add(new Vector2f(0, 1));
+        renderNormals.add(new Vector3f(0, 1, 0));
         renderVertices.add(new Vector3f(-radius, -radius, radius));
         renderUVs.add(new Vector2f(0, 0));
+        renderNormals.add(new Vector3f(0, 1, 0));
         renderVertices.add(new Vector3f(radius, -radius, radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderNormals.add(new Vector3f(0, 1, 0));
         renderVertices.add(new Vector3f(radius, -radius, -radius));
         renderUVs.add(new Vector2f(1, 1));
+        renderNormals.add(new Vector3f(0, 1, 0));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, textures[0], Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, textures[0], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
         //top
         renderUVs.add(new Vector2f(1, 0));
+        renderNormals.add(new Vector3f(0, -1, 0));
         renderVertices.add(new Vector3f(-radius, radius, -radius));
         renderUVs.add(new Vector2f(1, 1));
+        renderNormals.add(new Vector3f(0, -1, 0));
         renderVertices.add(new Vector3f(radius, radius, -radius));
         renderUVs.add(new Vector2f(0, 1));
+        renderNormals.add(new Vector3f(0, -1, 0));
         renderVertices.add(new Vector3f(radius, radius, radius));
         renderUVs.add(new Vector2f(0, 0));
+        renderNormals.add(new Vector3f(0, -1, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, textures[1], Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, textures[1], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
         //back
         renderUVs.add(new Vector2f(0, 0));
+        renderNormals.add(new Vector3f(0, 0, 1));
         renderVertices.add(new Vector3f(-radius, radius, radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderNormals.add(new Vector3f(0, 0, 1));
         renderVertices.add(new Vector3f(radius, radius, radius));
         renderUVs.add(new Vector2f(1, 1));
+        renderNormals.add(new Vector3f(0, 0, 1));
         renderVertices.add(new Vector3f(radius, -radius, radius));
         renderUVs.add(new Vector2f(0, 1));
+        renderNormals.add(new Vector3f(0, 0, 1));
         renderVertices.add(new Vector3f(-radius, -radius, radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, textures[2], Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, textures[2], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
         //front
         renderUVs.add(new Vector2f(1, 1));
+        renderNormals.add(new Vector3f(0, 0, -1));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
         renderUVs.add(new Vector2f(0, 1));
+        renderNormals.add(new Vector3f(0, 0, -1));
         renderVertices.add(new Vector3f(radius, -radius, -radius));
         renderUVs.add(new Vector2f(0, 0));
+        renderNormals.add(new Vector3f(0, 0, -1));
         renderVertices.add(new Vector3f(radius, radius, -radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderNormals.add(new Vector3f(0, 0, -1));
         renderVertices.add(new Vector3f(-radius, radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, textures[3], Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, textures[3], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
         //left
         renderUVs.add(new Vector2f(1, 1));
+        renderNormals.add(new Vector3f(1, 0, 0));
         renderVertices.add(new Vector3f(-radius, -radius, radius));
         renderUVs.add(new Vector2f(0, 1));
+        renderNormals.add(new Vector3f(1, 0, 0));
         renderVertices.add(new Vector3f(-radius, -radius, -radius));
         renderUVs.add(new Vector2f(0, 0));
+        renderNormals.add(new Vector3f(1, 0, 0));
         renderVertices.add(new Vector3f(-radius, radius, -radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderNormals.add(new Vector3f(1, 0, 0));
         renderVertices.add(new Vector3f(-radius, radius, radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, textures[4], Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, textures[4], Renderer.RENDER_QUADS);
         renderVertices = new ArrayList<Vector3f>();
         renderUVs = new ArrayList<Vector2f>();
 
         //right
         renderUVs.add(new Vector2f(1, 1));
+        renderNormals.add(new Vector3f(-1, 0, 0));
         renderVertices.add(new Vector3f(radius, -radius, -radius));
         renderUVs.add(new Vector2f(0, 1));
+        renderNormals.add(new Vector3f(-1, 0, 0));
         renderVertices.add(new Vector3f(radius, -radius, radius));
         renderUVs.add(new Vector2f(0, 0));
+        renderNormals.add(new Vector3f(-1, 0, 0));
         renderVertices.add(new Vector3f(radius, radius, radius));
         renderUVs.add(new Vector2f(1, 0));
+        renderNormals.add(new Vector3f(-1, 0, 0));
         renderVertices.add(new Vector3f(radius, radius, -radius));
 
-        Renderer.renderObject3D(renderVertices, renderUVs, textures[5], Renderer.RENDER_QUADS);
+        Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, textures[5], Renderer.RENDER_QUADS);
 
         glPopMatrix();
 

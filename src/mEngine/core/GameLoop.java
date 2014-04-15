@@ -41,6 +41,8 @@ public class GameLoop implements Runnable {
             if (Input.isKeyDown(Keyboard.KEY_R))
                 GraphicsController.isWireFrameMode = !GraphicsController.isWireFrameMode;
 
+            if (Input.isKeyDown(Keyboard.KEY_O)) ObjectController.gameObjects.get(0).position = new Vector3f();
+
             TimeHelper.updateDeltaTime();
 
             for (int i = 0; i < ObjectController.gameObjects.size(); i++) {

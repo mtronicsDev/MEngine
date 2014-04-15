@@ -69,11 +69,20 @@ public class ShaderHelper {
 
         shaderPrograms.put(fileName, shaderProgram);
 
+        glDeleteShader(fragmentShader);
+        glDeleteShader(vertexShader);
+
     }
 
     public static void useShader(String shaderName) {
 
         glUseProgram(shaderPrograms.get(shaderName));
+
+    }
+
+    public static void useNoShader() {
+
+        glUseProgram(0);
 
     }
 

@@ -1,17 +1,12 @@
 package mEngine.graphics;
 
 import mEngine.util.rendering.ShaderHelper;
-import mEngine.util.resources.ResourceHelper;
-import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.List;
 
@@ -36,16 +31,25 @@ public class Renderer {
 
     public static RenderQueue currentRenderQueue;
 
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode) {
 
         ShaderHelper.useShader("intenseColor");
 
+        //glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 0, 0);
+
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
+        FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
         for(Vector3f vertex : vertices) {
 
             vertexData.put(new float[] {vertex.x, vertex.y, vertex.z});
+
+        }
+
+        for(Vector3f normal : normals) {
+
+            normalData.put(new float[] {normal.x, normal.y, normal.z});
 
         }
 
@@ -56,11 +60,17 @@ public class Renderer {
         }
 
         vertexData.flip();
+        normalData.flip();
         textureData.flip();
 
         int vboVertexHandle = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        int vboNormalHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
+        glBufferData(GL_ARRAY_BUFFER, normalData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         int vboTextureHandle = glGenBuffers();
@@ -73,15 +83,20 @@ public class Renderer {
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(3, GL_FLOAT, 0, 0l);
 
+        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
+        glNormalPointer(GL_FLOAT, 0, 0l);
+
         glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
         glTexCoordPointer(2, GL_FLOAT, 0, 0l);
 
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
         glDrawArrays(mode, 0, vertices.size());
 
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -89,15 +104,21 @@ public class Renderer {
         //texture.release();
 
         glDeleteBuffers(vboVertexHandle);
+        glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboTextureHandle);
 
-        glUseProgram(0);
+        ShaderHelper.useNoShader();
 
     }
 
-    public static void renderObject3D(List<Vector3f> vertices, int mode) {
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, int mode) {
+
+        ShaderHelper.useShader("noTexture");
+
+        //glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 0, 0);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
+        FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
 
         for(Vector3f vertex : vertices) {
 
@@ -105,31 +126,49 @@ public class Renderer {
 
         }
 
+        for(Vector3f normal : normals) {
+
+            normalData.put(new float[] {normal.x, normal.y, normal.z});
+
+        }
+
         vertexData.flip();
+        normalData.flip();
 
         int vboVertexHandle = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+        int vboNormalHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
+        glBufferData(GL_ARRAY_BUFFER, normalData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(3, GL_FLOAT, 0, 0l);
 
+        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
+        glNormalPointer(GL_FLOAT, 0, 0l);
+
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
 
         glDrawArrays(mode, 0, vertices.size());
 
+        glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+        glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboVertexHandle);
+
+        ShaderHelper.useNoShader();
 
     }
 
     public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
-
-        ShaderHelper.useShader("intenseColor");
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
@@ -181,6 +220,8 @@ public class Renderer {
 
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboTextureHandle);
+
+        ShaderHelper.useNoShader();
 
     }
 

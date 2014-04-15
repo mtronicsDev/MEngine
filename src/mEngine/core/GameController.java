@@ -9,7 +9,6 @@ import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.Terrain;
-import mEngine.graphics.Renderer;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.RuntimeHelper;
 import mEngine.util.TimeHelper;

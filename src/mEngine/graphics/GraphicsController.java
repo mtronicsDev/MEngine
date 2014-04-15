@@ -7,7 +7,10 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.vector.Vector4f;
+
+import java.nio.FloatBuffer;
 
 import static mEngine.util.input.Input.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -145,17 +148,13 @@ public class GraphicsController {
 
     private static void initializeOpenGL() {
 
-        //Enabling OpenGL functions
+        glShadeModel(GL_SMOOTH);
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-
-        //Using them
         glCullFace(GL_BACK);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glShadeModel(GL_SMOOTH);
-
 
     }
 
