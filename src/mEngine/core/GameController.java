@@ -61,7 +61,7 @@ public class GameController {
                         "controller",
                         new ControllerKeyboardMouse(
                                 new float[]{0.4f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
-                                false
+                                true
                         )
                 )
                 .addComponent(
