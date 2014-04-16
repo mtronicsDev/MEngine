@@ -78,7 +78,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200)
+                        new LightSource(80)
                 )
                 .addComponent(
                         "fpsText",
@@ -129,6 +129,10 @@ public class GameController {
                         new RenderComponent("12star")
                 )
                 .addComponent(
+                        "lightSource",
+                        new LightSource(80)
+                )
+                .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
@@ -140,14 +144,14 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200)
+                        new LightSource(80)
                 )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(-20, 0, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(20, 0, 20), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
@@ -163,11 +167,15 @@ public class GameController {
                         new RenderComponent("texturedStar")
                 )
                 .addComponent(
+                        "lightSource",
+                        new LightSource(80)
+                )
+                .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, -20, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")

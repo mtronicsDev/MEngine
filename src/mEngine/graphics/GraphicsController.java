@@ -33,6 +33,7 @@ public class GraphicsController {
     public static boolean mEnchmarkEnabled;
     public static int renderDistance;
     public static boolean isWireFrameMode = false;
+    public static int fieldOfView;
     private static int width;
     private static int height;
     private static String title;
@@ -43,6 +44,7 @@ public class GraphicsController {
         width = PreferenceHelper.getInteger("screenWidth");
         height = PreferenceHelper.getInteger("screenHeight");
         renderDistance = PreferenceHelper.getInteger("renderDistance");
+        fieldOfView = PreferenceHelper.getInteger("fieldOfView");
 
         fps = PreferenceHelper.getInteger("framesPerSecond");
 
@@ -245,7 +247,7 @@ public class GraphicsController {
             glPopMatrix(); //From 2D
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            gluPerspective(PreferenceHelper.getInteger("fieldOfView"), (float) Display.getWidth() / Display.getHeight(), 0.1f, renderDistance);
+            gluPerspective(fieldOfView, (float) Display.getWidth() / Display.getHeight(), 0.1f, renderDistance);
             glViewport(0, 0, Display.getWidth(), Display.getHeight());
             glMatrixMode(GL_MODELVIEW);
 
