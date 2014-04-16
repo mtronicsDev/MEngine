@@ -37,36 +37,6 @@ public class RenderLoop implements Runnable {
 
             }
 
-            if (Mouse.isButtonDown(1)) {
-
-                GraphicsController.fieldOfView = 30;
-
-                for (GameObject obj : ObjectController.gameObjects) {
-
-                    for (Component component : obj.components.values()) {
-
-                        if (component instanceof Controller) ((Controller) component).rotationSpeed = 0.02f;
-
-                    }
-
-                }
-
-            } else {
-
-                GraphicsController.fieldOfView = PreferenceHelper.getInteger("fieldOfView");
-
-                for (GameObject obj : ObjectController.gameObjects) {
-
-                    for (Component component : obj.components.values()) {
-
-                        if (component instanceof Controller) ((Controller) component).rotationSpeed = PreferenceHelper.getFloat("rotationSpeed");
-
-                    }
-
-                }
-
-            }
-
             //Renders all the gameObjects
             for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 

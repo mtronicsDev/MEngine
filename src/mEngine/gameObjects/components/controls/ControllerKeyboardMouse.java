@@ -2,6 +2,7 @@ package mEngine.gameObjects.components.controls;
 
 import mEngine.gameObjects.components.MovementComponent;
 import mEngine.gameObjects.components.controls.Controller;
+import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
 import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.resources.PreferenceHelper;
@@ -45,6 +46,18 @@ public class ControllerKeyboardMouse extends Controller {
     }
 
     public void updateObject() {
+
+        if (Mouse.isButtonDown(1)) {
+
+            GraphicsController.fieldOfView = 30;
+            rotationSpeed = 0.02f;
+
+        } else {
+
+            GraphicsController.fieldOfView = PreferenceHelper.getInteger("fieldOfView");
+            rotationSpeed = PreferenceHelper.getFloat("rotationSpeed");
+
+        }
 
         MovementComponent movementComponent = (MovementComponent) parent.getComponent("movementComponent");
 
