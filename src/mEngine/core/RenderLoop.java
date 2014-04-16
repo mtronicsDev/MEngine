@@ -51,7 +51,6 @@ public class RenderLoop implements Runnable {
 
                 }
 
-
             } else {
 
                 GraphicsController.fieldOfView = PreferenceHelper.getInteger("fieldOfView");

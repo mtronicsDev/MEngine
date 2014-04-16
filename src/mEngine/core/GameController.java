@@ -175,10 +175,14 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(-30, 0, -30), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "terrain",
+                        new Terrain(new Vector3f(100, 100, 100))
                 )
                 .addComponent(
                         "collideComponent",
@@ -189,10 +193,6 @@ public class GameController {
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
-                )
-                .addComponent(
-                        "terrain",
-                        new Terrain(new Vector3f(100, 100, 100))
                 )
                 .addComponent(
                         "collideComponent",

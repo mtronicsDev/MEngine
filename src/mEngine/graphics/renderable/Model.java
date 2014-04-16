@@ -74,7 +74,7 @@ public class Model implements Serializable {
 
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture, Vector3f pos, Vector3f rot) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture, Vector3f pos) {
 
         this.vertices = vertices;
         this.normals = normals;
@@ -89,7 +89,6 @@ public class Model implements Serializable {
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
         position = pos;
-        rotation = rot;
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
@@ -113,7 +112,7 @@ public class Model implements Serializable {
 
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName, Vector3f pos, Vector3f rot) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName, Vector3f pos) {
 
         this.vertices = vertices;
         this.normals = normals;
@@ -128,7 +127,6 @@ public class Model implements Serializable {
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
         position = pos;
-        rotation = rot;
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
