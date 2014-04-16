@@ -129,10 +129,6 @@ public class GameController {
                         new RenderComponent("12star")
                 )
                 .addComponent(
-                        "lightSource",
-                        new LightSource(200)
-                )
-                .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
@@ -141,6 +137,10 @@ public class GameController {
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(200)
                 )
                 .addComponent(
                         "collideComponent",
