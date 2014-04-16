@@ -60,7 +60,7 @@ public class GameController {
                 .addComponent(
                         "controller",
                         new ControllerKeyboardMouse(
-                                new float[]{0.4f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
+                                new float[]{0.3f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
                                 true
                         )
                 )
@@ -127,6 +127,10 @@ public class GameController {
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("12star")
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(200)
                 )
                 .addComponent(
                         "collideComponent",

@@ -1,8 +1,9 @@
 varying vec3 vertex;
 varying vec3 normal;
 
-uniform vec3 lightPosition;
-uniform float lightStrength;
+uniform int lightSourceCount;
+uniform vec3[] lightPositions;
+uniform float[] lightStrengths;
 uniform sampler2D texture;
 
 void main(void) {
@@ -10,16 +11,21 @@ void main(void) {
     vec3 fragColor;
 
     vec4 textureColor = texture2D(texture, vec2(gl_TexCoord[0]));
-    vec3 darkTextureColor = vec3(vec3(textureColor) * 0.03);
+    vec3 darkTextureColor = vec3(vec3(textureColor) * 0.05);
 
-    vec3 lightDirection = normalize(vertex - lightPosition);
+    for (int count = 0; count < lightSourceCount; count += 1) {
 
-    vec3 lightDifference = vertex - lightPosition;
-    float difference = abs(sqrt(dot(lightDifference, lightDifference)));
+        vec3 lightDifference = vertex - lightPositions[0];
 
-    float diffuseLightIntensity = lightStrength / difference;
+        vec3 lightDirection = normalize(lightDifference);
 
-    fragColor = vec3(darkTextureColor * diffuseLightIntensity);
+        float difference = length(lightDifference);
+
+        float diffuseLightIntensity = lightStrengths[0] / difference;
+
+        fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+
+    }
 
     fragColor += darkTextureColor;
 

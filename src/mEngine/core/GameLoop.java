@@ -1,6 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.TimeHelper;
@@ -41,7 +42,12 @@ public class GameLoop implements Runnable {
             if (Input.isKeyDown(Keyboard.KEY_R))
                 GraphicsController.isWireFrameMode = !GraphicsController.isWireFrameMode;
 
-            if (Input.isKeyDown(Keyboard.KEY_O)) ObjectController.gameObjects.get(0).position = new Vector3f();
+            if (Input.isKeyDown(Keyboard.KEY_O)) {
+
+                ObjectController.gameObjects.get(0).position = new Vector3f();
+                ((Camera) ObjectController.gameObjects.get(0).getComponent("camera")).zoom = 0;
+
+            }
 
             TimeHelper.updateDeltaTime();
 

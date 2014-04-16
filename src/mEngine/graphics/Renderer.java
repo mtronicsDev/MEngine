@@ -35,9 +35,15 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
-        Vector3f lightSourcePosition = currentRenderQueue.lightSources.get(0).position;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), lightSourcePosition.x, lightSourcePosition.y, lightSourcePosition.z);
-        glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrength"), currentRenderQueue.lightSources.get(0).strength);
+        glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
+
+        for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
+
+            Vector3f lightPosition = currentRenderQueue.lightSources.get(count).position;
+            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), currentRenderQueue.lightSources.get(count).strength);
+
+        }
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
@@ -117,7 +123,15 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPosition"), 0, 0, 0);
+        glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
+
+        for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
+
+            Vector3f lightPosition = currentRenderQueue.lightSources.get(count).position;
+            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), currentRenderQueue.lightSources.get(count).strength);
+
+        }
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
