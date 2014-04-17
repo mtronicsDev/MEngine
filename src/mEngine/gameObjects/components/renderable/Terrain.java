@@ -19,18 +19,34 @@ public class Terrain extends ComponentRenderable {
     private Vector3f size;
     private float[][] heightmap;
 
-    public Terrain(Vector3f size) {
+    public Terrain(Vector3f size, boolean structured) {
 
         this.size = size;
         heightmap = new float[(int) size.x][(int) size.z];
 
         Random rand = new Random();
 
-        for (int x = 0; x < size.x; x++) {
+        if (structured) {
 
-            for (int z = 0; z < size.z; z++) {
+            for (int x = 0; x < size.x; x++) {
 
-                setHeight(x, z, (float) rand.nextInt(11) / 1000);
+                for (int z = 0; z < size.z; z++) {
+
+                    setHeight(x, z, (float) rand.nextInt(11) / 1000);
+
+                }
+
+            }
+
+        } else {
+
+            for (int x = 0; x < size.x; x++) {
+
+                for (int z = 0; z < size.z; z++) {
+
+                    setHeight(x, z, 0);
+
+                }
 
             }
 
@@ -112,6 +128,8 @@ public class Terrain extends ComponentRenderable {
 
             Vector3f normal = VectorHelper.getVectorProduct(directionVectorA, directionVectorB);
             normal = VectorHelper.normalizeVector(normal);
+
+            if (VectorHelper.getScalarProduct(normal, new Vector3f(0, 1, 0)) < 0) normal = VectorHelper.negateVector(normal);
 
             normals.add(normal);
             normals.add(normal);

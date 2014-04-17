@@ -8,12 +8,14 @@ import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 import org.newdawn.slick.opengl.Texture;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Model implements Serializable {
 
@@ -28,7 +30,7 @@ public class Model implements Serializable {
     public int renderMode = Renderer.RENDER_TRIANGLES;
     String textureName;
     Texture texture;
-    boolean isTextureThere;
+    boolean isTextureThere = true;
 
     public Model(String fileName, Vector3f pos, Vector3f rot) {
 
@@ -132,7 +134,7 @@ public class Model implements Serializable {
 
     public void render() {
 
-        if (texture == null) {
+        if (texture == null && isTextureThere) {
 
             File textureFile = ResourceHelper.getResource(textureName, ResourceHelper.RES_TEXTURE);
 

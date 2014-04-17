@@ -91,6 +91,12 @@ public class VectorHelper {
 
     }
 
+    public static Vector3f negateVector(Vector3f vector) {
+
+        return multiplyVectorByFloat(vector, -1);
+
+    }
+
     public static Vector3f normalizeVector(Vector3f vector) {
 
         return divideVectorByFloat(vector, getAbs(vector));
@@ -250,6 +256,12 @@ public class VectorHelper {
                 && vector.x < rectangle.x + rectangle.width
                 && vector.y > rectangle.y
                 && vector.y < rectangle.y + rectangle.height;
+
+    }
+
+    public static Vector2f negateVector(Vector2f vector) {
+
+        return multiplyVectorByFloat(vector, -1);
 
     }
 

@@ -5,13 +5,18 @@ uniform int lightSourceCount;
 uniform vec3[] lightPositions;
 uniform float[] lightStrengths;
 uniform sampler2D texture;
+uniform vec3 color;
 
 void main(void) {
 
     vec3 fragColor;
 
     vec4 textureColor = texture2D(texture, vec2(gl_TexCoord[0]));
-    vec3 ambientLightedTextureColor = vec3(vec3(textureColor) * 0.05);
+    vec3 ambientLightedTextureColor;
+
+    if (color == vec3(0, 0, 0)) ambientLightedTextureColor = vec3(vec3(textureColor) * 0.05);
+
+    else ambientLightedTextureColor = vec3(color * 0.05);
 
     //don't wonder about the ifs, glsl doesn't seem to understand what lightPositions[count] means
     for (int count = 0; count < lightSourceCount; count += 1) {
@@ -25,6 +30,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[0] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -37,6 +43,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[1] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -49,6 +56,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[2] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -61,6 +69,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[3] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -73,6 +82,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[4] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -85,6 +95,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[5] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -97,6 +108,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[6] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
@@ -109,6 +121,7 @@ void main(void) {
             float difference = length(lightDifference);
 
             float diffuseLightIntensity = lightStrengths[7] / difference;
+            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
