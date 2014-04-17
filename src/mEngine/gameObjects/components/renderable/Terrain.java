@@ -26,12 +26,24 @@ public class Terrain extends ComponentRenderable {
         this.size = size;
         heightmap = new float[(int)size.x][(int)size.z];
 
+        Random rand = new Random();
+
+        for (int x = 0; x < size.x; x++) {
+
+            for (int z = 0; z < size.z; z++) {
+
+                setHeight(x, z, (float)rand.nextInt(11) / 1000);
+
+            }
+
+        }
+
     }
 
-    public Terrain(float[][] heightmap) {
+    public Terrain(float[][] heightmap, float maxHeight) {
 
         this.heightmap = heightmap;
-        size = null;
+        size = new Vector3f(heightmap.length, maxHeight, heightmap[0].length);
 
     }
 
@@ -39,39 +51,6 @@ public class Terrain extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-
-        if (size == null) {
-
-            float highest = 0;
-
-            for (int i = 0; i < heightmap.length; i++) {
-
-                for (int j = 0; j < heightmap[i].length; j++) {
-
-                    if (heightmap[i][j] > highest) highest = heightmap[i][j];
-
-                }
-
-            }
-
-            size = new Vector3f(heightmap.length, highest, heightmap[0].length);
-
-        } else {
-
-            Random rand = new Random();
-
-            for (int x = 0; x < size.x; x++) {
-
-                for (int z = 0; z < size.z; z++) {
-
-                    setHeight(x, z, (float)rand.nextInt(11) / 1000);
-
-                }
-
-            }
-
-        }
-
         generateMesh();
 
     }
