@@ -137,7 +137,7 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, 0, 20), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(20, 0, 10), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
@@ -151,17 +151,21 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(20, 0, 20), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(20, 0, -20), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(80)
                 )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(20, 0, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 0, 10), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("texturedStar")

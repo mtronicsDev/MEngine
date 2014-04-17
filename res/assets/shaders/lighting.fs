@@ -40,31 +40,79 @@ void main(void) {
 
             fragColor += vec3(darkTextureColor * diffuseLightIntensity);
 
-        } else if (count == 3) {
+        } else if (count == 2) {
 
-             vec3 lightDifference = vertex - lightPositions[3];
+             vec3 lightDifference = vertex - lightPositions[2];
 
              vec3 lightDirection = normalize(lightDifference);
 
              float difference = length(lightDifference);
 
-             float diffuseLightIntensity = lightStrengths[3] / difference;
+             float diffuseLightIntensity = lightStrengths[2] / difference;
 
              fragColor += vec3(darkTextureColor * diffuseLightIntensity);
 
-         } else if (count == 4) {
+        } else if (count == 3) {
 
-              vec3 lightDifference = vertex - lightPositions[4];
+              vec3 lightDifference = vertex - lightPositions[3];
 
               vec3 lightDirection = normalize(lightDifference);
 
               float difference = length(lightDifference);
 
-              float diffuseLightIntensity = lightStrengths[4] / difference;
+              float diffuseLightIntensity = lightStrengths[3] / difference;
 
               fragColor += vec3(darkTextureColor * diffuseLightIntensity);
 
-          }
+        } else if (count == 4) {
+
+             vec3 lightDifference = vertex - lightPositions[4];
+
+             vec3 lightDirection = normalize(lightDifference);
+
+             float difference = length(lightDifference);
+
+             float diffuseLightIntensity = lightStrengths[4] / difference;
+
+             fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+
+         } else if (count == 5) {
+
+              vec3 lightDifference = vertex - lightPositions[5];
+
+              vec3 lightDirection = normalize(lightDifference);
+
+              float difference = length(lightDifference);
+
+              float diffuseLightIntensity = lightStrengths[5] / difference;
+
+              fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+
+         } else if (count == 6) {
+
+               vec3 lightDifference = vertex - lightPositions[6];
+
+               vec3 lightDirection = normalize(lightDifference);
+
+               float difference = length(lightDifference);
+
+               float diffuseLightIntensity = lightStrengths[6] / difference;
+
+               fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+
+         } else if (count == 6) {
+
+                 vec3 lightDifference = vertex - lightPositions[7];
+
+                 vec3 lightDirection = normalize(lightDifference);
+
+                 float difference = length(lightDifference);
+
+                 float diffuseLightIntensity = lightStrengths[7] / difference;
+
+                 fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+
+        }
 
     }
 
