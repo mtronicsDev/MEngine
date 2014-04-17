@@ -31,6 +31,7 @@ public class GraphicsController {
     public static boolean mEnchmarkEnabled;
     public static int renderDistance;
     public static boolean isWireFrameMode = false;
+    public static boolean isBlackAndWhite = false;
     public static int fieldOfView;
     private static int width;
     private static int height;

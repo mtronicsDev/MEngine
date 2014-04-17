@@ -35,6 +35,7 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
+        if (GraphicsController.isBlackAndWhite) glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1);
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
@@ -181,7 +182,7 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboVertexHandle);
 
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0);
+        if (!GraphicsController.isBlackAndWhite) glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0);
 
         ShaderHelper.useNoShader();
 

@@ -49,6 +49,8 @@ public class GameLoop implements Runnable {
 
             }
 
+            if (Input.isKeyDown(Keyboard.KEY_B)) GraphicsController.isBlackAndWhite = !GraphicsController.isBlackAndWhite;
+
             TimeHelper.updateDeltaTime();
 
             for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
