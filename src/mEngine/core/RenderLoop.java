@@ -42,8 +42,7 @@ public class RenderLoop implements Runnable {
 
         }
 
-        ThreadHelper.stopAllThreads();
-        System.exit(0);
+        GameController.stopGame();
 
     }
 
