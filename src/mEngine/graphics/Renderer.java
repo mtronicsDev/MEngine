@@ -116,6 +116,8 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboTextureHandle);
 
+        if (GraphicsController.isBlackAndWhite) glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0);
+
         ShaderHelper.useNoShader();
 
     }
