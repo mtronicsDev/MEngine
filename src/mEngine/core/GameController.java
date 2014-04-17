@@ -211,7 +211,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 1, 40), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("lowerVerticesSphere")
                 )
                 .addComponent(
                         "lightSource",
