@@ -50,6 +50,8 @@ public class RenderLoop implements Runnable {
 
         }
 
+        GameController.stopGame();
+
     }
 
 }

@@ -78,7 +78,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(80)
+                        new LightSource(100)
                 )
                 .addComponent(
                         "fpsText",
@@ -130,7 +130,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(80)
+                        new LightSource(60)
                 )
                 .addComponent(
                         "collideComponent",
@@ -144,7 +144,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(80)
+                        new LightSource(60)
                 )
                 .addComponent(
                         "collideComponent",
@@ -158,7 +158,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(80)
+                        new LightSource(60)
                 )
                 .addComponent(
                         "collideComponent",
@@ -172,7 +172,49 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(80)
+                        new LightSource(60)
+                )
+                .addComponent(
+                        "collideComponent",
+                        new CollideComponent(false, true)
+                ));
+
+        addGameObject(new GameObject(new Vector3f(40, 0, 40), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(60)
+                )
+                .addComponent(
+                        "collideComponent",
+                        new CollideComponent(false, true)
+                ));
+
+        addGameObject(new GameObject(new Vector3f(45, 0, 0), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(60)
+                )
+                .addComponent(
+                        "collideComponent",
+                        new CollideComponent(false, true)
+                ));
+
+        addGameObject(new GameObject(new Vector3f(0, 0, 40), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
+                )
+                .addComponent(
+                        "lightSource",
+                        new LightSource(60)
                 )
                 .addComponent(
                         "collideComponent",

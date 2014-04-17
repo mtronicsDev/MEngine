@@ -11,9 +11,9 @@ void main(void) {
     vec3 fragColor;
 
     vec4 textureColor = texture2D(texture, vec2(gl_TexCoord[0]));
-    vec3 darkTextureColor = vec3(vec3(textureColor) * 0.05);
+    vec3 ambientLightedTextureColor = vec3(vec3(textureColor) * 0.05);
 
-    //don't wonder about the ifs, glsl doesn't seem to understand what lightPosition[count] means
+    //don't wonder about the ifs, glsl doesn't seem to understand what lightPositions[count] means
     for (int count = 0; count < lightSourceCount; count += 1) {
 
         if (count == 0) {
@@ -26,7 +26,7 @@ void main(void) {
 
             float diffuseLightIntensity = lightStrengths[0] / difference;
 
-            fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
         } else if (count == 1) {
 
@@ -38,85 +38,85 @@ void main(void) {
 
             float diffuseLightIntensity = lightStrengths[1] / difference;
 
-            fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
         } else if (count == 2) {
 
-             vec3 lightDifference = vertex - lightPositions[2];
+            vec3 lightDifference = vertex - lightPositions[2];
 
-             vec3 lightDirection = normalize(lightDifference);
+            vec3 lightDirection = normalize(lightDifference);
 
-             float difference = length(lightDifference);
+            float difference = length(lightDifference);
 
-             float diffuseLightIntensity = lightStrengths[2] / difference;
+            float diffuseLightIntensity = lightStrengths[2] / difference;
 
-             fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
         } else if (count == 3) {
 
-              vec3 lightDifference = vertex - lightPositions[3];
+            vec3 lightDifference = vertex - lightPositions[3];
 
-              vec3 lightDirection = normalize(lightDifference);
+            vec3 lightDirection = normalize(lightDifference);
 
-              float difference = length(lightDifference);
+            float difference = length(lightDifference);
 
-              float diffuseLightIntensity = lightStrengths[3] / difference;
+            float diffuseLightIntensity = lightStrengths[3] / difference;
 
-              fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
         } else if (count == 4) {
 
-             vec3 lightDifference = vertex - lightPositions[4];
+            vec3 lightDifference = vertex - lightPositions[4];
 
-             vec3 lightDirection = normalize(lightDifference);
+            vec3 lightDirection = normalize(lightDifference);
 
-             float difference = length(lightDifference);
+            float difference = length(lightDifference);
 
-             float diffuseLightIntensity = lightStrengths[4] / difference;
+            float diffuseLightIntensity = lightStrengths[4] / difference;
 
-             fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
-         } else if (count == 5) {
+        } else if (count == 5) {
 
-              vec3 lightDifference = vertex - lightPositions[5];
+            vec3 lightDifference = vertex - lightPositions[5];
 
-              vec3 lightDirection = normalize(lightDifference);
+            vec3 lightDirection = normalize(lightDifference);
 
-              float difference = length(lightDifference);
+            float difference = length(lightDifference);
 
-              float diffuseLightIntensity = lightStrengths[5] / difference;
+            float diffuseLightIntensity = lightStrengths[5] / difference;
 
-              fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
-         } else if (count == 6) {
+        } else if (count == 6) {
 
-               vec3 lightDifference = vertex - lightPositions[6];
+            vec3 lightDifference = vertex - lightPositions[6];
 
-               vec3 lightDirection = normalize(lightDifference);
+            vec3 lightDirection = normalize(lightDifference);
 
-               float difference = length(lightDifference);
+            float difference = length(lightDifference);
 
-               float diffuseLightIntensity = lightStrengths[6] / difference;
+            float diffuseLightIntensity = lightStrengths[6] / difference;
 
-               fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
-         } else if (count == 7) {
+        } else if (count == 7) {
 
-                 vec3 lightDifference = vertex - lightPositions[7];
+            vec3 lightDifference = vertex - lightPositions[7];
 
-                 vec3 lightDirection = normalize(lightDifference);
+            vec3 lightDirection = normalize(lightDifference);
 
-                 float difference = length(lightDifference);
+            float difference = length(lightDifference);
 
-                 float diffuseLightIntensity = lightStrengths[7] / difference;
+            float diffuseLightIntensity = lightStrengths[7] / difference;
 
-                 fragColor += vec3(darkTextureColor * diffuseLightIntensity);
+            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
         }
 
     }
 
-    fragColor += darkTextureColor;
+    fragColor += ambientLightedTextureColor;
 
     gl_FragColor = vec4(fragColor, 1);
 
