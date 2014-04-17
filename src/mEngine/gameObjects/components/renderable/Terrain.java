@@ -28,18 +28,45 @@ public class Terrain extends ComponentRenderable {
 
     }
 
+    public Terrain(float[][] heightmap) {
+
+        this.heightmap = heightmap;
+        size = null;
+
+    }
+
     @Override
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
 
-        Random rand = new Random();
+        if (size == null) {
 
-        for (int x = 0; x < size.x; x++) {
+            float highest = 0;
 
-            for (int z = 0; z < size.z; z++) {
+            for (int i = 0; i < heightmap.length; i++) {
 
-                setHeight(x, z, (float)rand.nextInt(11) / 1000);
+                for (int j = 0; j < heightmap[i].length; j++) {
+
+                    if (heightmap[i][j] > highest) highest = heightmap[i][j];
+
+                }
+
+            }
+
+            size = new Vector3f(heightmap.length, highest, heightmap[0].length);
+
+        } else {
+
+            Random rand = new Random();
+
+            for (int x = 0; x < size.x; x++) {
+
+                for (int z = 0; z < size.z; z++) {
+
+                    setHeight(x, z, (float)rand.nextInt(11) / 1000);
+
+                }
 
             }
 
