@@ -1,7 +1,6 @@
 package mEngine.gameObjects.components.controls;
 
 import mEngine.gameObjects.components.MovementComponent;
-import mEngine.gameObjects.components.controls.Controller;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
 import mEngine.util.input.KeyAlreadyAssignedException;

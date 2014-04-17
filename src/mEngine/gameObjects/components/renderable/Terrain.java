@@ -6,10 +6,8 @@ import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
 import mEngine.util.math.MathHelper;
 import mEngine.util.math.vectors.VectorHelper;
-import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.opengl.Texture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ public class Terrain extends ComponentRenderable {
     public Terrain(Vector3f size) {
 
         this.size = size;
-        heightmap = new float[(int)size.x][(int)size.z];
+        heightmap = new float[(int) size.x][(int) size.z];
 
         Random rand = new Random();
 
@@ -32,7 +30,7 @@ public class Terrain extends ComponentRenderable {
 
             for (int z = 0; z < size.z; z++) {
 
-                setHeight(x, z, (float)rand.nextInt(11) / 1000);
+                setHeight(x, z, (float) rand.nextInt(11) / 1000);
 
             }
 
@@ -57,7 +55,7 @@ public class Terrain extends ComponentRenderable {
 
     public void setHeight(int x, int z, float height) {
 
-        heightmap[x][z] = (float)MathHelper.clamp(height, 0, 1);
+        heightmap[x][z] = (float) MathHelper.clamp(height, 0, 1);
 
     }
 
@@ -77,22 +75,22 @@ public class Terrain extends ComponentRenderable {
                 vertices.add(new Vector3f(x, size.y * heightmap[x][z], z));
                 uvs.add(new Vector2f(0, 0));
 
-                if(x < (size.x - 1) && z < (size.z - 1)) {
+                if (x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f(i + 1, i + 2, i + (int)size.x + 1),
-                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int)size.x + 1),
-                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int)size.x + 1)
+                            new Vector3f(i + 1, i + 2, i + (int) size.x + 1),
+                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int) size.x + 1),
+                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int) size.x + 1)
                     ));
 
                 }
 
-                if(z < size.z && i < 9900) { //Don't ask me about this, it seems to be random
+                if (z < size.z && i < 9900) { //Don't ask me about this, it seems to be random
 
                     faces.add(new Face(
-                            new Vector3f(i + 1, i + (int)size.x + 1, i + (int)size.x),
-                            new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x),
-                            new Vector3f((x * z) + 1, (x * z) + (int)size.x + 1, (x * z) + (int)size.x)
+                            new Vector3f(i + 1, i + (int) size.x + 1, i + (int) size.x),
+                            new Vector3f((x * z) + 1, (x * z) + (int) size.x + 1, (x * z) + (int) size.x),
+                            new Vector3f((x * z) + 1, (x * z) + (int) size.x + 1, (x * z) + (int) size.x)
                     ));
 
                 }

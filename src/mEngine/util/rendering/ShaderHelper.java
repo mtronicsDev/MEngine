@@ -31,7 +31,7 @@ public class ShaderHelper {
             BufferedReader fragmentReader = new BufferedReader(new FileReader(ResourceHelper.getResource(fileName, ResourceHelper.RES_SHADER_F)));
             String line;
 
-            while((line = vertexReader.readLine()) != null) {
+            while ((line = vertexReader.readLine()) != null) {
 
                 vertexShaderSource.append(line + "\n");
 
@@ -39,7 +39,7 @@ public class ShaderHelper {
 
             vertexReader.close();
 
-            while((line = fragmentReader.readLine()) != null) {
+            while ((line = fragmentReader.readLine()) != null) {
 
                 fragmentShaderSource.append(line + "\n");
 
@@ -87,7 +87,6 @@ public class ShaderHelper {
     }
 
     public static void combineShaders(String fileNameA, String fileNameB, String newFileName) {
-
 
 
     }

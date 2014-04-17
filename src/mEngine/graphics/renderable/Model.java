@@ -15,8 +15,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.opengl.GL11.*;
-
 public class Model implements Serializable {
 
     public List<Vector3f> vertices = new ArrayList<Vector3f>();
@@ -138,7 +136,7 @@ public class Model implements Serializable {
 
             File textureFile = ResourceHelper.getResource(textureName, ResourceHelper.RES_TEXTURE);
 
-            if(!textureFile.exists()) isTextureThere = false;
+            if (!textureFile.exists()) isTextureThere = false;
 
             else {
 

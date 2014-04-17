@@ -1,7 +1,7 @@
 package mEngine.gameObjects.components.gui;
 
-import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
+import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.graphics.Renderer;
 import org.lwjgl.util.vector.Vector2f;
 

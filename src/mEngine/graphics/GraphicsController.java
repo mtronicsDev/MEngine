@@ -7,7 +7,6 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.vector.Vector4f;
 
 import javax.imageio.ImageIO;
@@ -16,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -165,9 +163,9 @@ public class GraphicsController {
         String fileFormat = "PNG";
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        for(int x = 0; x < width; x++) {
+        for (int x = 0; x < width; x++) {
 
-            for(int y = 0; y < height; y++) {
+            for (int y = 0; y < height; y++) {
 
                 //Stuff 'n' things for every pixel
                 int i = (x + (width * y)) * bytesPerPixel;

@@ -49,21 +49,21 @@ public class Renderer {
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-        for(Vector3f vertex : vertices) {
+        for (Vector3f vertex : vertices) {
 
-            vertexData.put(new float[] {vertex.x, vertex.y, vertex.z});
-
-        }
-
-        for(Vector3f normal : normals) {
-
-            normalData.put(new float[] {normal.x, normal.y, normal.z});
+            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
 
         }
 
-        for(Vector2f uv : uvs) {
+        for (Vector3f normal : normals) {
 
-            textureData.put(new float[] {uv.x, uv.y});
+            normalData.put(new float[]{normal.x, normal.y, normal.z});
+
+        }
+
+        for (Vector2f uv : uvs) {
+
+            textureData.put(new float[]{uv.x, uv.y});
 
         }
 
@@ -136,15 +136,15 @@ public class Renderer {
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
 
-        for(Vector3f vertex : vertices) {
+        for (Vector3f vertex : vertices) {
 
-            vertexData.put(new float[] {vertex.x, vertex.y, vertex.z});
+            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
 
         }
 
-        for(Vector3f normal : normals) {
+        for (Vector3f normal : normals) {
 
-            normalData.put(new float[] {normal.x, normal.y, normal.z});
+            normalData.put(new float[]{normal.x, normal.y, normal.z});
 
         }
 
@@ -189,15 +189,15 @@ public class Renderer {
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-        for(Vector2f vertex : vertices) {
+        for (Vector2f vertex : vertices) {
 
-            vertexData.put(new float[] {vertex.x, vertex.y});
+            vertexData.put(new float[]{vertex.x, vertex.y});
 
         }
 
-        for(Vector2f uv : uvs) {
+        for (Vector2f uv : uvs) {
 
-            textureData.put(new float[] {uv.x, uv.y});
+            textureData.put(new float[]{uv.x, uv.y});
 
         }
 
@@ -245,9 +245,9 @@ public class Renderer {
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
 
-        for(Vector2f vertex : vertices) {
+        for (Vector2f vertex : vertices) {
 
-            vertexData.put(new float[] {vertex.x, vertex.y});
+            vertexData.put(new float[]{vertex.x, vertex.y});
 
         }
 

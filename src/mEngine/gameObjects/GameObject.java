@@ -1,6 +1,6 @@
 package mEngine.gameObjects;
 
-import mEngine.gameObjects.components.*;
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
