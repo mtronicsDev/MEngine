@@ -8,6 +8,7 @@ import mEngine.util.input.Input;
 import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.serialization.Serializer;
+import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
@@ -46,7 +47,8 @@ public class RenderLoop implements Runnable {
 
         }
 
-        GameController.stopGame();
+        ThreadHelper.stopAllThreads();
+        System.exit(0);
 
     }
 
