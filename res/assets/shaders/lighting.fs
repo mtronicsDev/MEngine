@@ -7,6 +7,8 @@ uniform float[] lightStrengths;
 uniform sampler2D texture;
 uniform vec3 color;
 
+const float shininess = 90;
+
 void main(void) {
 
     vec3 fragColor;
@@ -34,6 +36,13 @@ void main(void) {
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
+
         } else if (count == 1) {
 
             vec3 lightDifference = vertex - lightPositions[1];
@@ -46,6 +55,13 @@ void main(void) {
             diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
 
         } else if (count == 2) {
 
@@ -60,6 +76,13 @@ void main(void) {
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
+
         } else if (count == 3) {
 
             vec3 lightDifference = vertex - lightPositions[3];
@@ -72,6 +95,13 @@ void main(void) {
             diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
 
         } else if (count == 4) {
 
@@ -86,6 +116,13 @@ void main(void) {
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
+
         } else if (count == 5) {
 
             vec3 lightDifference = vertex - lightPositions[5];
@@ -98,6 +135,13 @@ void main(void) {
             diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
 
         } else if (count == 6) {
 
@@ -112,6 +156,13 @@ void main(void) {
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
 
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
+
         } else if (count == 7) {
 
             vec3 lightDifference = vertex - lightPositions[7];
@@ -124,6 +175,13 @@ void main(void) {
             diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
             fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+
+            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+            fragColor += specularLightIntensity;
 
         }
 
