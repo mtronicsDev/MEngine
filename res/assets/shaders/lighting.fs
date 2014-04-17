@@ -100,7 +100,7 @@ void main(void) {
 
                fragColor += vec3(darkTextureColor * diffuseLightIntensity);
 
-         } else if (count == 6) {
+         } else if (count == 7) {
 
                  vec3 lightDifference = vertex - lightPositions[7];
 
