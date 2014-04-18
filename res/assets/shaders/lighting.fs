@@ -19,7 +19,7 @@ void main(void) {
 
         if (color == vec3(0, 0, 0)) fragColor = vec3(vec3(texture2D(texture, vec2(gl_TexCoord[0]))) * emissiveLightStrength);
 
-        else fragColor = color;
+        else fragColor = color * emissiveLightStrength;
 
     } else {
 
