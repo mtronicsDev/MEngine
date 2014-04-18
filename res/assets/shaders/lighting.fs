@@ -44,7 +44,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[0] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[0]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -64,7 +64,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[1] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[1]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -84,7 +84,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[2] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[2]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -104,7 +104,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[3] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[3]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -124,7 +124,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[4] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[4]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -144,7 +144,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[5] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[5]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -164,7 +164,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[6] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[6]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -184,7 +184,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[7] / difference;
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[7]);
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 

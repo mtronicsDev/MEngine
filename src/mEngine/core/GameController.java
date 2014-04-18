@@ -79,7 +79,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200)
+                        new LightSource(200, new Vector3f(0, 1, 0))
                 )
                 .addComponent(
                         "fpsText",
@@ -173,7 +173,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200)
+                        new LightSource(200, new Vector3f(1, 1, 0))
                 )
                 .addComponent(
                         "collideComponent",
@@ -208,14 +208,14 @@ public class GameController {
                         new CollideComponent(false, true)
                 ));
 
-        addGameObject(new GameObject(new Vector3f(0, 1, 40), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 10, 40), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("lowerVerticesSphere")
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200)
+                        new LightSource(200, new Vector3f(1, 0, 0))
                 )
                 .addComponent(
                         "collideComponent",
