@@ -1,5 +1,8 @@
 package mEngine.graphics;
 
+import mEngine.gameObjects.components.renderable.LightSource;
+import mEngine.util.data.BinaryHelper;
+import mEngine.util.math.MathHelper;
 import mEngine.util.rendering.ShaderHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -31,18 +34,26 @@ public class Renderer {
 
     public static RenderQueue currentRenderQueue;
 
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode) {
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode, float emissiveLightStrength) {
 
         ShaderHelper.useShader("lighting");
 
         if (GraphicsController.isBlackAndWhite) glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1);
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
+        emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
+        glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 
-            Vector3f lightPosition = currentRenderQueue.lightSources.get(count).position;
+            LightSource lightSource = currentRenderQueue.lightSources.get(count);
+
+            Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), currentRenderQueue.lightSources.get(count).strength);
+
+            Vector3f lightColor = lightSource.color;
+            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
+
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
 
         }
 
@@ -122,18 +133,26 @@ public class Renderer {
 
     }
 
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, int mode) {
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, int mode, float emissiveLightStrength) {
 
         ShaderHelper.useShader("lighting");
 
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1);
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
+        emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
+        glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 
-            Vector3f lightPosition = currentRenderQueue.lightSources.get(count).position;
+            LightSource lightSource = currentRenderQueue.lightSources.get(count);
+
+            Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), currentRenderQueue.lightSources.get(count).strength);
+
+            Vector3f lightColor = lightSource.color;
+            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
+
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
 
         }
 

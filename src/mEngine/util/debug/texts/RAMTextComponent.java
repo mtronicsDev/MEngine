@@ -2,7 +2,7 @@ package mEngine.util.debug.texts;
 
 import mEngine.gameObjects.components.gui.guiComponents.GUIText;
 
-import static mEngine.util.RuntimeHelper.*;
+import static mEngine.util.time.RuntimeHelper.*;
 import static mEngine.util.math.NumberFormatHelper.cutDecimals;
 
 public class RAMTextComponent extends GUIText {

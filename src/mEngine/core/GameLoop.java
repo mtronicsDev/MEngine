@@ -4,7 +4,7 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.GraphicsController;
-import mEngine.util.TimeHelper;
+import mEngine.util.time.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.serialization.Serializer;
 import org.lwjgl.input.Keyboard;

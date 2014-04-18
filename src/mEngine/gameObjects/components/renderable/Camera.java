@@ -1,7 +1,7 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.graphics.Renderer;
-import mEngine.util.TimeHelper;
+import mEngine.util.time.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;

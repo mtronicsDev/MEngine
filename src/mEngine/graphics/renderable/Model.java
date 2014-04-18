@@ -184,9 +184,9 @@ public class Model implements Serializable {
             }
 
             if (GraphicsController.isWireFrameMode)
-                Renderer.renderObject3D(renderVertices, renderNormals, Renderer.RENDER_LINE_STRIP);
+                Renderer.renderObject3D(renderVertices, renderNormals, Renderer.RENDER_LINE_STRIP, 0);
 
-            else Renderer.renderObject3D(renderVertices, renderNormals, renderMode);
+            else Renderer.renderObject3D(renderVertices, renderNormals, renderMode, 0);
 
         } else {
 
@@ -224,9 +224,9 @@ public class Model implements Serializable {
             }
 
             if (GraphicsController.isWireFrameMode)
-                Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, Renderer.RENDER_LINE_STRIP);
+                Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, Renderer.RENDER_LINE_STRIP, 0);
 
-            else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, renderMode);
+            else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, renderMode, 0);
 
         }
 

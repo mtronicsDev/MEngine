@@ -1,4 +1,4 @@
-package mEngine.util;
+package mEngine.util.data;
 
 public class DataTypeHelper {
 

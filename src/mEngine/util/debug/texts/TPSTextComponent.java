@@ -1,7 +1,7 @@
 package mEngine.util.debug.texts;
 
 import mEngine.gameObjects.components.gui.guiComponents.GUIText;
-import mEngine.util.TimeHelper;
+import mEngine.util.time.TimeHelper;
 
 public class TPSTextComponent extends GUIText {
 
