@@ -50,14 +50,14 @@ public class Renderer {
             Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
 
-            if (!GraphicsController.isBlackAndWhite) {
+            if (GraphicsController.isBlackAndWhite) {
 
-                Vector3f lightColor = lightSource.color;
-                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
 
             } else {
 
-                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
+                Vector3f lightColor = lightSource.color;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
 
             }
 
@@ -157,14 +157,14 @@ public class Renderer {
             Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
 
-            if (!GraphicsController.isBlackAndWhite) {
+            if (GraphicsController.isBlackAndWhite) {
 
-                Vector3f lightColor = lightSource.color;
-                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
 
             } else {
 
-                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
+                Vector3f lightColor = lightSource.color;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
 
             }
 

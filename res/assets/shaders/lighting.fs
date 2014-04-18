@@ -51,7 +51,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[0];
 
             } else if (count == 1) {
 
@@ -71,7 +71,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[1];
 
             } else if (count == 2) {
 
@@ -91,7 +91,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[2];
 
             } else if (count == 3) {
 
@@ -111,7 +111,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[3];
 
             } else if (count == 4) {
 
@@ -131,7 +131,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[4];
 
             } else if (count == 5) {
 
@@ -151,7 +151,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[5];
 
             } else if (count == 6) {
 
@@ -171,7 +171,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[6];
 
             } else if (count == 7) {
 
@@ -191,7 +191,7 @@ void main(void) {
                 float specularLightIntensity = max(0, dot(reflectionDirection, normal));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                fragColor += specularLightIntensity;
+                fragColor += specularLightIntensity * lightColors[7];
 
             }
 
