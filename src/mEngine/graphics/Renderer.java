@@ -56,10 +56,13 @@ public class Renderer {
 
             } else {
 
-                Vector3f lightColor = lightSource.color;
+                Vector3f lightColor = new Vector3f(lightSource.color);
                 glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
 
             }
+
+            Vector3f lightDirection = lightSource.direction;
+            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
 
             glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
 
@@ -163,7 +166,7 @@ public class Renderer {
 
             } else {
 
-                Vector3f lightColor = lightSource.color;
+                Vector3f lightColor = new Vector3f(lightSource.color);
                 glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
 
             }

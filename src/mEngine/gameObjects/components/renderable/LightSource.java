@@ -2,25 +2,54 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public class LightSource extends ComponentRenderable {
 
     public float strength;
+    public float radius;
     public Vector3f position;
-    public Vector3f color;
+    public Vector4f color;
+    public Vector3f direction;
 
     public LightSource(float strength) {
 
-        this.strength = strength;
-        color = new Vector3f(1, 1, 1);
+        this(strength, new Vector4f(1, 1, 1, 1), new Vector3f(), 0);
 
     }
 
-    public LightSource(float strength, Vector3f color) {
+    public LightSource(float strength, Vector4f color) {
+
+        this(strength, color, new Vector3f(), 0);
+
+    }
+
+    public LightSource(float strength, Vector4f color, Vector3f direction) {
+
+        this(strength, color, direction, -1);
+
+    }
+
+    public LightSource(float strength, Vector3f direction) {
+
+        this(strength, new Vector4f(1, 1, 1, 1), direction, -1);
+
+    }
+
+    public LightSource(float strength, Vector3f direction, float radius) {
+
+        this(strength, new Vector4f(1, 1, 1, 1), direction, radius);
+
+    }
+
+    public LightSource(float strength, Vector4f color, Vector3f direction, float radius) {
 
         this.strength = strength;
         this.color = color;
+        this.direction = VectorHelper.normalizeVector(direction);
+        this.radius = radius;
 
     }
 

@@ -27,6 +27,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 import static mEngine.core.ObjectController.addGameObject;
 
@@ -79,7 +80,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector3f(0, 1, 0))
+                        new LightSource(200, new Vector4f(0, 1, 0, 1))
                 )
                 .addComponent(
                         "fpsText",
@@ -173,7 +174,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector3f(1, 1, 0))
+                        new LightSource(200, new Vector4f(1, 1, 0, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -215,7 +216,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector3f(1, 0, 0))
+                        new LightSource(200, new Vector4f(1, 0, 0, 1))
                 )
                 .addComponent(
                         "collideComponent",
