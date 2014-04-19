@@ -43,6 +43,8 @@ public class Renderer {
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
         emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
+        Vector3f cameraPosition = currentRenderQueue.camera.position;
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 
@@ -155,6 +157,8 @@ public class Renderer {
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
         emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
+        Vector3f cameraPosition = currentRenderQueue.camera.position;
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 

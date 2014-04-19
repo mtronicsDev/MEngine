@@ -10,8 +10,9 @@ uniform float[8]lightRadii;
 uniform sampler2D texture;
 uniform vec3 color;
 uniform float emissiveLightStrength;
+uniform vec3 cameraPosition;
 
-const float shininess = 90;
+const float shininess = 50;
 const float ambientColorMultiplier = 0.05;
 
 void main(void) {
@@ -54,7 +55,9 @@ void main(void) {
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
-                float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+                vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+
+                float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
                 fragColor += specularLightIntensity * lightColors[count];
@@ -76,7 +79,9 @@ void main(void) {
 
                         vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
-                        float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+                        vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+
+                        float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                         specularLightIntensity = pow(specularLightIntensity, shininess);
 
                         fragColor += specularLightIntensity * lightColors[count];

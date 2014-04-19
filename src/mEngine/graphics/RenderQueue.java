@@ -12,7 +12,7 @@ import java.util.List;
 public class RenderQueue {
 
     public List<LightSource> lightSources = new ArrayList<LightSource>();
-    private Camera camera;
+    public Camera camera;
     private Skybox skybox;
     private List<Model> modelQueue = new ArrayList<Model>();
     private List<GUIElement> guiQueue = new ArrayList<GUIElement>();
