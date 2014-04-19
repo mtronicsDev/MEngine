@@ -2,16 +2,17 @@ varying vec3 vertex;
 varying vec3 normal;
 
 uniform int lightSourceCount;
-uniform vec3[100] lightPositions;
-uniform vec3[100] lightColors;
-uniform float[100] lightStrengths;
-uniform vec3[100] lightDirections;
-uniform float[100]lightRadii;
+uniform vec3[8] lightPositions;
+uniform vec3[8] lightColors;
+uniform float[8] lightStrengths;
+uniform vec3[8] lightDirections;
+uniform float[8]lightRadii;
 uniform sampler2D texture;
 uniform vec3 color;
 uniform float emissiveLightStrength;
 
 const float shininess = 90;
+const float ambientColorMultiplier = 0.05;
 
 void main(void) {
 
@@ -30,35 +31,65 @@ void main(void) {
         if (color == vec3(0, 0, 0)) {
 
             vec4 textureColor = texture2D(texture, vec2(gl_TexCoord[0]));
-            ambientLightedTextureColor = vec3(vec3(textureColor) * 0.05);
+            ambientLightedTextureColor = vec3(vec3(textureColor) * ambientColorMultiplier);
 
         }
 
-        else ambientLightedTextureColor = vec3(color * 0.05);
+        else ambientLightedTextureColor = vec3(color * ambientColorMultiplier);
 
         for (int count = 0; count < lightSourceCount; count++) {
 
-            vec3 lightDifference = vertex - lightPositions[count];
+            if (lightRadii[count] == 0) {
 
-            vec3 lightDirection;
+                vec3 lightDifference = vertex - lightPositions[count];
 
-            /*if (lightDirections[count] == vec3(0, 0, 0))*/ lightDirection = normalize(lightDifference);
+                vec3 lightDirection = normalize(lightDifference);
 
-            //else lightDirection = lightDirections[count];
+                float difference = length(lightDifference);
 
-            float difference = length(lightDifference);
+                float diffuseLightIntensity = lightStrengths[count] / difference;
+                diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-            float diffuseLightIntensity = lightStrengths[count] / difference;
-            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[count]);
 
-            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[count]);
+                vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
-            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+                float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+                specularLightIntensity = pow(specularLightIntensity, shininess);
 
-            float specularLightIntensity = max(0, dot(reflectionDirection, normal));
-            specularLightIntensity = pow(specularLightIntensity, shininess);
+                fragColor += specularLightIntensity * lightColors[count];
 
-            fragColor += specularLightIntensity * lightColors[count];
+            } else {
+
+                vec3 lightDirection = lightDirections[count];
+
+                float difference = dot(lightDirection, vertex) + dot(-lightDirection, lightPositions[count]);
+
+                if (difference > 0) {
+
+                    if (lightRadii[count] == -1) {
+
+                        float diffuseLightIntensity = lightStrengths[count] / difference;
+                        diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+
+                        fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[count]);
+
+                        vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+                        float specularLightIntensity = max(0, dot(reflectionDirection, normal));
+                        specularLightIntensity = pow(specularLightIntensity, shininess);
+
+                        fragColor += specularLightIntensity * lightColors[count];
+
+                    } else {
+
+                        vec3 differenceVector = normalize(vec3(lightDirection * difference));
+
+                    }
+
+                }
+
+            }
 
         }
 
