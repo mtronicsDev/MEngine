@@ -2,11 +2,11 @@ varying vec3 vertex;
 varying vec3 normal;
 
 uniform int lightSourceCount;
-uniform vec3[8] lightPositions;
-uniform vec3[8] lightColors;
-uniform float[8] lightStrengths;
-uniform vec3[8] lightDirections;
-uniform float[8]lightRadii;
+uniform vec3[32] lightPositions;
+uniform vec3[32] lightColors;
+uniform float[32] lightStrengths;
+uniform vec3[32] lightDirections;
+uniform float[32]lightRadii;
 uniform sampler2D texture;
 uniform vec3 color;
 uniform float emissiveLightStrength;

@@ -1,14 +1,12 @@
 package mEngine.graphics;
 
 import mEngine.gameObjects.components.renderable.LightSource;
-import mEngine.util.data.BinaryHelper;
 import mEngine.util.math.MathHelper;
 import mEngine.util.rendering.ShaderHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 import org.newdawn.slick.opengl.Texture;
 
 import java.nio.FloatBuffer;

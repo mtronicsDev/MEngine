@@ -80,7 +80,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(0, 1, 0, 1))
+                        new LightSource(100, new Vector4f(0, 1, 0, 1))
                 )
                 .addComponent(
                         "fpsText",
@@ -132,7 +132,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(1, 1, 0.5f, 1))
+                        new LightSource(100, new Vector4f(1, 1, 0.5f, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -146,7 +146,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(1, 0.5f, 1, 1))
+                        new LightSource(100, new Vector4f(1, 0.5f, 1, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -160,7 +160,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(0.5f, 1, 1, 1))
+                        new LightSource(100, new Vector4f(0.5f, 1, 1, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -174,7 +174,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(1, 1, 0, 1))
+                        new LightSource(100, new Vector4f(1, 1, 0, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -188,7 +188,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(1, 0, 1, 1))
+                        new LightSource(100, new Vector4f(1, 0, 1, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -202,7 +202,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(0, 1, 1, 1))
+                        new LightSource(100, new Vector4f(0, 1, 1, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -216,7 +216,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(200, new Vector4f(1, 0, 0, 1))
+                        new LightSource(100, new Vector4f(1, 0, 0, 1))
                 )
                 .addComponent(
                         "collideComponent",
@@ -230,7 +230,7 @@ public class GameController {
                 )
                 .addComponent(
                         "terrain",
-                        new Terrain(new Vector3f(100, 100, 100), false)
+                        new Terrain(new Vector3f(100, 100, 100), true)
                 )
                 .addComponent(
                         "collideComponent",
