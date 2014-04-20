@@ -55,7 +55,7 @@ void main(void) {
 
                 vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
-                vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+                vec3 idealReflectionDirection = vec3(normalize(cameraPosition - vertex));
 
                 float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                 specularLightIntensity = pow(specularLightIntensity, shininess);

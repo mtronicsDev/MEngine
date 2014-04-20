@@ -130,10 +130,10 @@ public class GameController {
                         "renderComponent",
                         new RenderComponent("12star")
                 )
-                /*.addComponent(
+                .addComponent(
                         "lightSource",
-                        new LightSource(200)
-                )*/
+                        new LightSource(200, new Vector4f(1, 1, 0.5f, 1))
+                )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
@@ -144,10 +144,10 @@ public class GameController {
                         "renderComponent",
                         new RenderComponent("texturedStar")
                 )
-                /*.addComponent(
+                .addComponent(
                         "lightSource",
-                        new LightSource(200)
-                )*/
+                        new LightSource(200, new Vector4f(1, 0.5f, 1, 1))
+                )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
@@ -158,10 +158,10 @@ public class GameController {
                         "renderComponent",
                         new RenderComponent("texturedStar")
                 )
-                /*.addComponent(
+                .addComponent(
                         "lightSource",
-                        new LightSource(200)
-                )*/
+                        new LightSource(200, new Vector4f(0.5f, 1, 1, 1))
+                )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
@@ -186,10 +186,10 @@ public class GameController {
                         "renderComponent",
                         new RenderComponent("texturedStar")
                 )
-                /*.addComponent(
+                .addComponent(
                         "lightSource",
-                        new LightSource(200)
-                )*/
+                        new LightSource(200, new Vector4f(1, 0, 1, 1))
+                )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
@@ -200,10 +200,10 @@ public class GameController {
                         "renderComponent",
                         new RenderComponent("texturedStar")
                 )
-                /*.addComponent(
+                .addComponent(
                         "lightSource",
-                        new LightSource(200)
-                )*/
+                        new LightSource(200, new Vector4f(0, 1, 1, 1))
+                )
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
@@ -230,7 +230,7 @@ public class GameController {
                 )
                 .addComponent(
                         "terrain",
-                        new Terrain(new Vector3f(100, 100, 100), true)
+                        new Terrain(new Vector3f(100, 100, 100), false)
                 )
                 .addComponent(
                         "collideComponent",

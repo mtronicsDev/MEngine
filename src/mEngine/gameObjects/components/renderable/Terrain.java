@@ -137,7 +137,7 @@ public class Terrain extends ComponentRenderable {
 
         }
 
-        model = new Model(vertices, normals, uvs, faces, "graph", parent.position);
+        model = new Model(vertices, normals, uvs, faces, "background", parent.position);
 
     }
 
