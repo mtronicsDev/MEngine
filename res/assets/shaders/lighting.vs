@@ -6,7 +6,7 @@ void main(void) {
     vertex = vec3(gl_Vertex);
     normal = vec3(gl_Normal);
 
-    gl_Position = ftransform();
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
     gl_TexCoord[0] = gl_MultiTexCoord0;
 
 }

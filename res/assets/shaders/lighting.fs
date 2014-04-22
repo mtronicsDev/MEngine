@@ -38,7 +38,9 @@ void main(void) {
 
         else ambientLightedTextureColor = vec3(color * ambientColorMultiplier);
 
-        for (int count = 0; count < lightSourceCount; count++) {
+        int count = 0;
+
+        while (count < lightSourceCount) {
 
             if (lightRadii[count] == 0) {
 
@@ -95,6 +97,8 @@ void main(void) {
                 }
 
             }
+
+            count++;
 
         }
 

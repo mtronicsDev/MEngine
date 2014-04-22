@@ -142,7 +142,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(20, 1, 10), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "lightSource",
@@ -156,7 +156,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(20, 1, -20), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "lightSource",
@@ -170,7 +170,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 1, 10), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "lightSource",
@@ -184,7 +184,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(40, 1, 40), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "lightSource",
@@ -198,7 +198,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(45, 1, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "lightSource",
@@ -212,7 +212,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 10, 40), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("lowerVerticesSphere")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "lightSource",
@@ -240,7 +240,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(20, 40, 20), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("lowerVerticesSphere")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "collideComponent",
