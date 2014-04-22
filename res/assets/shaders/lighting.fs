@@ -90,7 +90,28 @@ void main(void) {
 
                     } else {
 
+                        vec3 differenceVector = vec3(-lightDirection * difference);
+                        differenceVector += vertex;
 
+                        float differenceToLightSource = length(differenceVector - lightPositions[count]);
+
+                        if (differenceToLightSource <= lightRadii[count]) {
+
+                            float diffuseLightIntensity = lightStrengths[count] / difference;
+                            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+
+                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[count]);
+
+                            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+                            vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+
+                            float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
+                            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+                            fragColor += specularLightIntensity * lightColors[count];
+
+                        }
 
                     }
 

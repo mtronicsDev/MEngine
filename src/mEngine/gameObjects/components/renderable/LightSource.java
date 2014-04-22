@@ -9,7 +9,7 @@ import org.lwjgl.util.vector.Vector4f;
 public class LightSource extends ComponentRenderable {
 
     public float strength;
-    public float radiusRadians;
+    public float radius;
     public Vector3f position;
     public Vector4f color;
     public Vector3f direction;
@@ -49,16 +49,7 @@ public class LightSource extends ComponentRenderable {
         this.strength = strength;
         this.color = color;
         this.direction = VectorHelper.normalizeVector(direction);
-
-        if (radius == 0 || radius == -1) {
-
-            radiusRadians = radius;
-
-        } else {
-
-
-
-        }
+        this.radius = radius;
 
     }
 
@@ -73,15 +64,9 @@ public class LightSource extends ComponentRenderable {
 
         position = parent.position;
 
-        if (!VectorHelper.areEqual(direction, new Vector3f()) && !(radiusRadians == 0)) {
+        if (!VectorHelper.areEqual(direction, new Vector3f()) && !(radius == 0)) {
 
             //direction = parent.percentRotation;
-
-            /*if (!(radiusRadians != -1)) {
-
-
-
-            }*/
 
         }
 
