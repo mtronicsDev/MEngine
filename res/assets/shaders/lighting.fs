@@ -90,7 +90,7 @@ void main(void) {
 
                     } else {
 
-                        vec3 differenceVector = normalize(vec3(lightDirection * difference));
+
 
                     }
 

@@ -33,7 +33,6 @@ import static mEngine.core.ObjectController.addGameObject;
 
 public class GameController {
 
-
     public static boolean isGamePaused;
 
     public static void runGame() {

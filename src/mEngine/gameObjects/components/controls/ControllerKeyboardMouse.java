@@ -56,8 +56,6 @@ public class ControllerKeyboardMouse extends Controller {
 
             else if (change < 0 && fovModifier > 2) fovModifier--;
 
-            System.out.println(fovModifier);
-
             GraphicsController.fieldOfView = PreferenceHelper.getInteger("fieldOfView") / fovModifier;
             rotationSpeed = 0.02f;
 
