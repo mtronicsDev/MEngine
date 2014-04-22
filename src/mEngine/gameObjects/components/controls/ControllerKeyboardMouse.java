@@ -12,6 +12,8 @@ import static mEngine.util.input.Input.getKey;
 
 public class ControllerKeyboardMouse extends Controller {
 
+    int fovModifier = 2;
+
     public ControllerKeyboardMouse(float[] forceStrengths, boolean capableOfFlying) {
 
         super(forceStrengths, capableOfFlying);
@@ -48,7 +50,15 @@ public class ControllerKeyboardMouse extends Controller {
 
         if (Mouse.isButtonDown(1)) {
 
-            GraphicsController.fieldOfView = 30;
+            int change = Mouse.getDWheel();
+
+            if (change > 0) fovModifier++;
+
+            else if (change < 0 && fovModifier > 2) fovModifier--;
+
+            System.out.println(fovModifier);
+
+            GraphicsController.fieldOfView = PreferenceHelper.getInteger("fieldOfView") / fovModifier;
             rotationSpeed = 0.02f;
 
         } else {

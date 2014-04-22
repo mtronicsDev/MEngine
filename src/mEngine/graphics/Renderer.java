@@ -40,7 +40,7 @@ public class Renderer {
 
         int displayListHandle = glGenLists(1);
 
-        glNewList(displayListHandle, GL_COMPILE);
+        glNewList(displayListHandle, GL_COMPILE_AND_EXECUTE);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
@@ -123,7 +123,7 @@ public class Renderer {
 
         int displayListHandle = glGenLists(1);
 
-        glNewList(displayListHandle, GL_COMPILE);
+        glNewList(displayListHandle, GL_COMPILE_AND_EXECUTE);
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
