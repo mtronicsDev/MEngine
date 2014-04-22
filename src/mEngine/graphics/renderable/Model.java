@@ -1,21 +1,22 @@
 package mEngine.graphics.renderable;
 
+import mEngine.core.ObjectController;
+import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
+import mEngine.util.rendering.RenderHelper;
 import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 import org.newdawn.slick.opengl.Texture;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class Model implements Serializable {
 
@@ -31,10 +32,12 @@ public class Model implements Serializable {
     String textureName;
     Texture texture;
     boolean isTextureThere = true;
+    public boolean[] displayListFactors = new boolean[] {false, false};
+    public int displayListIndex;
 
-    public Model(String fileName, Vector3f pos, Vector3f rot) {
+    public Model(String fileName, Vector3f pos, Vector3f rot, boolean isStatic) {
 
-        Model model = ModelHelper.loadModelSafely(fileName);
+        Model model = ModelHelper.loadModelSafely(fileName, isStatic);
         textureName = fileName;
 
         this.vertices = model.vertices;
@@ -43,6 +46,7 @@ public class Model implements Serializable {
         this.faces = model.faces;
         this.texture = model.texture;
         this.mass = model.getMass();
+        this.displayListFactors[0] = isStatic;
 
         Vector3f middle = getMiddle();
 
@@ -54,10 +58,13 @@ public class Model implements Serializable {
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
+        if (!displayListFactors[0]) displayListIndex = -1;
+
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture, boolean isStatic) {
 
+        this.displayListFactors[0] = isStatic;
         this.vertices = vertices;
         this.normals = normals;
         this.uvs = uvs;
@@ -72,10 +79,13 @@ public class Model implements Serializable {
 
         position = middle;
 
+        if (!displayListFactors[0]) displayListIndex = -1;
+
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture, Vector3f pos) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, Texture texture, Vector3f pos, boolean isStatic) {
 
+        this.displayListFactors[0] = isStatic;
         this.vertices = vertices;
         this.normals = normals;
         this.uvs = uvs;
@@ -92,10 +102,13 @@ public class Model implements Serializable {
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
+        if (!displayListFactors[0]) displayListIndex = -1;
+
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName, boolean isStatic) {
 
+        this.displayListFactors[0] = isStatic;
         this.vertices = vertices;
         this.normals = normals;
         this.uvs = uvs;
@@ -110,10 +123,13 @@ public class Model implements Serializable {
 
         position = middle;
 
+        if (!displayListFactors[0]) displayListIndex = -1;
+
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName, Vector3f pos) {
+    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, String textureName, Vector3f pos, boolean isStatic) {
 
+        this.displayListFactors[0] = isStatic;
         this.vertices = vertices;
         this.normals = normals;
         this.uvs = uvs;
@@ -129,6 +145,8 @@ public class Model implements Serializable {
         position = pos;
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
+
+        if (!displayListFactors[0]) displayListIndex = -1;
 
     }
 
@@ -149,84 +167,173 @@ public class Model implements Serializable {
 
         }
 
+        if (displayListFactors[0] && !displayListFactors[1]) {
+
+            List<Vector3f> renderVertices = new ArrayList<Vector3f>();
+            List<Vector3f> renderNormals = new ArrayList<Vector3f>();
+
+            if (isTextureThere) {
+
+                List<Vector2f> renderUVs = new ArrayList<Vector2f>();
+
+                for (Face face : faces) {
+
+                    Vector2f uv1 = uvs.get((int) face.uvIndices.x);
+                    renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
+
+                    Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
+                    renderVertices.add(v1);
+
+                    Vector3f n1 = normals.get((int) face.normalIndices.x);
+                    renderNormals.add(n1);
+
+
+                    Vector2f uv2 = uvs.get((int) face.uvIndices.y);
+                    renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
+
+                    Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
+                    renderVertices.add(v2);
+
+                    Vector3f n2 = normals.get((int) face.normalIndices.y);
+                    renderNormals.add(n2);
+
+
+                    Vector2f uv3 = uvs.get((int) face.uvIndices.z);
+                    renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
+
+                    Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
+                    renderVertices.add(v3);
+
+                    Vector3f n3 = normals.get((int) face.normalIndices.z);
+                    renderNormals.add(n3);
+
+                }
+
+                displayListIndex = Renderer.displayListCounter;
+                Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, texture, renderMode);
+
+            } else {
+
+                for (Face face : faces) {
+
+                    Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
+                    renderVertices.add(v1);
+
+                    Vector3f n1 = normals.get((int) face.normalIndices.x);
+                    renderNormals.add(n1);
+
+
+                    Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
+                    renderVertices.add(v2);
+
+                    Vector3f n2 = normals.get((int) face.normalIndices.y);
+                    renderNormals.add(n2);
+
+
+                    Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
+                    renderVertices.add(v3);
+
+                    Vector3f n3 = normals.get((int) face.normalIndices.z);
+                    renderNormals.add(n3);
+
+                }
+
+                displayListIndex = Renderer.displayListCounter;
+                Renderer.addDisplayList(renderVertices, renderNormals, renderMode);
+
+            }
+
+            displayListFactors[1] = true;
+
+        }
+
         //glRotatef(rotation.x, 1, 0, 0);
         //glRotatef(rotation.y, 0, 1, 0);
         //glRotatef(rotation.z, 0, 0, 1);
 
         List<Vector3f> renderVertices = new ArrayList<Vector3f>();
         List<Vector3f> renderNormals = new ArrayList<Vector3f>();
-        List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
-        if (!isTextureThere) {
+        if (displayListFactors[0] && displayListFactors[1]) {
 
-            for (Face face : faces) {
-
-                Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
-                renderVertices.add(v1);
-
-                Vector3f n1 = normals.get((int) face.normalIndices.x);
-                renderNormals.add(n1);
-
-
-                Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
-                renderVertices.add(v2);
-
-                Vector3f n2 = normals.get((int) face.normalIndices.y);
-                renderNormals.add(n2);
-
-
-                Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
-                renderVertices.add(v3);
-
-                Vector3f n3 = normals.get((int) face.normalIndices.z);
-                renderNormals.add(n3);
-
-            }
-
-            if (GraphicsController.isWireFrameMode)
-                Renderer.renderObject3D(renderVertices, renderNormals, Renderer.RENDER_LINE_STRIP, 0);
-
-            else Renderer.renderObject3D(renderVertices, renderNormals, renderMode, 0);
+            Renderer.renderObject3D(displayListIndex, isTextureThere, 0);
 
         } else {
 
-            for (Face face : faces) {
+            if (!isTextureThere) {
 
-                Vector2f uv1 = uvs.get((int) face.uvIndices.x);
-                renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
+                for (Face face : faces) {
 
-                Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
-                renderVertices.add(v1);
+                    Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
+                    renderVertices.add(v1);
 
-                Vector3f n1 = normals.get((int) face.normalIndices.x);
-                renderNormals.add(n1);
-
-
-                Vector2f uv2 = uvs.get((int) face.uvIndices.y);
-                renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
-
-                Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
-                renderVertices.add(v2);
-
-                Vector3f n2 = normals.get((int) face.normalIndices.y);
-                renderNormals.add(n2);
+                    Vector3f n1 = normals.get((int) face.normalIndices.x);
+                    renderNormals.add(n1);
 
 
-                Vector2f uv3 = uvs.get((int) face.uvIndices.z);
-                renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
+                    Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
+                    renderVertices.add(v2);
 
-                Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
-                renderVertices.add(v3);
+                    Vector3f n2 = normals.get((int) face.normalIndices.y);
+                    renderNormals.add(n2);
 
-                Vector3f n3 = normals.get((int) face.normalIndices.z);
-                renderNormals.add(n3);
+
+                    Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
+                    renderVertices.add(v3);
+
+                    Vector3f n3 = normals.get((int) face.normalIndices.z);
+                    renderNormals.add(n3);
+
+                }
+
+                if (GraphicsController.isWireFrameMode)
+                    Renderer.renderObject3D(renderVertices, renderNormals, Renderer.RENDER_LINE_STRIP, 0);
+
+                else Renderer.renderObject3D(renderVertices, renderNormals, renderMode, 0);
+
+            } else {
+
+                List<Vector2f> renderUVs = new ArrayList<Vector2f>();
+
+                for (Face face : faces) {
+
+                    Vector2f uv1 = uvs.get((int) face.uvIndices.x);
+                    renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
+
+                    Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
+                    renderVertices.add(v1);
+
+                    Vector3f n1 = normals.get((int) face.normalIndices.x);
+                    renderNormals.add(n1);
+
+
+                    Vector2f uv2 = uvs.get((int) face.uvIndices.y);
+                    renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
+
+                    Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
+                    renderVertices.add(v2);
+
+                    Vector3f n2 = normals.get((int) face.normalIndices.y);
+                    renderNormals.add(n2);
+
+
+                    Vector2f uv3 = uvs.get((int) face.uvIndices.z);
+                    renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
+
+                    Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
+                    renderVertices.add(v3);
+
+                    Vector3f n3 = normals.get((int) face.normalIndices.z);
+                    renderNormals.add(n3);
+
+                }
+
+                if (GraphicsController.isWireFrameMode)
+                    Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, Renderer.RENDER_LINE_STRIP, 0);
+
+                else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, renderMode, 0);
 
             }
-
-            if (GraphicsController.isWireFrameMode)
-                Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, Renderer.RENDER_LINE_STRIP, 0);
-
-            else Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, texture, renderMode, 0);
 
         }
 

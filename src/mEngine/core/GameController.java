@@ -52,12 +52,12 @@ public class GameController {
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(0, 10, 0), new Vector3f())
                 .addComponent(
-                        "renderComponent",
-                        new RenderComponent("texturedStar")
-                )
-                .addComponent(
                         "movementComponent",
                         new MovementComponent()
+                )
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
                 )
                 .addComponent(
                         "controller",

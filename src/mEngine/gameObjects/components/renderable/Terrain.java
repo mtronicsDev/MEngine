@@ -1,6 +1,8 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.MovementComponent;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
@@ -137,7 +139,15 @@ public class Terrain extends ComponentRenderable {
 
         }
 
-        model = new Model(vertices, normals, uvs, faces, "background", parent.position);
+        boolean isStatic = true;
+
+        for (Component component : parent.components.values()) {
+
+            if (component instanceof MovementComponent) isStatic = false;
+
+        }
+
+        model = new Model(vertices, normals, uvs, faces, "graph", parent.position, isStatic);
 
     }
 

@@ -1,5 +1,6 @@
 package mEngine.util.rendering;
 
+import mEngine.gameObjects.GameObject;
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
 import mEngine.util.threading.ThreadHelper;
@@ -18,9 +19,7 @@ import static mEngine.util.resources.ResourceHelper.getResource;
 
 public class ModelHelper {
 
-    private static Model loadModel(String fileName) throws IOException {
-
-        //Texture texture = TextureHelper.getTexture(fileName);
+    private static Model loadModel(String fileName, boolean isStatic) throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(getResource(fileName, RES_MODEL)));
         String line;
@@ -87,17 +86,17 @@ public class ModelHelper {
 
         reader.close();
 
-        return new Model(vertices, normals, uvs, faces, (Texture) null);
+        return new Model(vertices, normals, uvs, faces, (Texture) null, isStatic);
 
     }
 
-    public static Model loadModelSafely(String fileName) {
+    public static Model loadModelSafely(String fileName, boolean isStatic) {
 
         Model model = null;
 
         try {
 
-            model = loadModel(fileName);
+            model = loadModel(fileName, isStatic);
 
         } catch (IOException e) {
 

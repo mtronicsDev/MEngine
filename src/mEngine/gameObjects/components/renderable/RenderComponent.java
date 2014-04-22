@@ -1,6 +1,8 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.MovementComponent;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.Model;
 
@@ -18,7 +20,16 @@ public class RenderComponent extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        model = new Model(modelFileName, parent.position, parent.rotation);
+
+        boolean isStatic = true;
+
+        for (Component component : parent.components.values()) {
+
+            if (component instanceof MovementComponent) isStatic = false;
+
+        }
+        
+        model = new Model(modelFileName, parent.position, parent.rotation, isStatic);
 
     }
 
@@ -42,7 +53,16 @@ public class RenderComponent extends ComponentRenderable {
     public void onLoad() {
 
         super.onLoad();
-        model = new Model(modelFileName, parent.position, parent.rotation); //Create model again
+        
+        boolean isStatic = true;
+        
+        for (Component component : parent.components.values()) {
+            
+            if (component instanceof MovementComponent) isStatic = false;
+            
+        }
+        
+        model = new Model(modelFileName, parent.position, parent.rotation, isStatic); //Create model again
 
     }
 
