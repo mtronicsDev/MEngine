@@ -7,9 +7,9 @@ import org.lwjgl.util.vector.Vector2f;
 public class TPSGraphComponent extends GUIGraph {
 
 
-    public TPSGraphComponent(Vector2f size, double[] values) {
+    public TPSGraphComponent(Vector2f size, double[] values, String textureName) {
 
-        super(size, values);
+        super(size, values, textureName);
 
     }
 

@@ -1,8 +1,15 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
+import mEngine.graphics.Renderer;
 import mEngine.util.math.graphs.Graph;
 import mEngine.util.rendering.TextureHelper;
+import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
+import org.newdawn.slick.opengl.Texture;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static mEngine.util.math.MathHelper.clamp;
 import static org.lwjgl.opengl.GL11.*;
@@ -11,8 +18,11 @@ public class GUIGraph extends GUIComponent {
 
     public Vector2f size;
     public Graph graph;
+    String textureName;
+    Texture texture;
+    boolean isTextureThere = true;
 
-    public GUIGraph(Vector2f size, double[] values) {
+    public GUIGraph(Vector2f size, double[] values, String textureName) {
 
         this.size = size;
         this.graph = new Graph(values);
@@ -22,6 +32,8 @@ public class GUIGraph extends GUIComponent {
 
         }
 
+        this.textureName = textureName;
+
     }
 
     public void onUpdate() {
@@ -29,24 +41,44 @@ public class GUIGraph extends GUIComponent {
         super.onUpdate();
         float stepSize = size.x / graph.getLength();
 
-        TextureHelper.getTexture("graph").bind(); //Temporary fix
-        glBegin(GL_LINE_STRIP);
+        if (texture == null && isTextureThere) {
 
-        //For every x-value, a vertex is rendered at the appropriate spot
-        for (int i = 0; i < graph.getLength(); i++) {
+            File textureFile = ResourceHelper.getResource(textureName, ResourceHelper.RES_TEXTURE);
 
-            /*
-            StepSize: size of the jumps between x values
-            y values: The point is moved to the y-position of the element.
-                Then it is moved down by size.y so it is in the bottom left corner of the element.
-                Finally, it is moved up again by the y value given.
-            */
-            glTexCoord2f(0, 1 - (float) (clamp(graph.getY(i), 0, size.y) / size.y));
-            glVertex2f(parent.position.x + stepSize * i, parent.position.y + size.y - (float) clamp(graph.getY(i), 0, size.y));
+            if (!textureFile.exists()) isTextureThere = false;
+
+            else texture = TextureHelper.getTexture(textureName);
 
         }
 
-        glEnd();
+        if (isTextureThere) {
+
+            List<Vector2f> vertices = new ArrayList<Vector2f>();
+            List<Vector2f> uvs = new ArrayList<Vector2f>();
+
+            for (int count = 0; count < graph.getLength(); count++) {
+
+                uvs.add(new Vector2f(0, 1 - (float) (clamp(graph.getY(count), 0, size.y) / size.y)));
+
+                vertices.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
+
+            }
+
+            Renderer.renderObject2D(vertices, uvs, texture, Renderer.RENDER_LINE_STRIP);
+
+        } else {
+
+            List<Vector2f> vertices = new ArrayList<Vector2f>();
+
+            for (int count = 0; count < graph.getLength(); count++) {
+
+                vertices.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
+
+            }
+
+            Renderer.renderObject2D(vertices, Renderer.RENDER_LINE_STRIP);
+
+        }
 
     }
 

@@ -7,9 +7,9 @@ import org.lwjgl.util.vector.Vector2f;
 public class RAMGraphComponent extends GUIGraph {
 
 
-    public RAMGraphComponent(Vector2f size, double[] values) {
+    public RAMGraphComponent(Vector2f size, double[] values, String textureName) {
 
-        super(size, values);
+        super(size, values, textureName);
 
     }
 

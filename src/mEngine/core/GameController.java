@@ -111,13 +111,16 @@ public class GameController {
                         new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f())
                                 .addComponent("guiGraphFPS", new FPSGraphComponent(
                                         new Vector2f(Display.getWidth(), 100),
-                                        new double[]{}))
+                                        new double[]{},
+                                        "graph"))
                                 .addComponent("guiGraphTPS", new TPSGraphComponent(
                                         new Vector2f(Display.getWidth(), 100),
-                                        new double[]{}))
+                                        new double[]{},
+                                        "graph"))
                                 .addComponent("guiGraphRAM", new RAMGraphComponent(
                                         new Vector2f(Display.getWidth(), 100),
-                                        new double[]{}))
+                                        new double[]{},
+                                        "graph"))
                 )
                 .addComponent(
                         "reticule",
