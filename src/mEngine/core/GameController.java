@@ -34,6 +34,7 @@ import static mEngine.core.ObjectController.addGameObject;
 public class GameController {
 
     public static boolean isGamePaused;
+    public static boolean isLoading;
 
     public static void runGame() {
 
@@ -42,6 +43,8 @@ public class GameController {
         AudioHelper.initializeOpenAL();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
+
+        isLoading = true;
 
         ThreadHelper.startThread(new GameLoop()); //Physics and processing
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
@@ -248,6 +251,8 @@ public class GameController {
                         "collideComponent",
                         new CollideComponent(false, true)
                 ));
+
+        isLoading = false;
 
         Mouse.setGrabbed(true);
 
