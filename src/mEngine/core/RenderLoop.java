@@ -23,25 +23,21 @@ public class RenderLoop implements Runnable {
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
-            if (!GameController.isLoading) {
+            GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
+            Renderer.currentRenderQueue = new RenderQueue();
 
-                GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
-                Renderer.currentRenderQueue = new RenderQueue();
+            if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
 
-                if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
+            //Renders all the gameObjects
+            for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 
-                //Renders all the gameObjects
-                for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
-
-                    if (!Serializer.isSerializing) ObjectController.getGameObject(i).addToRenderQueue();
-
-                }
-
-                Renderer.currentRenderQueue.render();
-                TimeHelper.updateFPS();
-                GraphicsController.update();
+                if (!Serializer.isSerializing) ObjectController.getGameObject(i).addToRenderQueue();
 
             }
+
+            Renderer.currentRenderQueue.render();
+            TimeHelper.updateFPS();
+            GraphicsController.update();
 
         }
 

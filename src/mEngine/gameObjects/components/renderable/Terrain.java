@@ -23,14 +23,6 @@ public class Terrain extends ComponentRenderable {
 
     public Terrain(Vector3f size, boolean structured) {
 
-        this(size, structured, false);
-
-    }
-
-    public Terrain(Vector3f size, boolean structured, boolean addedAsLast) {
-
-        super(addedAsLast);
-
         this.size = size;
         heightmap = new float[(int) size.x][(int) size.z];
 
@@ -65,14 +57,6 @@ public class Terrain extends ComponentRenderable {
     }
 
     public Terrain(float[][] heightmap, float maxHeight) {
-
-        this(heightmap, maxHeight, false);
-
-    }
-
-    public Terrain(float[][] heightmap, float maxHeight, boolean addedAsLast) {
-
-        super(addedAsLast);
 
         this.heightmap = heightmap;
         size = new Vector3f(heightmap.length, maxHeight, heightmap[0].length);

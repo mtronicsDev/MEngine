@@ -20,12 +20,6 @@ public class Camera extends ComponentRenderable {
     public Camera() {
     }
 
-    public Camera(boolean addedAsLast) {
-
-        super(addedAsLast);
-
-    }
-
     public void onUpdate() {
 
         if (Input.isKeyPressed(Keyboard.KEY_F)) {

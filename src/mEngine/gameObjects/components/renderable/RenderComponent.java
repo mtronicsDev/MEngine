@@ -13,13 +13,6 @@ public class RenderComponent extends ComponentRenderable {
 
     public RenderComponent(String modelFileName) {
 
-        this(modelFileName, false);
-
-    }
-
-    public RenderComponent(String modelFileName, boolean addedAsLast) {
-
-        super(addedAsLast);
         this.modelFileName = modelFileName;
 
     }

@@ -7,7 +7,9 @@ import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class GameObject implements Serializable {
 
@@ -15,7 +17,6 @@ public class GameObject implements Serializable {
     public Vector3f rotation;
     public Vector3f percentRotation;
     public Map<String, Component> components = new HashMap<String, Component>();
-    private List<Component> componentList = new ArrayList<Component>();
     private long uuid = UUID.randomUUID().getMostSignificantBits();
 
     public GameObject(Vector3f pos, Vector3f rot) {
@@ -103,20 +104,7 @@ public class GameObject implements Serializable {
     public GameObject addComponent(String key, Component component) {
 
         components.put(key, component);
-        componentList.add(component);
-
-        if (component.addedAsLast) {
-
-            for (Component componentListValue : componentList) {
-
-                componentListValue.onCreation(this);
-
-            }
-
-            componentList = null;
-
-        }
-
+        getComponent(key).onCreation(this);
         return this;
 
     }

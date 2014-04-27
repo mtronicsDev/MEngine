@@ -11,25 +11,11 @@ public class CollideComponent extends Component {
 
     public CollideComponent(boolean destroyable, boolean ableToCollide) {
 
-        this(destroyable, ableToCollide, null, false);
-
-    }
-
-    public CollideComponent(boolean destroyable, boolean ableToCollide, boolean addedAsLast) {
-
-        this(destroyable, ableToCollide, null, addedAsLast);
+        this(destroyable, ableToCollide, null);
 
     }
 
     public CollideComponent(boolean destroyable, boolean ableToCollide, Vector3f modelSize) {
-
-        this(destroyable, ableToCollide, modelSize, false);
-
-    }
-
-    public CollideComponent(boolean destroyable, boolean ableToCollide, Vector3f modelSize, boolean addedAsLast) {
-
-        super(addedAsLast);
 
         this.destroyable = destroyable;
         this.ableToCollide = ableToCollide;

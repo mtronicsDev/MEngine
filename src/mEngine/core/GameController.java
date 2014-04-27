@@ -35,11 +35,7 @@ public class GameController {
 
     public static boolean isGamePaused;
 
-    public static boolean isLoading;
-
     public static void runGame() {
-
-        isLoading = true;
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
@@ -55,12 +51,12 @@ public class GameController {
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(0, 10, 0), new Vector3f())
                 .addComponent(
-                        "renderComponent",
-                        new RenderComponent("texturedStar")
-                )
-                .addComponent(
                         "movementComponent",
                         new MovementComponent()
+                )
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("texturedStar")
                 )
                 .addComponent(
                         "controller",
@@ -127,7 +123,7 @@ public class GameController {
                 )
                 .addComponent(
                         "reticule",
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), true)
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
                                 .addComponent("guiQuad", new GUIQuad("reticule"))
                 ));
 
@@ -142,7 +138,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(20, 1, 10), new Vector3f())
@@ -156,7 +152,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(20, 1, -20), new Vector3f())
@@ -170,7 +166,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(0, 1, 10), new Vector3f())
@@ -184,7 +180,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(40, 1, 40), new Vector3f())
@@ -198,7 +194,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(45, 1, 0), new Vector3f())
@@ -212,7 +208,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(0, 10, 40), new Vector3f())
@@ -226,7 +222,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(-30, 0, -30), new Vector3f())
@@ -240,7 +236,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         addGameObject(new GameObject(new Vector3f(20, 40, 20), new Vector3f())
@@ -250,12 +246,10 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true, true)
+                        new CollideComponent(false, true)
                 ));
 
         Mouse.setGrabbed(true);
-
-        isLoading = false;
 
     }
 

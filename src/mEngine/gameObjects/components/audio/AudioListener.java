@@ -14,18 +14,6 @@ public class AudioListener extends Component {
     FloatBuffer listenerVel;
     FloatBuffer listenerOri;
 
-    public AudioListener() {
-
-        super(false);
-
-    }
-
-    public AudioListener(boolean addedAsLast) {
-
-        super(addedAsLast);
-
-    }
-
     @Override
     public void onCreation(GameObject obj) {
 

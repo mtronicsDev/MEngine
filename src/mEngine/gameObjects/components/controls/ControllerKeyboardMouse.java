@@ -16,13 +16,7 @@ public class ControllerKeyboardMouse extends Controller {
 
     public ControllerKeyboardMouse(float[] forceStrengths, boolean capableOfFlying) {
 
-        this(forceStrengths, capableOfFlying, false);
-
-    }
-
-    public ControllerKeyboardMouse(float[] forceStrengths, boolean capableOfFlying, boolean addedAsLast) {
-
-        super(forceStrengths, capableOfFlying, addedAsLast);
+        super(forceStrengths, capableOfFlying);
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");

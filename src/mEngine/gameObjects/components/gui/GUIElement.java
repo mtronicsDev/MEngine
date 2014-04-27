@@ -22,14 +22,6 @@ public class GUIElement extends ComponentRenderable {
 
     public GUIElement(Vector2f pos, Vector2f size) {
 
-        this(pos, size, false);
-
-    }
-
-    public GUIElement(Vector2f pos, Vector2f size, boolean addedAsLast) {
-
-        super(addedAsLast);
-
         position = pos;
         this.size = size;
 
