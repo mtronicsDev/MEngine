@@ -124,6 +124,6 @@ void main(void) {
 
     }
 
-    gl_FragColor = vec4(fragColor, previousFragmentColor.w);
+    gl_FragColor = vec4(fragColor, previousFragmentColor.a);
 
 }

@@ -41,8 +41,6 @@ public class Camera extends ComponentRenderable {
         rotation = parent.rotation;
         percentRotation = parent.percentRotation;
 
-        percentRotation = VectorHelper.normalizeVector(percentRotation);
-
         if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
             position = VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(new Vector3f(percentRotation.x, percentRotation.y, -percentRotation.z), -zoom),
                     parent.position});
