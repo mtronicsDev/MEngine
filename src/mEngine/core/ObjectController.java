@@ -2,6 +2,7 @@ package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.audio.AudioSource;
+import mEngine.graphics.renderable.LoadingScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,22 +10,15 @@ import java.util.List;
 public class ObjectController {
 
     public static List<GameObject> gameObjects = new ArrayList<GameObject>();
-    public static List<AudioSource> audioSources = new ArrayList<AudioSource>();
+    private static LoadingScreen loadingScreen;
 
     public static void addGameObject(GameObject object) {
         gameObjects.add(object);
     }
-
     public static GameObject getGameObject(int index) {
         return gameObjects.get(index);
     }
-
-    public static void addAudioSource(AudioSource source) {
-        audioSources.add(source);
-    }
-
-    public static AudioSource getAudioSource(int index) {
-        return audioSources.get(index);
-    }
+    public static void setLoadingScreen(LoadingScreen screen) { loadingScreen = screen; }
+    public static LoadingScreen getLoadingScreen() { return loadingScreen; }
 
 }

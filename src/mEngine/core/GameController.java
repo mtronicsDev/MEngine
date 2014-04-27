@@ -7,6 +7,7 @@ import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.gameObjects.components.renderable.*;
+import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.time.RuntimeHelper;
 import mEngine.util.time.TimeHelper;
@@ -30,6 +31,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import static mEngine.core.ObjectController.addGameObject;
+import static mEngine.core.ObjectController.setLoadingScreen;
 
 public class GameController {
 
@@ -45,6 +47,7 @@ public class GameController {
         RuntimeHelper.initialize();
 
         isLoading = true;
+        setLoadingScreen(new LoadingScreen("loadingScreen"));
 
         ThreadHelper.startThread(new GameLoop()); //Physics and processing
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering

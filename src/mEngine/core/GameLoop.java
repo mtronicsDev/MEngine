@@ -53,9 +53,15 @@ public class GameLoop implements Runnable {
 
                 }
 
-                if (Input.isKeyDown(Keyboard.KEY_B)) GraphicsController.isBlackAndWhite = !GraphicsController.isBlackAndWhite;
+                if (Input.isKeyDown(Keyboard.KEY_B))
+                    GraphicsController.isBlackAndWhite = !GraphicsController.isBlackAndWhite;
 
-                TimeHelper.updateDeltaTime();
+            }
+
+            TimeHelper.updateDeltaTime();
+            if(ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
+
+            if (!GameController.isLoading) {
 
                 for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
 
@@ -66,9 +72,9 @@ public class GameLoop implements Runnable {
                 if (Input.isKeyDown(Keyboard.KEY_F9)) Serializer.serialize();
                 if (Input.isKeyDown(Keyboard.KEY_F10)) Serializer.deSerializeLatest();
 
-                TimeHelper.updateTPS();
-
             }
+
+            TimeHelper.updateTPS();
 
         }
 

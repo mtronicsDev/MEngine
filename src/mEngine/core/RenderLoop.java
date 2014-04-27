@@ -41,6 +41,8 @@ public class RenderLoop implements Runnable {
 
             }
 
+            if(ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().render();
+
             TimeHelper.updateFPS();
             GraphicsController.update();
 
