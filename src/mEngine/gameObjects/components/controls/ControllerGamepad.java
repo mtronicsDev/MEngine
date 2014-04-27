@@ -6,7 +6,13 @@ public class ControllerGamepad extends Controller {
 
     public ControllerGamepad(float[] forceStrengths, boolean capableOfFlying) {
 
-        super(forceStrengths, capableOfFlying);
+        this(forceStrengths, capableOfFlying, false);
+
+    }
+
+    public ControllerGamepad(float[] forceStrengths, boolean capableOfFlying, boolean addedAsLast) {
+
+        super(forceStrengths, capableOfFlying, addedAsLast);
 
         sneakModeToggle = PreferenceHelper.getBoolean("sneakModeToggle");
         sprintModeToggle = PreferenceHelper.getBoolean("sprintModeToggle");

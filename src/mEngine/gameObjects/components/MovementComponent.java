@@ -30,6 +30,14 @@ public class MovementComponent extends Component {
 
     public MovementComponent() {
 
+        this(false);
+
+    }
+
+    public MovementComponent(boolean addedAsLast) {
+
+        super(addedAsLast);
+
         speed = new Vector3f();
         movedSpace = new Vector3f();
         previousSpeed = new Vector3f();

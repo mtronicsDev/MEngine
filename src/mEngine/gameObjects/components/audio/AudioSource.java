@@ -21,6 +21,14 @@ public class AudioSource extends Component {
 
     public AudioSource(GameObject source, String fileName) {
 
+        this(source, fileName, false);
+
+    }
+
+    public AudioSource(GameObject source, String fileName, boolean addedAsLast) {
+
+        super(addedAsLast);
+
         alGetError();
         if (AudioHelper.loadALData(this, fileName) == AL_FALSE) return;
 

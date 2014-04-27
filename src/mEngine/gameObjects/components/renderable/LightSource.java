@@ -20,9 +20,21 @@ public class LightSource extends ComponentRenderable {
 
     }
 
+    public LightSource(float strength, boolean addedAsLast) {
+
+        this(strength, new Vector4f(1, 1, 1, 1), new Vector3f(), 0, addedAsLast);
+
+    }
+
     public LightSource(float strength, Vector4f color) {
 
         this(strength, color, new Vector3f(), 0);
+
+    }
+
+    public LightSource(float strength, Vector4f color, boolean addedAsLast) {
+
+        this(strength, color, new Vector3f(), 0, addedAsLast);
 
     }
 
@@ -32,9 +44,21 @@ public class LightSource extends ComponentRenderable {
 
     }
 
+    public LightSource(float strength, Vector4f color, Vector3f direction, boolean addedAsLast) {
+
+        this(strength, color, direction, -1, addedAsLast);
+
+    }
+
     public LightSource(float strength, Vector3f direction) {
 
         this(strength, new Vector4f(1, 1, 1, 1), direction, -1);
+
+    }
+
+    public LightSource(float strength, Vector3f direction, boolean addedAsLast) {
+
+        this(strength, new Vector4f(1, 1, 1, 1), direction, -1, addedAsLast);
 
     }
 
@@ -44,7 +68,21 @@ public class LightSource extends ComponentRenderable {
 
     }
 
+    public LightSource(float strength, Vector3f direction, float radius, boolean addedAsLast) {
+
+        this(strength, new Vector4f(1, 1, 1, 1), direction, radius, addedAsLast);
+
+    }
+
     public LightSource(float strength, Vector4f color, Vector3f direction, float radius) {
+
+        this(strength, color, direction, radius, false);
+
+    }
+
+    public LightSource(float strength, Vector4f color, Vector3f direction, float radius, boolean addedAsLast) {
+
+        super(addedAsLast);
 
         this.strength = strength;
         this.color = color;

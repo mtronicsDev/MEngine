@@ -21,48 +21,52 @@ public class GameLoop implements Runnable {
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
-            if (Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            if (!GameController.isLoading) {
 
-                if (GameController.isGamePaused) GameController.unPauseGame();
-                else GameController.pauseGame();
+                if (Input.isKeyDown(Keyboard.KEY_ESCAPE)) {
+
+                    if (GameController.isGamePaused) GameController.unPauseGame();
+                    else GameController.pauseGame();
+
+                }
+
+                if (Input.isKeyPressed(Keyboard.KEY_Y)) {
+
+                    ObjectController.addGameObject(
+                            new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
+                                    .addComponent("renderComponent", new RenderComponent("texturedStar"))
+                    );
+
+                }
+
+                if (Input.isKeyDown(Keyboard.KEY_T)) TimeHelper.isInSlowMotion = !TimeHelper.isInSlowMotion;
+
+                if (Input.isKeyDown(Keyboard.KEY_R))
+                    GraphicsController.isWireFrameMode = !GraphicsController.isWireFrameMode;
+
+                if (Input.isKeyDown(Keyboard.KEY_O)) {
+
+                    ObjectController.gameObjects.get(0).position = new Vector3f();
+                    ((Camera) ObjectController.gameObjects.get(0).getComponent("camera")).zoom = 0;
+
+                }
+
+                if (Input.isKeyDown(Keyboard.KEY_B)) GraphicsController.isBlackAndWhite = !GraphicsController.isBlackAndWhite;
+
+                TimeHelper.updateDeltaTime();
+
+                for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
+
+                    if (!Serializer.isSerializing) ObjectController.getGameObject(i).update();
+
+                }
+
+                if (Input.isKeyDown(Keyboard.KEY_F9)) Serializer.serialize();
+                if (Input.isKeyDown(Keyboard.KEY_F10)) Serializer.deSerializeLatest();
+
+                TimeHelper.updateTPS();
 
             }
-
-            if (Input.isKeyPressed(Keyboard.KEY_Y)) {
-
-                ObjectController.addGameObject(
-                        new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
-                                .addComponent("renderComponent", new RenderComponent("texturedStar"))
-                );
-
-            }
-
-            if (Input.isKeyDown(Keyboard.KEY_T)) TimeHelper.isInSlowMotion = !TimeHelper.isInSlowMotion;
-
-            if (Input.isKeyDown(Keyboard.KEY_R))
-                GraphicsController.isWireFrameMode = !GraphicsController.isWireFrameMode;
-
-            if (Input.isKeyDown(Keyboard.KEY_O)) {
-
-                ObjectController.gameObjects.get(0).position = new Vector3f();
-                ((Camera) ObjectController.gameObjects.get(0).getComponent("camera")).zoom = 0;
-
-            }
-
-            if (Input.isKeyDown(Keyboard.KEY_B)) GraphicsController.isBlackAndWhite = !GraphicsController.isBlackAndWhite;
-
-            TimeHelper.updateDeltaTime();
-
-            for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
-
-                if (!Serializer.isSerializing) ObjectController.getGameObject(i).update();
-
-            }
-
-            if (Input.isKeyDown(Keyboard.KEY_F9)) Serializer.serialize();
-            if (Input.isKeyDown(Keyboard.KEY_F10)) Serializer.deSerializeLatest();
-
-            TimeHelper.updateTPS();
 
         }
 

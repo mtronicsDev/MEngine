@@ -13,13 +13,25 @@ public class GUIEllipse extends GUIElement {
 
     public GUIEllipse(Vector2f pos, Vector2f radius) {
 
-        this(pos, new Vector2f(), radius);
+        this(pos, new Vector2f(), radius, false);
+
+    }
+
+    public GUIEllipse(Vector2f pos, Vector2f radius, boolean addedAsLast) {
+
+        this(pos, new Vector2f(), radius, addedAsLast);
 
     }
 
     public GUIEllipse(Vector2f pos, Vector2f rot, Vector2f radius) {
 
-        super(pos, rot);
+        this(pos, rot, radius, false);
+
+    }
+
+    public GUIEllipse(Vector2f pos, Vector2f rot, Vector2f radius, boolean addedAsLast) {
+
+        super(pos, rot, addedAsLast);
         this.radius = radius;
 
     }
