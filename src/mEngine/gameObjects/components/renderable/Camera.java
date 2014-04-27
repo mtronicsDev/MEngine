@@ -8,6 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.util.glu.GLU.*;
 
 public class Camera extends ComponentRenderable {
 
@@ -27,14 +28,24 @@ public class Camera extends ComponentRenderable {
 
     public void onUpdate() {
 
-        if (Input.isKeyPressed(Keyboard.KEY_F) && zoom >= 0.015f * TimeHelper.deltaTime)
-            zoom -= 0.015f * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(Keyboard.KEY_F)) {
+
+            if (zoom >= 0.015f * TimeHelper.deltaTime) zoom -= 0.015f * TimeHelper.deltaTime;
+
+            else zoom = 0;
+
+        }
+
         else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.015f * TimeHelper.deltaTime;
 
-        if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
-            position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0, zoom, 0)});
         rotation = parent.rotation;
         percentRotation = parent.percentRotation;
+
+        percentRotation = VectorHelper.normalizeVector(percentRotation);
+
+        if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
+            position = VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(new Vector3f(percentRotation.x, percentRotation.y, -percentRotation.z), -zoom),
+                    parent.position});
 
     }
 
@@ -42,13 +53,19 @@ public class Camera extends ComponentRenderable {
 
         glLoadIdentity();
 
-        glRotatef(rotation.x, 1, 0, 0);
-        glRotatef(rotation.y, 0, 1, 0);
-        glRotatef(rotation.z, 0, 0, 1);
+        if (zoom == 0) {
 
-        Vector3f newPosition = VectorHelper.sumVectors(new Vector3f[]{VectorHelper.multiplyVectorByFloat(percentRotation, -zoom), position});
+            glRotatef(rotation.x, 1, 0, 0);
+            glRotatef(rotation.y, 0, 1, 0);
+            glRotatef(rotation.z, 0, 0, 1);
 
-        glTranslatef(-newPosition.x, -newPosition.y, -newPosition.z);
+            glTranslatef(-position.x, -position.y, -position.z);
+
+        } else {
+
+            gluLookAt(position.x, position.y, position.z, parent.position.x, parent.position.y, parent.position.z, 0, 1, 0);
+
+        }
 
     }
 

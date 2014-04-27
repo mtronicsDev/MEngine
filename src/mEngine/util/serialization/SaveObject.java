@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SaveObject implements Serializable {
 
-    java.util.List<GameObject> gameObjects = new ArrayList<GameObject>();
+    List<GameObject> gameObjects = new ArrayList<GameObject>();
 
     public SaveObject(List<GameObject> objects) {
 
