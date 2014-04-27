@@ -8,7 +8,7 @@ uniform float[32] lightStrengths;
 uniform vec3[32] lightDirections;
 uniform float[32]lightRadii;
 uniform sampler2D texture;
-uniform vec3 color;
+uniform vec4 color;
 uniform float emissiveLightStrength;
 uniform vec3 cameraPosition;
 
@@ -19,24 +19,21 @@ void main(void) {
 
     vec3 fragColor;
 
+    vec4 previousFragmentColor;
+
+    if (color == vec4(0, 0, 0, 0)) previousFragmentColor = texture2D(texture, vec2(gl_TexCoord[0]));
+
+    else previousFragmentColor = color;
+
     if (emissiveLightStrength != 0) {
 
-        if (color == vec3(0, 0, 0)) fragColor = vec3(vec3(texture2D(texture, vec2(gl_TexCoord[0]))) * emissiveLightStrength);
-
-        else fragColor = color * emissiveLightStrength;
+        fragColor = vec3(vec3(previousFragmentColor) * emissiveLightStrength);
 
     } else {
 
         vec3 ambientLightedTextureColor;
 
-        if (color == vec3(0, 0, 0)) {
-
-            vec4 textureColor = texture2D(texture, vec2(gl_TexCoord[0]));
-            ambientLightedTextureColor = vec3(vec3(textureColor) * ambientColorMultiplier);
-
-        }
-
-        else ambientLightedTextureColor = vec3(color * ambientColorMultiplier);
+        ambientLightedTextureColor = vec3(vec3(previousFragmentColor) * ambientColorMultiplier);
 
         int count = 0;
 
@@ -127,6 +124,6 @@ void main(void) {
 
     }
 
-    gl_FragColor = vec4(fragColor, 1);
+    gl_FragColor = vec4(fragColor, previousFragmentColor.w);
 
 }
