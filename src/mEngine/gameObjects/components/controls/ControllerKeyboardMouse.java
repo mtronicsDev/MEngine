@@ -74,8 +74,8 @@ public class ControllerKeyboardMouse extends Controller {
             float pitch = parent.rotation.x;
             float yaw = parent.rotation.y;
 
-            float maxUpAngle = 90;
-            float maxDownAngle = -90;
+            float maxUpAngle = 89.9f;
+            float maxDownAngle = -89.9f;
 
             float deltaMouseX = Mouse.getDX() * rotationSpeed;
             float deltaMouseY = Mouse.getDY() * rotationSpeed;
