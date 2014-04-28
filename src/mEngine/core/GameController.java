@@ -48,6 +48,7 @@ public class GameController {
 
         isLoading = true;
         setLoadingScreen(new LoadingScreen("loadingScreen"));
+        Mouse.setGrabbed(true);
 
         ThreadHelper.startThread(new GameLoop()); //Physics and processing
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
@@ -266,8 +267,6 @@ public class GameController {
                 .createAllComponents());
 
         isLoading = false;
-
-        Mouse.setGrabbed(true);
 
     }
 
