@@ -3,11 +3,14 @@ package mEngine.gameObjects.components.gui.guiComponents;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
+import static mEngine.util.input.Input.*;
+
 public class GUIButton extends GUIComponent {
 
     //Later used for rising edge / falling edge detection
     boolean isButtonPressed;
     boolean isButtonHovered;
+    boolean pressedBeforeRelease;
 
     public GUIButton() {
     }
@@ -15,8 +18,11 @@ public class GUIButton extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
+
         isButtonPressed = buttonPressed();
         isButtonHovered = buttonHovered();
+
+        if (!pressedBeforeRelease) pressedBeforeRelease = isButtonPressed;
 
     }
 
@@ -29,7 +35,23 @@ public class GUIButton extends GUIComponent {
 
     public boolean buttonPressed() {
 
-        return Mouse.isButtonDown(0) && buttonHovered();
+        return isButtonPressed(0) && buttonHovered();
+
+    }
+
+    public boolean buttonReleased() {
+
+        return isButtonUp(0) && buttonHovered();
+
+    }
+
+    public boolean isButtonActivated() {
+
+        boolean buttonActivated = buttonReleased() && pressedBeforeRelease;
+
+        if (buttonActivated) pressedBeforeRelease = false;
+
+        return buttonActivated;
 
     }
 

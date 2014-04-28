@@ -5,6 +5,7 @@ import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector4f;
@@ -50,7 +51,19 @@ public class GraphicsController {
         mEnchmarkEnabled = PreferenceHelper.getBoolean("mEnchmarkEnabled");
         GraphicsController.title = title;
 
+        if (!PreferenceHelper.getBoolean("fullscreen")) {
+
+            setupWindow(width, height, title);
+
+        } else {
+
+            setupFullscreen();
+
+        }
+
         try {
+
+            Mouse.create();
 
             assignKey("fullscreen", Keyboard.KEY_F11);
 
@@ -59,15 +72,10 @@ public class GraphicsController {
             e.printStackTrace();
             System.exit(1);
 
-        }
+        } catch (LWJGLException e) {
 
-        if (!PreferenceHelper.getBoolean("fullscreen")) {
-
-            setupWindow(width, height, title);
-
-        } else {
-
-            setupFullscreen();
+            e.printStackTrace();
+            System.exit(1);
 
         }
 
