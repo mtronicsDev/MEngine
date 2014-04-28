@@ -2,6 +2,7 @@ package mEngine.gameObjects;
 
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.renderable.ComponentRenderable;
+import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -104,7 +105,7 @@ public class GameObject implements Serializable {
     public GameObject addComponent(String key, Component component) {
 
         components.put(key, component);
-        getComponent(key).onCreation(this);
+
         return this;
 
     }
@@ -118,6 +119,22 @@ public class GameObject implements Serializable {
     public Component getComponent(String key) {
 
         return components.get(key);
+
+    }
+
+    public GameObject createAllComponents() {
+
+        RenderComponent renderComponent = (RenderComponent) getComponent("renderComponent");
+
+        if (renderComponent != null) renderComponent.onCreation(this);
+
+        for (Component component : components.values()) {
+
+            if (component != renderComponent) component.onCreation(this);
+
+        }
+
+        return this;
 
     }
 

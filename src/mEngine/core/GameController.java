@@ -131,7 +131,8 @@ public class GameController {
                         "reticule",
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
                                 .addComponent("guiQuad", new GUIQuad("reticule"))
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(0, 1, -20), new Vector3f())
                 .addComponent(
@@ -145,7 +146,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(20, 1, 10), new Vector3f())
                 .addComponent(
@@ -159,7 +161,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(20, 1, -20), new Vector3f())
                 .addComponent(
@@ -173,7 +176,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(0, 1, 10), new Vector3f())
                 .addComponent(
@@ -187,7 +191,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(40, 1, 40), new Vector3f())
                 .addComponent(
@@ -201,7 +206,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(45, 1, 0), new Vector3f())
                 .addComponent(
@@ -215,7 +221,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(0, 10, 40), new Vector3f())
                 .addComponent(
@@ -229,7 +236,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(-30, 0, -30), new Vector3f())
                 .addComponent(
@@ -243,7 +251,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(20, 40, 20), new Vector3f())
                 .addComponent(
@@ -253,7 +262,8 @@ public class GameController {
                 .addComponent(
                         "collideComponent",
                         new CollideComponent(false, true)
-                ));
+                )
+                .createAllComponents());
 
         isLoading = false;
 
