@@ -35,6 +35,7 @@ public class GameLoop implements Runnable {
                     ObjectController.addGameObject(
                             new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
                                     .addComponent("renderComponent", new RenderComponent("texturedStar"))
+                                    .createAllComponents()
                     );
 
                 }
@@ -63,9 +64,9 @@ public class GameLoop implements Runnable {
 
             if (!GameController.isLoading) {
 
-                for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
+                for (GameObject gameObject : ObjectController.gameObjects) {
 
-                    if (!Serializer.isSerializing) ObjectController.getGameObject(i).update();
+                    if (!Serializer.isSerializing) gameObject.update();
 
                 }
 

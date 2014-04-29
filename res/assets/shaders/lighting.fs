@@ -12,7 +12,7 @@ uniform vec4 color;
 uniform float emissiveLightStrength;
 uniform vec3 cameraPosition;
 
-const float shininess = 50;
+const float shininess = 90;
 const float ambientColorMultiplier = 0.05;
 
 void main(void) {

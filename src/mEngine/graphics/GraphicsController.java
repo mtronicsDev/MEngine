@@ -92,10 +92,14 @@ public class GraphicsController {
 
     public static void update() {
 
-        if (isKeyDown(getKey("fullscreen"))) {
+        if (keyAssignments.get("fullscreen") != null) {
 
-            if (isFullscreen) setupWindow(width, height, title);
-            else setupFullscreen();
+            if (isKeyDown(getKey("fullscreen"))) {
+
+                if (isFullscreen) setupWindow(width, height, title);
+                else setupFullscreen();
+
+            }
 
         }
 
