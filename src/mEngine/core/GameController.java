@@ -7,6 +7,7 @@ import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.gameObjects.components.renderable.*;
+import mEngine.graphics.GraphicsController;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.time.RuntimeHelper;
@@ -130,7 +131,7 @@ public class GameController {
                 )
                 .addComponent(
                         "reticule",
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
+                        new GUIElement(new Vector2f(GraphicsController.middleOfScreen.x - 32, GraphicsController.middleOfScreen.y / 2 - 32), new Vector2f(64, 64))
                                 .addComponent("guiQuad", new GUIQuad("reticule"))
                 )
                 .createAllComponents());

@@ -1,6 +1,8 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
+import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
+import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
@@ -27,6 +29,8 @@ public class GUIQuad extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
+
+        parent.position = VectorHelper.subtractVectorAndFloat(GraphicsController.middleOfScreen, 32);
 
         if (texture == null && isTextureThere) {
 

@@ -1,9 +1,12 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
+import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.graphs.Graph;
+import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.opengl.Texture;
 
@@ -39,6 +42,10 @@ public class GUIGraph extends GUIComponent {
     public void onUpdate() {
 
         super.onUpdate();
+
+        parent.position = new Vector2f(0, Display.getHeight() - size.y);
+        size.x = Display.getWidth();
+
         float stepSize = size.x / graph.getLength();
 
         if (texture == null && isTextureThere) {
