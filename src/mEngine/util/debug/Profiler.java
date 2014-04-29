@@ -1,4 +1,4 @@
-package mEngine.util.debug.profiler;
+package mEngine.util.debug;
 
 import mEngine.util.time.TimeHelper;
 import mEngine.util.math.graphs.Graph;
