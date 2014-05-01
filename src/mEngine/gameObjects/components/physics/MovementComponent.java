@@ -1,8 +1,10 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.physics;
 
 import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.controls.Controller;
+import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.physics.collisions.Collider;
 import mEngine.physics.forces.Force;

@@ -34,7 +34,6 @@ public class Renderer {
 
     public static RenderQueue currentRenderQueue;
 
-    public static List<Integer> displayLists = new ArrayList<Integer>();
     public static int displayListCounter = 0;
 
     public static void addDisplayList(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode) {
@@ -115,7 +114,6 @@ public class Renderer {
 
         glEndList();
 
-        displayLists.add(displayListHandle);
         displayListCounter++;
 
     }
@@ -175,7 +173,6 @@ public class Renderer {
 
         glEndList();
 
-        displayLists.add(displayListHandle);
         displayListCounter++;
 
     }
@@ -332,9 +329,7 @@ public class Renderer {
 
         }
 
-        int displayListHandle = displayLists.get(displayListIndex);
-
-        glCallList(displayListHandle);
+        glCallList(displayListIndex + 1);
 
         if (GraphicsController.isBlackAndWhite || !isTextureThere) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 

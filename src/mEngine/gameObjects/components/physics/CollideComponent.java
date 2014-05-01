@@ -1,5 +1,6 @@
-package mEngine.gameObjects.components;
+package mEngine.gameObjects.components.physics;
 
+import mEngine.gameObjects.components.Component;
 import mEngine.physics.collisions.Collider;
 import org.lwjgl.util.vector.Vector3f;
 

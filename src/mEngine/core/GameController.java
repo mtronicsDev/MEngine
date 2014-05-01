@@ -1,8 +1,8 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.CollideComponent;
-import mEngine.gameObjects.components.MovementComponent;
+import mEngine.gameObjects.components.physics.CollideComponent;
+import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;

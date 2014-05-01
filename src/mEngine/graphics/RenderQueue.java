@@ -3,6 +3,7 @@ package mEngine.graphics;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.LightSource;
+import mEngine.gameObjects.components.renderable.Particle;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.graphics.renderable.Model;
 
@@ -15,6 +16,7 @@ public class RenderQueue {
     public Camera camera;
     private Skybox skybox;
     private List<Model> modelQueue = new ArrayList<Model>();
+    private List<Particle> particleQueue = new ArrayList<Particle>();
     private List<GUIElement> guiQueue = new ArrayList<GUIElement>();
 
     public void addCamera(Camera camera) {
@@ -32,6 +34,12 @@ public class RenderQueue {
     public void addModel(Model model) {
 
         modelQueue.add(model);
+
+    }
+
+    public void addParticle(Particle particle) {
+
+        particleQueue.add(particle);
 
     }
 
@@ -54,6 +62,12 @@ public class RenderQueue {
         for (Model model : modelQueue) {
 
             model.render();
+
+        }
+
+        for (Particle particle : particleQueue) {
+
+            particle.render();
 
         }
 

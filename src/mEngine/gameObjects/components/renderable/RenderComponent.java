@@ -2,7 +2,7 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.MovementComponent;
+import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.Model;
 
