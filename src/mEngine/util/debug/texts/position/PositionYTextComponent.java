@@ -16,8 +16,7 @@ public class PositionYTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        GameObject obj = ObjectController.getGameObject(0);
-        text = "y: " + obj.position.y;
+        text = "y: " + parent.parent.position.y;
 
     }
 

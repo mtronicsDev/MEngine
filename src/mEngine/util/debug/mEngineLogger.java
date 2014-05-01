@@ -3,9 +3,9 @@ package mEngine.util.debug;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MEngineLogger {
+public class mEngineLogger {
 
-    public static final Logger LOGGER = Logger.getLogger(MEngineLogger.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(mEngineLogger.class.getName());
 
     public static void initialize() {
 

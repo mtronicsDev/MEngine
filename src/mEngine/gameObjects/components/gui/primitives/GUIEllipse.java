@@ -11,22 +11,22 @@ public class GUIEllipse extends GUIElement {
 
     Vector2f radius;
 
-    public GUIEllipse(Vector2f pos, Vector2f radius) {
+    public GUIEllipse(Vector2f pos, Vector2f radius, boolean independent) {
 
-        this(pos, new Vector2f(), radius);
+        this(pos, new Vector2f(), radius, independent);
 
     }
 
-    public GUIEllipse(Vector2f pos, Vector2f rot, Vector2f radius) {
+    public GUIEllipse(Vector2f pos, Vector2f rot, Vector2f radius, boolean independent) {
 
-        super(pos, rot);
+        super(pos, rot, independent);
         this.radius = radius;
 
     }
 
     public void update() {
 
-        TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
+        /*TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
         glBegin(GL_TRIANGLE_FAN);
 
         glVertex2f(position.x, position.y);
@@ -47,7 +47,7 @@ public class GUIEllipse extends GUIElement {
                 position.y + ((float) sin(toRadians(360)) * radius.y)
         );
 
-        glEnd();
+        glEnd();*/
 
     }
 

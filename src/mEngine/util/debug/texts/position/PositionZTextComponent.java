@@ -16,8 +16,7 @@ public class PositionZTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        GameObject obj = ObjectController.getGameObject(0);
-        text = "z: " + obj.position.z;
+        text = "z: " + parent.parent.position.z;
 
     }
 

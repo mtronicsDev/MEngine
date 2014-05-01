@@ -1,7 +1,7 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
+import mEngine.util.math.MathHelper;
 import mEngine.util.math.graphs.Graph;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static mEngine.util.math.MathHelper.clamp;
-import static org.lwjgl.opengl.GL11.*;
 
 public class GUIGraph extends GUIComponent {
 
@@ -41,10 +40,23 @@ public class GUIGraph extends GUIComponent {
 
     public void onUpdate() {
 
-        super.onUpdate();
+        parent.onUpdate();
 
-        parent.position = new Vector2f(0, Display.getHeight() - size.y);
-        size.x = Display.getWidth();
+        if (parent.independentSize.x == 0) {
+
+            if (parent.percentSize.x == 0) parent.percentSize.x = (float) MathHelper.clamp(size.x, 0, 100);
+
+            size.x = Display.getWidth() * parent.percentSize.x;
+
+        }
+
+        if (parent.independentSize.y == 0) {
+
+            if (parent.percentSize.y == 0) parent.percentSize.y = (float) MathHelper.clamp(size.y, 0, 100);
+
+            size.y = Display.getHeight() * parent.percentSize.y;
+
+        }
 
         float stepSize = size.x / graph.getLength();
 
@@ -67,7 +79,8 @@ public class GUIGraph extends GUIComponent {
 
                 uvs.add(new Vector2f(0, 1 - (float) (clamp(graph.getY(count), 0, size.y) / size.y)));
 
-                vertices.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
+                vertices.add(new Vector2f(parent.position.x + stepSize * count,
+                        parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
 
             }
 
@@ -79,7 +92,7 @@ public class GUIGraph extends GUIComponent {
 
             for (int count = 0; count < graph.getLength(); count++) {
 
-                vertices.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
+                vertices.add(new Vector2f(Display.getWidth() * parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
 
             }
 

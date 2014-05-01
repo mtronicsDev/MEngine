@@ -1,8 +1,6 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
-import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
@@ -11,8 +9,6 @@ import org.newdawn.slick.opengl.Texture;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class GUIQuad extends GUIComponent {
 
@@ -28,9 +24,7 @@ public class GUIQuad extends GUIComponent {
 
     public void onUpdate() {
 
-        super.onUpdate();
-
-        parent.position = VectorHelper.subtractVectorAndFloat(GraphicsController.middleOfScreen, 32);
+        parent.onUpdate();
 
         if (texture == null && isTextureThere) {
 
