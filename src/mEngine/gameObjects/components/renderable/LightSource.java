@@ -47,7 +47,8 @@ public class LightSource extends ComponentRenderable {
     public LightSource(float strength, Vector4f color, Vector3f direction, float radius) {
 
         this.strength = strength;
-        this.color = color;
+        Vector3f colorIntensity = VectorHelper.divideVectorByFloat(new Vector3f(color), 255f);
+        this.color = new Vector4f(colorIntensity.x, colorIntensity.y, colorIntensity.z, color.w);
         this.direction = VectorHelper.normalizeVector(direction);
         this.radius = radius;
 
