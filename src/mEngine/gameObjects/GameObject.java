@@ -18,8 +18,6 @@ public class GameObject implements Serializable {
     public Vector3f rotation;
     public Vector3f percentRotation;
     public Map<String, Component> components = new HashMap<String, Component>();
-    private Map<Integer, String> componentKeys = new HashMap<Integer, String>();
-    private int componentCount = 0;
     private long uuid = UUID.randomUUID().getMostSignificantBits();
 
     public GameObject(Vector3f pos, Vector3f rot) {
@@ -107,8 +105,6 @@ public class GameObject implements Serializable {
     public GameObject addComponent(String key, Component component) {
 
         components.put(key, component);
-        componentKeys.put(componentCount, key);
-        componentCount++;
 
         return this;
 
@@ -135,18 +131,6 @@ public class GameObject implements Serializable {
         for (Component component : components.values()) {
 
             if (component != renderComponent) component.onCreation(this);
-
-        }
-
-        return this;
-
-    }
-
-    public GameObject createLatestComponents(int latestComponents) {
-
-        for (int count = componentCount - latestComponents; count <= componentCount; count++ ) {
-
-            components.get(componentKeys.get(count)).onCreation(this);
 
         }
 

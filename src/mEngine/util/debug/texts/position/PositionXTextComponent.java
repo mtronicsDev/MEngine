@@ -16,7 +16,8 @@ public class PositionXTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        text = "x: " + parent.parent.position.x;
+        GameObject obj = ObjectController.getGameObject(0);
+        text = "x: " + obj.position.x;
 
     }
 

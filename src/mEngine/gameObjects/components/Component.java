@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public abstract class Component implements Serializable {
 
-    public GameObject parent;
+    protected GameObject parent;
 
     public void onCreation(GameObject obj) {
         parent = obj;
