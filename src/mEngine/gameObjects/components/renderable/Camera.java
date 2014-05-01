@@ -18,6 +18,11 @@ public class Camera extends ComponentRenderable {
     public Vector3f percentRotation;
 
     public Camera() {
+
+        position = new Vector3f();
+        rotation = new Vector3f();
+        percentRotation = new Vector3f();
+
     }
 
     public void onUpdate() {

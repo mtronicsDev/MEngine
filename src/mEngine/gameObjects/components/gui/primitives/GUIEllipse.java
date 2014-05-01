@@ -1,53 +1,51 @@
 package mEngine.gameObjects.components.gui.primitives;
 
-import mEngine.gameObjects.components.gui.GUIElement;
+import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
+import mEngine.graphics.Renderer;
 import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
 import static java.lang.Math.*;
-import static org.lwjgl.opengl.GL11.*;
 
-public class GUIEllipse extends GUIElement {
+public class GUIEllipse extends GUIComponent {
 
-    Vector2f radius;
+    Vector2f radii;
 
-    public GUIEllipse(Vector2f pos, Vector2f radius) {
+    public GUIEllipse(Vector2f radii) {
 
-        this(pos, new Vector2f(), radius);
-
-    }
-
-    public GUIEllipse(Vector2f pos, Vector2f rot, Vector2f radius) {
-
-        super(pos, rot);
-        this.radius = radius;
+        super();
+        this.radii = radii;
 
     }
 
-    public void update() {
+    public void render() {
 
+        super.render();
         TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
-        glBegin(GL_TRIANGLE_FAN);
 
-        glVertex2f(position.x, position.y);
+        if(verticesToRender.size() == 0) {
 
-        for (int i = 360; i > 0; i--) {
+            verticesToRender.add(new Vector2f(parent.position.x, parent.position.y));
 
-            float radians = (float) toRadians(i);
+            for (int i = 360; i > 0; i--) {
 
-            glVertex2f(
-                    position.x + ((float) cos(radians) * radius.x),
-                    position.y + ((float) sin(radians) * radius.y)
-            );
+                float radians = (float) toRadians(i);
+
+                verticesToRender.add(new Vector2f(
+                        parent.position.x + ((float) cos(radians) * radii.x),
+                        parent.position.y + ((float) sin(radians) * radii.y)
+                ));
+
+            }
+
+            verticesToRender.add(new Vector2f(
+                    parent.position.x + ((float) cos(360) * radii.x),
+                    parent.position.y + ((float) sin(360) * radii.y)
+            ));
 
         }
 
-        glVertex2f(
-                position.x + ((float) cos(toRadians(360)) * radius.x),
-                position.y + ((float) sin(toRadians(360)) * radius.y)
-        );
-
-        glEnd();
+        Renderer.renderObject2D(verticesToRender, Renderer.RENDER_TRIANGLE_FAN);
 
     }
 

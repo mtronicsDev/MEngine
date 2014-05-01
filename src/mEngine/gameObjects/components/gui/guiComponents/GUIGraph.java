@@ -23,7 +23,6 @@ public class GUIGraph extends GUIComponent {
     public Graph graph;
     String textureName;
     Texture texture;
-    boolean isTextureThere = true;
 
     public GUIGraph(Vector2f size, double[] values, String textureName) {
 
@@ -39,53 +38,24 @@ public class GUIGraph extends GUIComponent {
 
     }
 
-    public void onUpdate() {
+    public void render() {
 
-        super.onUpdate();
+        super.render();
 
         parent.position = new Vector2f(0, Display.getHeight() - size.y);
         size.x = Display.getWidth();
 
         float stepSize = size.x / graph.getLength();
 
-        if (texture == null && isTextureThere) {
+        if (texture == null) texture = TextureHelper.getTexture(textureName);
 
-            File textureFile = ResourceHelper.getResource(textureName, ResourceHelper.RES_TEXTURE);
+        for (int count = 0; count < graph.getLength(); count++) {
 
-            if (!textureFile.exists()) isTextureThere = false;
-
-            else texture = TextureHelper.getTexture(textureName);
+            verticesToRender.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
 
         }
 
-        if (isTextureThere) {
-
-            List<Vector2f> vertices = new ArrayList<Vector2f>();
-            List<Vector2f> uvs = new ArrayList<Vector2f>();
-
-            for (int count = 0; count < graph.getLength(); count++) {
-
-                uvs.add(new Vector2f(0, 1 - (float) (clamp(graph.getY(count), 0, size.y) / size.y)));
-
-                vertices.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
-
-            }
-
-            Renderer.renderObject2D(vertices, uvs, texture, Renderer.RENDER_LINE_STRIP);
-
-        } else {
-
-            List<Vector2f> vertices = new ArrayList<Vector2f>();
-
-            for (int count = 0; count < graph.getLength(); count++) {
-
-                vertices.add(new Vector2f(parent.position.x + stepSize * count, parent.position.y + size.y - (float) clamp(graph.getY(count), 0, size.y)));
-
-            }
-
-            Renderer.renderObject2D(vertices, Renderer.RENDER_LINE_STRIP);
-
-        }
+        Renderer.renderObject2D(verticesToRender, Renderer.RENDER_LINE_STRIP);
 
     }
 
