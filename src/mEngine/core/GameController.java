@@ -87,7 +87,7 @@ public class GameController {
                 )
                 .addComponent(
                         "lightSource",
-                        new LightSource(100, new Vector4f(0, 255, 0, 1), new Vector3f(0, -1, 0), 10)
+                        new LightSource(100, new Vector4f(0, 255, 0, 1))
                 )
                 .addComponent(
                         "fpsText",
