@@ -93,7 +93,7 @@ public class GameObject implements Serializable {
 
     public void addToRenderQueue() {
 
-        //Adds this gameObject's models and guiElements to the renderQueue
+        //Adds this gameObject's models, particles and guiElements to the renderQueue
         for (Component component : components.values()) {
 
             if (component instanceof ComponentRenderable) ((ComponentRenderable) component).addToRenderQueue();

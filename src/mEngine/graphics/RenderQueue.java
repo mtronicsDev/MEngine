@@ -80,9 +80,6 @@ public class RenderQueue {
 
         }
 
-        //GraphicsController.switchTo3D();
-        //if (camera != null) camera.render();
-
     }
 
 }

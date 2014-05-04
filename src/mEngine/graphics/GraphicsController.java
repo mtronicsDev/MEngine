@@ -8,6 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector4f;
 
@@ -119,7 +120,7 @@ public class GraphicsController {
             Display.setTitle(title);
             Display.setFullscreen(false);
 
-            if (!Display.isCreated()) Display.create();
+            if (!Display.isCreated()) Display.create(new PixelFormat(8, 8, 0, 8));
 
         } catch (LWJGLException e) {
 
@@ -138,7 +139,7 @@ public class GraphicsController {
 
             Display.setDisplayMode(Display.getDesktopDisplayMode());
             Display.setFullscreen(true);
-            if (!Display.isCreated()) Display.create();
+            if (!Display.isCreated()) Display.create(new PixelFormat(8, 8, 0, 8));
 
         } catch (LWJGLException e) {
 

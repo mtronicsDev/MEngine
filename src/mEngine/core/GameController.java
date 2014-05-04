@@ -1,6 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.particles.particleComponents.MovementParticleComponent;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
