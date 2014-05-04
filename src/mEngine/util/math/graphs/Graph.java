@@ -1,6 +1,6 @@
 package mEngine.util.math.graphs;
 
-import mEngine.util.ArrayHelper;
+import mEngine.util.data.ArrayHelper;
 
 import java.io.Serializable;
 

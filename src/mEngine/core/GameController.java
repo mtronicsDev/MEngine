@@ -267,6 +267,13 @@ public class GameController {
                 )
                 .createAllComponents());
 
+        addGameObject(new GameObject(new Vector3f(20, 5, 20), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("monkey")
+                )
+                .createAllComponents());
+
         isLoading = false;
 
     }
