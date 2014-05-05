@@ -1,18 +1,17 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.particles.particleComponents.MovementParticleComponent;
-import mEngine.gameObjects.components.physics.CollideComponent;
-import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
-import mEngine.gameObjects.components.renderable.*;
-import mEngine.graphics.GraphicsController;
+import mEngine.gameObjects.components.physics.CollideComponent;
+import mEngine.gameObjects.components.physics.MovementComponent;
+import mEngine.gameObjects.components.renderable.Camera;
+import mEngine.gameObjects.components.renderable.LightSource;
+import mEngine.gameObjects.components.renderable.RenderComponent;
+import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.time.RuntimeHelper;
-import mEngine.util.time.TimeHelper;
 import mEngine.util.audio.AudioHelper;
 import mEngine.util.debug.graphs.FPSGraphComponent;
 import mEngine.util.debug.graphs.RAMGraphComponent;
@@ -26,8 +25,9 @@ import mEngine.util.debug.texts.position.PositionZTextComponent;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
+import mEngine.util.time.RuntimeHelper;
+import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -58,7 +58,7 @@ public class GameController {
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
-        addGameObject(new GameObject(new Vector3f(0, 10, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(-20, 15, 220), new Vector3f())
                 .addComponent(
                         "movementComponent",
                         new MovementComponent()
@@ -85,10 +85,6 @@ public class GameController {
                 .addComponent(
                         "camera",
                         new Camera()
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(0, 255, 0, 1))
                 )
                 .addComponent(
                         "fpsText",
@@ -137,141 +133,21 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(0, 1, -20), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(100, 0, 100), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("12star")
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(255, 255, 127.5f, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
+                        new RenderComponent("Paris2010")
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(20, 1, 10), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 100, 0), new Vector3f())
                 .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
+                        "sunAmbient",
+                        new LightSource(20, new Vector4f(255, 255, 255, 1), new Vector3f(0, -1, 0))
                 )
                 .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(255, 127.5f, 255, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(20, 1, -20), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(127.5f, 255, 255, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(0, 1, 10), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(255, 255, 0, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(40, 1, 40), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(255, 0, 255, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(45, 1, 0), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(0, 255, 255, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(0, 10, 40), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .addComponent(
-                        "lightSource",
-                        new LightSource(100, new Vector4f(255, 0, 0, 1))
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(-30, 0, -30), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("texturedStar")
-                )
-                .addComponent(
-                        "terrain",
-                        new Terrain(new Vector3f(100, 100, 100), true)
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(20, 40, 20), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, true)
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(20, 5, 20), new Vector3f())
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("monkey")
+                        "sun",
+                        new LightSource(80, new Vector4f(255, 255, 255, 1), new Vector3f(-1, -1, 0))
                 )
                 .createAllComponents());
 
