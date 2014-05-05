@@ -5,7 +5,6 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.graphics.Renderer;
-import mEngine.util.data.BinaryHelper;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -13,10 +12,9 @@ public class MovementParticleComponent extends ParticleComponent {
 
     Vector3f rotationAbility;
 
-    public MovementParticleComponent(boolean xAxisRotation, boolean yAxisRotation, boolean zAxisRotation) {
+    public MovementParticleComponent(Vector3f rotationAbility) {
 
-        rotationAbility = new Vector3f(BinaryHelper.convertToBinaryInteger(xAxisRotation),
-                BinaryHelper.convertToBinaryInteger(yAxisRotation), BinaryHelper.convertToBinaryInteger(zAxisRotation));
+        this.rotationAbility = rotationAbility;
 
     }
 
@@ -42,11 +40,16 @@ public class MovementParticleComponent extends ParticleComponent {
 
         }
 
-        Vector3f cameraPosition = camera.position;
+        if (camera != null) {
 
-        parent.normal = VectorHelper.normalizeVector(VectorHelper.subtractVectors(cameraPosition, parent.position));
+            Vector3f cameraPosition = camera.position;
+            Vector3f idealNormal = VectorHelper.normalizeVector(VectorHelper.subtractVectors(cameraPosition, parent.position));
 
-        parent.calculateVertices(previousNormal);
+            parent.normal = idealNormal;
+
+            parent.calculateVertices(previousNormal);
+
+        }
 
     }
 
