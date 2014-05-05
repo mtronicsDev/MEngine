@@ -2,6 +2,7 @@ package mEngine.graphics.renderable;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
+import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
 import mEngine.util.rendering.TextureHelper;
@@ -25,6 +26,7 @@ public class Model implements Serializable {
     public float mass;
     public Vector3f position = new Vector3f();
     public Vector3f rotation = new Vector3f();
+    public Vector3f percentRotation = new Vector3f();
     public int renderMode = Renderer.RENDER_TRIANGLES;
     String textureName;
     Texture texture;
@@ -52,6 +54,22 @@ public class Model implements Serializable {
 
         position = pos;
         rotation = rot;
+
+        percentRotation = new Vector3f(0, 0, 1);
+
+        if (!VectorHelper.areEqual(rotation, new Vector3f())) {
+
+            Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+                    new Vector3f(0, (float) Math.cos(Math.toRadians(rotation.x)), (float) -Math.sin(Math.toRadians(rotation.x))),
+                    new Vector3f(0, (float) Math.sin(Math.toRadians(rotation.x)), (float) Math.cos(Math.toRadians(rotation.x))));
+            percentRotation = xAxisRotationMatrix.multiplyByVector(percentRotation);
+
+            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(rotation.y)), 0, (float) Math.sin(Math.toRadians(rotation.y))),
+                    new Vector3f(0, 1, 0),
+                    new Vector3f((float) -Math.sin(Math.toRadians(rotation.y)), 0, (float) Math.cos(Math.toRadians(rotation.y))));
+            percentRotation = yAxisRotationMatrix.multiplyByVector(percentRotation);
+
+        }
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
@@ -239,18 +257,14 @@ public class Model implements Serializable {
 
         }
 
-        //glRotatef(rotation.x, 1, 0, 0);
-        //glRotatef(rotation.y, 0, 1, 0);
-        //glRotatef(rotation.z, 0, 0, 1);
-
-        List<Vector3f> renderVertices = new ArrayList<Vector3f>();
-        List<Vector3f> renderNormals = new ArrayList<Vector3f>();
-
         if (displayListFactors[0] && displayListFactors[1]) {
 
             Renderer.renderObject3D(displayListIndex, isTextureThere, 0);
 
         } else {
+
+            List<Vector3f> renderVertices = new ArrayList<Vector3f>();
+            List<Vector3f> renderNormals = new ArrayList<Vector3f>();
 
             if (!isTextureThere) {
 
@@ -331,10 +345,44 @@ public class Model implements Serializable {
 
     }
 
-    public void update(Vector3f pos, Vector3f rot) {
+    public void update(Vector3f pos, Vector3f rot, Vector3f percentRotation) {
 
         position = pos;
         rotation = rot;
+
+        /*if (!VectorHelper.areEqual(this.percentRotation, percentRotation)) {
+
+            Vector3f turningAxis = VectorHelper.normalizeVector(VectorHelper.getVectorProduct(this.percentRotation, percentRotation));
+
+            float angle = -VectorHelper.getAngle(percentRotation, this.percentRotation);
+
+            Matrix3d rotationMatrix = new Matrix3d(
+                    new Vector3f(
+                            (float) Math.pow(turningAxis.x, 2) * (1 - (float) Math.cos(angle)) + (float) Math.cos(angle),
+                            turningAxis.x * turningAxis.y * (1 - (float) Math.cos(angle)) - turningAxis.z * (float) Math.sin(angle),
+                            turningAxis.x * turningAxis.z * (1 - (float) Math.cos(angle)) + turningAxis.y * (float) Math.sin(angle)
+                    ),
+                    new Vector3f(
+                            turningAxis.x * turningAxis.y * (1 - (float) Math.cos(angle)) + turningAxis.z * (float) Math.sin(angle),
+                            (float) Math.pow(turningAxis.y, 2) * (1 - (float) Math.cos(angle)) * (float) Math.cos(angle),
+                            turningAxis.y * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.x * (float) Math.sin(angle)
+                    ),
+                    new Vector3f(
+                            turningAxis.x * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.y * (float) Math.sin(angle),
+                            turningAxis.y * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.x * (float) Math.sin(angle),
+                            (float) Math.pow(turningAxis.z, 2) * (1 - (float) Math.cos(angle)) + (float) Math.cos(angle)
+                    )
+            );
+
+            for (int count = 0; count < vertices.size(); count++) {
+
+                vertices.set(count, rotationMatrix.multiplyByVector(vertices.get(count)));
+
+            }
+
+            this.percentRotation = percentRotation;
+
+        }*/
 
     }
 
