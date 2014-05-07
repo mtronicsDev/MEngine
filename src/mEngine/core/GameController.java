@@ -4,6 +4,8 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
+import mEngine.gameObjects.components.interaction.Interaction;
+import mEngine.gameObjects.components.interaction.InteractionComponent;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
@@ -125,10 +127,10 @@ public class GameController {
                 )
                 .addComponent(
                         "interactionComponent",
-                        new InteractionComponent(true, 10, "I", "move", new Interaction() {
+                        new InteractionComponent(true, 10, "I", "move monkey", new Interaction() {
                             @Override
                             public void interact(GameObject object) {
-                                object.position = VectorHelper.sumVectors(new Vector3f[] {object.position, new Vector3f(5, 5, 5)});
+                                object.position = VectorHelper.sumVectors(new Vector3f[]{object.position, new Vector3f(5, 5, 5)});
                             }
                         })
                 )
