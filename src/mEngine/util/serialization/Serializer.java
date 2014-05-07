@@ -101,7 +101,7 @@ public class Serializer {
             }
         });
 
-        if (saves != null) deSerialize(saves[0].getName().replace(".mso", ""));
+        if (saves != null) deSerialize(saves[0].getName().replace(".mess", ""));
 
     }
 
