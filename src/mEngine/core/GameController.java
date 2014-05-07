@@ -4,8 +4,6 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
-import mEngine.gameObjects.components.interaction.Interaction;
-import mEngine.gameObjects.components.interaction.InteractionComponent;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
@@ -15,9 +13,6 @@ import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
-import mEngine.util.debug.graphs.FPSGraphComponent;
-import mEngine.util.debug.graphs.RAMGraphComponent;
-import mEngine.util.debug.graphs.TPSGraphComponent;
 import mEngine.util.debug.texts.FPSTextComponent;
 import mEngine.util.debug.texts.RAMTextComponent;
 import mEngine.util.debug.texts.TPSTextComponent;
@@ -93,6 +88,11 @@ public class GameController {
                         new Camera()
                 )
                 .addComponent(
+                        "reticule",
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
+                                .addComponent("guiQuad", new GUIQuad("reticule"))
+                )
+                .addComponent(
                         "fpsText",
                         new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
                 )
@@ -115,24 +115,6 @@ public class GameController {
                 .addComponent(
                         "posZText",
                         new GUIElement(new Vector2f(5, 125), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
-                )
-                /*.addComponent(
-                        "graphs",
-                        new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f(Display.getWidth(), 100))
-                                .addComponent("guiGraphFPS", new FPSGraphComponent(
-                                        new double[]{},
-                                        "graph"))
-                                .addComponent("guiGraphTPS", new TPSGraphComponent(
-                                        new double[]{},
-                                        "graph"))
-                                .addComponent("guiGraphRAM", new RAMGraphComponent(
-                                        new double[]{},
-                                        "graph"))
-                )*/
-                .addComponent(
-                        "reticule",
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
-                                .addComponent("guiQuad", new GUIQuad("reticule"))
                 )
                 .createAllComponents());
 
