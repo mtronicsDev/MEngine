@@ -38,9 +38,9 @@ public class Particle extends ComponentRenderable {
         this.textureName = textureName;
 
         vertices.add(VectorHelper.divideVectorByFloat(new Vector3f(-size.x, -size.y, 0), 2));
-        vertices.add(VectorHelper.divideVectorByFloat(new Vector3f(-size.x, size.y, 0), 2));
         vertices.add(VectorHelper.divideVectorByFloat(new Vector3f(size.x, -size.y, 0), 2));
         vertices.add(VectorHelper.divideVectorByFloat(new Vector3f(size.x, size.y, 0), 2));
+        vertices.add(VectorHelper.divideVectorByFloat(new Vector3f(-size.x, size.y, 0), 2));
 
     }
 

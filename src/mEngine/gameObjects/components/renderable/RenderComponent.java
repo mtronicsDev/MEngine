@@ -37,7 +37,7 @@ public class RenderComponent extends ComponentRenderable {
     public void onUpdate() {
 
         super.onUpdate();
-        model.update(parent.position, parent.rotation);
+        model.update(parent.position, parent.rotation, parent.percentRotation);
 
     }
 
