@@ -119,6 +119,7 @@ public class Terrain extends ComponentRenderable {
 
         }
 
+
         for (Face face : faces) {
 
             Vector3f vertexA = vertices.get((int) face.vertexIndices.x);

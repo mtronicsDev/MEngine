@@ -51,6 +51,7 @@ public class MovementParticleComponent extends ParticleComponent {
                     VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, parent.normal.y, 0))
             );
 
+
         }
 
     }

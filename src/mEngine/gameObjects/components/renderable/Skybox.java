@@ -168,6 +168,7 @@ public class Skybox extends ComponentRenderable {
 
             displayListsCreated = true;
 
+
         }
 
         for (int displayListIndex : displayListIndices) {

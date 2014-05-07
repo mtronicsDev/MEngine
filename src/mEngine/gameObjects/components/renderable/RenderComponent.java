@@ -37,7 +37,7 @@ public class RenderComponent extends ComponentRenderable {
     public void onSave() {
 
         super.onSave();
-        model = null; //Delete unserializable model
+        model = null;
 
     }
 
@@ -46,7 +46,7 @@ public class RenderComponent extends ComponentRenderable {
 
         super.onLoad();
         
-        model = new Model(modelFileName, parent.position, parent.rotation, true); //Create model again
+        model = new Model(modelFileName, parent.position, parent.rotation, true);
 
     }
 

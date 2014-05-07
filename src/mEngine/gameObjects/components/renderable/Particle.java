@@ -49,19 +49,7 @@ public class Particle extends ComponentRenderable {
 
         super.onCreation(object);
 
-        boolean isStatic = true;
-
-        for (ParticleComponent particleComponent : components.values()) {
-
-            if (particleComponent instanceof MovementParticleComponent) {
-
-                isStatic = false;
-
-            }
-
-        }
-
-        displayListFactors[0] = isStatic;
+        displayListFactors[0] = true;
 
         position = new Vector3f(parent.position);
         normal = new Vector3f(parent.percentRotation);

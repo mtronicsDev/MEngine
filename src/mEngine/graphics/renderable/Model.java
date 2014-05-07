@@ -241,6 +241,7 @@ public class Model implements Serializable {
 
         }
 
+
         if (displayListFactors[0] && displayListFactors[1]) {
 
             Renderer.renderObject3D(displayListIndex, position, rotation, isTextureThere, 0);
