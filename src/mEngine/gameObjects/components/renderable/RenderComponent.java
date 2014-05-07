@@ -20,7 +20,7 @@ public class RenderComponent extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        
+
         model = new Model(modelFileName, parent.position, parent.rotation, true);
 
     }
@@ -37,7 +37,7 @@ public class RenderComponent extends ComponentRenderable {
     public void onSave() {
 
         super.onSave();
-        model = null;
+        model = null; //Delete unserializable model
 
     }
 
@@ -45,8 +45,8 @@ public class RenderComponent extends ComponentRenderable {
     public void onLoad() {
 
         super.onLoad();
-        
-        model = new Model(modelFileName, parent.position, parent.rotation, true);
+
+        model = new Model(modelFileName, parent.position, parent.rotation, true); //Create model again
 
     }
 

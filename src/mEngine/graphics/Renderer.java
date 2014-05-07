@@ -422,7 +422,6 @@ public class Renderer {
         glRotatef(modelRotation.y, 0, 1, 0);
         glRotatef(modelRotation.z, 0, 0, 1);*/
 
-
         glCallList(displayListIndex + 1);
 
         glPopMatrix();

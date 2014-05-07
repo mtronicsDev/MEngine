@@ -35,7 +35,7 @@ public class InteractionComponent extends Component {
 
     public void onUpdate() {
 
-        //if (interacted) interaction.interact();
+        //if (...) interaction.interact();
 
     }
 
