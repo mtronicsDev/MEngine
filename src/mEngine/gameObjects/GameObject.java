@@ -1,6 +1,7 @@
 package mEngine.gameObjects;
 
 import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.util.math.vectors.Matrix3d;
@@ -125,12 +126,14 @@ public class GameObject implements Serializable {
     public GameObject createAllComponents() {
 
         RenderComponent renderComponent = (RenderComponent) getComponent("renderComponent");
-
         if (renderComponent != null) renderComponent.onCreation(this);
+
+        MovementComponent movementComponent = (MovementComponent) getComponent("movementComponent");
+        if (movementComponent != null) movementComponent.onCreation(this);
 
         for (Component component : components.values()) {
 
-            if (component != renderComponent) component.onCreation(this);
+            if (component != renderComponent && component != movementComponent) component.onCreation(this);
 
         }
 

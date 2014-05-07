@@ -45,7 +45,7 @@ public class Model implements Serializable {
         this.faces = model.faces;
         this.texture = model.texture;
         this.mass = model.getMass();
-        this.displayListFactors[0] = true;
+        this.displayListFactors[0] = isStatic;
 
         Vector3f middle = getMiddle();
 

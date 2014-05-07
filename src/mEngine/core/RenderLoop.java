@@ -1,5 +1,6 @@
 package mEngine.core;
 
+import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
@@ -31,9 +32,9 @@ public class RenderLoop implements Runnable {
                 if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
 
                 //Renders all the gameObjects
-                for (int i = 0; i < ObjectController.gameObjects.size(); i++) {
+                for (GameObject object : ObjectController.gameObjects) {
 
-                    if (!Serializer.isSerializing) ObjectController.getGameObject(i).addToRenderQueue();
+                    if (!Serializer.isSerializing) object.addToRenderQueue();
 
                 }
 

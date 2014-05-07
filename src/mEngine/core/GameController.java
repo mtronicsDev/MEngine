@@ -113,7 +113,7 @@ public class GameController {
                         "posZText",
                         new GUIElement(new Vector2f(5, 125), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
                 )
-                .addComponent(
+                /*.addComponent(
                         "graphs",
                         new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f(Display.getWidth(), 100))
                                 .addComponent("guiGraphFPS", new FPSGraphComponent(
@@ -125,7 +125,7 @@ public class GameController {
                                 .addComponent("guiGraphRAM", new RAMGraphComponent(
                                         new double[]{},
                                         "graph"))
-                )
+                )*/
                 .addComponent(
                         "reticule",
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
