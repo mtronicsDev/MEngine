@@ -33,10 +33,10 @@ public class GUIQuad extends GUIComponent {
 
         if (verticesToRender.size() == 0) {
 
-            verticesToRender.add(new Vector2f(parent.position.x, parent.position.y + parent.size.y));
-            verticesToRender.add(new Vector2f(parent.position.x + parent.size.x, parent.position.y + parent.size.y));
-            verticesToRender.add(new Vector2f(parent.position.x + parent.size.x, parent.position.y));
-            verticesToRender.add(new Vector2f(parent.position.x, parent.position.y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x, parent.getPosition().y + parent.getSize().y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x + parent.getSize().x, parent.getPosition().y + parent.getSize().y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x + parent.getSize().x, parent.getPosition().y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x, parent.getPosition().y));
 
         }
 

@@ -28,6 +28,7 @@ import mEngine.util.threading.ThreadHelper;
 import mEngine.util.time.RuntimeHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -88,47 +89,44 @@ public class GameController {
                 )
                 .addComponent(
                         "fpsText",
-                        new GUIElement(new Vector2f(0.001f, 0.001f), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
+                        new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
                 )
                 .addComponent(
                         "tpsText",
-                        new GUIElement(new Vector2f(0.001f, 0.031f), new Vector2f()).addComponent("guiText", new TPSTextComponent("Current TPS", 15))
+                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new TPSTextComponent("Current TPS", 15))
                 )
                 .addComponent(
                         "ramText",
-                        new GUIElement(new Vector2f(0.001f, 0.061f), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
+                        new GUIElement(new Vector2f(5, 45), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
                 )
                 .addComponent(
                         "posXText",
-                        new GUIElement(new Vector2f(0.001f, 0.091f), new Vector2f()).addComponent("guiText", new PositionXTextComponent("x Position", 15))
+                        new GUIElement(new Vector2f(5, 85), new Vector2f()).addComponent("guiText", new PositionXTextComponent("x Position", 15))
                 )
                 .addComponent(
                         "posYText",
-                        new GUIElement(new Vector2f(0.001f, 0.121f), new Vector2f()).addComponent("guiText", new PositionYTextComponent("y Position", 15))
+                        new GUIElement(new Vector2f(5, 105), new Vector2f()).addComponent("guiText", new PositionYTextComponent("y Position", 15))
                 )
                 .addComponent(
                         "posZText",
-                        new GUIElement(new Vector2f(0.001f, 0.151f), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
+                        new GUIElement(new Vector2f(5, 125), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
                 )
                 .addComponent(
                         "graphs",
-                        new GUIElement(new Vector2f(0, 0.8f), new Vector2f())
+                        new GUIElement(new Vector2f(0, Display.getHeight() - 100), new Vector2f(Display.getWidth(), 100))
                                 .addComponent("guiGraphFPS", new FPSGraphComponent(
-                                        new Vector2f(1, 0.2f),
                                         new double[]{},
                                         "graph"))
                                 .addComponent("guiGraphTPS", new TPSGraphComponent(
-                                        new Vector2f(1, 0.2f),
                                         new double[]{},
                                         "graph"))
                                 .addComponent("guiGraphRAM", new RAMGraphComponent(
-                                        new Vector2f(1, 0.2f),
                                         new double[]{},
                                         "graph"))
                 )
                 .addComponent(
                         "reticule",
-                        new GUIElement(new Vector2f(0.5f - 0.01f, 0.5f - 0.01f), new Vector2f(0.02f, 0.02f))
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
                                 .addComponent("guiQuad", new GUIQuad("reticule"))
                 )
                 .createAllComponents());

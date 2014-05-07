@@ -4,7 +4,6 @@ import mEngine.gameObjects.components.renderable.LightSource;
 import mEngine.util.math.MathHelper;
 import mEngine.util.rendering.ShaderHelper;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -443,7 +442,7 @@ public class Renderer {
 
         for (Vector2f vertex : vertices) {
 
-            vertexData.put(new float[]{vertex.x * Display.getWidth(), vertex.y * Display.getHeight()});
+            vertexData.put(new float[]{vertex.x, vertex.y});
 
         }
 

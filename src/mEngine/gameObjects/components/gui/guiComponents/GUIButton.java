@@ -29,8 +29,8 @@ public class GUIButton extends GUIComponent {
 
     public boolean buttonHovered() {
 
-        return Mouse.getX() >= parent.position.x && Mouse.getX() <= parent.position.x + parent.size.x &&
-                Display.getHeight() - Mouse.getY() >= parent.position.y && Display.getHeight() - Mouse.getY() <= parent.position.y + parent.size.y;
+        return Mouse.getX() >= parent.getPosition().x && Mouse.getX() <= parent.getPosition().x + parent.getSize().x &&
+                Display.getHeight() - Mouse.getY() >= parent.getPosition().y && Display.getHeight() - Mouse.getY() <= parent.getPosition().y + parent.getSize().y;
 
     }
 
