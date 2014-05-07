@@ -39,8 +39,8 @@ public class LoadingScreen {
         int cx = Display.getWidth() / 2; //Center x
         int cy = Display.getHeight() / 2; //Center y
 
-        float pox = (float)ox / cx; //x offset in percent
-        float poy = (float)oy / cy; //y offset in percent
+        float pox = (float) ox / cx; //x offset in percent
+        float poy = (float) oy / cy; //y offset in percent
 
         vertices.add(new Vector2f(-pox, -poy));
         vertices.add(new Vector2f(pox, -poy));
@@ -51,7 +51,7 @@ public class LoadingScreen {
 
     public void render() {
 
-        if(texture == null) {
+        if (texture == null) {
 
             texture = TextureHelper.getTexture(textureName);
             calculateVertexPositions();
@@ -64,7 +64,7 @@ public class LoadingScreen {
 
     public void update() {
 
-        if(!GameController.isLoading) ObjectController.setLoadingScreen(null);
+        if (!GameController.isLoading) ObjectController.setLoadingScreen(null);
 
     }
 

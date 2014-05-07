@@ -30,7 +30,7 @@ public class MovementParticleComponent extends ParticleComponent {
 
                 for (Component component : object.components.values()) {
 
-                    if (component instanceof  Camera) camera = (Camera) component;
+                    if (component instanceof Camera) camera = (Camera) component;
 
                 }
 

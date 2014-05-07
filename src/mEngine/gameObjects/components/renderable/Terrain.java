@@ -131,7 +131,8 @@ public class Terrain extends ComponentRenderable {
             Vector3f normal = VectorHelper.getVectorProduct(directionVectorA, directionVectorB);
             normal = VectorHelper.normalizeVector(normal);
 
-            if (VectorHelper.getScalarProduct(normal, new Vector3f(0, 1, 0)) < 0) normal = VectorHelper.negateVector(normal);
+            if (VectorHelper.getScalarProduct(normal, new Vector3f(0, 1, 0)) < 0)
+                normal = VectorHelper.negateVector(normal);
 
             normals.add(normal);
             normals.add(normal);

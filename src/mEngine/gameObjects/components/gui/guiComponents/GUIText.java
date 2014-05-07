@@ -2,7 +2,6 @@ package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.resources.FontHelper;
 import mEngine.util.resources.PreferenceHelper;
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -50,7 +49,7 @@ public class GUIText extends GUIComponent {
         super.render();
         if (font == null)
             font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
-        font.drawString(parent.position.x * Display.getWidth(), parent.position.y * Display.getHeight(), text, color);
+        font.drawString(parent.getPosition().x, parent.getPosition().y, text, color);
 
     }
 

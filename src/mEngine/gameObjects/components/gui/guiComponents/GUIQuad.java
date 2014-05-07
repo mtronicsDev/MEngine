@@ -1,18 +1,12 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
-import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
-import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.opengl.Texture;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class GUIQuad extends GUIComponent {
 
@@ -37,12 +31,12 @@ public class GUIQuad extends GUIComponent {
 
         if (texture == null) texture = TextureHelper.getTexture(textureName);
 
-        if(verticesToRender.size() == 0) {
+        if (verticesToRender.size() == 0) {
 
-            verticesToRender.add(new Vector2f(parent.position.x, parent.position.y + parent.size.y));
-            verticesToRender.add(new Vector2f(parent.position.x + parent.size.x, parent.position.y + parent.size.y));
-            verticesToRender.add(new Vector2f(parent.position.x + parent.size.x, parent.position.y));
-            verticesToRender.add(new Vector2f(parent.position.x, parent.position.y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x, parent.getPosition().y + parent.getSize().y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x + parent.getSize().x, parent.getPosition().y + parent.getSize().y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x + parent.getSize().x, parent.getPosition().y));
+            verticesToRender.add(new Vector2f(parent.getPosition().x, parent.getPosition().y));
 
         }
 

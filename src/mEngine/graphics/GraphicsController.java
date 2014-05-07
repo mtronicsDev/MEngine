@@ -34,6 +34,7 @@ public class GraphicsController {
     public static int renderDistance;
     public static boolean isWireFrameMode = false;
     public static boolean isBlackAndWhite = false;
+    public static boolean wasResized = false;
     public static int fieldOfView;
     private static int width;
     private static int height;
@@ -95,10 +96,11 @@ public class GraphicsController {
 
         if (isKeyDown(getKey("fullscreen"))) {
 
+            wasResized = true;
             if (isFullscreen) setupWindow(width, height, title);
             else setupFullscreen();
 
-        }
+        } else wasResized = false;
 
         Display.update();
         if (!mEnchmarkEnabled) Display.sync(fps);

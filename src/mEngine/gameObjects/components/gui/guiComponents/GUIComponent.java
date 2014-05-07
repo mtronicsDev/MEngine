@@ -1,6 +1,7 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.gameObjects.components.gui.GUIElement;
+import mEngine.graphics.GraphicsController;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.io.Serializable;
@@ -41,6 +42,9 @@ public abstract class GUIComponent implements Serializable {
     }
 
     public void render() {
+
+        if (GraphicsController.wasResized) verticesToRender = new ArrayList<Vector2f>();
+
     }
 
 }

@@ -30,11 +30,9 @@ public class DeathParticleComponent extends ParticleComponent {
         if (deathTimeInSeconds != -1) {
 
 
-
         }
 
         if (deathCollisionTimes != -1) {
-
 
 
         }

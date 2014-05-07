@@ -26,12 +26,12 @@ public class Particle extends ComponentRenderable {
     public List<Vector3f> vertices = new ArrayList<Vector3f>();
     public List<Vector2f> uvs = new ArrayList<Vector2f>();
     public Vector2f size;
+    public Map<String, ParticleComponent> components = new HashMap<String, ParticleComponent>();
     String textureName;
     Texture texture;
     boolean isTextureThere = true;
-    boolean[] displayListFactors = new boolean[] {false, false};
+    boolean[] displayListFactors = new boolean[]{false, false};
     int displayListIndex;
-    public Map<String, ParticleComponent> components = new HashMap<String, ParticleComponent>();
 
     public Particle(Vector2f size, String textureName) {
 
@@ -110,10 +110,10 @@ public class Particle extends ComponentRenderable {
 
             List<Vector3f> renderVertices = new ArrayList<Vector3f>();
 
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(0), position}));
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(1), position}));
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(2), position}));
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(3), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(0), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(1), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(2), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(3), position}));
 
             List<Vector3f> normals = new ArrayList<Vector3f>();
 
@@ -151,12 +151,13 @@ public class Particle extends ComponentRenderable {
 
             List<Vector3f> renderVertices = new ArrayList<Vector3f>();
 
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(0), position}));
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(1), position}));
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(2), position}));
-            renderVertices.add(VectorHelper.sumVectors(new Vector3f[] {vertices.get(3), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(0), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(1), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(2), position}));
+            renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(3), position}));
 
-            if (isTextureThere) Renderer.renderObject3D(renderVertices, normals, uvs, texture, Renderer.RENDER_QUADS, 0);
+            if (isTextureThere)
+                Renderer.renderObject3D(renderVertices, normals, uvs, texture, Renderer.RENDER_QUADS, 0);
 
             else Renderer.renderObject3D(renderVertices, normals, Renderer.RENDER_QUADS, 0);
 

@@ -12,7 +12,8 @@ public class Material3D extends Material {
 
     private float opticalDensity;
 
-    public Material3D() {}
+    public Material3D() {
+    }
 
     public Vector3f getAmbientReflectivity() {
         return ambientReflectivity;
