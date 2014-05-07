@@ -10,7 +10,8 @@ public abstract class Material {
     private Color color;
     private float opacity;
 
-    public Material() {}
+    public Material() {
+    }
 
     public Texture getTexture() {
         return texture;

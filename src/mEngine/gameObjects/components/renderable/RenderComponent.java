@@ -28,7 +28,7 @@ public class RenderComponent extends ComponentRenderable {
             if (component instanceof MovementComponent) isStatic = false;
 
         }
-        
+
         model = new Model(modelFileName, parent.position, parent.rotation, isStatic);
 
     }
@@ -53,15 +53,15 @@ public class RenderComponent extends ComponentRenderable {
     public void onLoad() {
 
         super.onLoad();
-        
+
         boolean isStatic = true;
-        
+
         for (Component component : parent.components.values()) {
-            
+
             if (component instanceof MovementComponent) isStatic = false;
-            
+
         }
-        
+
         model = new Model(modelFileName, parent.position, parent.rotation, isStatic); //Create model again
 
     }

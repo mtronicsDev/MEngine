@@ -3,11 +3,11 @@ package mEngine.core;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
-import mEngine.util.time.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.serialization.Serializer;
+import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector4f;
@@ -26,7 +26,7 @@ public class RenderLoop implements Runnable {
             GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
             Renderer.currentRenderQueue = new RenderQueue();
 
-            if(!GameController.isLoading) {
+            if (!GameController.isLoading) {
 
                 if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
 
@@ -39,7 +39,7 @@ public class RenderLoop implements Runnable {
 
                 Renderer.currentRenderQueue.render();
 
-            } else if(ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().render();
+            } else if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().render();
 
             TimeHelper.updateFPS();
             GraphicsController.update();

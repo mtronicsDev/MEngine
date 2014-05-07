@@ -23,7 +23,7 @@ public class GUIEllipse extends GUIComponent {
         super.render();
         TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
 
-        if(verticesToRender.size() == 0) {
+        if (verticesToRender.size() == 0) {
 
             verticesToRender.add(new Vector2f(parent.position.x, parent.position.y));
 

@@ -1,15 +1,15 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.graphics.Renderer;
-import mEngine.util.math.vectors.Matrix3d;
-import mEngine.util.time.TimeHelper;
 import mEngine.util.input.Input;
+import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.util.glu.GLU.*;
+import static org.lwjgl.util.glu.GLU.gluLookAt;
 
 public class Camera extends ComponentRenderable {
 
@@ -34,15 +34,13 @@ public class Camera extends ComponentRenderable {
 
             else zoom = 0;
 
-        }
-
-        else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.015f * TimeHelper.deltaTime;
+        } else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.015f * TimeHelper.deltaTime;
 
         rotation = parent.rotation;
         percentRotation = parent.percentRotation;
 
         if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
-            position = VectorHelper.sumVectors(new Vector3f[] {VectorHelper.multiplyVectorByFloat(new Vector3f(percentRotation.x, percentRotation.y, -percentRotation.z), -zoom),
+            position = VectorHelper.sumVectors(new Vector3f[]{VectorHelper.multiplyVectorByFloat(new Vector3f(percentRotation.x, percentRotation.y, -percentRotation.z), -zoom),
                     parent.position});
 
     }

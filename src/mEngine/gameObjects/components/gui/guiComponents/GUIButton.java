@@ -3,7 +3,8 @@ package mEngine.gameObjects.components.gui.guiComponents;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-import static mEngine.util.input.Input.*;
+import static mEngine.util.input.Input.isButtonPressed;
+import static mEngine.util.input.Input.isButtonUp;
 
 public class GUIButton extends GUIComponent {
 

@@ -1,21 +1,13 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
-import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.graphs.Graph;
-import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
-import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.opengl.Texture;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import static mEngine.util.math.MathHelper.clamp;
-import static org.lwjgl.opengl.GL11.*;
 
 public class GUIGraph extends GUIComponent {
 

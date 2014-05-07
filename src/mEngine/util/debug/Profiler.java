@@ -1,7 +1,7 @@
 package mEngine.util.debug;
 
-import mEngine.util.time.TimeHelper;
 import mEngine.util.math.graphs.Graph;
+import mEngine.util.time.TimeHelper;
 
 import static mEngine.util.time.RuntimeHelper.*;
 

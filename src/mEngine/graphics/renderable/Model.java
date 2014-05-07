@@ -28,11 +28,11 @@ public class Model implements Serializable {
     public Vector3f rotation = new Vector3f();
     public Vector3f percentRotation = new Vector3f();
     public int renderMode = Renderer.RENDER_TRIANGLES;
+    public boolean[] displayListFactors = new boolean[]{false, false};
+    public int displayListIndex;
     String textureName;
     Texture texture;
     boolean isTextureThere = true;
-    public boolean[] displayListFactors = new boolean[] {false, false};
-    public int displayListIndex;
 
     public Model(String fileName, Vector3f pos, Vector3f rot, boolean isStatic) {
 

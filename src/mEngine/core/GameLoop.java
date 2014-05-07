@@ -4,9 +4,9 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.GraphicsController;
-import mEngine.util.time.TimeHelper;
 import mEngine.util.input.Input;
 import mEngine.util.serialization.Serializer;
+import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
@@ -60,7 +60,7 @@ public class GameLoop implements Runnable {
             }
 
             TimeHelper.updateDeltaTime();
-            if(ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
+            if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
 
             if (!GameController.isLoading) {
 

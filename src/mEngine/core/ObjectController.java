@@ -1,7 +1,6 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.audio.AudioSource;
 import mEngine.graphics.renderable.LoadingScreen;
 
 import java.util.ArrayList;
@@ -15,10 +14,17 @@ public class ObjectController {
     public static void addGameObject(GameObject object) {
         gameObjects.add(object);
     }
+
     public static GameObject getGameObject(int index) {
         return gameObjects.get(index);
     }
-    public static void setLoadingScreen(LoadingScreen screen) { loadingScreen = screen; }
-    public static LoadingScreen getLoadingScreen() { return loadingScreen; }
+
+    public static LoadingScreen getLoadingScreen() {
+        return loadingScreen;
+    }
+
+    public static void setLoadingScreen(LoadingScreen screen) {
+        loadingScreen = screen;
+    }
 
 }

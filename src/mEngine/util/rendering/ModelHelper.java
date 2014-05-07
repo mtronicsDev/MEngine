@@ -1,6 +1,5 @@
 package mEngine.util.rendering;
 
-import mEngine.gameObjects.GameObject;
 import mEngine.graphics.renderable.Face;
 import mEngine.graphics.renderable.Model;
 import mEngine.util.threading.ThreadHelper;

@@ -11,7 +11,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
 import java.nio.FloatBuffer;
-import java.util.*;
+import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -181,7 +181,8 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
-        if (GraphicsController.isBlackAndWhite) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1, 1);
+        if (GraphicsController.isBlackAndWhite)
+            glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1, 1);
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
         emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
@@ -287,7 +288,8 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboTextureHandle);
 
-        if (GraphicsController.isBlackAndWhite) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
+        if (GraphicsController.isBlackAndWhite)
+            glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
         ShaderHelper.useNoShader();
 
@@ -297,7 +299,8 @@ public class Renderer {
 
         ShaderHelper.useShader("lighting");
 
-        if (GraphicsController.isBlackAndWhite || !isTextureThere) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1, 1);
+        if (GraphicsController.isBlackAndWhite || !isTextureThere)
+            glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1, 1);
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
         emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
@@ -335,7 +338,8 @@ public class Renderer {
 
         glCallList(displayListIndex + 1);
 
-        if (GraphicsController.isBlackAndWhite || !isTextureThere) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
+        if (GraphicsController.isBlackAndWhite || !isTextureThere)
+            glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
         ShaderHelper.useNoShader();
 
@@ -425,7 +429,8 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboVertexHandle);
 
-        if (!GraphicsController.isBlackAndWhite) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
+        if (!GraphicsController.isBlackAndWhite)
+            glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
         ShaderHelper.useNoShader();
 
