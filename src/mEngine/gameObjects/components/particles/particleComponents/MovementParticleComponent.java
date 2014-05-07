@@ -20,8 +20,6 @@ public class MovementParticleComponent extends ParticleComponent {
 
     public void onUpdate() {
 
-        Vector3f previousNormal = new Vector3f(parent.normal);
-
         Camera camera = null;
 
         if (Renderer.currentRenderQueue.camera != null) camera = Renderer.currentRenderQueue.camera;
@@ -47,7 +45,11 @@ public class MovementParticleComponent extends ParticleComponent {
 
             parent.normal = idealNormal;
 
-            parent.calculateVertices(previousNormal);
+            parent.rotation = new Vector3f(
+                    VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(0, parent.normal.y, parent.normal.z)),
+                    VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, 0, parent.normal.z)),
+                    VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, parent.normal.y, 0))
+            );
 
         }
 

@@ -21,6 +21,7 @@ import java.util.Map;
 public class Particle extends ComponentRenderable {
 
     public Vector3f position;
+    public Vector3f rotation;
     public Vector3f normal;
     public List<Vector3f> vertices = new ArrayList<Vector3f>();
     public List<Vector2f> uvs = new ArrayList<Vector2f>();
@@ -65,7 +66,11 @@ public class Particle extends ComponentRenderable {
         position = new Vector3f(parent.position);
         normal = new Vector3f(parent.percentRotation);
 
-        calculateVertices(new Vector3f(0, 0, 1));
+        rotation = new Vector3f(
+                VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(0, normal.y, normal.z)),
+                VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(normal.x, 0, normal.z)),
+                VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(normal.x, normal.y, 0))
+        );
 
     }
 
@@ -133,7 +138,7 @@ public class Particle extends ComponentRenderable {
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, isTextureThere, 0);
+            Renderer.renderObject3D(displayListIndex, position, rotation, isTextureThere, 0);
 
         } else {
 
@@ -154,38 +159,6 @@ public class Particle extends ComponentRenderable {
             if (isTextureThere) Renderer.renderObject3D(renderVertices, normals, uvs, texture, Renderer.RENDER_QUADS, 0);
 
             else Renderer.renderObject3D(renderVertices, normals, Renderer.RENDER_QUADS, 0);
-
-        }
-
-    }
-
-    public void calculateVertices(Vector3f previousNormal) {
-
-        Vector3f turningAxis = VectorHelper.normalizeVector(VectorHelper.getVectorProduct(previousNormal, normal));
-
-        float angle = VectorHelper.getAngle(previousNormal, normal);
-
-        Matrix3d rotationMatrix = new Matrix3d(
-                new Vector3f(
-                        (float) Math.pow(turningAxis.x, 2) * (1 - (float) Math.cos(angle)) + (float) Math.cos(angle),
-                        turningAxis.x * turningAxis.y * (1 - (float) Math.cos(angle)) - turningAxis.z * (float) Math.sin(angle),
-                        turningAxis.x * turningAxis.z * (1 - (float) Math.cos(angle)) + turningAxis.y * (float) Math.sin(angle)
-                ),
-                new Vector3f(
-                        turningAxis.x * turningAxis.y * (1 - (float) Math.cos(angle)) + turningAxis.z * (float) Math.sin(angle),
-                        (float) Math.pow(turningAxis.y, 2) * (1 - (float) Math.cos(angle)) * (float) Math.cos(angle),
-                        turningAxis.y * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.x * (float) Math.sin(angle)
-                ),
-                new Vector3f(
-                        turningAxis.x * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.y * (float) Math.sin(angle),
-                        turningAxis.y * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.x * (float) Math.sin(angle),
-                        (float) Math.pow(turningAxis.z, 2) * (1 - (float) Math.cos(angle)) + (float) Math.cos(angle)
-                )
-        );
-
-        for (int count = 0; count < vertices.size(); count++) {
-
-            vertices.set(count, rotationMatrix.multiplyByVector(vertices.get(count)));
 
         }
 

@@ -1,9 +1,11 @@
 varying vec3 vertex;
 varying vec3 normal;
 
+uniform vec3 modelPosition;
+
 void main(void) {
 
-    vertex = vec3(gl_Vertex);
+    vertex = vec3(gl_Vertex) + modelPosition;
     normal = vec3(gl_Normal);
 
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;

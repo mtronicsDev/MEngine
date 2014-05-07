@@ -139,15 +139,7 @@ public class Terrain extends ComponentRenderable {
 
         }
 
-        boolean isStatic = true;
-
-        for (Component component : parent.components.values()) {
-
-            if (component instanceof MovementComponent) isStatic = false;
-
-        }
-
-        model = new Model(vertices, normals, uvs, faces, "graph", parent.position, isStatic);
+        model = new Model(vertices, normals, uvs, faces, "graph", parent.position, true);
 
     }
 

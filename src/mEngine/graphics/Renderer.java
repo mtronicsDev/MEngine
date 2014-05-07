@@ -118,6 +118,86 @@ public class Renderer {
 
     }
 
+    public static void changeTexture(int displayListIndex, List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode) {
+
+        int displayListHandle = displayListIndex + 1;
+
+        glNewList(displayListHandle, GL_COMPILE_AND_EXECUTE);
+
+        FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
+        FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
+        FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
+
+        for (Vector3f vertex : vertices) {
+
+            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
+
+        }
+
+        for (Vector3f normal : normals) {
+
+            normalData.put(new float[]{normal.x, normal.y, normal.z});
+
+        }
+
+        for (Vector2f uv : uvs) {
+
+            textureData.put(new float[]{uv.x, uv.y});
+
+        }
+
+        vertexData.flip();
+        normalData.flip();
+        textureData.flip();
+
+        int vboVertexHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        int vboNormalHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
+        glBufferData(GL_ARRAY_BUFFER, normalData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        int vboTextureHandle = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
+        glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(3, GL_FLOAT, 0, 0l);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
+        glNormalPointer(GL_FLOAT, 0, 0l);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
+        glTexCoordPointer(2, GL_FLOAT, 0, 0l);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        glDrawArrays(mode, 0, vertices.size());
+
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_NORMAL_ARRAY);
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        //texture.release();
+
+        glDeleteBuffers(vboVertexHandle);
+        glDeleteBuffers(vboNormalHandle);
+        glDeleteBuffers(vboTextureHandle);
+
+        glEndList();
+
+    }
+
     public static void addDisplayList(List<Vector3f> vertices, List<Vector3f> normals, int mode) {
 
         int displayListHandle = glGenLists(1);
@@ -293,7 +373,7 @@ public class Renderer {
 
     }
 
-    public static void renderObject3D(int displayListIndex, boolean isTextureThere, float emissiveLightStrength) {
+    public static void renderObject3D(int displayListIndex, Vector3f modelPosition, Vector3f modelRotation, boolean isTextureThere, float emissiveLightStrength) {
 
         ShaderHelper.useShader("lighting");
 
@@ -303,6 +383,7 @@ public class Renderer {
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
         Vector3f cameraPosition = currentRenderQueue.camera.position;
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "modelPosition"), modelPosition.x, modelPosition.y, modelPosition.z);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 
@@ -333,7 +414,17 @@ public class Renderer {
 
         }
 
+        glPushMatrix();
+
+        glTranslatef(modelPosition.x, modelPosition.y, modelPosition.z);
+
+        /*glRotatef(modelRotation.x, 1, 0, 0);
+        glRotatef(modelRotation.y, 0, 1, 0);
+        glRotatef(modelRotation.z, 0, 0, 1);*/
+
         glCallList(displayListIndex + 1);
+
+        glPopMatrix();
 
         if (GraphicsController.isBlackAndWhite || !isTextureThere) glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 

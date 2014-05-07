@@ -20,16 +20,8 @@ public class RenderComponent extends ComponentRenderable {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-
-        boolean isStatic = true;
-
-        for (Component component : parent.components.values()) {
-
-            if (component instanceof MovementComponent) isStatic = false;
-
-        }
         
-        model = new Model(modelFileName, parent.position, parent.rotation, isStatic);
+        model = new Model(modelFileName, parent.position, parent.rotation, true);
 
     }
 
@@ -37,7 +29,7 @@ public class RenderComponent extends ComponentRenderable {
     public void onUpdate() {
 
         super.onUpdate();
-        model.update(parent.position, parent.rotation, parent.percentRotation);
+        model.update(parent.position, parent.rotation);
 
     }
 
@@ -54,15 +46,7 @@ public class RenderComponent extends ComponentRenderable {
 
         super.onLoad();
         
-        boolean isStatic = true;
-        
-        for (Component component : parent.components.values()) {
-            
-            if (component instanceof MovementComponent) isStatic = false;
-            
-        }
-        
-        model = new Model(modelFileName, parent.position, parent.rotation, isStatic); //Create model again
+        model = new Model(modelFileName, parent.position, parent.rotation, true); //Create model again
 
     }
 

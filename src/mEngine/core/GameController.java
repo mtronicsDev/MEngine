@@ -4,6 +4,8 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
+import mEngine.gameObjects.components.interaction.Interaction;
+import mEngine.gameObjects.components.interaction.InteractionComponent;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
@@ -58,14 +60,14 @@ public class GameController {
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
-        addGameObject(new GameObject(new Vector3f(-20, 15, 220), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 15, 0), new Vector3f())
                 .addComponent(
                         "movementComponent",
                         new MovementComponent()
                 )
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("texturedStar")
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "controller",
@@ -133,7 +135,7 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(100, 0, 100), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("Paris2010")

@@ -14,6 +14,7 @@ import org.newdawn.slick.opengl.Texture;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Model implements Serializable {
@@ -26,7 +27,6 @@ public class Model implements Serializable {
     public float mass;
     public Vector3f position = new Vector3f();
     public Vector3f rotation = new Vector3f();
-    public Vector3f percentRotation = new Vector3f();
     public int renderMode = Renderer.RENDER_TRIANGLES;
     String textureName;
     Texture texture;
@@ -45,7 +45,7 @@ public class Model implements Serializable {
         this.faces = model.faces;
         this.texture = model.texture;
         this.mass = model.getMass();
-        this.displayListFactors[0] = isStatic;
+        this.displayListFactors[0] = true;
 
         Vector3f middle = getMiddle();
 
@@ -54,22 +54,6 @@ public class Model implements Serializable {
 
         position = pos;
         rotation = rot;
-
-        percentRotation = new Vector3f(0, 0, 1);
-
-        if (!VectorHelper.areEqual(rotation, new Vector3f())) {
-
-            Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float) Math.cos(Math.toRadians(rotation.x)), (float) -Math.sin(Math.toRadians(rotation.x))),
-                    new Vector3f(0, (float) Math.sin(Math.toRadians(rotation.x)), (float) Math.cos(Math.toRadians(rotation.x))));
-            percentRotation = xAxisRotationMatrix.multiplyByVector(percentRotation);
-
-            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(rotation.y)), 0, (float) Math.sin(Math.toRadians(rotation.y))),
-                    new Vector3f(0, 1, 0),
-                    new Vector3f((float) -Math.sin(Math.toRadians(rotation.y)), 0, (float) Math.cos(Math.toRadians(rotation.y))));
-            percentRotation = yAxisRotationMatrix.multiplyByVector(percentRotation);
-
-        }
 
         position = VectorHelper.sumVectors(new Vector3f[]{position, middle});
 
@@ -191,7 +175,7 @@ public class Model implements Serializable {
                     Vector2f uv1 = uvs.get((int) face.uvIndices.x);
                     renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
 
-                    Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
+                    Vector3f v1 = vertices.get((int) face.vertexIndices.x);
                     renderVertices.add(v1);
 
                     Vector3f n1 = normals.get((int) face.normalIndices.x);
@@ -201,7 +185,7 @@ public class Model implements Serializable {
                     Vector2f uv2 = uvs.get((int) face.uvIndices.y);
                     renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
 
-                    Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
+                    Vector3f v2 = vertices.get((int) face.vertexIndices.y);
                     renderVertices.add(v2);
 
                     Vector3f n2 = normals.get((int) face.normalIndices.y);
@@ -211,7 +195,7 @@ public class Model implements Serializable {
                     Vector2f uv3 = uvs.get((int) face.uvIndices.z);
                     renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
 
-                    Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
+                    Vector3f v3 = vertices.get((int) face.vertexIndices.z);
                     renderVertices.add(v3);
 
                     Vector3f n3 = normals.get((int) face.normalIndices.z);
@@ -226,21 +210,21 @@ public class Model implements Serializable {
 
                 for (Face face : faces) {
 
-                    Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
+                    Vector3f v1 = vertices.get((int) face.vertexIndices.x);
                     renderVertices.add(v1);
 
                     Vector3f n1 = normals.get((int) face.normalIndices.x);
                     renderNormals.add(n1);
 
 
-                    Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
+                    Vector3f v2 = vertices.get((int) face.vertexIndices.y);
                     renderVertices.add(v2);
 
                     Vector3f n2 = normals.get((int) face.normalIndices.y);
                     renderNormals.add(n2);
 
 
-                    Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
+                    Vector3f v3 = vertices.get((int) face.vertexIndices.z);
                     renderVertices.add(v3);
 
                     Vector3f n3 = normals.get((int) face.normalIndices.z);
@@ -259,7 +243,7 @@ public class Model implements Serializable {
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, isTextureThere, 0);
+            Renderer.renderObject3D(displayListIndex, position, rotation, isTextureThere, 0);
 
         } else {
 
@@ -345,44 +329,10 @@ public class Model implements Serializable {
 
     }
 
-    public void update(Vector3f pos, Vector3f rot, Vector3f percentRotation) {
+    public void update(Vector3f pos, Vector3f rot) {
 
         position = pos;
         rotation = rot;
-
-        /*if (!VectorHelper.areEqual(this.percentRotation, percentRotation)) {
-
-            Vector3f turningAxis = VectorHelper.normalizeVector(VectorHelper.getVectorProduct(this.percentRotation, percentRotation));
-
-            float angle = -VectorHelper.getAngle(percentRotation, this.percentRotation);
-
-            Matrix3d rotationMatrix = new Matrix3d(
-                    new Vector3f(
-                            (float) Math.pow(turningAxis.x, 2) * (1 - (float) Math.cos(angle)) + (float) Math.cos(angle),
-                            turningAxis.x * turningAxis.y * (1 - (float) Math.cos(angle)) - turningAxis.z * (float) Math.sin(angle),
-                            turningAxis.x * turningAxis.z * (1 - (float) Math.cos(angle)) + turningAxis.y * (float) Math.sin(angle)
-                    ),
-                    new Vector3f(
-                            turningAxis.x * turningAxis.y * (1 - (float) Math.cos(angle)) + turningAxis.z * (float) Math.sin(angle),
-                            (float) Math.pow(turningAxis.y, 2) * (1 - (float) Math.cos(angle)) * (float) Math.cos(angle),
-                            turningAxis.y * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.x * (float) Math.sin(angle)
-                    ),
-                    new Vector3f(
-                            turningAxis.x * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.y * (float) Math.sin(angle),
-                            turningAxis.y * turningAxis.z * (1 - (float) Math.cos(angle)) - turningAxis.x * (float) Math.sin(angle),
-                            (float) Math.pow(turningAxis.z, 2) * (1 - (float) Math.cos(angle)) + (float) Math.cos(angle)
-                    )
-            );
-
-            for (int count = 0; count < vertices.size(); count++) {
-
-                vertices.set(count, rotationMatrix.multiplyByVector(vertices.get(count)));
-
-            }
-
-            this.percentRotation = percentRotation;
-
-        }*/
 
     }
 

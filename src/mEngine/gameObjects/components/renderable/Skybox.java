@@ -170,17 +170,11 @@ public class Skybox extends ComponentRenderable {
 
         }
 
-        glPushMatrix();
-
-        glTranslatef(parent.position.x, parent.position.y, parent.position.z);
-
         for (int displayListIndex : displayListIndices) {
 
-            Renderer.renderObject3D(displayListIndex, true, 1);
+            Renderer.renderObject3D(displayListIndex, parent.position, new Vector3f(), true, 1);
 
         }
-
-        glPopMatrix();
 
     }
 
