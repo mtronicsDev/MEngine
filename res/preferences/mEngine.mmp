@@ -4,7 +4,7 @@ screenHeight=720
 framesPerSecond=60
 fullscreen=false
 title=mEngine Test Run
-renderDistance=1000
+renderDistance=10000
 antiAliasing=true
 
 #Camera preferences

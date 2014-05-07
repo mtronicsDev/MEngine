@@ -143,11 +143,11 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 100, 0), new Vector3f())
                 .addComponent(
                         "sunAmbient",
-                        new LightSource(20, new Vector4f(255, 255, 255, 1), new Vector3f(0, -1, 0))
+                        new LightSource(80, new Vector4f(255, 255, 255, 1), new Vector3f(0, -1, 0))
                 )
                 .addComponent(
                         "sun",
-                        new LightSource(80, new Vector4f(255, 255, 255, 1), new Vector3f(-1, -1, 0))
+                        new LightSource(80, new Vector4f(255, 255, 255, 1), new Vector3f(0, 1, 0))
                 )
                 .createAllComponents());
 

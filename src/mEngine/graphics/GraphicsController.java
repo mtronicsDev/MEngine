@@ -9,7 +9,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector4f;
 
 import javax.imageio.ImageIO;
@@ -36,7 +35,6 @@ public class GraphicsController {
     public static boolean isWireFrameMode = false;
     public static boolean isBlackAndWhite = false;
     public static int fieldOfView;
-    public static Vector2f middleOfScreen;
     private static int width;
     private static int height;
     private static String title;
@@ -57,8 +55,6 @@ public class GraphicsController {
         if (!PreferenceHelper.getBoolean("fullscreen")) {
 
             setupWindow(width, height, title);
-
-            middleOfScreen = new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2);
 
         } else {
 
@@ -106,9 +102,6 @@ public class GraphicsController {
 
         Display.update();
         if (!mEnchmarkEnabled) Display.sync(fps);
-
-        middleOfScreen.x = Display.getWidth() / 2;
-        middleOfScreen.y = Display.getHeight() / 2;
 
     }
 
