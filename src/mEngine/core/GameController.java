@@ -4,8 +4,10 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
-import mEngine.gameObjects.components.interaction.Interaction;
+import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
+import mEngine.gameObjects.components.interaction.methods.InteractionMethod;
 import mEngine.gameObjects.components.interaction.InteractionComponent;
+import mEngine.gameObjects.components.interaction.methods.NormalMethod;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
@@ -21,14 +23,12 @@ import mEngine.util.debug.texts.TPSTextComponent;
 import mEngine.util.debug.texts.position.PositionXTextComponent;
 import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
-import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
 import mEngine.util.time.RuntimeHelper;
 import mEngine.util.time.TimeHelper;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -127,10 +127,31 @@ public class GameController {
                 )
                 .addComponent(
                         "interactionComponent",
-                        new InteractionComponent(true, 10, "I", "move monkey", new Interaction() {
+                        new InteractionComponent(true, 10, "I", "move monkey", new AsyncMethod() {
                             @Override
-                            public void interact(GameObject object) {
-                                object.position = VectorHelper.sumVectors(new Vector3f[]{object.position, new Vector3f(5, 5, 5)});
+                            public void interact() {
+                                caller.interactable = false;
+
+                                for (int count = 0; count < 1000; count++) {
+
+                                    parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0.005f, 0.005f, 0.005f)});
+
+                                    try {
+
+                                        Thread.sleep(10);
+
+                                    } catch (InterruptedException e) {
+
+                                        e.printStackTrace();
+                                        ThreadHelper.stopAllThreads();
+                                        System.exit(1);
+
+                                    }
+
+                                }
+
+                                caller.interactable = true;
+
                             }
                         })
                 )

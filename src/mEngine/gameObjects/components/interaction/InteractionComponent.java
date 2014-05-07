@@ -6,8 +6,12 @@ import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.controls.Controller;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIText;
+import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
+import mEngine.gameObjects.components.interaction.methods.InteractionMethod;
+import mEngine.gameObjects.components.interaction.methods.NormalMethod;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -22,9 +26,9 @@ public class InteractionComponent extends Component {
     public float radius;
     public float controllerDistance;
 
-    public Interaction interaction;
+    public InteractionMethod interaction;
 
-    public InteractionComponent(boolean interactable, float radius, Interaction interaction) {
+    public InteractionComponent(boolean interactable, float radius, InteractionMethod interaction) {
 
         this.interactable = interactable;
         this.interaction = interaction;
@@ -32,7 +36,7 @@ public class InteractionComponent extends Component {
 
     }
 
-    public InteractionComponent(boolean interactable, float radius, String interactionKey, Interaction interaction) {
+    public InteractionComponent(boolean interactable, float radius, String interactionKey, InteractionMethod interaction) {
 
         this.interactable = interactable;
         this.interactionKey = interactionKey;
@@ -42,7 +46,7 @@ public class InteractionComponent extends Component {
 
     }
 
-    public InteractionComponent(boolean interactable, float radius, String interactionKey, String interactionDescription, Interaction interaction) {
+    public InteractionComponent(boolean interactable, float radius, String interactionKey, String interactionDescription, InteractionMethod interaction) {
 
         this(interactable, radius, interactionKey, interaction);
 
@@ -53,6 +57,8 @@ public class InteractionComponent extends Component {
     public void onCreation(GameObject object) {
 
         super.onCreation(object);
+
+        interaction.setParent(parent);
 
         if (interactionKey != null) {
 
@@ -128,12 +134,18 @@ public class InteractionComponent extends Component {
 
         controllerDistance = getControllerDistance();
 
-        if (interactionInstruction != null && controllerDistance <= radius)
+        if (interactionInstruction != null && controllerDistance <= radius && interactable)
             ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
 
         else ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
 
-        if (isInteracted()) interaction.interact(parent);
+        if (isInteracted()) {
+
+            if (interaction instanceof NormalMethod) ((NormalMethod) interaction).interact();
+
+            else ThreadHelper.startThread(((AsyncMethod) interaction));
+
+        }
 
     }
 
