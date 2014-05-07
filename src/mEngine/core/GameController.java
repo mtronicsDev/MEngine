@@ -24,11 +24,14 @@ import mEngine.util.debug.texts.TPSTextComponent;
 import mEngine.util.debug.texts.position.PositionXTextComponent;
 import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
+import mEngine.util.input.Input;
+import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
 import mEngine.util.time.RuntimeHelper;
 import mEngine.util.time.TimeHelper;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -130,6 +133,22 @@ public class GameController {
                         "reticule",
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
                                 .addComponent("guiQuad", new GUIQuad("reticule"))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(0, 40, 0), new Vector3f())
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("monkey")
+                )
+                .addComponent(
+                        "interactionComponent",
+                        new InteractionComponent(true, 10, "I", "move", new Interaction() {
+                            @Override
+                            public void interact(GameObject object) {
+                                object.position = VectorHelper.sumVectors(new Vector3f[] {object.position, new Vector3f(5, 5, 5)});
+                            }
+                        })
                 )
                 .createAllComponents());
 
