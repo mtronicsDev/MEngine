@@ -69,9 +69,13 @@ public class Input {
 
     }
 
-    public static int getKey(String key) {
+    public static Integer getKey(String key) {
 
-        return keyAssignments.get(key);
+        Integer keyAssignment  = keyAssignments.get(key);
+
+        if (keyAssignment != null) return keyAssignment;
+
+        else return null;
 
     }
 
