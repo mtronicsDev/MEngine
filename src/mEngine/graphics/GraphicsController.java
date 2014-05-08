@@ -94,13 +94,17 @@ public class GraphicsController {
 
     public static void update() {
 
-        if (isKeyDown(getKey("fullscreen"))) {
+        if (getKey("fullscreen") != null) {
 
-            wasResized = true;
-            if (isFullscreen) setupWindow(width, height, title);
-            else setupFullscreen();
+            if (isKeyDown(getKey("fullscreen"))) {
 
-        } else wasResized = false;
+                wasResized = true;
+                if (isFullscreen) setupWindow(width, height, title);
+                else setupFullscreen();
+
+            } else wasResized = false;
+
+        }
 
         Display.update();
         if (!mEnchmarkEnabled) Display.sync(fps);

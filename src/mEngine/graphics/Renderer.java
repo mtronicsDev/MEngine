@@ -1,6 +1,9 @@
 package mEngine.graphics;
 
-import mEngine.gameObjects.components.renderable.LightSource;
+import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
+import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
+import mEngine.gameObjects.components.renderable.light.LightSource;
+import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.util.math.MathHelper;
 import mEngine.util.rendering.ShaderHelper;
@@ -340,6 +343,10 @@ public class Renderer {
             Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
 
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
+
+            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
+
             if (GraphicsController.isBlackAndWhite) {
 
                 glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
@@ -351,14 +358,38 @@ public class Renderer {
 
             }
 
-            Vector3f lightDirection = lightSource.direction;
-            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+            if (lightSource instanceof SpotLightSource) {
 
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), lightSource.radius);
+                SpotLightSource spotLightSource = (SpotLightSource) lightSource;
 
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
 
-            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
+                Vector3f lightDirection = spotLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
+
+            } else if (lightSource instanceof DirectionalLightSource) {
+
+                DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
+
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 1);
+
+                Vector3f lightDirection = directionalLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
+
+            } else {
+
+                GlobalLightSource globalLightSource = (GlobalLightSource) lightSource;
+
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 2);
+
+                Vector3f lightDirection = globalLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+            }
 
         }
 
@@ -459,6 +490,10 @@ public class Renderer {
             Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
 
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
+
+            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
+
             if (GraphicsController.isBlackAndWhite) {
 
                 glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
@@ -470,14 +505,38 @@ public class Renderer {
 
             }
 
-            Vector3f lightDirection = lightSource.direction;
-            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+            if (lightSource instanceof SpotLightSource) {
 
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), lightSource.radius);
+                SpotLightSource spotLightSource = (SpotLightSource) lightSource;
 
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
 
-            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
+                Vector3f lightDirection = spotLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
+
+            } else if (lightSource instanceof DirectionalLightSource) {
+
+                DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
+
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 1);
+
+                Vector3f lightDirection = directionalLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
+
+            } else {
+
+                GlobalLightSource globalLightSource = (GlobalLightSource) lightSource;
+
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 2);
+
+                Vector3f lightDirection = globalLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+            }
 
         }
 
@@ -518,6 +577,10 @@ public class Renderer {
             Vector3f lightPosition = lightSource.position;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
 
+            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
+
+            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
+
             if (GraphicsController.isBlackAndWhite) {
 
                 glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
@@ -529,11 +592,38 @@ public class Renderer {
 
             }
 
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), lightSource.radius);
+            if (lightSource instanceof SpotLightSource) {
 
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
+                SpotLightSource spotLightSource = (SpotLightSource) lightSource;
 
-            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
+
+                Vector3f lightDirection = spotLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
+
+            } else if (lightSource instanceof DirectionalLightSource) {
+
+                DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
+
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 1);
+
+                Vector3f lightDirection = directionalLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
+
+            } else {
+
+                GlobalLightSource globalLightSource = (GlobalLightSource) lightSource;
+
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 2);
+
+                Vector3f lightDirection = globalLightSource.direction;
+                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
+
+            }
 
         }
 

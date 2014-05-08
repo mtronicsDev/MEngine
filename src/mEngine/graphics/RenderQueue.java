@@ -2,7 +2,7 @@ package mEngine.graphics;
 
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.LightSource;
+import mEngine.gameObjects.components.renderable.light.LightSource;
 import mEngine.gameObjects.components.renderable.Particle;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.graphics.renderable.models.Model;

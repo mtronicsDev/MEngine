@@ -9,9 +9,11 @@ import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.LightSource;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
+import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
+import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
+import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
@@ -162,14 +164,50 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(1000, 500, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(1000, 500, 0), new Vector3f(90, 0, 0))
                 .addComponent(
                         "sunAmbient",
-                        new LightSource(800, new Vector4f(255, 147, 41, 1), new Vector3f(0, -1, 0), false)
+                        new GlobalLightSource(800, new Vector4f(255, 147, 41, 1), false, new Vector3f(0, -1, 0))
                 )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(1000, 500, 0), new Vector3f(35, -45, 0))
                 .addComponent(
                         "sun",
-                        new LightSource(4000, new Vector4f(255, 147, 41, 1), new Vector3f(-1, -1, 0))
+                        new GlobalLightSource(800, new Vector4f(255, 147, 41, 1), new Vector3f(0, -1, 0))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(2, 25, -12), new Vector3f(0, 135, 0))
+                .addComponent(
+                        "spotLight",
+                        new SpotLightSource(500, new Vector4f(255, 0, 0, 1), new Vector3f(), 25)
+                )
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("sphere")
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(0, 25, 0), new Vector3f(0, 65, 0))
+                .addComponent(
+                        "spotLight",
+                        new SpotLightSource(500, new Vector4f(0, 255, 0, 1), new Vector3f(), 25)
+                )
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("sphere")
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(1, 25, -6), new Vector3f(-25, 95, 0))
+                .addComponent(
+                        "spotLight",
+                        new SpotLightSource(500, new Vector4f(0, 0, 255, 1), new Vector3f(), 25)
+                )
+                .addComponent(
+                        "renderComponent",
+                        new RenderComponent("sphere")
                 )
                 .createAllComponents());
 
