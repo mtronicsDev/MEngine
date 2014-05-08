@@ -1,4 +1,4 @@
-package mEngine.graphics.renderable;
+package mEngine.graphics.renderable.materials;
 
 import mEngine.util.rendering.TextureHelper;
 import org.newdawn.slick.Color;

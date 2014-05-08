@@ -1,11 +1,11 @@
-package mEngine.graphics.renderable;
+package mEngine.graphics.renderable.animations;
 
 import mEngine.util.time.Timer;
 
 public abstract class KeyFrame {
 
+    protected Object data; //Can be a texture, list of vertices ore something else
     private int delay; //In milliseconds
-    private Object data; //Can be a texture, list of vertices ore something else
     private Timer delayTimer;
 
     KeyFrame(int delay, Object data) {
@@ -33,5 +33,7 @@ public abstract class KeyFrame {
         return delayTimer.isRunning();
 
     }
+
+    public abstract org.newdawn.slick.opengl.Texture getData();
 
 }

@@ -1,4 +1,4 @@
-package mEngine.graphics.renderable;
+package mEngine.graphics.renderable.models;
 
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;

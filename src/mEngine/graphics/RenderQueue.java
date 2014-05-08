@@ -5,7 +5,7 @@ import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.LightSource;
 import mEngine.gameObjects.components.renderable.Particle;
 import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.graphics.renderable.Model;
+import mEngine.graphics.renderable.models.Model;
 
 import java.util.ArrayList;
 import java.util.List;

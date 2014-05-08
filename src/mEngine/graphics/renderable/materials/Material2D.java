@@ -1,4 +1,4 @@
-package mEngine.graphics.renderable;
+package mEngine.graphics.renderable.materials;
 
 public class Material2D extends Material {
 

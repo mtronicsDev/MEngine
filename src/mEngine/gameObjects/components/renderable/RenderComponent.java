@@ -1,10 +1,8 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.graphics.Renderer;
-import mEngine.graphics.renderable.Model;
+import mEngine.graphics.renderable.models.Model;
 
 public class RenderComponent extends ComponentRenderable {
 

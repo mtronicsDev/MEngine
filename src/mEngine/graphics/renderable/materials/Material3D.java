@@ -1,4 +1,4 @@
-package mEngine.graphics.renderable;
+package mEngine.graphics.renderable.materials;
 
 import org.lwjgl.util.vector.Vector3f;
 

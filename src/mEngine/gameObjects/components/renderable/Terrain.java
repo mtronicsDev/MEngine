@@ -1,11 +1,9 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.graphics.Renderer;
-import mEngine.graphics.renderable.Face;
-import mEngine.graphics.renderable.Model;
+import mEngine.graphics.renderable.models.Face;
+import mEngine.graphics.renderable.models.Model;
 import mEngine.util.math.MathHelper;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;

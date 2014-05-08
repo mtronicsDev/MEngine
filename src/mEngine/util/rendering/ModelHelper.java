@@ -1,7 +1,7 @@
 package mEngine.util.rendering;
 
-import mEngine.graphics.renderable.Face;
-import mEngine.graphics.renderable.Model;
+import mEngine.graphics.renderable.models.Face;
+import mEngine.graphics.renderable.models.Model;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;

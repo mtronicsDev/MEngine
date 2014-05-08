@@ -1,8 +1,7 @@
-package mEngine.graphics.renderable;
+package mEngine.graphics.renderable.models;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
-import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
 import mEngine.util.rendering.TextureHelper;
@@ -14,7 +13,6 @@ import org.newdawn.slick.opengl.Texture;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Model implements Serializable {

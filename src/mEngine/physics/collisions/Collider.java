@@ -6,7 +6,7 @@ import mEngine.gameObjects.components.controls.Controller;
 import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.graphics.renderable.Face;
+import mEngine.graphics.renderable.models.Face;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Plane;
 import mEngine.util.math.vectors.Matrix3d;
