@@ -1,10 +1,8 @@
 package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.particles.particleComponents.MovementParticleComponent;
 import mEngine.gameObjects.components.particles.particleComponents.ParticleComponent;
 import mEngine.graphics.Renderer;
-import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;

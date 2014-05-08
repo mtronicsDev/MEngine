@@ -10,8 +10,6 @@ import org.newdawn.slick.opengl.Texture;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.opengl.GL11.*;
-
 public class Skybox extends ComponentRenderable {
 
     protected Texture[] textures = new Texture[6];

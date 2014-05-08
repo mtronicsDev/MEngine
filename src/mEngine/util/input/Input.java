@@ -71,7 +71,7 @@ public class Input {
 
     public static Integer getKey(String key) {
 
-        Integer keyAssignment  = keyAssignments.get(key);
+        Integer keyAssignment = keyAssignments.get(key);
 
         if (keyAssignment != null) return keyAssignment;
 
