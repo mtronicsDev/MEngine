@@ -48,7 +48,7 @@ public class GUIElement extends ComponentRenderable {
 
     public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, Material2D material) {
 
-        material = new Material2D();
+        this.material = material;
         //Absolute size to relative size
         position = new Vector2f();
         position.x = posInPixels.x / Display.getWidth();
