@@ -128,7 +128,7 @@ public class GUIElement extends ComponentRenderable {
 
     public Vector2f getSize() {
 
-        return new Vector2f(size.x * Display.getWidth(), size.y * Display.getHeight()); //TODO: Make this lag-free
+        return new Vector2f(size.x * Display.getWidth(), size.y * Display.getHeight());
 
     }
 
@@ -140,7 +140,7 @@ public class GUIElement extends ComponentRenderable {
 
     public Vector2f getPosition() {
 
-        return new Vector2f(position.x * Display.getWidth(), position.y * Display.getHeight()); //TODO: Make this lag-free
+        return new Vector2f(position.x * Display.getWidth(), position.y * Display.getHeight());
 
     }
 
