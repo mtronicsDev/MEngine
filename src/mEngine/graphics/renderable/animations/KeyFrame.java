@@ -34,6 +34,6 @@ public abstract class KeyFrame {
 
     }
 
-    public abstract org.newdawn.slick.opengl.Texture getData();
+    public abstract Object getData();
 
 }

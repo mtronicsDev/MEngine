@@ -5,7 +5,7 @@ import org.newdawn.slick.opengl.TextureImpl;
 
 public class TextureKeyFrame extends KeyFrame {
 
-    TextureKeyFrame(int delay, Texture texture) {
+    public TextureKeyFrame(int delay, Texture texture) {
         super(delay, texture);
     }
 

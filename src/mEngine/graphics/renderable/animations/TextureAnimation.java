@@ -10,7 +10,7 @@ public class TextureAnimation extends Animation {
 
     public Texture getCurrentTexture() {
 
-        return getCurrentKeyFrame().getData();
+        return (Texture) getCurrentKeyFrame().getData();
 
     }
 

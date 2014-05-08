@@ -35,9 +35,7 @@ public class TextureHelper {
 
     public static Texture getTexture(String name) {
 
-        Texture texture = loadedTextures.get(name);
-
-        if (loadedTextures.containsKey(name)) return texture;
+        if (loadedTextures.containsKey(name)) return loadedTextures.get(name);
         else {
 
             loadTexture(name);
