@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class GUIText extends GUIComponent {
 
-    protected String text;
+    public String text;
     protected String fontFace;
     protected int fontStyle;
     protected int fontSize;
