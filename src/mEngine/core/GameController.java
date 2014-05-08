@@ -89,8 +89,8 @@ public class GameController {
                 )
                 .addComponent(
                         "reticule",
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64))
-                                .addComponent("guiQuad", new GUIQuad("reticule"))
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
+                                .addComponent("guiQuad", new GUIQuad())
                 )
                 .addComponent(
                         "fpsText",

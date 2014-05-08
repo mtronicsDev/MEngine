@@ -41,7 +41,7 @@ public class GUIGraph extends GUIComponent {
 
         float stepSize = parent.getSize().x / graph.getLength();
 
-        if (texture == null) texture = TextureHelper.getTexture(textureName);
+        if (texture == null) texture = TextureHelper.getTexture(textureName).getTexture();
 
         for (int count = 0; count < graph.getLength(); count++) {
 

@@ -1,6 +1,7 @@
 package mEngine.util.rendering;
 
-import org.newdawn.slick.opengl.Texture;
+import mEngine.graphics.renderable.textures.StaticTexture;
+import mEngine.graphics.renderable.textures.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import java.io.FileInputStream;
@@ -19,7 +20,8 @@ public class TextureHelper {
 
         try {
 
-            Texture texture = TextureLoader.getTexture("PNG", new FileInputStream(getResource(fileName, RES_TEXTURE)));
+            org.newdawn.slick.opengl.Texture textureData = TextureLoader.getTexture("PNG", new FileInputStream(getResource(fileName, RES_TEXTURE)));
+            StaticTexture texture = new StaticTexture(textureData);
             loadedTextures.put(fileName, texture);
 
         } catch (IOException e) {

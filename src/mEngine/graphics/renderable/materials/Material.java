@@ -1,14 +1,13 @@
 package mEngine.graphics.renderable.materials;
 
+import mEngine.graphics.renderable.textures.Texture;
 import mEngine.util.rendering.TextureHelper;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.opengl.Texture;
 
 public abstract class Material {
 
-    private Texture texture;
-    private Color color;
-    private float opacity;
+    protected Texture texture;
+    protected Color color = Color.white;
 
     public Material() {
     }
@@ -29,11 +28,9 @@ public abstract class Material {
         this.color = color;
     }
 
-    public float getOpacity() {
-        return opacity;
+    public void bind() {
+        if (texture != null) texture.getTexture().bind();
+        if (color != null) color.bind();
     }
 
-    public void setOpacity(float opacity) {
-        this.opacity = opacity;
-    }
 }

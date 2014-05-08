@@ -7,12 +7,10 @@ public class Material3D extends Material {
     private Vector3f ambientReflectivity;
     private Vector3f diffuseReflectivity;
     private Vector3f specularReflectivity;
-
     private Vector3f emit;
 
-    private float opticalDensity;
-
     public Material3D() {
+        super();
     }
 
     public Vector3f getAmbientReflectivity() {
@@ -39,14 +37,6 @@ public class Material3D extends Material {
         this.specularReflectivity = specularReflectivity;
     }
 
-    public float getOpticalDensity() {
-        return opticalDensity;
-    }
-
-    public void setOpticalDensity(float opticalDensity) {
-        this.opticalDensity = opticalDensity;
-    }
-
     public Vector3f getEmit() {
         return emit;
     }
@@ -54,4 +44,5 @@ public class Material3D extends Material {
     public void setEmit(Vector3f emit) {
         this.emit = emit;
     }
+
 }

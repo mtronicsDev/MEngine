@@ -3,10 +3,9 @@ package mEngine.graphics.renderable;
 import mEngine.core.GameController;
 import mEngine.core.ObjectController;
 import mEngine.graphics.Renderer;
-import mEngine.util.rendering.TextureHelper;
+import mEngine.graphics.renderable.materials.Material2D;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
-import org.newdawn.slick.opengl.Texture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +13,13 @@ import java.util.List;
 public class LoadingScreen {
 
     String textureName;
-    Texture texture;
+    Material2D material;
     List<Vector2f> vertices;
     List<Vector2f> uvs;
 
     public LoadingScreen(String textureName) {
 
+        material = new Material2D();
         this.textureName = textureName;
         vertices = new ArrayList<Vector2f>();
         uvs = new ArrayList<Vector2f>();
@@ -33,8 +33,8 @@ public class LoadingScreen {
 
     private void calculateVertexPositions() {
 
-        int ox = texture.getImageWidth() / 2; //Offset x
-        int oy = texture.getImageHeight() / 2; //Offset y
+        int ox = material.getTexture().getTexture().getImageWidth() / 2; //Offset x
+        int oy = material.getTexture().getTexture().getImageHeight() / 2; //Offset y
 
         int cx = Display.getWidth() / 2; //Center x
         int cy = Display.getHeight() / 2; //Center y
@@ -51,14 +51,14 @@ public class LoadingScreen {
 
     public void render() {
 
-        if (texture == null) {
+        if (material.getTexture() == null) {
 
-            texture = TextureHelper.getTexture(textureName);
+            material.setTexture(textureName);
             calculateVertexPositions();
 
         }
 
-        Renderer.renderObject2D(vertices, uvs, texture, Renderer.RENDER_QUADS);
+        Renderer.renderObject2D(vertices, uvs, material, Renderer.RENDER_QUADS);
 
     }
 

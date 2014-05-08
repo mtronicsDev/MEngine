@@ -80,7 +80,7 @@ public class Particle extends ComponentRenderable {
 
             else {
 
-                texture = TextureHelper.getTexture(textureName);
+                texture = TextureHelper.getTexture(textureName).getTexture();
 
                 uvs.add(new Vector2f(0, 1));
                 uvs.add(new Vector2f(0, 0));

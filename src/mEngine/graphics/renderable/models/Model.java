@@ -155,7 +155,7 @@ public class Model implements Serializable {
 
             if (!textureFile.exists()) isTextureThere = false;
 
-            else texture = TextureHelper.getTexture(textureName);
+            else texture = TextureHelper.getTexture(textureName).getTexture();
 
         }
 

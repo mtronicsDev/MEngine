@@ -28,12 +28,12 @@ public class Skybox extends ComponentRenderable {
     public void render() {
 
         if (textures[0] == null) {
-            textures[0] = TextureHelper.getTexture(textureName + "_bottom");
-            textures[1] = TextureHelper.getTexture(textureName + "_top");
-            textures[2] = TextureHelper.getTexture(textureName + "_back");
-            textures[3] = TextureHelper.getTexture(textureName + "_front");
-            textures[4] = TextureHelper.getTexture(textureName + "_left");
-            textures[5] = TextureHelper.getTexture(textureName + "_right");
+            textures[0] = TextureHelper.getTexture(textureName + "_bottom").getTexture();
+            textures[1] = TextureHelper.getTexture(textureName + "_top").getTexture();
+            textures[2] = TextureHelper.getTexture(textureName + "_back").getTexture();
+            textures[3] = TextureHelper.getTexture(textureName + "_front").getTexture();
+            textures[4] = TextureHelper.getTexture(textureName + "_left").getTexture();
+            textures[5] = TextureHelper.getTexture(textureName + "_right").getTexture();
         }
 
         if (!displayListsCreated) {

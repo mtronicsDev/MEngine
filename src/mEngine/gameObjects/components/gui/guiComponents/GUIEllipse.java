@@ -1,7 +1,6 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.graphics.Renderer;
-import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 
 import static java.lang.Math.*;
@@ -11,7 +10,6 @@ public class GUIEllipse extends GUIComponent {
     public void render() {
 
         super.render();
-        TextureHelper.getTexture("texturedStar").bind(); //Temporary fix
 
         if (verticesToRender.size() == 0) {
 

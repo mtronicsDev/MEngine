@@ -1,6 +1,7 @@
 package mEngine.graphics;
 
 import mEngine.gameObjects.components.renderable.LightSource;
+import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.util.math.MathHelper;
 import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.rendering.TextureHelper;
@@ -181,7 +182,7 @@ public class Renderer {
 
         } else {
 
-            Texture texture = TextureHelper.getTexture(textureName);
+            Texture texture = TextureHelper.getTexture(textureName).getTexture();
 
             glNewList(displayListHandle, GL_COMPILE_AND_EXECUTE);
 
@@ -590,7 +591,7 @@ public class Renderer {
 
     }
 
-    public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Texture texture, int mode) {
+    public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Material2D material, int mode) {
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
@@ -610,6 +611,8 @@ public class Renderer {
         vertexData.flip();
         textureData.flip();
 
+        material.bind();
+
         int vboVertexHandle = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
@@ -619,8 +622,6 @@ public class Renderer {
         glBindBuffer(GL_ARRAY_BUFFER, vboTextureHandle);
         glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(2, GL_FLOAT, 0, 0l);

@@ -1,22 +1,17 @@
 package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.graphics.Renderer;
-import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
-import org.newdawn.slick.opengl.Texture;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GUIQuad extends GUIComponent {
 
-    private String textureName;
-    private Texture texture;
     private List<Vector2f> uvs;
 
-    public GUIQuad(String fileName) {
+    public GUIQuad() {
 
-        textureName = fileName;
         uvs = new ArrayList<Vector2f>();
         uvs.add(new Vector2f(0, 1));
         uvs.add(new Vector2f(1, 1));
@@ -29,8 +24,6 @@ public class GUIQuad extends GUIComponent {
 
         super.render();
 
-        if (texture == null) texture = TextureHelper.getTexture(textureName);
-
         if (verticesToRender.size() == 0) {
 
             verticesToRender.add(new Vector2f(parent.getPosition().x, parent.getPosition().y + parent.getSize().y));
@@ -40,15 +33,8 @@ public class GUIQuad extends GUIComponent {
 
         }
 
-        Renderer.renderObject2D(verticesToRender, uvs, texture, Renderer.RENDER_QUADS);
+        Renderer.renderObject2D(verticesToRender, uvs, parent.material, Renderer.RENDER_QUADS);
 
     }
 
-    @Override
-    public void onSave() {
-
-        super.onSave();
-        texture = null;
-
-    }
 }

@@ -13,7 +13,6 @@ public class GUIText extends GUIComponent {
     protected String fontFace;
     protected int fontStyle;
     protected int fontSize;
-    protected Color color;
     protected TrueTypeFont font;
 
     public GUIText(String text, int fontSize) {
@@ -30,17 +29,10 @@ public class GUIText extends GUIComponent {
 
     public GUIText(String text, String fontFace, int fontStyle, int fontSize) {
 
-        this(text, fontFace, fontStyle, fontSize, Color.white);
-
-    }
-
-    public GUIText(String text, String fontFace, int fontStyle, int fontSize, Color color) {
-
         this.text = text;
         this.fontFace = fontFace;
         this.fontStyle = fontStyle;
         this.fontSize = fontSize;
-        this.color = color;
 
     }
 
@@ -49,7 +41,7 @@ public class GUIText extends GUIComponent {
         super.render();
         if (font == null)
             font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
-        font.drawString(parent.getPosition().x, parent.getPosition().y, text, color);
+        font.drawString(parent.getPosition().x, parent.getPosition().y, text, parent.material.getColor());
 
     }
 
@@ -85,7 +77,7 @@ public class GUIText extends GUIComponent {
     protected void onExternalUpdate(int fontStyle, int fontSize, String fontFace, Color color) {
 
         font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
-        this.color = color;
+        parent.material.setColor(color);
 
     }
 
