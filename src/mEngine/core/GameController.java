@@ -162,7 +162,7 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(0, 500, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(1000, 500, 0), new Vector3f())
                 .addComponent(
                         "sunAmbient",
                         new LightSource(800, new Vector4f(255, 147, 41, 1), new Vector3f(0, -1, 0), false)
