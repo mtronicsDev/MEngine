@@ -32,7 +32,7 @@ public class GUIElement extends ComponentRenderable {
     public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, String textureName) {
 
         material = new Material2D();
-        //Absolute size to relative size
+        //Absolute position to relative position
         position = new Vector2f();
         position.x = posInPixels.x / Display.getWidth();
         position.y = posInPixels.y / Display.getHeight();

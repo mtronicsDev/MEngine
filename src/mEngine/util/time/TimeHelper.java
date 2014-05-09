@@ -8,7 +8,7 @@ public class TimeHelper {
     public static int highestFPS;
     public static int TPS;
     public static int highestTPS;
-    public static boolean isInSlowMotion = false;
+    public static float timeModifier = 1;
     private static float lastTime = System.nanoTime() / 1000000;
     private static float lastFPS;
     private static long currentFPS;
@@ -31,7 +31,7 @@ public class TimeHelper {
 
         float thisTime = getTime();
         deltaTime = thisTime - lastTime;
-        if (isInSlowMotion) deltaTime /= 8;
+        deltaTime *= timeModifier;
         lastTime = thisTime;
 
     }
@@ -65,6 +65,16 @@ public class TimeHelper {
         }
 
         currentTPS++;
+
+    }
+
+    public static void updateTimeModifier() {
+
+        if (timeModifier == 1f / 8f) timeModifier = 1f;
+
+        else if (timeModifier == 1) timeModifier = 8f;
+
+        else if (timeModifier == 8) timeModifier = 1f / 8f;
 
     }
 

@@ -168,7 +168,7 @@ void main(void) {
                 vec3 lightDirection = lightDirections[count];
 
                 float diffuseLightIntensity = lightStrengths[count];
-                diffuseLightIntensity = max(0, dot(normal, -lightDirection));
+                diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
                 fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * lightColors[count]);
 
