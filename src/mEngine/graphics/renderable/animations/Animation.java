@@ -17,6 +17,7 @@ public abstract class Animation {
         Collections.addAll(this.keyFrames, keyFrames);
         if (!this.keyFrames.isEmpty()) currentKeyFrameIndex = 0;
         this.stopAfterOneCycle = stopAfterOneCycle;
+        start();
 
     }
 

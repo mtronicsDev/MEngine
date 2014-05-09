@@ -1,4 +1,4 @@
-package mEngine.util.time;
+package mEngine.util.debug;
 
 public class RuntimeHelper {
 

@@ -17,7 +17,11 @@ public abstract class Material {
     }
 
     public void setTexture(String textureName) {
-        texture = TextureHelper.getTexture(textureName);
+        setTexture(textureName, false);
+    }
+
+    public void setTexture(String textureName, boolean isAnimated) {
+        texture = TextureHelper.getTexture(textureName, isAnimated);
     }
 
     public Color getColor() {

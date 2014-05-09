@@ -16,8 +16,9 @@ public class ResourceHelper {
     public static final int RES_MODEL = 5;
     public static final int RES_SOUND = 6;
     public static final int RES_TEXTURE = 7;
-    public static final int RES_SHADER_V = 8;
-    public static final int RES_SHADER_F = 9;
+    public static final int RES_TEXTURE_ANIMATED = 8;
+    public static final int RES_SHADER_V = 9;
+    public static final int RES_SHADER_F = 10;
 
     private static List<String> paths = new ArrayList<String>();
 
@@ -33,6 +34,7 @@ public class ResourceHelper {
         paths.add(paths.get(1) + "models/"); //RES_MODEL
         paths.add(paths.get(1) + "sounds/"); //RES_SOUND
         paths.add(paths.get(1) + "textures/"); //RES_TEXTURE
+        paths.add(paths.get(1) + "textures/"); //RES_TEXTURE_ANIMATED
         paths.add(paths.get(1) + "shaders/"); //RES_SHADER_V
         paths.add(paths.get(1) + "shaders/"); //RES_SHADER_F
 
@@ -64,6 +66,9 @@ public class ResourceHelper {
                 break;
             case RES_TEXTURE:
                 filePath = paths.get(type) + fileName + ".png";
+                break;
+            case RES_TEXTURE_ANIMATED:
+                filePath = paths.get(type) + fileName + ".meta";
                 break;
             case RES_SHADER_V:
                 filePath = paths.get(type) + fileName + ".vs";

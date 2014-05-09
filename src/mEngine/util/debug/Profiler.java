@@ -3,7 +3,7 @@ package mEngine.util.debug;
 import mEngine.util.math.graphs.Graph;
 import mEngine.util.time.TimeHelper;
 
-import static mEngine.util.time.RuntimeHelper.*;
+import static mEngine.util.debug.RuntimeHelper.*;
 
 public class Profiler {
 

@@ -11,12 +11,12 @@ import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
 import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
+import mEngine.util.debug.RuntimeHelper;
 import mEngine.util.debug.texts.FPSTextComponent;
 import mEngine.util.debug.texts.RAMTextComponent;
 import mEngine.util.debug.texts.TPSTextComponent;
@@ -27,7 +27,6 @@ import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
-import mEngine.util.time.RuntimeHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -91,7 +90,7 @@ public class GameController {
                 )
                 .addComponent(
                         "reticule",
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "test", true)
                                 .addComponent("guiQuad", new GUIQuad())
                 )
                 .addComponent(
