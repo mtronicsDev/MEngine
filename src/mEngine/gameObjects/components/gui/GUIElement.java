@@ -15,7 +15,6 @@ public class GUIElement extends ComponentRenderable {
     public HashMap<String, GUIComponent> components = new HashMap<String, GUIComponent>();
     private Vector2f position; //Values from 0 to 1
     private Vector2f size; //Values from 0 to 1
-    private boolean isAnimated;
     private String textureName;
 
     public GUIElement(Vector2f posInPixels) {
@@ -32,12 +31,6 @@ public class GUIElement extends ComponentRenderable {
 
     public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, String textureName) {
 
-        this(posInPixels, sizeInPixels, textureName, false);
-
-    }
-
-    public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, String textureName, boolean isAnimated) {
-
         material = new Material2D();
         //Absolute size to relative size
         position = new Vector2f();
@@ -50,7 +43,6 @@ public class GUIElement extends ComponentRenderable {
         size.y = sizeInPixels.y / Display.getHeight();
 
         this.textureName = textureName;
-        this.isAnimated = isAnimated;
 
     }
 
@@ -119,7 +111,7 @@ public class GUIElement extends ComponentRenderable {
 
     public void render() {
 
-        if (material.getTexture() == null && textureName != null) material.setTexture(textureName, isAnimated);
+        if (material.getTexture() == null && textureName != null) material.setTexture(textureName);
         material.bind();
         for (GUIComponent component : components.values()) {
             component.render();

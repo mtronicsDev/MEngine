@@ -90,7 +90,7 @@ public class GameController {
                 )
                 .addComponent(
                         "reticule",
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "test", true)
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "test")
                                 .addComponent("guiQuad", new GUIQuad())
                 )
                 .addComponent(

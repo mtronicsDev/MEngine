@@ -1,5 +1,6 @@
 package mEngine.util.rendering;
 
+import mEngine.graphics.renderable.animations.TextureAnimation;
 import mEngine.graphics.renderable.animations.TextureKeyFrame;
 import mEngine.util.resources.ResourceHelper;
 
@@ -11,11 +12,12 @@ import java.util.List;
 
 public class TextureAnimationHelper {
 
-    public static TextureKeyFrame[] getFrames(String animationName) throws IOException {
+    public static TextureAnimation getAnimation(String animationName) throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(ResourceHelper.getResource(animationName, ResourceHelper.RES_TEXTURE_ANIMATED)));
         List<TextureKeyFrame> frames = new ArrayList<TextureKeyFrame>();
         String line;
+        boolean stopAfterOneCycle = false;
 
         while ((line = reader.readLine()) != null) {
 
@@ -28,11 +30,15 @@ public class TextureAnimationHelper {
 
                 frames.add(new TextureKeyFrame(frameDelay, TextureHelper.getTexture(frameName).getTexture()));
 
+            } else if (line.startsWith("r ")) {
+                if (!line.split(" ")[1].equals("true"))
+                    stopAfterOneCycle = true; //r stands for repeat which makes it the opposite of stopAfterOneCycle
             }
 
         }
 
-        return frames.toArray(new TextureKeyFrame[frames.size()]);
+        reader.close();
+        return new TextureAnimation(frames.toArray(new TextureKeyFrame[frames.size()]), stopAfterOneCycle);
 
     }
 

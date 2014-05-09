@@ -1,3 +1,4 @@
-f test0 100
-f test1 100
-f test2 100
+r true
+f test0 1
+f test1 1
+f test2 1

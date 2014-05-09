@@ -4,8 +4,10 @@ import mEngine.graphics.renderable.animations.TextureAnimation;
 import mEngine.graphics.renderable.textures.AnimatedTexture;
 import mEngine.graphics.renderable.textures.StaticTexture;
 import mEngine.graphics.renderable.textures.Texture;
+import mEngine.util.resources.ResourceHelper;
 import org.newdawn.slick.opengl.TextureLoader;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,24 +20,11 @@ public class TextureHelper {
 
     private static Map<String, Texture> loadedTextures = new HashMap<String, Texture>();
 
-    private static void loadTexture(String fileName, boolean isAnimated) {
+    private static void loadTexture(String fileName) {
 
-        if (isAnimated) {
+        File file = ResourceHelper.getResource(fileName, RES_TEXTURE);
 
-            TextureAnimation animation = null;
-
-            try {
-                animation = new TextureAnimation(TextureAnimationHelper.getFrames(fileName), false);
-            } catch (IOException e) {
-
-                e.printStackTrace();
-                System.exit(1);
-
-            }
-
-            loadedTextures.put(fileName, new AnimatedTexture(animation));
-
-        } else {
+        if (file.exists()) {
 
             try {
 
@@ -50,22 +39,31 @@ public class TextureHelper {
 
             }
 
+        } else {
+
+            TextureAnimation animation = null;
+
+            try {
+                animation = TextureAnimationHelper.getAnimation(fileName);
+            } catch (IOException e) {
+
+                e.printStackTrace();
+                System.exit(1);
+
+            }
+
+            loadedTextures.put(fileName, new AnimatedTexture(animation));
+
         }
 
     }
 
     public static Texture getTexture(String name) {
 
-        return getTexture(name, false);
-
-    }
-
-    public static Texture getTexture(String name, boolean isAnimated) {
-
         if (loadedTextures.containsKey(name)) return loadedTextures.get(name);
         else {
 
-            loadTexture(name, isAnimated);
+            loadTexture(name);
             return getTexture(name);
 
         }
