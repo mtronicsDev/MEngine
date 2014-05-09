@@ -5,7 +5,6 @@ import org.lwjgl.util.vector.Vector4f;
 
 public class SpotLightSource extends LightSource {
 
-    public Vector3f direction;
     public float angle;
 
     public SpotLightSource(float strength) {
@@ -52,21 +51,11 @@ public class SpotLightSource extends LightSource {
 
     public SpotLightSource(float strength, Vector4f color, boolean specularLighting, Vector3f direction, float angle) {
 
-        super(strength, color, specularLighting);
-
-        this.direction = direction;
+        super(strength, color, direction, specularLighting);
 
         if (angle == -1) this.angle = -1;
 
         else this.angle = (float) Math.toRadians(angle);
-
-    }
-
-    public void onUpdate() {
-
-        super.onUpdate();
-
-        direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
 
     }
 

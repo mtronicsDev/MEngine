@@ -5,8 +5,6 @@ import org.lwjgl.util.vector.Vector4f;
 
 public class GlobalLightSource extends LightSource {
 
-    public Vector3f direction;
-
     public GlobalLightSource(float strength, Vector3f direction) {
 
         this(strength, new Vector4f(1, 1, 1, 1), direction);
@@ -27,17 +25,7 @@ public class GlobalLightSource extends LightSource {
 
     public GlobalLightSource(float strength, Vector4f color, boolean specularLighting, Vector3f direction) {
 
-        super(strength, color, specularLighting);
-
-        this.direction = direction;
-
-    }
-
-    public void onUpdate() {
-
-        super.onUpdate();
-
-        direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
+        super(strength, color, direction, specularLighting);
 
     }
 

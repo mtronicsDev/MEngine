@@ -5,7 +5,6 @@ import org.lwjgl.util.vector.Vector4f;
 
 public class DirectionalLightSource extends LightSource {
 
-    public Vector3f direction;
     public float radius;
 
     public DirectionalLightSource(float strength, Vector3f direction) {
@@ -52,18 +51,9 @@ public class DirectionalLightSource extends LightSource {
 
     public DirectionalLightSource(float strength, Vector4f color, boolean specularLighting, Vector3f direction, float radius) {
 
-        super(strength, color, specularLighting);
+        super(strength, color, direction, specularLighting);
 
-        this.direction = direction;
         this.radius = radius;
-
-    }
-
-    public void onUpdate() {
-
-        super.onUpdate();
-
-        direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
 
     }
 
