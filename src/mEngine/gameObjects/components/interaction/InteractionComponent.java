@@ -134,10 +134,14 @@ public class InteractionComponent extends Component {
 
         controllerDistance = getControllerDistance();
 
-        if (interactionInstruction != null && controllerDistance <= radius && interactable)
+        if (interactionInstruction != null) {
+
+            if (controllerDistance <= radius && interactable)
             ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
 
-        else ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
+            else ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
+
+        }
 
         if (isInteracted()) {
 
