@@ -1,7 +1,6 @@
 package mEngine.graphics;
 
 import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
-import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
 import mEngine.gameObjects.components.renderable.light.LightSource;
 import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.materials.Material2D;
@@ -595,7 +594,8 @@ public class Renderer {
 
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
 
-            } else glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 2);
+            } else
+                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 2);
 
         }
 

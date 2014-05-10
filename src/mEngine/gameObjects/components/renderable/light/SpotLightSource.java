@@ -30,7 +30,7 @@ public class SpotLightSource extends LightSource {
         this(strength, color, specularLighting, new Vector3f(0, -1, 0), -1);
 
     }
-    
+
     public SpotLightSource(float strength, Vector3f direction, float angle) {
 
         this(strength, new Vector4f(1, 1, 1, 1), direction, angle);
