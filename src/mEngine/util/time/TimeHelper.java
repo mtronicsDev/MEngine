@@ -68,6 +68,16 @@ public class TimeHelper {
 
     }
 
+    public static void timeOut(long milliseconds) {
+
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void updateTimeModifier() {
 
         if (timeModifier == 1f / 8f) timeModifier = 1f;
