@@ -4,7 +4,9 @@ import mEngine.graphics.renderable.textures.Texture;
 import mEngine.util.rendering.TextureHelper;
 import org.newdawn.slick.Color;
 
-public abstract class Material {
+import java.io.Serializable;
+
+public abstract class Material implements Serializable {
 
     protected Texture texture;
     protected Color color = Color.white;
@@ -16,8 +18,16 @@ public abstract class Material {
         return texture;
     }
 
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+
     public void setTexture(String textureName) {
         texture = TextureHelper.getTexture(textureName);
+    }
+
+    public void deleteTexture() {
+        texture = null;
     }
 
     public Color getColor() {
@@ -26,6 +36,10 @@ public abstract class Material {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void deleteColor() {
+        setColor(null);
     }
 
     public void bind() {

@@ -47,7 +47,7 @@ public class Serializer {
 
     }
 
-    public static void deSerialize(String fileName) {
+    public static void deSerialize(String fileName, boolean delete) {
 
         SaveObject object = null;
 
@@ -58,8 +58,8 @@ public class Serializer {
             object = (SaveObject) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
-            //noinspection ResultOfMethodCallIgnored
-            file.delete();
+            if (delete) //noinspection ResultOfMethodCallIgnored
+                file.delete();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class Serializer {
             }
         });
 
-        if (saves != null) deSerialize(saves[0].getName().replace(".mess", ""));
+        if (saves != null) deSerialize(saves[0].getName().replace(".mess", ""), true);
 
     }
 

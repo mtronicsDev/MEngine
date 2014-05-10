@@ -83,6 +83,9 @@ public class GUIElement extends ComponentRenderable {
 
         }
 
+        material.deleteTexture();
+        material.deleteColor();
+
     }
 
     @Override
