@@ -159,7 +159,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("Paris2010")
+                        new RenderComponent("sciFiCity")
                 )
                 .createAllComponents());
 
