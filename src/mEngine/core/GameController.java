@@ -11,8 +11,8 @@ import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
+import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
-import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
@@ -60,7 +60,7 @@ public class GameController {
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
-        addGameObject(new GameObject(new Vector3f(0, 15, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
                 .addComponent(
                         "movementComponent",
                         new MovementComponent()
@@ -158,8 +158,16 @@ public class GameController {
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
-                        "renderComponent",
+                        "ocean",
+                        new RenderComponent("sciFiOcean")
+                )
+                .addComponent(
+                        "city",
                         new RenderComponent("sciFiCity")
+                )
+                .addComponent(
+                        "terrain",
+                        new RenderComponent("sciFiTerrain")
                 )
                 .createAllComponents());
 
@@ -177,36 +185,10 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(2, 25, -12), new Vector3f(0, 135, 0))
+        addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
                 .addComponent(
                         "spotLight",
-                        new SpotLightSource(500, new Vector4f(255, 0, 0, 1), new Vector3f(), 25)
-                )
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(0, 25, 0), new Vector3f(0, 65, 0))
-                .addComponent(
-                        "spotLight",
-                        new SpotLightSource(500, new Vector4f(0, 255, 0, 1), new Vector3f(), 25)
-                )
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(1, 25, -6), new Vector3f(-25, 95, 0))
-                .addComponent(
-                        "spotLight",
-                        new SpotLightSource(500, new Vector4f(0, 0, 255, 1), new Vector3f(), 25)
-                )
-                .addComponent(
-                        "renderComponent",
-                        new RenderComponent("sphere")
+                        new DirectionalLightSource(1000, new Vector4f(255, 255, 255, 1), new Vector3f(-11.9f, 153.3f, 0))
                 )
                 .createAllComponents());
 

@@ -1,52 +1,20 @@
 # Blender MTL File: 'None'
-# Material Count: 5
+# Material Count: 2
 
-newmtl default
-Ns 0.000000
+newmtl default_bldgs2.001
+Ns 96.078431
 Ka 0.000000 0.000000 0.000000
-Kd 0.232157 0.225882 0.203922
+Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd \Maps\1thr.jpg
 
-newmtl default_bldgs2
-Ns 0.000000
+newmtl default_bldgs2_NONE.001
+Ns 96.078431
 Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
+Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd \Maps\axq2.jpg
-
-newmtl default_bldgs2_NONE
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd \\Maps\\axq2.jpg
-
-newmtl material_1
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd \Maps\snd2_01.jpg
-
-newmtl material_1_mountain
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.401569 0.401569 0.401569
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd \Maps\mtlm1.jpg
