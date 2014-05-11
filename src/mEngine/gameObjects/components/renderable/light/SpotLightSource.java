@@ -9,7 +9,7 @@ public class SpotLightSource extends LightSource {
 
     public SpotLightSource(float strength) {
 
-        this(strength, new Vector4f(1, 1, 1, 1), new Vector3f(0, -1, 0), -1);
+        this(strength, new Vector4f(255, 255, 255, 1), new Vector3f(0, -1, 0), -1);
 
     }
 
@@ -21,7 +21,7 @@ public class SpotLightSource extends LightSource {
 
     public SpotLightSource(float strength, Vector3f direction, float angle) {
 
-        this(strength, new Vector4f(1, 1, 1, 1), direction, angle);
+        this(strength, new Vector4f(255, 255, 255, 1), direction, angle);
 
     }
 

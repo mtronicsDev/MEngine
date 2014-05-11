@@ -7,7 +7,7 @@ public class GlobalLightSource extends LightSource {
 
     public GlobalLightSource(float strength, Vector3f direction) {
 
-        this(strength, new Vector4f(1, 1, 1, 1), direction);
+        this(strength, new Vector4f(255, 255, 255, 1), direction);
 
     }
 

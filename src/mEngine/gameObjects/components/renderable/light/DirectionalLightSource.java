@@ -9,13 +9,13 @@ public class DirectionalLightSource extends LightSource {
 
     public DirectionalLightSource(float strength, Vector3f direction) {
 
-        this(strength, new Vector4f(1, 1, 1, 1), direction, -1);
+        this(strength, new Vector4f(255, 255, 255, 1), direction, -1);
 
     }
 
     public DirectionalLightSource(float strength, Vector3f direction, float radius) {
 
-        this(strength, new Vector4f(1, 1, 1, 1), direction, radius);
+        this(strength, new Vector4f(255, 255, 255, 1), direction, radius);
 
     }
 
