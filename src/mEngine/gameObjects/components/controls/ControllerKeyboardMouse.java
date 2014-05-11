@@ -110,30 +110,34 @@ public class ControllerKeyboardMouse extends Controller {
 
             movementComponent.rotate(pitch, yaw);
 
-            if (sprintModeToggle) {
-                if (Input.isKeyDown(getKey("sprint"))) movementComponent.sprint();
-            } else {
-                if (Input.isKeyPressed(getKey("sprint"))) movementComponent.sprint();
-            }
+            if (getKey("forward") != null) {
 
-            if (sneakModeToggle) {
-                if (Input.isKeyDown(getKey("sneak"))) movementComponent.sneak();
-            } else {
-                if (Input.isKeyPressed(getKey("sneak"))) movementComponent.sneak();
-            }
+                if (sprintModeToggle) {
+                    if (Input.isKeyDown(getKey("sprint"))) movementComponent.sprint();
+                } else {
+                    if (Input.isKeyPressed(getKey("sprint"))) movementComponent.sprint();
+                }
 
-            if (Input.isKeyPressed(getKey("forward"))) movementComponent.moveForward();
-            if (Input.isKeyPressed(getKey("backward"))) movementComponent.moveBackward();
-            if (Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft();
-            if (Input.isKeyPressed(getKey("left"))) movementComponent.moveRight();
+                if (sneakModeToggle) {
+                    if (Input.isKeyDown(getKey("sneak"))) movementComponent.sneak();
+                } else {
+                    if (Input.isKeyPressed(getKey("sneak"))) movementComponent.sneak();
+                }
 
-            if (Input.isKeyPressed(getKey("up")) && capableOfFlying) movementComponent.moveUp();
-            if (Input.isKeyPressed(getKey("down")) && capableOfFlying) movementComponent.moveDown();
+                if (Input.isKeyPressed(getKey("forward"))) movementComponent.moveForward();
+                if (Input.isKeyPressed(getKey("backward"))) movementComponent.moveBackward();
+                if (Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft();
+                if (Input.isKeyPressed(getKey("left"))) movementComponent.moveRight();
 
-            if (continuouslyJumping) {
-                if (Input.isKeyPressed(getKey("jump"))) movementComponent.jump();
-            } else {
-                if (Input.isKeyDown(getKey("jump"))) movementComponent.jump();
+                if (Input.isKeyPressed(getKey("up")) && capableOfFlying) movementComponent.moveUp();
+                if (Input.isKeyPressed(getKey("down")) && capableOfFlying) movementComponent.moveDown();
+
+                if (continuouslyJumping) {
+                    if (Input.isKeyPressed(getKey("jump"))) movementComponent.jump();
+                } else {
+                    if (Input.isKeyDown(getKey("jump"))) movementComponent.jump();
+                }
+
             }
 
         }

@@ -4,7 +4,7 @@ import mEngine.util.time.Timer;
 
 public abstract class KeyFrame {
 
-    protected Object data; //Can be a texture, list of vertices ore something else
+    protected Object data; //Can be a texture, list of vertices or something else
     private int delay; //In milliseconds
     private Timer delayTimer;
 
