@@ -43,14 +43,14 @@ public class InteractionComponent extends Component {
 
     public InteractionComponent(boolean interactable, float radius, String interactionKey, InteractionMethod interaction) {
 
-        this(interactable, radius, interactionKey, "interact",180, interaction);
+        this(interactable, radius, interactionKey, "interact", 180, interaction);
 
 
     }
 
     public InteractionComponent(boolean interactable, float radius, String interactionKey, String interactionDescription, InteractionMethod interaction) {
 
-        this(interactable, radius, interactionKey, interactionDescription,180, interaction);
+        this(interactable, radius, interactionKey, interactionDescription, 180, interaction);
 
     }
 

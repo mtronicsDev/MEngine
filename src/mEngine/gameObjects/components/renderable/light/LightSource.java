@@ -13,16 +13,30 @@ public abstract class LightSource extends ComponentRenderable {
     public float strength;
     public Vector3f position;
     public Vector4f color;
-    public int specularLighting;
+    public int specularLighting = 1;
     public Vector3f direction;
+    public boolean dependent = true;
 
-    public LightSource(float strength, Vector4f color, Vector3f direction, boolean specularLighting) {
+    public LightSource(float strength, Vector4f color, Vector3f direction) {
 
         this.strength = strength;
         Vector3f colorIntensity = VectorHelper.divideVectorByFloat(new Vector3f(color), 255f);
         this.color = new Vector4f(colorIntensity.x, colorIntensity.y, colorIntensity.z, color.w);
-        this.specularLighting = BinaryHelper.convertToBinaryInteger(specularLighting);
         this.direction = direction;
+
+    }
+
+    public LightSource setDependent(boolean dependent) {
+
+        this.dependent = dependent;
+        return this;
+
+    }
+
+    public LightSource setSpecularLighting(boolean specularLighting) {
+
+        this.specularLighting = BinaryHelper.convertToBinaryInteger(specularLighting);
+        return this;
 
     }
 
@@ -37,7 +51,7 @@ public abstract class LightSource extends ComponentRenderable {
 
         position = parent.position;
 
-        direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
+        if (dependent) direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
 
     }
 

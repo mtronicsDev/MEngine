@@ -171,49 +171,43 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(90, 0, 0))
-                .addComponent(
-                        "sunAmbient",
-                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, -1, 0))
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(-90, 0, 0))
-                .addComponent(
-                        "sunAmbient",
-                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, 90, 0))
-                .addComponent(
-                        "sunAmbient",
-                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, -90, 0))
-                .addComponent(
-                        "sunAmbient",
-                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, 0, 0))
-                .addComponent(
-                        "sunAmbient",
-                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
-                )
-                .createAllComponents());
-
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, 180, 0))
-                .addComponent(
-                        "sunAmbient",
-                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
-                )
-                .createAllComponents());
-
         addGameObject(new GameObject(new Vector3f(), new Vector3f(35, -45, 0))
+                .addComponent(
+                        "sunAmbient0",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 1, 0))
+                                .setSpecularLighting(false)
+                                .setDependent(false)
+                )
+                .addComponent(
+                        "sunAmbient1",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))
+                                .setSpecularLighting(false)
+                                .setDependent(false)
+                )
+                .addComponent(
+                        "sunAmbient2",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(1, 0, 0))
+                                .setSpecularLighting(false)
+                                .setDependent(false)
+                )
+                .addComponent(
+                        "sunAmbient3",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(-1, 0, 0))
+                                .setSpecularLighting(false)
+                                .setDependent(false)
+                )
+                .addComponent(
+                        "sunAmbient4",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 0, 1))
+                                .setSpecularLighting(false)
+                                .setDependent(false)
+                )
+                .addComponent(
+                        "sunAmbient5",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 0, -1))
+                                .setSpecularLighting(false)
+                                .setDependent(false)
+                )
                 .addComponent(
                         "sun",
                         new GlobalLightSource(15, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))

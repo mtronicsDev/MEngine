@@ -21,37 +21,13 @@ public class DirectionalLightSource extends LightSource {
 
     public DirectionalLightSource(float strength, Vector4f color, Vector3f direction) {
 
-        this(strength, color, true, direction, -1);
+        this(strength, color, direction, -1);
 
     }
 
     public DirectionalLightSource(float strength, Vector4f color, Vector3f direction, float radius) {
 
-        this(strength, color, true, direction, radius);
-
-    }
-
-    public DirectionalLightSource(float strength, boolean specularLighting, Vector3f direction) {
-
-        this(strength, new Vector4f(1, 1, 1, 1), specularLighting, direction, -1);
-
-    }
-
-    public DirectionalLightSource(float strength, boolean specularLighting, Vector3f direction, float radius) {
-
-        this(strength, new Vector4f(1, 1, 1, 1), specularLighting, direction, radius);
-
-    }
-
-    public DirectionalLightSource(float strength, Vector4f color, boolean specularLighting, Vector3f direction) {
-
-        this(strength, color, specularLighting, direction, -1);
-
-    }
-
-    public DirectionalLightSource(float strength, Vector4f color, boolean specularLighting, Vector3f direction, float radius) {
-
-        super(strength, color, direction, specularLighting);
+        super(strength, color, direction);
 
         this.radius = radius;
 
