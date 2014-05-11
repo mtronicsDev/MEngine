@@ -97,7 +97,7 @@ public class InteractionComponent extends Component {
 
                 if (interactionKey == null) {
 
-                    if (controllerDistances[count] <= radius) interacted = true;
+                    if (controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) interacted = true;
 
                 } else {
 

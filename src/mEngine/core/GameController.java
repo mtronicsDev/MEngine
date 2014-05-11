@@ -220,13 +220,6 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        /*addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
-                .addComponent(
-                        "spotLight",
-                        new DirectionalLightSource(1000, new Vector4f(255, 255, 255, 1), new Vector3f(-11.9f, 153.3f, 0))
-                )
-                .createAllComponents());*/
-
         isLoading = false;
 
     }
