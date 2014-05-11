@@ -15,6 +15,10 @@ import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InteractionComponent extends Component {
 
@@ -23,34 +27,42 @@ public class InteractionComponent extends Component {
     public String interactionKey;
     public String interactionDescription;
     public String interactionInstruction;
-    public float radius;
-    public float controllerDistance;
+    private float radius;
+    private float[] controllerDistances;
+    private float maxControllerLookAngle;
+    private float[] controllerLookAngles;
+    private List<GameObject> controlledGameObjects;
 
     public InteractionMethod interaction;
 
     public InteractionComponent(boolean interactable, float radius, InteractionMethod interaction) {
 
-        this.interactable = interactable;
-        this.interaction = interaction;
-        this.radius = radius;
+        this(interactable, radius, null, "interact", 180, interaction);
 
     }
 
     public InteractionComponent(boolean interactable, float radius, String interactionKey, InteractionMethod interaction) {
+
+        this(interactable, radius, interactionKey, "interact",180, interaction);
+
+
+    }
+
+    public InteractionComponent(boolean interactable, float radius, String interactionKey, String interactionDescription, InteractionMethod interaction) {
+
+        this(interactable, radius, interactionKey, interactionDescription,180, interaction);
+
+    }
+
+    public InteractionComponent(boolean interactable, float radius, String interactionKey, String interactionDescription, float maxControllerLookAngle, InteractionMethod interaction) {
 
         this.interactable = interactable;
         this.interactionKey = interactionKey;
         this.interactionKeyIndex = Keyboard.getKeyIndex(interactionKey);
         this.interaction = interaction;
         this.radius = radius;
-
-    }
-
-    public InteractionComponent(boolean interactable, float radius, String interactionKey, String interactionDescription, InteractionMethod interaction) {
-
-        this(interactable, radius, interactionKey, interaction);
-
         this.interactionDescription = interactionDescription;
+        this.maxControllerLookAngle = (float) Math.toRadians(maxControllerLookAngle);
 
     }
 
@@ -62,11 +74,7 @@ public class InteractionComponent extends Component {
 
         if (interactionKey != null) {
 
-            String interactionInstruction = String.valueOf(interactionKey).toUpperCase() + ": ";
-
-            if (interactionDescription == null) interactionInstruction += "interact";
-
-            else interactionInstruction += interactionDescription;
+            String interactionInstruction = String.valueOf(interactionKey).toUpperCase() + ": " + interactionDescription;
 
             parent.addComponent(
                     "interactionInstruction",
@@ -85,13 +93,22 @@ public class InteractionComponent extends Component {
 
             boolean interacted = false;
 
-            if (interactionKey == null) {
+            for (int count = 0; count < controlledGameObjects.size(); count++) {
 
-                if (controllerDistance <= radius) interacted = true;
+                if (interactionKey == null) {
 
-            } else {
+                    if (controllerDistances[count] <= radius) interacted = true;
 
-                if (Input.isKeyDown(interactionKeyIndex) && controllerDistance <= radius) interacted = true;
+                } else {
+
+                    if (Input.isKeyDown(interactionKeyIndex) && controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
+
+                        interacted = true;
+                        break;
+
+                    }
+
+                }
 
             }
 
@@ -101,46 +118,66 @@ public class InteractionComponent extends Component {
 
     }
 
-    private float getControllerDistance() {
+    private void setControllerData() {
 
-        GameObject controlledObject = null;
+        for (int count = 0; count < controlledGameObjects.size(); count++) {
+
+            GameObject controlledObject = controlledGameObjects.get(count);
+
+            Vector3f distanceVector = VectorHelper.subtractVectors(parent.position, controlledObject.position);
+
+            controllerDistances[count] = VectorHelper.getAbs(distanceVector);
+
+            Vector3f percentRotation = new Vector3f(controlledObject.percentRotation.x, controlledObject.percentRotation.y, -controlledObject.percentRotation.z);
+            controllerLookAngles[count] = VectorHelper.getAngle(distanceVector, percentRotation);
+
+        }
+
+    }
+
+    private void setControlledGameObjects() {
+
+        controlledGameObjects = new ArrayList<GameObject>();
 
         for (GameObject object : ObjectController.gameObjects) {
 
             for (Component component : object.components.values()) {
 
-                if (component instanceof Controller) {
+                if (component instanceof Controller) controlledGameObjects.add(object);
 
-                    controlledObject = object;
+            }
+
+        }
+
+        controllerDistances = new float[controlledGameObjects.size()];
+        controllerLookAngles = new float[controlledGameObjects.size()];
+
+    }
+
+    public void onUpdate() {
+
+        if (controlledGameObjects == null) setControlledGameObjects();
+
+        setControllerData();
+
+        if (interactionInstruction != null) {
+
+            boolean interactable = false;
+
+            for (int count = 0; count < controlledGameObjects.size(); count++) {
+
+                if (controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
+
+                    interactable = true;
                     break;
 
                 }
 
             }
 
-        }
+            if (interactable && this.interactable) ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
 
-        float distance;
-
-        if (controlledObject == null) distance = Float.POSITIVE_INFINITY;
-
-        else distance = VectorHelper.getAbs(VectorHelper.subtractVectors(controlledObject.position, parent.position));
-
-        return distance;
-
-    }
-
-    public void onUpdate() {
-
-        controllerDistance = getControllerDistance();
-
-        if (interactionInstruction != null) {
-
-            if (controllerDistance <= radius && interactable)
-                ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
-
-            else
-                ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
+            else ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
 
         }
 

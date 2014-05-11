@@ -3,15 +3,25 @@ package mEngine.gameObjects.components.renderable;
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.models.Model;
+import mEngine.util.math.vectors.VectorHelper;
+import org.lwjgl.util.vector.Vector3f;
 
 public class RenderComponent extends ComponentRenderable {
 
     public Model model;
     String modelFileName;
+    Vector3f positionModifier;
 
     public RenderComponent(String modelFileName) {
 
+        this(modelFileName, new Vector3f());
+
+    }
+
+    public RenderComponent(String modelFileName, Vector3f positionModifier) {
+
         this.modelFileName = modelFileName;
+        this.positionModifier = positionModifier;
 
     }
 
@@ -27,7 +37,7 @@ public class RenderComponent extends ComponentRenderable {
     public void onUpdate() {
 
         super.onUpdate();
-        model.update(parent.position, parent.rotation);
+        model.update(VectorHelper.sumVectors(new Vector3f[] {parent.position, positionModifier}), parent.rotation);
 
     }
 

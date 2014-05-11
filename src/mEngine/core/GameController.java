@@ -119,14 +119,14 @@ public class GameController {
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(0, 40, 0), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
                         new RenderComponent("monkey")
                 )
                 .addComponent(
                         "interactionComponent",
-                        new InteractionComponent(true, 10, "I", "move monkey", new AsyncMethod() {
+                        new InteractionComponent(true, 10, "I", "move monkey", 25, new AsyncMethod() {
                             @Override
                             public void interact() {
                                 caller.interactable = false;
@@ -159,11 +159,11 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
                         "ocean",
-                        new RenderComponent("sciFiOcean")
+                        new RenderComponent("sciFiOcean", new Vector3f(0, -84, 0))
                 )
                 .addComponent(
                         "city",
-                        new RenderComponent("sciFiCity")
+                        new RenderComponent("sciFiCity", new Vector3f(0, 50, 0))
                 )
                 .addComponent(
                         "terrain",
@@ -174,23 +174,58 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(), new Vector3f(90, 0, 0))
                 .addComponent(
                         "sunAmbient",
-                        new GlobalLightSource(4, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, -1, 0))
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, -1, 0))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(), new Vector3f(-90, 0, 0))
+                .addComponent(
+                        "sunAmbient",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, 90, 0))
+                .addComponent(
+                        "sunAmbient",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, -90, 0))
+                .addComponent(
+                        "sunAmbient",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, 0, 0))
+                .addComponent(
+                        "sunAmbient",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
+                )
+                .createAllComponents());
+
+        addGameObject(new GameObject(new Vector3f(), new Vector3f(0, 180, 0))
+                .addComponent(
+                        "sunAmbient",
+                        new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), false, new Vector3f(0, 1, 0))
                 )
                 .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f(35, -45, 0))
                 .addComponent(
                         "sun",
-                        new GlobalLightSource(20, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))
+                        new GlobalLightSource(15, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))
                 )
                 .createAllComponents());
 
-        addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
+        /*addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
                 .addComponent(
                         "spotLight",
                         new DirectionalLightSource(1000, new Vector4f(255, 255, 255, 1), new Vector3f(-11.9f, 153.3f, 0))
                 )
-                .createAllComponents());
+                .createAllComponents());*/
 
         isLoading = false;
 

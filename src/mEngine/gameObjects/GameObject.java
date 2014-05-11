@@ -125,15 +125,21 @@ public class GameObject implements Serializable {
 
     public GameObject createAllComponents() {
 
-        RenderComponent renderComponent = (RenderComponent) getComponent("renderComponent");
-        if (renderComponent != null) renderComponent.onCreation(this);
+        for (Component component : components.values()) {
 
-        MovementComponent movementComponent = (MovementComponent) getComponent("movementComponent");
-        if (movementComponent != null) movementComponent.onCreation(this);
+            if (component instanceof RenderComponent) component.onCreation(this);
+
+        }
 
         for (Component component : components.values()) {
 
-            if (component != renderComponent && component != movementComponent) component.onCreation(this);
+            if (component instanceof MovementComponent) component.onCreation(this);
+
+        }
+
+        for (Component component : components.values()) {
+
+            if (!(component instanceof RenderComponent || component instanceof MovementComponent)) component.onCreation(this);
 
         }
 
