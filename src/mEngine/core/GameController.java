@@ -11,15 +11,12 @@ import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
 import mEngine.util.debug.RuntimeHelper;
-import mEngine.util.debug.texts.FPSTextComponent;
-import mEngine.util.debug.texts.RAMTextComponent;
-import mEngine.util.debug.texts.TPSTextComponent;
+import mEngine.util.debug.texts.*;
 import mEngine.util.debug.texts.position.PositionXTextComponent;
 import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
@@ -116,6 +113,14 @@ public class GameController {
                 .addComponent(
                         "posZText",
                         new GUIElement(new Vector2f(5, 125), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
+                )
+                .addComponent(
+                        "vertexCountText",
+                        new GUIElement(new Vector2f(5, 165), new Vector2f()).addComponent("guiText", new VertexCountTextComponent("vertices", 15))
+                )
+                .addComponent(
+                        "faceCountText",
+                        new GUIElement(new Vector2f(5, 185), new Vector2f()).addComponent("guiText", new FaceCountTextComponent("faces", 15))
                 )
                 .createAllComponents());
 

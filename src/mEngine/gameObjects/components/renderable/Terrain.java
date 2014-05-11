@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Terrain extends ComponentRenderable {
 
-    private Model model;
+    public Model model;
     private Vector3f size;
     private float[][] heightmap;
 
