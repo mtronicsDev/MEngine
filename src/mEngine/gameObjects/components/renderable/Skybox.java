@@ -2,6 +2,7 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.renderable.materials.Material;
 import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.graphics.renderable.textures.StaticTexture;
 import mEngine.util.rendering.TextureHelper;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class Skybox extends ComponentRenderable3D {
 
-    protected Texture[] textures = new Texture[6];
+    protected Material3D[] materials = new Material3D[6];
     protected String textureName;
     protected int radius;
     protected boolean displayListsCreated = false;
@@ -30,16 +31,31 @@ public class Skybox extends ComponentRenderable3D {
 
     public void render() {
 
-        if (textures[0] == null) {
-            textures[0] = TextureHelper.getTexture(textureName + "_bottom").getTexture();
-            textures[1] = TextureHelper.getTexture(textureName + "_top").getTexture();
-            textures[2] = TextureHelper.getTexture(textureName + "_back").getTexture();
-            textures[3] = TextureHelper.getTexture(textureName + "_front").getTexture();
-            textures[4] = TextureHelper.getTexture(textureName + "_left").getTexture();
-            textures[5] = TextureHelper.getTexture(textureName + "_right").getTexture();
-        }
-
         if (!displayListsCreated) {
+
+            materials[0] = new Material3D();
+            materials[0].setTextureName(textureName + "_bottom");
+            materials[0].setTextureFromName();
+
+            materials[1] = new Material3D();
+            materials[1].setTextureName(textureName + "_top");
+            materials[1].setTextureFromName();
+
+            materials[2] = new Material3D();
+            materials[2].setTextureName(textureName + "_back");
+            materials[2].setTextureFromName();
+
+            materials[3] = new Material3D();
+            materials[3].setTextureName(textureName + "_front");
+            materials[3].setTextureFromName();
+
+            materials[4] = new Material3D();
+            materials[4].setTextureName(textureName + "_left");
+            materials[4].setTextureFromName();
+
+            materials[5] = new Material3D();
+            materials[5].setTextureName(textureName + "_right");
+            materials[5].setTextureFromName();
 
             List<Vector3f> renderVertices = new ArrayList<Vector3f>();
             List<Vector3f> renderNormals = new ArrayList<Vector3f>();
@@ -60,8 +76,7 @@ public class Skybox extends ComponentRenderable3D {
             renderVertices.add(new Vector3f(-radius, -radius, -radius));
 
             displayListIndices[0] = Renderer.displayListCounter;
-            material.setTexture(new StaticTexture(textures[0]));
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, materials[0], Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -82,8 +97,7 @@ public class Skybox extends ComponentRenderable3D {
             renderVertices.add(new Vector3f(-radius, radius, radius));
 
             displayListIndices[1] = Renderer.displayListCounter;
-            material.setTexture(new StaticTexture(textures[1]));
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, materials[1], Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -104,8 +118,7 @@ public class Skybox extends ComponentRenderable3D {
             renderVertices.add(new Vector3f(-radius, -radius, radius));
 
             displayListIndices[2] = Renderer.displayListCounter;
-            material.setTexture(new StaticTexture(textures[2]));
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, materials[2], Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -126,8 +139,7 @@ public class Skybox extends ComponentRenderable3D {
             renderVertices.add(new Vector3f(-radius, radius, -radius));
 
             displayListIndices[3] = Renderer.displayListCounter;
-            material.setTexture(new StaticTexture(textures[3]));
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, materials[3], Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -148,8 +160,7 @@ public class Skybox extends ComponentRenderable3D {
             renderVertices.add(new Vector3f(-radius, radius, radius));
 
             displayListIndices[4] = Renderer.displayListCounter;
-            material.setTexture(new StaticTexture(textures[4]));
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, materials[4], Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -170,16 +181,18 @@ public class Skybox extends ComponentRenderable3D {
             renderVertices.add(new Vector3f(radius, radius, -radius));
 
             displayListIndices[5] = Renderer.displayListCounter;
-            material.setTexture(new StaticTexture(textures[5]));
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, materials[5], Renderer.RENDER_QUADS);
 
             displayListsCreated = true;
 
         }
 
+        int materialCount = 0;
+
         for (int displayListIndex : displayListIndices) {
 
-            Renderer.renderObject3D(displayListIndex, parent.position, parent.rotation, material, 1);
+            Renderer.renderObject3D(displayListIndex, parent.position, parent.rotation, materials[materialCount], 1);
+            materialCount++;
 
         }
 
@@ -189,7 +202,6 @@ public class Skybox extends ComponentRenderable3D {
     public void onSave() {
 
         super.onSave();
-        textures = null;
 
     }
 
@@ -197,7 +209,6 @@ public class Skybox extends ComponentRenderable3D {
     public void onLoad() {
 
         super.onLoad();
-        textures = new Texture[6];
 
     }
 
