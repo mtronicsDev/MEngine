@@ -4,6 +4,7 @@ import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
 import mEngine.gameObjects.components.renderable.light.LightSource;
 import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.materials.Material2D;
+import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.util.math.MathHelper;
 import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.rendering.TextureHelper;
@@ -41,7 +42,7 @@ public class Renderer {
 
     public static int displayListCounter = 0;
 
-    public static void addDisplayList(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode) {
+    public static void addDisplayList(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Material3D material, int mode) {
 
         int displayListHandle = glGenLists(1);
 
@@ -88,7 +89,7 @@ public class Renderer {
         glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
+        if (material.hasTexture()) glBindTexture(GL_TEXTURE_2D, material.getTexture().getTexture().getTextureID());
 
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(3, GL_FLOAT, 0, 0l);
@@ -323,7 +324,7 @@ public class Renderer {
 
     }
 
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Texture texture, int mode, float emissiveLightStrength) {
+    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Material3D material, int mode, float emissiveLightStrength) {
 
         ShaderHelper.useShader("lighting");
 
@@ -427,7 +428,7 @@ public class Renderer {
         glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
+        material.bind();
 
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(3, GL_FLOAT, 0, 0l);
@@ -463,11 +464,11 @@ public class Renderer {
 
     }
 
-    public static void renderObject3D(int displayListIndex, Vector3f modelPosition, Vector3f modelRotation, boolean isTextureThere, float emissiveLightStrength) {
+    public static void renderObject3D(int displayListIndex, Vector3f modelPosition, Vector3f modelRotation, Material3D material, float emissiveLightStrength) {
 
         ShaderHelper.useShader("lighting");
 
-        if (GraphicsController.isBlackAndWhite || !isTextureThere)
+        if (GraphicsController.isBlackAndWhite || !material.hasTexture())
             glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1, 1);
         glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
         emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
@@ -539,120 +540,7 @@ public class Renderer {
 
         glPopMatrix();
 
-        if (GraphicsController.isBlackAndWhite || !isTextureThere)
-            glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
-
-        ShaderHelper.useNoShader();
-
-    }
-
-    public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, int mode, float emissiveLightStrength) {
-
-        ShaderHelper.useShader("lighting");
-
-        glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 1, 1, 1, 1);
-        glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceCount"), currentRenderQueue.lightSources.size());
-        emissiveLightStrength = (float) MathHelper.clamp(emissiveLightStrength, 0, 1);
-        glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "emissiveLightStrength"), emissiveLightStrength);
-        Vector3f cameraPosition = currentRenderQueue.camera.position;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
-
-        for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
-
-            LightSource lightSource = currentRenderQueue.lightSources.get(count);
-
-            Vector3f lightPosition = lightSource.position;
-            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightPositions[" + count + "]"), lightPosition.x, lightPosition.y, lightPosition.z);
-
-            Vector3f lightDirection = lightSource.direction;
-            glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
-
-            glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
-
-            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
-
-            glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "shadowThrowing[" + count + "]"), lightSource.shadowThrowing);
-
-            if (GraphicsController.isBlackAndWhite) {
-
-                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), 1, 1, 1);
-
-            } else {
-
-                Vector3f lightColor = new Vector3f(lightSource.color);
-                glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightColors[" + count + "]"), lightColor.x, lightColor.y, lightColor.z);
-
-            }
-
-            if (lightSource instanceof SpotLightSource) {
-
-                SpotLightSource spotLightSource = (SpotLightSource) lightSource;
-
-                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
-
-                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
-
-            } else if (lightSource instanceof DirectionalLightSource) {
-
-                DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
-
-                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 1);
-
-                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
-
-            } else
-                glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 2);
-
-        }
-
-        FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
-        FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
-
-        for (Vector3f vertex : vertices) {
-
-            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
-
-        }
-
-        for (Vector3f normal : normals) {
-
-            normalData.put(new float[]{normal.x, normal.y, normal.z});
-
-        }
-
-        vertexData.flip();
-        normalData.flip();
-
-        int vboVertexHandle = glGenBuffers();
-        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-        glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        int vboNormalHandle = glGenBuffers();
-        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
-        glBufferData(GL_ARRAY_BUFFER, normalData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-        glVertexPointer(3, GL_FLOAT, 0, 0l);
-
-        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
-        glNormalPointer(GL_FLOAT, 0, 0l);
-
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_NORMAL_ARRAY);
-
-        glDrawArrays(mode, 0, vertices.size());
-
-        glDisableClientState(GL_NORMAL_ARRAY);
-        glDisableClientState(GL_VERTEX_ARRAY);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glDeleteBuffers(vboNormalHandle);
-        glDeleteBuffers(vboVertexHandle);
-
-        if (!GraphicsController.isBlackAndWhite)
+        if (GraphicsController.isBlackAndWhite || !material.hasTexture())
             glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
         ShaderHelper.useNoShader();

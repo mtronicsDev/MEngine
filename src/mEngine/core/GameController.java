@@ -64,7 +64,7 @@ public class GameController {
                 )
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("sphere")
+                        new RenderComponent("sphere", false)
                 )
                 .addComponent(
                         "controller",
@@ -127,7 +127,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("monkey")
+                        new RenderComponent("monkey", false)
                 )
                 .addComponent(
                         "interactionComponent",

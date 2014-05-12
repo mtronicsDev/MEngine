@@ -5,7 +5,6 @@ import mEngine.graphics.renderable.models.Model;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.opengl.Texture;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -85,7 +84,7 @@ public class ModelHelper {
 
         reader.close();
 
-        return new Model(vertices, normals, uvs, faces, (Texture) null, isStatic);
+        return new Model(vertices, normals, uvs, faces, null, isStatic);
 
     }
 

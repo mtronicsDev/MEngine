@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Terrain extends ComponentRenderable {
+public class Terrain extends ComponentRenderable3D {
 
     public Model model;
     private Vector3f size;
@@ -139,7 +139,7 @@ public class Terrain extends ComponentRenderable {
 
         }
 
-        model = new Model(vertices, normals, uvs, faces, "graph", parent.position, true);
+        model = new Model(vertices, normals, uvs, faces, this, true);
 
     }
 

@@ -12,7 +12,6 @@ import java.util.List;
 
 public class LoadingScreen {
 
-    String textureName;
     Material2D material;
     List<Vector2f> vertices;
     List<Vector2f> uvs;
@@ -20,7 +19,7 @@ public class LoadingScreen {
     public LoadingScreen(String textureName) {
 
         material = new Material2D();
-        this.textureName = textureName;
+        material.setTextureName(textureName);
         vertices = new ArrayList<Vector2f>();
         uvs = new ArrayList<Vector2f>();
 
@@ -53,7 +52,7 @@ public class LoadingScreen {
 
         if (material.getTexture() == null) {
 
-            material.setTexture(textureName);
+            material.setTextureFromName();
             calculateVertexPositions();
 
         }

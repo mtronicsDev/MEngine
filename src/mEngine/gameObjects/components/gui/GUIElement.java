@@ -15,7 +15,6 @@ public class GUIElement extends ComponentRenderable {
     public HashMap<String, GUIComponent> components = new HashMap<String, GUIComponent>();
     private Vector2f position; //Values from 0 to 1
     private Vector2f size; //Values from 0 to 1
-    private String textureName;
 
     public GUIElement(Vector2f posInPixels) {
 
@@ -32,6 +31,7 @@ public class GUIElement extends ComponentRenderable {
     public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, String textureName) {
 
         material = new Material2D();
+        material.setTextureName(textureName);
         //Absolute position to relative position
         position = new Vector2f();
         position.x = posInPixels.x / Display.getWidth();
@@ -41,8 +41,6 @@ public class GUIElement extends ComponentRenderable {
         size = new Vector2f();
         size.x = sizeInPixels.x / Display.getWidth();
         size.y = sizeInPixels.y / Display.getHeight();
-
-        this.textureName = textureName;
 
     }
 
@@ -114,7 +112,7 @@ public class GUIElement extends ComponentRenderable {
 
     public void render() {
 
-        if (material.getTexture() == null && textureName != null) material.setTexture(textureName);
+        if (material.getTexture() == null && material.hasTexture()) material.setTextureFromName();
         material.bind();
         for (GUIComponent component : components.values()) {
             component.render();

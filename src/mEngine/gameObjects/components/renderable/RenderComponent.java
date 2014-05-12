@@ -2,26 +2,63 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.graphics.renderable.models.Model;
-import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
-public class RenderComponent extends ComponentRenderable {
+public class RenderComponent extends ComponentRenderable3D {
 
     public Model model;
     String modelFileName;
-    Vector3f positionModifier;
+    Vector3f offset;
 
     public RenderComponent(String modelFileName) {
 
-        this(modelFileName, new Vector3f());
+        this(modelFileName, true);
 
     }
 
-    public RenderComponent(String modelFileName, Vector3f positionModifier) {
+    public RenderComponent(String modelFileName, boolean hasTexture) {
+
+        this(modelFileName, new Vector3f(), modelFileName);
+        if (!hasTexture) material.setTextureName(null);
+
+    }
+
+    public RenderComponent(String modelFileName, Material3D material) {
+
+        this(modelFileName, new Vector3f(), material);
+
+    }
+
+    public RenderComponent(String modelFileName, Vector3f offset) {
+
+        this(modelFileName, offset, true);
+
+    }
+
+    public RenderComponent(String modelFileName, Vector3f offset, boolean hasTexture) {
+
+        this(modelFileName, offset, modelFileName);
+        if (!hasTexture) material.setTextureName(null);
+
+    }
+
+    public RenderComponent(String modelFileName, Vector3f offset, Material3D material) {
 
         this.modelFileName = modelFileName;
-        this.positionModifier = positionModifier;
+        this.offset = offset;
+        this.material = material;
+
+    }
+
+    public RenderComponent(String modelFileName, Vector3f offset, String textureName) {
+
+        this.modelFileName = modelFileName;
+        this.offset = offset;
+        this.material = new Material3D();
+
+        material.setTextureName(textureName);
 
     }
 
@@ -29,15 +66,7 @@ public class RenderComponent extends ComponentRenderable {
 
         super.onCreation(obj);
 
-        model = new Model(modelFileName, parent.position, parent.rotation, true);
-
-    }
-
-    @Override
-    public void onUpdate() {
-
-        super.onUpdate();
-        model.update(VectorHelper.sumVectors(new Vector3f[] {parent.position, positionModifier}), parent.rotation);
+        model = new Model(modelFileName, this, true);
 
     }
 
@@ -54,7 +83,7 @@ public class RenderComponent extends ComponentRenderable {
 
         super.onLoad();
 
-        model = new Model(modelFileName, parent.position, parent.rotation, true); //Create model again
+        model = new Model(modelFileName, this, true); //Create model again
 
     }
 

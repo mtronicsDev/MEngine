@@ -2,6 +2,8 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.renderable.materials.Material3D;
+import mEngine.graphics.renderable.textures.StaticTexture;
 import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -10,7 +12,7 @@ import org.newdawn.slick.opengl.Texture;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Skybox extends ComponentRenderable {
+public class Skybox extends ComponentRenderable3D {
 
     protected Texture[] textures = new Texture[6];
     protected String textureName;
@@ -22,6 +24,7 @@ public class Skybox extends ComponentRenderable {
 
         textureName = fileName;
         radius = GraphicsController.renderDistance / 2;
+        material = new Material3D();
 
     }
 
@@ -57,7 +60,8 @@ public class Skybox extends ComponentRenderable {
             renderVertices.add(new Vector3f(-radius, -radius, -radius));
 
             displayListIndices[0] = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, textures[0], Renderer.RENDER_QUADS);
+            material.setTexture(new StaticTexture(textures[0]));
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -78,7 +82,8 @@ public class Skybox extends ComponentRenderable {
             renderVertices.add(new Vector3f(-radius, radius, radius));
 
             displayListIndices[1] = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, textures[1], Renderer.RENDER_QUADS);
+            material.setTexture(new StaticTexture(textures[1]));
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -99,7 +104,8 @@ public class Skybox extends ComponentRenderable {
             renderVertices.add(new Vector3f(-radius, -radius, radius));
 
             displayListIndices[2] = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, textures[2], Renderer.RENDER_QUADS);
+            material.setTexture(new StaticTexture(textures[2]));
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -120,7 +126,8 @@ public class Skybox extends ComponentRenderable {
             renderVertices.add(new Vector3f(-radius, radius, -radius));
 
             displayListIndices[3] = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, textures[3], Renderer.RENDER_QUADS);
+            material.setTexture(new StaticTexture(textures[3]));
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -141,7 +148,8 @@ public class Skybox extends ComponentRenderable {
             renderVertices.add(new Vector3f(-radius, radius, radius));
 
             displayListIndices[4] = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, textures[4], Renderer.RENDER_QUADS);
+            material.setTexture(new StaticTexture(textures[4]));
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
 
             renderVertices = new ArrayList<Vector3f>();
             renderNormals = new ArrayList<Vector3f>();
@@ -162,7 +170,8 @@ public class Skybox extends ComponentRenderable {
             renderVertices.add(new Vector3f(radius, radius, -radius));
 
             displayListIndices[5] = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, textures[5], Renderer.RENDER_QUADS);
+            material.setTexture(new StaticTexture(textures[5]));
+            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, material, Renderer.RENDER_QUADS);
 
             displayListsCreated = true;
 
@@ -170,7 +179,7 @@ public class Skybox extends ComponentRenderable {
 
         for (int displayListIndex : displayListIndices) {
 
-            Renderer.renderObject3D(displayListIndex, parent.position, new Vector3f(), true, 1);
+            Renderer.renderObject3D(displayListIndex, parent.position, parent.rotation, material, 1);
 
         }
 

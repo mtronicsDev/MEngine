@@ -4,19 +4,16 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.particles.particleComponents.ParticleComponent;
 import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
-import mEngine.util.rendering.TextureHelper;
-import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.Texture;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Particle extends ComponentRenderable {
+public class Particle extends ComponentRenderable3D {
 
     public Vector3f position;
     public Vector3f rotation;
@@ -72,23 +69,12 @@ public class Particle extends ComponentRenderable {
 
     public void render() {
 
-        if (texture == null && isTextureThere) {
+        if (material.hasTexture() && material.getTexture() == null) {
 
-            File textureFile = ResourceHelper.getResource(textureName, ResourceHelper.RES_TEXTURE);
-
-            if (!textureFile.exists()) isTextureThere = false;
-
-            else {
-
-                texture = TextureHelper.getTexture(textureName).getTexture();
-
-                uvs.add(new Vector2f(0, 1));
-                uvs.add(new Vector2f(0, 0));
-                uvs.add(new Vector2f(1, 0));
-                uvs.add(new Vector2f(1, 1));
-
-
-            }
+            uvs.add(new Vector2f(0, 1));
+            uvs.add(new Vector2f(0, 0));
+            uvs.add(new Vector2f(1, 0));
+            uvs.add(new Vector2f(1, 1));
 
         }
 
@@ -108,23 +94,14 @@ public class Particle extends ComponentRenderable {
             normals.add(normal);
             normals.add(normal);
 
-            if (isTextureThere) {
-
-                displayListIndex = Renderer.displayListCounter;
-                Renderer.addDisplayList(renderVertices, normals, uvs, texture, Renderer.RENDER_QUADS);
-
-            } else {
-
-                displayListIndex = Renderer.displayListCounter;
-                Renderer.addDisplayList(renderVertices, normals, Renderer.RENDER_QUADS);
-
-            }
+            displayListIndex = Renderer.displayListCounter;
+            Renderer.addDisplayList(renderVertices, normals, uvs, material, Renderer.RENDER_QUADS);
 
         }
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, position, rotation, isTextureThere, 0);
+            Renderer.renderObject3D(displayListIndex, position, rotation, material, 0);
 
         } else {
 
@@ -142,10 +119,7 @@ public class Particle extends ComponentRenderable {
             renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(2), position}));
             renderVertices.add(VectorHelper.sumVectors(new Vector3f[]{vertices.get(3), position}));
 
-            if (isTextureThere)
-                Renderer.renderObject3D(renderVertices, normals, uvs, texture, Renderer.RENDER_QUADS, 0);
-
-            else Renderer.renderObject3D(renderVertices, normals, Renderer.RENDER_QUADS, 0);
+            Renderer.renderObject3D(renderVertices, normals, uvs, material, Renderer.RENDER_QUADS, 0);
 
         }
 

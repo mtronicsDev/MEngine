@@ -9,10 +9,8 @@ import java.io.Serializable;
 public abstract class Material implements Serializable {
 
     protected Texture texture;
+    protected String textureName;
     protected Color color = Color.white;
-
-    public Material() {
-    }
 
     public Texture getTexture() {
         return texture;
@@ -22,12 +20,20 @@ public abstract class Material implements Serializable {
         this.texture = texture;
     }
 
-    public void setTexture(String textureName) {
+    public void setTextureName(String textureName) {
+        this.textureName = textureName;
+    }
+
+    public void setTextureFromName() {
         texture = TextureHelper.getTexture(textureName);
     }
 
     public void deleteTexture() {
         texture = null;
+    }
+
+    public boolean hasTexture() {
+        return textureName != null;
     }
 
     public Color getColor() {
