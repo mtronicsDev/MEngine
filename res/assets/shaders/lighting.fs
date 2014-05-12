@@ -10,6 +10,7 @@ uniform vec3[32] lightDirections;
 uniform float[32] lightRadii;
 uniform int[32] specularLighting;
 uniform float[32] lightAngles;
+uniform int[32] shadowThrowing;
 uniform sampler2D texture;
 uniform vec4 color;
 uniform float emissiveLightStrength;

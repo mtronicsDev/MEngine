@@ -16,6 +16,7 @@ public abstract class LightSource extends ComponentRenderable {
     public int specularLighting = 1;
     public Vector3f direction;
     public boolean dependent = true;
+    public int shadowThrowing = 1;
 
     public LightSource(float strength, Vector4f color, Vector3f direction) {
 
@@ -36,6 +37,13 @@ public abstract class LightSource extends ComponentRenderable {
     public LightSource setSpecularLighting(boolean specularLighting) {
 
         this.specularLighting = BinaryHelper.convertToBinaryInteger(specularLighting);
+        return this;
+
+    }
+
+    public LightSource setShadowThrowing(boolean shadowThrowing) {
+
+        this.shadowThrowing = BinaryHelper.convertToBinaryInteger(shadowThrowing);
         return this;
 
     }

@@ -182,36 +182,42 @@ public class GameController {
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 1, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
+                                .setShadowThrowing(false)
                 )
                 .addComponent(
                         "sunAmbient1",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
+                                .setShadowThrowing(false)
                 )
                 .addComponent(
                         "sunAmbient2",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(1, 0, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
+                                .setShadowThrowing(false)
                 )
                 .addComponent(
                         "sunAmbient3",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(-1, 0, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
+                                .setShadowThrowing(false)
                 )
                 .addComponent(
                         "sunAmbient4",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 0, 1))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
+                                .setShadowThrowing(false)
                 )
                 .addComponent(
                         "sunAmbient5",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 0, -1))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
+                                .setShadowThrowing(false)
                 )
                 .addComponent(
                         "sun",
