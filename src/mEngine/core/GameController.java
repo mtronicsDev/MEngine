@@ -13,6 +13,7 @@ import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
+import mEngine.physics.collisions.Collision;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
 import mEngine.util.debug.RuntimeHelper;
@@ -75,7 +76,10 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, true)
+                        new CollideComponent(false, new Collision() {
+                            @Override
+                            public void onCollision() {}
+                        })
                 )
                 .addComponent(
                         "skybox",

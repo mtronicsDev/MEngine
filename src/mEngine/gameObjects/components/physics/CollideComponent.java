@@ -2,33 +2,32 @@ package mEngine.gameObjects.components.physics;
 
 import mEngine.gameObjects.components.Component;
 import mEngine.physics.collisions.Collider;
+import mEngine.physics.collisions.Collision;
 import org.lwjgl.util.vector.Vector3f;
 
 public class CollideComponent extends Component {
 
-    public boolean destroyable;
     public boolean ableToCollide;
     public Vector3f modelSize;
+    public Collision collision;
 
-    public CollideComponent(boolean destroyable, boolean ableToCollide) {
+    public CollideComponent(boolean ableToCollide, Collision collision) {
 
-        this(destroyable, ableToCollide, null);
+        this(ableToCollide, null, collision);
 
     }
 
-    public CollideComponent(boolean destroyable, boolean ableToCollide, Vector3f modelSize) {
+    public CollideComponent(boolean ableToCollide, Vector3f modelSize, Collision collision) {
 
-        this.destroyable = destroyable;
         this.ableToCollide = ableToCollide;
         this.modelSize = modelSize;
+        this.collision = collision;
 
     }
 
     public void onRemoteUpdate() {
 
-        MovementComponent movementComponent = (MovementComponent) parent.getComponent("movementComponent");
-
-        if (movementComponent != null) Collider.collideObject(parent);
+        Collider.collideObject(parent);
 
     }
 
