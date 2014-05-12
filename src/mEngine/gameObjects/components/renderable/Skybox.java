@@ -191,7 +191,7 @@ public class Skybox extends ComponentRenderable3D {
 
         for (int displayListIndex : displayListIndices) {
 
-            Renderer.renderObject3D(displayListIndex, parent.position, parent.rotation, materials[materialCount], 1);
+            Renderer.renderObject3D(displayListIndex, 24, parent.position, parent.rotation, materials[materialCount], 1);
             materialCount++;
 
         }

@@ -22,6 +22,7 @@ import java.util.List;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.glBindAttribLocation;
 
 public class Renderer {
 
@@ -336,6 +337,26 @@ public class Renderer {
         Vector3f cameraPosition = currentRenderQueue.camera.position;
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
+        int shininessLocation = glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "shininess");
+
+        for (int count = 0; count < vertices.size(); count++) {
+
+            glVertexAttrib1f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "shininess") + count, material.specularHighlightStrength);
+
+            /*Vector3f ambientReflectivity = material.ambientReflectivity;
+            glVertexAttrib3f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "ambientReflectivity") + count,
+                    ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
+
+            Vector3f diffuseReflectivity = material.diffuseReflectivity;
+            glVertexAttrib3f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "diffuseReflectivity") + count,
+                    diffuseReflectivity.x, diffuseReflectivity.y, diffuseReflectivity.z);
+
+            Vector3f specularReflectivity = material.specularReflectivity;
+            glVertexAttrib3f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularReflectivity") + count,
+                    specularReflectivity.x, specularReflectivity.y, specularReflectivity.z);*/
+
+        }
+
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 
             LightSource lightSource = currentRenderQueue.lightSources.get(count);
@@ -464,7 +485,7 @@ public class Renderer {
 
     }
 
-    public static void renderObject3D(int displayListIndex, Vector3f modelPosition, Vector3f modelRotation, Material3D material, float emissiveLightStrength) {
+    public static void renderObject3D(int displayListIndex, int vertexCount, Vector3f modelPosition, Vector3f modelRotation, Material3D material, float emissiveLightStrength) {
 
         ShaderHelper.useShader("lighting");
 
@@ -476,6 +497,26 @@ public class Renderer {
         Vector3f cameraPosition = currentRenderQueue.camera.position;
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "modelPosition"), modelPosition.x, modelPosition.y, modelPosition.z);
+
+        int shininessLocation = glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "shininess");
+
+        for (int count = 0; count < vertexCount; count++) {
+
+            glVertexAttrib1f(shininessLocation + count, material.specularHighlightStrength);
+
+            /*Vector3f ambientReflectivity = material.ambientReflectivity;
+            glVertexAttrib3f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "ambientReflectivity") + count,
+                    ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
+
+            Vector3f diffuseReflectivity = material.diffuseReflectivity;
+            glVertexAttrib3f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "diffuseReflectivity") + count,
+                    diffuseReflectivity.x, diffuseReflectivity.y, diffuseReflectivity.z);
+
+            Vector3f specularReflectivity = material.specularReflectivity;
+            glVertexAttrib3f(glGetAttribLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularReflectivity") + count,
+                    specularReflectivity.x, specularReflectivity.y, specularReflectivity.z);*/
+
+        }
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 

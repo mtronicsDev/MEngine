@@ -2,6 +2,7 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.graphics.renderable.models.Model;
 import mEngine.util.math.MathHelper;
@@ -52,12 +53,15 @@ public class Terrain extends ComponentRenderable3D {
 
         }
 
+        material = new Material3D();
+
     }
 
     public Terrain(float[][] heightmap, float maxHeight) {
 
         this.heightmap = heightmap;
         size = new Vector3f(heightmap.length, maxHeight, heightmap[0].length);
+        material = new Material3D();
 
     }
 

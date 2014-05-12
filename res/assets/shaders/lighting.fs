@@ -1,6 +1,10 @@
 varying vec3 vertex;
 varying vec3 normal;
-//varying float shininess;
+
+varying float shininess;
+varying vec3 ambientReflectivity;
+varying vec3 diffuseReflectivity;
+varying vec3 specularReflectivity;
 
 uniform int lightSourceCount;
 uniform int[32] lightSourceTypes;
@@ -17,7 +21,7 @@ uniform vec4 color;
 uniform float emissiveLightStrength;
 uniform vec3 cameraPosition;
 
-const float shininess = 90;
+//const float shininess = 90;
 const float ambientColorMultiplier = 0.05;
 
 void main(void) {

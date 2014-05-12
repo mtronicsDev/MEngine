@@ -2,6 +2,7 @@ package mEngine.graphics.renderable.models;
 
 import mEngine.gameObjects.components.renderable.ComponentRenderable3D;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
 import org.lwjgl.util.vector.Vector2f;
@@ -132,7 +133,7 @@ public class Model implements Serializable {
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, position, parent.parent.rotation, parent.material, 0);
+            Renderer.renderObject3D(displayListIndex, vertices.size(), position, parent.parent.rotation, parent.material, 0);
 
         } else {
 
