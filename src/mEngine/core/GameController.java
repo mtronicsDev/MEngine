@@ -78,7 +78,8 @@ public class GameController {
                         "collideComponent",
                         new CollideComponent(false, new Collision() {
                             @Override
-                            public void onCollision() {}
+                            public void onCollision() {
+                            }
                         })
                 )
                 .addComponent(

@@ -59,7 +59,8 @@ public abstract class LightSource extends ComponentRenderable {
 
         position = parent.position;
 
-        if (dependent) direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
+        if (dependent)
+            direction = new Vector3f(parent.percentRotation.x, parent.percentRotation.y, -parent.percentRotation.z);
 
     }
 

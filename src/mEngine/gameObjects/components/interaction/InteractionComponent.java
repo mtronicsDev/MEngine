@@ -27,13 +27,12 @@ public class InteractionComponent extends Component {
     public String interactionKey;
     public String interactionDescription;
     public String interactionInstruction;
+    public InteractionMethod interaction;
     private float radius;
     private float[] controllerDistances;
     private float maxControllerLookAngle;
     private float[] controllerLookAngles;
     private List<GameObject> controlledGameObjects;
-
-    public InteractionMethod interaction;
 
     public InteractionComponent(boolean interactable, float radius, InteractionMethod interaction) {
 
@@ -180,9 +179,11 @@ public class InteractionComponent extends Component {
 
             }
 
-            if (interactable && this.interactable) ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
+            if (interactable && this.interactable)
+                ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
 
-            else ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
+            else
+                ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
 
         }
 

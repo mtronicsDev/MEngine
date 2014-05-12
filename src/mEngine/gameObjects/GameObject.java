@@ -139,7 +139,8 @@ public class GameObject implements Serializable {
 
         for (Component component : components.values()) {
 
-            if (!(component instanceof RenderComponent || component instanceof MovementComponent)) component.onCreation(this);
+            if (!(component instanceof RenderComponent || component instanceof MovementComponent))
+                component.onCreation(this);
 
         }
 
