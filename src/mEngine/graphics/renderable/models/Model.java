@@ -25,6 +25,7 @@ public class Model implements Serializable {
 
     public ComponentRenderable3D parent;
     public Vector3f position;
+    public Vector3f rotation;
 
     public Model(String fileName, ComponentRenderable3D parent, boolean isStatic) {
 
@@ -43,19 +44,13 @@ public class Model implements Serializable {
         for (int count = 0; count < this.vertices.size(); count++)
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
-        position = VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, parent.parent.rotation, middle});
+        position = VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, middle});
 
         if (!displayListFactors[0]) displayListIndex = -1;
 
     }
 
     public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, ComponentRenderable3D parent, boolean isStatic) {
-
-        this(vertices, normals, uvs, faces, parent, new Vector3f(), isStatic);
-
-    }
-
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, ComponentRenderable3D parent, Vector3f offset, boolean isStatic) {
 
         this.displayListFactors[0] = isStatic;
         this.vertices = vertices;
@@ -71,7 +66,7 @@ public class Model implements Serializable {
             this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
 
         if (parent != null)
-            position = VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, parent.parent.rotation, middle, offset});
+            position = VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, middle});
 
         if (!displayListFactors[0]) displayListIndex = -1;
 
@@ -137,7 +132,7 @@ public class Model implements Serializable {
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, getMiddle()}), parent.parent.rotation, parent.material, 0);
+            Renderer.renderObject3D(displayListIndex, position, parent.parent.rotation, parent.material, 0);
 
         } else {
 
@@ -181,6 +176,13 @@ public class Model implements Serializable {
             Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, parent.material, renderMode, 0);
 
         }
+
+    }
+
+    public void update(Vector3f pos, Vector3f rot) {
+
+        position = pos;
+        rotation = rot;
 
     }
 

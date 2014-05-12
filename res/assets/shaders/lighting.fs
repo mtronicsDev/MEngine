@@ -1,5 +1,6 @@
 varying vec3 vertex;
 varying vec3 normal;
+//varying float shininess;
 
 uniform int lightSourceCount;
 uniform int[32] lightSourceTypes;

@@ -4,6 +4,7 @@ import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.graphics.renderable.models.Model;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 public class RenderComponent extends ComponentRenderable3D {
@@ -67,6 +68,12 @@ public class RenderComponent extends ComponentRenderable3D {
         super.onCreation(obj);
 
         model = new Model(modelFileName, this, true);
+
+    }
+
+    public void onUpdate() {
+
+        model.update(VectorHelper.sumVectors(new Vector3f[] {parent.position, offset}), parent.rotation);
 
     }
 
