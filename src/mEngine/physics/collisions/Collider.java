@@ -608,7 +608,9 @@ public class Collider {
 
                 else {
 
-                    for (Face face : allFaces) {
+                    collideComponentA.collision.onCollision();
+
+                    /*for (Face face : allFaces) {
 
                         if (finalCollisionFace == face) {
 
@@ -638,7 +640,7 @@ public class Collider {
 
                         } else {*/
 
-                        if (collideComponentB.destroyable) {
+                        /*if (collideComponentB.destroyable) {
 
                             movedSpace = VectorHelper.multiplyVectorByFloat(velocity, finalCollisionTime);
 
@@ -780,13 +782,13 @@ public class Collider {
 
                                     }
 
-                                }*/
-
-                        }
+                                }
 
                         //}
 
-                    }
+                        //}
+
+                    }*/
 
                 }
 
