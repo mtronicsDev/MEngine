@@ -31,18 +31,9 @@ public class ShaderHelper {
             BufferedReader fragmentReader = new BufferedReader(new FileReader(ResourceHelper.getResource(fileName, ResourceHelper.RES_SHADER_F)));
             String line;
 
-            int attributeCount = 0;
-
             while ((line = vertexReader.readLine()) != null) {
 
                 vertexShaderSource.append(line + "\n");
-
-                if (line.startsWith("attribute")) {
-
-                    glBindAttribLocation(shaderProgram, attributeCount, line.split(" ")[2]);
-                    attributeCount++;
-
-                }
 
             }
 

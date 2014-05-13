@@ -12,6 +12,8 @@ import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
+import mEngine.gameObjects.components.renderable.light.LightSource;
+import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.collisions.Collision;
 import mEngine.physics.forces.ForceController;
