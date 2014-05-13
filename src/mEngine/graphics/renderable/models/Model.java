@@ -133,7 +133,7 @@ public class Model implements Serializable {
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, vertices.size(), position, parent.parent.rotation, parent.material, 0);
+            Renderer.renderObject3D(displayListIndex, position, parent.parent.rotation, parent.material, 0);
 
         } else {
 

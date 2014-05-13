@@ -1,11 +1,10 @@
 varying vec3 vertex;
 varying vec3 normal;
 
-varying float shininess;
-varying vec3 ambientReflectivity;
-varying vec3 diffuseReflectivity;
-varying vec3 specularReflectivity;
-
+uniform float shininess;
+uniform vec3 ambientReflectivity;
+uniform vec3 diffuseReflectivity;
+uniform vec3 specularReflectivity;
 uniform int lightSourceCount;
 uniform int[32] lightSourceTypes;
 uniform vec3[32] lightPositions;

@@ -101,7 +101,7 @@ public class Particle extends ComponentRenderable3D {
 
         if (displayListFactors[0] && displayListFactors[1]) {
 
-            Renderer.renderObject3D(displayListIndex, 4, position, rotation, material, 0);
+            Renderer.renderObject3D(displayListIndex, position, rotation, material, 0);
 
         } else {
 
