@@ -383,6 +383,8 @@ public class Renderer {
 
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
 
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "transitions[" + count + "]"), spotLightSource.transition);
+
             } else if (lightSource instanceof DirectionalLightSource) {
 
                 DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
@@ -534,6 +536,8 @@ public class Renderer {
                 glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
 
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
+
+                glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "transitions[" + count + "]"), spotLightSource.transition);
 
             } else if (lightSource instanceof DirectionalLightSource) {
 

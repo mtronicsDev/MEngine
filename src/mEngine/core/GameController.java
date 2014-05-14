@@ -12,7 +12,6 @@ import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
-import mEngine.gameObjects.components.renderable.light.LightSource;
 import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.collisions.Collision;
@@ -91,6 +90,10 @@ public class GameController {
                 .addComponent(
                         "camera",
                         new Camera()
+                )
+                .addComponent(
+                        "pocketLamp",
+                        new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )
                 .addComponent(
                         "reticule",
