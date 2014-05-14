@@ -14,7 +14,7 @@ import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
 import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
-import mEngine.physics.collisions.Collision;
+import mEngine.physics.collisions.CollisionResponseMethod;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
 import mEngine.util.debug.RuntimeHelper;
@@ -23,6 +23,7 @@ import mEngine.util.debug.texts.position.PositionXTextComponent;
 import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.physics.CollisionHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
@@ -77,11 +78,7 @@ public class GameController {
                 )
                 .addComponent(
                         "collideComponent",
-                        new CollideComponent(false, new Collision() {
-                            @Override
-                            public void onCollision() {
-                            }
-                        })
+                        new CollideComponent(false, CollisionHelper.getCollisionResponseMethod(false, true, false))
                 )
                 .addComponent(
                         "skybox",
@@ -92,7 +89,7 @@ public class GameController {
                         new Camera()
                 )
                 .addComponent(
-                        "pocketLamp",
+                        "flashlight",
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )
                 .addComponent(

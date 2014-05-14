@@ -1,6 +1,6 @@
 package mEngine.physics.collisions;
 
-public interface Collision {
+public interface CollisionResponseMethod {
 
     public void onCollision();
 
