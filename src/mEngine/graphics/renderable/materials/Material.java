@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 public abstract class Material implements Serializable {
 
-    protected Texture texture;
-    protected String textureName;
-    protected Color color = Color.white;
+    public Texture texture;
+    public String textureName;
+    public Color color = Color.white;
 
     public Texture getTexture() {
         return texture;

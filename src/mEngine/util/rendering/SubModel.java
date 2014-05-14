@@ -1,0 +1,34 @@
+package mEngine.util.rendering;
+
+import mEngine.graphics.renderable.materials.Material3D;
+import mEngine.graphics.renderable.models.Face;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
+import java.util.ArrayList;
+
+public class SubModel {
+
+    public Material3D material;
+    public ArrayList<Vector3f> vertices;
+    public ArrayList<Vector3f> normals;
+    public ArrayList<Vector2f> uvs;
+    public ArrayList<Face> faces;
+
+    SubModel() {
+        vertices = new ArrayList<Vector3f>();
+        normals = new ArrayList<Vector3f>();
+        uvs = new ArrayList<Vector2f>();
+        faces = new ArrayList<Face>();
+    }
+
+    public SubModel(Material3D material) {
+        this.material = material;
+
+        vertices = new ArrayList<Vector3f>();
+        normals = new ArrayList<Vector3f>();
+        uvs = new ArrayList<Vector2f>();
+        faces = new ArrayList<Face>();
+    }
+
+}
