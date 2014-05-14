@@ -2,7 +2,6 @@ package mEngine.graphics.renderable.models;
 
 import mEngine.gameObjects.components.renderable.ComponentRenderable3D;
 import mEngine.graphics.Renderer;
-import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
 import org.lwjgl.util.vector.Vector2f;

@@ -2,13 +2,9 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.Renderer;
-import mEngine.graphics.renderable.materials.Material;
 import mEngine.graphics.renderable.materials.Material3D;
-import mEngine.graphics.renderable.textures.StaticTexture;
-import mEngine.util.rendering.TextureHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.opengl.Texture;
 
 import java.util.ArrayList;
 import java.util.List;

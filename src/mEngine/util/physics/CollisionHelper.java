@@ -54,7 +54,7 @@ public class CollisionHelper {
 
         }
 
-        return  collisionResponseMethod;
+        return collisionResponseMethod;
 
     }
 

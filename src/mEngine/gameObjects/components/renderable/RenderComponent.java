@@ -73,7 +73,7 @@ public class RenderComponent extends ComponentRenderable3D {
 
     public void onUpdate() {
 
-        model.update(VectorHelper.sumVectors(new Vector3f[] {parent.position, offset}), parent.rotation);
+        model.update(VectorHelper.sumVectors(new Vector3f[]{parent.position, offset}), parent.rotation);
 
     }
 
