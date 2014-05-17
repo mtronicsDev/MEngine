@@ -44,7 +44,7 @@ public class MovementComponent extends Component {
 
         if (renderComponent != null) {
 
-            mass = renderComponent.model.mass;
+            mass = renderComponent.model.getMass();
 
             forcePoints.put("middle", new ForcePoint(new Vector3f()));
             forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, -1)));

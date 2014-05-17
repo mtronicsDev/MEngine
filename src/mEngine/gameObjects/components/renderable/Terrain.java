@@ -5,6 +5,7 @@ import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.graphics.renderable.models.Model;
+import mEngine.graphics.renderable.models.SubModel;
 import mEngine.util.math.MathHelper;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector2f;
@@ -143,14 +144,34 @@ public class Terrain extends ComponentRenderable3D {
 
         }
 
-        model = new Model(vertices, normals, uvs, faces, this, true);
+        SubModel subModel = new SubModel(new Material3D());
+        subModel.vertices = (ArrayList<Vector3f>) vertices;
+        subModel.normals = (ArrayList<Vector3f>) normals;
+        subModel.uvs = (ArrayList<Vector2f>) uvs;
+        subModel.faces = (ArrayList<Face>) faces;
+
+        ArrayList<SubModel> subModels = new ArrayList<SubModel>();
+        subModels.add(subModel);
+
+        model = new Model(subModels);
+
+    }
+
+    @Override
+    public void render() {
+
+        for (SubModel subModel : model.subModels) {
+
+            Renderer.renderObject3D(subModel.vertices, subModel.normals, subModel.uvs, subModel.material, Renderer.RENDER_TRIANGLES, 0);
+
+        }
 
     }
 
     @Override
     public void addToRenderQueue() {
 
-        Renderer.currentRenderQueue.addModel(model);
+        Renderer.currentRenderQueue.addModel(this);
 
     }
 

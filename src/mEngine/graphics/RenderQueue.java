@@ -2,10 +2,10 @@ package mEngine.graphics;
 
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.renderable.Camera;
+import mEngine.gameObjects.components.renderable.ComponentRenderable3D;
 import mEngine.gameObjects.components.renderable.Particle;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.LightSource;
-import mEngine.graphics.renderable.models.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class RenderQueue {
     public List<LightSource> lightSources = new ArrayList<LightSource>();
     public Camera camera;
     private Skybox skybox;
-    private List<Model> modelQueue = new ArrayList<Model>();
+    private List<ComponentRenderable3D> modelQueue = new ArrayList<ComponentRenderable3D>();
     private List<Particle> particleQueue = new ArrayList<Particle>();
     private List<GUIElement> guiQueue = new ArrayList<GUIElement>();
 
@@ -31,9 +31,9 @@ public class RenderQueue {
 
     }
 
-    public void addModel(Model model) {
+    public void addModel(ComponentRenderable3D component) {
 
-        modelQueue.add(model);
+        modelQueue.add(component);
 
     }
 
@@ -59,9 +59,9 @@ public class RenderQueue {
 
         GraphicsController.switchTo3D();
         if (camera != null) camera.render();
-        for (Model model : modelQueue) {
+        for (ComponentRenderable3D component : modelQueue) {
 
-            model.render();
+            component.render();
 
         }
 

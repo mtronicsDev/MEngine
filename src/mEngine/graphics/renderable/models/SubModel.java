@@ -1,7 +1,6 @@
-package mEngine.util.rendering;
+package mEngine.graphics.renderable.models;
 
 import mEngine.graphics.renderable.materials.Material3D;
-import mEngine.graphics.renderable.models.Face;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -15,7 +14,7 @@ public class SubModel {
     public ArrayList<Vector2f> uvs;
     public ArrayList<Face> faces;
 
-    SubModel() {
+    public SubModel() {
         vertices = new ArrayList<Vector3f>();
         normals = new ArrayList<Vector3f>();
         uvs = new ArrayList<Vector2f>();

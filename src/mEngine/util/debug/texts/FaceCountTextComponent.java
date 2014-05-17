@@ -28,9 +28,10 @@ public class FaceCountTextComponent extends GUIText {
 
             for (Component component : object.components.values()) {
 
-                if (component instanceof RenderComponent) faceCount += ((RenderComponent) component).model.faces.size();
+                if (component instanceof RenderComponent)
+                    faceCount += ((RenderComponent) component).model.getFaces().size();
 
-                else if (component instanceof Terrain) faceCount += ((Terrain) component).model.faces.size();
+                else if (component instanceof Terrain) faceCount += ((Terrain) component).model.getFaces().size();
 
                 else if (component instanceof Particle) faceCount++;
 

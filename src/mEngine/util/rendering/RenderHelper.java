@@ -3,9 +3,7 @@ package mEngine.util.rendering;
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.renderable.models.Face;
-import mEngine.graphics.renderable.models.Model;
 import mEngine.util.math.vectors.Matrix3d;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.resources.PreferenceHelper;
@@ -15,7 +13,7 @@ public class RenderHelper {
 
     public static boolean isFaceNeededToBeRendered(Face face) {
 
-        boolean neededToBeRendered = false;
+        /*boolean neededToBeRendered = false;
 
         Model model = null;
 
@@ -26,7 +24,7 @@ public class RenderHelper {
 
             if (renderComponent != null) {
 
-                for (Face faceListPart : renderComponent.model.faces) {
+                for (Face faceListPart : renderComponent.model.getFaces()) {
 
                     if (faceListPart == face) {
 
@@ -46,9 +44,9 @@ public class RenderHelper {
 
         if (model != null) {
 
-            Vector3f vertexA = VectorHelper.sumVectors(new Vector3f[]{model.vertices.get((int) face.vertexIndices.x), model.position});
-            Vector3f vertexB = VectorHelper.sumVectors(new Vector3f[]{model.vertices.get((int) face.vertexIndices.y), model.position});
-            Vector3f vertexC = VectorHelper.sumVectors(new Vector3f[]{model.vertices.get((int) face.vertexIndices.z), model.position});
+            Vector3f vertexA = VectorHelper.sumVectors(new Vector3f[]{model.getVertices()[(int) face.vertexIndices.x], model.});
+            Vector3f vertexB = VectorHelper.sumVectors(new Vector3f[]{model.getVertices()[(int) face.vertexIndices.y], model.position});
+            Vector3f vertexC = VectorHelper.sumVectors(new Vector3f[]{model.getVertices()[(int) face.vertexIndices.z], model.position});
 
             if (isVectorOnScreen(vertexA) || isVectorOnScreen(vertexB) || isVectorOnScreen(vertexC)) {
 
@@ -58,7 +56,8 @@ public class RenderHelper {
 
         }
 
-        return neededToBeRendered;
+        return neededToBeRendered;*/
+        return true;
 
     }
 

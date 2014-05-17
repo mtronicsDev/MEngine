@@ -1,188 +1,78 @@
 package mEngine.graphics.renderable.models;
 
-import mEngine.gameObjects.components.renderable.ComponentRenderable3D;
-import mEngine.graphics.Renderer;
 import mEngine.util.math.vectors.VectorHelper;
-import mEngine.util.rendering.ModelHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Model implements Serializable {
+public class Model {
 
-    public List<Vector3f> vertices = new ArrayList<Vector3f>();
-    public List<Vector3f> normals = new ArrayList<Vector3f>();
-    public List<Vector2f> uvs = new ArrayList<Vector2f>();
-    public List<Face> faces = new ArrayList<Face>();
+    public ArrayList<SubModel> subModels;
 
-    public float mass;
-    public int renderMode = Renderer.RENDER_TRIANGLES;
-    public boolean[] displayListFactors = new boolean[]{false, false};
-    public int displayListIndex;
-
-    public ComponentRenderable3D parent;
-    public Vector3f position;
-    public Vector3f rotation;
-
-    public Model(String fileName, ComponentRenderable3D parent, boolean isStatic) {
-
-        Model model = ModelHelper.loadModelSafely(fileName, isStatic);
-
-        this.vertices = model.vertices;
-        this.normals = model.normals;
-        this.uvs = model.uvs;
-        this.faces = model.faces;
-        this.mass = model.getMass();
-        this.displayListFactors[0] = isStatic;
-        this.parent = parent;
-
-        Vector3f middle = getMiddle();
-
-        for (int count = 0; count < this.vertices.size(); count++)
-            this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
-
-        position = VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, middle});
-
-        if (!displayListFactors[0]) displayListIndex = -1;
-
+    public Model() {
+        subModels = new ArrayList<SubModel>();
     }
 
-    public Model(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, List<Face> faces, ComponentRenderable3D parent, boolean isStatic) {
+    public Model(ArrayList<SubModel> subModels) {
+        this.subModels = subModels;
 
-        this.displayListFactors[0] = isStatic;
-        this.vertices = vertices;
-        this.normals = normals;
-        this.uvs = uvs;
-        this.faces = faces;
-        this.mass = getMass();
-        this.parent = parent;
-
-        Vector3f middle = getMiddle();
-
-        for (int count = 0; count < this.vertices.size(); count++)
-            this.vertices.set(count, VectorHelper.subtractVectors(this.vertices.get(count), middle));
-
-        if (parent != null)
-            position = VectorHelper.sumVectors(new Vector3f[]{parent.parent.position, middle});
-
-        if (!displayListFactors[0]) displayListIndex = -1;
-
+        //Centering the model
+        Vector3f center = getCenter();
+        for (SubModel subModel : subModels)
+            for (int i = 0; i < subModel.vertices.size(); i++)
+                subModel.vertices.set(i, VectorHelper.subtractVectors(subModel.vertices.get(i), center));
     }
 
-    public void render() {
+    public ArrayList<Vector3f> getVertices() {
 
-        if (parent.material.hasTexture() && parent.material.getTexture() == null) {
-            parent.material.setTextureFromName();
-        }
+        ArrayList<Vector3f> vertices = new ArrayList<Vector3f>();
+        for (SubModel subModel : subModels) {
 
-        if (displayListFactors[0] && !displayListFactors[1]) {
-
-            List<Vector3f> renderVertices = new ArrayList<Vector3f>();
-            List<Vector3f> renderNormals = new ArrayList<Vector3f>();
-            List<Vector2f> renderUVs = new ArrayList<Vector2f>();
-
-            for (Face face : faces) {
-
-
-                Vector3f v1 = vertices.get((int) face.vertexIndices.x);
-                renderVertices.add(v1);
-
-                Vector3f v2 = vertices.get((int) face.vertexIndices.y);
-                renderVertices.add(v2);
-
-                Vector3f v3 = vertices.get((int) face.vertexIndices.z);
-                renderVertices.add(v3);
-
-                if (uvs.size() != 0) {
-                    Vector2f uv1 = uvs.get((int) face.uvIndices.x);
-                    renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
-
-                    Vector2f uv2 = uvs.get((int) face.uvIndices.y);
-                    renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
-
-                    Vector2f uv3 = uvs.get((int) face.uvIndices.z);
-                    renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
-                } else {
-
-                    for (int i = 0; i < 3; i++) renderUVs.add(new Vector2f(0, 0));
-
-                }
-
-
-                Vector3f n1 = normals.get((int) face.normalIndices.x);
-                renderNormals.add(n1);
-
-                Vector3f n2 = normals.get((int) face.normalIndices.y);
-                renderNormals.add(n2);
-
-                Vector3f n3 = normals.get((int) face.normalIndices.z);
-                renderNormals.add(n3);
-
-            }
-
-            displayListIndex = Renderer.displayListCounter;
-            Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, parent.material, renderMode);
-
-            displayListFactors[1] = true;
+            vertices.addAll(subModel.vertices);
 
         }
 
-        if (displayListFactors[0] && displayListFactors[1]) {
-
-            Renderer.renderObject3D(displayListIndex, position, parent.parent.rotation, parent.material, 0);
-
-        } else {
-
-            List<Vector3f> renderVertices = new ArrayList<Vector3f>();
-            List<Vector3f> renderNormals = new ArrayList<Vector3f>();
-            List<Vector2f> renderUVs = new ArrayList<Vector2f>();
-
-            for (Face face : faces) {
-
-                Vector2f uv1 = uvs.get((int) face.uvIndices.x);
-                renderUVs.add(new Vector2f(uv1.x, 1 - uv1.y));
-
-                Vector3f v1 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.x), position});
-                renderVertices.add(v1);
-
-                Vector3f n1 = normals.get((int) face.normalIndices.x);
-                renderNormals.add(n1);
-
-
-                Vector2f uv2 = uvs.get((int) face.uvIndices.y);
-                renderUVs.add(new Vector2f(uv2.x, 1 - uv2.y));
-
-                Vector3f v2 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.y), position});
-                renderVertices.add(v2);
-
-                Vector3f n2 = normals.get((int) face.normalIndices.y);
-                renderNormals.add(n2);
-
-
-                Vector2f uv3 = uvs.get((int) face.uvIndices.z);
-                renderUVs.add(new Vector2f(uv3.x, 1 - uv3.y));
-
-                Vector3f v3 = VectorHelper.sumVectors(new Vector3f[]{vertices.get((int) face.vertexIndices.z), position});
-                renderVertices.add(v3);
-
-                Vector3f n3 = normals.get((int) face.normalIndices.z);
-                renderNormals.add(n3);
-
-            }
-
-            Renderer.renderObject3D(renderVertices, renderNormals, renderUVs, parent.material, renderMode, 0);
-
-        }
+        return vertices;
 
     }
 
-    public void update(Vector3f pos, Vector3f rot) {
+    public ArrayList<Vector3f> getNormals() {
 
-        position = pos;
-        rotation = rot;
+        ArrayList<Vector3f> normals = new ArrayList<Vector3f>();
+        for (SubModel subModel : subModels) {
+
+            normals.addAll(subModel.normals);
+
+        }
+
+        return normals;
+
+    }
+
+    public ArrayList<Vector2f> getUvs() {
+
+        ArrayList<Vector2f> uvs = new ArrayList<Vector2f>();
+        for (SubModel subModel : subModels) {
+
+            uvs.addAll(subModel.uvs);
+
+        }
+
+        return uvs;
+
+    }
+
+    public ArrayList<Face> getFaces() {
+
+        ArrayList<Face> faces = new ArrayList<Face>();
+        for (SubModel subModel : subModels) {
+
+            faces.addAll(subModel.faces);
+
+        }
+
+        return faces;
 
     }
 
@@ -192,66 +82,62 @@ public class Model implements Serializable {
         Vector3f maxVertexPos = new Vector3f();
         Vector3f minVertexPos = new Vector3f();
 
-        for (Vector3f vertex : vertices) {
+        for (SubModel subModel : subModels)
+            for (Vector3f vertex : subModel.vertices) {
 
-            if (vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
-            else if (vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
+                if (vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
+                else if (vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
 
-            if (vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
-            else if (vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
+                if (vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
+                else if (vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
 
-            if (vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
-            else if (vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
+                if (vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
+                else if (vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
 
-        }
+            }
 
-        size.x = maxVertexPos.x - minVertexPos.x;
-        size.y = maxVertexPos.y - minVertexPos.y;
-        size.z = maxVertexPos.z - minVertexPos.z;
+        VectorHelper.subtractVectors(maxVertexPos, minVertexPos);
 
         return size;
 
     }
 
-    public Vector3f[] getExtremeVertexPositions() {
+    private Vector3f[] getExtremeVertexPositions() {
 
         Vector3f maxVertexPos = new Vector3f();
         Vector3f minVertexPos = new Vector3f();
 
-        for (Vector3f vertex : vertices) {
+        for (SubModel subModel : subModels)
+            for (Vector3f vertex : subModel.vertices) {
 
-            if (vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
-            else if (vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
+                if (vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
+                else if (vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
 
-            if (vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
-            else if (vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
+                if (vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
+                else if (vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
 
-            if (vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
-            else if (vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
+                if (vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
+                else if (vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
 
-        }
+            }
 
         return new Vector3f[]{minVertexPos, maxVertexPos};
 
     }
 
-    public Vector3f getMiddle() {
+    public Vector3f getCenter() {
 
-        Vector3f minVertexPos = getExtremeVertexPositions()[0];
+        Vector3f[] extremeVertexPositions = getExtremeVertexPositions();
 
-        for (int count = 0; count < vertices.size(); count++)
-            vertices.set(count, VectorHelper.subtractVectors(vertices.get(count), minVertexPos));
-
-        return VectorHelper.divideVectors(getExtremeVertexPositions()[1], new Vector3f(2, 2, 2));
+        return VectorHelper.sumVectors(new Vector3f[]
+                {VectorHelper.divideVectorByFloat(VectorHelper.subtractVectors(extremeVertexPositions[1], extremeVertexPositions[0]), 2), extremeVertexPositions[0]});
 
     }
 
-
-    private float getMass() {
+    public float getMass() {
 
         return 60;
 
     }
 
 }
-

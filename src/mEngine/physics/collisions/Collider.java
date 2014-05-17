@@ -95,19 +95,19 @@ public class Collider {
 
                     if (areAABBsColliding(objA, objB)) {
 
-                        for (Face face : renderComponentB.model.faces) {
+                        for (Face face : renderComponentB.model.getFaces()) {
 
                             allFaces.add(new Face(face));
 
                             Face newFace = allFaces.get(allFaces.size() - 1);
 
-                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.vertices.get((int) face.vertexIndices.x), objB.position})));
-                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.vertices.get((int) face.vertexIndices.y), objB.position})));
-                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.vertices.get((int) face.vertexIndices.z), objB.position})));
+                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.getVertices().get((int) face.vertexIndices.x), objB.position})));
+                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.getVertices().get((int) face.vertexIndices.y), objB.position})));
+                            allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentB.model.getVertices().get((int) face.vertexIndices.z), objB.position})));
 
-                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int) face.normalIndices.x)));
-                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int) face.normalIndices.y)));
-                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int) face.normalIndices.z)));
+                            allNormals.add(new Vector3f(renderComponentB.model.getNormals().get((int) face.vertexIndices.x)));
+                            allNormals.add(new Vector3f(renderComponentB.model.getNormals().get((int) face.vertexIndices.y)));
+                            allNormals.add(new Vector3f(renderComponentB.model.getNormals().get((int) face.vertexIndices.z)));
 
                             newFace.vertexIndices.x = allVertices.size() - 3;
                             newFace.vertexIndices.y = allVertices.size() - 2;
@@ -131,7 +131,7 @@ public class Collider {
 
         if (maybeColliding) {
 
-            for (Face faceA : renderComponentA.model.faces) {
+            for (Face faceA : renderComponentA.model.getFaces()) {
 
                 Vector3f maxVertexPos;
                 Vector3f minVertexPos;
@@ -140,9 +140,9 @@ public class Collider {
                 List<Vector3f> verticesA = new ArrayList<Vector3f>();
                 List<Vector3f> verticesToCalculate = new ArrayList<Vector3f>();
 
-                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.x), objA.position})));
-                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.y), objA.position})));
-                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.z), objA.position})));
+                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.getVertices().get((int) faceA.vertexIndices.x), objA.position})));
+                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.getVertices().get((int) faceA.vertexIndices.y), objA.position})));
+                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.getVertices().get((int) faceA.vertexIndices.z), objA.position})));
 
                 verticesToCalculate.add(new Vector3f());
                 verticesToCalculate.add(VectorHelper.subtractVectors(verticesA.get(1), verticesA.get(0)));
@@ -266,8 +266,8 @@ public class Collider {
 
             }
 
-            collisionTimes = new float[renderComponentA.model.faces.size()];
-            collisionFaces = new Face[renderComponentA.model.faces.size()];
+            collisionTimes = new float[renderComponentA.model.getFaces().size()];
+            collisionFaces = new Face[renderComponentA.model.getFaces().size()];
 
         }
 
@@ -327,7 +327,7 @@ public class Collider {
 
                         if (areSmallerBoxesColliding.equals(new boolean[]{true, true, true, true, true, true, true, true})) {*/
 
-                        for (Face faceB : renderComponentB.model.faces) {
+                        for (Face faceB : renderComponentB.model.getFaces()) {
 
                             allFaces.add(new Face(faceB));
                             objList.add(objB);
@@ -335,15 +335,15 @@ public class Collider {
                             Face newFace = allFaces.get(allFaces.size() - 1);
 
                             allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
-                                    {renderComponentB.model.vertices.get((int) faceB.vertexIndices.x), objB.position})));
+                                    {renderComponentB.model.getVertices().get((int) faceB.vertexIndices.x), objB.position})));
                             allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
-                                    {renderComponentB.model.vertices.get((int) faceB.vertexIndices.y), objB.position})));
+                                    {renderComponentB.model.getVertices().get((int) faceB.vertexIndices.y), objB.position})));
                             allVertices.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]
-                                    {renderComponentB.model.vertices.get((int) faceB.vertexIndices.z), objB.position})));
+                                    {renderComponentB.model.getVertices().get((int) faceB.vertexIndices.z), objB.position})));
 
-                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int) faceB.normalIndices.x)));
-                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int) faceB.normalIndices.y)));
-                            allNormals.add(new Vector3f(renderComponentB.model.normals.get((int) faceB.normalIndices.z)));
+                            allNormals.add(new Vector3f(renderComponentB.model.getNormals().get((int) faceB.vertexIndices.x)));
+                            allNormals.add(new Vector3f(renderComponentB.model.getNormals().get((int) faceB.vertexIndices.x)));
+                            allNormals.add(new Vector3f(renderComponentB.model.getNormals().get((int) faceB.vertexIndices.x)));
 
                             newFace.vertexIndices.x = allVertices.size() - 3;
                             newFace.vertexIndices.y = allVertices.size() - 2;
@@ -357,7 +357,7 @@ public class Collider {
 
                         /*} else {
 
-                            for (Face faceB : renderComponentB.model.faces) {
+                            for (Face faceB : renderComponentB.model.getFaces()) {
 
                                 allFaces.add(new Face(faceB));
                                 objList.add(objB);
@@ -390,7 +390,7 @@ public class Collider {
 
                             for (Box collisionBoxB : collisionBoxesB) {
 
-                                for (Face faceB : renderComponentB.model.faces) {
+                                for (Face faceB : renderComponentB.model.getFaces()) {
 
                                     List<Vector3f> verticesB = new ArrayList<Vector3f>();
                                     verticesB.add(new Vector3f(renderComponentB.model.vertices.get((int) faceB.vertexIndices.x)));
@@ -448,16 +448,16 @@ public class Collider {
             List<Vector3f> middles = new ArrayList<Vector3f>();
             List<Vector3f> radii = new Vector<Vector3f>();
 
-            for (Face faceA : renderComponentA.model.faces) {
+            for (Face faceA : renderComponentA.model.getFaces()) {
 
                 Vector3f maxVertexPos;
                 Vector3f minVertexPos;
                 List<Vector3f> verticesA = new ArrayList<Vector3f>();
                 List<Vector3f> verticesToCalculate = new ArrayList<Vector3f>();
 
-                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.x), objA.position})));
-                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.y), objA.position})));
-                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.vertices.get((int) faceA.vertexIndices.z), objA.position})));
+                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.getVertices().get((int) faceA.vertexIndices.x), objA.position})));
+                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.getVertices().get((int) faceA.vertexIndices.y), objA.position})));
+                verticesA.add(new Vector3f(VectorHelper.sumVectors(new Vector3f[]{renderComponentA.model.getVertices().get((int) faceA.vertexIndices.z), objA.position})));
 
                 verticesToCalculate.add(new Vector3f());
                 verticesToCalculate.add(new Vector3f(VectorHelper.subtractVectors(verticesA.get(1), verticesA.get(0))));
@@ -522,11 +522,11 @@ public class Collider {
 
                         float collisionTime = difference / VectorHelper.getAbs(velocity);
 
-                        if (collisionTime >= 0 && collisionTime <= 1 && Math.abs(collisionTime) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+                        if (collisionTime >= 0 && collisionTime <= 1 && Math.abs(collisionTime) < Math.abs(collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)])) {
 
                             collidingHere = true;
-                            collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime;
-                            collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+                            collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)] = collisionTime;
+                            collisionFaces[renderComponentA.model.getFaces().indexOf(faceA)] = faceB;
 
                         }
 
@@ -543,23 +543,23 @@ public class Collider {
                         Vector3f collisionTime = VectorHelper.divideVectors(differenceToVertices,
                                 new Vector3f(VectorHelper.getAbs(velocity), VectorHelper.getAbs(velocity), VectorHelper.getAbs(velocity)));
 
-                        if (collisionTime.x >= 0 && collisionTime.x <= 1 && Math.abs(collisionTime.x) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+                        if (collisionTime.x >= 0 && collisionTime.x <= 1 && Math.abs(collisionTime.x) < Math.abs(collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)])) {
 
                             collidingHere = true;
-                            collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime.x;
-                            collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+                            collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)] = collisionTime.x;
+                            collisionFaces[renderComponentA.model.getFaces().indexOf(faceA)] = faceB;
 
-                        } else if (collisionTime.y >= 0 && collisionTime.y <= 1 && Math.abs(collisionTime.y) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
-
-                            collidingHere = true;
-                            collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime.y;
-                            collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
-
-                        } else if (collisionTime.z >= 0 && collisionTime.z <= 1 && Math.abs(collisionTime.z) < Math.abs(collisionTimes[renderComponentA.model.faces.indexOf(faceA)])) {
+                        } else if (collisionTime.y >= 0 && collisionTime.y <= 1 && Math.abs(collisionTime.y) < Math.abs(collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)])) {
 
                             collidingHere = true;
-                            collisionTimes[renderComponentA.model.faces.indexOf(faceA)] = collisionTime.z;
-                            collisionFaces[renderComponentA.model.faces.indexOf(faceA)] = faceB;
+                            collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)] = collisionTime.y;
+                            collisionFaces[renderComponentA.model.getFaces().indexOf(faceA)] = faceB;
+
+                        } else if (collisionTime.z >= 0 && collisionTime.z <= 1 && Math.abs(collisionTime.z) < Math.abs(collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)])) {
+
+                            collidingHere = true;
+                            collisionTimes[renderComponentA.model.getFaces().indexOf(faceA)] = collisionTime.z;
+                            collisionFaces[renderComponentA.model.getFaces().indexOf(faceA)] = faceB;
 
                         }
 

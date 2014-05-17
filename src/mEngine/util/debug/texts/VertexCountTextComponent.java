@@ -29,9 +29,10 @@ public class VertexCountTextComponent extends GUIText {
             for (Component component : object.components.values()) {
 
                 if (component instanceof RenderComponent)
-                    vertexCount += ((RenderComponent) component).model.faces.size() * 3;
+                    vertexCount += ((RenderComponent) component).model.getVertices().size() * 3;
 
-                else if (component instanceof Terrain) vertexCount += ((Terrain) component).model.faces.size() * 3;
+                else if (component instanceof Terrain)
+                    vertexCount += ((Terrain) component).model.getVertices().size() * 3;
 
                 else if (component instanceof Particle) vertexCount += 4;
 

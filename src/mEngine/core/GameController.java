@@ -23,7 +23,6 @@ import mEngine.util.debug.texts.position.PositionYTextComponent;
 import mEngine.util.debug.texts.position.PositionZTextComponent;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.physics.CollisionHelper;
-import mEngine.util.rendering.ModelLoader;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
@@ -58,8 +57,6 @@ public class GameController {
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
 
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
-
-        ModelLoader.getModel("Sci-fi_Tropical_city"); //Delete after testing
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
@@ -172,16 +169,8 @@ public class GameController {
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
-                        "ocean",
-                        new RenderComponent("sciFiOcean", new Vector3f(0, -84, 0))
-                )
-                .addComponent(
                         "city",
-                        new RenderComponent("sciFiCity", new Vector3f(0, 50, 0))
-                )
-                .addComponent(
-                        "terrain",
-                        new RenderComponent("sciFiTerrain")
+                        new RenderComponent("Sci-fi_Tropical_city")
                 )
                 .createAllComponents());
 
