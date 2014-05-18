@@ -137,6 +137,9 @@ public class ModelHelper {
                             Float.valueOf(line.split(" ")[2]),
                             Float.valueOf(line.split(" ")[3]));
                     else if (line.startsWith("d ")) currentMaterial.color.a = Float.valueOf(line.split(" ")[1]);
+                    /*else if (line.startsWith("map_Kd ")) {
+                        currentMaterial.textureName = line.split(" ")[1];
+                    }*/
 
                 }
 
