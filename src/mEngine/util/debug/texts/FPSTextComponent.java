@@ -15,7 +15,7 @@ public class FPSTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        text = String.valueOf("mEngine Test Run @ " + TimeHelper.FPS + " FPS");
+        text = String.valueOf("Frames per second: " + TimeHelper.FPS + " FPS");
 
     }
 
