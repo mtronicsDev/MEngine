@@ -66,7 +66,7 @@ public class GameController {
                 )
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("sphere", false)
+                        new RenderComponent("sphere")
                 )
                 .addComponent(
                         "controller",
@@ -87,10 +87,10 @@ public class GameController {
                         "camera",
                         new Camera()
                 )
-                .addComponent(
+                /*.addComponent(
                         "flashlight",
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
-                )
+                )*/
                 .addComponent(
                         "reticule",
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
@@ -133,7 +133,7 @@ public class GameController {
         addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
                 .addComponent(
                         "renderComponent",
-                        new RenderComponent("monkey", false)
+                        new RenderComponent("monkey")
                 )
                 .addComponent(
                         "interactionComponent",

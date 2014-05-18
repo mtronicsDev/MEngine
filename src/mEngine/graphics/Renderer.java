@@ -339,13 +339,13 @@ public class Renderer {
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "shininess"), material.specularHighlightStrength);
 
         Vector3f ambientReflectivity = material.ambientReflectivity;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "ambientReflectivity"), ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[0]"), ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
 
         Vector3f diffuseReflectivity = material.diffuseReflectivity;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "diffuseReflectivity"), diffuseReflectivity.x, diffuseReflectivity.y, diffuseReflectivity.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[1]"), diffuseReflectivity.x, diffuseReflectivity.y, diffuseReflectivity.z);
 
         Vector3f specularReflectivity = material.specularReflectivity;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularReflectivity"), specularReflectivity.x, specularReflectivity.y, specularReflectivity.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[2]"), specularReflectivity.x, specularReflectivity.y, specularReflectivity.z);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 
@@ -493,13 +493,13 @@ public class Renderer {
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "shininess"), material.specularHighlightStrength);
 
         Vector3f ambientReflectivity = material.ambientReflectivity;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "ambientReflectivity"), ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[0]"), ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
 
         Vector3f diffuseReflectivity = material.diffuseReflectivity;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "diffuseReflectivity"), diffuseReflectivity.x, diffuseReflectivity.y, diffuseReflectivity.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[1]"), diffuseReflectivity.x, diffuseReflectivity.y, diffuseReflectivity.z);
 
         Vector3f specularReflectivity = material.specularReflectivity;
-        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularReflectivity"), specularReflectivity.x, specularReflectivity.y, specularReflectivity.z);
+        glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[2]"), specularReflectivity.x, specularReflectivity.y, specularReflectivity.z);
 
         for (int count = 0; count < currentRenderQueue.lightSources.size(); count++) {
 

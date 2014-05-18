@@ -5,6 +5,7 @@ import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.graphics.renderable.models.Model;
 import mEngine.graphics.renderable.models.SubModel;
+import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ModelHelper;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -48,12 +49,6 @@ public class RenderComponent extends ComponentRenderable3D {
 
     }
 
-    public void onUpdate() {
-
-        //model.update(VectorHelper.sumVectors(new Vector3f[]{parent.position, offset}), parent.rotation);
-
-    }
-
     public void render() {
 
         for (SubModel subModel : model.subModels) {
@@ -69,7 +64,10 @@ public class RenderComponent extends ComponentRenderable3D {
             List<Vector3f> renderNormals = new ArrayList<Vector3f>();
             List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
+            displayListIndex = Renderer.displayListCounter;
+
             for (SubModel subModel : model.subModels) {
+
                 for (Face face : subModel.faces) {
 
                     Vector3f v1 = subModel.vertices.get((int) face.vertexIndices.x);
@@ -101,18 +99,19 @@ public class RenderComponent extends ComponentRenderable3D {
 
                 }
 
-                displayListIndex = Renderer.displayListCounter;
-                displayListFactors[1] = true;
                 Renderer.addDisplayList(renderVertices, renderNormals, renderUVs, subModel.material, Renderer.RENDER_TRIANGLES);
 
             }
 
+            displayListFactors[1] = true;
+
         }
+
         if (displayListFactors[0] && displayListFactors[1]) {
 
             for (int i = 0; i < model.subModels.size(); i++) {
 
-                Renderer.renderObject3D(displayListIndex + i, parent.position, parent.rotation, model.subModels.get(i).material, 0);
+                Renderer.renderObject3D(displayListIndex + i, VectorHelper.sumVectors(new Vector3f[] {parent.position, offset}), parent.rotation, model.subModels.get(i).material, 0);
 
             }
 
@@ -123,6 +122,7 @@ public class RenderComponent extends ComponentRenderable3D {
             List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
             for (SubModel subModel : model.subModels) {
+
                 for (Face face : subModel.faces) {
 
                     Vector3f v1 = subModel.vertices.get((int) face.vertexIndices.x);
