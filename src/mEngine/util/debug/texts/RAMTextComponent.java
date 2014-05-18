@@ -17,7 +17,7 @@ public class RAMTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        text = String.valueOf("MemUsage: "
+        text = String.valueOf("Memory usage: "
                 + cutDecimals((float) getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1)
                 + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]");
 

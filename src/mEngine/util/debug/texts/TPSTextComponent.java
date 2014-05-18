@@ -15,7 +15,7 @@ public class TPSTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        text = String.valueOf("ticks per second: " + TimeHelper.TPS + " TPS");
+        text = String.valueOf("Ticks per second: " + TimeHelper.TPS + " TPS");
 
     }
 
