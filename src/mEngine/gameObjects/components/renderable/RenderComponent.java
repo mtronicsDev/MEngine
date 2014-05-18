@@ -35,7 +35,7 @@ public class RenderComponent extends ComponentRenderable3D {
     public RenderComponent(String modelFileName, boolean isStatic, Vector3f offset) {
 
         this.modelFileName = modelFileName;
-        displayListFactors[1] = isStatic;
+        displayListFactors[0] = isStatic;
         this.offset = offset;
 
     }
@@ -63,7 +63,7 @@ public class RenderComponent extends ComponentRenderable3D {
 
         }
 
-        if (displayListFactors[0] && displayListFactors[1]) {
+        if (displayListFactors[0] && !displayListFactors[1]) {
 
             List<Vector3f> renderVertices = new ArrayList<Vector3f>();
             List<Vector3f> renderNormals = new ArrayList<Vector3f>();
