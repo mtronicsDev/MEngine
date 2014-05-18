@@ -1,25 +1,25 @@
 varying vec3 vertex;
 varying vec3 normal;
 
+const int maxLightSourceCount = 32;
+
 uniform float shininess;
-uniform vec3 ambientReflectivity;
-uniform vec3 diffuseReflectivity;
-uniform vec3 specularReflectivity;
 uniform int lightSourceCount;
-uniform int[32] lightSourceTypes;
-uniform vec3[32] lightPositions;
-uniform vec3[32] lightColors;
-uniform float[32] lightStrengths;
-uniform vec3[32] lightDirections;
-uniform float[32] lightRadii;
-uniform int[32] specularLighting;
-uniform float[32] lightAngles;
-uniform int[32] shadowThrowing;
-uniform float[32] transitions;
+uniform int[maxLightSourceCount] lightSourceTypes;
+uniform vec3[maxLightSourceCount] lightPositions;
+uniform vec3[maxLightSourceCount] lightColors;
+uniform float[maxLightSourceCount] lightStrengths;
+uniform vec3[maxLightSourceCount] lightDirections;
+uniform float[maxLightSourceCount] lightRadii;
+uniform int[maxLightSourceCount] specularLighting;
+uniform float[maxLightSourceCount] lightAngles;
+uniform int[maxLightSourceCount] shadowThrowing;
+uniform float[maxLightSourceCount] transitions;
 uniform sampler2D texture;
 uniform vec4 color;
 uniform float emissiveLightStrength;
 uniform vec3 cameraPosition;
+uniform vec3[3] reflectionAssets;
 
 void main(void) {
 
@@ -41,9 +41,9 @@ void main(void) {
 
         vec3 ambientColorMultiplier;
 
-        if (ambientReflectivity == vec3(0, 0, 0)) ambientColorMultiplier = vec3(0.05, 0.05, 0.05);
+        if (reflectionAssets[0] == vec3(0, 0, 0)) ambientColorMultiplier = vec3(0.05, 0.05, 0.05);
 
-        else ambientColorMultiplier = ambientReflectivity;
+        else ambientColorMultiplier = reflectionAssets[0];
 
         ambientLightedTextureColor = vec3(vec3(previousFragmentColor) * ambientColorMultiplier);
 
@@ -64,7 +64,7 @@ void main(void) {
                     float diffuseLightIntensity = lightStrengths[count] / difference;
                     diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                    fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * diffuseReflectivity * lightColors[count]);
+                    fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
                     if (specularLighting[count] == 1) {
 
@@ -75,7 +75,7 @@ void main(void) {
                         float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                         specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                        fragColor += vec3(specularLightIntensity * lightColors[count] * specularReflectivity);
+                        fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
 
                     }
 
@@ -94,7 +94,7 @@ void main(void) {
                         float diffuseLightIntensity = lightStrengths[count] / difference;
                         diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                        fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * diffuseReflectivity * lightColors[count]);
+                        fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
                         if (specularLighting[count] == 1) {
 
@@ -105,13 +105,13 @@ void main(void) {
                             float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                             specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                            fragColor += vec3(specularLightIntensity * lightColors[count] * specularReflectivity);
+                            fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
 
                         }
 
                     } else if (transitions[count] != 0) {
 
-                        float newLightAngle = lightAngles[count] + lightAngles[count] * 0.5;
+                        float newLightAngle = lightAngles[count] * 1.5;
 
                         if (actualAngle <= newLightAngle) {
 
@@ -122,7 +122,7 @@ void main(void) {
                             float diffuseLightIntensity = lightStrengths[count] / difference;
                             diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * diffuseReflectivity * lightColors[count] * relativeAngleDifference);
+                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count] * relativeAngleDifference);
 
                             if (specularLighting[count] == 1) {
 
@@ -133,7 +133,7 @@ void main(void) {
                                 float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                                fragColor += vec3(specularLightIntensity * lightColors[count] * specularReflectivity * relativeAngleDifference);
+                                fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2] * relativeAngleDifference);
 
                             }
 
@@ -156,7 +156,7 @@ void main(void) {
                         float diffuseLightIntensity = lightStrengths[count] / difference;
                         diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                        fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * diffuseReflectivity * lightColors[count]);
+                        fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
                         if (specularLighting[count] == 1) {
 
@@ -167,7 +167,7 @@ void main(void) {
                             float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                             specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                            fragColor += vec3(specularLightIntensity * lightColors[count] * specularReflectivity);
+                            fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
 
                         }
 
@@ -183,7 +183,7 @@ void main(void) {
                             float diffuseLightIntensity = lightStrengths[count] / difference;
                             diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * diffuseReflectivity * lightColors[count]);
+                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
                             if (specularLighting[count] == 1) {
 
@@ -194,7 +194,7 @@ void main(void) {
                                 float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                                 specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                                fragColor += vec3(specularLightIntensity * lightColors[count] * specularReflectivity);
+                                fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
 
                             }
 
@@ -211,8 +211,7 @@ void main(void) {
                 float diffuseLightIntensity = lightStrengths[count];
                 diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                vec3 diffuseComponents = vec3(diffuseLightIntensity * diffuseReflectivity);
-                fragColor += vec3(ambientLightedTextureColor * diffuseComponents * lightColors[count]);
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
                 if (specularLighting[count] == 1) {
 
@@ -223,7 +222,7 @@ void main(void) {
                     float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
                     specularLightIntensity = pow(specularLightIntensity, shininess);
 
-                    fragColor += vec3(specularLightIntensity * lightColors[count] * specularReflectivity);
+                    fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
 
                 }
 
