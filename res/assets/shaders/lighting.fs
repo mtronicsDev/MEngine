@@ -3,7 +3,7 @@ varying vec3 normal;
 
 const int maxLightSourceCount = 32;
 
-uniform float shininess;
+uniform float materialShininess;
 uniform int lightSourceCount;
 uniform int[maxLightSourceCount] lightSourceTypes;
 uniform vec3[maxLightSourceCount] lightPositions;
@@ -46,6 +46,12 @@ void main(void) {
         else ambientColorMultiplier = reflectionAssets[0];
 
         ambientLightedTextureColor = vec3(vec3(previousFragmentColor) * ambientColorMultiplier);
+
+        float shininess;
+
+        if (materialShininess == 0) shininess = 90;
+
+        else shininess = materialShininess;
 
         int count = 0;
 
