@@ -117,11 +117,15 @@ public class RenderComponent extends ComponentRenderable3D {
 
         } else {
 
-            List<Vector3f> renderVertices = new ArrayList<Vector3f>();
-            List<Vector3f> renderNormals = new ArrayList<Vector3f>();
-            List<Vector2f> renderUVs = new ArrayList<Vector2f>();
+            List<Vector3f> renderVertices;
+            List<Vector3f> renderNormals;
+            List<Vector2f> renderUVs;
 
             for (SubModel subModel : model.subModels) {
+
+                renderVertices = new ArrayList<Vector3f>();
+                renderNormals = new ArrayList<Vector3f>();
+                renderUVs = new ArrayList<Vector2f>();
 
                 for (Face face : subModel.faces) {
 
