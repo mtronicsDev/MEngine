@@ -20,17 +20,17 @@ map_Kd Maps/mtlm1
 
 newmtl default
 d 1
-Ns 1
+Ns 90
 Ni 0
 Ka 0 0 0
 Kd 0.290196 0.282353 0.254902
-Ks 1 1 1
+Ks 0 0 0
 Km 0
 map_Kd Maps/1thr
 
 newmtl default_bldgs2
 d 1
-Ns 1
+Ns 90
 Ni 0
 Ka 0 0 0
 Kd 1 1 1
