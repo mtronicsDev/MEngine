@@ -8,7 +8,7 @@ import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Plane;
-import mEngine.util.math.vectors.Matrix3d;
+import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -171,7 +171,7 @@ public class Collider {
 
                 radius = VectorHelper.subtractVectors(maxVertexPos, middle);
 
-                Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
+                Matrix3f changeOfBasisMatrix = new Matrix3f(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
 
                 middle = changeOfBasisMatrix.multiplyByVector(middle);
 
@@ -488,8 +488,8 @@ public class Collider {
                 radii.add(VectorHelper.subtractVectors(maxVertexPos, middle));
                 Vector3f radius = radii.get(radii.size() - 1);
 
-                Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
-                Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
+                Matrix3f changeOfBasisMatrix = new Matrix3f(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
+                Matrix3f invertedChangeOfBasisMatrix = new Matrix3f(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
 
                 middle = changeOfBasisMatrix.multiplyByVector(middle);
                 velocity = changeOfBasisMatrix.multiplyByVector(velocity);
@@ -670,8 +670,8 @@ public class Collider {
 
                             Vector3f radius = radii.get(index);
 
-                            Matrix3d changeOfBasisMatrix = new Matrix3d(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
-                            //Matrix3d invertedChangeOfBasisMatrix = new Matrix3d(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
+                            Matrix3f changeOfBasisMatrix = new Matrix3f(new Vector3f(1 / radius.x, 0, 0), new Vector3f(0, 1 / radius.y, 0), new Vector3f(0, 0, 1 / radius.z));
+                            //Matrix3f invertedChangeOfBasisMatrix = new Matrix3f(new Vector3f(radius.x, 0, 0), new Vector3f(0, radius.y, 0), new Vector3f(0, 0, radius.z));
 
                             vertexBToCalculate = changeOfBasisMatrix.multiplyByVector(vertexBToCalculate);
                             vertexCToCalculate = changeOfBasisMatrix.multiplyByVector(vertexCToCalculate);
@@ -687,15 +687,15 @@ public class Collider {
                             float beta;
                             float gamma;
 
-                            Matrix3d xAxisRotationMatrix;
-                            Matrix3d yAxisRotationMatrix;
-                            Matrix3d zAxisRotationMatrix;
+                            Matrix3f xAxisRotationMatrix;
+                            Matrix3f yAxisRotationMatrix;
+                            Matrix3f zAxisRotationMatrix;
 
                             Vector3f alphaIndicator = new Vector3f(vertexBToCalculate.x, vertexBToCalculate.y, 0);
 
                             alpha = VectorHelper.getAngle(alphaIndicator, vertexBToCalculate);
 
-                            yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(alpha), 0, (float) Math.sin(alpha)),
+                            yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(alpha), 0, (float) Math.sin(alpha)),
                                     new Vector3f(0, 1, 0),
                                     new Vector3f(-(float) Math.sin(alpha), 0, (float) Math.cos(alpha)));
 
@@ -709,7 +709,7 @@ public class Collider {
 
                             beta = VectorHelper.getAngle(betaIndicator, vertexBToCalculate);
 
-                            zAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(beta), -(float) Math.sin(beta), 0),
+                            zAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(beta), -(float) Math.sin(beta), 0),
                                     new Vector3f((float) Math.sin(beta), (float) Math.cos(beta), 0),
                                     new Vector3f(0, 0, 1));
 
@@ -722,7 +722,7 @@ public class Collider {
 
                             gamma = VectorHelper.getAngle(gammaIndicator, vertexCToCalculate);
 
-                            xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+                            xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
                                     new Vector3f(0, (float) Math.cos(gamma), -(float) Math.sin(gamma)),
                                     new Vector3f(0, (float) Math.sin(gamma), (float) Math.cos(gamma)));
 
@@ -736,21 +736,21 @@ public class Collider {
 
                             Vector3f temporaryNewVelocity = VectorHelper.sumVectors(new Vector3f[]{newVelocity, middle});
 
-                            Matrix3d invertedXAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+                            Matrix3f invertedXAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
                                     new Vector3f(0, (float) Math.cos(-gamma), -(float) Math.sin(-gamma)),
                                     new Vector3f(0, (float) Math.sin(-gamma), (float) Math.cos(-gamma)));
 
                             temporaryNewVelocity = invertedXAxisRotationMatrix.multiplyByVector(temporaryNewVelocity);
                             middle = invertedXAxisRotationMatrix.multiplyByVector(middle);
 
-                            Matrix3d invertedZAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(-beta), -(float) Math.sin(-beta), 0),
+                            Matrix3f invertedZAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(-beta), -(float) Math.sin(-beta), 0),
                                     new Vector3f((float) Math.sin(-beta), (float) Math.cos(-beta), 0),
                                     new Vector3f(0, 0, 1));
 
                             temporaryNewVelocity = invertedZAxisRotationMatrix.multiplyByVector(temporaryNewVelocity);
                             middle = invertedZAxisRotationMatrix.multiplyByVector(middle);
 
-                            Matrix3d invertedYAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(-alpha), 0, (float) Math.sin(-alpha)),
+                            Matrix3f invertedYAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(-alpha), 0, (float) Math.sin(-alpha)),
                                     new Vector3f(0, 1, 0),
                                     new Vector3f(-(float) Math.sin(-alpha), 0, (float) Math.cos(-alpha)));
 

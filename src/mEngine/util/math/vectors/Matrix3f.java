@@ -2,13 +2,13 @@ package mEngine.util.math.vectors;
 
 import org.lwjgl.util.vector.Vector3f;
 
-public class Matrix3d extends Matrix {
+public class Matrix3f extends Matrix {
 
     private Vector3f firstLine;
     private Vector3f secondLine;
     private Vector3f thirdLine;
 
-    public Matrix3d(Vector3f firstLine, Vector3f secondLine, Vector3f thirdLine) {
+    public Matrix3f(Vector3f firstLine, Vector3f secondLine, Vector3f thirdLine) {
 
         this.firstLine = firstLine;
         this.secondLine = secondLine;

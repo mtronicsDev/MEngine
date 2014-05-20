@@ -2,12 +2,12 @@ package mEngine.util.math.vectors;
 
 import org.lwjgl.util.vector.Vector2f;
 
-public class Matrix2d extends Matrix {
+public class Matrix2f extends Matrix {
 
     private Vector2f firstLine;
     private Vector2f secondLine;
 
-    public Matrix2d(Vector2f firstLine, Vector2f secondLine) {
+    public Matrix2f(Vector2f firstLine, Vector2f secondLine) {
 
         this.firstLine = firstLine;
         this.secondLine = secondLine;

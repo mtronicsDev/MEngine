@@ -10,7 +10,7 @@ import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.physics.forces.ForcePoint;
 import mEngine.util.input.Input;
-import mEngine.util.math.vectors.Matrix3d;
+import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
@@ -90,12 +90,12 @@ public class MovementComponent extends Component {
 
             parent.percentRotation = new Vector3f(0, 0, 1);
 
-            Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+            Matrix3f xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
                     new Vector3f(0, (float) Math.cos(Math.toRadians(parent.rotation.x)), (float) -Math.sin(Math.toRadians(parent.rotation.x))),
                     new Vector3f(0, (float) Math.sin(Math.toRadians(parent.rotation.x)), (float) Math.cos(Math.toRadians(parent.rotation.x))));
             parent.percentRotation = xAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
-            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(parent.rotation.y)), 0, (float) Math.sin(Math.toRadians(parent.rotation.y))),
+            Matrix3f yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(Math.toRadians(parent.rotation.y)), 0, (float) Math.sin(Math.toRadians(parent.rotation.y))),
                     new Vector3f(0, 1, 0),
                     new Vector3f((float) -Math.sin(Math.toRadians(parent.rotation.y)), 0, (float) Math.cos(Math.toRadians(parent.rotation.y))));
             parent.percentRotation = yAxisRotationMatrix.multiplyByVector(parent.percentRotation);

@@ -337,6 +337,8 @@ public class Renderer {
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "materialShininess"), material.specularHighlightStrength);
+        glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "materialType"), material.type);
+        glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "materialTransparency"), material.color.a);
 
         Vector3f ambientReflectivity = material.ambientReflectivity;
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[0]"), ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);
@@ -491,6 +493,8 @@ public class Renderer {
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "modelPosition"), modelPosition.x, modelPosition.y, modelPosition.z);
 
         glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "materialShininess"), material.specularHighlightStrength);
+        glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "materialType"), material.type);
+        glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "materialTransparency"), material.color.a);
 
         Vector3f ambientReflectivity = material.ambientReflectivity;
         glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "reflectionAssets[0]"), ambientReflectivity.x, ambientReflectivity.y, ambientReflectivity.z);

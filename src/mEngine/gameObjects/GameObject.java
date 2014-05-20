@@ -4,7 +4,7 @@ import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.util.math.vectors.Matrix3d;
+import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -30,12 +30,12 @@ public class GameObject implements Serializable {
 
         if (!VectorHelper.areEqual(rotation, new Vector3f())) {
 
-            Matrix3d xAxisRotationMatrix = new Matrix3d(new Vector3f(1, 0, 0),
+            Matrix3f xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
                     new Vector3f(0, (float) Math.cos(Math.toRadians(rotation.x)), (float) -Math.sin(Math.toRadians(rotation.x))),
                     new Vector3f(0, (float) Math.sin(Math.toRadians(rotation.x)), (float) Math.cos(Math.toRadians(rotation.x))));
             percentRotation = xAxisRotationMatrix.multiplyByVector(percentRotation);
 
-            Matrix3d yAxisRotationMatrix = new Matrix3d(new Vector3f((float) Math.cos(Math.toRadians(rotation.y)), 0, (float) Math.sin(Math.toRadians(rotation.y))),
+            Matrix3f yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(Math.toRadians(rotation.y)), 0, (float) Math.sin(Math.toRadians(rotation.y))),
                     new Vector3f(0, 1, 0),
                     new Vector3f((float) -Math.sin(Math.toRadians(rotation.y)), 0, (float) Math.cos(Math.toRadians(rotation.y))));
             percentRotation = yAxisRotationMatrix.multiplyByVector(percentRotation);

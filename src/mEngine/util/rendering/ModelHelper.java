@@ -122,8 +122,7 @@ public class ModelHelper {
                     currentMaterialName = line.split(" ")[1];
                 } else if (currentMaterial != null) {
 
-                    if (line.startsWith("Ns "))
-                        currentMaterial.specularHighlightStrength = Float.valueOf(line.split(" ")[1]);
+                    if (line.startsWith("Ns ")) currentMaterial.specularHighlightStrength = Float.valueOf(line.split(" ")[1]);
                     else if (line.startsWith("Ka ")) currentMaterial.ambientReflectivity = new Vector3f(
                             Float.valueOf(line.split(" ")[1]),
                             Float.valueOf(line.split(" ")[2]),
@@ -137,9 +136,8 @@ public class ModelHelper {
                             Float.valueOf(line.split(" ")[2]),
                             Float.valueOf(line.split(" ")[3]));
                     else if (line.startsWith("d ")) currentMaterial.color.a = Float.valueOf(line.split(" ")[1]);
-                    else if (line.startsWith("map_Kd ")) {
-                        currentMaterial.textureName = line.split(" ")[1];
-                    }
+                    else if (line.startsWith("map_Kd ")) currentMaterial.textureName = line.split(" ")[1];
+                    else if (line.startsWith("illum ")) currentMaterial.type = Integer.valueOf(line.split(" ")[1]);
 
                 }
 

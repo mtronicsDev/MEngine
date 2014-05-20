@@ -10,7 +10,7 @@ public abstract class Material implements Serializable {
 
     public Texture texture;
     public String textureName;
-    public Color color = Color.white;
+    public Color color = new Color(Color.white);
 
     public Texture getTexture() {
         return texture;

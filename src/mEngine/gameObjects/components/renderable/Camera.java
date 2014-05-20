@@ -2,7 +2,7 @@ package mEngine.gameObjects.components.renderable;
 
 import mEngine.graphics.Renderer;
 import mEngine.util.input.Input;
-import mEngine.util.math.vectors.Matrix3d;
+import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
@@ -65,7 +65,7 @@ public class Camera extends ComponentRenderable {
 
                 float radiantRotation = (float) -Math.toRadians(parent.rotation.z);
 
-                Matrix3d zAxisRotationMatrix = new Matrix3d(
+                Matrix3f zAxisRotationMatrix = new Matrix3f(
                         new Vector3f((float) Math.cos(radiantRotation), (float) -Math.sin(radiantRotation), 0),
                         new Vector3f((float) Math.sin(radiantRotation), (float) Math.cos(radiantRotation), 0),
                         new Vector3f(0, 0, 1)
