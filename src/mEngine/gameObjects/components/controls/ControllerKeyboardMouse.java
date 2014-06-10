@@ -1,5 +1,6 @@
 package mEngine.gameObjects.components.controls;
 
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
@@ -66,7 +67,13 @@ public class ControllerKeyboardMouse extends Controller {
 
         }
 
-        MovementComponent movementComponent = (MovementComponent) parent.getComponent("movementComponent");
+        MovementComponent movementComponent = null;
+
+        for (Component component : parent.components) {
+
+            if (component instanceof MovementComponent) movementComponent = (MovementComponent) component;
+
+        }
 
         if (movementComponent != null) {
 

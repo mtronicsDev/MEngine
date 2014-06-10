@@ -79,24 +79,9 @@ public class Model {
     public Vector3f getSize() {
 
         Vector3f size = new Vector3f();
-        Vector3f maxVertexPos = new Vector3f();
-        Vector3f minVertexPos = new Vector3f();
+        Vector3f[] extremeVertexPositions = getExtremeVertexPositions();
 
-        for (SubModel subModel : subModels)
-            for (Vector3f vertex : subModel.vertices) {
-
-                if (vertex.x > maxVertexPos.x) maxVertexPos.x = vertex.x;
-                else if (vertex.x < minVertexPos.x) minVertexPos.x = vertex.x;
-
-                if (vertex.y > maxVertexPos.y) maxVertexPos.y = vertex.y;
-                else if (vertex.y < minVertexPos.y) minVertexPos.y = vertex.y;
-
-                if (vertex.z > maxVertexPos.z) maxVertexPos.z = vertex.z;
-                else if (vertex.z < minVertexPos.z) minVertexPos.z = vertex.z;
-
-            }
-
-        VectorHelper.subtractVectors(maxVertexPos, minVertexPos);
+        VectorHelper.subtractVectors(extremeVertexPositions[1], extremeVertexPositions[0]);
 
         return size;
 

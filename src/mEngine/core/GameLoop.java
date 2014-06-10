@@ -1,6 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.GraphicsController;
@@ -34,7 +35,7 @@ public class GameLoop implements Runnable {
 
                     ObjectController.addGameObject(
                             new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
-                                    .addComponent("renderComponent", new RenderComponent("texturedStar"))
+                                    .addComponent(new RenderComponent("texturedStar"))
                                     .createAllComponents()
                     );
 
@@ -47,7 +48,12 @@ public class GameLoop implements Runnable {
                     ObjectController.gameObjects.get(0).position = new Vector3f();
                     ObjectController.gameObjects.get(0).rotation = new Vector3f();
                     ObjectController.gameObjects.get(0).percentRotation = new Vector3f(0, 0, 1);
-                    ((Camera) ObjectController.gameObjects.get(0).getComponent("camera")).zoom = 0;
+
+                    for (Component component : ObjectController.gameObjects.get(0).components) {
+
+                        if (component instanceof Camera) ((Camera) component).zoom = 0;
+
+                    }
 
                 }
 

@@ -5,23 +5,22 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.controls.Controller;
 import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.physics.collisions.Collider;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
-import mEngine.physics.forces.ForcePoint;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MovementComponent extends Component {
 
-    public HashMap<String, ForcePoint> forcePoints = new HashMap<String, ForcePoint>();
+    public Map<String, Force> forces = new HashMap<String, Force>();
+    public int forceCount = 0;
     public Vector3f speed;
     public Vector3f movedSpace;
     Vector3f previousSpeed;
@@ -40,31 +39,19 @@ public class MovementComponent extends Component {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        RenderComponent renderComponent = (RenderComponent) parent.getComponent("renderComponent");
+        RenderComponent renderComponent = null;
 
-        if (renderComponent != null) {
+        for (Component component : parent.components)
+            if (component instanceof RenderComponent) renderComponent = (RenderComponent) component;
 
-            mass = renderComponent.model.getMass();
 
-            forcePoints.put("middle", new ForcePoint(new Vector3f()));
-            forcePoints.put("forward", new ForcePoint(new Vector3f(0, 0, -1)));
-            forcePoints.put("backward", new ForcePoint(new Vector3f(0, 0, 1)));
-            forcePoints.put("left", new ForcePoint(new Vector3f(-1, 0, 0)));
-            forcePoints.put("right", new ForcePoint(new Vector3f(1, 0, 0)));
-            forcePoints.put("up", new ForcePoint(new Vector3f(0, 1, 0)));
-            forcePoints.put("down", new ForcePoint(new Vector3f(0, -1, 0)));
+        if (renderComponent != null) mass = renderComponent.model.getMass();
 
-        } else {
-
-            mass = 60;
-
-            forcePoints.put("middle", new ForcePoint(new Vector3f()));
-
-        }
+        else  mass = 60;
 
         for (String key : ForceController.generalForces.keySet()) {
 
-            forcePoints.get("middle").forces.put(key, ForceController.generalForces.get(key));
+            forces.put(key, ForceController.generalForces.get(key));
 
         }
 
@@ -74,15 +61,28 @@ public class MovementComponent extends Component {
 
         if (!GameController.isGamePaused) {
 
-            Controller controller = (Controller) parent.getComponent("controller");
-            CollideComponent collideComponent = (CollideComponent) parent.getComponent("collideComponent");
+            Controller controller = null;
+
+            for (Component component : parent.components) {
+
+                if (component instanceof Controller) controller = (Controller) component;
+
+            }
+
+            PhysicComponent physicComponent = null;
+
+            for (Component component : parent.components) {
+
+                if (component instanceof PhysicComponent) physicComponent = (PhysicComponent) component;
+
+            }
 
             if (controller != null) {
 
                 if (!controller.sprintModeToggle) sprinting = false;
                 if (!controller.sneakModeToggle) sneaking = false;
                 if (Input.isKeyDown(Keyboard.KEY_V))
-                    forcePoints.get("middle").forces.get("gravity").enabled = !forcePoints.get("middle").forces.get("gravity").enabled; //Kiwi (KEY_V) :P
+                    forces.get("gravity").enabled = !forces.get("gravity").enabled; //Kiwi (KEY_V) :P
 
                 controller.onRemoteUpdate();
 
@@ -100,25 +100,21 @@ public class MovementComponent extends Component {
                     new Vector3f((float) -Math.sin(Math.toRadians(parent.rotation.y)), 0, (float) Math.cos(Math.toRadians(parent.rotation.y))));
             parent.percentRotation = yAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
-            for (ForcePoint forcePoint : forcePoints.values()) {
+            for (String key : forces.keySet()) {
 
-                for (String key : forcePoint.forces.keySet()) {
+                if (key.startsWith("inertiaForce")) {
 
-                    if (key.startsWith("inertiaForce")) {
+                    Force force = forces.get(key);
 
-                        Force force = forcePoint.forces.get(key);
+                    //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
 
-                        //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
+                    force.direction = VectorHelper.divideVectorByFloat(force.direction, 2);
 
-                        force.direction = VectorHelper.divideVectorByFloat(force.direction, 2);
+                    if (Math.abs(force.direction.x) <= 0.001f &&
+                            Math.abs(force.direction.y) <= 0.001f &&
+                            Math.abs(force.direction.z) <= 0.001f) {
 
-                        if (Math.abs(force.direction.x) <= 0.001f &&
-                                Math.abs(force.direction.y) <= 0.001f &&
-                                Math.abs(force.direction.z) <= 0.001f) {
-
-                            forcePoint.forces.remove(force);
-
-                        }
+                        forces.remove(force);
 
                     }
 
@@ -126,24 +122,9 @@ public class MovementComponent extends Component {
 
             }
 
-            Vector3f forceSum = ForceController.sumForces(forcePoints.get("middle").forces.values());
+            Vector3f forceSum = ForceController.sumForces(forces.values());
 
-            if (collideComponent != null) {
-
-                if (Collider.isCollidingWithSomething(parent)) {
-
-                    forceSum = ForceController.getCombinedForces(forceSum);
-
-                } else {
-
-                    Vector2f newForces = ForceController.getCombinedForces(new Vector2f(forceSum.x, forceSum.z));
-
-                    forceSum.x = newForces.x;
-                    forceSum.z = newForces.y;
-
-                }
-
-            } else forceSum = ForceController.getCombinedForces(forceSum);
+            forceSum = ForceController.getCombinedForces(forceSum);
 
             Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
 
@@ -155,10 +136,7 @@ public class MovementComponent extends Component {
 
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if (collideComponent != null && collideComponent.ableToCollide && !VectorHelper.areEqual(movedSpace, new Vector3f()))
-                collideComponent.onRemoteUpdate();
-
-            parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, movedSpace});
+            if (physicComponent == null) parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, movedSpace});
 
         }
 
@@ -167,11 +145,10 @@ public class MovementComponent extends Component {
     public void onRemoteUpdate() {
     }
 
-    //TODO: Find a way to hold the force counter as little as possible because otherwise there could be an overflow error
     public void moveForward() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get("forward");
+        Force givenForce = forces.get("forward");
 
         direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
         direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
@@ -192,19 +169,21 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
+        String forceIdentifier = "inertiaForce" + forceCount;
 
-        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
-        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
 
-        forcePoints.get("middle").forceCount++;
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
 
     }
 
     public void moveBackward() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get("backward");
+        Force givenForce = forces.get("backward");
 
         direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
         direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
@@ -218,19 +197,21 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
+        String forceIdentifier = "inertiaForce" + forceCount;
 
-        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
-        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
 
-        forcePoints.get("middle").forceCount++;
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
 
     }
 
     public void moveLeft() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get("left");
+        Force givenForce = forces.get("left");
 
         direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
         direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
@@ -244,19 +225,21 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
+        String forceIdentifier = "inertiaForce" + forceCount;
 
-        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
-        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
 
-        forcePoints.get("middle").forceCount++;
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
 
     }
 
     public void moveRight() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get("right");
+        Force givenForce = forces.get("right");
 
         direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
         direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
@@ -270,19 +253,21 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
+        String forceIdentifier = "inertiaForce" + forceCount;
 
-        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
-        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
 
-        forcePoints.get("middle").forceCount++;
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
 
     }
 
     public void moveUp() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get("up");
+        Force givenForce = forces.get("up");
 
         direction.y = givenForce.direction.y;
 
@@ -300,50 +285,64 @@ public class MovementComponent extends Component {
 
         }
 
-        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
+        String forceIdentifier = "inertiaForce" + forceCount;
 
-        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
-        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
 
-        forcePoints.get("middle").forceCount++;
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
 
     }
 
     public void moveDown() {
 
         Vector3f direction = new Vector3f();
-        Force givenForce = forcePoints.get("middle").forces.get("down");
+        Force givenForce = forces.get("down");
 
         direction.y = givenForce.direction.y;
 
-        String forceIdentifier = "inertiaForce" + forcePoints.get("middle").forceCount;
+        String forceIdentifier = "inertiaForce" + forceCount;
 
-        forcePoints.get("middle").forces.put(forceIdentifier, new Force(direction));
-        forcePoints.get("middle").forces.get(forceIdentifier).enabled = true;
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
 
-        forcePoints.get("middle").forceCount++;
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
 
     }
 
     public void jump() {
 
-        forcePoints.get("middle").forces.get("jump").enabled = true;
+        forces.get("jump").enabled = true;
 
     }
 
     public void sprint() {
 
-        Controller controller = (Controller) parent.getComponent("controller");
+        Controller controller = null;
 
-        if (!controller.sprintModeToggle) {
+        for (Component component : parent.components) {
 
-            sprinting = true;
-            sneaking = false;
+            if (component instanceof Controller) controller = (Controller) component;
 
-        } else {
+        }
 
-            sprinting = !sprinting;
-            sneaking = false;
+        if (controller != null) {
+
+            if (!controller.sprintModeToggle) {
+
+                sprinting = true;
+                sneaking = false;
+
+            } else {
+
+                sprinting = !sprinting;
+                sneaking = false;
+
+            }
 
         }
 
@@ -351,13 +350,18 @@ public class MovementComponent extends Component {
 
     public void sneak() {
 
-        Controller controller = (Controller) parent.getComponent("controller");
+        Controller controller = null;
 
-        if (!sprinting) {
+        for (Component component : parent.components) {
 
-            sneaking = !controller.sneakModeToggle || !sneaking;
+            if (component instanceof Controller) controller = (Controller) component;
 
         }
+
+
+        if (controller != null)
+            if (!sprinting)
+                sneaking = !controller.sneakModeToggle || !sneaking;
 
     }
 

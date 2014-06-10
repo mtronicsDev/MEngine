@@ -1,6 +1,7 @@
 package mEngine.gameObjects.components.interaction.methods;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.interaction.InteractionComponent;
 
 public abstract class InteractionMethod {
@@ -12,7 +13,11 @@ public abstract class InteractionMethod {
 
         parent = object;
 
-        caller = ((InteractionComponent) parent.getComponent("interactionComponent"));
+        for (Component component : parent.components) {
+
+            if (component instanceof InteractionComponent) caller = (InteractionComponent) component;
+
+        }
 
     }
 

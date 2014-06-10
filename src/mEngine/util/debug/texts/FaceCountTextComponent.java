@@ -26,7 +26,7 @@ public class FaceCountTextComponent extends GUIText {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            for (Component component : object.components.values()) {
+            for (Component component : object.components) {
 
                 if (component instanceof RenderComponent)
                     faceCount += ((RenderComponent) component).model.getFaces().size();

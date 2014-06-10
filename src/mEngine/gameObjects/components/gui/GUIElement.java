@@ -7,12 +7,14 @@ import mEngine.graphics.renderable.materials.Material2D;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GUIElement extends ComponentRenderable {
 
     public Material2D material;
-    public HashMap<String, GUIComponent> components = new HashMap<String, GUIComponent>();
+    public List<GUIComponent> components = new ArrayList<GUIComponent>();
     private Vector2f position; //Values from 0 to 1
     private Vector2f size; //Values from 0 to 1
 
@@ -65,7 +67,7 @@ public class GUIElement extends ComponentRenderable {
     public void onUpdate() {
         super.onUpdate();
 
-        for (GUIComponent component : components.values()) {
+        for (GUIComponent component : components) {
             component.onUpdate();
         }
 
@@ -75,7 +77,7 @@ public class GUIElement extends ComponentRenderable {
     public void onSave() {
 
         super.onSave();
-        for (GUIComponent component : components.values()) {
+        for (GUIComponent component : components) {
 
             component.onSave();
 
@@ -90,7 +92,7 @@ public class GUIElement extends ComponentRenderable {
     public void onLoad() {
 
         super.onLoad();
-        for (GUIComponent component : components.values()) {
+        for (GUIComponent component : components) {
 
             component.onLoad();
 
@@ -98,23 +100,19 @@ public class GUIElement extends ComponentRenderable {
 
     }
 
-    public GUIElement addComponent(String key, GUIComponent component) {
+    public GUIElement addComponent(GUIComponent component) {
 
-        components.put(key, component);
-        getComponent(key).onCreation(this);
+        components.add(component);
+        component.onCreation(this);
         return this;
 
-    }
-
-    public GUIComponent getComponent(String key) {
-        return components.get(key);
     }
 
     public void render() {
 
         if (material.getTexture() == null && material.hasTexture()) material.setTextureFromName();
         material.bind();
-        for (GUIComponent component : components.values()) {
+        for (GUIComponent component : components) {
             component.render();
         }
 

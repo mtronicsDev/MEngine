@@ -32,26 +32,32 @@ public class Skybox extends ComponentRenderable3D {
             materials[0] = new Material3D();
             materials[0].setTextureName(textureName + "_bottom");
             materials[0].setTextureFromName();
+            materials[0].type = 0;
 
             materials[1] = new Material3D();
             materials[1].setTextureName(textureName + "_top");
             materials[1].setTextureFromName();
+            materials[1].type = 0;
 
             materials[2] = new Material3D();
             materials[2].setTextureName(textureName + "_back");
             materials[2].setTextureFromName();
+            materials[2].type = 0;
 
             materials[3] = new Material3D();
             materials[3].setTextureName(textureName + "_front");
             materials[3].setTextureFromName();
+            materials[3].type = 0;
 
             materials[4] = new Material3D();
             materials[4].setTextureName(textureName + "_left");
             materials[4].setTextureFromName();
+            materials[4].type = 0;
 
             materials[5] = new Material3D();
             materials[5].setTextureName(textureName + "_right");
             materials[5].setTextureFromName();
+            materials[5].type = 0;
 
             List<Vector3f> renderVertices = new ArrayList<Vector3f>();
             List<Vector3f> renderNormals = new ArrayList<Vector3f>();

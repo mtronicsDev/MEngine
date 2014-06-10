@@ -2,7 +2,9 @@ package mEngine.util.rendering;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.renderable.Camera;
+import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
@@ -81,14 +83,27 @@ public class RenderHelper {
 
         Camera camera = null;
 
-        for (GameObject obj : ObjectController.gameObjects) {
+        if (Renderer.currentRenderQueue.camera != null) camera = Renderer.currentRenderQueue.camera;
 
-            Camera maybeCamera = (Camera) obj.getComponent("camera");
+        else {
 
-            if (maybeCamera != null) {
+            for (GameObject obj : ObjectController.gameObjects) {
 
-                camera = maybeCamera;
-                break;
+                boolean cameraFound = false;
+
+                for (Component component : obj.components) {
+
+                    if (component instanceof Camera) {
+
+                        camera = (Camera) component;
+                        cameraFound = true;
+                        break;
+
+                    }
+
+                }
+
+                if (cameraFound) break;
 
             }
 

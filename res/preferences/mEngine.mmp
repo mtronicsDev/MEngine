@@ -2,7 +2,7 @@
 screenWidth=1280
 screenHeight=720
 framesPerSecond=60
-fullscreen=true
+fullscreen=false
 title=mEngine Test Run
 renderDistance=10000
 antiAliasing=true

@@ -5,12 +5,14 @@ import mEngine.gameObjects.components.particles.particleComponents.ParticleCompo
 import mEngine.gameObjects.components.renderable.Particle;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ParticleEmitter extends Component {
 
-    public Map<String, ParticleComponent> particleComponents = new HashMap<String, ParticleComponent>();
+    public List<ParticleComponent> particleComponents = new ArrayList<ParticleComponent>();
     public Vector2f size;
     String textureName;
     int particleCount = 0;
@@ -22,9 +24,9 @@ public class ParticleEmitter extends Component {
 
     }
 
-    public ParticleEmitter addParticleComponent(String componentName, ParticleComponent particleComponent) {
+    public ParticleEmitter addParticleComponent(ParticleComponent particleComponent) {
 
-        particleComponents.put(componentName, particleComponent);
+        particleComponents.add(particleComponent);
 
         return this;
 
@@ -34,17 +36,15 @@ public class ParticleEmitter extends Component {
 
         Particle particle = new Particle(size, textureName);
 
-        for (String key : particleComponents.keySet()) {
+        for (ParticleComponent particleComponent : particleComponents) {
 
-            particle.addComponent(key, particleComponents.get(key));
+            particle.addComponent(particleComponent);
 
         }
 
-        String particleIdentifier = "particle" + particleCount;
+        parent.addComponent(particle);
 
-        parent.addComponent(particleIdentifier, particle);
-
-        parent.getComponent(particleIdentifier).onCreation(parent);
+        particle.onCreation(parent);
 
         particleCount++;
 

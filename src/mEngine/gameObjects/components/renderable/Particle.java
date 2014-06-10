@@ -21,7 +21,7 @@ public class Particle extends ComponentRenderable3D {
     public List<Vector3f> vertices = new ArrayList<Vector3f>();
     public List<Vector2f> uvs = new ArrayList<Vector2f>();
     public Vector2f size;
-    public Map<String, ParticleComponent> components = new HashMap<String, ParticleComponent>();
+    public List<ParticleComponent> components = new ArrayList<ParticleComponent>();
     String textureName;
     Texture texture;
     boolean isTextureThere = true;
@@ -59,7 +59,7 @@ public class Particle extends ComponentRenderable3D {
 
     public void onUpdate() {
 
-        for (ParticleComponent particleComponent : components.values()) {
+        for (ParticleComponent particleComponent : components) {
 
             particleComponent.onUpdate();
 
@@ -125,9 +125,9 @@ public class Particle extends ComponentRenderable3D {
 
     }
 
-    public Particle addComponent(String componentName, ParticleComponent component) {
+    public Particle addComponent(ParticleComponent component) {
 
-        components.put(componentName, component);
+        components.add(component);
         component.onCreation(this);
 
         return this;

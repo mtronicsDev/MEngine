@@ -17,7 +17,6 @@ uniform int[maxLightSourceCount] shadowThrowing;
 uniform float[maxLightSourceCount] transitions;
 uniform sampler2D texture;
 uniform vec4 color;
-uniform float emissiveLightStrength;
 uniform vec3 cameraPosition;
 uniform vec3[3] reflectionAssets;
 uniform int materialType;
@@ -35,7 +34,7 @@ void main(void) {
 
     previousFragmentColor.a *= materialTransparency;
 
-    if (emissiveLightStrength != 0) fragColor = vec3(vec3(previousFragmentColor) * emissiveLightStrength);
+    if (materialType == 0) fragColor = vec3(previousFragmentColor);
 
     else {
 
@@ -57,25 +56,45 @@ void main(void) {
 
         int count = 0;
 
-        if (materialType == 0) {
+        while (count < lightSourceCount) {
 
+            if (lightSourceTypes[count] == 0) {
 
+                if (lightAngles[count] == -1) {
 
-        } else if (materialType == 1) {
+                    vec3 lightDifference = vertex - lightPositions[count];
 
+                    vec3 lightDirection = normalize(lightDifference);
 
+                    float difference = length(lightDifference);
 
-        } else if (materialType == 2) {
+                    float diffuseLightIntensity = lightStrengths[count] / difference;
+                    diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-            while (count < lightSourceCount) {
+                    fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
-                if (lightSourceTypes[count] == 0) {
+                    if (specularLighting[count] == 1 && materialType >= 2) {
 
-                    if (lightAngles[count] == -1) {
+                        vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
-                        vec3 lightDifference = vertex - lightPositions[count];
+                        vec3 idealReflectionDirection = vec3(normalize(cameraPosition - vertex));
 
-                        vec3 lightDirection = normalize(lightDifference);
+                        float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
+                        specularLightIntensity = pow(specularLightIntensity, shininess);
+
+                        fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
+
+                    }
+
+                } else {
+
+                    vec3 lightDifference = vertex - lightPositions[count];
+
+                    vec3 lightDirection = normalize(lightDifference);
+
+                    float actualAngle = acos(dot(lightDirections[count], lightDirection));
+
+                    if (actualAngle <= lightAngles[count]) {
 
                         float difference = length(lightDifference);
 
@@ -84,7 +103,7 @@ void main(void) {
 
                         fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
-                        if (specularLighting[count] == 1) {
+                        if (specularLighting[count] == 1 && materialType >= 2) {
 
                             vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
@@ -99,121 +118,27 @@ void main(void) {
 
                     } else {
 
-                        vec3 lightDifference = vertex - lightPositions[count];
+                        if (transitions[count] != 0) {
 
-                        vec3 lightDirection = normalize(lightDifference);
+                            float newLightAngle = lightAngles[count] +  lightAngles[count] * 0.5 * transitions[count];
 
-                        float actualAngle = acos(dot(lightDirections[count], lightDirection));
+                            if (actualAngle <= newLightAngle) {
 
-                        if (actualAngle <= lightAngles[count]) {
+                                float relativeAngleDifference = (1 - (actualAngle - lightAngles[count]) / (newLightAngle - lightAngles[count]));
 
-                            float difference = length(lightDifference);
+                                float difference = length(lightDifference);
 
-                            float diffuseLightIntensity = lightStrengths[count] / difference;
-                            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+                                float diffuseLightIntensity = lightStrengths[count] / difference * max(0, dot(normal, -lightDirection)) * relativeAngleDifference;
 
-                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
+                                fragColor += vec3(ambientLightedTextureColor * reflectionAssets[1] * lightColors[count] * diffuseLightIntensity);
 
-                            if (specularLighting[count] == 1) {
-
-                                vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
-
-                                vec3 idealReflectionDirection = vec3(normalize(cameraPosition - vertex));
-
-                                float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
-                                specularLightIntensity = pow(specularLightIntensity, shininess);
-
-                                fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
-
-                            }
-
-                        } else {
-
-                            if (transitions[count] != 0) {
-
-                                float newLightAngle = lightAngles[count] * 1.5;
-
-                                if (actualAngle <= newLightAngle) {
-
-                                    float relativeAngleDifference = (1 - (actualAngle - lightAngles[count]) / (newLightAngle - lightAngles[count])) * transitions[count];
-
-                                    float difference = length(lightDifference);
-
-                                    float diffuseLightIntensity = lightStrengths[count] / difference;
-                                    diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
-
-                                    fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count] * relativeAngleDifference);
-
-                                    if (specularLighting[count] == 1) {
-
-                                        vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
-
-                                        vec3 idealReflectionDirection = vec3(normalize(cameraPosition - vertex));
-
-                                        float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
-                                        specularLightIntensity = pow(specularLightIntensity, shininess);
-
-                                        fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2] * relativeAngleDifference);
-
-                                    }
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-                } else if (lightSourceTypes[count] == 1) {
-
-                    vec3 lightDirection = lightDirections[count];
-
-                    float difference = dot(lightDirection, vertex) + dot(-lightDirection, lightPositions[count]);
-
-                    if (difference > 0) {
-
-                        if (lightRadii[count] == -1) {
-
-                            float diffuseLightIntensity = lightStrengths[count] / difference;
-                            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
-
-                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
-
-                            if (specularLighting[count] == 1) {
-
-                                vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
-
-                                vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
-
-                                float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
-                                specularLightIntensity = pow(specularLightIntensity, shininess);
-
-                                fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
-
-                            }
-
-                        } else {
-
-                            vec3 differenceVector = vec3(-lightDirection * difference);
-                            differenceVector += vertex;
-
-                            float differenceToLightSource = length(differenceVector - lightPositions[count]);
-
-                            if (differenceToLightSource <= lightRadii[count]) {
-
-                                float diffuseLightIntensity = lightStrengths[count] / difference;
-                                diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
-
-                                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
-
-                                if (specularLighting[count] == 1) {
+                                if (specularLighting[count] == 1 && materialType >= 2) {
 
                                     vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
 
-                                    vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+                                    vec3 idealReflectionDirection = vec3(normalize(cameraPosition - vertex));
 
-                                    float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
+                                    float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection) * relativeAngleDifference);
                                     specularLightIntensity = pow(specularLightIntensity, shininess);
 
                                     fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
@@ -226,36 +151,94 @@ void main(void) {
 
                     }
 
-                } else if (lightSourceTypes[count] == 2) {
+                }
 
-                    vec3 lightDirection = lightDirections[count];
+            } else if (lightSourceTypes[count] == 1) {
 
-                    float diffuseLightIntensity = lightStrengths[count];
-                    diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+                vec3 lightDirection = lightDirections[count];
 
-                    fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
+                float difference = dot(lightDirection, vertex) + dot(-lightDirection, lightPositions[count]);
 
-                    if (specularLighting[count] == 1) {
+                if (difference > 0) {
 
-                        vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+                    if (lightRadii[count] == -1) {
 
-                        vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+                        float diffuseLightIntensity = lightStrengths[count] / difference;
+                        diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
 
-                        float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
-                        specularLightIntensity = pow(specularLightIntensity, shininess);
+                        fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
 
-                        fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
+                        if (specularLighting[count] == 1 && materialType >= 2) {
+
+                            vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+                            vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+
+                            float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
+                            specularLightIntensity = pow(specularLightIntensity, shininess);
+
+                            fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
+
+                        }
+
+                    } else {
+
+                        vec3 differenceVector = vec3(-lightDirection * difference);
+                        differenceVector += vertex;
+
+                        float differenceToLightSource = length(differenceVector - lightPositions[count]);
+
+                        if (differenceToLightSource <= lightRadii[count]) {
+
+                            float diffuseLightIntensity = lightStrengths[count] / difference;
+                            diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+
+                            fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
+
+                            if (specularLighting[count] == 1 && materialType >= 2) {
+
+                                vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+                                vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+
+                                float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
+                                specularLightIntensity = pow(specularLightIntensity, shininess);
+
+                                fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
+
+                            }
+
+                        }
 
                     }
 
                 }
 
-                count++;
+            } else if (lightSourceTypes[count] == 2) {
+
+                vec3 lightDirection = lightDirections[count];
+
+                float diffuseLightIntensity = lightStrengths[count];
+                diffuseLightIntensity *= max(0, dot(normal, -lightDirection));
+
+                fragColor += vec3(ambientLightedTextureColor * diffuseLightIntensity * reflectionAssets[1] * lightColors[count]);
+
+                if (specularLighting[count] == 1 && materialType >= 2) {
+
+                    vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+
+                    vec3 idealReflectionDirection = normalize(cameraPosition - vertex);
+
+                    float specularLightIntensity = max(0, dot(reflectionDirection, idealReflectionDirection));
+                    specularLightIntensity = pow(specularLightIntensity, shininess);
+
+                    fragColor += vec3(specularLightIntensity * lightColors[count] * reflectionAssets[2]);
+
+                }
 
             }
 
-        } else if (materialType == 3) {
-
+            count++;
 
         }
 

@@ -28,17 +28,24 @@ public abstract class Controller extends Component {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        MovementComponent movementComponent = (MovementComponent) obj.getComponent("movementComponent");
+
+        MovementComponent movementComponent = null;
+
+        for (Component component : parent.components) {
+
+            if (component instanceof MovementComponent) movementComponent = (MovementComponent) component;
+
+        }
 
         if (movementComponent != null) {
 
-            movementComponent.forcePoints.get("middle").forces.put("forward", new Force(new Vector3f(0, 0, -forceStrengths[0])));
-            movementComponent.forcePoints.get("middle").forces.put("backward", new Force(new Vector3f(0, 0, forceStrengths[1])));
-            movementComponent.forcePoints.get("middle").forces.put("right", new Force(new Vector3f(-forceStrengths[2], 0, 0)));
-            movementComponent.forcePoints.get("middle").forces.put("left", new Force(new Vector3f(forceStrengths[3], 0, 0)));
-            movementComponent.forcePoints.get("middle").forces.put("up", new Force(new Vector3f(0, forceStrengths[4], 0)));
-            movementComponent.forcePoints.get("middle").forces.put("down", new Force(new Vector3f(0, -forceStrengths[5], 0)));
-            movementComponent.forcePoints.get("middle").forces.put("jump", new Force(new Vector3f(0, forceStrengths[6], 0)));
+            movementComponent.forces.put("forward", new Force(new Vector3f(0, 0, -forceStrengths[0])));
+            movementComponent.forces.put("backward", new Force(new Vector3f(0, 0, forceStrengths[1])));
+            movementComponent.forces.put("right", new Force(new Vector3f(-forceStrengths[2], 0, 0)));
+            movementComponent.forces.put("left", new Force(new Vector3f(forceStrengths[3], 0, 0)));
+            movementComponent.forces.put("up", new Force(new Vector3f(0, forceStrengths[4], 0)));
+            movementComponent.forces.put("down", new Force(new Vector3f(0, -forceStrengths[5], 0)));
+            movementComponent.forces.put("jump", new Force(new Vector3f(0, forceStrengths[6], 0)));
 
         }
 

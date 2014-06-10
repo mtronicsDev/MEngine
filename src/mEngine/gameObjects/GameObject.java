@@ -9,16 +9,14 @@ import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class GameObject implements Serializable {
 
     public Vector3f position;
     public Vector3f rotation;
     public Vector3f percentRotation;
-    public Map<String, Component> components = new HashMap<String, Component>();
+    public List<Component> components = new ArrayList<Component>();
     private long uuid = UUID.randomUUID().getMostSignificantBits();
 
     public GameObject(Vector3f pos, Vector3f rot) {
@@ -50,9 +48,9 @@ public class GameObject implements Serializable {
         rotation = src.rotation;
         percentRotation = src.percentRotation;
 
-        for (String key : src.components.keySet()) {
+        for (Component component : src.components) {
 
-            addComponent(key, src.getComponent(key));
+            addComponent(component);
 
         }
 
@@ -60,7 +58,7 @@ public class GameObject implements Serializable {
 
     public void update() {
 
-        for (Component component : components.values()) {
+        for (Component component : components) {
 
             component.onUpdate();
 
@@ -70,7 +68,7 @@ public class GameObject implements Serializable {
 
     public void save() {
 
-        for (Component component : components.values()) {
+        for (Component component : components) {
 
             component.onSave();
 
@@ -80,7 +78,7 @@ public class GameObject implements Serializable {
 
     public void load() {
 
-        for (Component component : components.values()) {
+        for (Component component : components) {
 
             component.onLoad();
 
@@ -95,7 +93,7 @@ public class GameObject implements Serializable {
     public void addToRenderQueue() {
 
         //Adds this gameObject's models, particles and guiElements to the renderQueue
-        for (Component component : components.values()) {
+        for (Component component : components) {
 
             if (component instanceof ComponentRenderable) ((ComponentRenderable) component).addToRenderQueue();
 
@@ -103,9 +101,9 @@ public class GameObject implements Serializable {
 
     }
 
-    public GameObject addComponent(String key, Component component) {
+    public GameObject addComponent(Component component) {
 
-        components.put(key, component);
+        components.add(component);
 
         return this;
 
@@ -117,27 +115,26 @@ public class GameObject implements Serializable {
 
     }
 
-    public Component getComponent(String key) {
-
-        return components.get(key);
-
-    }
-
     public GameObject createAllComponents() {
 
-        for (Component component : components.values()) {
+        List<Component> components = new ArrayList<Component>();
+
+        for (Component component : this.components)
+            components.add(component);
+
+        for (Component component : components) {
 
             if (component instanceof RenderComponent) component.onCreation(this);
 
         }
 
-        for (Component component : components.values()) {
+        for (Component component : components) {
 
             if (component instanceof MovementComponent) component.onCreation(this);
 
         }
 
-        for (Component component : components.values()) {
+        for (Component component : components) {
 
             if (!(component instanceof RenderComponent || component instanceof MovementComponent))
                 component.onCreation(this);

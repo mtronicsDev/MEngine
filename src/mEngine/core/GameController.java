@@ -6,13 +6,11 @@ import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
 import mEngine.gameObjects.components.interaction.InteractionComponent;
 import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
-import mEngine.gameObjects.components.physics.CollideComponent;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
-import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
@@ -61,82 +59,61 @@ public class GameController {
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
                 .addComponent(
-                        "movementComponent",
                         new MovementComponent()
                 )
                 .addComponent(
-                        "renderComponent",
                         new RenderComponent("sphere")
                 )
                 .addComponent(
-                        "controller",
                         new ControllerKeyboardMouse(
                                 new float[]{0.3f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
                                 true
                         )
                 )
                 .addComponent(
-                        "collideComponent",
-                        new CollideComponent(false, CollisionHelper.getCollisionResponseMethod(false, true, false))
-                )
-                .addComponent(
-                        "skybox",
                         new Skybox("peaks")
                 )
                 .addComponent(
-                        "camera",
                         new Camera()
                 )
                 /*.addComponent(
-                        "flashlight",
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )*/
                 .addComponent(
-                        "reticule",
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
-                                .addComponent("guiQuad", new GUIQuad())
+                                .addComponent(new GUIQuad())
                 )
                 .addComponent(
-                        "fpsText",
-                        new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent("guiText", new FPSTextComponent("Current FPS", 15))
+                        new GUIElement(new Vector2f(5, 5), new Vector2f()).addComponent(new FPSTextComponent("Current FPS", 15))
                 )
                 .addComponent(
-                        "tpsText",
-                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent("guiText", new TPSTextComponent("Current TPS", 15))
+                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addComponent(new TPSTextComponent("Current TPS", 15))
                 )
                 .addComponent(
-                        "ramText",
-                        new GUIElement(new Vector2f(5, 45), new Vector2f()).addComponent("guiText", new RAMTextComponent("Current RAM", 15))
+                        new GUIElement(new Vector2f(5, 45), new Vector2f()).addComponent(new RAMTextComponent("Current RAM", 15))
                 )
                 .addComponent(
-                        "posXText",
-                        new GUIElement(new Vector2f(5, 85), new Vector2f()).addComponent("guiText", new PositionXTextComponent("x Position", 15))
+                        new GUIElement(new Vector2f(5, 85), new Vector2f()).addComponent(new PositionXTextComponent("x Position", 15))
                 )
                 .addComponent(
-                        "posYText",
-                        new GUIElement(new Vector2f(5, 105), new Vector2f()).addComponent("guiText", new PositionYTextComponent("y Position", 15))
+                        new GUIElement(new Vector2f(5, 105), new Vector2f()).addComponent(new PositionYTextComponent("y Position", 15))
                 )
                 .addComponent(
-                        "posZText",
-                        new GUIElement(new Vector2f(5, 125), new Vector2f()).addComponent("guiText", new PositionZTextComponent("z Position", 15))
+                        new GUIElement(new Vector2f(5, 125), new Vector2f()).addComponent(new PositionZTextComponent("z Position", 15))
                 )
                 .addComponent(
-                        "vertexCountText",
-                        new GUIElement(new Vector2f(5, 165), new Vector2f()).addComponent("guiText", new VertexCountTextComponent("vertices", 15))
+                        new GUIElement(new Vector2f(5, 165), new Vector2f()).addComponent(new VertexCountTextComponent("vertices", 15))
                 )
                 .addComponent(
-                        "faceCountText",
-                        new GUIElement(new Vector2f(5, 185), new Vector2f()).addComponent("guiText", new FaceCountTextComponent("faces", 15))
+                        new GUIElement(new Vector2f(5, 185), new Vector2f()).addComponent(new FaceCountTextComponent("faces", 15))
                 )
                 .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
                 .addComponent(
-                        "renderComponent",
                         new RenderComponent("monkey")
                 )
                 .addComponent(
-                        "interactionComponent",
                         new InteractionComponent(true, 10, "I", "move monkey", 25, new AsyncMethod() {
                             @Override
                             public void interact() {
@@ -169,56 +146,48 @@ public class GameController {
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
-                        "city",
                         new RenderComponent("Sci-fi_Tropical_city")
                 )
                 .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f(35, -45, 0))
                 .addComponent(
-                        "sunAmbient0",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 1, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
                                 .setShadowThrowing(false)
                 )
                 .addComponent(
-                        "sunAmbient1",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
                                 .setShadowThrowing(false)
                 )
                 .addComponent(
-                        "sunAmbient2",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(1, 0, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
                                 .setShadowThrowing(false)
                 )
                 .addComponent(
-                        "sunAmbient3",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(-1, 0, 0))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
                                 .setShadowThrowing(false)
                 )
                 .addComponent(
-                        "sunAmbient4",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 0, 1))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
                                 .setShadowThrowing(false)
                 )
                 .addComponent(
-                        "sunAmbient5",
                         new GlobalLightSource(1, new Vector4f(255, 251, 237, 1), new Vector3f(0, 0, -1))
                                 .setSpecularLighting(false)
                                 .setDependent(false)
                                 .setShadowThrowing(false)
                 )
                 .addComponent(
-                        "sun",
                         new GlobalLightSource(15, new Vector4f(255, 251, 237, 1), new Vector3f(0, -1, 0))
                 )
                 .createAllComponents());

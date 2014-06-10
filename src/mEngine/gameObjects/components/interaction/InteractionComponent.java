@@ -33,6 +33,7 @@ public class InteractionComponent extends Component {
     private float maxControllerLookAngle;
     private float[] controllerLookAngles;
     private List<GameObject> controlledGameObjects;
+    public GUIText interactionInstructionText;
 
     public InteractionComponent(boolean interactable, float radius, InteractionMethod interaction) {
 
@@ -75,9 +76,10 @@ public class InteractionComponent extends Component {
 
             String interactionInstruction = String.valueOf(interactionKey).toUpperCase() + ": " + interactionDescription;
 
+            interactionInstructionText = new GUIText(interactionInstruction, 15);
+
             parent.addComponent(
-                    "interactionInstruction",
-                    new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addComponent("text", new GUIText(interactionInstruction, 15))
+                    new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addComponent(interactionInstructionText)
             );
 
             this.interactionInstruction = interactionInstruction;
@@ -145,7 +147,7 @@ public class InteractionComponent extends Component {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            for (Component component : object.components.values()) {
+            for (Component component : object.components) {
 
                 if (component instanceof Controller) controlledGameObjects.add(object);
 
@@ -180,10 +182,10 @@ public class InteractionComponent extends Component {
             }
 
             if (interactable && this.interactable)
-                ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = interactionInstruction;
+                interactionInstructionText.text = interactionInstruction;
 
             else
-                ((GUIText) ((GUIElement) parent.getComponent("interactionInstruction")).getComponent("text")).text = "";
+                interactionInstructionText.text = "";
 
         }
 

@@ -57,6 +57,12 @@ public class RenderQueue {
 
     public void render() {
 
+        /*for (LightSource lightSource : lightSources) {
+
+            lightSource.updateShadowMap();
+
+        }*/
+
         GraphicsController.switchTo3D();
         if (camera != null) camera.render();
         for (ComponentRenderable3D component : modelQueue) {

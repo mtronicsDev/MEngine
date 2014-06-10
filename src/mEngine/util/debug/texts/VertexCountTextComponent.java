@@ -26,7 +26,7 @@ public class VertexCountTextComponent extends GUIText {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            for (Component component : object.components.values()) {
+            for (Component component : object.components) {
 
                 if (component instanceof RenderComponent)
                     vertexCount += ((RenderComponent) component).model.getVertices().size() * 3;
