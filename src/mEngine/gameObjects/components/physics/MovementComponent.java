@@ -39,11 +39,7 @@ public class MovementComponent extends Component {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        RenderComponent renderComponent = null;
-
-        for (Component component : parent.components)
-            if (component instanceof RenderComponent) renderComponent = (RenderComponent) component;
-
+        RenderComponent renderComponent = (RenderComponent) obj.getAnyComponent(RenderComponent.class);
 
         if (renderComponent != null) mass = renderComponent.model.getMass();
 
@@ -61,21 +57,9 @@ public class MovementComponent extends Component {
 
         if (!GameController.isGamePaused) {
 
-            Controller controller = null;
+            Controller controller = (Controller) parent.getAnyComponent(Controller.class);
 
-            for (Component component : parent.components) {
-
-                if (component instanceof Controller) controller = (Controller) component;
-
-            }
-
-            PhysicComponent physicComponent = null;
-
-            for (Component component : parent.components) {
-
-                if (component instanceof PhysicComponent) physicComponent = (PhysicComponent) component;
-
-            }
+            PhysicComponent physicComponent = (PhysicComponent) parent.getAnyComponent(PhysicComponent.class);
 
             if (controller != null) {
 
@@ -322,13 +306,7 @@ public class MovementComponent extends Component {
 
     public void sprint() {
 
-        Controller controller = null;
-
-        for (Component component : parent.components) {
-
-            if (component instanceof Controller) controller = (Controller) component;
-
-        }
+        Controller controller = (Controller) parent.getAnyComponent(Controller.class);
 
         if (controller != null) {
 
@@ -350,13 +328,7 @@ public class MovementComponent extends Component {
 
     public void sneak() {
 
-        Controller controller = null;
-
-        for (Component component : parent.components) {
-
-            if (component instanceof Controller) controller = (Controller) component;
-
-        }
+        Controller controller = (Controller) parent.getAnyComponent(Controller.class);
 
 
         if (controller != null)

@@ -67,13 +67,7 @@ public class ControllerKeyboardMouse extends Controller {
 
         }
 
-        MovementComponent movementComponent = null;
-
-        for (Component component : parent.components) {
-
-            if (component instanceof MovementComponent) movementComponent = (MovementComponent) component;
-
-        }
+        MovementComponent movementComponent = (MovementComponent) parent.getAnyComponent(MovementComponent.class);
 
         if (movementComponent != null) {
 

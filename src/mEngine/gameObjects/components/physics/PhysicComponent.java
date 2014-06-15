@@ -3,6 +3,7 @@ package mEngine.gameObjects.components.physics;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.Component;
 import mEngine.physics.collisions.Collider;
+import mEngine.physics.collisions.primitives.Triangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.List;
 public class PhysicComponent extends Component {
 
     public boolean ableToCollide = true;
-    public int id;
+    private int id;
     private static int physicObjectCount = 0;
     private static List<GameObject> objects = new ArrayList<GameObject>();
-    private static boolean neededToBeCleared = false;
+    public List<Triangle> collidingTriangles = new ArrayList<Triangle>();
 
     public PhysicComponent() {
 
@@ -24,27 +25,13 @@ public class PhysicComponent extends Component {
 
     public void onUpdate() {
 
-        if (neededToBeCleared) {
+        if (id  == physicObjectCount - 1) Collider.collideObjects();
 
-            physicObjectCount = objects.size();
-            objects.clear();
-            neededToBeCleared = false;
+    }
 
-        }
+    public static List<GameObject> getPhysicObjects() {
 
-        if (ableToCollide) {
-
-            objects.add(parent);
-            id = objects.size() - 1;
-
-        }
-
-        if (id  == physicObjectCount - 1) {
-
-            Collider.collideObjects(objects);
-            neededToBeCleared = true;
-
-        }
+        return objects;
 
     }
 

@@ -29,13 +29,7 @@ public abstract class Controller extends Component {
 
         super.onCreation(obj);
 
-        MovementComponent movementComponent = null;
-
-        for (Component component : parent.components) {
-
-            if (component instanceof MovementComponent) movementComponent = (MovementComponent) component;
-
-        }
+        MovementComponent movementComponent = (MovementComponent) obj.getAnyComponent(MovementComponent.class);
 
         if (movementComponent != null) {
 

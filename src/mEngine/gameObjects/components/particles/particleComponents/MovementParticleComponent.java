@@ -28,9 +28,12 @@ public class MovementParticleComponent extends ParticleComponent {
 
             for (GameObject object : ObjectController.gameObjects) {
 
-                for (Component component : object.components) {
+                Camera objectCamera = (Camera) object.getAnyComponent(Camera.class);
 
-                    if (component instanceof Camera) camera = (Camera) component;
+                if (objectCamera != null) {
+
+                    camera = objectCamera;
+                    break;
 
                 }
 

@@ -45,15 +45,13 @@ public class GameLoop implements Runnable {
 
                 if (Input.isKeyDown(Keyboard.KEY_O)) {
 
-                    ObjectController.gameObjects.get(0).position = new Vector3f();
-                    ObjectController.gameObjects.get(0).rotation = new Vector3f();
-                    ObjectController.gameObjects.get(0).percentRotation = new Vector3f(0, 0, 1);
+                    GameObject object = ObjectController.gameObjects.get(0);
 
-                    for (Component component : ObjectController.gameObjects.get(0).components) {
+                    object.position = new Vector3f();
+                    object.rotation = new Vector3f();
+                    object.percentRotation = new Vector3f(0, 0, 1);
 
-                        if (component instanceof Camera) ((Camera) component).zoom = 0;
-
-                    }
+                    ((Camera) object.getAnyComponent(Camera.class)).zoom = 0;
 
                 }
 

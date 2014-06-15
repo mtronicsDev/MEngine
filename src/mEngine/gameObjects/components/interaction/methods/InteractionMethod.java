@@ -13,11 +13,7 @@ public abstract class InteractionMethod {
 
         parent = object;
 
-        for (Component component : parent.components) {
-
-            if (component instanceof InteractionComponent) caller = (InteractionComponent) component;
-
-        }
+        caller = (InteractionComponent) parent.getAnyComponent(InteractionComponent.class);
 
     }
 

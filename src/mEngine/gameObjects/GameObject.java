@@ -115,6 +115,20 @@ public class GameObject implements Serializable {
 
     }
 
+    public Component getAnyComponent(Class componentClass) {
+
+        Component equalingComponent = null;
+
+        for (Component componentInList : components) {
+
+            if (componentClass.isInstance(componentInList)) equalingComponent = componentInList;
+
+        }
+
+        return equalingComponent;
+
+    }
+
     public GameObject createAllComponents() {
 
         List<Component> components = new ArrayList<Component>();

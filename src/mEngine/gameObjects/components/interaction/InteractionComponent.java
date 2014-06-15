@@ -147,11 +147,7 @@ public class InteractionComponent extends Component {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            for (Component component : object.components) {
-
-                if (component instanceof Controller) controlledGameObjects.add(object);
-
-            }
+            if (object.getAnyComponent(Controller.class) != null) controlledGameObjects.add(object);
 
         }
 

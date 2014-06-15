@@ -2,12 +2,14 @@ package mEngine.physics.collisions;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.physics.MovementComponent;
 import mEngine.gameObjects.components.physics.PhysicComponent;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Plane;
+import mEngine.physics.collisions.primitives.Triangle;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -49,7 +51,7 @@ public class Collider {
 
     }
 
-    public static void collideObjects(List<GameObject> objects) {
+    public static void collideObjects() {
 
 
 

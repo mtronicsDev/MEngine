@@ -28,21 +28,13 @@ public class VectorHelper {
 
     public static Vector3f getDifferenceVectorBetweenPlaneAndVector(Plane plane, Vector3f vector) {
 
-        float difference = getDifferenceBetweenPlaneAndVector(plane, vector);
-
-        return multiplyVectorByFloat(multiplyVectorByFloat(plane.normal, -1), difference);
+        return multiplyVectorByFloat(multiplyVectorByFloat(plane.normal, -1), getDifferenceBetweenPlaneAndVector(plane, vector));
 
     }
 
     public static Box getAABB(GameObject obj) {
 
-        RenderComponent renderComponent = null;
-
-        for (Component component : obj.components) {
-
-            if (component instanceof RenderComponent) renderComponent = (RenderComponent) component;
-
-        }
+        RenderComponent renderComponent = (RenderComponent) obj.getAnyComponent(RenderComponent.class);
 
         if (renderComponent != null) {
 
@@ -73,7 +65,7 @@ public class VectorHelper {
 
         Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(triangle, middle);
 
-        if (isVectorInsideBox(differenceVector, box)) {
+        if (isVectorInsideBox(VectorHelper.sumVectors(new Vector3f[] {middle, differenceVector}), box)) {
 
             Vector3f maxVertexDifference = subtractVectors(triangle.directionVectorA, triangle.position);
 
