@@ -86,9 +86,4 @@ public class ShaderHelper {
 
     }
 
-    public static void combineShaders(String fileNameA, String fileNameB, String newFileName) {
-
-
-    }
-
 }

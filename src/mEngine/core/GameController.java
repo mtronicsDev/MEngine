@@ -4,6 +4,9 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
+import mEngine.gameObjects.components.gui.guiComponents.GUIText;
+import mEngine.gameObjects.components.gui.guiComponents.buttons.ButtonPressingMethod;
+import mEngine.gameObjects.components.gui.guiComponents.buttons.GUIButton;
 import mEngine.gameObjects.components.interaction.InteractionComponent;
 import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
 import mEngine.gameObjects.components.physics.MovementComponent;
@@ -12,6 +15,8 @@ import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
 import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
+import mEngine.graphics.renderable.materials.Material;
+import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.audio.AudioHelper;
 import mEngine.util.debug.RuntimeHelper;
@@ -30,9 +35,9 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
+import org.newdawn.slick.Color;
 
-import static mEngine.core.ObjectController.addGameObject;
-import static mEngine.core.ObjectController.setLoadingScreen;
+import static mEngine.core.ObjectController.*;
 
 public class GameController {
 
@@ -55,6 +60,10 @@ public class GameController {
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
 
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
+
+        maxMenuGUIDepartments = PreferenceHelper.getInteger("maxMenuDepartments");
+        activeMenuGUIDepartment = maxMenuGUIDepartments - 1;
+        activeGUIDepartment = -1;
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
@@ -106,6 +115,18 @@ public class GameController {
                 )
                 .addComponent(
                         new GUIElement(new Vector2f(5, 185), new Vector2f()).addComponent(new FaceCountTextComponent("faces", 15))
+                )
+                .addComponent(
+                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 125, Display.getHeight() / 2 - 50), new Vector2f(250, 100), "graph").setGUIDepartment(0)
+                                .addComponent(new GUIQuad())
+                                .addComponent(new GUIButton(
+                                        new ButtonPressingMethod() {
+                                            @Override
+                                            public void onPressing() {
+                                                unPauseGame();
+                                            }
+                                        }
+                                ))
                 )
                 .createAllComponents());
 
@@ -201,12 +222,21 @@ public class GameController {
         Mouse.setGrabbed(false);
         isGamePaused = true;
 
+        int menuDepartment;
+
+        if (maxMenuGUIDepartments > 0) menuDepartment = 0;
+
+        else menuDepartment = -1;
+
+        activeMenuGUIDepartment = activeGUIDepartment = menuDepartment;
+
     }
 
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
         isGamePaused = false;
+        activeGUIDepartment = -1;
 
     }
 

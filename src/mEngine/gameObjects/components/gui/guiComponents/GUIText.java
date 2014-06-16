@@ -2,6 +2,7 @@ package mEngine.gameObjects.components.gui.guiComponents;
 
 import mEngine.util.resources.FontHelper;
 import mEngine.util.resources.PreferenceHelper;
+import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -10,6 +11,7 @@ import java.awt.*;
 public class GUIText extends GUIComponent {
 
     public String text;
+    public Color specificColor;
     protected String fontFace;
     protected int fontStyle;
     protected int fontSize;
@@ -36,18 +38,34 @@ public class GUIText extends GUIComponent {
 
     }
 
+    public GUIText setSpecificColor(Color color) {
+
+        specificColor = color;
+        return this;
+
+    }
+
     public void render() {
 
         super.render();
+
         if (font == null)
             font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
-        font.drawString(parent.getPosition().x, parent.getPosition().y, text, parent.material.getColor());
+
+        Color color;
+
+        if (specificColor != null) color = specificColor;
+
+        else color = parent.material.getColor();
+
+        Vector2f position = parent.getPosition();
+
+        font.drawString(position.x, position.y, text, color);
 
     }
 
     public void onExternalUpdate(Object[] args) {
 
-        super.onExternalUpdate(args);
         if (args.length >= 1) this.text = (String) args[0];
         if (args.length == 2) onExternalUpdate((Integer) args[1]);
         if (args.length == 3) onExternalUpdate((Integer) args[1], (Integer) args[2]);
@@ -77,7 +95,7 @@ public class GUIText extends GUIComponent {
     protected void onExternalUpdate(int fontStyle, int fontSize, String fontFace, Color color) {
 
         font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
-        parent.material.setColor(color);
+        //parent.material.setColor(color);
 
     }
 

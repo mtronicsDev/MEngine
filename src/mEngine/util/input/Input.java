@@ -35,7 +35,7 @@ public class Input {
     public static boolean isButtonDown(int key) {
 
         boolean isAlreadyActivated = buttonStats[key];
-        keyStats[key] = isButtonPressed(key);
+        buttonStats[key] = isButtonPressed(key);
         return buttonStats[key] != isAlreadyActivated && !isAlreadyActivated;
 
     }
@@ -51,7 +51,7 @@ public class Input {
     public static boolean isButtonUp(int key) {
 
         boolean isAlreadyActivated = buttonStats[key];
-        keyStats[key] = isButtonPressed(key);
+        buttonStats[key] = isButtonPressed(key);
         return buttonStats[key] != isAlreadyActivated && isAlreadyActivated;
 
     }

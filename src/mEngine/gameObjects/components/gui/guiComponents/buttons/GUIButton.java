@@ -1,5 +1,6 @@
-package mEngine.gameObjects.components.gui.guiComponents;
+package mEngine.gameObjects.components.gui.guiComponents.buttons;
 
+import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
@@ -11,19 +12,25 @@ public class GUIButton extends GUIComponent {
     //Later used for rising edge / falling edge detection
     boolean isButtonPressed;
     boolean isButtonHovered;
-    boolean pressedBeforeRelease;
+    boolean previouslyPressed;
+    public ButtonPressingMethod buttonPressingMethod;
 
-    public GUIButton() {
+    public GUIButton(ButtonPressingMethod buttonPressingMethod) {
+
+        this.buttonPressingMethod = buttonPressingMethod;
+
     }
 
     public void onUpdate() {
 
         super.onUpdate();
 
-        isButtonPressed = buttonPressed();
-        isButtonHovered = buttonHovered();
+        previouslyPressed = isButtonPressed;
 
-        if (!pressedBeforeRelease) pressedBeforeRelease = isButtonPressed;
+        isButtonHovered = buttonHovered();
+        isButtonPressed = buttonPressed();
+
+        if (isButtonActivated()) buttonPressingMethod.onPressing();
 
     }
 
@@ -36,23 +43,19 @@ public class GUIButton extends GUIComponent {
 
     public boolean buttonPressed() {
 
-        return isButtonPressed(0) && buttonHovered();
+        return isButtonPressed(0) && isButtonHovered;
 
     }
 
     public boolean buttonReleased() {
 
-        return isButtonUp(0) && buttonHovered();
+        return isButtonUp(0) && isButtonHovered;
 
     }
 
     public boolean isButtonActivated() {
 
-        boolean buttonActivated = buttonReleased() && pressedBeforeRelease;
-
-        if (buttonActivated) pressedBeforeRelease = false;
-
-        return buttonActivated;
+        return buttonReleased() && previouslyPressed;
 
     }
 

@@ -16,12 +16,18 @@ public abstract class Material implements Serializable {
         return texture;
     }
 
-    public void setTexture(Texture texture) {
+    public Material setTexture(Texture texture) {
+
         this.texture = texture;
+        return this;
+
     }
 
-    public void setTextureName(String textureName) {
+    public Material setTextureName(String textureName) {
+
         this.textureName = textureName;
+        return this;
+
     }
 
     public void setTextureFromName() {
@@ -36,12 +42,19 @@ public abstract class Material implements Serializable {
         return textureName != null;
     }
 
+    public boolean hasColor() {
+        return color != null;
+    }
+
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public Material setColor(Color color) {
+
+        this.color = new Color(color);
+        return this;
+
     }
 
     public void deleteColor() {
@@ -49,8 +62,11 @@ public abstract class Material implements Serializable {
     }
 
     public void bind() {
+
         if (texture != null) texture.getTexture().bind();
-        if (color != null) color.bind();
+
+        else if (color != null) color.bind();
+
     }
 
 }

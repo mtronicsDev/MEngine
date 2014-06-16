@@ -18,6 +18,7 @@ rotationSpeed=0.1
 
 #GUI preferences
 defaultFontFace=Verdana
+maxMenuDepartments=1
 
 #mEnchmark preferences
 mEnchmarkEnabled=false

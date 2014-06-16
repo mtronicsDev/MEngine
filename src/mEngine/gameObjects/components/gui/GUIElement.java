@@ -1,11 +1,13 @@
 package mEngine.gameObjects.components.gui;
 
+import mEngine.core.ObjectController;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
 import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.materials.Material2D;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
+import org.newdawn.slick.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ public class GUIElement extends ComponentRenderable {
     public List<GUIComponent> components = new ArrayList<GUIComponent>();
     private Vector2f position; //Values from 0 to 1
     private Vector2f size; //Values from 0 to 1
+    private int guiDepartment = -1;
 
     public GUIElement(Vector2f posInPixels) {
 
@@ -26,7 +29,7 @@ public class GUIElement extends ComponentRenderable {
 
     public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels) {
 
-        this(posInPixels, sizeInPixels, new Material2D());
+        this(posInPixels, sizeInPixels, Color.white);
 
     }
 
@@ -34,7 +37,27 @@ public class GUIElement extends ComponentRenderable {
 
         material = new Material2D();
         material.setTextureName(textureName);
+
         //Absolute position to relative position
+        position = new Vector2f(
+                posInPixels.x / Display.getWidth(),
+                posInPixels.y / Display.getHeight()
+        );
+
+        //Absolute size to relative size
+        size = new Vector2f(
+                sizeInPixels.x / Display.getWidth(),
+                sizeInPixels.y / Display.getHeight()
+        );
+
+    }
+
+    public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, Color color) {
+
+        material = new Material2D();
+        material.setColor(new Color(color));
+
+        //Absolute size to relative size
         position = new Vector2f();
         position.x = posInPixels.x / Display.getWidth();
         position.y = posInPixels.y / Display.getHeight();
@@ -46,20 +69,10 @@ public class GUIElement extends ComponentRenderable {
 
     }
 
-    public GUIElement(Vector2f posInPixels, Vector2f sizeInPixels, Material2D material) {
+    public GUIElement setGUIDepartment(int department) {
 
-        this.material = material;
-        //Absolute size to relative size
-        position = new Vector2f();
-        position.x = posInPixels.x / Display.getWidth();
-        position.y = posInPixels.y / Display.getHeight();
-
-        //Absolute size to relative size
-        size = new Vector2f();
-        size.x = sizeInPixels.x / Display.getWidth();
-        size.y = sizeInPixels.y / Display.getHeight();
-
-        this.material = material;
+        guiDepartment = department;
+        return this;
 
     }
 
@@ -67,9 +80,9 @@ public class GUIElement extends ComponentRenderable {
     public void onUpdate() {
         super.onUpdate();
 
-        for (GUIComponent component : components) {
-            component.onUpdate();
-        }
+        if (guiDepartment == ObjectController.activeGUIDepartment)
+            for (GUIComponent component : components)
+                component.onUpdate();
 
     }
 
@@ -111,7 +124,7 @@ public class GUIElement extends ComponentRenderable {
     public void render() {
 
         if (material.getTexture() == null && material.hasTexture()) material.setTextureFromName();
-        material.bind();
+
         for (GUIComponent component : components) {
             component.render();
         }
@@ -121,7 +134,7 @@ public class GUIElement extends ComponentRenderable {
     @Override
     public void addToRenderQueue() {
 
-        Renderer.currentRenderQueue.addGUIElement(this);
+        if (guiDepartment == ObjectController.activeGUIDepartment) Renderer.currentRenderQueue.addGUIElement(this);
 
     }
 

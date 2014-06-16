@@ -6,6 +6,7 @@ import mEngine.gameObjects.components.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.util.math.MathHelper;
+import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.rendering.TextureHelper;
 import mEngine.util.resources.ResourceHelper;
@@ -13,6 +14,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 import org.newdawn.slick.opengl.Texture;
 
 import java.io.File;
@@ -89,7 +91,7 @@ public class Renderer {
         glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        if (material.hasTexture()) glBindTexture(GL_TEXTURE_2D, material.getTexture().getTexture().getTextureID());
+        material.bind();
 
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(3, GL_FLOAT, 0, 0l);
@@ -111,8 +113,6 @@ public class Renderer {
         glDisableClientState(GL_VERTEX_ARRAY);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        //texture.release();
 
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboNormalHandle);
@@ -252,8 +252,6 @@ public class Renderer {
             glDisableClientState(GL_VERTEX_ARRAY);
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-            //texture.release();
 
             glDeleteBuffers(vboVertexHandle);
             glDeleteBuffers(vboNormalHandle);
@@ -466,8 +464,6 @@ public class Renderer {
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        //texture.release();
-
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboTextureHandle);
@@ -579,6 +575,25 @@ public class Renderer {
 
     public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Material2D material, int mode) {
 
+        ShaderHelper.useShader("simple2DRendering");
+
+        if (material.hasTexture()) {
+
+            glBindTexture(GL_TEXTURE_2D, material.texture.getTexture().getTextureID());
+
+        } else {
+
+            if (material.hasColor()) {
+
+                Vector3f colorWithoutAlpha = new Vector3f(material.color.r, material.color.g, material.color.b);
+                Vector4f color = new Vector4f(colorWithoutAlpha.x, colorWithoutAlpha.y, colorWithoutAlpha.z, material.color.a);
+
+                glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("simple2DRendering"), "color"), color.x, color.y, color.z, color.w);
+
+            }
+
+        }
+
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
@@ -596,8 +611,6 @@ public class Renderer {
 
         vertexData.flip();
         textureData.flip();
-
-        material.bind();
 
         int vboVertexHandle = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
@@ -624,8 +637,6 @@ public class Renderer {
         glDisableClientState(GL_VERTEX_ARRAY);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        //texture.release();
 
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboTextureHandle);

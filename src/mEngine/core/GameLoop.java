@@ -2,6 +2,7 @@ package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.components.Component;
+import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.graphics.GraphicsController;
@@ -57,9 +58,6 @@ public class GameLoop implements Runnable {
 
                 if (Input.isKeyDown(Keyboard.KEY_B))
                     GraphicsController.isBlackAndWhite = !GraphicsController.isBlackAndWhite;
-
-                if (Input.isKeyDown(Keyboard.KEY_N))
-                    System.out.println(ObjectController.getGameObject(0).rotation + " / " + ObjectController.getGameObject(0).position);
 
             }
 

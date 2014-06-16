@@ -1,6 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
@@ -20,6 +21,7 @@ public class RenderLoop implements Runnable {
 
         GraphicsController.createDisplay(PreferenceHelper.getValue("title"));
         ShaderHelper.addShader("lighting");
+        ShaderHelper.addShader("simple2DRendering");
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
@@ -28,12 +30,14 @@ public class RenderLoop implements Runnable {
 
             if (!GameController.isLoading) {
 
-                if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
+                if (!GameController.isGamePaused)
+                    if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
 
-                //Renders all the gameObjects
-                for (GameObject object : ObjectController.gameObjects) {
+                if (!Serializer.isSerializing) {
 
-                    if (!Serializer.isSerializing) object.addToRenderQueue();
+                    //Renders all the gameObjects
+                    for (GameObject object : ObjectController.gameObjects)
+                        object.addToRenderQueue();
 
                 }
 
