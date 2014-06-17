@@ -118,7 +118,6 @@ public class GameController {
                 )
                 .addComponent(
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 125, Display.getHeight() / 2 - 50), new Vector2f(250, 100), "graph").setGUIDepartment(0)
-                                .addComponent(new GUIQuad())
                                 .addComponent(new GUIButton(
                                         new ButtonPressingMethod() {
                                             @Override
@@ -127,6 +126,7 @@ public class GameController {
                                             }
                                         }
                                 ))
+                                .addComponent(new GUIQuad())
                 )
                 .createAllComponents());
 

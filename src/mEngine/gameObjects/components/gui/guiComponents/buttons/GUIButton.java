@@ -1,8 +1,12 @@
 package mEngine.gameObjects.components.gui.guiComponents.buttons;
 
+import mEngine.gameObjects.components.gui.GUIElement;
 import mEngine.gameObjects.components.gui.guiComponents.GUIComponent;
+import mEngine.gameObjects.components.gui.guiComponents.GUIQuad;
+import mEngine.gameObjects.components.gui.guiComponents.GUIText;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.Color;
 
 import static mEngine.util.input.Input.isButtonPressed;
 import static mEngine.util.input.Input.isButtonUp;

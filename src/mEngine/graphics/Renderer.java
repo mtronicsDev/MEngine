@@ -118,6 +118,8 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboTextureHandle);
 
+        org.newdawn.slick.opengl.TextureImpl.bindNone();
+
         glEndList();
 
         displayListCounter++;
@@ -180,6 +182,8 @@ public class Renderer {
 
             glDeleteBuffers(vboNormalHandle);
             glDeleteBuffers(vboVertexHandle);
+
+            org.newdawn.slick.opengl.TextureImpl.bindNone();
 
             glEndList();
 
@@ -257,6 +261,8 @@ public class Renderer {
             glDeleteBuffers(vboNormalHandle);
             glDeleteBuffers(vboTextureHandle);
 
+            org.newdawn.slick.opengl.TextureImpl.bindNone();
+
             glEndList();
 
         }
@@ -315,6 +321,8 @@ public class Renderer {
 
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboVertexHandle);
+
+        org.newdawn.slick.opengl.TextureImpl.bindNone();
 
         glEndList();
 
@@ -471,6 +479,8 @@ public class Renderer {
         if (GraphicsController.isBlackAndWhite)
             glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
+        org.newdawn.slick.opengl.TextureImpl.bindNone();
+
         ShaderHelper.useNoShader();
 
     }
@@ -569,30 +579,13 @@ public class Renderer {
         if (GraphicsController.isBlackAndWhite || !material.hasTexture())
             glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
+        org.newdawn.slick.opengl.TextureImpl.bindNone();
+
         ShaderHelper.useNoShader();
 
     }
 
     public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Material2D material, int mode) {
-
-        ShaderHelper.useShader("simple2DRendering");
-
-        if (material.hasTexture()) {
-
-            glBindTexture(GL_TEXTURE_2D, material.texture.getTexture().getTextureID());
-
-        } else {
-
-            if (material.hasColor()) {
-
-                Vector3f colorWithoutAlpha = new Vector3f(material.color.r, material.color.g, material.color.b);
-                Vector4f color = new Vector4f(colorWithoutAlpha.x, colorWithoutAlpha.y, colorWithoutAlpha.z, material.color.a);
-
-                glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("simple2DRendering"), "color"), color.x, color.y, color.z, color.w);
-
-            }
-
-        }
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
@@ -611,6 +604,8 @@ public class Renderer {
 
         vertexData.flip();
         textureData.flip();
+
+        material.bind();
 
         int vboVertexHandle = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
@@ -641,7 +636,7 @@ public class Renderer {
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboTextureHandle);
 
-        ShaderHelper.useNoShader();
+        org.newdawn.slick.opengl.TextureImpl.bindNone();
 
     }
 

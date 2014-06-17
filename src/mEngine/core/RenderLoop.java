@@ -21,7 +21,6 @@ public class RenderLoop implements Runnable {
 
         GraphicsController.createDisplay(PreferenceHelper.getValue("title"));
         ShaderHelper.addShader("lighting");
-        ShaderHelper.addShader("simple2DRendering");
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
