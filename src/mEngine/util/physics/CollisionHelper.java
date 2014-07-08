@@ -16,7 +16,13 @@ public class CollisionHelper {
         }
     };
 
-    private static CollisionResponseMethod breakMethod = new CollisionResponseMethod() {
+    private static CollisionResponseMethod breakAtSpecificPointMethod = new CollisionResponseMethod() {
+        @Override
+        public void onCollision() {
+        }
+    };
+
+    private static CollisionResponseMethod breakCompletelyMethod = new CollisionResponseMethod() {
         @Override
         public void onCollision() {
         }
@@ -34,28 +40,11 @@ public class CollisionHelper {
         }
     };
 
-    public static CollisionResponseMethod getCollisionResponseMethod(boolean breaking, boolean sliding, boolean rolling) {
-
-        CollisionResponseMethod collisionResponseMethod;
-
-        if (breaking) collisionResponseMethod = breakMethod;
-
-        else {
-
-            if (sliding) {
-
-                if (rolling) collisionResponseMethod = slideAndRollMethod;
-
-                else collisionResponseMethod = slideMethod;
-
-            } else if (rolling) collisionResponseMethod = rollMethod;
-
-            else collisionResponseMethod = stickMethod;
+    private static CollisionResponseMethod bounceMethod = new CollisionResponseMethod() {
+        @Override
+        public void onCollision() {
 
         }
-
-        return collisionResponseMethod;
-
-    }
+    };
 
 }

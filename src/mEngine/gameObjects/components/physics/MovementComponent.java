@@ -90,9 +90,17 @@ public class MovementComponent extends Component {
 
                     Force force = forces.get(key);
 
-                    //TODO: insert a method to calculate the sliding factor (friction) of the triangle the object is moving on to calculate the force direction subtraction
+                    float friction = 2;
 
-                    force.direction = VectorHelper.divideVectorByFloat(force.direction, 2);
+                    if (physicComponent != null) {
+
+                        friction = 2;
+
+                        //TODO: actually create the method
+
+                    }
+
+                    force.direction = VectorHelper.divideVectorByFloat(force.direction, friction);
 
                     if (Math.abs(force.direction.x) <= 0.001f &&
                             Math.abs(force.direction.y) <= 0.001f &&
@@ -126,13 +134,30 @@ public class MovementComponent extends Component {
 
     }
 
-    public void onRemoteUpdate() {
+    public void moveInSpecificDirection(Vector3f direction) {
+
+        String forceIdentifier = "inertiaForce" + forceCount;
+
+        forces.put(forceIdentifier, new Force(direction));
+        forces.get(forceIdentifier).enabled = true;
+
+        if (forces.containsKey("inertiaForce0")) forceCount++;
+
+        else forceCount = 0;
+
     }
 
     public void moveForward() {
 
         Vector3f direction = new Vector3f();
         Force givenForce = forces.get("forward");
+
+        if (givenForce == null) {
+
+            givenForce = new Force(new Vector3f(0, 0, -1));
+
+        }
+
 
         direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
         direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));

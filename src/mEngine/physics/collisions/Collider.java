@@ -20,16 +20,6 @@ import java.util.Vector;
 
 public class Collider {
 
-    public static boolean areAABBsColliding(GameObject objA, GameObject objB) {
-
-        boolean colliding;
-
-        colliding = areBoxesColliding(VectorHelper.getAABB(objA), VectorHelper.getAABB(objB));
-
-        return colliding;
-
-    }
-
     public static boolean areBoxesColliding(Box boxA, Box boxB) {
 
         return boxA.position.x < boxB.position.x + boxB.size.x
@@ -38,16 +28,6 @@ public class Collider {
                 && boxA.position.y + boxA.size.y > boxB.position.y
                 && boxA.position.z < boxB.position.z + boxB.size.z
                 && boxA.position.z + boxA.size.z > boxB.position.z;
-
-    }
-
-    public static boolean isBoxCollidingWithAABB(Box boxA, GameObject obj) {
-
-        boolean colliding;
-
-        colliding = areBoxesColliding(boxA, VectorHelper.getAABB(obj));
-
-        return colliding;
 
     }
 

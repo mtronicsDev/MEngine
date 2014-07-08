@@ -10,6 +10,7 @@ import mEngine.gameObjects.components.gui.guiComponents.buttons.GUIButton;
 import mEngine.gameObjects.components.interaction.InteractionComponent;
 import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
 import mEngine.gameObjects.components.physics.MovementComponent;
+import mEngine.gameObjects.components.physics.PhysicComponent;
 import mEngine.gameObjects.components.renderable.Camera;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.gameObjects.components.renderable.Skybox;
@@ -138,6 +139,7 @@ public class GameController {
                         new InteractionComponent(true, 10, "I", "move monkey", 25, new AsyncMethod() {
                             @Override
                             public void interact() {
+
                                 caller.interactable = false;
 
                                 for (int count = 0; count < 1000; count++) {

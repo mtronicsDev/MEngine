@@ -2,6 +2,7 @@ package mEngine.gameObjects;
 
 import mEngine.gameObjects.components.Component;
 import mEngine.gameObjects.components.physics.MovementComponent;
+import mEngine.gameObjects.components.physics.PhysicComponent;
 import mEngine.gameObjects.components.renderable.ComponentRenderable;
 import mEngine.gameObjects.components.renderable.RenderComponent;
 import mEngine.util.math.vectors.Matrix3f;
@@ -58,11 +59,11 @@ public class GameObject implements Serializable {
 
     public void update() {
 
-        for (Component component : components) {
+        for (Component component : components)
+            if (!(component instanceof PhysicComponent)) component.onUpdate();
 
-            component.onUpdate();
-
-        }
+        for (Component component : components)
+            if (component instanceof PhysicComponent) component.onUpdate();
 
     }
 
@@ -109,9 +110,12 @@ public class GameObject implements Serializable {
 
     }
 
-    public void removeComponent(String key) {
+    public void removeAnyComponent(Class componentClass) {
 
-        components.remove(key);
+        Component component = getAnyComponent(componentClass);
+
+        component.onDestroy();
+        components.remove(component);
 
     }
 

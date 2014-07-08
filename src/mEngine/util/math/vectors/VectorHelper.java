@@ -67,10 +67,13 @@ public class VectorHelper {
 
         if (isVectorInsideBox(VectorHelper.sumVectors(new Vector3f[] {middle, differenceVector}), box)) {
 
-            Vector3f maxVertexDifference = subtractVectors(triangle.directionVectorA, triangle.position);
+            Vector3f directionVectorA = VectorHelper.subtractVectors(triangle.vertexB, triangle.position);
+            Vector3f directionVectorB = VectorHelper.subtractVectors(triangle.vertexC, triangle.position);
 
-            if (getAbs(subtractVectors(triangle.directionVectorB, triangle.position)) > getAbs(maxVertexDifference))
-                maxVertexDifference = subtractVectors(triangle.directionVectorB, triangle.position);
+            Vector3f maxVertexDifference = subtractVectors(directionVectorA, triangle.position);
+
+            if (getAbs(subtractVectors(directionVectorB, triangle.position)) > getAbs(maxVertexDifference))
+                maxVertexDifference = subtractVectors(directionVectorB, triangle.position);
 
             insideBox = getAbs(subtractVectors(differenceVector, triangle.position)) < getAbs(maxVertexDifference);
 

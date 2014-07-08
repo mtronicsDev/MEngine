@@ -16,7 +16,7 @@ import java.util.List;
 public class RenderComponent extends ComponentRenderable3D {
 
     public Model model;
-    String modelFileName;
+    public String modelFileName;
     Vector3f offset;
     boolean[] displayListFactors = new boolean[]{false, false};
     int displayListIndex;

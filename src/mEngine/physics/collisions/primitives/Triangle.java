@@ -1,27 +1,28 @@
 package mEngine.physics.collisions.primitives;
 
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Triangle extends Plane {
 
-    public Vector3f directionVectorA;
-    public Vector3f directionVectorB;
+    public Vector3f vertexB;
+    public Vector3f vertexC;
 
-    public Triangle(Vector3f position, Vector3f normal, Vector3f directionVectorA, Vector3f directionVectorB) {
+    public Triangle(Vector3f vertexA, Vector3f vertexB, Vector3f vertexC, Vector3f normal) {
 
-        super(position, normal);
+        super(vertexA, normal);
 
-        this.directionVectorA = directionVectorA;
-        this.directionVectorB = directionVectorB;
+        this.vertexB = vertexB;
+        this.vertexC = vertexC;
 
     }
 
-    public Triangle(Vector3f position, Vector3f directionVectorA, Vector3f directionVectorB) {
+    public Triangle(Vector3f vertexA, Vector3f vertexB, Vector3f vertexC) {
 
-        super(position, directionVectorA, directionVectorB);
+        super(vertexA, VectorHelper.subtractVectors(vertexB, vertexA), VectorHelper.subtractVectors(vertexC, vertexA));
 
-        this.directionVectorA = directionVectorA;
-        this.directionVectorB = directionVectorB;
+        this.vertexB = vertexB;
+        this.vertexC = vertexC;
 
     }
 
