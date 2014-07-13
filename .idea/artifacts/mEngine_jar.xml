@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact name="mEngine:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/mEngine_jar</output-path>
+    <root id="root">
+      <element id="archive" name="mEngine.jar">
+        <element id="module-output" name="mEngine" />
+      </element>
+      <element id="library" level="project" name="slick-util" />
+      <element id="library" level="project" name="jar" />
+    </root>
+  </artifact>
+</component>
