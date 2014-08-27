@@ -1,4 +1,4 @@
-mEngine License
+com.mGameLabs.mEngine License
 =====
 
 Copyright (c) 2013 - 2014, mGameLabs
