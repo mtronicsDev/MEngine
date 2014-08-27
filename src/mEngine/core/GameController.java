@@ -89,7 +89,7 @@ public class GameController {
                 /*.addComponent(
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )*/
-                .addComponent(
+                /*.addComponent(
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
                                 .addComponent(new GUIQuad())
                 )
@@ -128,7 +128,7 @@ public class GameController {
                                         }
                                 ))
                                 .addComponent(new GUIQuad())
-                )
+                )*/
                 .createAllComponents());
 
         addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
