@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="mEngine" type="Application" factoryName="Application">
+  <configuration default="false" name="mEngine [Run]" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="mEngine.Main" />
     <option name="VM_PARAMETERS" value="-Djava.library.path=lib/lwjgl/native/windows" />
     <option name="PROGRAM_PARAMETERS" value="" />
