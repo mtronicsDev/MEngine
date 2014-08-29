@@ -9,9 +9,6 @@ sourceSets {
         resources {
             srcDir 'res'
         }
-        output {
-            resourcesDir 'build/libs/res'
-        }
     }
     test {
         java {
