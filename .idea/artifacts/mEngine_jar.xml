@@ -5,7 +5,9 @@
       <element id="archive" name="mEngine.jar">
         <element id="module-output" name="mEngine" />
       </element>
-      <element id="dir-copy" path="$PROJECT_DIR$/lib" />
+      <element id="directory" name="lib">
+        <element id="dir-copy" path="$PROJECT_DIR$/lib" />
+      </element>
     </root>
   </artifact>
 </component>
