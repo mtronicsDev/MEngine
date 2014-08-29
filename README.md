@@ -1,3 +1,3 @@
-com.mGameLabs.mEngine
+mEngine
 =======
 A lightweight java game engine.

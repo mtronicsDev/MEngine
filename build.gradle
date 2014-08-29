@@ -6,9 +6,12 @@ sourceSets {
         java {
             srcDir 'src'
         }
-        //resources {
-        //    srcDir 'res'
-        //}
+        resources {
+            srcDir 'res'
+        }
+        output {
+            resourcesDir 'build/libs/res'
+        }
     }
     test {
         java {
@@ -18,7 +21,7 @@ sourceSets {
 }
 
 version = '1.0'
-mainClassName = 'com.mGameLabs.mEngine.Main'
+mainClassName = 'mEngine.Main'
 
 repositories {
     mavenCentral()
@@ -32,6 +35,10 @@ dependencies {
 }
 
 jar {
-    from configurations.compile.collect { zipTree it }
-    manifest.attributes 'Main-Class':'com.mGameLabs.mEngine.Main'
+    //from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest.attributes 'Main-Class' : mainClassName
+}
+
+artifacts {
+    archives file("build/libs/mEngine-${version}.jar")
 }
