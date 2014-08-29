@@ -20,10 +20,6 @@
     <patterns />
     <RunnerSettings RunnerId="Run" />
     <ConfigurationWrapper RunnerId="Run" />
-    <method>
-      <option name="BuildArtifacts" enabled="true">
-        <artifact name="mEngine:jar" />
-      </option>
-    </method>
+    <method />
   </configuration>
 </component>
