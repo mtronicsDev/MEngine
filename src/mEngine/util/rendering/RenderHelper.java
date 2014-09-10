@@ -88,7 +88,7 @@ public class RenderHelper {
 
             for (GameObject obj : ObjectController.gameObjects) {
 
-                Camera objectCamera = (Camera) obj.getAnyComponent(Camera.class);
+                Camera objectCamera = (Camera) obj.getModule(Camera.class);
 
                 if (objectCamera != null) {
 

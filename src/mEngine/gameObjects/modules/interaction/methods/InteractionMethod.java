@@ -12,7 +12,7 @@ public abstract class InteractionMethod {
 
         parent = object;
 
-        caller = (InteractionModule) parent.getAnyComponent(InteractionModule.class);
+        caller = (InteractionModule) parent.getModule(InteractionModule.class);
 
     }
 

@@ -66,7 +66,7 @@ public class ControllerKeyboardMouse extends Controller {
 
         }
 
-        MovementModule movementComponent = (MovementModule) parent.getAnyComponent(MovementModule.class);
+        MovementModule movementComponent = (MovementModule) parent.getModule(MovementModule.class);
 
         if (movementComponent != null) {
 

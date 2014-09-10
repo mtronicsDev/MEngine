@@ -29,7 +29,7 @@ public abstract class Controller extends Module {
 
         super.onCreation(obj);
 
-        MovementModule movementComponent = (MovementModule) obj.getAnyComponent(MovementModule.class);
+        MovementModule movementComponent = (MovementModule) obj.getModule(MovementModule.class);
 
         if (movementComponent != null) {
 

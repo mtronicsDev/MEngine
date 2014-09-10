@@ -39,7 +39,7 @@ public class MovementModule extends Module {
     public void onCreation(GameObject obj) {
 
         super.onCreation(obj);
-        RenderModule renderComponent = (RenderModule) obj.getAnyComponent(RenderModule.class);
+        RenderModule renderComponent = (RenderModule) obj.getModule(RenderModule.class);
 
         if (renderComponent != null) mass = renderComponent.model.getMass();
 
@@ -57,9 +57,9 @@ public class MovementModule extends Module {
 
         if (!GameController.isGamePaused) {
 
-            Controller controller = (Controller) parent.getAnyComponent(Controller.class);
+            Controller controller = (Controller) parent.getModule(Controller.class);
 
-            PhysicModule physicComponent = (PhysicModule) parent.getAnyComponent(PhysicModule.class);
+            PhysicModule physicComponent = (PhysicModule) parent.getModule(PhysicModule.class);
 
             if (controller != null) {
 
@@ -331,7 +331,7 @@ public class MovementModule extends Module {
 
     public void sprint() {
 
-        Controller controller = (Controller) parent.getAnyComponent(Controller.class);
+        Controller controller = (Controller) parent.getModule(Controller.class);
 
         if (controller != null) {
 
@@ -353,7 +353,7 @@ public class MovementModule extends Module {
 
     public void sneak() {
 
-        Controller controller = (Controller) parent.getAnyComponent(Controller.class);
+        Controller controller = (Controller) parent.getModule(Controller.class);
 
 
         if (controller != null)

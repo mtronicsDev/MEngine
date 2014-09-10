@@ -32,7 +32,7 @@ public class VectorHelper {
 
     public static Box getAABB(GameObject obj) {
 
-        RenderModule renderComponent = (RenderModule) obj.getAnyComponent(RenderModule.class);
+        RenderModule renderComponent = (RenderModule) obj.getModule(RenderModule.class);
 
         if (renderComponent != null) {
 

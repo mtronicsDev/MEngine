@@ -37,9 +37,9 @@ public class PhysicModule extends Module {
 
         super.onCreation(object);
 
-        parentMovementComponent = (MovementModule) parent.getAnyComponent(MovementModule.class);
+        parentMovementComponent = (MovementModule) parent.getModule(MovementModule.class);
 
-        RenderModule renderComponent = (RenderModule) parent.getAnyComponent(RenderModule.class);
+        RenderModule renderComponent = (RenderModule) parent.getModule(RenderModule.class);
 
         if (renderComponent == null) axisAlignedBoundingBox = new Box(parent.position, new Vector3f(2, 2, 2));
 
@@ -51,7 +51,7 @@ public class PhysicModule extends Module {
 
                     GameObject gameObject = physicComponent.parent;
 
-                    RenderModule gameObjectRenderComponent = (RenderModule) gameObject.getAnyComponent(RenderModule.class);
+                    RenderModule gameObjectRenderComponent = (RenderModule) gameObject.getModule(RenderModule.class);
 
                     if (gameObjectRenderComponent != null) {
 

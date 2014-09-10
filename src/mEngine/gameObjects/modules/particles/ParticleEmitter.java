@@ -40,7 +40,7 @@ public class ParticleEmitter extends Module {
 
         }
 
-        parent.addComponent(particle);
+        parent.addModule(particle);
 
         particle.onCreation(parent);
 

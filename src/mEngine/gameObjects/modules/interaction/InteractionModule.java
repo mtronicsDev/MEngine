@@ -78,7 +78,7 @@ public class InteractionModule extends Module {
 
             interactionInstructionText = new GUIText(interactionInstruction, 15);
 
-            parent.addComponent(
+            parent.addModule(
                     new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addComponent(interactionInstructionText)
             );
 
@@ -147,7 +147,7 @@ public class InteractionModule extends Module {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            if (object.getAnyComponent(Controller.class) != null) controlledGameObjects.add(object);
+            if (object.getModule(Controller.class) != null) controlledGameObjects.add(object);
 
         }
 

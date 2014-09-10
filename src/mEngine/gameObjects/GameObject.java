@@ -51,7 +51,7 @@ public class GameObject implements Serializable {
 
         for (Module module : src.modules) {
 
-            addComponent(module);
+            addModule(module);
 
         }
 
@@ -102,7 +102,7 @@ public class GameObject implements Serializable {
 
     }
 
-    public GameObject addComponent(Module module) {
+    public GameObject addModule(Module module) {
 
         modules.add(module);
 
@@ -110,22 +110,22 @@ public class GameObject implements Serializable {
 
     }
 
-    public void removeAnyComponent(Class componentClass) {
+    public void removeModule(Class moduleClass) {
 
-        Module module = getAnyComponent(componentClass);
+        Module module = getModule(moduleClass);
 
         module.onDestroy();
         modules.remove(module);
 
     }
 
-    public Module getAnyComponent(Class componentClass) {
+    public Module getModule(Class moduleClass) {
 
         Module equalingModule = null;
 
         for (Module moduleInList : modules) {
 
-            if (componentClass.isInstance(moduleInList)) equalingModule = moduleInList;
+            if (moduleClass.isInstance(moduleInList)) equalingModule = moduleInList;
 
         }
 
@@ -133,7 +133,7 @@ public class GameObject implements Serializable {
 
     }
 
-    public GameObject createAllComponents() {
+    public GameObject createModules() {
 
         List<Module> modules = new ArrayList<Module>();
 

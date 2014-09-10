@@ -1,13 +1,13 @@
 package mEngine.gameObjects.modules.audio;
 
-import org.lwjgl.BufferUtils;
+import mEngine.audio.AudioController;
+import mEngine.gameObjects.modules.Module;
 
-import java.nio.FloatBuffer;
+public class AudioListener extends Module {
 
-public class AudioListener {
-
-    private FloatBuffer position = BufferUtils.createFloatBuffer(3);
-    private FloatBuffer velocity = BufferUtils.createFloatBuffer(3);
-    private FloatBuffer rotation = BufferUtils.createFloatBuffer(6); //Last 3 values represent the "up" vector
-
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        AudioController.updateListener(this);
+    }
 }

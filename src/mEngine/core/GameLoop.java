@@ -1,6 +1,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.modules.audio.AudioSource;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.graphics.GraphicsController;
@@ -34,8 +35,8 @@ public class GameLoop implements Runnable {
 
                     ObjectController.addGameObject(
                             new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
-                                    .addComponent(new RenderModule("texturedStar"))
-                                    .createAllComponents()
+                                    .addModule(new RenderModule("texturedStar"))
+                                    .createModules()
                     );
 
                 }
@@ -50,8 +51,43 @@ public class GameLoop implements Runnable {
                     object.rotation = new Vector3f();
                     object.percentRotation = new Vector3f(0, 0, 1);
 
-                    ((Camera) object.getAnyComponent(Camera.class)).zoom = 0;
+                    ((Camera) object.getModule(Camera.class)).zoom = 0;
 
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_1)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.play();
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_2)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.pause();
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_3)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.stop();
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_4)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.pitch -= 0.1f;
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_5)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.pitch += 0.1f;
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_6)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.gain -= 0.1f;
+                }
+
+                if(Input.isKeyDown(Keyboard.KEY_7)) {
+                    AudioSource source = (AudioSource) ObjectController.getGameObject(1).getModule(AudioSource.class);
+                    source.gain += 0.1f;
                 }
 
                 if (Input.isKeyDown(Keyboard.KEY_B))
