@@ -2,7 +2,7 @@ package mEngine.util.rendering;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.renderable.Camera;
+import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.models.Face;
 import mEngine.util.math.vectors.Matrix3f;

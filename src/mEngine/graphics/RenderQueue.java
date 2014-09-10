@@ -1,11 +1,11 @@
 package mEngine.graphics;
 
-import mEngine.gameObjects.components.gui.GUIElement;
-import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.ComponentRenderable3D;
-import mEngine.gameObjects.components.renderable.Particle;
-import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.light.LightSource;
+import mEngine.gameObjects.modules.gui.GUIElement;
+import mEngine.gameObjects.modules.renderable.Camera;
+import mEngine.gameObjects.modules.renderable.ModuleRenderable3D;
+import mEngine.gameObjects.modules.renderable.Particle;
+import mEngine.gameObjects.modules.renderable.Skybox;
+import mEngine.gameObjects.modules.renderable.light.LightSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class RenderQueue {
     public List<LightSource> lightSources = new ArrayList<LightSource>();
     public Camera camera;
     private Skybox skybox;
-    private List<ComponentRenderable3D> modelQueue = new ArrayList<ComponentRenderable3D>();
+    private List<ModuleRenderable3D> modelQueue = new ArrayList<ModuleRenderable3D>();
     private List<Particle> particleQueue = new ArrayList<Particle>();
     private List<GUIElement> guiQueue = new ArrayList<GUIElement>();
 
@@ -31,7 +31,7 @@ public class RenderQueue {
 
     }
 
-    public void addModel(ComponentRenderable3D component) {
+    public void addModel(ModuleRenderable3D component) {
 
         modelQueue.add(component);
 
@@ -59,7 +59,7 @@ public class RenderQueue {
 
         GraphicsController.switchTo3D();
         if (camera != null) camera.render();
-        for (ComponentRenderable3D component : modelQueue) {
+        for (ModuleRenderable3D component : modelQueue) {
 
             component.render();
 

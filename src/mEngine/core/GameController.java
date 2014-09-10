@@ -1,17 +1,17 @@
 package mEngine.core;
 
+import mEngine.audio.AudioController;
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.controls.ControllerKeyboardMouse;
-import mEngine.gameObjects.components.interaction.InteractionComponent;
-import mEngine.gameObjects.components.interaction.methods.AsyncMethod;
-import mEngine.gameObjects.components.physics.MovementComponent;
-import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.light.GlobalLightSource;
+import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
+import mEngine.gameObjects.modules.interaction.InteractionModule;
+import mEngine.gameObjects.modules.interaction.methods.AsyncMethod;
+import mEngine.gameObjects.modules.physics.MovementModule;
+import mEngine.gameObjects.modules.renderable.Camera;
+import mEngine.gameObjects.modules.renderable.RenderModule;
+import mEngine.gameObjects.modules.renderable.Skybox;
+import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.audio.AudioHelper;
 import mEngine.util.debug.RuntimeHelper;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.resources.PreferenceHelper;
@@ -33,7 +33,7 @@ public class GameController {
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
-        AudioHelper.initializeOpenAL();
+        AudioController.initialize();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
 
@@ -53,10 +53,10 @@ public class GameController {
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
                 .addComponent(
-                        new MovementComponent()
+                        new MovementModule()
                 )
                 .addComponent(
-                        new RenderComponent("sphere")
+                        new RenderModule("sphere")
                 )
                 .addComponent(
                         new ControllerKeyboardMouse(
@@ -117,10 +117,10 @@ public class GameController {
 
         addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
                 .addComponent(
-                        new RenderComponent("monkey")
+                        new RenderModule("monkey")
                 )
                 .addComponent(
-                        new InteractionComponent(true, 10, "I", "move monkey", 25, new AsyncMethod() {
+                        new InteractionModule(true, 10, "I", "move monkey", 25, new AsyncMethod() {
                             @Override
                             public void interact() {
 
@@ -153,7 +153,7 @@ public class GameController {
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addComponent(
-                        new RenderComponent("Sci-fi_Tropical_city")
+                        new RenderModule("Sci-fi_Tropical_city")
                 )
                 .createAllComponents());
 
@@ -228,7 +228,7 @@ public class GameController {
 
     public static void stopGame() {
 
-        AudioHelper.killALData();
+        AudioController.disposeAudioData();
         ThreadHelper.stopAllThreads();
         System.exit(0);
 

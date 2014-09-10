@@ -2,12 +2,12 @@ package mEngine.util.debug.texts;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.gui.guiComponents.GUIText;
-import mEngine.gameObjects.components.renderable.Particle;
-import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.Terrain;
+import mEngine.gameObjects.modules.Module;
+import mEngine.gameObjects.modules.gui.modules.GUIText;
+import mEngine.gameObjects.modules.renderable.Particle;
+import mEngine.gameObjects.modules.renderable.RenderModule;
+import mEngine.gameObjects.modules.renderable.Skybox;
+import mEngine.gameObjects.modules.renderable.Terrain;
 
 public class FaceCountTextComponent extends GUIText {
 
@@ -26,16 +26,16 @@ public class FaceCountTextComponent extends GUIText {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            for (Component component : object.components) {
+            for (Module module : object.modules) {
 
-                if (component instanceof RenderComponent)
-                    faceCount += ((RenderComponent) component).model.getFaces().size();
+                if (module instanceof RenderModule)
+                    faceCount += ((RenderModule) module).model.getFaces().size();
 
-                else if (component instanceof Terrain) faceCount += ((Terrain) component).model.getFaces().size();
+                else if (module instanceof Terrain) faceCount += ((Terrain) module).model.getFaces().size();
 
-                else if (component instanceof Particle) faceCount++;
+                else if (module instanceof Particle) faceCount++;
 
-                else if (component instanceof Skybox) faceCount += 6;
+                else if (module instanceof Skybox) faceCount += 6;
 
             }
 

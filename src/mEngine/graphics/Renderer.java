@@ -1,8 +1,8 @@
 package mEngine.graphics;
 
-import mEngine.gameObjects.components.renderable.light.DirectionalLightSource;
-import mEngine.gameObjects.components.renderable.light.LightSource;
-import mEngine.gameObjects.components.renderable.light.SpotLightSource;
+import mEngine.gameObjects.modules.renderable.light.DirectionalLightSource;
+import mEngine.gameObjects.modules.renderable.light.LightSource;
+import mEngine.gameObjects.modules.renderable.light.SpotLightSource;
 import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.util.math.MathHelper;

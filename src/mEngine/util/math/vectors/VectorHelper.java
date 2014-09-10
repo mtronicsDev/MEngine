@@ -1,7 +1,7 @@
 package mEngine.util.math.vectors;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.renderable.RenderComponent;
+import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.physics.collisions.primitives.Box;
 import mEngine.physics.collisions.primitives.Plane;
 import mEngine.physics.collisions.primitives.Triangle;
@@ -32,7 +32,7 @@ public class VectorHelper {
 
     public static Box getAABB(GameObject obj) {
 
-        RenderComponent renderComponent = (RenderComponent) obj.getAnyComponent(RenderComponent.class);
+        RenderModule renderComponent = (RenderModule) obj.getAnyComponent(RenderModule.class);
 
         if (renderComponent != null) {
 

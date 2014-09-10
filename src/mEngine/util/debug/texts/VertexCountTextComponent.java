@@ -2,12 +2,12 @@ package mEngine.util.debug.texts;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.gui.guiComponents.GUIText;
-import mEngine.gameObjects.components.renderable.Particle;
-import mEngine.gameObjects.components.renderable.RenderComponent;
-import mEngine.gameObjects.components.renderable.Skybox;
-import mEngine.gameObjects.components.renderable.Terrain;
+import mEngine.gameObjects.modules.Module;
+import mEngine.gameObjects.modules.gui.modules.GUIText;
+import mEngine.gameObjects.modules.renderable.Particle;
+import mEngine.gameObjects.modules.renderable.RenderModule;
+import mEngine.gameObjects.modules.renderable.Skybox;
+import mEngine.gameObjects.modules.renderable.Terrain;
 
 public class VertexCountTextComponent extends GUIText {
 
@@ -26,17 +26,17 @@ public class VertexCountTextComponent extends GUIText {
 
         for (GameObject object : ObjectController.gameObjects) {
 
-            for (Component component : object.components) {
+            for (Module module : object.modules) {
 
-                if (component instanceof RenderComponent)
-                    vertexCount += ((RenderComponent) component).model.getVertices().size() * 3;
+                if (module instanceof RenderModule)
+                    vertexCount += ((RenderModule) module).model.getVertices().size() * 3;
 
-                else if (component instanceof Terrain)
-                    vertexCount += ((Terrain) component).model.getVertices().size() * 3;
+                else if (module instanceof Terrain)
+                    vertexCount += ((Terrain) module).model.getVertices().size() * 3;
 
-                else if (component instanceof Particle) vertexCount += 4;
+                else if (module instanceof Particle) vertexCount += 4;
 
-                else if (component instanceof Skybox) vertexCount += 24;
+                else if (module instanceof Skybox) vertexCount += 24;
 
             }
 

@@ -2,7 +2,7 @@ package mEngine.util.debug.texts.position;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.gui.guiComponents.GUIText;
+import mEngine.gameObjects.modules.gui.modules.GUIText;
 
 public class PositionZTextComponent extends GUIText {
 

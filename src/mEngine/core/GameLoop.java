@@ -1,8 +1,8 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.components.renderable.Camera;
-import mEngine.gameObjects.components.renderable.RenderComponent;
+import mEngine.gameObjects.modules.renderable.Camera;
+import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
 import mEngine.util.serialization.Serializer;
@@ -34,7 +34,7 @@ public class GameLoop implements Runnable {
 
                     ObjectController.addGameObject(
                             new GameObject(ObjectController.getGameObject(0).position, new Vector3f())
-                                    .addComponent(new RenderComponent("texturedStar"))
+                                    .addComponent(new RenderModule("texturedStar"))
                                     .createAllComponents()
                     );
 

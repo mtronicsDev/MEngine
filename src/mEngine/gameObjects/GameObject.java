@@ -1,10 +1,10 @@
 package mEngine.gameObjects;
 
-import mEngine.gameObjects.components.Component;
-import mEngine.gameObjects.components.physics.MovementComponent;
-import mEngine.gameObjects.components.physics.PhysicComponent;
-import mEngine.gameObjects.components.renderable.ComponentRenderable;
-import mEngine.gameObjects.components.renderable.RenderComponent;
+import mEngine.gameObjects.modules.Module;
+import mEngine.gameObjects.modules.physics.MovementModule;
+import mEngine.gameObjects.modules.physics.PhysicModule;
+import mEngine.gameObjects.modules.renderable.ModuleRenderable;
+import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
@@ -17,7 +17,7 @@ public class GameObject implements Serializable {
     public Vector3f position;
     public Vector3f rotation;
     public Vector3f percentRotation;
-    public List<Component> components = new ArrayList<Component>();
+    public List<Module> modules = new ArrayList<Module>();
     private long uuid = UUID.randomUUID().getMostSignificantBits();
 
     public GameObject(Vector3f pos, Vector3f rot) {
@@ -49,9 +49,9 @@ public class GameObject implements Serializable {
         rotation = src.rotation;
         percentRotation = src.percentRotation;
 
-        for (Component component : src.components) {
+        for (Module module : src.modules) {
 
-            addComponent(component);
+            addComponent(module);
 
         }
 
@@ -59,19 +59,19 @@ public class GameObject implements Serializable {
 
     public void update() {
 
-        for (Component component : components)
-            if (!(component instanceof PhysicComponent)) component.onUpdate();
+        for (Module module : modules)
+            if (!(module instanceof PhysicModule)) module.onUpdate();
 
-        for (Component component : components)
-            if (component instanceof PhysicComponent) component.onUpdate();
+        for (Module module : modules)
+            if (module instanceof PhysicModule) module.onUpdate();
 
     }
 
     public void save() {
 
-        for (Component component : components) {
+        for (Module module : modules) {
 
-            component.onSave();
+            module.onSave();
 
         }
 
@@ -79,9 +79,9 @@ public class GameObject implements Serializable {
 
     public void load() {
 
-        for (Component component : components) {
+        for (Module module : modules) {
 
-            component.onLoad();
+            module.onLoad();
 
         }
 
@@ -94,17 +94,17 @@ public class GameObject implements Serializable {
     public void addToRenderQueue() {
 
         //Adds this gameObject's models, particles and guiElements to the renderQueue
-        for (Component component : components) {
+        for (Module module : modules) {
 
-            if (component instanceof ComponentRenderable) ((ComponentRenderable) component).addToRenderQueue();
+            if (module instanceof ModuleRenderable) ((ModuleRenderable) module).addToRenderQueue();
 
         }
 
     }
 
-    public GameObject addComponent(Component component) {
+    public GameObject addComponent(Module module) {
 
-        components.add(component);
+        modules.add(module);
 
         return this;
 
@@ -112,50 +112,50 @@ public class GameObject implements Serializable {
 
     public void removeAnyComponent(Class componentClass) {
 
-        Component component = getAnyComponent(componentClass);
+        Module module = getAnyComponent(componentClass);
 
-        component.onDestroy();
-        components.remove(component);
+        module.onDestroy();
+        modules.remove(module);
 
     }
 
-    public Component getAnyComponent(Class componentClass) {
+    public Module getAnyComponent(Class componentClass) {
 
-        Component equalingComponent = null;
+        Module equalingModule = null;
 
-        for (Component componentInList : components) {
+        for (Module moduleInList : modules) {
 
-            if (componentClass.isInstance(componentInList)) equalingComponent = componentInList;
+            if (componentClass.isInstance(moduleInList)) equalingModule = moduleInList;
 
         }
 
-        return equalingComponent;
+        return equalingModule;
 
     }
 
     public GameObject createAllComponents() {
 
-        List<Component> components = new ArrayList<Component>();
+        List<Module> modules = new ArrayList<Module>();
 
-        for (Component component : this.components)
-            components.add(component);
+        for (Module module : this.modules)
+            modules.add(module);
 
-        for (Component component : components) {
+        for (Module module : modules) {
 
-            if (component instanceof RenderComponent) component.onCreation(this);
-
-        }
-
-        for (Component component : components) {
-
-            if (component instanceof MovementComponent) component.onCreation(this);
+            if (module instanceof RenderModule) module.onCreation(this);
 
         }
 
-        for (Component component : components) {
+        for (Module module : modules) {
 
-            if (!(component instanceof RenderComponent || component instanceof MovementComponent))
-                component.onCreation(this);
+            if (module instanceof MovementModule) module.onCreation(this);
+
+        }
+
+        for (Module module : modules) {
+
+            if (!(module instanceof RenderModule || module instanceof MovementModule))
+                module.onCreation(this);
 
         }
 
