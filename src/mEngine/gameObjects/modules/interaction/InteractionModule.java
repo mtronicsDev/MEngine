@@ -6,9 +6,6 @@ import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.controls.Controller;
 import mEngine.gameObjects.modules.gui.GUIElement;
 import mEngine.gameObjects.modules.gui.modules.GUIText;
-import mEngine.gameObjects.modules.interaction.methods.AsyncMethod;
-import mEngine.gameObjects.modules.interaction.methods.InteractionMethod;
-import mEngine.gameObjects.modules.interaction.methods.NormalMethod;
 import mEngine.util.input.Input;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.threading.ThreadHelper;
@@ -22,12 +19,12 @@ import java.util.List;
 
 public class InteractionModule extends Module {
 
-    public boolean interactable;
+    public boolean enabled;
     public Integer interactionKeyIndex;
     public String interactionKey;
     public String interactionDescription;
     public String interactionInstruction;
-    public InteractionMethod interaction;
+    public Interaction interaction;
     private float radius;
     private float[] controllerDistances;
     private float maxControllerLookAngle;
@@ -35,28 +32,28 @@ public class InteractionModule extends Module {
     private List<GameObject> controlledGameObjects;
     public GUIText interactionInstructionText;
 
-    public InteractionModule(boolean interactable, float radius, InteractionMethod interaction) {
+    public InteractionModule(boolean enabled, float radius, Interaction interaction) {
 
-        this(interactable, radius, null, "interact", 180, interaction);
-
-    }
-
-    public InteractionModule(boolean interactable, float radius, String interactionKey, InteractionMethod interaction) {
-
-        this(interactable, radius, interactionKey, "interact", 180, interaction);
-
+        this(enabled, radius, null, "interact", 180, interaction);
 
     }
 
-    public InteractionModule(boolean interactable, float radius, String interactionKey, String interactionDescription, InteractionMethod interaction) {
+    public InteractionModule(boolean enabled, float radius, String interactionKey, Interaction interaction) {
 
-        this(interactable, radius, interactionKey, interactionDescription, 180, interaction);
+        this(enabled, radius, interactionKey, "interact", 180, interaction);
+
 
     }
 
-    public InteractionModule(boolean interactable, float radius, String interactionKey, String interactionDescription, float maxControllerLookAngle, InteractionMethod interaction) {
+    public InteractionModule(boolean enabled, float radius, String interactionKey, String interactionDescription, Interaction interaction) {
 
-        this.interactable = interactable;
+        this(enabled, radius, interactionKey, interactionDescription, 180, interaction);
+
+    }
+
+    public InteractionModule(boolean enabled, float radius, String interactionKey, String interactionDescription, float maxControllerLookAngle, Interaction interaction) {
+
+        this.enabled = enabled;
         this.interactionKey = interactionKey;
         this.interactionKeyIndex = Keyboard.getKeyIndex(interactionKey);
         this.interaction = interaction;
@@ -90,7 +87,7 @@ public class InteractionModule extends Module {
 
     public boolean isInteracted() {
 
-        if (interactable) {
+        if (enabled) {
 
             boolean interacted = false;
 
@@ -164,20 +161,20 @@ public class InteractionModule extends Module {
 
         if (interactionInstruction != null) {
 
-            boolean interactable = false;
+            boolean enabled = false;
 
             for (int count = 0; count < controlledGameObjects.size(); count++) {
 
                 if (controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
 
-                    interactable = true;
+                    enabled = true;
                     break;
 
                 }
 
             }
 
-            if (interactable && this.interactable)
+            if (enabled && this.enabled)
                 interactionInstructionText.text = interactionInstruction;
 
             else
@@ -187,9 +184,9 @@ public class InteractionModule extends Module {
 
         if (isInteracted()) {
 
-            if (interaction instanceof NormalMethod) ((NormalMethod) interaction).interact();
+            if (interaction instanceof StandardInteraction) ((StandardInteraction) interaction).interact();
 
-            else ThreadHelper.startThread(((AsyncMethod) interaction));
+            else ThreadHelper.startThread(((AsyncInteraction) interaction));
 
         }
 

@@ -1,7 +1,7 @@
 package mEngine.gameObjects.modules.gui;
 
 import mEngine.core.ObjectController;
-import mEngine.gameObjects.modules.gui.modules.GUIComponent;
+import mEngine.gameObjects.modules.gui.modules.GUIModule;
 import mEngine.gameObjects.modules.renderable.ModuleRenderable;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.materials.Material2D;
@@ -15,7 +15,7 @@ import java.util.List;
 public class GUIElement extends ModuleRenderable {
 
     public Material2D material;
-    public List<GUIComponent> components = new ArrayList<GUIComponent>();
+    public List<GUIModule> components = new ArrayList<GUIModule>();
     private Vector2f position; //Values from 0 to 1
     private Vector2f size; //Values from 0 to 1
     private int guiDepartment = -1;
@@ -80,7 +80,7 @@ public class GUIElement extends ModuleRenderable {
         super.onUpdate();
 
         if (guiDepartment == ObjectController.activeGUIDepartment)
-            for (GUIComponent component : components)
+            for (GUIModule component : components)
                 component.onUpdate();
 
     }
@@ -89,7 +89,7 @@ public class GUIElement extends ModuleRenderable {
     public void onSave() {
 
         super.onSave();
-        for (GUIComponent component : components) {
+        for (GUIModule component : components) {
 
             component.onSave();
 
@@ -104,7 +104,7 @@ public class GUIElement extends ModuleRenderable {
     public void onLoad() {
 
         super.onLoad();
-        for (GUIComponent component : components) {
+        for (GUIModule component : components) {
 
             component.onLoad();
 
@@ -112,7 +112,7 @@ public class GUIElement extends ModuleRenderable {
 
     }
 
-    public GUIElement addComponent(GUIComponent component) {
+    public GUIElement addComponent(GUIModule component) {
 
         components.add(component);
         component.onCreation(this);
@@ -124,7 +124,7 @@ public class GUIElement extends ModuleRenderable {
 
         if (material.getTexture() == null && material.hasTexture()) material.setTextureFromName();
 
-        for (GUIComponent component : components) {
+        for (GUIModule component : components) {
             component.render();
         }
 

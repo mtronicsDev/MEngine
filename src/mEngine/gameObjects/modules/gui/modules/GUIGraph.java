@@ -9,7 +9,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import static mEngine.util.math.MathHelper.clamp;
 
-public class GUIGraph extends GUIComponent {
+public class GUIGraph extends GUIModule {
 
     protected Graph graph;
     protected String textureName;

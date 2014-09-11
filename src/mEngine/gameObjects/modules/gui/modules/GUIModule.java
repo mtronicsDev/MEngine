@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GUIComponent implements Serializable {
+public abstract class GUIModule implements Serializable {
 
     public GUIElement parent;
     protected List<Vector2f> verticesToRender;
 
-    public GUIComponent() {
+    public GUIModule() {
 
         verticesToRender = new ArrayList<Vector2f>();
 

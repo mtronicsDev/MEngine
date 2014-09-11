@@ -9,9 +9,9 @@ import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.Terrain;
 
-public class FaceCountTextComponent extends GUIText {
+public class VertexCountTextModule extends GUIText {
 
-    public FaceCountTextComponent(String text, int fontSize) {
+    public VertexCountTextModule(String text, int fontSize) {
 
         super(text, fontSize);
 
@@ -22,26 +22,27 @@ public class FaceCountTextComponent extends GUIText {
 
         super.onUpdate();
 
-        int faceCount = 0;
+        int vertexCount = 0;
 
         for (GameObject object : ObjectController.gameObjects) {
 
             for (Module module : object.modules) {
 
                 if (module instanceof RenderModule)
-                    faceCount += ((RenderModule) module).model.getFaces().size();
+                    vertexCount += ((RenderModule) module).model.getVertices().size() * 3;
 
-                else if (module instanceof Terrain) faceCount += ((Terrain) module).model.getFaces().size();
+                else if (module instanceof Terrain)
+                    vertexCount += ((Terrain) module).model.getVertices().size() * 3;
 
-                else if (module instanceof Particle) faceCount++;
+                else if (module instanceof Particle) vertexCount += 4;
 
-                else if (module instanceof Skybox) faceCount += 6;
+                else if (module instanceof Skybox) vertexCount += 24;
 
             }
 
         }
 
-        text = "faces: " + faceCount;
+        text = "vertices: " + vertexCount;
 
     }
 

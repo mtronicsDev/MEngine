@@ -3,10 +3,10 @@ package mEngine.util.debug.graphs;
 import mEngine.gameObjects.modules.gui.modules.GUIGraph;
 import mEngine.util.debug.Profiler;
 
-public class TPSGraphComponent extends GUIGraph {
+public class FPSGraphModule extends GUIGraph {
 
 
-    public TPSGraphComponent(double[] values, String textureName) {
+    public FPSGraphModule(double[] values, String textureName) {
 
         super(values, textureName);
 
@@ -15,7 +15,7 @@ public class TPSGraphComponent extends GUIGraph {
     @Override
     public void onUpdate() {
 
-        graph = Profiler.getTPSGraph((int) parent.getSize().x);
+        graph = Profiler.getFPSGraph((int) parent.getSize().x);
         super.onUpdate();
 
     }

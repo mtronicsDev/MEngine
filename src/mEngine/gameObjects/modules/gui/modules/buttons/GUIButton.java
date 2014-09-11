@@ -1,61 +1,63 @@
 package mEngine.gameObjects.modules.gui.modules.buttons;
 
-import mEngine.gameObjects.modules.gui.modules.GUIComponent;
+import mEngine.gameObjects.modules.gui.modules.GUIModule;
+import mEngine.util.input.Input;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-import static mEngine.util.input.Input.isButtonPressed;
-import static mEngine.util.input.Input.isButtonUp;
-
-public class GUIButton extends GUIComponent {
+public class GUIButton extends GUIModule {
 
     //Later used for rising edge / falling edge detection
-    boolean isButtonPressed;
-    boolean isButtonHovered;
-    boolean previouslyPressed;
-    public ButtonPressingMethod buttonPressingMethod;
+    private boolean buttonPressed;
+    private boolean buttonHovered;
+    private boolean previouslyPressed;
+    private ButtonPressAction buttonPressAction;
 
-    public GUIButton(ButtonPressingMethod buttonPressingMethod) {
+    public GUIButton(ButtonPressAction buttonPressAction) {
 
-        this.buttonPressingMethod = buttonPressingMethod;
+        this.buttonPressAction = buttonPressAction;
+        previouslyPressed = false;
 
     }
 
     public void onUpdate() {
 
         super.onUpdate();
+        buttonHovered = isButtonHovered();
+        buttonPressed = isButtonPressed();
 
-        previouslyPressed = isButtonPressed;
+        if(buttonHovered) buttonPressAction.hovered();
+        if(buttonPressed) buttonPressAction.pressed();
+        if(isButtonReleased()) buttonPressAction.up();
+        if(isButtonActivated()) buttonPressAction.down();
 
-        isButtonHovered = buttonHovered();
-        isButtonPressed = buttonPressed();
-
-        if (isButtonActivated()) buttonPressingMethod.onPressing();
+        previouslyPressed = buttonPressed;
 
     }
 
-    public boolean buttonHovered() {
+    private boolean isButtonHovered() {
 
+        buttonPressAction.hovered();
         return Mouse.getX() >= parent.getPosition().x && Mouse.getX() <= parent.getPosition().x + parent.getSize().x &&
                 Display.getHeight() - Mouse.getY() >= parent.getPosition().y && Display.getHeight() - Mouse.getY() <= parent.getPosition().y + parent.getSize().y;
 
     }
 
-    public boolean buttonPressed() {
+    private boolean isButtonPressed() {
 
-        return isButtonPressed(0) && isButtonHovered;
-
-    }
-
-    public boolean buttonReleased() {
-
-        return isButtonUp(0) && isButtonHovered;
+        return Input.isButtonPressed(0) && buttonHovered;
 
     }
 
-    public boolean isButtonActivated() {
+    private boolean isButtonReleased() {
 
-        return buttonReleased() && previouslyPressed;
+        return Input.isButtonUp(0) && previouslyPressed;
+
+    }
+
+    private boolean isButtonActivated() {
+
+        return isButtonPressed() && !previouslyPressed;
 
     }
 

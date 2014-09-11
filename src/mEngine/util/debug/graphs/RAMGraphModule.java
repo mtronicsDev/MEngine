@@ -3,10 +3,10 @@ package mEngine.util.debug.graphs;
 import mEngine.gameObjects.modules.gui.modules.GUIGraph;
 import mEngine.util.debug.Profiler;
 
-public class RAMGraphComponent extends GUIGraph {
+public class RAMGraphModule extends GUIGraph {
 
 
-    public RAMGraphComponent(double[] values, String textureName) {
+    public RAMGraphModule(double[] values, String textureName) {
 
         super(values, textureName);
 

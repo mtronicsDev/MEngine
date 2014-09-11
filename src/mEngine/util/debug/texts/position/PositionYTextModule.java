@@ -4,9 +4,9 @@ import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.gui.modules.GUIText;
 
-public class PositionXTextComponent extends GUIText {
+public class PositionYTextModule extends GUIText {
 
-    public PositionXTextComponent(String text, int fontSize) {
+    public PositionYTextModule(String text, int fontSize) {
 
         super(text, fontSize);
 
@@ -17,7 +17,7 @@ public class PositionXTextComponent extends GUIText {
 
         super.onUpdate();
         GameObject obj = ObjectController.getGameObject(0);
-        text = "x: " + obj.position.x;
+        text = "y: " + obj.position.y;
 
     }
 

@@ -1,9 +1,9 @@
-package mEngine.gameObjects.modules.interaction.methods;
+package mEngine.gameObjects.modules.interaction;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.interaction.InteractionModule;
 
-public abstract class InteractionMethod {
+abstract class Interaction {
 
     protected GameObject parent;
     protected InteractionModule caller;

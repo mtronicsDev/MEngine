@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GUIQuad extends GUIComponent {
+public class GUIQuad extends GUIModule {
 
     private List<Vector2f> uvs;
 

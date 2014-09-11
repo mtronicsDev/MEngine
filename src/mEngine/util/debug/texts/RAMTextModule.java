@@ -5,9 +5,9 @@ import mEngine.gameObjects.modules.gui.modules.GUIText;
 import static mEngine.util.debug.RuntimeHelper.*;
 import static mEngine.util.math.NumberFormatHelper.cutDecimals;
 
-public class RAMTextComponent extends GUIText {
+public class RAMTextModule extends GUIText {
 
-    public RAMTextComponent(String text, int fontSize) {
+    public RAMTextModule(String text, int fontSize) {
 
         super(text, fontSize);
 

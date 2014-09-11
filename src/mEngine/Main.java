@@ -5,7 +5,7 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.audio.AudioListener;
 import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.modules.interaction.InteractionModule;
-import mEngine.gameObjects.modules.interaction.methods.AsyncMethod;
+import mEngine.gameObjects.modules.interaction.AsyncInteraction;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
@@ -85,7 +85,7 @@ public class Main {
                 .addModule(
                         new GUIElement(new Vector2f(Display.getWidth() / 2 - 125, Display.getHeight() / 2 - 50), new Vector2f(250, 100), "graph").setGUIDepartment(0)
                                 .addModule(new GUIButton(
-                                        new ButtonPressingMethod() {
+                                        new ButtonPressAction() {
                                             @Override
                                             public void onPressing() {
                                                 unPauseGame();
@@ -104,11 +104,11 @@ public class Main {
                         new AudioSource("test")
                 )*/
                 .addModule(
-                        new InteractionModule(true, 10, "I", "move monkey", 25, new AsyncMethod() {
+                        new InteractionModule(true, 10, "I", "move monkey", 25, new AsyncInteraction() {
                             @Override
                             public void interact() {
 
-                                caller.interactable = false;
+                                caller.enabled = false;
 
                                 for (int count = 0; count < 1000; count++) {
 
@@ -128,7 +128,7 @@ public class Main {
 
                                 }
 
-                                caller.interactable = true;
+                                caller.enabled = true;
 
                             }
                         })

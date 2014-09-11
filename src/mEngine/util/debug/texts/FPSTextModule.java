@@ -3,9 +3,9 @@ package mEngine.util.debug.texts;
 import mEngine.gameObjects.modules.gui.modules.GUIText;
 import mEngine.util.time.TimeHelper;
 
-public class TPSTextComponent extends GUIText {
+public class FPSTextModule extends GUIText {
 
-    public TPSTextComponent(String text, int fontSize) {
+    public FPSTextModule(String text, int fontSize) {
 
         super(text, fontSize);
 
@@ -15,7 +15,7 @@ public class TPSTextComponent extends GUIText {
     public void onUpdate() {
 
         super.onUpdate();
-        text = String.valueOf("Ticks per second: " + TimeHelper.TPS + " TPS");
+        text = String.valueOf("Frames per second: " + TimeHelper.FPS + " FPS");
 
     }
 

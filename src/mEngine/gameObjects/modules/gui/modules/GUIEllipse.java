@@ -5,7 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import static java.lang.Math.*;
 
-public class GUIEllipse extends GUIComponent {
+public class GUIEllipse extends GUIModule {
 
     public void render() {
 

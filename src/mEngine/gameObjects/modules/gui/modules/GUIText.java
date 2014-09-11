@@ -8,7 +8,7 @@ import org.newdawn.slick.TrueTypeFont;
 
 import java.awt.*;
 
-public class GUIText extends GUIComponent {
+public class GUIText extends GUIModule {
 
     public String text;
     public Color specificColor;
