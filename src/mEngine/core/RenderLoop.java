@@ -6,24 +6,22 @@ import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
 import mEngine.util.input.Input;
 import mEngine.util.rendering.ShaderHelper;
-import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.serialization.Serializer;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Vector4f;
 
 public class RenderLoop implements Runnable {
 
     @Override
     public void run() {
 
-        GraphicsController.createDisplay(PreferenceHelper.getValue("title"));
+        GraphicsController.createDisplay();
         ShaderHelper.addShader("lighting");
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
-            GraphicsController.clearScreen(new Vector4f(0.44f, 0.58f, 0.93f, 1));
+            GraphicsController.clearScreen();
             Renderer.currentRenderQueue = new RenderQueue();
 
             if (!GameController.isLoading) {

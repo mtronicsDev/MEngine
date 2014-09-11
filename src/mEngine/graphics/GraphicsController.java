@@ -1,5 +1,6 @@
 package mEngine.graphics;
 
+import mEngine.util.data.ColorHelper;
 import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.BufferUtils;
@@ -35,22 +36,24 @@ public class GraphicsController {
     public static boolean isBlackAndWhite = false;
     public static boolean wasResized = false;
     public static int fieldOfView;
+    public static Vector4f skyColor;
     private static int width;
     private static int height;
     private static String title;
     private static int fps;
 
-    public static void createDisplay(String title) {
+    public static void createDisplay() {
 
         width = PreferenceHelper.getInteger("screenWidth");
         height = PreferenceHelper.getInteger("screenHeight");
         renderDistance = PreferenceHelper.getInteger("renderDistance");
         fieldOfView = PreferenceHelper.getInteger("fieldOfView");
+        skyColor = ColorHelper.colorToRgba(ColorHelper.getHexColor(PreferenceHelper.getValue("skyColor")));
 
         fps = PreferenceHelper.getInteger("framesPerSecond");
 
         mEnchmarkEnabled = PreferenceHelper.getBoolean("mEnchmarkEnabled");
-        GraphicsController.title = title;
+        title = PreferenceHelper.getValue("title");
 
         if (!PreferenceHelper.getBoolean("fullscreen")) {
 
@@ -84,9 +87,9 @@ public class GraphicsController {
 
     }
 
-    public static void clearScreen(Vector4f rgba) {
+    public static void clearScreen() {
 
-        glClearColor(rgba.x, rgba.y, rgba.z, rgba.w);
+        glClearColor(skyColor.x, skyColor.y, skyColor.z, skyColor.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     }

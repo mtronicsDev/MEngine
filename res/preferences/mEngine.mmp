@@ -9,6 +9,7 @@ antiAliasing=true
 
 #Camera preferences
 fieldOfView=95
+skyColor=#6495ed
 
 #Player preferences
 continuouslyJumping=true
