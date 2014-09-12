@@ -89,8 +89,6 @@ public class GraphicsController {
 
     public static void update() {
 
-        if (getKey("fullscreen") != null) {
-
             if (isKeyDown("fullscreen")) {
 
                 wasResized = true;
@@ -98,8 +96,6 @@ public class GraphicsController {
                 else setupFullscreen();
 
             } else wasResized = false;
-
-        }
 
         Display.update();
         if (!mEnchmarkEnabled) Display.sync(fps);

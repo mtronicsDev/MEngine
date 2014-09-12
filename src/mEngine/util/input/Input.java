@@ -61,16 +61,6 @@ public class Input {
         keyStats[value] = false;
     }
 
-    public static Integer getKey(String key) {
-
-        Integer keyAssignment = keyAssignments.get(key);
-
-        if (keyAssignment != null) return keyAssignment;
-
-        else return null;
-
-    }
-
     public static void unAssignKey(String key) {
         keyAssignments.remove(key);
     }
