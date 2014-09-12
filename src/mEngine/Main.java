@@ -4,8 +4,8 @@ import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.audio.AudioListener;
 import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
-import mEngine.gameObjects.modules.interaction.InteractionModule;
 import mEngine.gameObjects.modules.interaction.AsyncInteraction;
+import mEngine.gameObjects.modules.interaction.InteractionModule;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
@@ -14,6 +14,7 @@ import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.threading.ThreadHelper;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
@@ -104,7 +105,7 @@ public class Main {
                         new AudioSource("test")
                 )*/
                 .addModule(
-                        new InteractionModule(true, 10, "I", "move monkey", 25, new AsyncInteraction() {
+                        new InteractionModule(true, 10, Keyboard.KEY_I, "move monkey", 25, new AsyncInteraction() {
                             @Override
                             public void interact() {
 

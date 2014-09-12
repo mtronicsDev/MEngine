@@ -1,7 +1,6 @@
 package mEngine.graphics;
 
 import mEngine.util.data.ColorHelper;
-import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -68,13 +67,7 @@ public class GraphicsController {
         try {
 
             Mouse.create();
-
             assignKey("fullscreen", Keyboard.KEY_F11);
-
-        } catch (KeyAlreadyAssignedException e) {
-
-            e.printStackTrace();
-            System.exit(1);
 
         } catch (LWJGLException e) {
 
@@ -98,7 +91,7 @@ public class GraphicsController {
 
         if (getKey("fullscreen") != null) {
 
-            if (isKeyDown(getKey("fullscreen"))) {
+            if (isKeyDown("fullscreen")) {
 
                 wasResized = true;
                 if (isFullscreen) setupWindow(width, height, title);

@@ -1,11 +1,8 @@
 package mEngine.gameObjects.modules.renderable;
 
 import mEngine.graphics.Renderer;
-import mEngine.util.input.Input;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
-import mEngine.util.time.TimeHelper;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -27,14 +24,6 @@ public class Camera extends ModuleRenderable {
     }
 
     public void onUpdate() {
-
-        if (Input.isKeyPressed(Keyboard.KEY_F)) {
-
-            if (zoom >= 0.015f * TimeHelper.deltaTime) zoom -= 0.015f * TimeHelper.deltaTime;
-
-            else zoom = 0;
-
-        } else if (Input.isKeyPressed(Keyboard.KEY_G)) zoom += 0.015f * TimeHelper.deltaTime;
 
         rotation = parent.rotation;
         percentRotation = parent.percentRotation;

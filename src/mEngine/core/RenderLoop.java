@@ -4,11 +4,9 @@ import mEngine.gameObjects.GameObject;
 import mEngine.graphics.GraphicsController;
 import mEngine.graphics.RenderQueue;
 import mEngine.graphics.Renderer;
-import mEngine.util.input.Input;
 import mEngine.util.rendering.ShaderHelper;
 import mEngine.util.serialization.Serializer;
 import mEngine.util.time.TimeHelper;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 public class RenderLoop implements Runnable {
@@ -25,9 +23,6 @@ public class RenderLoop implements Runnable {
             Renderer.currentRenderQueue = new RenderQueue();
 
             if (!GameController.isLoading) {
-
-                if (!GameController.isGamePaused)
-                    if (Input.isKeyDown(Keyboard.KEY_F2)) GraphicsController.takeScreenshot();
 
                 if (!Serializer.isSerializing) {
 

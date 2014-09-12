@@ -8,13 +8,13 @@ import java.util.Map;
 
 public class Input {
 
-    public static Map<String, Integer> keyAssignments = new HashMap<String, Integer>();
+    private static Map<String, Integer> keyAssignments = new HashMap<String, Integer>();
     private static boolean[] keyStats = new boolean[Keyboard.getKeyCount()];
     private static boolean[] buttonStats = new boolean[Mouse.getButtonCount()];
 
-    public static boolean isKeyPressed(int key) {
+    public static boolean isKeyPressed(String key) {
 
-        return Keyboard.isKeyDown(key);
+        return Keyboard.isKeyDown(keyAssignments.get(key));
 
     }
 
@@ -24,11 +24,11 @@ public class Input {
 
     }
 
-    public static boolean isKeyDown(int key) {
+    public static boolean isKeyDown(String key) {
 
-        boolean isAlreadyActivated = keyStats[key];
-        keyStats[key] = isKeyPressed(key);
-        return keyStats[key] != isAlreadyActivated && !isAlreadyActivated;
+        boolean isAlreadyActivated = keyStats[keyAssignments.get(key)];
+        keyStats[keyAssignments.get(key)] = isKeyPressed(key);
+        return keyStats[keyAssignments.get(key)] != isAlreadyActivated && !isAlreadyActivated;
 
     }
 
@@ -40,11 +40,11 @@ public class Input {
 
     }
 
-    public static boolean isKeyUp(int key) {
+    public static boolean isKeyUp(String key) {
 
-        boolean isAlreadyActivated = keyStats[key];
-        keyStats[key] = isKeyPressed(key);
-        return keyStats[key] != isAlreadyActivated && isAlreadyActivated;
+        boolean isAlreadyActivated = keyStats[keyAssignments.get(key)];
+        keyStats[keyAssignments.get(key)] = isKeyPressed(key);
+        return keyStats[keyAssignments.get(key)] != isAlreadyActivated && isAlreadyActivated;
 
     }
 
@@ -56,17 +56,9 @@ public class Input {
 
     }
 
-    public static void assignKey(String key, int value) throws KeyAlreadyAssignedException {
-
-        if (keyAssignments.get(key) != null) throw new KeyAlreadyAssignedException();
-
-        else {
-
-            keyAssignments.put(key, value);
-            keyStats[value] = false;
-
-        }
-
+    public static void assignKey(String key, int value) {
+        keyAssignments.put(key, value);
+        keyStats[value] = false;
     }
 
     public static Integer getKey(String key) {

@@ -3,12 +3,9 @@ package mEngine.gameObjects.modules.controls;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.graphics.GraphicsController;
 import mEngine.util.input.Input;
-import mEngine.util.input.KeyAlreadyAssignedException;
 import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-
-import static mEngine.util.input.Input.getKey;
 
 public class ControllerKeyboardMouse extends Controller {
 
@@ -23,26 +20,17 @@ public class ControllerKeyboardMouse extends Controller {
         continuouslyJumping = PreferenceHelper.getBoolean("continuouslyJumping");
         rotationSpeed = PreferenceHelper.getFloat("rotationSpeed");
 
-        try {
+        Input.assignKey("forward", Keyboard.KEY_W);
+        Input.assignKey("backward", Keyboard.KEY_S);
+        Input.assignKey("right", Keyboard.KEY_D);
+        Input.assignKey("left", Keyboard.KEY_A);
 
-            Input.assignKey("forward", Keyboard.KEY_W);
-            Input.assignKey("backward", Keyboard.KEY_S);
-            Input.assignKey("right", Keyboard.KEY_D);
-            Input.assignKey("left", Keyboard.KEY_A);
+        Input.assignKey("up", Keyboard.KEY_E);
+        Input.assignKey("down", Keyboard.KEY_Q);
 
-            Input.assignKey("up", Keyboard.KEY_E);
-            Input.assignKey("down", Keyboard.KEY_Q);
-
-            Input.assignKey("jump", Keyboard.KEY_SPACE);
-            Input.assignKey("sprint", Keyboard.KEY_LSHIFT);
-            Input.assignKey("sneak", Keyboard.KEY_C);
-
-        } catch (KeyAlreadyAssignedException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
+        Input.assignKey("jump", Keyboard.KEY_SPACE);
+        Input.assignKey("sprint", Keyboard.KEY_LSHIFT);
+        Input.assignKey("sneak", Keyboard.KEY_C);
 
     }
 
@@ -110,34 +98,30 @@ public class ControllerKeyboardMouse extends Controller {
 
             movementComponent.rotate(pitch, yaw);
 
-            if (getKey("forward") != null) {
+            if (sprintModeToggle) {
+                if (Input.isKeyDown("sprint")) movementComponent.sprint();
+            } else {
+                if (Input.isKeyPressed("sprint")) movementComponent.sprint();
+            }
 
-                if (sprintModeToggle) {
-                    if (Input.isKeyDown(getKey("sprint"))) movementComponent.sprint();
-                } else {
-                    if (Input.isKeyPressed(getKey("sprint"))) movementComponent.sprint();
-                }
+            if (sneakModeToggle) {
+                if (Input.isKeyDown("sneak")) movementComponent.sneak();
+            } else {
+                if (Input.isKeyPressed("sneak")) movementComponent.sneak();
+            }
 
-                if (sneakModeToggle) {
-                    if (Input.isKeyDown(getKey("sneak"))) movementComponent.sneak();
-                } else {
-                    if (Input.isKeyPressed(getKey("sneak"))) movementComponent.sneak();
-                }
+            if (Input.isKeyPressed("forward")) movementComponent.moveForward();
+            if (Input.isKeyPressed("backward")) movementComponent.moveBackward();
+            if (Input.isKeyPressed("right")) movementComponent.moveLeft();
+            if (Input.isKeyPressed("left")) movementComponent.moveRight();
 
-                if (Input.isKeyPressed(getKey("forward"))) movementComponent.moveForward();
-                if (Input.isKeyPressed(getKey("backward"))) movementComponent.moveBackward();
-                if (Input.isKeyPressed(getKey("right"))) movementComponent.moveLeft();
-                if (Input.isKeyPressed(getKey("left"))) movementComponent.moveRight();
+            if (Input.isKeyPressed("up") && capableOfFlying) movementComponent.moveUp();
+            if (Input.isKeyPressed("down") && capableOfFlying) movementComponent.moveDown();
 
-                if (Input.isKeyPressed(getKey("up")) && capableOfFlying) movementComponent.moveUp();
-                if (Input.isKeyPressed(getKey("down")) && capableOfFlying) movementComponent.moveDown();
-
-                if (continuouslyJumping) {
-                    if (Input.isKeyPressed(getKey("jump"))) movementComponent.jump();
-                } else {
-                    if (Input.isKeyDown(getKey("jump"))) movementComponent.jump();
-                }
-
+            if (continuouslyJumping) {
+                if (Input.isKeyPressed("jump")) movementComponent.jump();
+            } else {
+                if (Input.isKeyDown("jump")) movementComponent.jump();
             }
 
         }

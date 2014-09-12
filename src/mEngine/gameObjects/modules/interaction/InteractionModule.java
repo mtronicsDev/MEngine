@@ -20,7 +20,6 @@ import java.util.List;
 public class InteractionModule extends Module {
 
     public boolean enabled;
-    public Integer interactionKeyIndex;
     public String interactionKey;
     public String interactionDescription;
     public String interactionInstruction;
@@ -34,28 +33,27 @@ public class InteractionModule extends Module {
 
     public InteractionModule(boolean enabled, float radius, Interaction interaction) {
 
-        this(enabled, radius, null, "interact", 180, interaction);
+        this(enabled, radius, Keyboard.KEY_I, "interact", 180, interaction);
 
     }
 
-    public InteractionModule(boolean enabled, float radius, String interactionKey, Interaction interaction) {
+    public InteractionModule(boolean enabled, float radius, int interactionKey, Interaction interaction) {
 
         this(enabled, radius, interactionKey, "interact", 180, interaction);
 
 
     }
 
-    public InteractionModule(boolean enabled, float radius, String interactionKey, String interactionDescription, Interaction interaction) {
+    public InteractionModule(boolean enabled, float radius, int interactionKey, String interactionDescription, Interaction interaction) {
 
         this(enabled, radius, interactionKey, interactionDescription, 180, interaction);
 
     }
 
-    public InteractionModule(boolean enabled, float radius, String interactionKey, String interactionDescription, float maxControllerLookAngle, Interaction interaction) {
+    public InteractionModule(boolean enabled, float radius, int interactionKey, String interactionDescription, float maxControllerLookAngle, Interaction interaction) {
 
         this.enabled = enabled;
-        this.interactionKey = interactionKey;
-        this.interactionKeyIndex = Keyboard.getKeyIndex(interactionKey);
+        Input.assignKey(this.getClass().getName() + ".interact", interactionKey);
         this.interaction = interaction;
         this.radius = radius;
         this.interactionDescription = interactionDescription;
@@ -104,7 +102,7 @@ public class InteractionModule extends Module {
 
                 } else {
 
-                    if (Input.isKeyDown(interactionKeyIndex) && controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
+                    if (Input.isKeyDown(interactionKey) && controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
 
                         interacted = true;
                         break;

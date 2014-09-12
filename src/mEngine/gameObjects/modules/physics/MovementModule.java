@@ -7,11 +7,9 @@ import mEngine.gameObjects.modules.controls.Controller;
 import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.input.Input;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.time.TimeHelper;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;
@@ -65,8 +63,6 @@ public class MovementModule extends Module {
 
                 if (!controller.sprintModeToggle) sprinting = false;
                 if (!controller.sneakModeToggle) sneaking = false;
-                if (Input.isKeyDown(Keyboard.KEY_V))
-                    forces.get("gravity").enabled = !forces.get("gravity").enabled; //Kiwi (KEY_V) :P
 
                 controller.onRemoteUpdate();
 
