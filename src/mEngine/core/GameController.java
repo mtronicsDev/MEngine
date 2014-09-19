@@ -58,7 +58,7 @@ public class GameController {
 
     public static void stopGame() {
 
-        AudioController.disposeAudioData();
+        AudioController.clear();
         ThreadHelper.stopAllThreads();
         System.exit(0);
 

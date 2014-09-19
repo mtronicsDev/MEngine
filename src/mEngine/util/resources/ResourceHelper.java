@@ -1,6 +1,8 @@
 package mEngine.util.resources;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +82,21 @@ public class ResourceHelper {
         }
 
         return new File(filePath);
+
+    }
+
+    public static URL getResourceURL(String fileName, int type) {
+
+        File file = getResource(fileName, type);
+        URL url = null;
+
+        try {
+            url = file.toURI().toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
 
     }
 

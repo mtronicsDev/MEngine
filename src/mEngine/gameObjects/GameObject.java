@@ -137,6 +137,7 @@ public class GameObject implements Serializable {
 
     public GameObject createModules() {
 
+        //Multiple for-loops because every module has to be in the gameObject's list first because of their dependencies
         List<Module> modules = new ArrayList<Module>();
 
         for (Module module : this.modules)

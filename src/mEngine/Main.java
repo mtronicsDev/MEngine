@@ -3,6 +3,7 @@ package mEngine;
 import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.audio.AudioListener;
+import mEngine.gameObjects.modules.audio.AudioSource;
 import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.modules.interaction.AsyncInteraction;
 import mEngine.gameObjects.modules.interaction.InteractionModule;
@@ -101,9 +102,9 @@ public class Main {
                 .addModule(
                         new RenderModule("monkey")
                 )
-                /*.addModule(
-                        new AudioSource("test")
-                )*/
+                .addModule(
+                        new AudioSource("Unity", false, true)
+                )
                 .addModule(
                         new InteractionModule(true, 10, Keyboard.KEY_I, "move monkey", 25, new AsyncInteraction() {
                             @Override
