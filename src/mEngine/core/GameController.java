@@ -15,7 +15,8 @@ import mEngine.util.threading.ThreadHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
 
-import static mEngine.core.ObjectController.*;
+import static mEngine.core.ObjectController.activeGUIDepartment;
+import static mEngine.core.ObjectController.setLoadingScreen;
 
 public class GameController {
 

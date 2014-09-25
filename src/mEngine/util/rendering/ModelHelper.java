@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.rendering;
 
 import mEngine.graphics.renderable.materials.Material3D;
@@ -122,7 +128,8 @@ public class ModelHelper {
                     currentMaterialName = line.split(" ")[1];
                 } else if (currentMaterial != null) {
 
-                    if (line.startsWith("Ns ")) currentMaterial.specularHighlightStrength = Float.valueOf(line.split(" ")[1]);
+                    if (line.startsWith("Ns "))
+                        currentMaterial.specularHighlightStrength = Float.valueOf(line.split(" ")[1]);
                     else if (line.startsWith("Ka ")) currentMaterial.ambientReflectivity = new Vector3f(
                             Float.valueOf(line.split(" ")[1]),
                             Float.valueOf(line.split(" ")[2]),

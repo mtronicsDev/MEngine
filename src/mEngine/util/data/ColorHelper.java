@@ -14,19 +14,20 @@ public class ColorHelper {
 
     /**
      * Converts a string containing hex code to an AWT color
+     *
      * @param hex The hex code (e.g. #FFF, #1659de, 000, 24351a)
      * @return The resulting color
      */
     public static Color getHexColor(String hex) {
-        if(hex.startsWith("#")) hex = hex.replace("#", "");
+        if (hex.startsWith("#")) hex = hex.replace("#", "");
 
         //Conversion to long notation
-        if(hex.length() == 3) {
+        if (hex.length() == 3) {
             char r = hex.charAt(0);
             char g = hex.charAt(1);
             char b = hex.charAt(2);
 
-            hex = new String(new char[]{r,r,g,g,b,b});
+            hex = new String(new char[]{r, r, g, g, b, b});
         }
 
         //Conversion to int
@@ -40,6 +41,7 @@ public class ColorHelper {
 
     /**
      * Converts a Java AWT color to an RGBA value
+     *
      * @param color The color to convert
      * @return A Vector4f containing the rgba value (x = r, y = g, z = b, w = a)
      */

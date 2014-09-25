@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.gui.modules.buttons;
 
 import mEngine.gameObjects.modules.gui.modules.GUIModule;
@@ -26,10 +32,10 @@ public class GUIButton extends GUIModule {
         buttonHovered = isButtonHovered();
         buttonPressed = isButtonPressed();
 
-        if(buttonHovered) buttonPressAction.hovered();
-        if(buttonPressed) buttonPressAction.pressed();
-        if(isButtonReleased()) buttonPressAction.up();
-        if(isButtonActivated()) buttonPressAction.down();
+        if (buttonHovered) buttonPressAction.hovered();
+        if (buttonPressed) buttonPressAction.pressed();
+        if (isButtonReleased()) buttonPressAction.up();
+        if (isButtonActivated()) buttonPressAction.down();
 
         previouslyPressed = buttonPressed;
 

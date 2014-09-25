@@ -51,11 +51,12 @@ public class Renderer {
     /**
      * Adds a display list to the OpenGL context.
      * This is used for static modules that will then render faster (e.g. Terrain)
+     *
      * @param vertices The vertices to be used
-     * @param normals The normals to be used
-     * @param uvs The texture coordinates to be used
+     * @param normals  The normals to be used
+     * @param uvs      The texture coordinates to be used
      * @param material The material to be used
-     * @param mode The render mode to be used
+     * @param mode     The render mode to be used
      */
     public static void addDisplayList(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Material3D material, int mode) {
 
@@ -141,12 +142,13 @@ public class Renderer {
 
     /**
      * Changes the texture of a display list
+     *
      * @param displayListIndex The index of the display list to edit
-     * @param vertices The vertices to be used
-     * @param normals The normals to be used
-     * @param uvs The texture coordinates to be used
-     * @param textureName The name of the new texture
-     * @param mode The render mode to be used
+     * @param vertices         The vertices to be used
+     * @param normals          The normals to be used
+     * @param uvs              The texture coordinates to be used
+     * @param textureName      The name of the new texture
+     * @param mode             The render mode to be used
      */
     public static void changeTexture(int displayListIndex, List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, String textureName, int mode) {
 
@@ -293,9 +295,10 @@ public class Renderer {
 
     /**
      * Register a display list without any material
+     *
      * @param vertices The vertices to be used
-     * @param normals The normals to be used
-     * @param mode The render mode to be used
+     * @param normals  The normals to be used
+     * @param mode     The render mode to be used
      */
     public static void addDisplayList(List<Vector3f> vertices, List<Vector3f> normals, int mode) {
 
@@ -360,11 +363,12 @@ public class Renderer {
 
     /**
      * Renders a 3D object
-     * @param vertices The vertices to be used
-     * @param normals The normals to be used
-     * @param uvs The texture coordinates to be used
-     * @param material The material to be used
-     * @param mode The render mode to be used
+     *
+     * @param vertices              The vertices to be used
+     * @param normals               The normals to be used
+     * @param uvs                   The texture coordinates to be used
+     * @param material              The material to be used
+     * @param mode                  The render mode to be used
      * @param emissiveLightStrength The strength of light that is emitted by the rendered object
      */
     public static void renderObject3D(List<Vector3f> vertices, List<Vector3f> normals, List<Vector2f> uvs, Material3D material, int mode, float emissiveLightStrength) {
@@ -524,10 +528,11 @@ public class Renderer {
 
     /**
      * Renders a 3D object that is registered in a display list
-     * @param displayListIndex The index of the display list to edit
-     * @param modelPosition The position of the model to render
-     * @param modelRotation The rotation of the model to render
-     * @param material The material to be used
+     *
+     * @param displayListIndex      The index of the display list to edit
+     * @param modelPosition         The position of the model to render
+     * @param modelRotation         The rotation of the model to render
+     * @param material              The material to be used
      * @param emissiveLightStrength The strength of light that is emitted by the rendered object
      */
     public static void renderObject3D(int displayListIndex, Vector3f modelPosition, Vector3f modelRotation, Material3D material, float emissiveLightStrength) {
@@ -632,10 +637,11 @@ public class Renderer {
 
     /**
      * Renders a 2D object
+     *
      * @param vertices The vertices to be used
-     * @param uvs The texture coordinates to be used
+     * @param uvs      The texture coordinates to be used
      * @param material The material to be used
-     * @param mode The render mode to be used
+     * @param mode     The render mode to be used
      */
     public static void renderObject2D(List<Vector2f> vertices, List<Vector2f> uvs, Material2D material, int mode) {
 
@@ -694,8 +700,9 @@ public class Renderer {
 
     /**
      * Renders a 2D object
+     *
      * @param vertices The vertices to be used
-     * @param mode The render mode to be used
+     * @param mode     The render mode to be used
      */
     public static void renderObject2D(List<Vector2f> vertices, int mode) {
 

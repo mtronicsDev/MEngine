@@ -27,7 +27,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static mEngine.util.input.Input.*;
+import static mEngine.util.input.Input.assignKey;
+import static mEngine.util.input.Input.isKeyDown;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
@@ -106,13 +107,13 @@ public class GraphicsController {
      */
     public static void update() {
 
-            if (isKeyDown("fullscreen")) {
+        if (isKeyDown("fullscreen")) {
 
-                wasResized = true;
-                if (isFullscreen) setupWindow(width, height, title);
-                else setupFullscreen();
+            wasResized = true;
+            if (isFullscreen) setupWindow(width, height, title);
+            else setupFullscreen();
 
-            } else wasResized = false;
+        } else wasResized = false;
 
         Display.update();
         if (!mEnchmarkEnabled) Display.sync(fps);
@@ -121,9 +122,10 @@ public class GraphicsController {
 
     /**
      * Configures the window.
-     * @param width Window width
+     *
+     * @param width  Window width
      * @param height Window height
-     * @param title Window title
+     * @param title  Window title
      */
     private static void setupWindow(int width, int height, String title) {
 
@@ -170,6 +172,7 @@ public class GraphicsController {
 
     /**
      * Allows you to make the game a part of another window
+     *
      * @param parent The AWT canvas you want the game to show in
      */
     public static void setParent(Canvas parent) {
@@ -228,6 +231,7 @@ public class GraphicsController {
 
     /**
      * Changes the title of the game window
+     *
      * @param title The desired title
      */
     public static void setWindowTitle(String title) {
@@ -236,6 +240,7 @@ public class GraphicsController {
 
     /**
      * Returns the current game window width
+     *
      * @return The current game window width
      */
     public static int getWidth() {
@@ -244,6 +249,7 @@ public class GraphicsController {
 
     /**
      * Returns the current game window height
+     *
      * @return The current game window height
      */
     public static int getHeight() {
@@ -252,6 +258,7 @@ public class GraphicsController {
 
     /**
      * Returns the maximum frames per second specified in the properties
+     *
      * @return The maximum FPS value
      */
     public static int getFps() {
@@ -260,6 +267,7 @@ public class GraphicsController {
 
     /**
      * Returns the game window's current aspect ratio
+     *
      * @return The game window's current aspect ratio
      */
     public static float getAspectRatio() {

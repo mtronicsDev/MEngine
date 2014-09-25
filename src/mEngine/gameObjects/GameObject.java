@@ -30,6 +30,7 @@ public class GameObject implements Serializable {
 
     /**
      * The default constructor for game objects
+     *
      * @param pos The initial position of the object
      * @param rot The initial rotation
      */
@@ -58,6 +59,7 @@ public class GameObject implements Serializable {
 
     /**
      * This constructor is used to clone existing game objects
+     *
      * @param src The game object to clone
      */
     public GameObject(GameObject src) {
@@ -116,6 +118,7 @@ public class GameObject implements Serializable {
 
     /**
      * Allows for easier identification of game objects
+     *
      * @return The Universally Unique Identifier of the game object
      */
     public long getUuid() {
@@ -139,6 +142,7 @@ public class GameObject implements Serializable {
 
     /**
      * Adds the desired module to the game object's module list
+     *
      * @param module The desired module
      * @return The game object, allows for chaining module additions
      */
@@ -152,6 +156,7 @@ public class GameObject implements Serializable {
 
     /**
      * Removes the first module of the given class from the game object
+     *
      * @param moduleClass The module's class
      */
     public void removeModule(Class moduleClass) {
@@ -165,6 +170,7 @@ public class GameObject implements Serializable {
 
     /**
      * Returns the first module of the given class in the game object's module list
+     *
      * @param moduleClass The class of the desired module
      * @return The first module with the desired class
      */
@@ -185,6 +191,7 @@ public class GameObject implements Serializable {
     /**
      * This must be executed after all modules were added to the game object.
      * It calls the modules' onCreation() methods
+     *
      * @return The game objects, allows for adding it to the object controller after executing this method
      */
     public GameObject createModules() {

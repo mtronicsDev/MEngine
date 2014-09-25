@@ -11,11 +11,12 @@ public class DataTypeHelper {
     /**
      * Converts a boolean into an integer.
      * This is necessary for some OpenGL interactions
+     *
      * @param b The boolean to be converted
      * @return The integer output
      */
     public static int booleanToInteger(boolean b) {
-        if(b) return 1;
+        if (b) return 1;
         else return 0;
     }
 

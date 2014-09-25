@@ -44,6 +44,7 @@ public class AudioController {
 
     /**
      * This is used for interacting with configurations and audio control
+     *
      * @return The current SoundSystem
      */
     public static SoundSystem getSoundSystem() {

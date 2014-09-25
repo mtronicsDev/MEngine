@@ -30,12 +30,12 @@ public class InteractionModule extends Module {
     public String interactionDescription;
     public String interactionInstruction;
     public Interaction interaction;
+    public GUIText interactionInstructionText;
     private float radius;
     private float[] controllerDistances;
     private float maxControllerLookAngle;
     private float[] controllerLookAngles;
     private List<GameObject> controlledGameObjects;
-    public GUIText interactionInstructionText;
 
     public InteractionModule(boolean enabled, float radius, Interaction interaction) {
 

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.renderable;
 
 import mEngine.gameObjects.GameObject;
@@ -111,7 +117,7 @@ public class RenderModule extends ModuleRenderable3D {
 
             for (int i = 0; i < model.subModels.size(); i++) {
 
-                Renderer.renderObject3D(displayListIndex + i, VectorHelper.sumVectors(new Vector3f[] {parent.position, offset}), parent.rotation, model.subModels.get(i).material, 0);
+                Renderer.renderObject3D(displayListIndex + i, VectorHelper.sumVectors(new Vector3f[]{parent.position, offset}), parent.rotation, model.subModels.get(i).material, 0);
 
             }
 

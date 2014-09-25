@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.audio;
 
 import mEngine.audio.AudioController;
@@ -19,22 +25,22 @@ public class AudioSource extends Module {
         Input.assignKey("pause", Keyboard.KEY_2);
         Input.assignKey("stop", Keyboard.KEY_3);
 
-        if(isAmbient) //Is the sound background music or a positional sound?
+        if (isAmbient) //Is the sound background music or a positional sound?
             AudioController.getSoundSystem().backgroundMusic(
-                audioFileName,
-                ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
-                audioFileName + ".wav",
-                loop);
+                    audioFileName,
+                    ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
+                    audioFileName + ".wav",
+                    loop);
         else
             AudioController.getSoundSystem().newSource(
-                false,
-                audioFileName,
-                ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
-                audioFileName + ".wav",
-                false,
-                0, 0, 0, //Parent is not accessible yet
-                SoundSystemConfig.ATTENUATION_ROLLOFF,
-                SoundSystemConfig.getDefaultRolloff()); // <-- Long constructor there :P
+                    false,
+                    audioFileName,
+                    ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
+                    audioFileName + ".wav",
+                    false,
+                    0, 0, 0, //Parent is not accessible yet
+                    SoundSystemConfig.ATTENUATION_ROLLOFF,
+                    SoundSystemConfig.getDefaultRolloff()); // <-- Long constructor there :P
     }
 
     public void play() {

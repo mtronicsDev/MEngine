@@ -17,6 +17,7 @@ public abstract class Module implements Serializable {
     /**
      * This is called by the game objects this module is part of.
      * Use this method to interact with your dependencies and to initialize your module
+     *
      * @param obj The parent of this module
      */
     public void onCreation(GameObject obj) {

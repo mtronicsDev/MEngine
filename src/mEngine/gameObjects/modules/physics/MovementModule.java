@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.physics;
 
 import mEngine.core.GameController;
@@ -41,7 +47,7 @@ public class MovementModule extends Module {
 
         if (renderComponent != null) mass = renderComponent.model.getMass();
 
-        else  mass = 60;
+        else mass = 60;
 
         for (String key : ForceController.generalForces.keySet()) {
 
@@ -124,7 +130,8 @@ public class MovementModule extends Module {
 
             movedSpace = ForceController.getMovedSpace(speed, deltaTime);
 
-            if (physicComponent == null) parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, movedSpace});
+            if (physicComponent == null)
+                parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, movedSpace});
 
         }
 

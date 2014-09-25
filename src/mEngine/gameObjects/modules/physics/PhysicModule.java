@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.physics;
 
 import mEngine.gameObjects.GameObject;
@@ -14,13 +20,13 @@ import java.util.List;
 
 public class PhysicModule extends Module {
 
-    public boolean ableToCollide = true;
-    private boolean lastPhysicComponent;
     public static List<PhysicModule> physicComponents = new ArrayList<PhysicModule>();
     private static List<String> alreadyUsedModels = new ArrayList<String>();
+    public boolean ableToCollide = true;
     public Box axisAlignedBoundingBox;
     public List<Triangle> triangles;
     public MovementModule parentMovementComponent;
+    private boolean lastPhysicComponent;
 
     public PhysicModule() {
 

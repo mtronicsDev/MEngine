@@ -8,9 +8,15 @@ package mEngine.gameObjects.modules.gui.modules.buttons;
 
 public abstract class ButtonPressAction {
 
-    public void down() {}
-    public void up() {}
+    public void down() {
+    }
+
+    public void up() {
+    }
+
     public abstract void pressed();
-    public void hovered() {}
+
+    public void hovered() {
+    }
 
 }

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.math.vectors;
 
 import mEngine.gameObjects.GameObject;
@@ -63,7 +69,7 @@ public class VectorHelper {
 
         Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(triangle, middle);
 
-        if (isVectorInsideBox(VectorHelper.sumVectors(new Vector3f[] {middle, differenceVector}), box)) {
+        if (isVectorInsideBox(VectorHelper.sumVectors(new Vector3f[]{middle, differenceVector}), box)) {
 
             Vector3f directionVectorA = VectorHelper.subtractVectors(triangle.vertexB, triangle.position);
             Vector3f directionVectorB = VectorHelper.subtractVectors(triangle.vertexC, triangle.position);

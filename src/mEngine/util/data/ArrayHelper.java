@@ -10,6 +10,7 @@ public class ArrayHelper {
 
     /**
      * Fills An array with zeros
+     *
      * @param arrayLength The length of the desired array
      * @return The filled array
      */
@@ -19,6 +20,7 @@ public class ArrayHelper {
 
     /**
      * Fills an array with custom numbers
+     *
      * @param arrayLength The length of the desired array
      * @param placeholder The desired number to fill the array with
      * @return The filled array

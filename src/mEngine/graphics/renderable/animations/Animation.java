@@ -19,7 +19,8 @@ public abstract class Animation {
 
     /**
      * Create an animation from key frames
-     * @param keyFrames The array of key frames in the animation
+     *
+     * @param keyFrames         The array of key frames in the animation
      * @param stopAfterOneCycle If true, the animation will only run once. If false, it will run continuously
      */
     public Animation(KeyFrame[] keyFrames, boolean stopAfterOneCycle) {
@@ -64,6 +65,7 @@ public abstract class Animation {
 
     /**
      * Get the currently active key frame
+     *
      * @return The current key frame
      */
     public KeyFrame getCurrentKeyFrame() {
