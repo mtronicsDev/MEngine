@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects;
 
 import mEngine.gameObjects.modules.Module;
@@ -22,6 +28,11 @@ public class GameObject implements Serializable {
     public List<Module> modules = new ArrayList<Module>();
     private long uuid = UUID.randomUUID().getMostSignificantBits();
 
+    /**
+     * The default constructor for game objects
+     * @param pos The initial position of the object
+     * @param rot The initial rotation
+     */
     public GameObject(Vector3f pos, Vector3f rot) {
 
         position = pos;
@@ -45,6 +56,10 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * This constructor is used to clone existing game objects
+     * @param src The game object to clone
+     */
     public GameObject(GameObject src) {
 
         position = src.position;
@@ -59,6 +74,9 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * Automatically called by the game loop, updates the object and its modules
+     */
     public void update() {
 
         for (Module module : modules)
@@ -69,6 +87,10 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * This is used for preparing the game object for serialization (saving it in its current state)
+     * It also takes care of all of the game objects modules
+     */
     public void save() {
 
         for (Module module : modules) {
@@ -79,6 +101,9 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * This prepares the game object and its components for de-serialization (loading)
+     */
     public void load() {
 
         for (Module module : modules) {
@@ -89,10 +114,18 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * Allows for easier identification of game objects
+     * @return The Universally Unique Identifier of the game object
+     */
     public long getUuid() {
         return uuid;
     }
 
+    /**
+     * Adds the game object and its modules to the current render queue.
+     * This method is called by the render loop
+     */
     public void addToRenderQueue() {
 
         //Adds this gameObject's models, particles and guiElements to the renderQueue
@@ -104,6 +137,11 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * Adds the desired module to the game object's module list
+     * @param module The desired module
+     * @return The game object, allows for chaining module additions
+     */
     public GameObject addModule(Module module) {
 
         modules.add(module);
@@ -112,6 +150,10 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * Removes the first module of the given class from the game object
+     * @param moduleClass The module's class
+     */
     public void removeModule(Class moduleClass) {
 
         Module module = getModule(moduleClass);
@@ -121,6 +163,11 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * Returns the first module of the given class in the game object's module list
+     * @param moduleClass The class of the desired module
+     * @return The first module with the desired class
+     */
     public Module getModule(Class moduleClass) {
 
         Module equalingModule = null;
@@ -135,6 +182,11 @@ public class GameObject implements Serializable {
 
     }
 
+    /**
+     * This must be executed after all modules were added to the game object.
+     * It calls the modules' onCreation() methods
+     * @return The game objects, allows for adding it to the object controller after executing this method
+     */
     public GameObject createModules() {
 
         //Multiple for-loops because every module has to be in the gameObject's list first because of their dependencies

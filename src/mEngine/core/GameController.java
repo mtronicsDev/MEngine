@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.core;
 
 import mEngine.audio.AudioController;
@@ -16,6 +22,9 @@ public class GameController {
     public static boolean isGamePaused;
     public static boolean isLoading;
 
+    /**
+     * Initializes all core classes and starts the game
+     */
     public static void runGame() {
 
         ResourceHelper.initialize();
@@ -33,6 +42,9 @@ public class GameController {
 
     }
 
+    /**
+     * Pauses all game objects (no updates, still renders them)
+     */
     public static void pauseGame() {
 
         Mouse.setGrabbed(false);
@@ -48,6 +60,9 @@ public class GameController {
 
     }
 
+    /**
+     * Unpauses all game objects
+     */
     public static void unPauseGame() {
 
         Mouse.setGrabbed(true);
@@ -56,6 +71,9 @@ public class GameController {
 
     }
 
+    /**
+     * Clears all bindings and stops the game
+     */
     public static void stopGame() {
 
         AudioController.clear();

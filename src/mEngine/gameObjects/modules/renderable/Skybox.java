@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.renderable;
 
 import mEngine.graphics.Renderer;
@@ -219,7 +225,7 @@ public class Skybox extends ModuleRenderable3D {
     @Override
     public void addToRenderQueue() {
 
-        Renderer.currentRenderQueue.addSkybox(this);
+        Renderer.currentRenderQueue.setSkybox(this);
 
     }
 }

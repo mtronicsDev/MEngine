@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine;
 
 import mEngine.core.GameController;
@@ -24,6 +30,10 @@ import static mEngine.core.ObjectController.addGameObject;
 
 public class Main {
 
+    /**
+     * This is only for testing purposes
+     * @param args None
+     */
     public static void main(String[] args) {
 
         runGame();

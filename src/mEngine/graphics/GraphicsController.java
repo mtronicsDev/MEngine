@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.graphics;
 
 import mEngine.util.data.ColorHelper;
@@ -41,6 +47,9 @@ public class GraphicsController {
     private static String title;
     private static int fps;
 
+    /**
+     * Creates a new window with OpenGL context, loads all graphics related preferences
+     */
     public static void createDisplay() {
 
         width = PreferenceHelper.getInteger("screenWidth");
@@ -80,6 +89,9 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Used in the render loop, it clears the screen every frame and sets the sky color
+     */
     public static void clearScreen() {
 
         glClearColor(skyColor.x, skyColor.y, skyColor.z, skyColor.w);
@@ -87,6 +99,11 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Called every frame by the render loop.
+     * It detects, if the user has resized the window or wants to toggle fullscreen mode.
+     * It also updates and synchronizes the window
+     */
     public static void update() {
 
             if (isKeyDown("fullscreen")) {
@@ -102,6 +119,12 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Configures the window.
+     * @param width Window width
+     * @param height Window height
+     * @param title Window title
+     */
     private static void setupWindow(int width, int height, String title) {
 
         try {
@@ -123,6 +146,9 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Changes the window to be a fullscreen one
+     */
     private static void setupFullscreen() {
 
         try {
@@ -142,6 +168,10 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Allows you to make the game a part of another window
+     * @param parent The AWT canvas you want the game to show in
+     */
     public static void setParent(Canvas parent) {
 
         try {
@@ -152,6 +182,9 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Takes a screenshot and saves it in the screenshots/ folder
+     */
     public static void takeScreenshot() {
 
         int width = Display.getWidth();
@@ -193,26 +226,49 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Changes the title of the game window
+     * @param title The desired title
+     */
     public static void setWindowTitle(String title) {
         Display.setTitle(title);
     }
 
+    /**
+     * Returns the current game window width
+     * @return The current game window width
+     */
     public static int getWidth() {
         return width;
     }
 
+    /**
+     * Returns the current game window height
+     * @return The current game window height
+     */
     public static int getHeight() {
         return height;
     }
 
+    /**
+     * Returns the maximum frames per second specified in the properties
+     * @return The maximum FPS value
+     */
     public static int getFps() {
         return fps;
     }
 
+    /**
+     * Returns the game window's current aspect ratio
+     * @return The game window's current aspect ratio
+     */
     public static float getAspectRatio() {
         return (float) width / height;
     }
 
+    /**
+     * Configures OpenGL to look nice
+     */
     private static void initializeOpenGL() {
 
         glShadeModel(GL_SMOOTH);
@@ -225,6 +281,10 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Used for displaying 2D content, such as GUI.
+     * Called in the render queue
+     */
     public static void switchTo2D() {
 
         if (currentRenderDimension != Dimension.DIM_2) {
@@ -245,6 +305,10 @@ public class GraphicsController {
 
     }
 
+    /**
+     * Used for displaying 3D content.
+     * Called in the render queue
+     */
     public static void switchTo3D() {
 
         if (currentRenderDimension != Dimension.DIM_3) {

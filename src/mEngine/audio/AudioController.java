@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.audio;
 
 import paulscode.sound.Library;
@@ -12,6 +18,9 @@ public class AudioController {
 
     private static SoundSystem soundSystem;
 
+    /**
+     * Sets the sound library and codecs
+     */
     public static void initialize() {
 
         Class library;
@@ -33,10 +42,17 @@ public class AudioController {
 
     }
 
+    /**
+     * This is used for interacting with configurations and audio control
+     * @return The current SoundSystem
+     */
     public static SoundSystem getSoundSystem() {
         return soundSystem;
     }
 
+    /**
+     * This gets rid of all AL bindings, used for stopping the audio system
+     */
     public static void clear() {
         soundSystem.cleanup();
     }

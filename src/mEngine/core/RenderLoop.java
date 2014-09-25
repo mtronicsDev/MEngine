@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
@@ -11,6 +17,9 @@ import org.lwjgl.opengl.Display;
 
 public class RenderLoop implements Runnable {
 
+    /**
+     * Creates a new OpenGL window, sets the standard shader and runs the render loop
+     */
     @Override
     public void run() {
 
