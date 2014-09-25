@@ -15,9 +15,9 @@ public abstract class KeyFrame {
     private Timer delayTimer;
 
     /**
-     * Create a keyframe for use in animations
-     * @param delay The time this keyframe will be active once activated
-     * @param data The keyframe's data (e.g. texture, position or color)
+     * Create a key frame for use in animations
+     * @param delay The time this key frame will be active once activated
+     * @param data The key frame's data (e.g. texture, position or color)
      */
     KeyFrame(int delay, Object data) {
 
@@ -28,8 +28,8 @@ public abstract class KeyFrame {
     }
 
     /**
-     * Called by the animation the keyframe is part of.
-     * The keyframe deactivates automatically after the specified delay time
+     * Called by the animation the key frame is part of.
+     * The key frame deactivates automatically after the specified delay time
      */
     void setActive() {
 
@@ -38,7 +38,7 @@ public abstract class KeyFrame {
     }
 
     /**
-     * Used by the animation this keyframe is part of to determine if the frame is done being active
+     * Used by the animation this key frame is part of to determine if the frame is done being active
      * @return True if it's done, false if not
      */
     boolean isDone() {
@@ -48,7 +48,7 @@ public abstract class KeyFrame {
     }
 
     /**
-     * Used by the animation this keyframe is part of to determine if the frame is still active
+     * Used by the animation this key frame is part of to determine if the frame is still active
      * @return True if active, false if not
      */
     boolean isActive() {
@@ -58,8 +58,8 @@ public abstract class KeyFrame {
     }
 
     /**
-     * Used by the animation this keyframe is part of to determine the data attached to the keyframe
-     * @return The keyframe's data
+     * Used by the animation this key frame is part of to determine the data attached to the key frame
+     * @return The key frame's data
      */
     public abstract Object getData();
 

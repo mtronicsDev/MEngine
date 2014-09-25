@@ -18,8 +18,8 @@ public abstract class Animation {
     private boolean running = false;
 
     /**
-     * Create an animation from keyframes
-     * @param keyFrames The array of keyframes in the animation
+     * Create an animation from key frames
+     * @param keyFrames The array of key frames in the animation
      * @param stopAfterOneCycle If true, the animation will only run once. If false, it will run continuously
      */
     public Animation(KeyFrame[] keyFrames, boolean stopAfterOneCycle) {
@@ -43,7 +43,7 @@ public abstract class Animation {
 
     /**
      * Pause the animation.
-     * It will start from the last keyframe the next time you start it
+     * It will start from the last key frame the next time you start it
      */
     public void pause() {
 
@@ -63,8 +63,8 @@ public abstract class Animation {
     }
 
     /**
-     * Get the currently active keyframe
-     * @return The current keyframe
+     * Get the currently active key frame
+     * @return The current key frame
      */
     public KeyFrame getCurrentKeyFrame() {
 
