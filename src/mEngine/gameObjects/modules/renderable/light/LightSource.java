@@ -1,9 +1,15 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.renderable.light;
 
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.renderable.ModuleRenderable;
 import mEngine.graphics.Renderer;
-import mEngine.util.data.BinaryHelper;
+import mEngine.util.data.DataTypeHelper;
 import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -36,14 +42,14 @@ public abstract class LightSource extends ModuleRenderable {
 
     public LightSource setSpecularLighting(boolean specularLighting) {
 
-        this.specularLighting = BinaryHelper.convertToBinaryInteger(specularLighting);
+        this.specularLighting = DataTypeHelper.booleanToInteger(specularLighting);
         return this;
 
     }
 
     public LightSource setShadowThrowing(boolean shadowThrowing) {
 
-        this.shadowThrowing = BinaryHelper.convertToBinaryInteger(shadowThrowing);
+        this.shadowThrowing = DataTypeHelper.booleanToInteger(shadowThrowing);
         return this;
 
     }

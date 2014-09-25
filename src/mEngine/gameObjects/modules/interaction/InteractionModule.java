@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.interaction;
 
 import mEngine.core.ObjectController;
@@ -74,7 +80,7 @@ public class InteractionModule extends Module {
             interactionInstructionText = new GUIText(interactionInstruction, 15);
 
             parent.addModule(
-                    new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addComponent(interactionInstructionText)
+                    new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addModule(interactionInstructionText)
             );
 
             this.interactionInstruction = interactionInstruction;

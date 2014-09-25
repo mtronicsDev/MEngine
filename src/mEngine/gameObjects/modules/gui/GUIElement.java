@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.gui;
 
 import mEngine.core.ObjectController;
@@ -112,10 +118,10 @@ public class GUIElement extends ModuleRenderable {
 
     }
 
-    public GUIElement addComponent(GUIModule component) {
+    public GUIElement addModule(GUIModule module) {
 
-        components.add(component);
-        component.onCreation(this);
+        components.add(module);
+        module.onCreation(this);
         return this;
 
     }

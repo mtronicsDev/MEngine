@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.data;
 
 import org.lwjgl.util.vector.Vector4f;
@@ -6,6 +12,11 @@ import java.awt.*;
 
 public class ColorHelper {
 
+    /**
+     * Converts a string containing hex code to an AWT color
+     * @param hex The hex code (e.g. #FFF, #1659de, 000, 24351a)
+     * @return The resulting color
+     */
     public static Color getHexColor(String hex) {
         if(hex.startsWith("#")) hex = hex.replace("#", "");
 
@@ -27,6 +38,11 @@ public class ColorHelper {
 
     }
 
+    /**
+     * Converts a Java AWT color to an RGBA value
+     * @param color The color to convert
+     * @return A Vector4f containing the rgba value (x = r, y = g, z = b, w = a)
+     */
     public static Vector4f colorToRgba(Color color) {
         return new Vector4f(color.getRed() / 256,
                 color.getGreen() / 256,

@@ -46,18 +46,7 @@ public class GameController {
      * Pauses all game objects (no updates, still renders them)
      */
     public static void pauseGame() {
-
-        Mouse.setGrabbed(false);
         isGamePaused = true;
-
-        int menuDepartment;
-
-        if (maxMenuGUIDepartments > 0) menuDepartment = 0;
-
-        else menuDepartment = -1;
-
-        activeMenuGUIDepartment = activeGUIDepartment = menuDepartment;
-
     }
 
     /**

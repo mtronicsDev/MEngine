@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.graphics.renderable.animations;
 
 import java.util.ArrayList;
@@ -11,6 +17,11 @@ public abstract class Animation {
     private boolean stopAfterOneCycle;
     private boolean running = false;
 
+    /**
+     * Create an animation from keyframes
+     * @param keyFrames The array of keyframes in the animation
+     * @param stopAfterOneCycle If true, the animation will only run once. If false, it will run continuously
+     */
     public Animation(KeyFrame[] keyFrames, boolean stopAfterOneCycle) {
 
         this.keyFrames = new ArrayList<KeyFrame>();
@@ -21,18 +32,29 @@ public abstract class Animation {
 
     }
 
+    /**
+     * Start the animation or resume it if it was previously paused
+     */
     public void start() {
 
         running = true;
 
     }
 
+    /**
+     * Pause the animation.
+     * It will start from the last keyframe the next time you start it
+     */
     public void pause() {
 
         running = false;
 
     }
 
+    /**
+     * Stop the animation.
+     * It will start from the beginning the next time you start it
+     */
     public void stop() {
 
         if (!keyFrames.isEmpty()) currentKeyFrameIndex = 0;
@@ -40,6 +62,10 @@ public abstract class Animation {
 
     }
 
+    /**
+     * Get the currently active keyframe
+     * @return The current keyframe
+     */
     public KeyFrame getCurrentKeyFrame() {
 
         if (running) {

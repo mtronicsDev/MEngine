@@ -99,7 +99,7 @@ public class Main {
                                 .addModule(new GUIButton(
                                         new ButtonPressAction() {
                                             @Override
-                                            public void onPressing() {
+                                            public void pressed() {
                                                 unPauseGame();
                                             }
                                         }
