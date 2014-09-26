@@ -18,15 +18,18 @@ import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
+import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import static mEngine.core.GameController.runGame;
 import static mEngine.core.ObjectController.addGameObject;
+import static mEngine.core.ObjectController.setLoadingScreen;
 
 public class Main {
 
@@ -36,6 +39,9 @@ public class Main {
      * @param args None
      */
     public static void main(String[] args) {
+
+        setLoadingScreen(new LoadingScreen("loadingScreen"));
+        Mouse.setGrabbed(true);
 
         runGame();
 

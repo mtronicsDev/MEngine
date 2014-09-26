@@ -7,7 +7,6 @@
 package mEngine.core;
 
 import mEngine.audio.AudioController;
-import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.util.debug.RuntimeHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
@@ -16,7 +15,6 @@ import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
 
 import static mEngine.core.ObjectController.activeGUIDepartment;
-import static mEngine.core.ObjectController.setLoadingScreen;
 
 public class GameController {
 
@@ -28,15 +26,13 @@ public class GameController {
      */
     public static void runGame() {
 
+        isLoading = true;
+
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
         AudioController.initialize();
         TimeHelper.setupTiming();
         RuntimeHelper.initialize();
-
-        isLoading = true;
-        setLoadingScreen(new LoadingScreen("loadingScreen"));
-        Mouse.setGrabbed(true);
 
         ThreadHelper.startThread(new GameLoop()); //Physics and processing
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
