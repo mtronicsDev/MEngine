@@ -17,7 +17,9 @@
           <element id="directory" name="models" />
           <element id="directory" name="materials" />
           <element id="directory" name="sounds" />
-          <element id="directory" name="shaders" />
+          <element id="directory" name="shaders">
+            <element id="dir-copy" path="$PROJECT_DIR$/res/assets/shaders" />
+          </element>
         </element>
         <element id="directory" name="saves" />
       </element>
