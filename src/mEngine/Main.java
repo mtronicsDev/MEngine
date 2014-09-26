@@ -16,7 +16,6 @@ import mEngine.gameObjects.modules.interaction.InteractionModule;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
-import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
@@ -61,9 +60,9 @@ public class Main {
                                 true
                         )
                 )
-                .addModule(
+                /*.addModule(
                         new Skybox("peaks")
-                )
+                )*/
                 .addModule(
                         new Camera()
                 )

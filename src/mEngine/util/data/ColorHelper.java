@@ -46,10 +46,10 @@ public class ColorHelper {
      * @return A Vector4f containing the rgba value (x = r, y = g, z = b, w = a)
      */
     public static Vector4f colorToRgba(Color color) {
-        return new Vector4f(color.getRed() / 256,
-                color.getGreen() / 256,
-                color.getBlue() / 256,
-                color.getAlpha() / 256);
+        return new Vector4f((float) color.getRed() / 256,
+                (float) color.getGreen() / 256,
+                (float) color.getBlue() / 256,
+                (float) color.getAlpha() / 256);
     }
 
 }
