@@ -8,6 +8,19 @@
       <element id="directory" name="lib">
         <element id="dir-copy" path="$PROJECT_DIR$/lib" />
       </element>
+      <element id="directory" name="res">
+        <element id="directory" name="preferences">
+          <element id="dir-copy" path="$PROJECT_DIR$/res/preferences" />
+        </element>
+        <element id="directory" name="assets">
+          <element id="directory" name="textures" />
+          <element id="directory" name="models" />
+          <element id="directory" name="materials" />
+          <element id="directory" name="sounds" />
+          <element id="directory" name="shaders" />
+        </element>
+        <element id="directory" name="saves" />
+      </element>
     </root>
   </artifact>
 </component>

@@ -1,14 +1,20 @@
+#
+# Copyright (c) 2014 mgamelabs
+# To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+# All rights reserved.
+#
+
 #Display preferences
 screenWidth=1280
 screenHeight=720
 framesPerSecond=60
 fullscreen=false
-title=mEngine Test Run
+title=My Beautiful Test Game
 renderDistance=10000
 antiAliasing=true
 
 #Camera preferences
-fieldOfView=95
+fieldOfView=75
 skyColor=#6495ed
 
 #Player preferences
@@ -19,7 +25,6 @@ rotationSpeed=0.1
 
 #GUI preferences
 defaultFontFace=Verdana
-maxMenuDepartments=1
 
 #mEnchmark preferences
 mEnchmarkEnabled=false

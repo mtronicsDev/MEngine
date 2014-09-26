@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.resources;
 
 import java.io.BufferedReader;
@@ -24,6 +30,10 @@ public class PreferenceHelper {
 
         }
 
+    }
+
+    public static void setValue(String key, String value) {
+        properties.setProperty(key, value);
     }
 
     public static String getValue(String key) {
