@@ -63,7 +63,7 @@ public class MovementModule extends Module {
 
             Controller controller = (Controller) parent.getModule(Controller.class);
 
-            PhysicModule physicComponent = (PhysicModule) parent.getModule(PhysicModule.class);
+            PhysicsModule physicComponent = (PhysicsModule) parent.getModule(PhysicsModule.class);
 
             if (controller != null) {
 

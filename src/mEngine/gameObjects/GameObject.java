@@ -8,7 +8,7 @@ package mEngine.gameObjects;
 
 import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.physics.MovementModule;
-import mEngine.gameObjects.modules.physics.PhysicModule;
+import mEngine.gameObjects.modules.physics.PhysicsModule;
 import mEngine.gameObjects.modules.renderable.ModuleRenderable;
 import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.util.math.vectors.Matrix3f;
@@ -82,10 +82,10 @@ public class GameObject implements Serializable {
     public void update() {
 
         for (Module module : modules)
-            if (!(module instanceof PhysicModule)) module.onUpdate();
+            if (!(module instanceof PhysicsModule)) module.onUpdate();
 
         for (Module module : modules)
-            if (module instanceof PhysicModule) module.onUpdate();
+            if (module instanceof PhysicsModule) module.onUpdate();
 
     }
 

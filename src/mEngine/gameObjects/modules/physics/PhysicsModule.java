@@ -18,9 +18,9 @@ import org.lwjgl.util.vector.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhysicModule extends Module {
+public class PhysicsModule extends Module {
 
-    public static List<PhysicModule> physicComponents = new ArrayList<PhysicModule>();
+    public static List<PhysicsModule> physicsModules = new ArrayList<PhysicsModule>();
     private static List<String> alreadyUsedModels = new ArrayList<String>();
     public boolean ableToCollide = true;
     public Box axisAlignedBoundingBox;
@@ -28,14 +28,14 @@ public class PhysicModule extends Module {
     public MovementModule parentMovementComponent;
     private boolean lastPhysicComponent;
 
-    public PhysicModule() {
+    public PhysicsModule() {
 
         lastPhysicComponent = true;
 
-        for (PhysicModule physicComponent : physicComponents)
+        for (PhysicsModule physicComponent : physicsModules)
             physicComponent.lastPhysicComponent = false;
 
-        physicComponents.add(this);
+        physicsModules.add(this);
 
     }
 
@@ -53,7 +53,7 @@ public class PhysicModule extends Module {
 
             if (alreadyUsedModels.contains(renderComponent.modelFileName)) {
 
-                for (PhysicModule physicComponent : physicComponents) {
+                for (PhysicsModule physicComponent : physicsModules) {
 
                     GameObject gameObject = physicComponent.parent;
 
@@ -107,10 +107,10 @@ public class PhysicModule extends Module {
 
     public void onDestroy() {
 
-        physicComponents.remove(this);
+        physicsModules.remove(this);
 
         if (lastPhysicComponent)
-            physicComponents.get(physicComponents.size() - 1).lastPhysicComponent = true;
+            physicsModules.get(physicsModules.size() - 1).lastPhysicComponent = true;
 
     }
 
