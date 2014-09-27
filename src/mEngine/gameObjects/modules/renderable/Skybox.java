@@ -8,19 +8,21 @@ package mEngine.gameObjects.modules.renderable;
 
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.materials.Material3D;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.*;
+
 public class Skybox extends ModuleRenderable3D {
 
-    protected Material3D[] materials = new Material3D[6];
-    protected String textureName;
-    protected boolean displayListsCreated = false;
-    protected int[] displayListIndices = new int[6];
+    private Material3D[] materials = new Material3D[6];
+    private String textureName;
+    private boolean displayListsCreated = false;
+    private int[] displayListIndices = new int[6];
 
     public Skybox(String fileName) {
 
@@ -31,7 +33,7 @@ public class Skybox extends ModuleRenderable3D {
 
     public void render() {
 
-        GL11.glDepthRange(0.9999999f, 1); // <-- 1 as near plane doesn't work, so I have to use 0.9999999f instead
+        glDepthRange(0.9999999f, 1); // <-- 1 as near plane doesn't work, so I have to use 0.9999999f instead
 
         if (!displayListsCreated) {
 
@@ -70,16 +72,16 @@ public class Skybox extends ModuleRenderable3D {
             List<Vector2f> renderUVs = new ArrayList<Vector2f>();
 
             //bottom
-            renderUVs.add(new Vector2f(0, 1));
+            renderUVs.add(new Vector2f(0.0001f, 0.9999f));
             renderNormals.add(new Vector3f(0, 1, 0));
             renderVertices.add(new Vector3f(-1, -1, 1));
-            renderUVs.add(new Vector2f(0, 0));
+            renderUVs.add(new Vector2f(0.0001f, 0.0001f));
             renderNormals.add(new Vector3f(0, 1, 0));
             renderVertices.add(new Vector3f(1, -1, 1));
-            renderUVs.add(new Vector2f(1, 0));
+            renderUVs.add(new Vector2f(0.9999f, 0.0001f));
             renderNormals.add(new Vector3f(0, 1, 0));
             renderVertices.add(new Vector3f(1, -1, -1));
-            renderUVs.add(new Vector2f(1, 1));
+            renderUVs.add(new Vector2f(0.9999f, 0.9999f));
             renderNormals.add(new Vector3f(0, 1, 0));
             renderVertices.add(new Vector3f(-1, -1, -1));
 
@@ -91,16 +93,16 @@ public class Skybox extends ModuleRenderable3D {
             renderUVs = new ArrayList<Vector2f>();
 
             //top
-            renderUVs.add(new Vector2f(1, 0));
+            renderUVs.add(new Vector2f(0.9999f, 0.0001f));
             renderNormals.add(new Vector3f(0, -1, 0));
             renderVertices.add(new Vector3f(-1, 1, -1));
-            renderUVs.add(new Vector2f(1, 1));
+            renderUVs.add(new Vector2f(0.9999f, 0.9999f));
             renderNormals.add(new Vector3f(0, -1, 0));
             renderVertices.add(new Vector3f(1, 1, -1));
-            renderUVs.add(new Vector2f(0, 1));
+            renderUVs.add(new Vector2f(0.0001f, 0.9999f));
             renderNormals.add(new Vector3f(0, -1, 0));
             renderVertices.add(new Vector3f(1, 1, 1));
-            renderUVs.add(new Vector2f(0, 0));
+            renderUVs.add(new Vector2f(0.0001f, 0.0001f));
             renderNormals.add(new Vector3f(0, -1, 0));
             renderVertices.add(new Vector3f(-1, 1, 1));
 
@@ -112,16 +114,16 @@ public class Skybox extends ModuleRenderable3D {
             renderUVs = new ArrayList<Vector2f>();
 
             //back
-            renderUVs.add(new Vector2f(0, 0));
+            renderUVs.add(new Vector2f(0.0001f, 0.0001f));
             renderNormals.add(new Vector3f(0, 0, 1));
             renderVertices.add(new Vector3f(-1, 1, 1));
-            renderUVs.add(new Vector2f(1, 0));
+            renderUVs.add(new Vector2f(0.9999f, 0.0001f));
             renderNormals.add(new Vector3f(0, 0, 1));
             renderVertices.add(new Vector3f(1, 1, 1));
-            renderUVs.add(new Vector2f(1, 1));
+            renderUVs.add(new Vector2f(0.9999f, 0.9999f));
             renderNormals.add(new Vector3f(0, 0, 1));
             renderVertices.add(new Vector3f(1, -1, 1));
-            renderUVs.add(new Vector2f(0, 1));
+            renderUVs.add(new Vector2f(0.0001f, 0.9999f));
             renderNormals.add(new Vector3f(0, 0, 1));
             renderVertices.add(new Vector3f(-1, -1, 1));
 
@@ -133,16 +135,16 @@ public class Skybox extends ModuleRenderable3D {
             renderUVs = new ArrayList<Vector2f>();
 
             //front
-            renderUVs.add(new Vector2f(1, 1));
+            renderUVs.add(new Vector2f(0.9999f, 0.9999f));
             renderNormals.add(new Vector3f(0, 0, -1));
             renderVertices.add(new Vector3f(-1, -1, -1));
-            renderUVs.add(new Vector2f(0, 1));
+            renderUVs.add(new Vector2f(0.0001f, 0.9999f));
             renderNormals.add(new Vector3f(0, 0, -1));
             renderVertices.add(new Vector3f(1, -1, -1));
-            renderUVs.add(new Vector2f(0, 0));
+            renderUVs.add(new Vector2f(0.0001f, 0.0001f));
             renderNormals.add(new Vector3f(0, 0, -1));
             renderVertices.add(new Vector3f(1, 1, -1));
-            renderUVs.add(new Vector2f(1, 0));
+            renderUVs.add(new Vector2f(0.9999f, 0.0001f));
             renderNormals.add(new Vector3f(0, 0, -1));
             renderVertices.add(new Vector3f(-1, 1, -1));
 
@@ -154,16 +156,16 @@ public class Skybox extends ModuleRenderable3D {
             renderUVs = new ArrayList<Vector2f>();
 
             //left
-            renderUVs.add(new Vector2f(1, 1));
+            renderUVs.add(new Vector2f(0.9999f, 0.9999f));
             renderNormals.add(new Vector3f(1, 0, 0));
             renderVertices.add(new Vector3f(-1, -1, 1));
-            renderUVs.add(new Vector2f(0, 1));
+            renderUVs.add(new Vector2f(0.0001f, 0.9999f));
             renderNormals.add(new Vector3f(1, 0, 0));
             renderVertices.add(new Vector3f(-1, -1, -1));
-            renderUVs.add(new Vector2f(0, 0));
+            renderUVs.add(new Vector2f(0.0001f, 0.0001f));
             renderNormals.add(new Vector3f(1, 0, 0));
             renderVertices.add(new Vector3f(-1, 1, -1));
-            renderUVs.add(new Vector2f(1, 0));
+            renderUVs.add(new Vector2f(0.9999f, 0.0001f));
             renderNormals.add(new Vector3f(1, 0, 0));
             renderVertices.add(new Vector3f(-1, 1, 1));
 
@@ -175,16 +177,16 @@ public class Skybox extends ModuleRenderable3D {
             renderUVs = new ArrayList<Vector2f>();
 
             //right
-            renderUVs.add(new Vector2f(1, 1));
+            renderUVs.add(new Vector2f(0.9999f, 0.9999f));
             renderNormals.add(new Vector3f(-1, 0, 0));
             renderVertices.add(new Vector3f(1, -1, -1));
-            renderUVs.add(new Vector2f(0, 1));
+            renderUVs.add(new Vector2f(0.0001f, 0.9999f));
             renderNormals.add(new Vector3f(-1, 0, 0));
             renderVertices.add(new Vector3f(1, -1, 1));
-            renderUVs.add(new Vector2f(0, 0));
+            renderUVs.add(new Vector2f(0.0001f, 0.0001f));
             renderNormals.add(new Vector3f(-1, 0, 0));
             renderVertices.add(new Vector3f(1, 1, 1));
-            renderUVs.add(new Vector2f(1, 0));
+            renderUVs.add(new Vector2f(0.9999f, 0.0001f));
             renderNormals.add(new Vector3f(-1, 0, 0));
             renderVertices.add(new Vector3f(1, 1, -1));
 
@@ -199,12 +201,14 @@ public class Skybox extends ModuleRenderable3D {
 
         for (int displayListIndex : displayListIndices) {
 
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             Renderer.renderObject3D(displayListIndex, parent.position, parent.rotation, materials[materialCount], 1);
             materialCount++;
 
         }
 
-        GL11.glDepthRange(0, 1); // <-- Resetting the depth range
+        glDepthRange(0, 1); // <-- Resetting the depth range
 
     }
 

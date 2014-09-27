@@ -16,6 +16,7 @@ import mEngine.gameObjects.modules.interaction.InteractionModule;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
+import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
@@ -48,27 +49,27 @@ public class Main {
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
-                .addModule(
-                        new MovementModule()
-                )
-                .addModule(
-                        new RenderModule("sphere")
-                )
-                .addModule(
-                        new ControllerKeyboardMouse(
-                                new float[]{0.3f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
-                                true
-                        )
-                )
-                /*.addModule(
-                        new Skybox("peaks")
-                )*/
-                .addModule(
-                        new Camera()
-                )
-                .addModule(
-                        new AudioListener()
-                )
+          .addModule(
+            new MovementModule()
+          )
+          .addModule(
+            new RenderModule("sphere")
+          )
+          .addModule(
+            new ControllerKeyboardMouse(
+              new float[]{0.3f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
+              true
+            )
+          )
+          .addModule(
+            new Skybox("peaks")
+          )
+          .addModule(
+            new Camera()
+          )
+          .addModule(
+            new AudioListener()
+          )
                 /*.addModule(
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )*/
@@ -112,7 +113,7 @@ public class Main {
                                 ))
                                 .addModule(new GUIQuad())
                 )*/
-                .createModules());
+          .createModules());
 
         addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
                 .addModule(
@@ -153,20 +154,50 @@ public class Main {
                 )
                 .createModules());
 
-        addGameObject(new GameObject(new Vector3f(), new Vector3f())
+        /*addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addModule(
                         new RenderModule("Sci-fi_Tropical_city")
                 )
-                .createModules());
+                .createModules());*/
 
-        addGameObject(new GameObject(new Vector3f(), new Vector3f(35, -45, 0))
-                .addModule(
-                        new GlobalLightSource(100, new Vector4f(180, 180, 0, 1), new Vector3f(0, 0, 1))
-                                .setSpecularLighting(false)
-                                        //.setDependent(false)
-                                .setShadowThrowing(false)
-                )
-                .createModules());
+        addGameObject(new GameObject(new Vector3f(), new Vector3f())
+          .addModule(
+            new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 0, 1))
+              .setSpecularLighting(false)
+              .setDependent(false)
+              .setShadowThrowing(false)
+          )
+          .addModule(
+            new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 0, -1))
+              .setSpecularLighting(false)
+              .setDependent(false)
+              .setShadowThrowing(false)
+          )
+          .addModule(
+            new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 1, 0))
+              .setSpecularLighting(false)
+              .setDependent(false)
+              .setShadowThrowing(false)
+          )
+          .addModule(
+            new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, -1, 0))
+              .setSpecularLighting(false)
+              .setDependent(false)
+              .setShadowThrowing(false)
+          )
+          .addModule(
+            new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(1, 0, 0))
+              .setSpecularLighting(false)
+              .setDependent(false)
+              .setShadowThrowing(false)
+          )
+          .addModule(
+            new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(-1, 0, 0))
+              .setSpecularLighting(false)
+              .setDependent(false)
+              .setShadowThrowing(false)
+          )
+          .createModules());
 
         GameController.isLoading = false;
 
