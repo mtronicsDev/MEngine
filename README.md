@@ -4,8 +4,8 @@ mEngine is a 3D and 2D hybrid game engine written in java that is designed to al
 
 Useful information
 -----
-Visit our project website to learn more about mEngine: http://mgamelabs.com/mengine/ <br>
-We also have a Wiki: https://github.com/mGameLabs/mengine/wiki
+* Visit our project website to learn more about mEngine: http://mgamelabs.com/mengine/
+* We also have a Wiki: https://github.com/mGameLabs/mengine/wiki
 
 Support us
 -----
