@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.rendering;
 
 import mEngine.util.resources.ResourceHelper;
@@ -15,6 +21,10 @@ public class ShaderHelper {
 
     public static Map<String, Integer> shaderPrograms = new HashMap<String, Integer>();
 
+    /**
+     * Adds a shader to the list
+     * @param fileName The name of the shader
+     */
     public static void addShader(String fileName) {
 
         int shaderProgram = glCreateProgram();
@@ -74,12 +84,19 @@ public class ShaderHelper {
 
     }
 
+    /**
+     * Sets the desired shader active
+     * @param shaderName The desired shader
+     */
     public static void useShader(String shaderName) {
 
         glUseProgram(shaderPrograms.get(shaderName));
 
     }
 
+    /**
+     * Use no shader. Oh, really...?
+     */
     public static void useNoShader() {
 
         glUseProgram(0);

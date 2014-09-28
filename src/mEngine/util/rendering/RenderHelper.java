@@ -1,10 +1,15 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.rendering;
 
 import mEngine.core.ObjectController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.graphics.Renderer;
-import mEngine.graphics.renderable.models.Face;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.resources.PreferenceHelper;
@@ -12,71 +17,12 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class RenderHelper {
 
-    public static boolean isFaceNeededToBeRendered(Face face) {
-
-        /*boolean neededToBeRendered = false;
-
-        Model model = null;
-
-        for (GameObject obj : ObjectController.gameObjects) {
-
-            boolean faceFound = false;
-            RenderComponent renderComponent = (RenderComponent) obj.components.get("renderComponent");
-
-            if (renderComponent != null) {
-
-                for (Face faceListPart : renderComponent.model.getFaces()) {
-
-                    if (faceListPart == face) {
-
-                        model = renderComponent.model;
-                        faceFound = true;
-                        break;
-
-                    }
-
-                }
-
-            }
-
-            if (faceFound) break;
-
-        }
-
-        if (model != null) {
-
-            Vector3f vertexA = VectorHelper.sumVectors(new Vector3f[]{model.getVertices()[(int) face.vertexIndices.x], model.});
-            Vector3f vertexB = VectorHelper.sumVectors(new Vector3f[]{model.getVertices()[(int) face.vertexIndices.y], model.position});
-            Vector3f vertexC = VectorHelper.sumVectors(new Vector3f[]{model.getVertices()[(int) face.vertexIndices.z], model.position});
-
-            if (isVectorOnScreen(vertexA) || isVectorOnScreen(vertexB) || isVectorOnScreen(vertexC)) {
-
-                neededToBeRendered = true;
-
-            }
-
-        }
-
-        return neededToBeRendered;*/
-        return true;
-
-    }
-
-    public static boolean isVectorOnScreen(Vector3f vector) {
-
-        boolean vectorOnScreen = false;
-
-        if (isVectorTheoreticallyOnScreen(vector)) {
-
-            vectorOnScreen = true;
-
-        }
-
-        return vectorOnScreen;
-
-    }
-
-    public static boolean isVectorTheoreticallyOnScreen(Vector3f vector) {
+    /**
+     * Used for frustum culling
+     * @param vector The vertex to check
+     * @return True if on screen, false if not
+     */
+    public static boolean isVertexOnScreen(Vector3f vector) {
 
         boolean theoreticallyOnScreen = false;
 

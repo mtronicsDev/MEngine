@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.rendering;
 
 import mEngine.graphics.renderable.animations.TextureAnimation;
@@ -12,6 +18,12 @@ import java.util.List;
 
 public class TextureAnimationHelper {
 
+    /**
+     * Returns the desired texture animation
+     * @param animationName The name of the desired animation
+     * @return The desired animation
+     * @throws IOException if the animation file is not found
+     */
     public static TextureAnimation getAnimation(String animationName) throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(ResourceHelper.getResource(animationName, ResourceHelper.RES_TEXTURE_ANIMATED)));

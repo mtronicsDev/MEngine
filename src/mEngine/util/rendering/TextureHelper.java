@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.rendering;
 
 import mEngine.graphics.renderable.animations.TextureAnimation;
@@ -20,6 +26,10 @@ public class TextureHelper {
 
     private static Map<String, Texture> loadedTextures = new HashMap<String, Texture>();
 
+    /**
+     * Loads a texture into the list
+     * @param fileName The name of the texture
+     */
     private static void loadTexture(String fileName) {
 
         File file = ResourceHelper.getResource(fileName, RES_TEXTURE);
@@ -58,6 +68,12 @@ public class TextureHelper {
 
     }
 
+    /**
+     * Returns the desired texture.
+     * The texture gets loaded if it isn't already
+     * @param name The name of the texture
+     * @return The desired texture
+     */
     public static Texture getTexture(String name) {
 
         if (loadedTextures.containsKey(name)) return loadedTextures.get(name);
@@ -70,6 +86,10 @@ public class TextureHelper {
 
     }
 
+    /**
+     * Unloads a texture. Use this for memory efficiency
+     * @param name The name of the texture
+     */
     public static void removeTexture(String name) {
         loadedTextures.remove(name);
     }

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.resources;
 
 import java.io.File;
@@ -24,6 +30,9 @@ public class ResourceHelper {
 
     private static List<String> paths = new ArrayList<String>();
 
+    /**
+     * Establishes all resource path variable
+     */
     public static void initialize() {
 
         paths.add("res/"); //RES_GENERIC
@@ -42,6 +51,12 @@ public class ResourceHelper {
 
     }
 
+    /**
+     * Returns a game resource
+     * @param fileName The name of the requested resource, without file ending
+     * @param type The resource type (ResourceHelper.RES_XXX)
+     * @return The requested resource file
+     */
     public static File getResource(String fileName, int type) {
 
         String filePath;
@@ -85,6 +100,12 @@ public class ResourceHelper {
 
     }
 
+    /**
+     * Returns the URL to a requested resource
+     * @param fileName The name of the requested resource, without file ending
+     * @param type The resource type (ResourceHelper.RES_XXX)
+     * @return The requested URL
+     */
     public static URL getResourceURL(String fileName, int type) {
 
         File file = getResource(fileName, type);

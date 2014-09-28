@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.debug;
 
 public class RuntimeHelper {
@@ -8,10 +14,18 @@ public class RuntimeHelper {
 
     private static Runtime runtime;
 
+    /**
+     * Loads the current runtime environment
+     */
     public static void initialize() {
         runtime = Runtime.getRuntime();
     }
 
+    /**
+     * Returns the desired information about the game's memory
+     * @param mode Use RuntimeHelper.XXX_MEMORY (total, used, free)
+     * @return The desired information
+     */
     public static int getMemoryStats(int mode) {
 
         switch (mode) {

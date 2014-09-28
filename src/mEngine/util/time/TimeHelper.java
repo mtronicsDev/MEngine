@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.time;
 
 public class TimeHelper {
@@ -15,6 +21,10 @@ public class TimeHelper {
     private static float lastTPS;
     private static long currentTPS;
 
+    /**
+     * Sets the lastTime variables to the current time so they aren't 0.
+     * Only needed once
+     */
     public static void setupTiming() {
 
         lastTime = getTime();
@@ -23,10 +33,17 @@ public class TimeHelper {
 
     }
 
+    /**
+     * Gives you the current time
+     * @return Current time in milliseconds
+     */
     public static long getTime() {
-        return System.nanoTime() / 1000000;
+        return System.nanoTime() / 1000000; //Nanoseconds give more accurate millisecond values
     }
 
+    /**
+     * Updates the deltaTime variable
+     */
     public static void updateDeltaTime() {
 
         float thisTime = getTime();
@@ -36,6 +53,9 @@ public class TimeHelper {
 
     }
 
+    /**
+     * Updates the currentFPS and lastFPS variables
+     */
     public static void updateFPS() {
 
         oneSecondPassed = false;
@@ -53,6 +73,9 @@ public class TimeHelper {
 
     }
 
+    /**
+     * Updates the currentTPS and lastTPS variables (ticks per second)
+     */
     public static void updateTPS() {
 
         if (getTime() - lastTPS > 1000) {
@@ -68,23 +91,17 @@ public class TimeHelper {
 
     }
 
-    public static void timeOut(long milliseconds) {
+    /**
+     * Pauses the thread this method was called from by the amount of milliseconds
+     * @param milliseconds The amount of milliseconds the pause should last
+     */
+    public static void sleep(long milliseconds) {
 
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public static void updateTimeModifier() {
-
-        if (timeModifier == 1f / 8f) timeModifier = 1f;
-
-        else if (timeModifier == 1) timeModifier = 8f;
-
-        else if (timeModifier == 8) timeModifier = 1f / 8f;
 
     }
 
