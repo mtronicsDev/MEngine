@@ -26,7 +26,9 @@ public class GameObject implements Serializable {
     public Vector3f rotation;
     public Vector3f percentRotation;
     public List<Module> modules = new ArrayList<Module>();
+
     private long uuid = UUID.randomUUID().getMostSignificantBits();
+    private BoundingBox boundingBox;
 
     /**
      * The default constructor for game objects
@@ -222,6 +224,30 @@ public class GameObject implements Serializable {
         }
 
         return this;
+
+    }
+
+    /**
+     * Returns the bounding box of this game object (around all modules that have a bounding box)
+     * @return The bounding box
+     */
+    public BoundingBox getBoundingBox() {
+        return boundingBox;
+    }
+
+    /**
+     * Updates the game object bounding box, so it surrounds all modules.
+     * @param newBox The box to add (the game object bounding box is going to expand automatically)
+     */
+    public void addBoundingBox(BoundingBox newBox) {
+
+        if(newBox.a.x < boundingBox.a.x) boundingBox.a.x = newBox.a.x;
+        if(newBox.a.y < boundingBox.a.y) boundingBox.a.y = newBox.a.y;
+        if(newBox.a.z < boundingBox.a.z) boundingBox.a.z = newBox.a.z;
+        
+        if(newBox.b.x > boundingBox.b.x) boundingBox.b.x = newBox.b.x;
+        if(newBox.b.y > boundingBox.b.y) boundingBox.b.y = newBox.b.y;
+        if(newBox.b.z > boundingBox.b.z) boundingBox.b.z = newBox.b.z;
 
     }
 

@@ -28,3 +28,6 @@ defaultFontFace=Verdana
 
 #mEnchmark preferences
 mEnchmarkEnabled=false
+
+#Physics preferences
+gravity=0, -9.81, 0

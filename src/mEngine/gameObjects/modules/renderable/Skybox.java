@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL12.*;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class Skybox extends ModuleRenderable3D {
 
@@ -198,12 +198,14 @@ public class Skybox extends ModuleRenderable3D {
         }
 
         int materialCount = 0;
+        Vector3f position = parent.position;
+        Vector3f rotation = parent.rotation;
 
         for (int displayListIndex : displayListIndices) {
 
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            Renderer.renderObject3D(displayListIndex, parent.position, parent.rotation, materials[materialCount], 1);
+            Renderer.renderObject3D(displayListIndex, position, rotation, materials[materialCount], 1);
             materialCount++;
 
         }

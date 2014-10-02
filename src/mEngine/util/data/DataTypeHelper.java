@@ -6,6 +6,8 @@
 
 package mEngine.util.data;
 
+import javax.vecmath.Vector3f;
+
 public class DataTypeHelper {
 
     /**
@@ -18,6 +20,16 @@ public class DataTypeHelper {
     public static int booleanToInteger(boolean b) {
         if (b) return 1;
         else return 0;
+    }
+
+    public static Vector3f stringToVector3f(String s) {
+        Vector3f out = new Vector3f();
+
+        out.x = Float.valueOf(s.split(",")[0]);
+        out.y = Float.valueOf(s.split(",")[1]);
+        out.z = Float.valueOf(s.split(",")[2]);
+
+        return out;
     }
 
 }
