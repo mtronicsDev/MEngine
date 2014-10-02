@@ -10,26 +10,21 @@ import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.controls.Controller;
-import mEngine.gameObjects.modules.renderable.RenderModule;
-import mEngine.physics.forces.Force;
-import mEngine.physics.forces.ForceController;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
+import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.util.vector.Vector3f;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MovementModule extends Module {
 
-    public Map<String, Force> forces = new HashMap<String, Force>();
-    public int forceCount = 0;
     public Vector3f speed;
     public Vector3f movedSpace;
     Vector3f previousSpeed;
     boolean sprinting;
     boolean sneaking;
-    float mass = 0;
+    float sprintModifier;
+    float sneakModifier;
+    private float[] forces;
 
     public MovementModule() {
 
@@ -37,23 +32,17 @@ public class MovementModule extends Module {
         movedSpace = new Vector3f();
         previousSpeed = new Vector3f();
 
+        sprintModifier = PreferenceHelper.getFloat("sprintModifier");
+        sneakModifier = PreferenceHelper.getFloat("sneakModifier");
+
     }
 
+    @Override
     public void onCreation(GameObject obj) {
-
         super.onCreation(obj);
-        RenderModule renderComponent = (RenderModule) obj.getModule(RenderModule.class);
 
-        if (renderComponent != null) mass = renderComponent.model.getMass();
-
-        else mass = 60;
-
-        for (String key : ForceController.generalForces.keySet()) {
-
-            forces.put(key, ForceController.generalForces.get(key));
-
-        }
-
+        Controller controller = (Controller) parent.getModule(Controller.class);
+        forces = controller.forceStrengths;
     }
 
     public void onUpdate() {
@@ -61,7 +50,6 @@ public class MovementModule extends Module {
         if (!GameController.isGamePaused) {
 
             Controller controller = (Controller) parent.getModule(Controller.class);
-            PhysicsModule physics = (PhysicsModule) parent.getModule(PhysicsModule.class);
 
             if (controller != null) {
 
@@ -112,6 +100,17 @@ public class MovementModule extends Module {
     }
 
     private void applyForce(Vector3f direction) {
+
+        if (sprinting) {
+            direction.x *= sprintModifier;
+            direction.y *= sprintModifier;
+            direction.z *= sprintModifier;
+        } else if (sneaking) {
+            direction.x *= sneakModifier;
+            direction.y *= sneakModifier;
+            direction.z *= sneakModifier;
+        }
+
         Vector3f force = calculateForce(direction);
         PhysicsModule physics = (PhysicsModule) parent.getModule(PhysicsModule.class);
 
@@ -119,33 +118,31 @@ public class MovementModule extends Module {
     }
 
     public void moveForward() {
-        applyForce(new Vector3f(0, 0, -10));
+        applyForce(new Vector3f(0, 0, -forces[0]));
     }
 
     public void moveBackward() {
-        applyForce(new Vector3f(0, 0, 10));
+        applyForce(new Vector3f(0, 0, forces[1]));
     }
 
     public void moveLeft() {
-        applyForce(new Vector3f(10, 0, 0));
+        applyForce(new Vector3f(forces[2], 0, 0));
     }
 
     public void moveRight() {
-        applyForce(new Vector3f(-10, 0, 0));
+        applyForce(new Vector3f(-forces[3], 0, 0));
     }
 
     public void moveDown() {
-        applyForce(new Vector3f(0, -10, 0));
+        applyForce(new Vector3f(0, -forces[4], 0));
     }
 
     public void moveUp() {
-        applyForce(new Vector3f(0, 10, 0));
+        applyForce(new Vector3f(0, forces[5], 0));
     }
 
     public void jump() {
-
-        forces.get("jump").enabled = true;
-
+        applyForce(new Vector3f(0, forces[6], 0));
     }
 
     public void sprint() {

@@ -68,7 +68,7 @@ public class ResourceHelper {
                 filePath = paths.get(type) + fileName;
                 break;
             case RES_PREFERENCE:
-                filePath = paths.get(type) + fileName + ".mmp";
+                filePath = paths.get(type) + fileName + ".properties";
                 break;
             case RES_SAVE:
                 filePath = paths.get(type) + fileName + ".mess";

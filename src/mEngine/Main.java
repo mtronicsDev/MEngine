@@ -53,8 +53,8 @@ public class Main {
           )
           .addModule(
             new ControllerKeyboardMouse(
-              new float[]{0.3f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 0.23f, 11},
-              true
+              new float[]{12, 10, 10, 10, 10, 10, 29}, //forward, backward, left, right, down, up, jump
+              true //Can fly
             )
           )
           .addModule(
@@ -132,6 +132,7 @@ public class Main {
           .addModule(
             new AudioSource("Unity", false, true)
           )
+            //.addModule(new DebugModule())
           .createModules());
 
         /*addGameObject(new GameObject(new Vector3f(), new Vector3f())
