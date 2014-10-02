@@ -66,12 +66,10 @@ public class RenderModule extends ModuleRenderable3D {
 
     public void render() {
 
-        for (SubModel subModel : model.subModels) {
-
-            if (subModel.material.hasTexture() && subModel.material.getTexture() == null)
-                subModel.material.setTextureFromName();
-
-        }
+        //If model has a texture name, set the texture
+        model.subModels.stream()
+          .filter(subModel -> subModel.material.hasTexture() && subModel.material.getTexture() == null)
+          .forEach(subModel -> subModel.material.setTextureFromName());
 
         if (displayListFactors[0] && !displayListFactors[1]) {
 

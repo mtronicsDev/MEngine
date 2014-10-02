@@ -67,7 +67,11 @@ public class Main {
             new AudioListener()
           )
           .addModule(
-            new PhysicsModule(60, PhysicsModule.CollisionShape.SPHERE).setDamping(.5f, .5f).setMargin(.1f)
+            new PhysicsModule(60, PhysicsModule.CollisionShape.SPHERE)
+              .setDamping(.5f, .5f)
+              .setMargin(.1f)
+              .setInertia(new javax.vecmath.Vector3f(.2f, .2f, .2f))
+              .setRestitution(.25f)
           )
                 /*.addModule(
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
@@ -119,7 +123,11 @@ public class Main {
             new RenderModule("sphere")
           )
           .addModule(
-            new PhysicsModule(10, PhysicsModule.CollisionShape.SPHERE).setDamping(.5f, .5f).setMargin(.1f)
+            new PhysicsModule(10, PhysicsModule.CollisionShape.SPHERE)
+              .setDamping(.5f, .5f)
+              .setMargin(.1f)
+              .setInertia(new javax.vecmath.Vector3f(.2f, .2f, .2f))
+              .setRestitution(.25f)
           )
           .addModule(
             new AudioSource("Unity", false, true)

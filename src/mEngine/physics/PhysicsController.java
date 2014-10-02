@@ -26,21 +26,16 @@ public class PhysicsController {
 
     public static DynamicsWorld world; //The physics world
 
-    private static BroadphaseInterface aabbInterface; //Checks if objects could collide
-    private static CollisionConfiguration collisionConfiguration;
-    private static CollisionDispatcher collisionDispatcher;
-    private static ConstraintSolver constraintSolver;
-
     /**
      * Creates the physics world and sets up collisions
      */
     public static void initialize() {
-        aabbInterface = new DbvtBroadphase();
-        collisionConfiguration = new DefaultCollisionConfiguration();
-        collisionDispatcher = new CollisionDispatcher(collisionConfiguration);
-        constraintSolver = new SequentialImpulseConstraintSolver();
-        world = new DiscreteDynamicsWorld(collisionDispatcher, aabbInterface, constraintSolver, collisionConfiguration);
+        BroadphaseInterface aabbInterface = new DbvtBroadphase(); //Checks if objects could collide
+        CollisionConfiguration collisionConfiguration = new DefaultCollisionConfiguration();
+        CollisionDispatcher collisionDispatcher = new CollisionDispatcher(collisionConfiguration); //Handles collisions
+        ConstraintSolver constraintSolver = new SequentialImpulseConstraintSolver();
 
+        world = new DiscreteDynamicsWorld(collisionDispatcher, aabbInterface, constraintSolver, collisionConfiguration);
         world.setGravity(DataTypeHelper.stringToVector3f(PreferenceHelper.getValue("gravity")));
     }
 

@@ -7,10 +7,7 @@
 package mEngine.gameObjects.modules.physics;
 
 import com.bulletphysics.collision.dispatch.CollisionObject;
-import com.bulletphysics.collision.shapes.BoxShape;
-import com.bulletphysics.collision.shapes.CapsuleShape;
-import com.bulletphysics.collision.shapes.ConvexHullShape;
-import com.bulletphysics.collision.shapes.SphereShape;
+import com.bulletphysics.collision.shapes.*;
 import com.bulletphysics.dynamics.RigidBody;
 import com.bulletphysics.dynamics.RigidBodyConstructionInfo;
 import com.bulletphysics.linearmath.DefaultMotionState;
@@ -31,6 +28,7 @@ public class PhysicsModule extends Module {
 
     private RigidBody body;
     private CollisionShape shape;
+
     /**
      * Creates a new physics module
      *
@@ -82,6 +80,10 @@ public class PhysicsModule extends Module {
             case CAPSULE:
                 float rCapsule = x + z / 4; //Div. by 2 (2 vals) and by 2 again (diameter to radius) => div. by 4
                 collisionShape = new CapsuleShape(rCapsule, y);
+                break;
+
+            case PLANE:
+                collisionShape = new StaticPlaneShape(new Vector3f(0, 1, 0), .25f);
                 break;
 
             case CUSTOM:
@@ -145,6 +147,16 @@ public class PhysicsModule extends Module {
         return this;
     }
 
+    public PhysicsModule setRestitution(float restitution) {
+        body.setRestitution(restitution);
+        return this;
+    }
+
+    public PhysicsModule setInertia(Vector3f inertia) {
+        body.setMassProps(1f / body.getInvMass(), inertia);
+        return this;
+    }
+
     /**
      * Apply a force in the center of the object
      *
@@ -167,7 +179,7 @@ public class PhysicsModule extends Module {
     }
 
     public enum CollisionShape {
-        SPHERE, BOX, CAPSULE, CUSTOM
+        SPHERE, BOX, CAPSULE, PLANE, CUSTOM
     }
 
 }

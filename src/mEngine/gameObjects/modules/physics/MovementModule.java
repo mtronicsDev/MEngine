@@ -91,19 +91,6 @@ public class MovementModule extends Module {
 
     }
 
-    public void moveInSpecificDirection(Vector3f direction) {
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
-    }
-
     private Vector3f calculateForce(Vector3f direction) {
         Vector3f force = new Vector3f();
 
