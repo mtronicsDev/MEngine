@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.particles.modules;
 
 import mEngine.core.ObjectController;
@@ -48,9 +54,9 @@ public class MovementParticleComponent extends ParticleComponent {
             parent.normal = idealNormal;
 
             parent.rotation = new Vector3f(
-                    VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(0, parent.normal.y, parent.normal.z)),
-                    VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, 0, parent.normal.z)),
-                    VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, parent.normal.y, 0))
+              VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(0, parent.normal.y, parent.normal.z)),
+              VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, 0, parent.normal.z)),
+              VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(parent.normal.x, parent.normal.y, 0))
             );
 
 

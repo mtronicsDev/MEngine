@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.graphics.renderable.models;
 
 import mEngine.util.math.vectors.VectorHelper;
@@ -115,7 +121,7 @@ public class Model {
         Vector3f[] extremeVertexPositions = getExtremeVertexPositions();
 
         return VectorHelper.sumVectors(new Vector3f[]
-                {VectorHelper.divideVectorByFloat(VectorHelper.subtractVectors(extremeVertexPositions[1], extremeVertexPositions[0]), 2), extremeVertexPositions[0]});
+          {VectorHelper.divideVectorByFloat(VectorHelper.subtractVectors(extremeVertexPositions[1], extremeVertexPositions[0]), 2), extremeVertexPositions[0]});
 
     }
 

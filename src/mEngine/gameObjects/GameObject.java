@@ -45,17 +45,21 @@ public class GameObject implements Serializable {
 
         if (!VectorHelper.areEqual(rotation, new Vector3f())) {
 
-            Matrix3f xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float) Math.cos(Math.toRadians(rotation.x)), (float) -Math.sin(Math.toRadians(rotation.x))),
-                    new Vector3f(0, (float) Math.sin(Math.toRadians(rotation.x)), (float) Math.cos(Math.toRadians(rotation.x))));
+            Matrix3f xAxisRotationMatrix = new Matrix3f(
+              new Vector3f(1, 0, 0),
+              new Vector3f(0, (float) Math.cos(Math.toRadians(rotation.x)), (float) -Math.sin(Math.toRadians(rotation.x))),
+              new Vector3f(0, (float) Math.sin(Math.toRadians(rotation.x)), (float) Math.cos(Math.toRadians(rotation.x))));
             percentRotation = xAxisRotationMatrix.multiplyByVector(percentRotation);
 
-            Matrix3f yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(Math.toRadians(rotation.y)), 0, (float) Math.sin(Math.toRadians(rotation.y))),
-                    new Vector3f(0, 1, 0),
-                    new Vector3f((float) -Math.sin(Math.toRadians(rotation.y)), 0, (float) Math.cos(Math.toRadians(rotation.y))));
+            Matrix3f yAxisRotationMatrix = new Matrix3f(
+              new Vector3f((float) Math.cos(Math.toRadians(rotation.y)), 0, (float) Math.sin(Math.toRadians(rotation.y))),
+              new Vector3f(0, 1, 0),
+              new Vector3f((float) -Math.sin(Math.toRadians(rotation.y)), 0, (float) Math.cos(Math.toRadians(rotation.y))));
             percentRotation = yAxisRotationMatrix.multiplyByVector(percentRotation);
 
         }
+
+        boundingBox = new BoundingBox(new Vector3f(), new Vector3f()); //Empty bounding box to prevent null references
 
     }
 
@@ -229,6 +233,7 @@ public class GameObject implements Serializable {
 
     /**
      * Returns the bounding box of this game object (around all modules that have a bounding box)
+     *
      * @return The bounding box
      */
     public BoundingBox getBoundingBox() {
@@ -237,17 +242,18 @@ public class GameObject implements Serializable {
 
     /**
      * Updates the game object bounding box, so it surrounds all modules.
+     *
      * @param newBox The box to add (the game object bounding box is going to expand automatically)
      */
     public void addBoundingBox(BoundingBox newBox) {
 
-        if(newBox.a.x < boundingBox.a.x) boundingBox.a.x = newBox.a.x;
-        if(newBox.a.y < boundingBox.a.y) boundingBox.a.y = newBox.a.y;
-        if(newBox.a.z < boundingBox.a.z) boundingBox.a.z = newBox.a.z;
-        
-        if(newBox.b.x > boundingBox.b.x) boundingBox.b.x = newBox.b.x;
-        if(newBox.b.y > boundingBox.b.y) boundingBox.b.y = newBox.b.y;
-        if(newBox.b.z > boundingBox.b.z) boundingBox.b.z = newBox.b.z;
+        if (newBox.a.x < boundingBox.a.x) boundingBox.a.x = newBox.a.x;
+        if (newBox.a.y < boundingBox.a.y) boundingBox.a.y = newBox.a.y;
+        if (newBox.a.z < boundingBox.a.z) boundingBox.a.z = newBox.a.z;
+
+        if (newBox.b.x > boundingBox.b.x) boundingBox.b.x = newBox.b.x;
+        if (newBox.b.y > boundingBox.b.y) boundingBox.b.y = newBox.b.y;
+        if (newBox.b.z > boundingBox.b.z) boundingBox.b.z = newBox.b.z;
 
     }
 

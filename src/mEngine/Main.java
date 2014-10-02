@@ -11,18 +11,14 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.audio.AudioListener;
 import mEngine.gameObjects.modules.audio.AudioSource;
 import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
-import mEngine.gameObjects.modules.interaction.AsyncInteraction;
-import mEngine.gameObjects.modules.interaction.InteractionModule;
 import mEngine.gameObjects.modules.physics.MovementModule;
+import mEngine.gameObjects.modules.physics.PhysicsModule;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.physics.forces.ForceController;
-import mEngine.util.math.vectors.VectorHelper;
-import mEngine.util.threading.ThreadHelper;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -48,7 +44,7 @@ public class Main {
         ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
-        addGameObject(new GameObject(new Vector3f(-67.8f, 23.0f, -148.7f), new Vector3f(-11.9f, 153.3f, 0))
+        addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
           .addModule(
             new MovementModule()
           )
@@ -69,6 +65,9 @@ public class Main {
           )
           .addModule(
             new AudioListener()
+          )
+          .addModule(
+            new PhysicsModule(60, PhysicsModule.CollisionShape.SPHERE).setDamping(.5f, .5f).setMargin(.1f)
           )
                 /*.addModule(
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
@@ -115,44 +114,17 @@ public class Main {
                 )*/
           .createModules());
 
-        addGameObject(new GameObject(new Vector3f(0, 80, 0), new Vector3f())
-                .addModule(
-                        new RenderModule("monkey")
-                )
-                .addModule(
-                        new AudioSource("Unity", false, true)
-                )
-                .addModule(
-                        new InteractionModule(true, 10, Keyboard.KEY_I, "move monkey", 25, new AsyncInteraction() {
-                            @Override
-                            public void interact() {
-
-                                caller.enabled = false;
-
-                                for (int count = 0; count < 1000; count++) {
-
-                                    parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, new Vector3f(0.005f, 0.005f, 0.005f)});
-
-                                    try {
-
-                                        Thread.sleep(10);
-
-                                    } catch (InterruptedException e) {
-
-                                        e.printStackTrace();
-                                        ThreadHelper.stopAllThreads();
-                                        System.exit(1);
-
-                                    }
-
-                                }
-
-                                caller.enabled = true;
-
-                            }
-                        })
-                )
-                .createModules());
+        addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f())
+          .addModule(
+            new RenderModule("sphere")
+          )
+          .addModule(
+            new PhysicsModule(10, PhysicsModule.CollisionShape.SPHERE).setDamping(.5f, .5f).setMargin(.1f)
+          )
+          .addModule(
+            new AudioSource("Unity", false, true)
+          )
+          .createModules());
 
         /*addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addModule(

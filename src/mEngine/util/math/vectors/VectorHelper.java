@@ -90,11 +90,11 @@ public class VectorHelper {
     public static boolean isVectorInsideBox(Vector3f vector, Box box) {
 
         return vector.x > box.position.x
-                && vector.x < box.position.x + box.size.x
-                && vector.y > box.position.y
-                && vector.y < box.position.y + box.size.y
-                && vector.z > box.position.z
-                && vector.z < box.position.z + box.size.z;
+          && vector.x < box.position.x + box.size.x
+          && vector.y > box.position.y
+          && vector.y < box.position.y + box.size.y
+          && vector.z > box.position.z
+          && vector.z < box.position.z + box.size.z;
 
     }
 
@@ -140,8 +140,8 @@ public class VectorHelper {
         if (vectorB == null) vectorB = new Vector3f();
 
         return vectorA.x == vectorB.x
-                && vectorA.y == vectorB.y
-                && vectorA.z == vectorB.z;
+          && vectorA.y == vectorB.y
+          && vectorA.z == vectorB.z;
 
     }
 
@@ -260,9 +260,9 @@ public class VectorHelper {
     public static boolean isVectorInsideRectangle(Vector2f vector, Rectangle rectangle) {
 
         return vector.x > rectangle.x
-                && vector.x < rectangle.x + rectangle.width
-                && vector.y > rectangle.y
-                && vector.y < rectangle.y + rectangle.height;
+          && vector.x < rectangle.x + rectangle.width
+          && vector.y > rectangle.y
+          && vector.y < rectangle.y + rectangle.height;
 
     }
 
@@ -308,7 +308,7 @@ public class VectorHelper {
         if (vectorB == null) vectorB = new Vector2f();
 
         return vectorA.x == vectorB.x
-                && vectorA.y == vectorB.y;
+          && vectorA.y == vectorB.y;
 
     }
 

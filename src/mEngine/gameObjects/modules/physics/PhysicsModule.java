@@ -6,11 +6,13 @@
 
 package mEngine.gameObjects.modules.physics;
 
+import com.bulletphysics.collision.dispatch.CollisionObject;
 import com.bulletphysics.collision.shapes.BoxShape;
 import com.bulletphysics.collision.shapes.CapsuleShape;
 import com.bulletphysics.collision.shapes.ConvexHullShape;
 import com.bulletphysics.collision.shapes.SphereShape;
 import com.bulletphysics.dynamics.RigidBody;
+import com.bulletphysics.dynamics.RigidBodyConstructionInfo;
 import com.bulletphysics.linearmath.DefaultMotionState;
 import com.bulletphysics.linearmath.MotionState;
 import com.bulletphysics.linearmath.Transform;
@@ -18,6 +20,7 @@ import com.bulletphysics.util.ObjectArrayList;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.renderable.RenderModule;
+import mEngine.physics.PhysicsController;
 
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
@@ -26,26 +29,22 @@ import java.util.stream.Collectors;
 
 public class PhysicsModule extends Module {
 
-    public enum CollisionShape {
-        SPHERE, BOX, CAPSULE, CUSTOM
-    }
-
     private RigidBody body;
-    private float mass;
     private CollisionShape shape;
-
     /**
      * Creates a new physics module
-     * @param mass The mass of the module
+     *
+     * @param mass  The mass of the module
      * @param shape The collision shape (note that CUSTOM can get very computationally heavy)
      */
     public PhysicsModule(float mass, CollisionShape shape) {
-        this.mass = mass;
         this.shape = shape;
+        body = new RigidBody(mass, new DefaultMotionState(), new SphereShape(0)); //Only temporary data
     }
 
     /**
      * Sets up the rigid body and the module itself
+     *
      * @param obj The parent of this module
      */
     @Override
@@ -69,6 +68,7 @@ public class PhysicsModule extends Module {
         MotionState state = new DefaultMotionState(new Transform(new Matrix4f(rotation, position, 1)));
         com.bulletphysics.collision.shapes.CollisionShape collisionShape;
 
+        //Gets the difference between point a and point b
         float x = parent.getBoundingBox().getB().x - parent.getBoundingBox().getA().x;
         float y = parent.getBoundingBox().getB().y - parent.getBoundingBox().getA().y;
         float z = parent.getBoundingBox().getB().z - parent.getBoundingBox().getA().z;
@@ -87,7 +87,7 @@ public class PhysicsModule extends Module {
             case CUSTOM:
                 ObjectArrayList<Vector3f> points = new ObjectArrayList<>();
 
-                RenderModule module = (RenderModule)parent.getModule(RenderModule.class);
+                RenderModule module = (RenderModule) parent.getModule(RenderModule.class);
 
                 points.addAll(module.model.getVertices().stream()           //Sexy new Java 8 code here!
                   .map(point -> new Vector3f(point.x, point.y, point.z))    //Lambdas are awesome.
@@ -102,42 +102,72 @@ public class PhysicsModule extends Module {
 
         }
 
-        body = new RigidBody(mass, state, collisionShape);
+        body.setCollisionShape(collisionShape);
+        body.setMotionState(state);
+        body.setActivationState(CollisionObject.DISABLE_DEACTIVATION);
+        PhysicsController.world.addRigidBody(body);
 
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        Transform transform = new Transform();
+        body.getInterpolationWorldTransform(transform);
+
+        org.lwjgl.util.vector.Vector3f position =
+          new org.lwjgl.util.vector.Vector3f(transform.origin.x, transform.origin.y, transform.origin.z);
+
+        parent.position = new org.lwjgl.util.vector.Vector3f(position);
     }
 
     /**
      * Sets the friction for sliding (linear) and rolling (angular)
-     * @param linear The "sliding" friction (0 - no friction, 1 - high friction)
+     *
+     * @param linear  The "sliding" friction (0 - no friction, 1 - high friction)
      * @param angular The "rolling" friction (0 - no friction, 1 - high friction)
+     * @return The physics module, for easy chaining
      */
-    public void setDamping(float linear, float angular) {
+    public PhysicsModule setDamping(float linear, float angular) {
         body.setDamping(linear, angular);
+        return this;
     }
 
     /**
      * Sets the collision margin for the rigid body, increases performance significantly
+     *
      * @param margin The margin to use, the higher, the more obvious it will be
+     * @return The physics module, for easy chaining
      */
-    public void setMargin(float margin) {
+    public PhysicsModule setMargin(float margin) {
         body.getCollisionShape().setMargin(margin);
+        return this;
     }
 
     /**
      * Apply a force in the center of the object
+     *
      * @param force The force in Newton
      */
     public void applyCentralForce(Vector3f force) {
+        body.activate(true);
         body.applyCentralForce(force);
     }
 
     /**
      * Apply a force anywhere on (or in) the body
+     *
      * @param force The force in Newton
      * @param point The desired spot where the force should be applied
      */
     public void applyForce(Vector3f force, Vector3f point) {
+        body.activate(true);
         body.applyForce(force, point);
+    }
+
+    public enum CollisionShape {
+        SPHERE, BOX, CAPSULE, CUSTOM
     }
 
 }

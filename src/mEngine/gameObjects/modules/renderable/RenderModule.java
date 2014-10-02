@@ -6,6 +6,7 @@
 
 package mEngine.gameObjects.modules.renderable;
 
+import mEngine.gameObjects.BoundingBox;
 import mEngine.gameObjects.GameObject;
 import mEngine.graphics.Renderer;
 import mEngine.graphics.renderable.models.Face;
@@ -52,6 +53,14 @@ public class RenderModule extends ModuleRenderable3D {
         super.onCreation(obj);
 
         model = ModelHelper.getModel(modelFileName);
+
+        Vector3f vert = model.getSize();
+        vert.x /= -2; // \
+        vert.y /= -2; //  > Vector gets divided by 2 and multiplied by -1
+        vert.z /= -2; // /
+
+        BoundingBox boundingBox = new BoundingBox(vert, new Vector3f(-vert.x, -vert.y, -vert.z));
+        parent.addBoundingBox(boundingBox);
 
     }
 

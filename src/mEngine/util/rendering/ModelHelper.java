@@ -27,6 +27,7 @@ public class ModelHelper {
 
     /**
      * Loads a model into loadedModels
+     *
      * @param fileName The name of the desired model
      */
     private static void loadModel(String fileName) {
@@ -59,42 +60,42 @@ public class ModelHelper {
                 } else if (line.startsWith("v ")) {
 
                     currentSubModel.vertices.add(new Vector3f(
-                            Float.valueOf(line.split(" ")[1]),
-                            Float.valueOf(line.split(" ")[2]),
-                            Float.valueOf(line.split(" ")[3])));
+                      Float.valueOf(line.split(" ")[1]),
+                      Float.valueOf(line.split(" ")[2]),
+                      Float.valueOf(line.split(" ")[3])));
 
                 } else if (line.startsWith("vn ")) {
 
                     currentSubModel.normals.add(new Vector3f(
-                            Float.valueOf(line.split(" ")[1]),
-                            Float.valueOf(line.split(" ")[2]),
-                            Float.valueOf(line.split(" ")[3])));
+                      Float.valueOf(line.split(" ")[1]),
+                      Float.valueOf(line.split(" ")[2]),
+                      Float.valueOf(line.split(" ")[3])));
 
                 } else if (line.startsWith("vt ")) {
 
                     currentSubModel.uvs.add(new Vector2f(
-                            Float.valueOf(line.split(" ")[1]),
-                            Float.valueOf(line.split(" ")[2])));
+                      Float.valueOf(line.split(" ")[1]),
+                      Float.valueOf(line.split(" ")[2])));
 
                 } else if (line.startsWith("f ")) {
 
                     //[0]: "f", [1]:([0]:vertexIndex, [1]:uvIndex, [2]: normalIndex), [...]
                     Vector3f vertexIndices = new Vector3f(
-                            Float.valueOf(line.split(" ")[1].split("/")[0]) - currentVertexCount,
-                            Float.valueOf(line.split(" ")[2].split("/")[0]) - currentVertexCount,
-                            Float.valueOf(line.split(" ")[3].split("/")[0]) - currentVertexCount);
+                      Float.valueOf(line.split(" ")[1].split("/")[0]) - currentVertexCount,
+                      Float.valueOf(line.split(" ")[2].split("/")[0]) - currentVertexCount,
+                      Float.valueOf(line.split(" ")[3].split("/")[0]) - currentVertexCount);
 
                     Vector3f normalIndices = new Vector3f(
-                            Float.valueOf(line.split(" ")[1].split("/")[2]) - currentNormalCount,
-                            Float.valueOf(line.split(" ")[2].split("/")[2]) - currentNormalCount,
-                            Float.valueOf(line.split(" ")[3].split("/")[2]) - currentNormalCount);
+                      Float.valueOf(line.split(" ")[1].split("/")[2]) - currentNormalCount,
+                      Float.valueOf(line.split(" ")[2].split("/")[2]) - currentNormalCount,
+                      Float.valueOf(line.split(" ")[3].split("/")[2]) - currentNormalCount);
 
                     Vector3f uvIndices;
                     if (!line.split(" ")[1].split("/")[1].equals(""))
                         uvIndices = new Vector3f(
-                                Float.valueOf(line.split(" ")[1].split("/")[1]) - currentUvCount,
-                                Float.valueOf(line.split(" ")[2].split("/")[1]) - currentUvCount,
-                                Float.valueOf(line.split(" ")[3].split("/")[1]) - currentUvCount);
+                          Float.valueOf(line.split(" ")[1].split("/")[1]) - currentUvCount,
+                          Float.valueOf(line.split(" ")[2].split("/")[1]) - currentUvCount,
+                          Float.valueOf(line.split(" ")[3].split("/")[1]) - currentUvCount);
                     else if (currentSubModel.uvs.size() == 0) {
                         currentSubModel.uvs.add(new Vector2f());
                         uvIndices = new Vector3f(1, 1, 1);
@@ -117,6 +118,7 @@ public class ModelHelper {
 
     /**
      * Loads all materials in a library into loadedMaterials
+     *
      * @param fileName The name of the desired library
      */
     private static void loadMaterialLibrary(String fileName) {
@@ -139,17 +141,17 @@ public class ModelHelper {
                     if (line.startsWith("Ns "))
                         currentMaterial.specularHighlightStrength = Float.valueOf(line.split(" ")[1]);
                     else if (line.startsWith("Ka ")) currentMaterial.ambientReflectivity = new Vector3f(
-                            Float.valueOf(line.split(" ")[1]),
-                            Float.valueOf(line.split(" ")[2]),
-                            Float.valueOf(line.split(" ")[3]));
+                      Float.valueOf(line.split(" ")[1]),
+                      Float.valueOf(line.split(" ")[2]),
+                      Float.valueOf(line.split(" ")[3]));
                     else if (line.startsWith("Kd ")) currentMaterial.diffuseReflectivity = new Vector3f(
-                            Float.valueOf(line.split(" ")[1]),
-                            Float.valueOf(line.split(" ")[2]),
-                            Float.valueOf(line.split(" ")[3]));
+                      Float.valueOf(line.split(" ")[1]),
+                      Float.valueOf(line.split(" ")[2]),
+                      Float.valueOf(line.split(" ")[3]));
                     else if (line.startsWith("Ks ")) currentMaterial.specularReflectivity = new Vector3f(
-                            Float.valueOf(line.split(" ")[1]),
-                            Float.valueOf(line.split(" ")[2]),
-                            Float.valueOf(line.split(" ")[3]));
+                      Float.valueOf(line.split(" ")[1]),
+                      Float.valueOf(line.split(" ")[2]),
+                      Float.valueOf(line.split(" ")[3]));
                     else if (line.startsWith("d ")) currentMaterial.color.a = Float.valueOf(line.split(" ")[1]);
                     else if (line.startsWith("map_Kd ")) currentMaterial.textureName = line.split(" ")[1];
                     else if (line.startsWith("illum ")) currentMaterial.type = Integer.valueOf(line.split(" ")[1]);
@@ -171,6 +173,7 @@ public class ModelHelper {
     /**
      * Returns the requested model.
      * The model and its materials get loaded if needed
+     *
      * @param name The name of the desired model
      * @return The requested model
      */

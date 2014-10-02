@@ -47,9 +47,9 @@ public class ColorHelper {
      */
     public static Vector4f colorToRgba(Color color) {
         return new Vector4f((float) color.getRed() / 256,
-                (float) color.getGreen() / 256,
-                (float) color.getBlue() / 256,
-                (float) color.getAlpha() / 256);
+          (float) color.getGreen() / 256,
+          (float) color.getBlue() / 256,
+          (float) color.getAlpha() / 256);
     }
 
 }

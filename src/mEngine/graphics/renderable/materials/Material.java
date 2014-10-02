@@ -20,6 +20,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Returns the material texture
+     *
      * @return The texture
      */
     public Texture getTexture() {
@@ -28,6 +29,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Sets the material texture
+     *
      * @param texture The texture to use
      * @return The material
      */
@@ -40,6 +42,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Sets only the texture name, the texture itself has to be set via setTextureFromName()
+     *
      * @param textureName The name of the texture
      * @return The material
      */
@@ -66,6 +69,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Determines if the material has a texture
+     *
      * @return True if a texture <i>name</i> is present, false if not
      */
     public boolean hasTexture() {
@@ -74,6 +78,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Determines if the material has a color
+     *
      * @return True if the material has a color, false if not
      */
     public boolean hasColor() {
@@ -82,6 +87,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Returns the material's color
+     *
      * @return The material's color
      */
     public Color getColor() {
@@ -90,6 +96,7 @@ public abstract class Material implements Serializable {
 
     /**
      * Sets the material's color
+     *
      * @param color The color to use
      * @return The material
      */

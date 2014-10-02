@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.util.debug.texts;
 
 import mEngine.gameObjects.modules.gui.modules.GUIText;
@@ -18,8 +24,8 @@ public class RAMTextModule extends GUIText {
 
         super.onUpdate();
         text = String.valueOf("Memory usage: "
-                + cutDecimals((float) getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1)
-                + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]");
+          + cutDecimals((float) getMemoryStats(USED_MEMORY) / getMemoryStats(TOTAL_MEMORY) * 100, 1)
+          + "% [" + getMemoryStats(TOTAL_MEMORY) + " MB]");
 
     }
 

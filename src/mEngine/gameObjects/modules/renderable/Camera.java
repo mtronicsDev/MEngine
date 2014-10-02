@@ -36,7 +36,7 @@ public class Camera extends ModuleRenderable {
 
         if (!(Float.isNaN(parent.position.x) || Float.isNaN(parent.position.y) || Float.isNaN(parent.position.z)))
             position = VectorHelper.sumVectors(new Vector3f[]{VectorHelper.multiplyVectorByFloat(new Vector3f(percentRotation.x, percentRotation.y, -percentRotation.z), -zoom),
-                    parent.position});
+              parent.position});
 
     }
 
@@ -61,9 +61,9 @@ public class Camera extends ModuleRenderable {
                 float radiantRotation = (float) -Math.toRadians(parent.rotation.z);
 
                 Matrix3f zAxisRotationMatrix = new Matrix3f(
-                        new Vector3f((float) Math.cos(radiantRotation), (float) -Math.sin(radiantRotation), 0),
-                        new Vector3f((float) Math.sin(radiantRotation), (float) Math.cos(radiantRotation), 0),
-                        new Vector3f(0, 0, 1)
+                  new Vector3f((float) Math.cos(radiantRotation), (float) -Math.sin(radiantRotation), 0),
+                  new Vector3f((float) Math.sin(radiantRotation), (float) Math.cos(radiantRotation), 0),
+                  new Vector3f(0, 0, 1)
                 );
 
                 up = zAxisRotationMatrix.multiplyByVector(up);

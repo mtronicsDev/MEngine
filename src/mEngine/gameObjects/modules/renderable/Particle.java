@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.renderable;
 
 import mEngine.gameObjects.GameObject;
@@ -48,9 +54,9 @@ public class Particle extends ModuleRenderable3D {
         normal = new Vector3f(parent.percentRotation);
 
         rotation = new Vector3f(
-                VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(0, normal.y, normal.z)),
-                VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(normal.x, 0, normal.z)),
-                VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(normal.x, normal.y, 0))
+          VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(0, normal.y, normal.z)),
+          VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(normal.x, 0, normal.z)),
+          VectorHelper.getAngle(new Vector3f(0, 0, 1), new Vector3f(normal.x, normal.y, 0))
         );
 
     }

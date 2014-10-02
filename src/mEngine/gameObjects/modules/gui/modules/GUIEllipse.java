@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.gui.modules;
 
 import mEngine.graphics.Renderer;
@@ -20,15 +26,15 @@ public class GUIEllipse extends GUIModule {
                 float radians = (float) toRadians(i);
 
                 verticesToRender.add(new Vector2f(
-                        parent.getPosition().x + ((float) cos(radians) * parent.getSize().x),
-                        parent.getPosition().y + ((float) sin(radians) * parent.getSize().y)
+                  parent.getPosition().x + ((float) cos(radians) * parent.getSize().x),
+                  parent.getPosition().y + ((float) sin(radians) * parent.getSize().y)
                 ));
 
             }
 
             verticesToRender.add(new Vector2f(
-                    parent.getPosition().x + ((float) cos(360) * parent.getSize().x),
-                    parent.getPosition().y + ((float) sin(360) * parent.getSize().y)
+              parent.getPosition().x + ((float) cos(360) * parent.getSize().x),
+              parent.getPosition().y + ((float) sin(360) * parent.getSize().y)
             ));
 
         }

@@ -7,6 +7,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.physics.PhysicsController;
 import mEngine.util.serialization.Serializer;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.opengl.Display;
@@ -18,9 +19,10 @@ public class GameLoop implements Runnable {
      */
     public void run() {
 
-        //noinspection StatementWithEmptyBody
+        //Waiting for Display creation
         while (!Display.isCreated()) {
-        } //Waiting for Display creation
+            TimeHelper.sleep(10);
+        }
 
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
@@ -28,6 +30,8 @@ public class GameLoop implements Runnable {
             if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
 
             if (!GameController.isLoading) {
+
+                PhysicsController.world.stepSimulation(TimeHelper.deltaTime);
 
                 for (GameObject gameObject : ObjectController.gameObjects) {
 

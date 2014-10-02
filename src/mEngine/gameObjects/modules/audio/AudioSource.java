@@ -27,20 +27,20 @@ public class AudioSource extends Module {
 
         if (isAmbient) //Is the sound background music or a positional sound?
             AudioController.getSoundSystem().backgroundMusic(
-                    audioFileName,
-                    ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
-                    audioFileName + ".wav",
-                    loop);
+              audioFileName,
+              ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
+              audioFileName + ".wav",
+              loop);
         else
             AudioController.getSoundSystem().newSource(
-                    false,
-                    audioFileName,
-                    ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
-                    audioFileName + ".wav",
-                    false,
-                    0, 0, 0, //Parent is not accessible yet
-                    SoundSystemConfig.ATTENUATION_ROLLOFF,
-                    SoundSystemConfig.getDefaultRolloff()); // <-- Long constructor there :P
+              false,
+              audioFileName,
+              ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
+              audioFileName + ".wav",
+              false,
+              0, 0, 0, //Parent is not accessible yet
+              SoundSystemConfig.ATTENUATION_ROLLOFF,
+              SoundSystemConfig.getDefaultRolloff()); // <-- Long constructor there :P
     }
 
     public void play() {
@@ -59,9 +59,9 @@ public class AudioSource extends Module {
     public void onUpdate() {
         super.onUpdate();
         AudioController.getSoundSystem().setPosition(sourceName,
-                parent.position.x,
-                parent.position.y,
-                parent.position.z);
+          parent.position.x,
+          parent.position.y,
+          parent.position.z);
 
         if (!AudioController.getSoundSystem().playing(sourceName) && Input.isKeyDown("play")) play();
         if (AudioController.getSoundSystem().playing(sourceName) && Input.isKeyDown("pause")) pause();

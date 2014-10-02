@@ -45,14 +45,14 @@ public class GUIElement extends ModuleRenderable {
 
         //Absolute position to relative position
         position = new Vector2f(
-                posInPixels.x / Display.getWidth(),
-                posInPixels.y / Display.getHeight()
+          posInPixels.x / Display.getWidth(),
+          posInPixels.y / Display.getHeight()
         );
 
         //Absolute size to relative size
         size = new Vector2f(
-                sizeInPixels.x / Display.getWidth(),
-                sizeInPixels.y / Display.getHeight()
+          sizeInPixels.x / Display.getWidth(),
+          sizeInPixels.y / Display.getHeight()
         );
 
     }

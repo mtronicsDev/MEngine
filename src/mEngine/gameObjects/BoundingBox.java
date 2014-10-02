@@ -14,11 +14,12 @@ public class BoundingBox {
 
     /**
      * Creates an AABB (Axis Aligned Bounding Box) for a game object
+     *
      * @param a The first corner (e.g. lower back left)
      * @param b The second corner (e.g. upper front right), has to be the opposite corner to a
      */
     public BoundingBox(Vector3f a, Vector3f b) {
-        
+
         this.a = new Vector3f();
         this.b = new Vector3f();
 
@@ -37,6 +38,7 @@ public class BoundingBox {
 
     /**
      * Lets you update the bounding box
+     *
      * @param a Point a
      * @param b Point b
      */
@@ -46,37 +48,35 @@ public class BoundingBox {
 
     /**
      * Sorts the coordinates, so a is more in the negative direction than b
+     *
      * @param a Point a
      * @param b Point b
      */
     private void sortCoordinates(Vector3f a, Vector3f b) {
 
         //Sorting x coords, so point a is the smaller one
-        if(a.x < b.x) {
+        if (a.x < b.x) {
             this.a.x = a.x;
             this.b.x = b.x;
-        }
-        else {
+        } else {
             this.a.x = b.x;
             this.b.x = a.x;
         }
 
         //Sorting y coords, so point a is the smaller one
-        if(a.y < b.y) {
+        if (a.y < b.y) {
             this.a.y = a.y;
             this.b.y = b.y;
-        }
-        else {
+        } else {
             this.a.y = b.y;
             this.b.y = a.y;
         }
 
         //Sorting z coords, so point a is the smaller one
-        if(a.y < b.y) {
+        if (a.y < b.y) {
             this.a.y = a.y;
             this.b.y = b.y;
-        }
-        else {
+        } else {
             this.a.y = b.y;
             this.b.y = a.y;
         }

@@ -23,6 +23,7 @@ public class RuntimeHelper {
 
     /**
      * Returns the desired information about the game's memory
+     *
      * @param mode Use RuntimeHelper.XXX_MEMORY (total, used, free)
      * @return The desired information
      */

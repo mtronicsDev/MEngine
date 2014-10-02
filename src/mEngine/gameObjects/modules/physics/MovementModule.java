@@ -15,7 +15,6 @@ import mEngine.physics.forces.Force;
 import mEngine.physics.forces.ForceController;
 import mEngine.util.math.vectors.Matrix3f;
 import mEngine.util.math.vectors.VectorHelper;
-import mEngine.util.time.TimeHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.HashMap;
@@ -62,8 +61,7 @@ public class MovementModule extends Module {
         if (!GameController.isGamePaused) {
 
             Controller controller = (Controller) parent.getModule(Controller.class);
-
-            PhysicsModule physicComponent = (PhysicsModule) parent.getModule(PhysicsModule.class);
+            PhysicsModule physics = (PhysicsModule) parent.getModule(PhysicsModule.class);
 
             if (controller != null) {
 
@@ -76,62 +74,18 @@ public class MovementModule extends Module {
 
             parent.percentRotation = new Vector3f(0, 0, 1);
 
-            Matrix3f xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float) Math.cos(Math.toRadians(parent.rotation.x)), (float) -Math.sin(Math.toRadians(parent.rotation.x))),
-                    new Vector3f(0, (float) Math.sin(Math.toRadians(parent.rotation.x)), (float) Math.cos(Math.toRadians(parent.rotation.x))));
+            Matrix3f xAxisRotationMatrix = new Matrix3f(
+              new Vector3f(1, 0, 0),
+              new Vector3f(0, (float) Math.cos(Math.toRadians(parent.rotation.x)), (float) -Math.sin(Math.toRadians(parent.rotation.x))),
+              new Vector3f(0, (float) Math.sin(Math.toRadians(parent.rotation.x)), (float) Math.cos(Math.toRadians(parent.rotation.x))));
             parent.percentRotation = xAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
-            Matrix3f yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(Math.toRadians(parent.rotation.y)), 0, (float) Math.sin(Math.toRadians(parent.rotation.y))),
-                    new Vector3f(0, 1, 0),
-                    new Vector3f((float) -Math.sin(Math.toRadians(parent.rotation.y)), 0, (float) Math.cos(Math.toRadians(parent.rotation.y))));
+            Matrix3f yAxisRotationMatrix = new Matrix3f(
+              new Vector3f((float) Math.cos(Math.toRadians(parent.rotation.y)), 0, (float) Math.sin(Math.toRadians(parent.rotation.y))),
+              new Vector3f(0, 1, 0),
+              new Vector3f((float) -Math.sin(Math.toRadians(parent.rotation.y)), 0, (float) Math.cos(Math.toRadians(parent.rotation.y))));
             parent.percentRotation = yAxisRotationMatrix.multiplyByVector(parent.percentRotation);
 
-            for (String key : forces.keySet()) {
-
-                if (key.startsWith("inertiaForce")) {
-
-                    Force force = forces.get(key);
-
-                    float friction = 2;
-
-                    if (physicComponent != null) {
-
-                        friction = 2;
-
-                        //TODO: actually create the method
-
-                    }
-
-                    force.direction = VectorHelper.divideVectorByFloat(force.direction, friction);
-
-                    if (Math.abs(force.direction.x) <= 0.001f &&
-                            Math.abs(force.direction.y) <= 0.001f &&
-                            Math.abs(force.direction.z) <= 0.001f) {
-
-                        forces.remove(force);
-
-                    }
-
-                }
-
-            }
-
-            Vector3f forceSum = ForceController.sumForces(forces.values());
-
-            forceSum = ForceController.getCombinedForces(forceSum);
-
-            Vector3f acceleration = ForceController.getAcceleration(forceSum, mass);
-
-            float deltaTime = TimeHelper.deltaTime;
-
-            speed = ForceController.getSpeed(acceleration, speed, deltaTime);
-            speed = VectorHelper.subtractVectors(speed, previousSpeed);
-            previousSpeed = speed;
-
-            movedSpace = ForceController.getMovedSpace(speed, deltaTime);
-
-            if (physicComponent == null)
-                parent.position = VectorHelper.sumVectors(new Vector3f[]{parent.position, movedSpace});
 
         }
 
@@ -150,180 +104,55 @@ public class MovementModule extends Module {
 
     }
 
+    private Vector3f calculateForce(Vector3f direction) {
+        Vector3f force = new Vector3f();
+
+        force.x = -(direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
+        force.z = direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
+
+        force.y = direction.y;
+
+        if (sneaking) {
+
+            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{force, new Vector3f(0.3f, 1, 0.3f)});
+
+            force.x = newDirection.x;
+            force.z = newDirection.z;
+
+        }
+
+        return force;
+    }
+
+    private void applyForce(Vector3f direction) {
+        Vector3f force = calculateForce(direction);
+        PhysicsModule physics = (PhysicsModule) parent.getModule(PhysicsModule.class);
+
+        physics.applyCentralForce(new javax.vecmath.Vector3f(force.x, force.y, force.z));
+    }
+
     public void moveForward() {
-
-        Vector3f direction = new Vector3f();
-        Force givenForce = forces.get("forward");
-
-        if (givenForce == null) {
-
-            givenForce = new Force(new Vector3f(0, 0, -1));
-
-        }
-
-
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
-
-        if (sprinting) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(3, 1, 3)});
-
-            direction.x = newDirection.x;
-            direction.z = newDirection.z;
-
-        } else if (sneaking) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
-
-            direction.x = newDirection.x;
-            direction.z = newDirection.z;
-
-        }
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
+        applyForce(new Vector3f(0, 0, -10));
     }
 
     public void moveBackward() {
-
-        Vector3f direction = new Vector3f();
-        Force givenForce = forces.get("backward");
-
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
-
-        if (sneaking) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
-
-            direction.x = newDirection.x;
-            direction.z = newDirection.z;
-
-        }
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
+        applyForce(new Vector3f(0, 0, 10));
     }
 
     public void moveLeft() {
-
-        Vector3f direction = new Vector3f();
-        Force givenForce = forces.get("left");
-
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
-
-        if (sneaking) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
-
-            direction.x = newDirection.x;
-            direction.z = newDirection.z;
-
-        }
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
+        applyForce(new Vector3f(10, 0, 0));
     }
 
     public void moveRight() {
-
-        Vector3f direction = new Vector3f();
-        Force givenForce = forces.get("right");
-
-        direction.x = -(givenForce.direction.x * (float) Math.sin(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.sin(Math.toRadians(parent.rotation.y)));
-        direction.z = givenForce.direction.x * (float) Math.cos(Math.toRadians(parent.rotation.y - 90)) + givenForce.direction.z * (float) Math.cos(Math.toRadians(parent.rotation.y));
-
-        if (sneaking) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(0.3f, 1, 0.3f)});
-
-            direction.x = newDirection.x;
-            direction.z = newDirection.z;
-
-        }
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
-    }
-
-    public void moveUp() {
-
-        Vector3f direction = new Vector3f();
-        Force givenForce = forces.get("up");
-
-        direction.y = givenForce.direction.y;
-
-        if (sprinting) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(1, 3, 1)});
-
-            direction.y = newDirection.y;
-
-        } else if (sneaking) {
-
-            Vector3f newDirection = VectorHelper.multiplyVectors(new Vector3f[]{direction, new Vector3f(1, 0.3f, 1)});
-
-            direction.y = newDirection.y;
-
-        }
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
+        applyForce(new Vector3f(-10, 0, 0));
     }
 
     public void moveDown() {
+        applyForce(new Vector3f(0, -10, 0));
+    }
 
-        Vector3f direction = new Vector3f();
-        Force givenForce = forces.get("down");
-
-        direction.y = givenForce.direction.y;
-
-        String forceIdentifier = "inertiaForce" + forceCount;
-
-        forces.put(forceIdentifier, new Force(direction));
-        forces.get(forceIdentifier).enabled = true;
-
-        if (forces.containsKey("inertiaForce0")) forceCount++;
-
-        else forceCount = 0;
-
+    public void moveUp() {
+        applyForce(new Vector3f(0, 10, 0));
     }
 
     public void jump() {

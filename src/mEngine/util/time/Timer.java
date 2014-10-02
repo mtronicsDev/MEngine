@@ -14,6 +14,7 @@ public class Timer {
 
     /**
      * Initializes a new timer
+     *
      * @param tickTime The time the timer should last for
      */
     public Timer(int tickTime) {
@@ -34,6 +35,7 @@ public class Timer {
 
     /**
      * Determines if the timer is already running
+     *
      * @return True if the timer is already running, false if not
      */
     public boolean isRunning() {
@@ -44,6 +46,7 @@ public class Timer {
 
     /**
      * Determines if the timer is done
+     *
      * @return True if done, false if running
      */
     public boolean isDone() {

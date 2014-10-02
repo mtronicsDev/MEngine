@@ -80,7 +80,7 @@ public class InteractionModule extends Module {
             interactionInstructionText = new GUIText(interactionInstruction, 15);
 
             parent.addModule(
-                    new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addModule(interactionInstructionText)
+              new GUIElement(new Vector2f(Display.getWidth() / 2, Display.getHeight() - 100), new Vector2f()).addModule(interactionInstructionText)
             );
 
             this.interactionInstruction = interactionInstruction;

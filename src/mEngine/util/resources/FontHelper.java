@@ -14,9 +14,10 @@ public class FontHelper {
 
     /**
      * Loads a true type font
-     * @param face The font face / type
-     * @param style The style (bold|italic|...)
-     * @param size The font size
+     *
+     * @param face         The font face / type
+     * @param style        The style (bold|italic|...)
+     * @param size         The font size
      * @param antiAliasing Should anti aliasing be applied to this font?
      * @return The true type font
      */

@@ -7,6 +7,7 @@
 package mEngine.core;
 
 import mEngine.audio.AudioController;
+import mEngine.physics.PhysicsController;
 import mEngine.util.debug.RuntimeHelper;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
@@ -31,8 +32,9 @@ public class GameController {
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
         AudioController.initialize();
-        TimeHelper.setupTiming();
+        TimeHelper.initialize();
         RuntimeHelper.initialize();
+        PhysicsController.initialize();
 
         ThreadHelper.startThread(new GameLoop()); //Physics and processing
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering

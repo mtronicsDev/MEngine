@@ -23,6 +23,7 @@ public class ShaderHelper {
 
     /**
      * Adds a shader to the list
+     *
      * @param fileName The name of the shader
      */
     public static void addShader(String fileName) {
@@ -86,6 +87,7 @@ public class ShaderHelper {
 
     /**
      * Sets the desired shader active
+     *
      * @param shaderName The desired shader
      */
     public static void useShader(String shaderName) {

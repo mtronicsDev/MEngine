@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2014 mgamelabs
+ * To see our full license terms, please visit https://github.com/mgamelabs/mengine/blob/master/LICENSE.md
+ * All rights reserved.
+ */
+
 package mEngine.gameObjects.modules.renderable;
 
 import mEngine.gameObjects.GameObject;
@@ -99,9 +105,9 @@ public class Terrain extends ModuleRenderable3D {
                 if (x < (size.x - 1) && z < (size.z - 1)) {
 
                     faces.add(new Face(
-                            new Vector3f(i + 1, i + 2, i + (int) size.x + 1),
-                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int) size.x + 1),
-                            new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int) size.x + 1)
+                      new Vector3f(i + 1, i + 2, i + (int) size.x + 1),
+                      new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int) size.x + 1),
+                      new Vector3f((x * z) + x + 1, (x * z) + x + 2, (x * z) + x + (int) size.x + 1)
                     ));
 
                 }
@@ -109,9 +115,9 @@ public class Terrain extends ModuleRenderable3D {
                 if (z < size.z && i < 9900) { //Don't ask me about this, it seems to be random
 
                     faces.add(new Face(
-                            new Vector3f(i + 1, i + (int) size.x + 1, i + (int) size.x),
-                            new Vector3f((x * z) + 1, (x * z) + (int) size.x + 1, (x * z) + (int) size.x),
-                            new Vector3f((x * z) + 1, (x * z) + (int) size.x + 1, (x * z) + (int) size.x)
+                      new Vector3f(i + 1, i + (int) size.x + 1, i + (int) size.x),
+                      new Vector3f((x * z) + 1, (x * z) + (int) size.x + 1, (x * z) + (int) size.x),
+                      new Vector3f((x * z) + 1, (x * z) + (int) size.x + 1, (x * z) + (int) size.x)
                     ));
 
                 }

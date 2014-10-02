@@ -19,6 +19,7 @@ public class RenderHelper {
 
     /**
      * Used for frustum culling
+     *
      * @param vector The vertex to check
      * @return True if on screen, false if not
      */
@@ -59,26 +60,26 @@ public class RenderHelper {
             Vector3f zAxis = new Vector3f(0, 0, 1);
 
             Matrix3f yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(-fov / 2), 0, (float) Math.sin(-fov / 2)),
-                    new Vector3f(0, 1, 0),
-                    new Vector3f(-(float) Math.sin(-fov / 2), 0, (float) Math.cos(-fov / 2)));
+              new Vector3f(0, 1, 0),
+              new Vector3f(-(float) Math.sin(-fov / 2), 0, (float) Math.cos(-fov / 2)));
 
             Vector3f leftLowerCorner = yAxisRotationMatrix.multiplyByVector(zAxis);
 
             yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(fov / 2), 0, (float) Math.sin(fov / 2)),
-                    new Vector3f(0, 1, 0),
-                    new Vector3f(-(float) Math.sin(fov / 2), 0, (float) Math.cos(fov / 2)));
+              new Vector3f(0, 1, 0),
+              new Vector3f(-(float) Math.sin(fov / 2), 0, (float) Math.cos(fov / 2)));
 
             Vector3f rightUpperCorner = yAxisRotationMatrix.multiplyByVector(zAxis);
 
             Matrix3f xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float) Math.cos(fov / 2), -(float) Math.sin(fov / 2)),
-                    new Vector3f(0, (float) Math.sin(fov / 2), (float) Math.cos(fov / 2)));
+              new Vector3f(0, (float) Math.cos(fov / 2), -(float) Math.sin(fov / 2)),
+              new Vector3f(0, (float) Math.sin(fov / 2), (float) Math.cos(fov / 2)));
 
             leftLowerCorner = xAxisRotationMatrix.multiplyByVector(leftLowerCorner);
 
             xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
-                    new Vector3f(0, (float) Math.cos(-fov / 2), -(float) Math.sin(-fov / 2)),
-                    new Vector3f(0, (float) Math.sin(-fov / 2), (float) Math.cos(-fov / 2)));
+              new Vector3f(0, (float) Math.cos(-fov / 2), -(float) Math.sin(-fov / 2)),
+              new Vector3f(0, (float) Math.sin(-fov / 2), (float) Math.cos(-fov / 2)));
 
             rightUpperCorner = xAxisRotationMatrix.multiplyByVector(rightUpperCorner);
 
@@ -88,8 +89,8 @@ public class RenderHelper {
             if (VectorHelper.getScalarProduct(camera.percentRotation, xAxis) < 0) alpha = -alpha;
 
             yAxisRotationMatrix = new Matrix3f(new Vector3f((float) Math.cos(alpha), 0, (float) Math.sin(alpha)),
-                    new Vector3f(0, 1, 0),
-                    new Vector3f(-(float) Math.sin(alpha), 0, (float) Math.cos(alpha)));
+              new Vector3f(0, 1, 0),
+              new Vector3f(-(float) Math.sin(alpha), 0, (float) Math.cos(alpha)));
 
             vector = yAxisRotationMatrix.multiplyByVector(vector);
 
@@ -101,8 +102,8 @@ public class RenderHelper {
                 if (VectorHelper.getScalarProduct(camera.percentRotation, yAxis) < 0) beta = -beta;
 
                 xAxisRotationMatrix = new Matrix3f(new Vector3f(1, 0, 0),
-                        new Vector3f(0, (float) Math.cos(beta), -(float) Math.sin(beta)),
-                        new Vector3f(0, (float) Math.sin(beta), (float) Math.cos(beta)));
+                  new Vector3f(0, (float) Math.cos(beta), -(float) Math.sin(beta)),
+                  new Vector3f(0, (float) Math.sin(beta), (float) Math.cos(beta)));
 
                 vector = xAxisRotationMatrix.multiplyByVector(vector);
 

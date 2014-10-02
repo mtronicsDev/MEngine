@@ -25,7 +25,6 @@ import java.util.Set;
 public class PhysicsController {
 
     public static DynamicsWorld world; //The physics world
-    public static Set<RigidBody> objects; //All physics objects
 
     private static BroadphaseInterface aabbInterface; //Checks if objects could collide
     private static CollisionConfiguration collisionConfiguration;
@@ -36,7 +35,6 @@ public class PhysicsController {
      * Creates the physics world and sets up collisions
      */
     public static void initialize() {
-        objects = new HashSet<>();
         aabbInterface = new DbvtBroadphase();
         collisionConfiguration = new DefaultCollisionConfiguration();
         collisionDispatcher = new CollisionDispatcher(collisionConfiguration);
