@@ -6,10 +6,138 @@
 
 package mEngine.gameObjects.modules.physics;
 
+import com.bulletphysics.collision.shapes.BoxShape;
+import com.bulletphysics.collision.shapes.CapsuleShape;
+import com.bulletphysics.collision.shapes.ConvexHullShape;
+import com.bulletphysics.collision.shapes.SphereShape;
+import com.bulletphysics.dynamics.RigidBody;
+import com.bulletphysics.linearmath.DefaultMotionState;
+import com.bulletphysics.linearmath.MotionState;
+import com.bulletphysics.linearmath.Transform;
+import com.bulletphysics.util.ObjectArrayList;
+import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.Module;
+import mEngine.gameObjects.modules.renderable.RenderModule;
+
+import javax.vecmath.Matrix4f;
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.stream.Collectors;
 
 public class PhysicsModule extends Module {
 
+    public enum CollisionShape {
+        SPHERE, BOX, CAPSULE, CUSTOM
+    }
 
+    private RigidBody body;
+    private float mass;
+    private CollisionShape shape;
+
+    /**
+     * Creates a new physics module
+     * @param mass The mass of the module
+     * @param shape The collision shape (note that CUSTOM can get very computationally heavy)
+     */
+    public PhysicsModule(float mass, CollisionShape shape) {
+        this.mass = mass;
+        this.shape = shape;
+    }
+
+    /**
+     * Sets up the rigid body and the module itself
+     * @param obj The parent of this module
+     */
+    @Override
+    public void onCreation(GameObject obj) {
+
+        super.onCreation(obj);
+
+        Quat4f rotation = new Quat4f(
+          parent.rotation.x,
+          parent.rotation.y,
+          parent.rotation.z,
+          1
+        );
+
+        Vector3f position = new Vector3f(
+          parent.position.x,
+          parent.position.y,
+          parent.position.z
+        );
+
+        MotionState state = new DefaultMotionState(new Transform(new Matrix4f(rotation, position, 1)));
+        com.bulletphysics.collision.shapes.CollisionShape collisionShape;
+
+        float x = parent.getBoundingBox().getB().x - parent.getBoundingBox().getA().x;
+        float y = parent.getBoundingBox().getB().y - parent.getBoundingBox().getA().y;
+        float z = parent.getBoundingBox().getB().z - parent.getBoundingBox().getA().z;
+
+        switch (shape) {
+            case SPHERE:
+                float rSphere = (x + y + z) / 6; // Divide by 3 (3 values) and by 2 (diameter to radius) => div. by 6
+                collisionShape = new SphereShape(rSphere);
+                break;
+
+            case CAPSULE:
+                float rCapsule = x + z / 4; //Div. by 2 (2 vals) and by 2 again (diameter to radius) => div. by 4
+                collisionShape = new CapsuleShape(rCapsule, y);
+                break;
+
+            case CUSTOM:
+                ObjectArrayList<Vector3f> points = new ObjectArrayList<>();
+
+                RenderModule module = (RenderModule)parent.getModule(RenderModule.class);
+
+                points.addAll(module.model.getVertices().stream()           //Sexy new Java 8 code here!
+                  .map(point -> new Vector3f(point.x, point.y, point.z))    //Lambdas are awesome.
+                  .collect(Collectors.toList()));                           //And so is Java 8!
+
+                collisionShape = new ConvexHullShape(points);
+                break;
+
+            default:
+                collisionShape = new BoxShape(new Vector3f(x / 2, y / 2, z / 2));
+                break;
+
+        }
+
+        body = new RigidBody(mass, state, collisionShape);
+
+    }
+
+    /**
+     * Sets the friction for sliding (linear) and rolling (angular)
+     * @param linear The "sliding" friction (0 - no friction, 1 - high friction)
+     * @param angular The "rolling" friction (0 - no friction, 1 - high friction)
+     */
+    public void setDamping(float linear, float angular) {
+        body.setDamping(linear, angular);
+    }
+
+    /**
+     * Sets the collision margin for the rigid body, increases performance significantly
+     * @param margin The margin to use, the higher, the more obvious it will be
+     */
+    public void setMargin(float margin) {
+        body.getCollisionShape().setMargin(margin);
+    }
+
+    /**
+     * Apply a force in the center of the object
+     * @param force The force in Newton
+     */
+    public void applyCentralForce(Vector3f force) {
+        body.applyCentralForce(force);
+    }
+
+    /**
+     * Apply a force anywhere on (or in) the body
+     * @param force The force in Newton
+     * @param point The desired spot where the force should be applied
+     */
+    public void applyForce(Vector3f force, Vector3f point) {
+        body.applyForce(force, point);
+    }
 
 }

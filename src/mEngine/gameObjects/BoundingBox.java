@@ -27,6 +27,14 @@ public class BoundingBox {
 
     }
 
+    public Vector3f getA() {
+        return a;
+    }
+
+    public Vector3f getB() {
+        return b;
+    }
+
     /**
      * Lets you update the bounding box
      * @param a Point a
