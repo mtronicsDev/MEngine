@@ -15,9 +15,6 @@ import java.util.List;
 public class ObjectController {
 
     public static List<GameObject> gameObjects = new ArrayList<GameObject>();
-    public static int activeGUIDepartment;
-    public static int activeMenuGUIDepartment;
-    public static int maxMenuGUIDepartments;
     private static LoadingScreen loadingScreen;
 
     /**

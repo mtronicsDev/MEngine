@@ -6,10 +6,11 @@
 
 package mEngine.gameObjects.modules.gui;
 
-import mEngine.core.ObjectController;
 import mEngine.gameObjects.modules.gui.modules.GUIModule;
 import mEngine.gameObjects.modules.renderable.ModuleRenderable;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.gui.GUIScreen;
+import mEngine.graphics.gui.GUIScreenController;
 import mEngine.graphics.renderable.materials.Material2D;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -24,7 +25,7 @@ public class GUIElement extends ModuleRenderable {
     public List<GUIModule> components = new ArrayList<GUIModule>();
     private Vector2f position; //Values from 0 to 1
     private Vector2f size; //Values from 0 to 1
-    private int guiDepartment = -1;
+    private GUIScreen screen; //The GUI screen to display this element on
 
     public GUIElement(Vector2f posInPixels) {
 
@@ -74,21 +75,13 @@ public class GUIElement extends ModuleRenderable {
 
     }
 
-    public GUIElement setGUIDepartment(int department) {
-
-        guiDepartment = department;
-        return this;
-
-    }
-
     @Override
     public void onUpdate() {
         super.onUpdate();
 
-        if (guiDepartment == ObjectController.activeGUIDepartment)
+        if (GUIScreenController.isScreenActive(screen) || screen == null)
             for (GUIModule component : components)
                 component.onUpdate();
-
     }
 
     @Override
@@ -118,6 +111,11 @@ public class GUIElement extends ModuleRenderable {
 
     }
 
+    public GUIElement setGUIScreen(GUIScreen screen) {
+        this.screen = screen;
+        return this;
+    }
+
     public GUIElement addModule(GUIModule module) {
 
         components.add(module);
@@ -128,7 +126,8 @@ public class GUIElement extends ModuleRenderable {
 
     public void render() {
 
-        if (material.getTexture() == null && material.hasTexture()) material.setTextureFromName();
+        if (material.getTexture() == null && material.hasTexture())
+            material.setTextureFromName();
 
         for (GUIModule component : components) {
             component.render();
@@ -139,7 +138,8 @@ public class GUIElement extends ModuleRenderable {
     @Override
     public void addToRenderQueue() {
 
-        if (guiDepartment == ObjectController.activeGUIDepartment) Renderer.currentRenderQueue.addGUIElement(this);
+        if (GUIScreenController.isScreenActive(screen) || screen == null)
+            Renderer.currentRenderQueue.addGUIElement(this);
 
     }
 

@@ -8,6 +8,7 @@ package mEngine;
 
 import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
+import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.audio.AudioListener;
 import mEngine.gameObjects.modules.audio.AudioSource;
 import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
@@ -18,13 +19,16 @@ import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
+import mEngine.util.input.Input;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
-import static mEngine.core.GameController.runGame;
+import static mEngine.core.GameController.*;
 import static mEngine.core.ObjectController.addGameObject;
 import static mEngine.core.ObjectController.setLoadingScreen;
+import static mEngine.core.events.EventController.addEventHandler;
 
 public class Main {
 
@@ -39,6 +43,10 @@ public class Main {
         Mouse.setGrabbed(true);
 
         runGame();
+        addEventHandler("gamePaused", () -> System.out.println("Game paused"));
+        addEventHandler("gameResumed", () -> System.out.println("Game resumed"));
+
+        Input.assignKey("pauseGame", Keyboard.KEY_ESCAPE);
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
@@ -70,6 +78,17 @@ public class Main {
               .setInertia(new javax.vecmath.Vector3f(.2f, .2f, .2f))
               .setRestitution(.25f)
           )
+          .addModule(new Module() {
+
+              @Override
+              public void onUpdate() {
+                  super.onUpdate();
+                  if (Input.isKeyDown("pauseGame")) {
+                      if (isGamePaused) resumeGame();
+                      else pauseGame();
+                  }
+              }
+          })
                 /*.addModule(
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )*/

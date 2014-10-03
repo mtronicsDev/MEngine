@@ -15,7 +15,8 @@ import mEngine.util.threading.ThreadHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
 
-import static mEngine.core.ObjectController.activeGUIDepartment;
+import static mEngine.core.events.EventController.addEvent;
+import static mEngine.core.events.EventController.triggerEvent;
 
 public class GameController {
 
@@ -36,6 +37,10 @@ public class GameController {
         RuntimeHelper.initialize();
         PhysicsController.initialize();
 
+        addEvent("gamePaused");  //Gets triggered every time the game is paused
+        addEvent("gameResumed"); //Every time the game is resumed
+        addEvent("gameStopped"); //When the game is stopped
+
         ThreadHelper.startThread(new GameLoop()); //Physics and processing
         ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
 
@@ -45,25 +50,24 @@ public class GameController {
      * Pauses all game objects (no updates, still renders them)
      */
     public static void pauseGame() {
+        triggerEvent("gamePaused");
         isGamePaused = true;
     }
 
     /**
-     * Unpauses all game objects
+     * Resumes tha game and the update loop for game objects
      */
-    public static void unPauseGame() {
-
+    public static void resumeGame() {
         Mouse.setGrabbed(true);
         isGamePaused = false;
-        activeGUIDepartment = -1;
-
+        triggerEvent("gameResumed");
     }
 
     /**
      * Clears all bindings and stops the game
      */
     public static void stopGame() {
-
+        triggerEvent("gameStopped");
         AudioController.clear();
         ThreadHelper.stopAllThreads();
         System.exit(0);

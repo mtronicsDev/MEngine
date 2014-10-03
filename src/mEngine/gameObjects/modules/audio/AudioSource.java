@@ -13,13 +13,15 @@ import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.input.Keyboard;
 import paulscode.sound.SoundSystemConfig;
 
+import java.util.Random;
+
 public class AudioSource extends Module {
 
     private String sourceName;
 
     public AudioSource(String audioFileName, boolean isAmbient, boolean loop) {
 
-        sourceName = audioFileName; //TODO: Generate unique id
+        sourceName = audioFileName + new Random().nextInt();
 
         Input.assignKey("play", Keyboard.KEY_1);
         Input.assignKey("pause", Keyboard.KEY_2);
@@ -27,14 +29,14 @@ public class AudioSource extends Module {
 
         if (isAmbient) //Is the sound background music or a positional sound?
             AudioController.getSoundSystem().backgroundMusic(
-              audioFileName,
+              sourceName,
               ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
               audioFileName + ".wav",
               loop);
         else
             AudioController.getSoundSystem().newSource(
               false,
-              audioFileName,
+              sourceName,
               ResourceHelper.getResourceURL(audioFileName, ResourceHelper.RES_SOUND),
               audioFileName + ".wav",
               false,
