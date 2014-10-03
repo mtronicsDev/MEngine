@@ -18,7 +18,6 @@ import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
 import mEngine.graphics.renderable.LoadingScreen;
-import mEngine.physics.forces.ForceController;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -40,8 +39,6 @@ public class Main {
         Mouse.setGrabbed(true);
 
         runGame();
-
-        ForceController.addForce("gravity", new Vector3f(0, -9.81f, 0));
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
