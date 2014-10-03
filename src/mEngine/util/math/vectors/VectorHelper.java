@@ -6,97 +6,12 @@
 
 package mEngine.util.math.vectors;
 
-import mEngine.gameObjects.GameObject;
-import mEngine.gameObjects.modules.renderable.RenderModule;
-import mEngine.physics.collisions.primitives.Box;
-import mEngine.physics.collisions.primitives.Plane;
-import mEngine.physics.collisions.primitives.Triangle;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.awt.*;
 
 public class VectorHelper {
-
-    public static boolean isVectorOnPlane(Plane plane, Vector3f vector) {
-
-        return Math.abs(getScalarProduct(plane.normal, vector) + getScalarProduct(plane.normal, plane.position)) == 0;
-
-    }
-
-    public static float getDifferenceBetweenPlaneAndVector(Plane plane, Vector3f vector) {
-
-        return Math.abs(getScalarProduct(plane.normal, vector) + getScalarProduct(plane.normal, plane.position));
-
-    }
-
-    public static Vector3f getDifferenceVectorBetweenPlaneAndVector(Plane plane, Vector3f vector) {
-
-        return multiplyVectorByFloat(multiplyVectorByFloat(plane.normal, -1), getDifferenceBetweenPlaneAndVector(plane, vector));
-
-    }
-
-    public static Box getAABB(GameObject obj) {
-
-        RenderModule renderComponent = (RenderModule) obj.getModule(RenderModule.class);
-
-        if (renderComponent != null) {
-
-            return new Box(VectorHelper.subtractVectors(obj.position, VectorHelper.divideVectorByFloat(renderComponent.model.getSize(), 2)), renderComponent.model.getSize());
-
-        } else return new Box(obj.position, new Vector3f());
-
-    }
-
-    public static boolean isPlaneInsideBox(Plane plane, Box box) {
-
-        Vector3f middle = sumVectors(new Vector3f[]{box.position, divideVectorByFloat(box.size, 2)});
-
-        Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(plane, middle);
-        differenceVector = sumVectors(new Vector3f[]{differenceVector, middle});
-
-        if (isVectorInsideBox(differenceVector, box)) return true;
-
-        else return false;
-
-    }
-
-    public static boolean isTriangleInsideBox(Triangle triangle, Box box) {
-
-        boolean insideBox;
-
-        Vector3f middle = sumVectors(new Vector3f[]{box.position, divideVectorByFloat(box.size, 2)});
-
-        Vector3f differenceVector = getDifferenceVectorBetweenPlaneAndVector(triangle, middle);
-
-        if (isVectorInsideBox(VectorHelper.sumVectors(new Vector3f[]{middle, differenceVector}), box)) {
-
-            Vector3f directionVectorA = VectorHelper.subtractVectors(triangle.vertexB, triangle.position);
-            Vector3f directionVectorB = VectorHelper.subtractVectors(triangle.vertexC, triangle.position);
-
-            Vector3f maxVertexDifference = subtractVectors(directionVectorA, triangle.position);
-
-            if (getAbs(subtractVectors(directionVectorB, triangle.position)) > getAbs(maxVertexDifference))
-                maxVertexDifference = subtractVectors(directionVectorB, triangle.position);
-
-            insideBox = getAbs(subtractVectors(differenceVector, triangle.position)) < getAbs(maxVertexDifference);
-
-        } else insideBox = false;
-
-        return insideBox;
-
-    }
-
-    public static boolean isVectorInsideBox(Vector3f vector, Box box) {
-
-        return vector.x > box.position.x
-          && vector.x < box.position.x + box.size.x
-          && vector.y > box.position.y
-          && vector.y < box.position.y + box.size.y
-          && vector.z > box.position.z
-          && vector.z < box.position.z + box.size.z;
-
-    }
 
     public static Vector3f negateVector(Vector3f vector) {
 
