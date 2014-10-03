@@ -83,4 +83,8 @@ public class BoundingBox {
 
     }
 
+    @Override
+    public String toString() {
+        return a.toString() + " | " + b.toString();
+    }
 }

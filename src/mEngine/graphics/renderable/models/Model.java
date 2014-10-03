@@ -83,14 +83,8 @@ public class Model {
     }
 
     public Vector3f getSize() {
-
-        Vector3f size = new Vector3f();
         Vector3f[] extremeVertexPositions = getExtremeVertexPositions();
-
-        VectorHelper.subtractVectors(extremeVertexPositions[1], extremeVertexPositions[0]);
-
-        return size;
-
+        return VectorHelper.subtractVectors(extremeVertexPositions[1], extremeVertexPositions[0]);
     }
 
     private Vector3f[] getExtremeVertexPositions() {

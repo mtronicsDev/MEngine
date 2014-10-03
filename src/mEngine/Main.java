@@ -132,7 +132,15 @@ public class Main {
           .addModule(
             new AudioSource("Unity", false, true)
           )
-            //.addModule(new DebugModule())
+          .createModules());
+
+        addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f())
+          .addModule(new RenderModule("soccerBall"))
+          .addModule(new PhysicsModule(0.4f, PhysicsModule.CollisionShape.SPHERE)
+            .setDamping(.25f, .25f)
+            .setInertia(new javax.vecmath.Vector3f(.05f, .05f, .05f))
+            .setMargin(.01f)
+            .setRestitution(.02f))
           .createModules());
 
         /*addGameObject(new GameObject(new Vector3f(), new Vector3f())
