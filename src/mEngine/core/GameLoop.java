@@ -33,11 +33,12 @@ public class GameLoop {
 
                 PhysicsController.world.stepSimulation(TimeHelper.deltaTime);
 
-                for (GameObject gameObject : ObjectController.gameObjects) {
+                //Adds all new game objects that were added via ObjectController.addGameObject() to the game object list
+                ObjectController.addNewGameObjects();
 
-                    if (!Serializer.isSerializing) gameObject.update();
-
-                }
+                if (!Serializer.isSerializing)
+                    ObjectController.gameObjects.stream()
+                      .forEach(GameObject::update);
 
             }
 

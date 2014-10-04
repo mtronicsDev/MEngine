@@ -15,6 +15,7 @@ import java.util.List;
 public class ObjectController {
 
     public static List<GameObject> gameObjects = new ArrayList<GameObject>();
+    static List<GameObject> gameObjectsToAdd = new ArrayList<>();
     private static LoadingScreen loadingScreen;
 
     /**
@@ -23,7 +24,7 @@ public class ObjectController {
      * @param object The game object to add to the list
      */
     public static void addGameObject(GameObject object) {
-        gameObjects.add(object);
+        gameObjectsToAdd.add(object);
     }
 
     /**
@@ -54,6 +55,15 @@ public class ObjectController {
      */
     public static void setLoadingScreen(LoadingScreen screen) {
         loadingScreen = screen;
+    }
+
+    static void addNewGameObjects() {
+        if (gameObjectsToAdd.size() > 0) {
+            gameObjectsToAdd.stream()
+              .forEach(gameObjects::add);
+
+            gameObjectsToAdd.clear();
+        }
     }
 
 }
