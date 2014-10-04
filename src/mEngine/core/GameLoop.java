@@ -35,6 +35,8 @@ public class GameLoop {
 
                 //Adds all new game objects that were added via ObjectController.addGameObject() to the game object list
                 ObjectController.addNewGameObjects();
+                //Removes all game objects that should be removed
+                ObjectController.removeGameObjects();
 
                 if (!Serializer.isSerializing)
                     ObjectController.gameObjects.stream()

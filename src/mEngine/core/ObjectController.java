@@ -16,6 +16,7 @@ public class ObjectController {
 
     public static List<GameObject> gameObjects = new ArrayList<GameObject>();
     private static List<GameObject> gameObjectsToAdd = new ArrayList<>();
+    private static List<GameObject> gameObjectsToRemove = new ArrayList<>();
     private static LoadingScreen loadingScreen;
 
     /**
@@ -25,6 +26,10 @@ public class ObjectController {
      */
     public static void addGameObject(GameObject object) {
         gameObjectsToAdd.add(object);
+    }
+
+    public static void removeGameObject(GameObject object) {
+        gameObjectsToRemove.add(object);
     }
 
     /**
@@ -55,6 +60,15 @@ public class ObjectController {
      */
     public static void setLoadingScreen(LoadingScreen screen) {
         loadingScreen = screen;
+    }
+
+    static void removeGameObjects() {
+        if (gameObjectsToRemove.size() > 0) {
+            gameObjectsToRemove.stream()
+              .forEach(gameObjects::remove);
+
+            gameObjectsToRemove.clear();
+        }
     }
 
     static void addNewGameObjects() {
