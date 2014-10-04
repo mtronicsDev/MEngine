@@ -61,36 +61,24 @@ public class Main {
 
         //GameObject Time ;)
         addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
-          .addModule(
-            new MovementModule()
-          )
-          .addModule(
-            new RenderModule("sphere")
-          )
+          .addModule(new MovementModule())
+          .addModule(new RenderModule("sphere"))
           .addModule(
             new ControllerKeyboardMouse(
-              new float[]{12, 10, 10, 10, 10, 10, 29}, //forward, backward, left, right, down, up, jump
+              new float[]{120, 100, 100, 100, 100, 100, 290}, //forward, backward, left, right, down, up, jump
               true //Can fly
             )
           )
-          .addModule(
-            new Skybox("peaks")
-          )
-          .addModule(
-            new Camera()
-          )
-          .addModule(
-            new AudioListener()
-          )
+          .addModule(new Skybox("peaks"))
+          .addModule(new Camera())
+          .addModule(new AudioListener())
           .addModule(
             new PhysicsModule(60, PhysicsModule.CollisionShape.SPHERE)
               .setDamping(.5f, .5f)
               .setMargin(.1f)
               .setInertia(new javax.vecmath.Vector3f(.2f, .2f, .2f))
-              .setRestitution(.25f)
-          )
+              .setRestitution(.25f))
           .addModule(new Module() {
-
               @Override
               public void onUpdate() {
                   super.onUpdate();
@@ -102,68 +90,21 @@ public class Main {
           })
           .addModule(new GUIElement(new Vector2f(GraphicsController.getWidth() - 100, 50), new Vector2f(50, 50))
             .setGUIScreen(menuScreen)
-            .addModule(new GUIButton(GameController::stopGame))
+            .addModule(new GUIButton()
+              .setEventHandler(GUIButton.ButtonEvent.DOWN, GameController::stopGame))
             .addModule(new GUIQuad())
             .setMaterial((Material2D) new Material2D().setTextureName("gui/x")))
-                /*.addModule(
-                        new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
-                )*/
-                /*.addModule(
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 32, Display.getHeight() / 2 - 32), new Vector2f(64, 64), "reticule")
-                                .addModule(new GUIQuad())
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 5), new Vector2f()).addModule(new FPSTextModule("Current FPS", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 25), new Vector2f()).addModule(new TPSTextModule("Current TPS", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 45), new Vector2f()).addModule(new RAMTextModule("Current RAM", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 85), new Vector2f()).addModule(new PositionXTextModule("x Position", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 105), new Vector2f()).addModule(new PositionYTextModule("y Position", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 125), new Vector2f()).addModule(new PositionZTextModule("z Position", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 165), new Vector2f()).addModule(new VertexCountTextModule("vertices", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(5, 185), new Vector2f()).addModule(new FaceCountTextModule("faces", 15))
-                )
-                .addModule(
-                        new GUIElement(new Vector2f(Display.getWidth() / 2 - 125, Display.getHeight() / 2 - 50), new Vector2f(250, 100), "graph").setGUIDepartment(0)
-                                .addModule(new GUIButton(
-                                        new ButtonPressAction() {
-                                            @Override
-                                            public void pressed() {
-                                                unPauseGame();
-                                            }
-                                        }
-                                ))
-                                .addModule(new GUIQuad())
-                )*/
           .createModules());
 
         addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f())
-          .addModule(
-            new RenderModule("sphere")
-          )
+          .addModule(new RenderModule("sphere"))
           .addModule(
             new PhysicsModule(10, PhysicsModule.CollisionShape.SPHERE)
               .setDamping(.5f, .5f)
               .setMargin(.1f)
               .setInertia(new javax.vecmath.Vector3f(.2f, .2f, .2f))
-              .setRestitution(.25f)
-          )
-          .addModule(
-            new AudioSource("Unity", false, true)
-          )
+              .setRestitution(.25f))
+          .addModule(new AudioSource("Unity", false, true))
           .createModules());
 
         addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f())
@@ -186,38 +127,32 @@ public class Main {
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 0, 1))
               .setSpecularLighting(false)
               .setDependent(false)
-              .setShadowThrowing(false)
-          )
+              .setShadowThrowing(false))
           .addModule(
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 0, -1))
               .setSpecularLighting(false)
               .setDependent(false)
-              .setShadowThrowing(false)
-          )
+              .setShadowThrowing(false))
           .addModule(
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 1, 0))
               .setSpecularLighting(false)
               .setDependent(false)
-              .setShadowThrowing(false)
-          )
+              .setShadowThrowing(false))
           .addModule(
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, -1, 0))
               .setSpecularLighting(false)
               .setDependent(false)
-              .setShadowThrowing(false)
-          )
+              .setShadowThrowing(false))
           .addModule(
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(1, 0, 0))
               .setSpecularLighting(false)
               .setDependent(false)
-              .setShadowThrowing(false)
-          )
+              .setShadowThrowing(false))
           .addModule(
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(-1, 0, 0))
               .setSpecularLighting(false)
               .setDependent(false)
-              .setShadowThrowing(false)
-          )
+              .setShadowThrowing(false))
           .createModules());
 
         GameController.isLoading = false;

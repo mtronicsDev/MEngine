@@ -9,6 +9,7 @@ package mEngine.graphics.renderable.materials;
 import mEngine.graphics.renderable.textures.Texture;
 import mEngine.util.rendering.TextureHelper;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.TextureImpl;
 
 import java.io.Serializable;
 
@@ -17,6 +18,13 @@ public abstract class Material implements Serializable {
     public Texture texture;
     public String textureName;
     public Color color = new Color(Color.white);
+
+    /**
+     * Releases the texture from the render context, prevents textures leaking onto other objects
+     */
+    public static void release() {
+        TextureImpl.bindNone();
+    }
 
     /**
      * Returns the material texture
@@ -119,10 +127,8 @@ public abstract class Material implements Serializable {
      * Automatically gets unbound when another material is bound
      */
     public void bind() {
-
         if (texture != null) texture.getTexture().bind();
         else if (color != null) color.bind();
-
     }
 
 }

@@ -20,31 +20,12 @@ public class GUIButton extends GUIModule {
 
     private boolean buttonHovered;
     private boolean previouslyPressed = false;
+    private boolean previouslyHovered = false;
     private int id; //For event ids to be unique
-    private boolean[] eventHandlersEnabled = new boolean[4];
+    private boolean[] triggerEnabled = new boolean[6];
 
-    public GUIButton(EventHandler down) {
+    public GUIButton() {
         id = new Random().nextInt();
-        addEvent(id + "-down");
-        addEventHandler(id + "-down", down);
-        eventHandlersEnabled[0] = true;
-    }
-
-    public GUIButton(EventHandler down, EventHandler up, EventHandler pressed, EventHandler hovered) {
-        id = new Random().nextInt();
-        addEvent(id + "-down");
-        addEvent(id + "-up");
-        addEvent(id + "-pressed");
-        addEvent(id + "-hovered");
-
-        addEventHandler(id + "-down", down);
-        addEventHandler(id + "-up", up);
-        addEventHandler(id + "-pressed", pressed);
-        addEventHandler(id + "-hovered", hovered);
-
-        for (int i = 0; i < eventHandlersEnabled.length; i++) {
-            eventHandlersEnabled[i] = true;
-        }
     }
 
     public void onUpdate() {
@@ -53,13 +34,26 @@ public class GUIButton extends GUIModule {
         buttonHovered = isButtonHovered();
         boolean buttonPressed = isButtonPressed();
 
-        if (buttonHovered) if (eventHandlersEnabled[3]) triggerEvent(id + "-hovered");
-        if (buttonPressed) if (eventHandlersEnabled[2]) triggerEvent(id + "-pressed");
-        if (isButtonReleased()) if (eventHandlersEnabled[1]) triggerEvent(id + "-up");
-        if (isButtonActivated()) if (eventHandlersEnabled[0]) triggerEvent(id + "-down");
+        if (buttonPressed && triggerEnabled[0]) triggerEvent(id + "-pressed");
+        if (isButtonDown() && triggerEnabled[1]) triggerEvent(id + "-down");
+        if (isButtonUp() && triggerEnabled[2]) triggerEvent(id + "-up");
+        if (buttonHovered && triggerEnabled[3]) triggerEvent(id + "-hovered");
+        if (isButtonEntered() && triggerEnabled[4]) triggerEvent(id + "-entered");
+        if (isButtonExited() && triggerEnabled[5]) triggerEvent(id + "-exited");
 
         previouslyPressed = buttonPressed;
+        previouslyHovered = buttonHovered;
 
+    }
+
+    public GUIButton setEventHandler(ButtonEvent trigger, EventHandler handler) {
+        triggerEnabled[trigger.ordinal()] = true;
+        String event = id + "-" + trigger.name;
+
+        addEvent(event);
+        addEventHandler(event, handler);
+
+        return this;
     }
 
     private boolean isButtonHovered() {
@@ -69,21 +63,46 @@ public class GUIButton extends GUIModule {
 
     }
 
+    private boolean isButtonEntered() {
+        return isButtonHovered() && !previouslyHovered;
+    }
+
+    private boolean isButtonExited() {
+        return !isButtonHovered() && previouslyHovered;
+    }
+
     private boolean isButtonPressed() {
 
         return Input.isButtonPressed(0) && buttonHovered;
 
     }
 
-    private boolean isButtonReleased() {
+    private boolean isButtonUp() {
 
         return Input.isButtonUp(0) && previouslyPressed;
 
     }
 
-    private boolean isButtonActivated() {
+    private boolean isButtonDown() {
 
         return isButtonPressed() && !previouslyPressed;
+
+    }
+
+    public enum ButtonEvent {
+        PRESSED("pressed"),
+        DOWN("down"),
+        UP("up"),
+
+        HOVERED("hovered"),
+        ENTERED("entered"),
+        EXITED("exited");
+
+        private String name;
+
+        private ButtonEvent(String name) {
+            this.name = name;
+        }
 
     }
 

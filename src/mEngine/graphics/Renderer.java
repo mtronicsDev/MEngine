@@ -9,6 +9,7 @@ package mEngine.graphics;
 import mEngine.gameObjects.modules.renderable.light.DirectionalLightSource;
 import mEngine.gameObjects.modules.renderable.light.LightSource;
 import mEngine.gameObjects.modules.renderable.light.SpotLightSource;
+import mEngine.graphics.renderable.materials.Material;
 import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.graphics.renderable.materials.Material3D;
 import mEngine.util.math.MathHelper;
@@ -132,7 +133,7 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboTextureHandle);
 
-        org.newdawn.slick.opengl.TextureImpl.bindNone();
+        Material.release();
 
         glEndList();
 
@@ -207,7 +208,7 @@ public class Renderer {
             glDeleteBuffers(vboNormalHandle);
             glDeleteBuffers(vboVertexHandle);
 
-            org.newdawn.slick.opengl.TextureImpl.bindNone();
+            Material.release();
 
             glEndList();
 
@@ -285,7 +286,7 @@ public class Renderer {
             glDeleteBuffers(vboNormalHandle);
             glDeleteBuffers(vboTextureHandle);
 
-            org.newdawn.slick.opengl.TextureImpl.bindNone();
+            Material.release();
 
             glEndList();
 
@@ -353,7 +354,7 @@ public class Renderer {
         glDeleteBuffers(vboNormalHandle);
         glDeleteBuffers(vboVertexHandle);
 
-        org.newdawn.slick.opengl.TextureImpl.bindNone();
+        Material.release();
 
         glEndList();
 
@@ -520,7 +521,7 @@ public class Renderer {
         if (GraphicsController.isBlackAndWhite)
             glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
-        org.newdawn.slick.opengl.TextureImpl.bindNone();
+        Material.release();
 
         ShaderHelper.useNoShader();
 
@@ -629,7 +630,7 @@ public class Renderer {
         if (GraphicsController.isBlackAndWhite || !material.hasTexture())
             glUniform4f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "color"), 0, 0, 0, 0);
 
-        org.newdawn.slick.opengl.TextureImpl.bindNone();
+        Material.release();
 
         ShaderHelper.useNoShader();
 
@@ -694,7 +695,7 @@ public class Renderer {
         glDeleteBuffers(vboVertexHandle);
         glDeleteBuffers(vboTextureHandle);
 
-        org.newdawn.slick.opengl.TextureImpl.bindNone();
+        Material.release();
 
     }
 
