@@ -15,7 +15,7 @@ import java.util.List;
 public class ObjectController {
 
     public static List<GameObject> gameObjects = new ArrayList<GameObject>();
-    static List<GameObject> gameObjectsToAdd = new ArrayList<>();
+    private static List<GameObject> gameObjectsToAdd = new ArrayList<>();
     private static LoadingScreen loadingScreen;
 
     /**
