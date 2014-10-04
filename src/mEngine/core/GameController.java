@@ -43,8 +43,8 @@ public class GameController {
         addEvent("gameResumed"); //Every time the game is resumed
         addEvent("gameStopped"); //When the game is stopped
 
-        ThreadHelper.startThread(GameLoop::startLoop); //Physics and processing
-        ThreadHelper.startThread(RenderLoop::startLoop); //Graphics and rendering
+        ThreadHelper.startThread(GameLoop::startLoop, "mengine-GameLoop"); //Physics and processing
+        ThreadHelper.startThread(RenderLoop::startLoop, "mengine-RenderLoop"); //Graphics and rendering
 
     }
 
