@@ -13,11 +13,6 @@ package mEngine.core.events;
 public interface EventHandler {
 
     /**
-     * The event this handler is bound to
-     */
-    public String event = "";
-
-    /**
      * The action that should be performed once the bound event is triggered
      */
     void handle();

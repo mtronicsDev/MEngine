@@ -12,16 +12,24 @@ import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.audio.AudioListener;
 import mEngine.gameObjects.modules.audio.AudioSource;
 import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
+import mEngine.gameObjects.modules.gui.GUIElement;
+import mEngine.gameObjects.modules.gui.modules.GUIQuad;
+import mEngine.gameObjects.modules.gui.modules.buttons.GUIButton;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.physics.PhysicsModule;
 import mEngine.gameObjects.modules.renderable.Camera;
 import mEngine.gameObjects.modules.renderable.RenderModule;
 import mEngine.gameObjects.modules.renderable.Skybox;
 import mEngine.gameObjects.modules.renderable.light.GlobalLightSource;
+import mEngine.graphics.GraphicsController;
+import mEngine.graphics.gui.GUIScreen;
+import mEngine.graphics.gui.GUIScreenController;
 import mEngine.graphics.renderable.LoadingScreen;
+import mEngine.graphics.renderable.materials.Material2D;
 import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
@@ -43,8 +51,11 @@ public class Main {
         Mouse.setGrabbed(true);
 
         runGame();
-        addEventHandler("gamePaused", () -> System.out.println("Game paused"));
-        addEventHandler("gameResumed", () -> System.out.println("Game resumed"));
+        addEventHandler("gamePaused", () -> Mouse.setGrabbed(false));
+        addEventHandler("gameResumed", () -> Mouse.setGrabbed(true));
+
+        GUIScreen menuScreen = new GUIScreen("gamePaused", "gameResumed");
+        GUIScreenController.addGUIScreen(menuScreen);
 
         Input.assignKey("pauseGame", Keyboard.KEY_ESCAPE);
 
@@ -89,6 +100,11 @@ public class Main {
                   }
               }
           })
+          .addModule(new GUIElement(new Vector2f(GraphicsController.getWidth() - 100, 50), new Vector2f(50, 50))
+            .setGUIScreen(menuScreen)
+            .addModule(new GUIButton(GameController::stopGame))
+            .addModule(new GUIQuad())
+            .setMaterial((Material2D) new Material2D().setTextureName("gui/x")))
                 /*.addModule(
                         new SpotLightSource(200, new Vector4f(255, 255, 255, 1), new Vector3f(), 25, 1)
                 )*/

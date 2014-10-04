@@ -21,8 +21,9 @@ public class ThreadHelper {
     public static void startThread(Runnable thread) {
 
         //Adds the desired thread to the list and starts it
-        threads.add(new Thread(thread));
-        threads.get(threads.size() - 1).start();
+        Thread newThread = new Thread(thread);
+        threads.add(newThread);
+        newThread.start();
 
     }
 

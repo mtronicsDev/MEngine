@@ -124,6 +124,11 @@ public class GUIElement extends ModuleRenderable {
 
     }
 
+    public GUIElement setMaterial(Material2D material) {
+        this.material = material;
+        return this;
+    }
+
     public void render() {
 
         if (material.getTexture() == null && material.hasTexture())
