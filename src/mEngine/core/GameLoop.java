@@ -12,12 +12,12 @@ import mEngine.util.serialization.Serializer;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.opengl.Display;
 
-public class GameLoop implements Runnable {
+public class GameLoop {
 
     /**
      * Runs the update loop
      */
-    public void run() {
+    public static void startLoop() {
 
         //Waiting for Display creation
         while (!Display.isCreated()) {

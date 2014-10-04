@@ -9,6 +9,7 @@ package mEngine.core;
 import mEngine.audio.AudioController;
 import mEngine.physics.PhysicsController;
 import mEngine.util.debug.RuntimeHelper;
+import mEngine.util.input.Input;
 import mEngine.util.resources.PreferenceHelper;
 import mEngine.util.resources.ResourceHelper;
 import mEngine.util.threading.ThreadHelper;
@@ -32,6 +33,7 @@ public class GameController {
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
+        Input.initialize();
         AudioController.initialize();
         TimeHelper.initialize();
         RuntimeHelper.initialize();
@@ -41,8 +43,8 @@ public class GameController {
         addEvent("gameResumed"); //Every time the game is resumed
         addEvent("gameStopped"); //When the game is stopped
 
-        ThreadHelper.startThread(new GameLoop()); //Physics and processing
-        ThreadHelper.startThread(new RenderLoop()); //Graphics and rendering
+        ThreadHelper.startThread(GameLoop::startLoop); //Physics and processing
+        ThreadHelper.startThread(RenderLoop::startLoop); //Graphics and rendering
 
     }
 

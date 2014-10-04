@@ -6,6 +6,7 @@
 
 package mEngine.util.input;
 
+import mEngine.util.math.MathHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -14,9 +15,18 @@ import java.util.Map;
 
 public class Input {
 
-    private static Map<String, Integer> keyAssignments = new HashMap<String, Integer>();
-    private static boolean[] keyStats = new boolean[Keyboard.getKeyCount()];
-    private static boolean[] buttonStats = new boolean[Mouse.getButtonCount()];
+    private static Map<String, Integer> keyAssignments;
+    private static boolean[] keyStates;
+    private static boolean[] buttonStates;
+
+    /**
+     * Initializes the state arrays and the map of key assignments
+     */
+    public static void initialize() {
+        keyAssignments = new HashMap<>();
+        keyStates = new boolean[Keyboard.getKeyCount()];
+        buttonStates = new boolean[(int) MathHelper.clampMin(Mouse.getButtonCount(), 3)];
+    }
 
     /**
      * Tells you if a certain key is currently in the "pressed" or "down" state
@@ -50,9 +60,9 @@ public class Input {
      */
     public static boolean isKeyDown(String key) {
 
-        boolean isAlreadyActivated = keyStats[keyAssignments.get(key)];
-        keyStats[keyAssignments.get(key)] = isKeyPressed(key);
-        return keyStats[keyAssignments.get(key)] != isAlreadyActivated && !isAlreadyActivated;
+        boolean isAlreadyActivated = keyStates[keyAssignments.get(key)];
+        keyStates[keyAssignments.get(key)] = isKeyPressed(key);
+        return keyStates[keyAssignments.get(key)] != isAlreadyActivated && !isAlreadyActivated;
 
     }
 
@@ -64,9 +74,9 @@ public class Input {
      */
     public static boolean isButtonDown(int button) {
 
-        boolean isAlreadyActivated = buttonStats[button];
-        buttonStats[button] = isButtonPressed(button);
-        return buttonStats[button] != isAlreadyActivated && !isAlreadyActivated;
+        boolean isAlreadyActivated = buttonStates[button];
+        buttonStates[button] = isButtonPressed(button);
+        return buttonStates[button] != isAlreadyActivated && !isAlreadyActivated;
 
     }
 
@@ -78,9 +88,9 @@ public class Input {
      */
     public static boolean isKeyUp(String key) {
 
-        boolean isAlreadyActivated = keyStats[keyAssignments.get(key)];
-        keyStats[keyAssignments.get(key)] = isKeyPressed(key);
-        return keyStats[keyAssignments.get(key)] != isAlreadyActivated && isAlreadyActivated;
+        boolean isAlreadyActivated = keyStates[keyAssignments.get(key)];
+        keyStates[keyAssignments.get(key)] = isKeyPressed(key);
+        return keyStates[keyAssignments.get(key)] != isAlreadyActivated && isAlreadyActivated;
 
     }
 
@@ -92,9 +102,9 @@ public class Input {
      */
     public static boolean isButtonUp(int button) {
 
-        boolean isAlreadyActivated = buttonStats[button];
-        buttonStats[button] = isButtonPressed(button);
-        return buttonStats[button] != isAlreadyActivated && isAlreadyActivated;
+        boolean isAlreadyActivated = buttonStates[button];
+        buttonStates[button] = isButtonPressed(button);
+        return buttonStates[button] != isAlreadyActivated && isAlreadyActivated;
 
     }
 
@@ -106,7 +116,7 @@ public class Input {
      */
     public static void assignKey(String name, int keycode) {
         keyAssignments.put(name, keycode);
-        keyStats[keycode] = false;
+        keyStates[keycode] = false;
     }
 
     /**

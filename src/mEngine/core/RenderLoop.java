@@ -15,13 +15,12 @@ import mEngine.util.serialization.Serializer;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.opengl.Display;
 
-public class RenderLoop implements Runnable {
+public class RenderLoop {
 
     /**
      * Creates a new OpenGL window, sets the standard shader and runs the render loop
      */
-    @Override
-    public void run() {
+    public static void startLoop() {
 
         GraphicsController.createDisplay();
         ShaderHelper.addShader("lighting");
