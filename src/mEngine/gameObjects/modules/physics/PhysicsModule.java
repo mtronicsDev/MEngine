@@ -136,6 +136,17 @@ public class PhysicsModule extends Module {
     }
 
     /**
+     * Changes the gravity vector for this specific physics module
+     *
+     * @param gravity The new gravity vector
+     * @return The physics module, for easy chaining
+     */
+    public PhysicsModule setGravity(Vector3f gravity) {
+        body.setGravity(gravity);
+        return this;
+    }
+
+    /**
      * Sets the collision margin for the rigid body, increases performance significantly
      *
      * @param margin The margin to use, the higher, the more obvious it will be
