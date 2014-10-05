@@ -64,8 +64,8 @@ public class ObjectController {
 
     static void removeGameObjects() {
         if (gameObjectsToRemove.size() > 0) {
-            gameObjectsToRemove.stream()
-              .forEach(gameObjects::remove);
+            gameObjectsToRemove
+              .forEach(GameObject::destroy);
 
             gameObjectsToRemove.clear();
         }

@@ -6,6 +6,7 @@
 
 package mEngine.gameObjects;
 
+import mEngine.core.ObjectController;
 import mEngine.gameObjects.modules.Module;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.physics.PhysicsModule;
@@ -192,6 +193,14 @@ public class GameObject implements Serializable {
 
         return equalingModule;
 
+    }
+
+    /**
+     * Executes onDestroy() in all modules and removes the game object from the list
+     */
+    public void destroy() {
+        modules.forEach(Module::onDestroy);
+        ObjectController.gameObjects.remove(this);
     }
 
     /**
