@@ -27,7 +27,6 @@ public class GameLoop {
         while (!Display.isCloseRequested() && !Thread.interrupted()) {
 
             TimeHelper.updateDeltaTime();
-            if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
 
             if (!GameController.isLoading) {
 
@@ -42,7 +41,7 @@ public class GameLoop {
                     ObjectController.gameObjects.stream()
                       .forEach(GameObject::update);
 
-            }
+            } else if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
 
             TimeHelper.updateTPS();
 
