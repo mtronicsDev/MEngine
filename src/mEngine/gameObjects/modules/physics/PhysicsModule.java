@@ -110,6 +110,9 @@ public class PhysicsModule extends Module {
 
     }
 
+    /**
+     * Transfers the calculated position to the game object
+     */
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -121,6 +124,15 @@ public class PhysicsModule extends Module {
           new org.lwjgl.util.vector.Vector3f(transform.origin.x, transform.origin.y, transform.origin.z);
 
         parent.position = new org.lwjgl.util.vector.Vector3f(position);
+    }
+
+    /**
+     * Destroys the module and removes the rigid body
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        PhysicsController.world.removeRigidBody(body);
     }
 
     /**
