@@ -33,9 +33,4 @@ Download compiled versions
     <td><a href="http://84.201.32.134:8111/repository/downloadAll/mEngine_BuildDefault/.lastSuccessful">Download</a></td>
     <td>The best choice for game development</td>
   </tr>
-  <tr>
-    <td>Sources</td>
-    <td><a href="https://github.com/mGameLabs/mengine">GitHub Repository</a></td>
-    <td>Download if you want to work on mengine yourself</td>
-  </tr>
 </table>
