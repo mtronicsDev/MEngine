@@ -14,3 +14,23 @@ Support us
 * Contribute via Pull Requests
 * Make games and share those
 * Write or record tutorials for mengine
+
+Download compiled versions
+-----
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Download</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Latest build</td>
+    <td><a href="http://84.201.32.134:8111/repository/downloadAll/mEngine_BuildDefault/.lastFinished">Download</a></td>
+    <td>May be unstable</td>
+  </tr>
+  <tr>
+    <td>Latest successful build</td>
+    <td><a href="http://84.201.32.134:8111/repository/downloadAll/mEngine_BuildDefault/.lastSuccessful">Download</a></td>
+    <td>The best choice for game development</td>
+  </tr>
+</table>

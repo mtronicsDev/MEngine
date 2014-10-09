@@ -1,8 +1,7 @@
 mEngine Documentation
 =====
 
-Everything that was inside here is now completely use- and senseless because there will be a development kit for mEngine.
-This documentation will be written seriously as soon as we find our motivation.
+* JavaDoc: http://mgamelabs.github.io/mengine/
+* Wiki & Tutorials: https://github.com/mGameLabs/mengine/wiki
 
-
-
+Note that the JavaDoc page only gets updated manually and therefore it can take some time until new changes are in the documentation.
