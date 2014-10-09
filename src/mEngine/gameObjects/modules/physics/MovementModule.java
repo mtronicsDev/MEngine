@@ -47,7 +47,7 @@ public class MovementModule extends Module {
 
     public void onUpdate() {
 
-        if (!GameController.isGamePaused) {
+        if (!GameController.isGamePaused()) {
 
             Controller controller = (Controller) parent.getModule(Controller.class);
 

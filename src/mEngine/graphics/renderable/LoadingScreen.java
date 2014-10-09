@@ -6,8 +6,8 @@
 
 package mEngine.graphics.renderable;
 
-import mEngine.core.GameController;
 import mEngine.graphics.Renderer;
+import mEngine.graphics.gui.GUIScreen;
 import mEngine.graphics.renderable.materials.Material2D;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -15,14 +15,21 @@ import org.lwjgl.util.vector.Vector2f;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadingScreen {
+public class LoadingScreen extends GUIScreen {
 
-    public boolean active;
+    public boolean active = true;
     Material2D material;
     List<Vector2f> vertices;
     List<Vector2f> uvs;
 
+    /**
+     * Default constructor for loading screens
+     *
+     * @param textureName The background texture of the loading screen
+     */
     public LoadingScreen(String textureName) {
+
+        super("loadingStarted", "loadingStopped");
 
         material = new Material2D();
         material.setTextureName(textureName);
@@ -36,6 +43,9 @@ public class LoadingScreen {
 
     }
 
+    /**
+     * Calculates size and position (centered)
+     */
     private void calculateVertexPositions() {
 
         int ox = material.getTexture().getTexture().getImageWidth() / 2; //Offset x
@@ -56,17 +66,15 @@ public class LoadingScreen {
 
     public void render() {
 
-        if (material.getTexture() == null) {
-            material.setTextureFromName();
-            calculateVertexPositions();
+        if (active) {
+            if (material.getTexture() == null) {
+                material.setTextureFromName();
+                calculateVertexPositions();
+            }
+
+            Renderer.renderObject2D(vertices, uvs, material, Renderer.RENDER_QUADS);
         }
 
-        Renderer.renderObject2D(vertices, uvs, material, Renderer.RENDER_QUADS);
-
-    }
-
-    public void update() {
-        active = GameController.isLoading;
     }
 
 }

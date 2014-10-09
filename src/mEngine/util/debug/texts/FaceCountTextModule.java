@@ -17,10 +17,8 @@ import mEngine.gameObjects.modules.renderable.Terrain;
 
 public class FaceCountTextModule extends GUIText {
 
-    public FaceCountTextModule(String text, int fontSize) {
-
-        super(text, fontSize);
-
+    public FaceCountTextModule(int fontSize) {
+        super("FAC", fontSize);
     }
 
     @Override
@@ -36,11 +34,8 @@ public class FaceCountTextModule extends GUIText {
 
                 if (module instanceof RenderModule)
                     faceCount += ((RenderModule) module).model.getFaces().size();
-
                 else if (module instanceof Terrain) faceCount += ((Terrain) module).model.getFaces().size();
-
                 else if (module instanceof Particle) faceCount++;
-
                 else if (module instanceof Skybox) faceCount += 6;
 
             }

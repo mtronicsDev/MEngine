@@ -11,10 +11,8 @@ import mEngine.util.time.TimeHelper;
 
 public class FPSTextModule extends GUIText {
 
-    public FPSTextModule(String text, int fontSize) {
-
-        super(text, fontSize);
-
+    public FPSTextModule(int fontSize) {
+        super("FPS", fontSize);
     }
 
     @Override

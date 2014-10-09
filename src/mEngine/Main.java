@@ -26,6 +26,7 @@ import mEngine.graphics.gui.GUIScreen;
 import mEngine.graphics.gui.GUIScreenController;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.graphics.renderable.materials.Material2D;
+import mEngine.util.debug.texts.*;
 import mEngine.util.input.Input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -36,6 +37,7 @@ import org.lwjgl.util.vector.Vector4f;
 import static mEngine.core.GameController.*;
 import static mEngine.core.ObjectController.addGameObject;
 import static mEngine.core.ObjectController.setLoadingScreen;
+import static mEngine.core.events.EventController.addEvent;
 import static mEngine.core.events.EventController.addEventHandler;
 
 public class Main {
@@ -47,6 +49,10 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        addEvent("gameStarted");
+        addEvent("loadingStarted");
+        addEvent("loadingStopped");
+
         setLoadingScreen(new LoadingScreen("loadingScreen"));
         Mouse.setGrabbed(true);
 
@@ -55,7 +61,9 @@ public class Main {
         addEventHandler("gameResumed", () -> Mouse.setGrabbed(true));
 
         GUIScreen menuScreen = new GUIScreen("gamePaused", "gameResumed");
+        GUIScreen inGame = new GUIScreen("gameResumed", "gamePaused", true);
         GUIScreenController.addGUIScreen(menuScreen);
+        GUIScreenController.addGUIScreen(inGame);
 
         Input.assignKey("pauseGame", Keyboard.KEY_ESCAPE);
 
@@ -72,6 +80,11 @@ public class Main {
           .addModule(new Skybox("peaks"))
           .addModule(new Camera())
           .addModule(new AudioListener())
+          .addModule(new GUIElement(new Vector2f(5, 5)).addModule(new FPSTextModule(12)).setGUIScreen(inGame))
+          .addModule(new GUIElement(new Vector2f(5, 19)).addModule(new TPSTextModule(12)).setGUIScreen(inGame))
+          .addModule(new GUIElement(new Vector2f(5, 33)).addModule(new RAMTextModule(12)).setGUIScreen(inGame))
+          .addModule(new GUIElement(new Vector2f(5, 47)).addModule(new VertexCountTextModule(12)).setGUIScreen(inGame))
+          .addModule(new GUIElement(new Vector2f(5, 61)).addModule(new FaceCountTextModule(12)).setGUIScreen(inGame))
           .addModule(
             new PhysicsModule(60, PhysicsModule.CollisionShape.SPHERE)
               .setDamping(.5f, .5f)
@@ -83,7 +96,7 @@ public class Main {
               public void onUpdate() {
                   super.onUpdate();
                   if (Input.isKeyDown("pauseGame")) {
-                      if (isGamePaused) resumeGame();
+                      if (isGamePaused()) resumeGame();
                       else pauseGame();
                   }
               }
@@ -116,11 +129,11 @@ public class Main {
             .setRestitution(.02f))
           .createModules());
 
-        /*addGameObject(new GameObject(new Vector3f(), new Vector3f())
+        addGameObject(new GameObject(new Vector3f(), new Vector3f())
                 .addModule(
                         new RenderModule("Sci-fi_Tropical_city")
                 )
-                .createModules());*/
+          .createModules());
 
         addGameObject(new GameObject(new Vector3f(), new Vector3f())
           .addModule(
@@ -155,7 +168,7 @@ public class Main {
               .setShadowThrowing(false))
           .createModules());
 
-        GameController.isLoading = false;
+        GameController.setLoading(false);
 
     }
 

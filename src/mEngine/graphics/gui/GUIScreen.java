@@ -23,4 +23,9 @@ public class GUIScreen {
         this.active = active;
     }
 
+    public GUIScreen(String activationEvent, String deactivationEvent, boolean active) {
+        this(activationEvent, deactivationEvent);
+        this.active = active;
+    }
+
 }

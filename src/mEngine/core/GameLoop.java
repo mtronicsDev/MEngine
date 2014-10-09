@@ -28,7 +28,7 @@ public class GameLoop {
 
             TimeHelper.updateDeltaTime();
 
-            if (!GameController.isLoading) {
+            if (!GameController.isLoading()) {
 
                 PhysicsController.world.stepSimulation(TimeHelper.deltaTime);
 
@@ -41,7 +41,7 @@ public class GameLoop {
                     ObjectController.gameObjects.stream()
                       .forEach(GameObject::update);
 
-            } else if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().update();
+            }
 
             TimeHelper.updateTPS();
 

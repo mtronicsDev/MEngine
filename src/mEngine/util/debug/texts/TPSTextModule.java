@@ -11,10 +11,8 @@ import mEngine.util.time.TimeHelper;
 
 public class TPSTextModule extends GUIText {
 
-    public TPSTextModule(String text, int fontSize) {
-
-        super(text, fontSize);
-
+    public TPSTextModule(int fontSize) {
+        super("TPS", fontSize);
     }
 
     @Override

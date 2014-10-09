@@ -7,6 +7,7 @@
 package mEngine.core;
 
 import mEngine.audio.AudioController;
+import mEngine.core.events.EventController;
 import mEngine.physics.PhysicsController;
 import mEngine.util.debug.RuntimeHelper;
 import mEngine.util.input.Input;
@@ -21,15 +22,19 @@ import static mEngine.core.events.EventController.triggerEvent;
 
 public class GameController {
 
-    public static boolean isGamePaused;
-    public static boolean isLoading;
+    private static boolean gamePaused;
+    private static boolean loading;
 
     /**
      * Initializes all core classes and starts the game
      */
     public static void runGame() {
 
-        isLoading = true;
+        addEvent("gameStarted");
+        addEvent("loadingStarted");
+        addEvent("loadingStopped");
+
+        setLoading(true);
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
@@ -49,11 +54,40 @@ public class GameController {
     }
 
     /**
+     * Returns if the game is paused or not
+     * @return True if paused, false if not
+     */
+    public static boolean isGamePaused() {
+        return gamePaused;
+    }
+
+    /**
+     * Returns if the ObjectController is loading or not
+     *
+     * @return True if loading, false if not
+     */
+    public static boolean isLoading() {
+        return loading;
+    }
+
+    /**
+     * Sets the loading variable and triggers the "loadingStarted" and "loadingStopped" events
+     *
+     * @param loading
+     */
+    public static void setLoading(boolean loading) {
+        if (!GameController.loading && loading) EventController.triggerEvent("loadingStarted");
+        else if (GameController.loading && !loading) EventController.triggerEvent("loadingStopped");
+
+        GameController.loading = loading;
+    }
+
+    /**
      * Pauses all game objects (no updates, still renders them)
      */
     public static void pauseGame() {
         triggerEvent("gamePaused");
-        isGamePaused = true;
+        gamePaused = true;
     }
 
     /**
@@ -61,7 +95,7 @@ public class GameController {
      */
     public static void resumeGame() {
         Mouse.setGrabbed(true);
-        isGamePaused = false;
+        gamePaused = false;
         triggerEvent("gameResumed");
     }
 

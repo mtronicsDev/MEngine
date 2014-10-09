@@ -13,10 +13,8 @@ import static mEngine.util.math.NumberFormatHelper.cutDecimals;
 
 public class RAMTextModule extends GUIText {
 
-    public RAMTextModule(String text, int fontSize) {
-
-        super(text, fontSize);
-
+    public RAMTextModule(int fontSize) {
+        super("RAM", fontSize);
     }
 
     @Override

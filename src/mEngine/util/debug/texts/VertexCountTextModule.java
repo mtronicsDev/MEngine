@@ -17,10 +17,8 @@ import mEngine.gameObjects.modules.renderable.Terrain;
 
 public class VertexCountTextModule extends GUIText {
 
-    public VertexCountTextModule(String text, int fontSize) {
-
-        super(text, fontSize);
-
+    public VertexCountTextModule(int fontSize) {
+        super("VTX", fontSize);
     }
 
     @Override

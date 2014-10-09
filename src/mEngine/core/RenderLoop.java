@@ -30,7 +30,7 @@ public class RenderLoop {
             GraphicsController.clearScreen();
             Renderer.currentRenderQueue = new RenderQueue();
 
-            if (!GameController.isLoading) {
+            if (!GameController.isLoading()) {
 
                 if (!Serializer.isSerializing) {
 
@@ -42,7 +42,9 @@ public class RenderLoop {
 
                 Renderer.currentRenderQueue.render();
 
-            } else if (ObjectController.getLoadingScreen() != null) ObjectController.getLoadingScreen().render();
+            }
+
+            ObjectController.getLoadingScreen().render();
 
             TimeHelper.updateFPS();
             GraphicsController.update();

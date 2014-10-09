@@ -7,6 +7,7 @@
 package mEngine.core;
 
 import mEngine.gameObjects.GameObject;
+import mEngine.graphics.gui.GUIScreenController;
 import mEngine.graphics.renderable.LoadingScreen;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class ObjectController {
      */
     public static void setLoadingScreen(LoadingScreen screen) {
         loadingScreen = screen;
+        GUIScreenController.addGUIScreen(loadingScreen);
     }
 
     static void removeGameObjects() {
