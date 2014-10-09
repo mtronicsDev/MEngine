@@ -35,7 +35,6 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import static mEngine.core.GameController.*;
-import static mEngine.core.ObjectController.addGameObject;
 import static mEngine.core.ObjectController.setLoadingScreen;
 import static mEngine.core.events.EventController.addEvent;
 import static mEngine.core.events.EventController.addEventHandler;
@@ -68,7 +67,7 @@ public class Main {
         Input.assignKey("pauseGame", Keyboard.KEY_ESCAPE);
 
         //GameObject Time ;)
-        addGameObject(new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
+        new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
           .addModule(new MovementModule())
           .addModule(new RenderModule("sphere"))
           .addModule(
@@ -107,9 +106,9 @@ public class Main {
               .setEventHandler(GUIButton.ButtonEvent.DOWN, GameController::stopGame))
             .addModule(new GUIQuad())
             .setMaterial((Material2D) new Material2D().setTextureName("gui/x")))
-          .createModules());
+          .createModules();
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -20), new Vector3f())
+        new GameObject(new Vector3f(0, 0, -20), new Vector3f())
           .addModule(new RenderModule("sphere"))
           .addModule(
             new PhysicsModule(10, PhysicsModule.CollisionShape.SPHERE)
@@ -118,24 +117,24 @@ public class Main {
               .setInertia(new javax.vecmath.Vector3f(.2f, .2f, .2f))
               .setRestitution(.25f))
           .addModule(new AudioSource("Unity", false, true))
-          .createModules());
+          .createModules();
 
-        addGameObject(new GameObject(new Vector3f(0, 0, -10), new Vector3f())
+        new GameObject(new Vector3f(0, 0, -10), new Vector3f())
           .addModule(new RenderModule("soccerBall"))
           .addModule(new PhysicsModule(0.4f, PhysicsModule.CollisionShape.SPHERE)
             .setDamping(.25f, .25f)
             .setInertia(new javax.vecmath.Vector3f(.05f, .05f, .05f))
             .setMargin(.01f)
             .setRestitution(.02f))
-          .createModules());
+          .createModules();
 
-        addGameObject(new GameObject(new Vector3f(), new Vector3f())
+        new GameObject(new Vector3f(), new Vector3f())
                 .addModule(
                         new RenderModule("Sci-fi_Tropical_city")
                 )
-          .createModules());
+          .createModules();
 
-        addGameObject(new GameObject(new Vector3f(), new Vector3f())
+        new GameObject(new Vector3f(), new Vector3f())
           .addModule(
             new GlobalLightSource(50, new Vector4f(255, 255, 255, 1), new Vector3f(0, 0, 1))
               .setSpecularLighting(false)
@@ -166,7 +165,7 @@ public class Main {
               .setSpecularLighting(false)
               .setDependent(false)
               .setShadowThrowing(false))
-          .createModules());
+          .createModules();
 
         GameController.setLoading(false);
 

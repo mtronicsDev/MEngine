@@ -19,7 +19,9 @@ import org.lwjgl.util.vector.Vector3f;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class GameObject implements Serializable {
 
@@ -62,6 +64,8 @@ public class GameObject implements Serializable {
 
         boundingBox = new BoundingBox(new Vector3f(), new Vector3f()); //Empty bounding box to prevent null references
 
+        ObjectController.addGameObject(this);
+
     }
 
     /**
@@ -75,11 +79,7 @@ public class GameObject implements Serializable {
         rotation = src.rotation;
         percentRotation = src.percentRotation;
 
-        for (Module module : src.modules) {
-
-            addModule(module);
-
-        }
+        src.modules.forEach(this::addModule);
 
     }
 
@@ -87,13 +87,8 @@ public class GameObject implements Serializable {
      * Automatically called by the game loop, updates the object and its modules
      */
     public void update() {
-
-        for (Module module : modules)
-            if (!(module instanceof PhysicsModule)) module.onUpdate();
-
-        for (Module module : modules)
-            if (module instanceof PhysicsModule) module.onUpdate();
-
+        modules.stream().filter(module -> !(module instanceof PhysicsModule)).forEach(Module::onUpdate);
+        modules.stream().filter(module -> module instanceof PhysicsModule).forEach(Module::onUpdate);
     }
 
     /**
@@ -101,26 +96,14 @@ public class GameObject implements Serializable {
      * It also takes care of all of the game objects modules
      */
     public void save() {
-
-        for (Module module : modules) {
-
-            module.onSave();
-
-        }
-
+        modules.forEach(Module::onSave);
     }
 
     /**
      * This prepares the game object and its components for de-serialization (loading)
      */
     public void load() {
-
-        for (Module module : modules) {
-
-            module.onLoad();
-
-        }
-
+        modules.forEach(Module::onSave);
     }
 
     /**
@@ -137,14 +120,10 @@ public class GameObject implements Serializable {
      * This method is called by the render loop
      */
     public void addToRenderQueue() {
-
         //Adds this gameObject's models, particles and guiElements to the renderQueue
-        for (Module module : modules) {
-
-            if (module instanceof ModuleRenderable) ((ModuleRenderable) module).addToRenderQueue();
-
-        }
-
+        modules.stream()
+          .filter(module -> module instanceof ModuleRenderable)
+          .forEach(module -> ((ModuleRenderable) module).addToRenderQueue());
     }
 
     /**
@@ -154,11 +133,8 @@ public class GameObject implements Serializable {
      * @return The game object, allows for chaining module additions
      */
     public GameObject addModule(Module module) {
-
         modules.add(module);
-
         return this;
-
     }
 
     /**
@@ -167,32 +143,24 @@ public class GameObject implements Serializable {
      * @param moduleClass The module's class
      */
     public void removeModule(Class moduleClass) {
-
         Module module = getModule(moduleClass);
 
         module.onDestroy();
         modules.remove(module);
-
     }
 
     /**
      * Returns the first module of the given class in the game object's module list
      *
      * @param moduleClass The class of the desired module
-     * @return The first module with the desired class
+     * @return The first module with the desired class or null if no instance of this class is available
      */
     public Module getModule(Class moduleClass) {
-
-        Module equalingModule = null;
-
-        for (Module moduleInList : modules) {
-
-            if (moduleClass.isInstance(moduleInList)) equalingModule = moduleInList;
-
+        try {
+            return modules.stream().filter(moduleClass::isInstance).findAny().get();
+        } catch (NoSuchElementException e) {
+            return null;
         }
-
-        return equalingModule;
-
     }
 
     /**
@@ -212,29 +180,19 @@ public class GameObject implements Serializable {
     public GameObject createModules() {
 
         //Multiple for-loops because every module has to be in the gameObject's list first because of their dependencies
-        List<Module> modules = new ArrayList<Module>();
+        List<Module> modules = this.modules.stream().collect(Collectors.toList());
 
-        for (Module module : this.modules)
-            modules.add(module);
+        modules.stream()
+          .filter(module -> module instanceof RenderModule
+          ).forEach(module -> module.onCreation(this));
 
-        for (Module module : modules) {
+        modules.stream()
+          .filter(module -> module instanceof MovementModule)
+          .forEach(module -> module.onCreation(this));
 
-            if (module instanceof RenderModule) module.onCreation(this);
-
-        }
-
-        for (Module module : modules) {
-
-            if (module instanceof MovementModule) module.onCreation(this);
-
-        }
-
-        for (Module module : modules) {
-
-            if (!(module instanceof RenderModule || module instanceof MovementModule))
-                module.onCreation(this);
-
-        }
+        modules.stream()
+          .filter(module -> !(module instanceof RenderModule || module instanceof MovementModule))
+          .forEach(module -> module.onCreation(this));
 
         return this;
 
