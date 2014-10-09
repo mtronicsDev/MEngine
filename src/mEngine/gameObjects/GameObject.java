@@ -81,6 +81,7 @@ public class GameObject implements Serializable {
 
         src.modules.forEach(this::addModule);
 
+        ObjectController.addGameObject(this);
     }
 
     /**
