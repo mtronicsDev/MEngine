@@ -17,7 +17,6 @@ import mEngine.util.threading.ThreadHelper;
 import mEngine.util.time.TimeHelper;
 import org.lwjgl.input.Mouse;
 
-import static mEngine.core.events.EventController.addEvent;
 import static mEngine.core.events.EventController.triggerEvent;
 
 public class GameController {
@@ -30,10 +29,6 @@ public class GameController {
      */
     public static void runGame() {
 
-        addEvent("gameStarted");
-        addEvent("loadingStarted");
-        addEvent("loadingStopped");
-
         setLoading(true);
 
         ResourceHelper.initialize();
@@ -43,10 +38,6 @@ public class GameController {
         TimeHelper.initialize();
         RuntimeHelper.initialize();
         PhysicsController.initialize();
-
-        addEvent("gamePaused");  //Gets triggered every time the game is paused
-        addEvent("gameResumed"); //Every time the game is resumed
-        addEvent("gameStopped"); //When the game is stopped
 
         ThreadHelper.startThread(GameLoop::startLoop, "mengine-GameLoop"); //Physics and processing
         ThreadHelper.startThread(RenderLoop::startLoop, "mengine-RenderLoop"); //Graphics and rendering

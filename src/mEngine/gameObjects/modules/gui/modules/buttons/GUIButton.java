@@ -14,7 +14,8 @@ import org.lwjgl.opengl.Display;
 
 import java.util.Random;
 
-import static mEngine.core.events.EventController.*;
+import static mEngine.core.events.EventController.addEventHandler;
+import static mEngine.core.events.EventController.triggerEvent;
 
 public class GUIButton extends GUIModule {
 
@@ -50,7 +51,6 @@ public class GUIButton extends GUIModule {
         triggerEnabled[trigger.ordinal()] = true;
         String event = id + "-" + trigger.name;
 
-        addEvent(event);
         addEventHandler(event, handler);
 
         return this;

@@ -23,27 +23,19 @@ public class EventController {
 
     /**
      * Used to trigger an event.
-     * This will execute the handle() method of all event handlers assigned to the event in question
+     * This will execute the handle() method of all event handlers assigned to the event in question.
      *
      * @param event The event to trigger
      */
     public static void triggerEvent(String event) {
+        if (!events.contains(event)) events.add("event");
         eventHandlers.stream()
           .filter(handler -> eventMap.get(handler).equals(event))
           .forEach(EventHandler::handle);
     }
 
     /**
-     * Adds an event to the list, handlers have to be assigned manually
-     *
-     * @param event The event to add
-     */
-    public static void addEvent(String event) {
-        events.add(event);
-    }
-
-    /**
-     * Removes an event from the list and un-links all its handlers
+     * Removes an event from the list and un-links all its handlers.
      *
      * @param event The event to remove
      */
@@ -56,16 +48,16 @@ public class EventController {
 
     /**
      * Adds an event handler to a specific event.
-     * All handlers linked to a event will be called when the event gets triggered
+     * All handlers linked to a event will be called when the event gets triggered.
      *
      * @param event   The event to link the handler to
      * @param handler The handler to link to the event
      */
     public static void addEventHandler(String event, EventHandler handler) {
-        if (events.contains(event)) {
-            eventMap.put(handler, event);
-            eventHandlers.add(handler);
-        }
+        if (!events.contains(event)) events.add(event);
+
+        eventMap.put(handler, event);
+        eventHandlers.add(handler);
     }
 
 }

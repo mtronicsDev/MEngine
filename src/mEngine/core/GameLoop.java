@@ -38,8 +38,7 @@ public class GameLoop {
                 ObjectController.removeGameObjects();
 
                 if (!Serializer.isSerializing)
-                    ObjectController.gameObjects.stream()
-                      .forEach(GameObject::update);
+                    ObjectController.gameObjects.forEach(GameObject::update);
 
             }
 

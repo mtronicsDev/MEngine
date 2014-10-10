@@ -19,9 +19,7 @@ public class TestEvents {
 
     @Test
     public void testEvents() {
-        EventController.addEvent("testEvent");
         EventController.addEventHandler("testEvent", () -> assertTrue(true));
-        EventController.addEventHandler("notTheTestEvent", () -> assertTrue(false));
 
         EventController.triggerEvent("testEvent");
     }

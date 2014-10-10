@@ -13,7 +13,7 @@ package mEngine.core.events;
 public interface EventHandler {
 
     /**
-     * The action that should be performed once the bound event is triggered
+     * The action that should be performed once the bound event is triggered.
      */
     void handle();
 

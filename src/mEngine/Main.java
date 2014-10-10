@@ -36,7 +36,6 @@ import org.lwjgl.util.vector.Vector4f;
 
 import static mEngine.core.GameController.*;
 import static mEngine.core.ObjectController.setLoadingScreen;
-import static mEngine.core.events.EventController.addEvent;
 import static mEngine.core.events.EventController.addEventHandler;
 
 public class Main {
@@ -47,10 +46,6 @@ public class Main {
      * @param args None
      */
     public static void main(String[] args) {
-
-        addEvent("gameStarted");
-        addEvent("loadingStarted");
-        addEvent("loadingStopped");
 
         setLoadingScreen(new LoadingScreen("loadingScreen"));
         Mouse.setGrabbed(true);
