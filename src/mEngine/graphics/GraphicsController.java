@@ -49,7 +49,7 @@ public class GraphicsController {
     private static int fps;
 
     /**
-     * Creates a new window with OpenGL context, loads all graphics related preferences
+     * Creates a new window with OpenGL context, loads all graphics related preferences.
      */
     public static void createDisplay() {
 
@@ -91,7 +91,7 @@ public class GraphicsController {
     }
 
     /**
-     * Used in the render loop, it clears the screen every frame and sets the sky color
+     * Used in the render loop, it clears the screen every frame and sets the sky color.
      */
     public static void clearScreen() {
 
@@ -103,7 +103,7 @@ public class GraphicsController {
     /**
      * Called every frame by the render loop.
      * It detects, if the user has resized the window or wants to toggle fullscreen mode.
-     * It also updates and synchronizes the window
+     * It also updates and synchronizes the window.
      */
     public static void update() {
 
@@ -122,7 +122,6 @@ public class GraphicsController {
 
     /**
      * Configures the window.
-     *
      * @param width  Window width
      * @param height Window height
      * @param title  Window title
@@ -149,7 +148,7 @@ public class GraphicsController {
     }
 
     /**
-     * Changes the window to be a fullscreen one
+     * Changes the window to be a fullscreen one.
      */
     private static void setupFullscreen() {
 
@@ -171,8 +170,7 @@ public class GraphicsController {
     }
 
     /**
-     * Allows you to make the game a part of another window
-     *
+     * Allows you to make the game a part of another window.
      * @param parent The AWT canvas you want the game to show in
      */
     public static void setParent(Canvas parent) {
@@ -186,7 +184,7 @@ public class GraphicsController {
     }
 
     /**
-     * Takes a screenshot and saves it in the screenshots/ folder
+     * Takes a screenshot and saves it in the screenshots/ folder.
      */
     public static void takeScreenshot() {
 
@@ -230,8 +228,7 @@ public class GraphicsController {
     }
 
     /**
-     * Changes the title of the game window
-     *
+     * Changes the title of the game window.
      * @param title The desired title
      */
     public static void setWindowTitle(String title) {
@@ -239,8 +236,7 @@ public class GraphicsController {
     }
 
     /**
-     * Returns the current game window width
-     *
+     * Returns the current game window width.
      * @return The current game window width
      */
     public static int getWidth() {
@@ -248,8 +244,7 @@ public class GraphicsController {
     }
 
     /**
-     * Returns the current game window height
-     *
+     * Returns the current game window height.
      * @return The current game window height
      */
     public static int getHeight() {
@@ -257,8 +252,7 @@ public class GraphicsController {
     }
 
     /**
-     * Returns the maximum frames per second specified in the properties
-     *
+     * Returns the maximum frames per second specified in the properties.
      * @return The maximum FPS value
      */
     public static int getFps() {
@@ -266,8 +260,7 @@ public class GraphicsController {
     }
 
     /**
-     * Returns the game window's current aspect ratio
-     *
+     * Returns the game window's current aspect ratio.
      * @return The game window's current aspect ratio
      */
     public static float getAspectRatio() {
@@ -275,7 +268,7 @@ public class GraphicsController {
     }
 
     /**
-     * Configures OpenGL to look nice
+     * Configures OpenGL to look nice.
      */
     private static void initializeOpenGL() {
 
@@ -291,7 +284,7 @@ public class GraphicsController {
 
     /**
      * Used for displaying 2D content, such as GUI.
-     * Called in the render queue
+     * Called in the render queue.
      */
     public static void switchTo2D() {
 
@@ -315,7 +308,7 @@ public class GraphicsController {
 
     /**
      * Used for displaying 3D content.
-     * Called in the render queue
+     * Called in the render queue.
      */
     public static void switchTo3D() {
 

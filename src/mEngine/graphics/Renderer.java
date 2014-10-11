@@ -51,8 +51,7 @@ public class Renderer {
 
     /**
      * Adds a display list to the OpenGL context.
-     * This is used for static modules that will then render faster (e.g. Terrain)
-     *
+     * This is used for static modules that will then render faster (e.g. Terrain).
      * @param vertices The vertices to be used
      * @param normals  The normals to be used
      * @param uvs      The texture coordinates to be used
@@ -69,23 +68,9 @@ public class Renderer {
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-        for (Vector3f vertex : vertices) {
-
-            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
-
-        }
-
-        for (Vector3f normal : normals) {
-
-            normalData.put(new float[]{normal.x, normal.y, normal.z});
-
-        }
-
-        for (Vector2f uv : uvs) {
-
-            textureData.put(new float[]{uv.x, uv.y});
-
-        }
+        vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y, vertex.z}));
+        normals.forEach((normal) -> normalData.put(new float[]{normal.x, normal.y, normal.z}));
+        uvs.forEach((uv) -> textureData.put(new float[]{uv.x, uv.y}));
 
         vertexData.flip();
         normalData.flip();
@@ -142,8 +127,7 @@ public class Renderer {
     }
 
     /**
-     * Changes the texture of a display list
-     *
+     * Changes the texture of a display list.
      * @param displayListIndex The index of the display list to edit
      * @param vertices         The vertices to be used
      * @param normals          The normals to be used
@@ -164,17 +148,8 @@ public class Renderer {
             FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
             FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
 
-            for (Vector3f vertex : vertices) {
-
-                vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
-
-            }
-
-            for (Vector3f normal : normals) {
-
-                normalData.put(new float[]{normal.x, normal.y, normal.z});
-
-            }
+            vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y, vertex.z}));
+            normals.forEach((normal) -> normalData.put(new float[]{normal.x, normal.y, normal.z}));
 
             vertexData.flip();
             normalData.flip();
@@ -222,23 +197,9 @@ public class Renderer {
             FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
             FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-            for (Vector3f vertex : vertices) {
-
-                vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
-
-            }
-
-            for (Vector3f normal : normals) {
-
-                normalData.put(new float[]{normal.x, normal.y, normal.z});
-
-            }
-
-            for (Vector2f uv : uvs) {
-
-                textureData.put(new float[]{uv.x, uv.y});
-
-            }
+            vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y, vertex.z}));
+            normals.forEach((normal) -> normalData.put(new float[]{normal.x, normal.y, normal.z}));
+            uvs.forEach((uv) -> textureData.put(new float[]{uv.x, uv.y}));
 
             vertexData.flip();
             normalData.flip();
@@ -295,8 +256,7 @@ public class Renderer {
     }
 
     /**
-     * Register a display list without any material
-     *
+     * Register a display list without any material.
      * @param vertices The vertices to be used
      * @param normals  The normals to be used
      * @param mode     The render mode to be used
@@ -310,17 +270,8 @@ public class Renderer {
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 3);
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
 
-        for (Vector3f vertex : vertices) {
-
-            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
-
-        }
-
-        for (Vector3f normal : normals) {
-
-            normalData.put(new float[]{normal.x, normal.y, normal.z});
-
-        }
+        vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y, vertex.z}));
+        normals.forEach((normal) -> normalData.put(new float[]{normal.x, normal.y, normal.z}));
 
         vertexData.flip();
         normalData.flip();
@@ -363,8 +314,7 @@ public class Renderer {
     }
 
     /**
-     * Renders a 3D object
-     *
+     * Renders a 3D object.
      * @param vertices              The vertices to be used
      * @param normals               The normals to be used
      * @param uvs                   The texture coordinates to be used
@@ -406,11 +356,8 @@ public class Renderer {
 
             Vector3f lightDirection = lightSource.direction;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
-
             glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
-
             glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
-
             glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "shadowThrowing[" + count + "]"), lightSource.shadowThrowing);
 
             if (GraphicsController.isBlackAndWhite) {
@@ -427,19 +374,14 @@ public class Renderer {
             if (lightSource instanceof SpotLightSource) {
 
                 SpotLightSource spotLightSource = (SpotLightSource) lightSource;
-
                 glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
-
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
-
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "transitions[" + count + "]"), spotLightSource.transition);
 
             } else if (lightSource instanceof DirectionalLightSource) {
 
                 DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
-
                 glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 1);
-
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
 
             } else {
@@ -454,23 +396,9 @@ public class Renderer {
         FloatBuffer normalData = BufferUtils.createFloatBuffer(normals.size() * 3);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-        for (Vector3f vertex : vertices) {
-
-            vertexData.put(new float[]{vertex.x, vertex.y, vertex.z});
-
-        }
-
-        for (Vector3f normal : normals) {
-
-            normalData.put(new float[]{normal.x, normal.y, normal.z});
-
-        }
-
-        for (Vector2f uv : uvs) {
-
-            textureData.put(new float[]{uv.x, uv.y});
-
-        }
+        vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y, vertex.z}));
+        normals.forEach((normal) -> normalData.put(new float[]{normal.x, normal.y, normal.z}));
+        uvs.forEach((uv) -> textureData.put(new float[]{uv.x, uv.y}));
 
         vertexData.flip();
         normalData.flip();
@@ -528,8 +456,7 @@ public class Renderer {
     }
 
     /**
-     * Renders a 3D object that is registered in a display list
-     *
+     * Renders a 3D object that is registered in a display list.
      * @param displayListIndex      The index of the display list to edit
      * @param modelPosition         The position of the model to render
      * @param modelRotation         The rotation of the model to render
@@ -571,11 +498,8 @@ public class Renderer {
 
             Vector3f lightDirection = lightSource.direction;
             glUniform3f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightDirections[" + count + "]"), lightDirection.x, lightDirection.y, lightDirection.z);
-
             glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightStrengths[" + count + "]"), lightSource.strength);
-
             glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "specularLighting[" + count + "]"), lightSource.specularLighting);
-
             glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "shadowThrowing[" + count + "]"), lightSource.shadowThrowing);
 
             if (GraphicsController.isBlackAndWhite) {
@@ -592,19 +516,14 @@ public class Renderer {
             if (lightSource instanceof SpotLightSource) {
 
                 SpotLightSource spotLightSource = (SpotLightSource) lightSource;
-
                 glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 0);
-
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightAngles[" + count + "]"), spotLightSource.angle);
-
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "transitions[" + count + "]"), spotLightSource.transition);
 
             } else if (lightSource instanceof DirectionalLightSource) {
 
                 DirectionalLightSource directionalLightSource = (DirectionalLightSource) lightSource;
-
                 glUniform1i(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightSourceTypes[" + count + "]"), 1);
-
                 glUniform1f(glGetUniformLocation(ShaderHelper.shaderPrograms.get("lighting"), "lightRadii[" + count + "]"), directionalLightSource.radius);
 
             } else {
@@ -638,7 +557,6 @@ public class Renderer {
 
     /**
      * Renders a 2D object
-     *
      * @param vertices The vertices to be used
      * @param uvs      The texture coordinates to be used
      * @param material The material to be used
@@ -649,17 +567,8 @@ public class Renderer {
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
         FloatBuffer textureData = BufferUtils.createFloatBuffer(uvs.size() * 2);
 
-        for (Vector2f vertex : vertices) {
-
-            vertexData.put(new float[]{vertex.x, vertex.y});
-
-        }
-
-        for (Vector2f uv : uvs) {
-
-            textureData.put(new float[]{uv.x, uv.y});
-
-        }
+        vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y}));
+        uvs.forEach((uv) -> textureData.put(new float[]{uv.x, uv.y}));
 
         vertexData.flip();
         textureData.flip();
@@ -700,8 +609,7 @@ public class Renderer {
     }
 
     /**
-     * Renders a 2D object
-     *
+     * Renders a 2D object.
      * @param vertices The vertices to be used
      * @param mode     The render mode to be used
      */
@@ -709,11 +617,7 @@ public class Renderer {
 
         FloatBuffer vertexData = BufferUtils.createFloatBuffer(vertices.size() * 2);
 
-        for (Vector2f vertex : vertices) {
-
-            vertexData.put(new float[]{vertex.x, vertex.y});
-
-        }
+        vertices.forEach((vertex) -> vertexData.put(new float[]{vertex.x, vertex.y}));
 
         vertexData.flip();
 
@@ -726,13 +630,9 @@ public class Renderer {
         glVertexPointer(2, GL_FLOAT, 0, 0l);
 
         glEnableClientState(GL_VERTEX_ARRAY);
-
         glDrawArrays(mode, 0, vertices.size());
-
         glDisableClientState(GL_VERTEX_ARRAY);
-
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-
         glDeleteBuffers(vboVertexHandle);
 
     }
