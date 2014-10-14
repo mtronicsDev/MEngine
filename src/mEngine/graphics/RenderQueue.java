@@ -27,7 +27,6 @@ public class RenderQueue {
 
     /**
      * Sets the active camera.
-     *
      * @param camera The desired camera
      */
     public void setCamera(Camera camera) {
@@ -36,7 +35,6 @@ public class RenderQueue {
 
     /**
      * Sets the active skybox.
-     *
      * @param skybox The desired skybox
      */
     public void setSkybox(Skybox skybox) {
@@ -45,7 +43,6 @@ public class RenderQueue {
 
     /**
      * Adds a 3D model to the current render queue.
-     *
      * @param module The desired model
      */
     public void addModel(ModuleRenderable3D module) {
@@ -54,7 +51,6 @@ public class RenderQueue {
 
     /**
      * Adds a particle to the current render queue.
-     *
      * @param particle The desired particle
      */
     public void addParticle(Particle particle) {
@@ -63,7 +59,6 @@ public class RenderQueue {
 
     /**
      * Adds a GUI element to the current render queue.
-     *
      * @param element The desired GUI element
      */
     public void addGUIElement(GUIElement element) {
@@ -72,7 +67,6 @@ public class RenderQueue {
 
     /**
      * Adds a light source to the current render queue.
-     *
      * @param lightSource The desired light source
      */
     public void addLightSource(LightSource lightSource) {
