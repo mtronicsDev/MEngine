@@ -95,8 +95,8 @@ public class GameController {
      */
     public static void stopGame() {
         triggerEvent("gameStopped");
-        AudioController.clear();
         ThreadHelper.stopAllThreads();
+        AudioController.clear();
         System.exit(0);
 
     }
