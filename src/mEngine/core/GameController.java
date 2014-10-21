@@ -25,7 +25,7 @@ public class GameController {
     private static boolean loading;
 
     /**
-     * Initializes all core classes and starts the game
+     * Initializes all core classes and starts the game.
      */
     public static void runGame() {
 
@@ -45,7 +45,7 @@ public class GameController {
     }
 
     /**
-     * Returns if the game is paused or not
+     * Returns if the game is paused or not.
      * @return True if paused, false if not
      */
     public static boolean isGamePaused() {
@@ -53,18 +53,16 @@ public class GameController {
     }
 
     /**
-     * Returns if the ObjectController is loading or not
-     *
-     * @return True if loading, false if not
+     * Returns if the ObjectController is loading or not.
+     * @return True if loading, false if not.
      */
     public static boolean isLoading() {
         return loading;
     }
 
     /**
-     * Sets the loading variable and triggers the "loadingStarted" and "loadingStopped" events
-     *
-     * @param loading
+     * Sets the loading variable and triggers the "loadingStarted" and "loadingStopped" events.
+     * @param loading If the game should be loading.
      */
     public static void setLoading(boolean loading) {
         if (!GameController.loading && loading) EventController.triggerEvent("loadingStarted");
@@ -74,7 +72,7 @@ public class GameController {
     }
 
     /**
-     * Pauses all game objects (no updates, still renders them)
+     * Pauses all game objects (no updates, still renders them).
      */
     public static void pauseGame() {
         triggerEvent("gamePaused");
@@ -82,7 +80,7 @@ public class GameController {
     }
 
     /**
-     * Resumes tha game and the update loop for game objects
+     * Resumes tha game and the update loop for game objects.
      */
     public static void resumeGame() {
         Mouse.setGrabbed(true);
@@ -91,7 +89,7 @@ public class GameController {
     }
 
     /**
-     * Clears all bindings and stops the game
+     * Clears all bindings and stops the game.
      */
     public static void stopGame() {
         triggerEvent("gameStopped");

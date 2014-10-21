@@ -52,11 +52,10 @@ public class ResourceHelper {
     }
 
     /**
-     * Returns a game resource
-     *
-     * @param fileName The name of the requested resource, without file ending
-     * @param type     The resource type (ResourceHelper.RES_XXX)
-     * @return The requested resource file
+     * Returns a game resource.
+     * @param fileName The name of the requested resource, without file ending.
+     * @param type     The resource type (ResourceHelper.RES_XXX).
+     * @return The requested resource file.
      */
     public static File getResource(String fileName, int type) {
 
@@ -102,11 +101,10 @@ public class ResourceHelper {
     }
 
     /**
-     * Returns the URL to a requested resource
-     *
-     * @param fileName The name of the requested resource, without file ending
-     * @param type     The resource type (ResourceHelper.RES_XXX)
-     * @return The requested URL
+     * Returns the URL to a requested resource.
+     * @param fileName The name of the requested resource, without file ending.
+     * @param type     The resource type (ResourceHelper.RES_XXX).
+     * @return The requested URL.
      */
     public static URL getResourceURL(String fileName, int type) {
 

@@ -68,7 +68,7 @@ public class Main {
               true //Can fly
             )
           )
-          .addModule(new Skybox("peaks"))
+          .addModule(new Skybox("devpun/devpun"))
           .addModule(new Camera())
           .addModule(new AudioListener())
           /*
