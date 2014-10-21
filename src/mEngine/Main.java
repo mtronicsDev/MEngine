@@ -109,7 +109,7 @@ public class Main {
           .createModules();
 
         new GameObject(new Vector3f(0, 0, -3), new Vector3f())
-          .addModule(new RenderModule("Ship", true))
+          .addModule(new RenderModule("Dragon", true))
           .createModules();
 
         //Lights
