@@ -7,6 +7,8 @@
 package mEngine.graphics;
 
 import mEngine.util.data.ColorHelper;
+import mEngine.util.input.Input;
+import mEngine.util.input.InputEventType;
 import mEngine.util.resources.PreferenceHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -27,7 +29,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static mEngine.util.input.Input.assignKey;
 import static mEngine.util.input.Input.isKeyDown;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluOrtho2D;
@@ -77,7 +78,7 @@ public class GraphicsController {
         try {
 
             Mouse.create();
-            assignKey("fullscreen", Keyboard.KEY_F11);
+            Input.assignInputEvent("fullscreen", true, InputEventType.ACTIVATED, Keyboard.KEY_F11);
 
         } catch (LWJGLException e) {
 
@@ -107,7 +108,7 @@ public class GraphicsController {
      */
     public static void update() {
 
-        if (isKeyDown("fullscreen")) {
+        if (Input.inputEventTriggered("fullscreen")) {
 
             wasResized = true;
             if (isFullscreen) setupWindow(width, height, title);

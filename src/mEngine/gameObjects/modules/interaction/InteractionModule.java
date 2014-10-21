@@ -26,7 +26,8 @@ import java.util.List;
 public class InteractionModule extends Module {
 
     public boolean enabled;
-    public String interactionKey;
+    public int interactionKey;
+    public String interactionKeyDescription;
     public String interactionDescription;
     public String interactionInstruction;
     public Interaction interaction;
@@ -39,14 +40,13 @@ public class InteractionModule extends Module {
 
     public InteractionModule(boolean enabled, float radius, Interaction interaction) {
 
-        this(enabled, radius, Keyboard.KEY_I, "interact", 180, interaction);
+        this(enabled, radius, -1, "", 180, interaction);
 
     }
 
     public InteractionModule(boolean enabled, float radius, int interactionKey, Interaction interaction) {
 
         this(enabled, radius, interactionKey, "interact", 180, interaction);
-
 
     }
 
@@ -59,11 +59,14 @@ public class InteractionModule extends Module {
     public InteractionModule(boolean enabled, float radius, int interactionKey, String interactionDescription, float maxControllerLookAngle, Interaction interaction) {
 
         this.enabled = enabled;
-        Input.assignKey(this.getClass().getName() + ".interact", interactionKey);
         this.interaction = interaction;
         this.radius = radius;
         this.interactionDescription = interactionDescription;
         this.maxControllerLookAngle = (float) Math.toRadians(maxControllerLookAngle);
+        this.interactionKey = interactionKey;
+
+        if (interactionKey != -1)
+            interactionKeyDescription = Keyboard.getKeyName(interactionKey);
 
     }
 
@@ -73,7 +76,7 @@ public class InteractionModule extends Module {
 
         interaction.setParent(parent);
 
-        if (interactionKey != null) {
+        if (interactionKeyDescription != null) {
 
             String interactionInstruction = String.valueOf(interactionKey).toUpperCase() + ": " + interactionDescription;
 
@@ -97,7 +100,7 @@ public class InteractionModule extends Module {
 
             for (int count = 0; count < controlledGameObjects.size(); count++) {
 
-                if (interactionKey == null) {
+                if (interactionKeyDescription == null) {
 
                     if (controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
 
@@ -108,7 +111,7 @@ public class InteractionModule extends Module {
 
                 } else {
 
-                    if (Input.isKeyDown(interactionKey) && controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
+                    if (Input.inputEventTriggered(interactionKeyDescription) && controllerDistances[count] <= radius && controllerLookAngles[count] <= maxControllerLookAngle) {
 
                         interacted = true;
                         break;

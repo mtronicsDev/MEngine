@@ -9,6 +9,7 @@ package mEngine.gameObjects.modules.audio;
 import mEngine.audio.AudioController;
 import mEngine.gameObjects.modules.Module;
 import mEngine.util.input.Input;
+import mEngine.util.input.InputEventType;
 import mEngine.util.resources.ResourceHelper;
 import org.lwjgl.input.Keyboard;
 import paulscode.sound.SoundSystemConfig;
@@ -23,9 +24,9 @@ public class AudioSource extends Module {
 
         sourceName = audioFileName + new Random().nextInt();
 
-        Input.assignKey("play", Keyboard.KEY_1);
-        Input.assignKey("pause", Keyboard.KEY_2);
-        Input.assignKey("stop", Keyboard.KEY_3);
+        Input.assignInputEvent("play", true, InputEventType.ACTIVATED, Keyboard.KEY_1);
+        Input.assignInputEvent("pause", true, InputEventType.ACTIVATED, Keyboard.KEY_2);
+        Input.assignInputEvent("stop", true, InputEventType.ACTIVATED, Keyboard.KEY_3);
 
         if (isAmbient) //Is the sound background music or a positional sound?
             AudioController.getSoundSystem().backgroundMusic(
@@ -65,8 +66,8 @@ public class AudioSource extends Module {
           parent.position.y,
           parent.position.z);
 
-        if (!AudioController.getSoundSystem().playing(sourceName) && Input.isKeyDown("play")) play();
-        if (AudioController.getSoundSystem().playing(sourceName) && Input.isKeyDown("pause")) pause();
-        if (AudioController.getSoundSystem().playing(sourceName) && Input.isKeyDown("stop")) stop();
+        if (!AudioController.getSoundSystem().playing(sourceName) && Input.inputEventTriggered("play")) play();
+        if (AudioController.getSoundSystem().playing(sourceName) && Input.inputEventTriggered("pause")) pause();
+        if (AudioController.getSoundSystem().playing(sourceName) && Input.inputEventTriggered("stop")) stop();
     }
 }
