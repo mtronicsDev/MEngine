@@ -28,6 +28,10 @@ public class Input {
         buttonStates = new boolean[(int) MathHelper.clampMin(Mouse.getButtonCount(), 3)];
     }
 
+    /**
+     * @param name The name of the event
+     * @return true, if the event is triggered, false if not
+     */
     public static boolean inputEventTriggered(String name) {
 
         boolean eventTriggered = false;
