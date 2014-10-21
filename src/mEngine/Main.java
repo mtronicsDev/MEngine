@@ -9,7 +9,7 @@ package mEngine;
 import mEngine.core.GameController;
 import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.audio.AudioListener;
-import mEngine.gameObjects.modules.controls.ControllerManual;
+import mEngine.gameObjects.modules.controls.ControllerKeyboardMouse;
 import mEngine.gameObjects.modules.gui.GUIElement;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.physics.PhysicsModule;
@@ -22,7 +22,6 @@ import mEngine.graphics.gui.GUIScreen;
 import mEngine.graphics.gui.GUIScreenController;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.util.input.Input;
-import mEngine.util.input.InputEventType;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
@@ -36,13 +35,13 @@ import static mEngine.core.events.EventController.addEventHandler;
 public class Main {
 
     /**
-     * This is only for testing purposes
-     *
-     * @param args None
+     * This is only for testing purposes.
+     * @param args None.
      */
     public static void main(String[] args) {
 
-        setLoadingScreen(new LoadingScreen("loadingScreen"));
+        LoadingScreen standardLoadingScreen = new LoadingScreen("loadingScreen");
+        setLoadingScreen(standardLoadingScreen);
         Mouse.setGrabbed(true);
 
         runGame();
@@ -56,15 +55,15 @@ public class Main {
         GUIScreenController.addGUIScreen(inGame);
         GUIScreenController.addGUIScreen(alwaysActive);
 
-        Input.assignInputEvent("pauseGame", true, InputEventType.ACTIVATED, Keyboard.KEY_ESCAPE);
-        Input.assignInputEvent("screenshot", true, InputEventType.ACTIVATED, Keyboard.KEY_F2);
+        Input.assignKey("pauseGame", Keyboard.KEY_ESCAPE);
+        Input.assignKey("screenshot", Keyboard.KEY_F2);
 
         //GameObject Time ;)
         new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
           .addModule(new MovementModule())
           .addModule(new RenderModule("sphere"))
           .addModule(
-            new ControllerManual(
+            new ControllerKeyboardMouse(
               new float[]{120, 100, 100, 100, 110, 110, 290}, //forward, backward, left, right, down, up, jump
               true //Can fly
             )
@@ -89,7 +88,7 @@ public class Main {
               @Override
               public void onUpdate() {
                   super.onUpdate();
-                  if (Input.inputEventTriggered("pauseGame")) {
+                  if (Input.isKeyDown("pauseGame")) {
                       if (isGamePaused()) resumeGame();
                       else pauseGame();
                   }
@@ -98,7 +97,7 @@ public class Main {
               @Override
               public void render() {
                   super.render();
-                  if (Input.inputEventTriggered("screenshot")) GraphicsController.takeScreenshot();
+                  if (Input.isKeyDown("screenshot")) GraphicsController.takeScreenshot();
               }
           }.setGUIScreen(alwaysActive))
           /*.addModule(new GUIElement(new Vector2f(GraphicsController.getWidth() - 100, 50), new Vector2f(50, 50))

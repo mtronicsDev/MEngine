@@ -11,7 +11,6 @@ import mEngine.util.time.Timer;
 public abstract class KeyFrame {
 
     protected Object data; //Can be a texture, list of vertices or something else
-    private int delay; //In milliseconds
     private Timer delayTimer;
 
     /**
@@ -22,7 +21,6 @@ public abstract class KeyFrame {
      */
     KeyFrame(int delay, Object data) {
 
-        this.delay = delay;
         this.data = data;
         delayTimer = new Timer(delay);
 

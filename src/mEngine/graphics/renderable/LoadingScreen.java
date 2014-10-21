@@ -17,22 +17,21 @@ import java.util.List;
 
 public class LoadingScreen extends GUIScreen {
 
-    public boolean active = true;
-    Material2D material;
-    List<Vector2f> vertices;
-    List<Vector2f> uvs;
+    boolean active = true;
+    private Material2D material;
+    private List<Vector2f> vertices;
+    private List<Vector2f> uvs;
 
     /**
-     * Default constructor for loading screens
-     *
-     * @param textureName The background texture of the loading screen
+     * Default constructor for loading screens.
+     * @param backgroundTextureName The background texture of the loading screen.
      */
-    public LoadingScreen(String textureName) {
+    public LoadingScreen(String backgroundTextureName) {
 
         super("loadingStarted", "loadingStopped");
 
         material = new Material2D();
-        material.setTextureName(textureName);
+        material.setTextureName(backgroundTextureName);
         vertices = new ArrayList<>();
         uvs = new ArrayList<>();
 
@@ -44,7 +43,7 @@ public class LoadingScreen extends GUIScreen {
     }
 
     /**
-     * Calculates size and position (centered)
+     * Calculates size and position (centered).
      */
     private void calculateVertexPositions() {
 

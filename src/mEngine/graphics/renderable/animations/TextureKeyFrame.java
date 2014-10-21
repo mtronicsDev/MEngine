@@ -12,19 +12,17 @@ import org.newdawn.slick.opengl.TextureImpl;
 public class TextureKeyFrame extends KeyFrame {
 
     /**
-     * A keyframe containing a texture
-     *
-     * @param delay   The duration of this keyframe
-     * @param texture The texture of this keyframe
+     * A keyframe containing a texture.
+     * @param delay   The duration of this keyframe.
+     * @param texture The texture of this keyframe.
      */
     public TextureKeyFrame(int delay, Texture texture) {
         super(delay, texture);
     }
 
     /**
-     * Returns the current texture
-     *
-     * @return The current texture
+     * Returns the current texture.
+     * @return The current texture.
      */
     @Override
     public Texture getData() {
