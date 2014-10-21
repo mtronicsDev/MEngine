@@ -21,19 +21,19 @@ public class SubModel {
     public ArrayList<Face> faces;
 
     public SubModel() {
-        vertices = new ArrayList<Vector3f>();
-        normals = new ArrayList<Vector3f>();
-        uvs = new ArrayList<Vector2f>();
-        faces = new ArrayList<Face>();
+        vertices = new ArrayList<>();
+        normals = new ArrayList<>();
+        uvs = new ArrayList<>();
+        faces = new ArrayList<>();
     }
 
     public SubModel(Material3D material) {
         this.material = material;
 
-        vertices = new ArrayList<Vector3f>();
-        normals = new ArrayList<Vector3f>();
-        uvs = new ArrayList<Vector2f>();
-        faces = new ArrayList<Face>();
+        vertices = new ArrayList<>();
+        normals = new ArrayList<>();
+        uvs = new ArrayList<>();
+        faces = new ArrayList<>();
     }
 
 }

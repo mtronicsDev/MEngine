@@ -17,7 +17,7 @@ public class Model {
     public ArrayList<SubModel> subModels;
 
     public Model() {
-        subModels = new ArrayList<SubModel>();
+        subModels = new ArrayList<>();
     }
 
     public Model(ArrayList<SubModel> subModels) {
