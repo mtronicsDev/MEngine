@@ -17,7 +17,7 @@ import java.awt.*;
 public class GUIText extends GUIModule {
 
     public String text;
-    public Color specificColor;
+    public Color color;
     protected String fontFace;
     protected int fontStyle;
     protected int fontSize;
@@ -44,9 +44,9 @@ public class GUIText extends GUIModule {
 
     }
 
-    public GUIText setSpecificColor(Color color) {
+    public GUIText setColor(Color color) {
 
-        specificColor = color;
+        this.color = color;
         return this;
 
     }
@@ -58,15 +58,14 @@ public class GUIText extends GUIModule {
         if (font == null)
             font = FontHelper.loadFont(fontFace, fontStyle, fontSize, PreferenceHelper.getBoolean("antiAliasing"));
 
-        Color color;
+        Color temporaryColor;
 
-        if (specificColor != null) color = specificColor;
-
-        else color = parent.material.getColor();
+        if (color != null) temporaryColor = color;
+        else temporaryColor = parent.material.getColor();
 
         Vector2f position = parent.getPosition();
 
-        font.drawString(position.x, position.y, text, color);
+        font.drawString(position.x, position.y, text, temporaryColor);
 
     }
 

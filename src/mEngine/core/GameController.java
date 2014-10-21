@@ -39,6 +39,8 @@ public class GameController {
         RuntimeHelper.initialize();
         PhysicsController.initialize();
 
+        triggerEvent("initialized");
+
         ThreadHelper.startThread(GameLoop::startLoop, "mengine-GameLoop"); //Physics and processing
         ThreadHelper.startThread(RenderLoop::startLoop, "mengine-RenderLoop"); //Graphics and rendering
 

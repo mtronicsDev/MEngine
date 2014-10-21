@@ -35,13 +35,13 @@ import static mEngine.core.events.EventController.addEventHandler;
 public class Main {
 
     /**
-     * This is only for testing purposes
-     *
-     * @param args None
+     * This is only for testing purposes.
+     * @param args None.
      */
     public static void main(String[] args) {
 
-        setLoadingScreen(new LoadingScreen("loadingScreen"));
+        LoadingScreen standardLoadingScreen = new LoadingScreen("loadingScreen");
+        setLoadingScreen(standardLoadingScreen);
         Mouse.setGrabbed(true);
 
         runGame();
@@ -64,7 +64,7 @@ public class Main {
           .addModule(new RenderModule("sphere"))
           .addModule(
             new ControllerKeyboardMouse(
-              new float[]{1000, 1000, 1000, 1000, 1000, 1000}, //forward, backward, left, right, down, up, jump
+              new float[]{120, 100, 100, 100, 110, 110, 290}, //forward, backward, left, right, down, up, jump
               true //Can fly
             )
           )
