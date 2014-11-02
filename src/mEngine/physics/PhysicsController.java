@@ -23,7 +23,7 @@ public class PhysicsController {
     public static DynamicsWorld world; //The physics world
 
     /**
-     * Creates the physics world and sets up collisions
+     * Creates the physics world and sets up collisions.
      */
     public static void initialize() {
         BroadphaseInterface aabbInterface = new DbvtBroadphase(); //Checks if objects could collide

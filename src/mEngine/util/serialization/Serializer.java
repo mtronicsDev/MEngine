@@ -22,7 +22,7 @@ public class Serializer {
     public static boolean isSerializing = false;
 
     /**
-     * Serializes [saves] the current scene
+     * Serializes [saves] the current scene.
      */
     public static void serialize() {
 
@@ -47,9 +47,6 @@ public class Serializer {
             objectOutputStream.writeObject(obj);
             objectOutputStream.close();
             fileOutputStream.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,9 +54,8 @@ public class Serializer {
     }
 
     /**
-     * De-serializes [loads] a serialized scene
-     *
-     * @param fileName The save file to de-serialize
+     * De-serializes [loads] a serialized scene.
+     * @param fileName The save file to de-serialize.
      * @param delete   Should the save file be deleted after de-serialization?
      */
     public static void deSerialize(String fileName, boolean delete) {
@@ -75,14 +71,7 @@ public class Serializer {
             fileInputStream.close();
             if (delete) //noinspection ResultOfMethodCallIgnored
                 file.delete();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -99,7 +88,7 @@ public class Serializer {
     }
 
     /**
-     * De-serializes the latest save file and deletes it
+     * De-serializes the latest save file and deletes it.
      */
     public static void deSerializeLatest() {
 

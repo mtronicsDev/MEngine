@@ -13,13 +13,12 @@ import java.awt.*;
 public class FontHelper {
 
     /**
-     * Loads a true type font
-     *
-     * @param face         The font face / type
-     * @param style        The style (bold|italic|...)
-     * @param size         The font size
+     * Loads a true type font.
+     * @param face         The font face / type.
+     * @param style        The style (bold|italic|...).
+     * @param size         The font size.
      * @param antiAliasing Should anti aliasing be applied to this font?
-     * @return The true type font
+     * @return The true type font.
      */
     public static TrueTypeFont loadFont(String face, int style, int size, boolean antiAliasing) {
 

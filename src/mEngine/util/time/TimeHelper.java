@@ -23,7 +23,7 @@ public class TimeHelper {
 
     /**
      * Sets the lastTime variables to the current time so they aren't 0.
-     * Only needed once
+     * Only needed once.
      */
     public static void initialize() {
 
@@ -34,16 +34,15 @@ public class TimeHelper {
     }
 
     /**
-     * Gives you the current time
-     *
-     * @return Current time in milliseconds
+     * Gives you the current time.
+     * @return Current time in milliseconds.
      */
     public static long getTime() {
         return System.nanoTime() / 1000000; //Nanoseconds give more accurate millisecond values
     }
 
     /**
-     * Updates the deltaTime variable
+     * Updates the deltaTime variable.
      */
     public static void updateDeltaTime() {
 
@@ -55,7 +54,7 @@ public class TimeHelper {
     }
 
     /**
-     * Updates the currentFPS and lastFPS variables
+     * Updates the currentFPS and lastFPS variables.
      */
     public static void updateFPS() {
 
@@ -75,7 +74,7 @@ public class TimeHelper {
     }
 
     /**
-     * Updates the currentTPS and lastTPS variables (ticks per second)
+     * Updates the currentTPS and lastTPS variables (ticks per second).
      */
     public static void updateTPS() {
 
@@ -93,9 +92,8 @@ public class TimeHelper {
     }
 
     /**
-     * Pauses the thread this method was called from by the amount of milliseconds
-     *
-     * @param milliseconds The amount of milliseconds the pause should last
+     * Pauses the thread this method was called from by the amount of milliseconds.
+     * @param milliseconds The amount of milliseconds the pause should last.
      */
     public static void sleep(long milliseconds) {
 

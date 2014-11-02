@@ -16,9 +16,8 @@ public class PreferenceHelper {
     private static Properties properties = new Properties();
 
     /**
-     * Loads a preference file
-     *
-     * @param fileName The preference file to load
+     * Loads a preference file.
+     * @param fileName The preference file to load.
      */
     public static void loadPreferences(String fileName) {
 
@@ -38,30 +37,27 @@ public class PreferenceHelper {
     }
 
     /**
-     * Write a preference to the opened preference file
-     *
-     * @param key   The name of the preference
-     * @param value The preference value
+     * Write a preference to the opened preference file.
+     * @param key   The name of the preference.
+     * @param value The preference value.
      */
     public static void setValue(String key, String value) {
         properties.setProperty(key, value);
     }
 
     /**
-     * Retrieves a value from the loaded preference file
-     *
-     * @param key The name of the preference
-     * @return The preference value
+     * Retrieves a value from the loaded preference file.
+     * @param key The name of the preference.
+     * @return The preference value.
      */
     public static String getValue(String key) {
         return properties.getProperty(key);
     }
 
     /**
-     * Retrieves a boolean from the loaded preference file
-     *
-     * @param key The name of the preference
-     * @return The preference value as boolean
+     * Retrieves a boolean from the loaded preference file.
+     * @param key The name of the preference.
+     * @return The preference value as boolean.
      */
     public static boolean getBoolean(String key) {
 
@@ -71,20 +67,18 @@ public class PreferenceHelper {
     }
 
     /**
-     * Retrieves an integer from the loaded preference file
-     *
-     * @param key The name of the preference
-     * @return The preference value as integer
+     * Retrieves an integer from the loaded preference file.
+     * @param key The name of the preference.
+     * @return The preference value as integer.
      */
     public static int getInteger(String key) {
         return Integer.valueOf(getValue(key));
     }
 
     /**
-     * Retrieves a float from the loaded preference file
-     *
-     * @param key The name of the preference
-     * @return The preference value as float
+     * Retrieves a float from the loaded preference file.
+     * @param key The name of the preference.
+     * @return The preference value as float.
      */
     public static float getFloat(String key) {
         return Float.valueOf(getValue(key));

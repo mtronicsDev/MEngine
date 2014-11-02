@@ -14,9 +14,9 @@ public class ThreadHelper {
     private static List<Thread> threads = new ArrayList<Thread>();
 
     /**
-     * Runs a thread asynchronously
-     * @param thread The thread (Runnable) to run
-     * @param name The name of the thread
+     * Runs a thread asynchronously.
+     * @param thread The thread (Runnable) to run.
+     * @param name The name of the thread.
      */
     public static void startThread(Runnable thread, String name) {
 
@@ -33,9 +33,8 @@ public class ThreadHelper {
 
     /**
      * Runs a thread asynchronously.
-     * A name will automatically be assigned
-     *
-     * @param thread The thread (Runnable) to run
+     * A name will automatically be assigned.
+     * @param thread The thread (Runnable) to run.
      */
     public static void startThread(Runnable thread) {
         startThread(thread, null);
@@ -43,7 +42,7 @@ public class ThreadHelper {
 
     /**
      * Stops all threads that were run via startThread().
-     * Note that all mengine threads will be stopped as well
+     * Note that all mengine threads will be stopped as well.
      */
     public static void stopAllThreads() {
         threads.forEach(Thread::interrupt);

@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package mEngine;
+package mEngine.test;
 
 import mEngine.core.events.EventController;
 import org.junit.Test;
@@ -20,7 +20,6 @@ public class TestEvents {
     @Test
     public void testEvents() {
         EventController.addEventHandler("testEvent", () -> assertTrue(true));
-
         EventController.triggerEvent("testEvent");
     }
 
