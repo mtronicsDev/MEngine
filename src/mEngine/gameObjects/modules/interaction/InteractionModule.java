@@ -13,6 +13,7 @@ import mEngine.gameObjects.modules.controls.Controller;
 import mEngine.gameObjects.modules.gui.GUIElement;
 import mEngine.gameObjects.modules.gui.modules.GUIText;
 import mEngine.util.input.Input;
+import mEngine.util.input.InputEventType;
 import mEngine.util.math.vectors.VectorHelper;
 import mEngine.util.threading.ThreadHelper;
 import org.lwjgl.input.Keyboard;
@@ -65,8 +66,12 @@ public class InteractionModule extends Module {
         this.maxControllerLookAngle = (float) Math.toRadians(maxControllerLookAngle);
         this.interactionKey = interactionKey;
 
-        if (interactionKey != -1)
+        if (interactionKey != -1) {
+
             interactionKeyDescription = Keyboard.getKeyName(interactionKey);
+            Input.assignInputEvent(interactionKeyDescription, true, InputEventType.ACTIVATED, interactionKey);
+
+        }
 
     }
 
@@ -78,7 +83,7 @@ public class InteractionModule extends Module {
 
         if (interactionKeyDescription != null) {
 
-            String interactionInstruction = String.valueOf(interactionKey).toUpperCase() + ": " + interactionDescription;
+            String interactionInstruction = interactionKeyDescription.toUpperCase() + ": " + interactionDescription;
 
             interactionInstructionText = new GUIText(interactionInstruction, 15);
 

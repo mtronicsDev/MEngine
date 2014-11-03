@@ -11,6 +11,8 @@ import mEngine.gameObjects.GameObject;
 import mEngine.gameObjects.modules.audio.AudioListener;
 import mEngine.gameObjects.modules.controls.ControllerManual;
 import mEngine.gameObjects.modules.gui.GUIElement;
+import mEngine.gameObjects.modules.interaction.AsyncInteraction;
+import mEngine.gameObjects.modules.interaction.InteractionModule;
 import mEngine.gameObjects.modules.physics.MovementModule;
 import mEngine.gameObjects.modules.physics.PhysicsModule;
 import mEngine.gameObjects.modules.renderable.Camera;
@@ -24,6 +26,8 @@ import mEngine.graphics.gui.GUIScreenController;
 import mEngine.graphics.renderable.LoadingScreen;
 import mEngine.util.input.Input;
 import mEngine.util.input.InputEventType;
+import mEngine.util.math.vectors.Matrix3f;
+import mEngine.util.math.vectors.VectorHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
@@ -61,7 +65,7 @@ public class Main {
         Input.assignInputEvent("screenshot", true, InputEventType.ACTIVATED, Keyboard.KEY_F2);
 
         //GameObject Time ;)
-        new GameObject(new Vector3f(0, 20, 0), new Vector3f(0, 0, 0))
+        new GameObject(new Vector3f(0, 20, 0), new Vector3f(0, 90, 0))
                 .addModule(new MovementModule())
                 .addModule(new RenderModule("sphere"))
                 .addModule(
@@ -129,30 +133,238 @@ public class Main {
                 .createModules();
 
         //Lights
+
+        //Basic Light
         new GameObject(new Vector3f(35, 30, 0), new Vector3f())
                 .addModule(new RenderModule("sphere2"))
                 .addModule(new SpotLightSource(500, new Vector4f(255, 255, 255, 1))
                     .setSpecularLighting(false))
                 .createModules();
 
+        //Spot Lights
         new GameObject(new Vector3f(0, 20, 40), new Vector3f(0, 180, 0))
                 .addModule(new RenderModule("sphere2"))
                 .addModule(new SpotLightSource(400, new Vector4f(255, 0, 0, 1), new Vector3f(), 25)
-                    .setSpecularLighting(false))
+                        .setSpecularLighting(false))
+                .addModule(new InteractionModule(true, 20, Keyboard.KEY_Z, "zoom", 10, new AsyncInteraction() {
+
+                    public void interact() {
+
+                        try {
+
+                            SpotLightSource spotLightSource = (SpotLightSource) parent.getModule(SpotLightSource.class);
+                            float modifier = (float) Math.toRadians(0.083);
+
+                            for (int i = 0; i < 250; i++) {
+
+                                spotLightSource.angle += modifier;
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 500; i++) {
+
+                                spotLightSource.angle -= modifier;
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 250; i++) {
+
+                                spotLightSource.angle += modifier;
+
+                                Thread.sleep(10);
+
+                            }
+
+                        }
+
+                        catch (InterruptedException e) {
+
+                            e.printStackTrace();
+                            System.exit(1);
+
+                        }
+
+                    }
+
+                }))
                 .createModules();
 
         new GameObject(new Vector3f(-7.5f, 30, 40), new Vector3f(0, 180, 0))
                 .addModule(new RenderModule("sphere2"))
-                .addModule(new SpotLightSource(400, new Vector4f(0, 255, 0, 1), new Vector3f(), 25)
-                        .setSpecularLighting(false))
+                .addModule(new SpotLightSource(400, new Vector4f(0, 255, 0, 1), new Vector3f(0, 0, 1), 25)
+                        .setSpecularLighting(false)
+                        .setDependent(false))
+                .addModule(new InteractionModule(true, 20, Keyboard.KEY_R, "rotate", 10, new AsyncInteraction() {
+
+                    public void interact() {
+
+                        try {
+
+                            SpotLightSource spotLightSource = (SpotLightSource) parent.getModule(SpotLightSource.class);
+                            float yRotation = (float) Math.toRadians(-0.15);
+                            float zRotation = (float) Math.toRadians(-(360f / 700f));
+
+                            Matrix3f yAxisRotationMatrix = new Matrix3f(
+                                    new Vector3f((float) Math.cos(yRotation), 0, (float) Math.sin(yRotation)),
+                                    new Vector3f(0, 1, 0),
+                                    new Vector3f((float) -Math.sin(yRotation), 0, (float) Math.cos(yRotation))
+                            );
+
+                            Matrix3f zAxisRotationMatrix = new Matrix3f(
+                                    new Vector3f((float) Math.cos(zRotation), (float) -Math.sin(zRotation), 0),
+                                    new Vector3f((float) Math.sin(zRotation), (float) Math.cos(zRotation), 0),
+                                    new Vector3f(0, 0, 1)
+                            );
+
+                            for (int i = 0; i < 200; i++) {
+
+                                spotLightSource.direction = yAxisRotationMatrix.multiplyByVector(spotLightSource.direction);
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 700; i++) {
+
+                                spotLightSource.direction = zAxisRotationMatrix.multiplyByVector(spotLightSource.direction);
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            yAxisRotationMatrix = new Matrix3f(
+                                    new Vector3f((float) Math.cos(-yRotation), 0, (float) Math.sin(-yRotation)),
+                                    new Vector3f(0, 1, 0),
+                                    new Vector3f((float) -Math.sin(-yRotation), 0, (float) Math.cos(-yRotation))
+                            );
+
+                            for (int i = 0; i < 200; i++) {
+
+                                spotLightSource.direction = yAxisRotationMatrix.multiplyByVector(spotLightSource.direction);
+
+                                Thread.sleep(10);
+
+                            }
+
+                        }
+
+                        catch (InterruptedException e) {
+
+                            e.printStackTrace();
+                            System.exit(1);
+
+                        }
+
+                    }
+
+                }))
                 .createModules();
 
         new GameObject(new Vector3f(7.5f, 30, 40), new Vector3f(0, 180, 0))
                 .addModule(new RenderModule("sphere2"))
                 .addModule(new SpotLightSource(400, new Vector4f(0, 0, 255, 1), new Vector3f(), 25)
                         .setSpecularLighting(false))
+                .addModule(new InteractionModule(true, 20, Keyboard.KEY_M, "move", 10, new AsyncInteraction() {
+
+                    public void interact() {
+
+                        try {
+
+                            for (int i = 0; i < 200; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0.05f, 0, 0)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 200; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0, -0.05f, 0)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 200; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(-0.05f, 0, 0)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 200; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0, 0.05f, 0)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 200; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0, 0, 0.05f)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 400; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0, 0, -0.05f)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                            Thread.sleep(200);
+
+                            for (int i = 0; i < 200; i++) {
+
+                                parent.position = VectorHelper.sumVectors(new Vector3f[] {parent.position, new Vector3f(0, 0, 0.05f)});
+
+                                Thread.sleep(10);
+
+                            }
+
+                        }
+
+                        catch (InterruptedException e) {
+
+                            e.printStackTrace();
+                            System.exit(1);
+
+                        }
+
+                    }
+
+                }))
                 .createModules();
 
+        //Specular Lighting Demo
         new GameObject(new Vector3f(-35, 30, -35), new Vector3f())
                 .addModule(new RenderModule("sphere2"))
                 .addModule(new SpotLightSource(100, new Vector4f(255, 255, 0, 1)))
