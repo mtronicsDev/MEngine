@@ -18,7 +18,7 @@ public class GUIScreenController {
     }
 
     public static boolean isScreenActive(GUIScreen screen) {
-        return true; //TODO: change this back to normal (return screen.active;) after the presentation
+        return screen != null && screen.active;
     }
 
 }
