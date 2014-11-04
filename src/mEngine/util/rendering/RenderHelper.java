@@ -18,10 +18,9 @@ import org.lwjgl.util.vector.Vector3f;
 public class RenderHelper {
 
     /**
-     * Used for frustum culling
-     *
-     * @param vector The vertex to check
-     * @return True if on screen, false if not
+     * Used for frustum culling.
+     * @param vector The vertex to check.
+     * @return True if on screen, false if not.
      */
     public static boolean isVertexOnScreen(Vector3f vector) {
 

@@ -19,11 +19,10 @@ import java.util.List;
 public class TextureAnimationHelper {
 
     /**
-     * Returns the desired texture animation
-     *
-     * @param animationName The name of the desired animation
-     * @return The desired animation
-     * @throws IOException if the animation file is not found
+     * Returns the desired texture animation.
+     * @param animationName The name of the desired animation.
+     * @return The desired animation.
+     * @throws IOException if the animation file is not found.
      */
     public static TextureAnimation getAnimation(String animationName) throws IOException {
 

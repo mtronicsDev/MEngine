@@ -22,9 +22,8 @@ public class ShaderHelper {
     public static Map<String, Integer> shaderPrograms = new HashMap<String, Integer>();
 
     /**
-     * Adds a shader to the list
-     *
-     * @param fileName The name of the shader
+     * Adds a shader to the list.
+     * @param fileName The name of the shader.
      */
     public static void addShader(String fileName) {
 
@@ -43,17 +42,13 @@ public class ShaderHelper {
             String line;
 
             while ((line = vertexReader.readLine()) != null) {
-
                 vertexShaderSource.append(line + "\n");
-
             }
 
             vertexReader.close();
 
             while ((line = fragmentReader.readLine()) != null) {
-
                 fragmentShaderSource.append(line + "\n");
-
             }
 
             fragmentReader.close();
@@ -86,9 +81,8 @@ public class ShaderHelper {
     }
 
     /**
-     * Sets the desired shader active
-     *
-     * @param shaderName The desired shader
+     * Sets the desired shader active.
+     * @param shaderName The desired shader.
      */
     public static void useShader(String shaderName) {
 

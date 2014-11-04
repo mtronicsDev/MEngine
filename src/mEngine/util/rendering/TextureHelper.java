@@ -27,9 +27,8 @@ public class TextureHelper {
     private static Map<String, Texture> loadedTextures = new HashMap<String, Texture>();
 
     /**
-     * Loads a texture into the list
-     *
-     * @param fileName The name of the texture
+     * Loads a texture into the list.
+     * @param fileName The name of the texture.
      */
     private static void loadTexture(String fileName) {
 
@@ -71,10 +70,9 @@ public class TextureHelper {
 
     /**
      * Returns the desired texture.
-     * The texture gets loaded if it isn't already
-     *
-     * @param name The name of the texture
-     * @return The desired texture
+     * The texture gets loaded if it isn't already.
+     * @param name The name of the texture.
+     * @return The desired texture.
      */
     public static Texture getTexture(String name) {
 
@@ -89,9 +87,8 @@ public class TextureHelper {
     }
 
     /**
-     * Unloads a texture. Use this for memory efficiency
-     *
-     * @param name The name of the texture
+     * Unloads a texture. Use this for memory efficiency.
+     * @param name The name of the texture.
      */
     public static void removeTexture(String name) {
         loadedTextures.remove(name);
