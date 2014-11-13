@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mEngine.iml" filepath="$PROJECT_DIR$/mEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Polygame Engine.iml" filepath="$PROJECT_DIR$/Polygame Engine.iml" />
     </modules>
   </component>
 </project>
-

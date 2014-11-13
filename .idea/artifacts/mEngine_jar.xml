@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/mEngine_jar</output-path>
     <root id="root">
       <element id="archive" name="mEngine.jar">
-        <element id="module-output" name="mEngine" />
+        <element id="module-output" name="Polygame Engine" />
       </element>
       <element id="directory" name="lib">
         <element id="dir-copy" path="$PROJECT_DIR$/lib" />

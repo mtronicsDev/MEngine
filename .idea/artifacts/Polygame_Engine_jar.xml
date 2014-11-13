@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="Polygame Engine:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Polygame_Engine_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Polygame Engine.jar">
+        <element id="module-output" name="Polygame Engine" />
+      </element>
+      <element id="library" level="project" name="SoundSystem" />
+      <element id="library" level="project" name="LWJGL" />
+      <element id="library" level="project" name="JBullet" />
+      <element id="library" level="project" name="Slick2D" />
+    </root>
+  </artifact>
+</component>

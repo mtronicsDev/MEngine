@@ -1,3 +1,6 @@
 Manifest-Version: 1.0
-Main-Class: mEngine.Main
+Class-Path: SoundSystem.jar LibraryLWJGLOpenAL.jar LibraryJavaSound.ja
+ r CodecWav.jar disruptor.jar lwjgl.jar jbullet.jar vecmath.jar slick-
+ util.jar
+Main-Class: com.polygame.engine.Main
 
