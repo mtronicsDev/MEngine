@@ -2,13 +2,24 @@
   <artifact name="Polygame Engine:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Polygame_Engine_jar</output-path>
     <root id="root">
-      <element id="archive" name="Polygame Engine.jar">
-        <element id="module-output" name="Polygame Engine" />
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="JBullet" />
+        <element id="library" level="project" name="LWJGL" />
+        <element id="library" level="project" name="Slick2D" />
+        <element id="library" level="project" name="SoundSystem" />
+        <element id="directory" name="PolygameEngine">
+          <element id="directory" name="jar">
+            <element id="archive" name="Polygame Engine.jar">
+              <element id="module-output" name="Polygame Engine" />
+            </element>
+          </element>
+        </element>
       </element>
-      <element id="library" level="project" name="SoundSystem" />
-      <element id="library" level="project" name="LWJGL" />
-      <element id="library" level="project" name="JBullet" />
-      <element id="library" level="project" name="Slick2D" />
+      <element id="directory" name="res">
+        <element id="directory" name="preferences">
+          <element id="dir-copy" path="$PROJECT_DIR$/res/preferences" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

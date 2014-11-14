@@ -15,6 +15,7 @@ import com.polygame.engine.util.resources.PreferenceHelper;
 import com.polygame.engine.util.resources.ResourceHelper;
 import com.polygame.engine.util.threading.ThreadHelper;
 import com.polygame.engine.util.time.TimeHelper;
+import org.lwjgl.Sys;
 
 public class GameController {
 
@@ -27,6 +28,7 @@ public class GameController {
     public static void runGame() {
 
         setLoading(true);
+        Sys.touch();
 
         ResourceHelper.initialize();
         PreferenceHelper.loadPreferences("mEngine");
