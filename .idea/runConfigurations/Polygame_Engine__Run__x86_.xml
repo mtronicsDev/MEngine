@@ -2,7 +2,7 @@
   <configuration default="false" name="Polygame Engine [Run][x86]" type="Application" factoryName="Application">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="com.polygame.engine.Main" />
-    <option name="VM_PARAMETERS" value="-Djava.library.path=lib/lwjgl/native/windows/x86" />
+    <option name="VM_PARAMETERS" value="-Djava.library.path=lib/lwjgl/native/windows/x86 -Dorg.lwjgl.util.Debug=true" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />

@@ -16,6 +16,13 @@ import static com.polygame.engine.core.events.EventController.triggerEvent;
  * @version 13.11.2014 21:06
  */
 public class WindowEventHandler extends WindowCallback {
+
+    private static final WindowEventHandler INSTANCE = new WindowEventHandler();
+
+    public static WindowEventHandler getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public void windowPos(long window, int xpos, int ypos) {
         triggerEvent("windowMoved", xpos, ypos);

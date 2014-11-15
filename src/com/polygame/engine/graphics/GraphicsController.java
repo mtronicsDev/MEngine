@@ -6,13 +6,18 @@
 
 package com.polygame.engine.graphics;
 
+import com.polygame.engine.core.events.WindowEventHandler;
 import com.polygame.engine.util.data.ColorHelper;
 import com.polygame.engine.util.input.Input;
+import com.polygame.engine.util.math.vectors.Vector2i;
 import com.polygame.engine.util.resources.PreferenceHelper;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.system.glfw.ErrorCallback;
+import org.lwjgl.system.glfw.WindowCallback;
 
 import javax.imageio.ImageIO;
+import javax.vecmath.Vector2f;
 import javax.vecmath.Vector4f;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,6 +46,7 @@ public class GraphicsController {
     private static int height;
     private static String title;
     private static int fps;
+    private static long window;
 
     private static double nearPlane = 0.1, xPlane, yPlane; // farPlane = renderDistance
 
@@ -67,6 +73,10 @@ public class GraphicsController {
         glfwInit();
         glfwDefaultWindowHints();
         setupWindow(width, height, title, PreferenceHelper.getBoolean("fullscreen"));
+
+        WindowCallback.set(window, WindowEventHandler.getInstance());
+        glfwSetErrorCallback(ErrorCallback.Util.getDefault());
+
         initializeOpenGL();
 
     }
@@ -94,7 +104,7 @@ public class GraphicsController {
         } else wasResized = false;
 
         //TODO: if (!mEnchmarkEnabled) Display.sync(fps);
-        glfwSwapBuffers(1);
+        glfwSwapBuffers(window);
 
     }
 
@@ -106,12 +116,12 @@ public class GraphicsController {
      * @param title  Window title
      */
     private static void setupWindow(int width, int height, String title, boolean fullscreen) {
-        if (fullscreen) glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), 0);
-        else glfwCreateWindow(width, height, title, 0, 0);
+        if (fullscreen) window = glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), 0);
+        else window = glfwCreateWindow(width, height, title, 0, 0);
     }
 
     public static boolean shouldClose() {
-        return glfwWindowShouldClose(1) == 1;
+        return glfwWindowShouldClose(window) == 1;
     }
 
     /**
@@ -164,7 +174,19 @@ public class GraphicsController {
      * @param title The desired title
      */
     public static void setWindowTitle(String title) {
-        glfwSetWindowTitle(1, title);
+        glfwSetWindowTitle(window, title);
+    }
+
+    /**
+     * Returns the current window dimensions (width & height).
+     *
+     * @return A Vector2i where x is the width and y is the height of the game window
+     */
+    public static Vector2i getDimensions() {
+        IntBuffer width = IntBuffer.allocate(1);
+        IntBuffer height = IntBuffer.allocate(1);
+        glfwGetWindowSize(window, width, height);
+        return new Vector2i(width.get(), height.get());
     }
 
     /**
@@ -173,10 +195,7 @@ public class GraphicsController {
      * @return The current game window width
      */
     public static int getWidth() {
-        IntBuffer width = IntBuffer.allocate(1);
-        IntBuffer height = IntBuffer.allocate(0);
-        glfwGetWindowSize(1, width, height);
-        return width.get();
+        return getDimensions().x;
     }
 
     /**
@@ -185,10 +204,7 @@ public class GraphicsController {
      * @return The current game window height
      */
     public static int getHeight() {
-        IntBuffer width = IntBuffer.allocate(0);
-        IntBuffer height = IntBuffer.allocate(1);
-        glfwGetWindowSize(1, width, height);
-        return height.get();
+        return getDimensions().y;
     }
 
     /**
@@ -214,7 +230,7 @@ public class GraphicsController {
      */
     private static void initializeOpenGL() {
 
-        glfwMakeContextCurrent(1);
+        glfwMakeContextCurrent(window);
         GLContext.createFromCurrent();
 
         glShadeModel(GL_SMOOTH);

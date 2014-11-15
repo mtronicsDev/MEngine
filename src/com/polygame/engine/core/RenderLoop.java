@@ -30,7 +30,7 @@ public class RenderLoop {
         triggerEvent("renderLoopInitialized");
         ShaderHelper.addShader("lighting");
 
-        while (GraphicsController.shouldClose() && !Thread.interrupted()) {
+        while (!GraphicsController.shouldClose() && !Thread.interrupted()) {
 
             GraphicsController.clearScreen();
             Renderer.currentRenderQueue = new RenderQueue();

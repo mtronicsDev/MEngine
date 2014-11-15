@@ -6,7 +6,6 @@
 
 package com.polygame.engine.core;
 
-import com.polygame.engine.audio.AudioController;
 import com.polygame.engine.core.events.EventController;
 import com.polygame.engine.physics.PhysicsController;
 import com.polygame.engine.util.debug.RuntimeHelper;
@@ -97,7 +96,7 @@ public class GameController {
     public static void stopGame() {
         EventController.triggerEvent("gameStopped");
         ThreadHelper.stopAllThreads();
-        AudioController.clear();
+        //AudioController.clear();
         System.exit(0);
 
     }

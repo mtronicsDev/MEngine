@@ -155,9 +155,9 @@ public class Input {
     /**
      * States of keyboard keys and mouse buttons (pressed = true).
      * <p>
-     * <p>This array has a size of exactly 128 which should just be enough for every desirable button.</p>
+     * <p>This array has a size of exactly 348 which should just be enough for every desirable button.</p>
      */
-    private static boolean[] keyStates = new boolean[128];
+    private static boolean[] keyStates = new boolean[348];
     /**
      * A map for assigning names such as "forward" or "jump" to key codes.
      * <p>

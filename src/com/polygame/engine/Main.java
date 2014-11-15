@@ -70,7 +70,7 @@ public class Main {
           )
           .addModule(new Skybox("peaks"))
           .addModule(new Camera())
-          .addModule(new AudioListener())
+          //.addModule(new AudioListener())
           /*
           .addModule(new GUIElement(new Vector2f(5, 5)).addModule(new FPSTextModule(12)).setGUIScreen(inGame))
           .addModule(new GUIElement(new Vector2f(5, 19)).addModule(new TPSTextModule(12)).setGUIScreen(inGame))
@@ -140,7 +140,7 @@ public class Main {
           .addModule(new RenderModule("sphere2"))
           .addModule(new SpotLightSource(400, new Vector4f(255, 0, 0, 1), new Vector3f(), 25)
             .setSpecularLighting(false))
-          .addModule(new InteractionModule(true, 20, Keyboard.KEY_Z, "zoom", 10, new AsyncInteraction() {
+          /*.addModule(new InteractionModule(true, 20, Keyboard.KEY_Z, "zoom", 10, new AsyncInteraction() {
 
               public void interact() {
 
@@ -186,7 +186,7 @@ public class Main {
 
               }
 
-          }))
+          }))*/
           .createModules();
 
         new GameObject(new Vector3f(-7.5f, 30, 40), new Vector3f(0, 180, 0))
@@ -194,7 +194,7 @@ public class Main {
           .addModule(new SpotLightSource(400, new Vector4f(0, 255, 0, 1), new Vector3f(0, 0, 1), 25)
             .setSpecularLighting(false)
             .setDependent(false))
-          .addModule(new InteractionModule(true, 20, Keyboard.KEY_R, "rotate", 10, new AsyncInteraction() {
+          /*.addModule(new InteractionModule(true, 20, Keyboard.KEY_R, "rotate", 10, new AsyncInteraction() {
 
               public void interact() {
 
@@ -259,14 +259,14 @@ public class Main {
 
               }
 
-          }))
+          }))*/
           .createModules();
 
         new GameObject(new Vector3f(7.5f, 30, 40), new Vector3f(0, 180, 0))
           .addModule(new RenderModule("sphere2"))
           .addModule(new SpotLightSource(400, new Vector4f(0, 0, 255, 1), new Vector3f(), 25)
             .setSpecularLighting(false))
-          .addModule(new InteractionModule(true, 20, Keyboard.KEY_M, "move", 10, new AsyncInteraction() {
+          /*.addModule(new InteractionModule(true, 20, Keyboard.KEY_M, "move", 10, new AsyncInteraction() {
 
               public void interact() {
 
@@ -349,7 +349,7 @@ public class Main {
 
               }
 
-          }))
+          }))*/
           .createModules();
 
         //Specular Lighting Demo
