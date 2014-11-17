@@ -233,6 +233,8 @@ public class GraphicsController {
         glfwMakeContextCurrent(window);
         GLContext.createFromCurrent();
 
+        glfwSwapInterval(1);
+
         glShadeModel(GL_SMOOTH);
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);

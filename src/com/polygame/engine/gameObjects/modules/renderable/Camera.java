@@ -10,7 +10,10 @@ import com.polygame.engine.graphics.Renderer;
 import com.polygame.engine.util.math.vectors.Matrix3f;
 import com.polygame.engine.util.math.vectors.VectorHelper;
 
+import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
+
+import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -70,6 +73,31 @@ public class Camera extends ModuleRenderable {
 
             }
 
+            float[] lookAtMatrix = new float[16];
+
+            lookAtMatrix[ 0] = position.x;
+            lookAtMatrix[ 1] = up.x;
+            lookAtMatrix[ 2] = -position.x;
+            lookAtMatrix[ 3] = 0;
+
+            lookAtMatrix[ 4] = position.y;
+            lookAtMatrix[ 5] = up.y;
+            lookAtMatrix[ 6] = -position.y;
+            lookAtMatrix[ 7] = 0;
+
+            lookAtMatrix[ 8] = position.z;
+            lookAtMatrix[ 9] = up.z;
+            lookAtMatrix[10] = -position.z;
+            lookAtMatrix[11] = 0;
+
+            lookAtMatrix[12] = -(position.x);
+            lookAtMatrix[13] = -(up.y);
+            lookAtMatrix[14] = (position.z);
+            lookAtMatrix[15] = 1;
+
+            FloatBuffer lookAt = FloatBuffer.allocate(16);
+            lookAt.put(lookAtMatrix);
+            glMultMatrix(lookAt);
             //TODO: gluLookAt(position.x, position.y, position.z, parent.position.x, parent.position.y, parent.position.z, up.x, up.y, up.z);
 
         }

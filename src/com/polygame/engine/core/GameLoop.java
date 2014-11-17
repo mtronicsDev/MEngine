@@ -27,7 +27,6 @@ public class GameLoop {
 
             if (!GameController.isLoading()) {
 
-                glfwPollEvents();
                 PhysicsController.world.stepSimulation(TimeHelper.deltaTime);
 
                 //Adds all new game objects that were added via ObjectController.addGameObject() to the game object list

@@ -17,6 +17,7 @@ import com.polygame.engine.util.time.TimeHelper;
 
 import static com.polygame.engine.core.events.EventController.addEventHandler;
 import static com.polygame.engine.core.events.EventController.triggerEvent;
+import static org.lwjgl.system.glfw.GLFW.glfwPollEvents;
 
 public class RenderLoop {
 
@@ -50,6 +51,7 @@ public class RenderLoop {
 
             TimeHelper.updateFPS();
             GraphicsController.update();
+            glfwPollEvents();
 
         }
 
